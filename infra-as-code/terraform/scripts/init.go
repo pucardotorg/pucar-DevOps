@@ -139,10 +139,10 @@ func isValidDBName(dbName string) error {
 	}
 
 	// Check if the DB name contains only alphanumeric characters
-	matched, _ = regexp.MatchString("^[a-zA-Z0-9]+$", dbName)
-	if !matched {
-		log.Fatalf("DB name and DB user name must contain only alphanumeric characters")
-	}
+	// matched, _ = regexp.MatchString("^[a-zA-Z0-9]+$", dbName)
+	// if !matched {
+	// 	log.Fatalf("DB name and DB user name must contain only alphanumeric characters")
+	// }
 
 	return nil
 }
