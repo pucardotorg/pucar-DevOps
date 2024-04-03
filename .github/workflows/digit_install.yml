@@ -9,7 +9,8 @@ on:
       destroyCommand:
         description: 'Type "destroy" to run the terraform_infra_destruction job.'
         required: true
-        default: ''   
+        default: '' 
+        
 jobs:
   check-changed-files:
     runs-on: ubuntu-latest
