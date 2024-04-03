@@ -129,7 +129,7 @@ func replaceVariableValues(content string, data map[string]interface{}, stripQuo
 func isValidDBName(dbName string) error {
 
 	dbName = strings.TrimSpace(dbName)
-	//dbName = dbName[1 : len(dbName)-1]
+	dbName = dbName[1 : len(dbName)-1]
 
 	//fmt.Println("Validating DB name")
 	// Check if the DB name starts with a letter
