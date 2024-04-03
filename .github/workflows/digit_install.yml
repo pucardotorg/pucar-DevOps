@@ -104,6 +104,7 @@ jobs:
           # client_secret: ${{ secrets.AZURE_CLIENT_SECRET }}
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          enable-AzPSSession: true
       - name: Convert YAML to ENV
         uses: dcarbone/yaml-to-env-action@main
         with:
