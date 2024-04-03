@@ -125,7 +125,7 @@ module "postgres-db" {
   sku_tier                  = "GP_Standard_D2ds_v4"
   storage_mb                = "65536"
   backup_retention_days     = "7"
-  administrator_login       = var.db_user
+  administrator_login       = var.db_username
   administrator_password    = var.db_password
   db_version                = var.db_version
   subnet_id                 = azurerm_subnet.postgres.id

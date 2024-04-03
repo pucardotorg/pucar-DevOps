@@ -64,7 +64,7 @@ variable "db_version" {
     default = "11"
 }
 
-variable "db_user" {
+variable "db_username" {
     type = string
 }
 
