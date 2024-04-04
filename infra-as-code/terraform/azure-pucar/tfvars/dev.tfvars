@@ -17,7 +17,7 @@ max_count                = "3"
 api_authorized_ip_ranges = ["183.82.96.201/32", "183.82.5.125/32", "183.82.117.28/32"]
 address_prefixes_aks     = ["10.7.1.0/24"]
 aks_dns_service_ip       = "10.7.3.10"
-aks_service_cidr         = "10.7.3.0/24"
+aks_service_cidr         = "10.7.4.0/24"
 
 # storage account kafka
 kafka_storage_account = {
