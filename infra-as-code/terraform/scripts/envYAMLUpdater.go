@@ -52,15 +52,22 @@ func main() {
 		os.Exit(1)
 	}
 	// Replace the placeholders with the actual volume IDs
-	output := strings.ReplaceAll(string(yamlFile), "<elasticsearch-data_volume_id_1>", tfOutput.EsDataVolumeIDs.Value[0])
-	output = strings.ReplaceAll(output, "<elasticsearch-data_volume_id_2>", tfOutput.EsDataVolumeIDs.Value[1])
-	output = strings.ReplaceAll(output, "<elasticsearch-data_volume_id_3>", tfOutput.EsDataVolumeIDs.Value[2])
-	output = strings.ReplaceAll(output, "<elasticsearch-master_volume_id_1>", tfOutput.EsMasterVolumeIDs.Value[0])
-	output = strings.ReplaceAll(output, "<elasticsearch-master_volume_id_2>", tfOutput.EsMasterVolumeIDs.Value[1])
-	output = strings.ReplaceAll(output, "<elasticsearch-master_volume_id_3>", tfOutput.EsMasterVolumeIDs.Value[2])
+	output := string(yamlFile)
+	if len(tfOutput.EsDataVolumeIDs.Value) >= 3 {
+		output = strings.ReplaceAll(output, "<elasticsearch-data_volume_id_1>", tfOutput.EsDataVolumeIDs.Value[0])
+		output = strings.ReplaceAll(output, "<elasticsearch-data_volume_id_2>", tfOutput.EsDataVolumeIDs.Value[1])
+		output = strings.ReplaceAll(output, "<elasticsearch-data_volume_id_3>", tfOutput.EsDataVolumeIDs.Value[2])
+	}
+	if len(tfOutput.EsMasterVolumeIDs.Value) >= 3 {
+		output = strings.ReplaceAll(output, "<elasticsearch-master_volume_id_1>", tfOutput.EsMasterVolumeIDs.Value[0])
+		output = strings.ReplaceAll(output, "<elasticsearch-master_volume_id_2>", tfOutput.EsMasterVolumeIDs.Value[1])
+		output = strings.ReplaceAll(output, "<elasticsearch-master_volume_id_3>", tfOutput.EsMasterVolumeIDs.Value[2])
+	}
 	output = strings.ReplaceAll(output, "<db_host_name>", tfOutput.DBHost.Value)
 	output = strings.ReplaceAll(output, "<db_name>", tfOutput.DBName.Value)
-	output = strings.ReplaceAll(output, "<zone>", tfOutput.Zones.Value[0])
+	if len(tfOutput.Zones.Value) > 0 {
+		output = strings.ReplaceAll(output, "<zone>", tfOutput.Zones.Value[0])
+	}
 
 	// Write the updated YAML to stdout
 	fmt.Println(output)
@@ -80,27 +87,23 @@ func main() {
 	// Split the string by newlines
 	lines := strings.Split(kubeConfigString, "\n")
 
-	// Remove leading and trailing whitespaces from each line
-	for i, line := range lines {
-		lines[i] = line
-	}
-
 	// Set initial indentation level to 0
 	indentationLevel := 0
 
 	// Build the properly indented YAML string
 	var builder strings.Builder
 	for _, line := range lines {
+		// Apply indentation to the line
+		indentedLine := strings.Repeat("  ", indentationLevel) + line
 
 		// Adjust the indentation level based on the line's content
 		if strings.Contains(line, "contexts:") || strings.Contains(line, "users:") {
 			indentationLevel = 0
 		} else if strings.Contains(line, "- name:") && indentationLevel > 0 {
 			indentationLevel--
+		} else if strings.Contains(line, "- name:") {
+			indentationLevel++
 		}
-
-		// Apply indentation to the line
-		indentedLine := strings.Repeat("  ", indentationLevel) + line
 
 		// Append the indented line to the builder
 		builder.WriteString(indentedLine)
@@ -108,32 +111,23 @@ func main() {
 	}
 
 	yamlString := builder.String()
-	fmt.Println(yamlString)
 
 	// Write the YAML to a new file
 	relativePath := "../../../deploy-as-code/deployer/kubeConfig"
-	file, err := os.Create(relativePath)
+	err = ioutil.WriteFile(relativePath, []byte(yamlString), 0644)
 	if err != nil {
-		fmt.Println("Error creating file:", err)
-		return
+		fmt.Fprintf(os.Stderr, "Error writing YAML file: %v\n", err)
+		os.Exit(1)
 	}
-	defer file.Close()
-
-	_, err = file.WriteString(yamlString)
-	if err != nil {
-		fmt.Println("Error writing to file:", err)
-		return
-	}
-
-	fmt.Println("YAML successfully written to file kubeConfig")
 
 	absolutePath, err := filepath.Abs(relativePath)
 	if err != nil {
-		fmt.Println("Error:", err)
-		return
+		fmt.Fprintf(os.Stderr, "Error getting absolute path: %v\n", err)
+		os.Exit(1)
 	}
 
+	// Provide instructions for setting the KUBECONFIG environment variable
 	fmt.Println("Please run the following command to set the kubeConfig:")
 	fmt.Printf("\texport KUBECONFIG=\"%s\"\n", strings.TrimSpace(absolutePath))
-
 }
+
