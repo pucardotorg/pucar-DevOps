@@ -11,7 +11,7 @@ output "resource_group" {
 }
 
 output "db_user" {
-  value = var.db_user
+  value = var.db_username
 }
 
 output "cluster_name" {
