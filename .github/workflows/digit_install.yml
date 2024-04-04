@@ -82,6 +82,7 @@ jobs:
       client_secret:  ${{ secrets.AZURE_CLIENT_SECRET }}
       tenant_id:  ${{ secrets.AZURE_TENANT_ID }}
       subscription_id:  ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+      ARM_USE_AZURECLI_AUTH: "false"
       
     steps:
       - name: Checkout code
