@@ -156,6 +156,10 @@ jobs:
       #   id: unlocking
       #   run: terraform force-unlock -force 302767c9-a713-f81d-cf1b-393dc958d02a
       #   working-directory: infra-as-code/terraform/sample-aws
+      - name: unlocking statefile
+        id: unlocking
+        run: terraform force-unlock -force 2365144f-504b-f836-6fb7-713dba5822f0
+        working-directory: infra-as-code/terraform/azure-pucar
       - name: Terraform Plan - Infra creation
         id: plan-Infra
         run: terraform plan -no-color -input=false -var-file="tfvars/dev.tfvars" -var "db_password=${{ secrets.TF_VAR_db_password }}" -var "db_username=${{ env.DB_USERNAME }}" -var "subscription_id=${{ secrets.AZURE_SUBSCRIPTION_ID }}" -var "tenant_id=${{ secrets.AZURE_TENANT_ID }}" -var "client_id=${{ secrets.AZURE_CLIENT_ID }}" -var "client_secret=${{ secrets.AZURE_CLIENT_SECRET }}"
