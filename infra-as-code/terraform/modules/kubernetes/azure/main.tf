@@ -28,10 +28,6 @@ resource "azurerm_kubernetes_cluster" "aks" {
     outbound_type  = "loadBalancer"
   }
 
-  api_server_access_profile {
-    authorized_ip_ranges = var.api_authorized_ip_ranges
-  }
-
   tags = {
     Environment = "${var.environment}"
   }
