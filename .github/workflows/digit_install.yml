@@ -79,7 +79,7 @@ jobs:
     env:
       TF_IN_AUTOMATION: "true"
       AZURE_CLIENT_ID:  ${{ secrets.AZURE_CLIENT_ID }}
-      AZURE_CLIENT_SECRET:  ${{ secrets.AZURE_CLIENT_SECRET }}
+      # AZURE_CLIENT_SECRET:  ${{ secrets.AZURE_CLIENT_SECRET }}
       AZURE_TENANT_ID:  ${{ secrets.AZURE_TENANT_ID }}
       AZURE_SUBSCRIPTION_ID:  ${{ secrets.AZURE_SUBSCRIPTION_ID }}
     steps:
@@ -102,8 +102,9 @@ jobs:
       - name: Azure login
         uses: azure/login@v2
         with:
-          client-id: ${{ secrets.AZURE_CLIENT_ID }}
-          client_secret: ${{ secrets.AZURE_CLIENT_SECRET }}
+          auth-type: IDENTITY
+          # client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          # client_secret: ${{ secrets.AZURE_CLIENT_SECRET }}
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
       
