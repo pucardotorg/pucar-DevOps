@@ -101,22 +101,22 @@ jobs:
         run: tar -xzf infra-as-code.tar.gz
       - name: Extract deploy-as-code folder
         run: tar -xzf deploy-as-code.tar.gz
-      - name: Azure login
-        uses: azure/login@v2
-        with:
-          # auth-type: IDENTITY
-          # client-id: ${{ secrets.AZURE_CLIENT_ID }}
-          # client_secret: ${{ secrets.AZURE_CLIENT_SECRET }}
-          # tenant-id: ${{ secrets.AZURE_TENANT_ID }}
-          # subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
-          enable-AzPSSession: true
-      - name: Azure CLI script
-        uses: azure/CLI@v1
-        with:
-          azcliversion: latest
-          inlineScript: |
-            az account show
+      # - name: Azure login
+      #   uses: azure/login@v2
+      #   with:
+      #     # auth-type: IDENTITY
+      #     # client-id: ${{ secrets.AZURE_CLIENT_ID }}
+      #     # client_secret: ${{ secrets.AZURE_CLIENT_SECRET }}
+      #     # tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+      #     # subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+      #     creds: ${{ secrets.AZURE_CREDENTIALS }}
+      #     enable-AzPSSession: true
+      # - name: Azure CLI script
+      #   uses: azure/CLI@v1
+      #   with:
+      #     azcliversion: latest
+      #     inlineScript: |
+      #       az account show
       - name: Convert YAML to ENV
         uses: dcarbone/yaml-to-env-action@main
         with:
