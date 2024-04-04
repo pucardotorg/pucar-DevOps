@@ -82,8 +82,8 @@ jobs:
       client_secret:  ${{ secrets.AZURE_CLIENT_SECRET }}
       tenant_id:  ${{ secrets.AZURE_TENANT_ID }}
       subscription_id:  ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+      ARM_USE_AZURECLI_AUTH: "false"
       
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -117,16 +117,16 @@ jobs:
 #        run: |
 #          db_password=$(jq -r '.secrets.db.password' secrets.json)
 #          echo "db_password=$db_password" >> $GITHUB_ENV
-      - name: Azure login
-        uses: azure/login@v2
-        with:
-          # auth-type: IDENTITY
-          # client-id: ${{ secrets.AZURE_CLIENT_ID }}
-          # client_secret: ${{ secrets.AZURE_CLIENT_SECRET }}
-          # tenant-id: ${{ secrets.AZURE_TENANT_ID }}
-          # subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
-          enable-AzPSSession: true
+      # - name: Azure login
+      #   uses: azure/login@v2
+      #   with:
+      #     # auth-type: IDENTITY
+      #     # client-id: ${{ secrets.AZURE_CLIENT_ID }}
+      #     # client_secret: ${{ secrets.AZURE_CLIENT_SECRET }}
+      #     # tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+      #     # subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+      #     creds: ${{ secrets.AZURE_CREDENTIALS }}
+      #     enable-AzPSSession: true
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2
 #      - name: Terraform Init - remotestate
