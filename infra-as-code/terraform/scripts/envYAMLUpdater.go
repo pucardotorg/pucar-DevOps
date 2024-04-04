@@ -16,6 +16,8 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error reading input: %v\n", err)
 		os.Exit(1)
 	}
+	fmt.Println("Input received:")
+	fmt.Println(string(input))
 	// Unmarshal the JSON output into a Go struct
 	type TfOutput struct {
 		EsDataVolumeIDs struct {
