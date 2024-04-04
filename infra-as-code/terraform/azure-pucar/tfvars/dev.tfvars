@@ -11,7 +11,7 @@ address_prefixes_postgres = ["10.7.2.0/24"]
 # kubernetes variables
 private_cluster_enabled  = false
 vm_size                  = "Standard_D2_v4"
-node_count               = "3"
+node_count               = "5"
 min_count                = "3"
 max_count                = "5"
 api_authorized_ip_ranges = ["183.82.96.201/32", "183.82.5.125/32", "183.82.117.28/32"]
