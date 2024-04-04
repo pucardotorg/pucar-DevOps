@@ -100,10 +100,6 @@ variable "aks_dns_service_ip" {
     type = string
 }
 
-variable "api_authorized_ip_ranges" {
-    type = list(string)
-}
-
 variable "vm_size" {
     type = string
 }
