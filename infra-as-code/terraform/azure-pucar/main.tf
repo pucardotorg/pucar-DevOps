@@ -113,7 +113,6 @@ module "kubernetes" {
   max_count                 = var.max_count
   aks_service_cidr          = var.aks_service_cidr
   aks_dns_service_ip        = var.aks_dns_service_ip
-  api_authorized_ip_ranges  = var.api_authorized_ip_ranges
   network_security_group_id = azurerm_network_security_group.aks_nsg.id
   subnet_id                 = azurerm_subnet.aks.id
 }
