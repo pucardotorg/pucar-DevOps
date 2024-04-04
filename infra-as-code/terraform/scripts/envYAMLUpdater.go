@@ -12,6 +12,8 @@ import (
 func main() {
 	// Read the Terraform output from stdin
 	input, err := ioutil.ReadAll(os.Stdin)
+	
+	fmt.Println(string(input))
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error reading input: %v\n", err)
 		os.Exit(1)
@@ -38,6 +40,7 @@ func main() {
 		} `json:"kubectl_config"`
 	}
 	var tfOutput TfOutput
+	fmt.Println(string(input))
 	err = json.Unmarshal(input, &tfOutput)
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error parsing JSON: %v\n", err)
