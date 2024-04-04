@@ -145,10 +145,6 @@ jobs:
         id: validate-Infra
         run: terraform validate -no-color
         working-directory: infra-as-code/terraform/azure-pucar
-      - name: unlocking statefile
-        id: unlocking
-        run: terraform force-unlock -force 2365144f-504b-f836-6fb7-713dba5822f0
-        working-directory: infra-as-code/terraform/azure-pucar
       
       - name: Terraform Plan - Infra creation
         id: plan-Infra
