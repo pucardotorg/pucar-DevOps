@@ -50,23 +50,23 @@ func main() {
 	fmt.Println("YAML successfully written to file:", yamlPath)
 
 	// Create kubeConfig file
-	// kubeConfigPath := "../../../deploy-as-code/deployer/kubeConfig"
-	// kubeConfigFile, err := os.Create(kubeConfigPath)
-	// if err != nil {
-	// 	fmt.Fprintf(os.Stderr, "Error creating kubeConfig file: %v\n", err)
-	// 	os.Exit(1)
-	// }
-	// defer kubeConfigFile.Close()
+	/* kubeConfigPath := "../../../deploy-as-code/deployer/kubeConfig"
+	kubeConfigFile, err := os.Create(kubeConfigPath)
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error creating kubeConfig file: %v\n", err)
+		os.Exit(1)
+	}
+	defer kubeConfigFile.Close()
 
-	// // Write kubeConfigString to kubeConfig file
-	// kubeConfigString := tfOutput["KubeConfig"].Value
-	// if _, err := kubeConfigFile.WriteString(kubeConfigString); err != nil {
-	// 	fmt.Fprintf(os.Stderr, "Error writing to kubeConfig file: %v\n", err)
-	// 	os.Exit(1)
-	// }
-	// fmt.Println("KubeConfig successfully written to file:", kubeConfigPath)
+	// Write kubeConfigString to kubeConfig file
+	kubeConfigString := tfOutput["KubeConfig"].Value
+	if _, err := kubeConfigFile.WriteString(kubeConfigString); err != nil {
+		fmt.Fprintf(os.Stderr, "Error writing to kubeConfig file: %v\n", err)
+		os.Exit(1)
+	}
+	fmt.Println("KubeConfig successfully written to file:", kubeConfigPath) */
 
-	// // Print command to set KUBECONFIG
-	// fmt.Println("Please run the following command to set the kubeConfig:")
-	// fmt.Printf("\texport KUBECONFIG=\"%s\"\n", kubeConfigPath)
+	// Print command to set KUBECONFIG
+	/* fmt.Println("Please run the following command to set the kubeConfig:")
+	fmt.Printf("\texport KUBECONFIG=\"%s\"\n", kubeConfigPath) */
 }
