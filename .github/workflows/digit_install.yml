@@ -247,7 +247,7 @@ jobs:
          az aks get-credentials --resource-group $RESOURCE_GROUP --name $ENVIRONMENT
          cat ~/.kube/config > kubeconfig
      - name: Kubectl setup
-     - uses: azure/setup-kubectl@v3
+       uses: azure/setup-kubectl@v3
        with:
          version: 'latest'
        id: install
