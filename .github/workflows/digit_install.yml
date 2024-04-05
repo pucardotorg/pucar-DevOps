@@ -199,58 +199,58 @@ jobs:
           name: deploy-as-code-artifact
           path: deploy-as-code.tar.gz      
 
-#  DIGIT-deployment:
-#    if: ${{ github.event_name == 'push' }}
-#    needs: Terraform_Infra_Creation
-#    runs-on: ubuntu-latest
-#    env:
-#      TF_IN_AUTOMATION: "true"
-#      AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
-#      AZURE_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
-#      AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
-#      AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-#    steps:
-#      - name: Checkout code
-#        uses: actions/checkout@v2
-#      - name: Download infra-as-code folder from artifacts
-#        uses: actions/download-artifact@v2
-#        with:
-#          name: infra-as-code-artifact
-#          path: .
-#      - name: Download deploy-as-code folder from artifacts
-#        uses: actions/download-artifact@v2
-#        with:
-#          name: deploy-as-code-artifact
-#          path: .
-#      - name: Extract infra-as-code folder
-#        run: tar -xzf infra-as-code.tar.gz
-#      - name: Extract deploy-as-code folder
-#        run: tar -xzf deploy-as-code.tar.gz
-#      - name: Convert YAML to ENV
-#        uses: dcarbone/yaml-to-env-action@main
-#        with:
-#          yaml-file: infra-as-code/terraform/azure-pucar/input.yaml
-#          debug: true # Optional: set to true to output some debug information
-#      # Now, use the env vars in subsequent steps
-#      - name: Install dependencies
-#        run: sudo apt-get install -y jq
-#      - name: Convert YAML to JSON
-#        run: |
-#          cat deploy-as-code/charts/environments/env-secrets.yaml | yq e -j - > secrets.json
-#      - name: Extract flywayPassword
-#        id: extract
-#        run: |
-#          db_password=$(jq -r '.secrets.db.password' secrets.json)
-#          echo "db_password=$db_password" >> $GITHUB_ENV
-#      - name: Generate kubeconfig
-#        run: |
-#          az aks get-credentials --resource-group $RESOURCE_GROUP --name $ENVIRONMENT
-#          cat ~/.kube/config > kubeconfig
-#      - name: Kubectl setup
-#      - uses: azure/setup-kubectl@v3
-#        with:
-#          version: 'latest'
-#        id: install
+  DIGIT-deployment:
+   if: ${{ github.event_name == 'push' }}
+   needs: Terraform_Infra_Creation
+   runs-on: ubuntu-latest
+   env:
+      TF_IN_AUTOMATION: "true"
+      ARM_CLIENT_ID:  ${{ secrets.AZURE_CLIENT_ID }}
+      ARM_CLIENT_SECRET:  ${{ secrets.AZURE_CLIENT_SECRET }}
+      ARM_TENANT_ID:  ${{ secrets.AZURE_TENANT_ID }}
+      ARM_SUBSCRIPTION_ID:  ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+   steps:
+     - name: Checkout code
+       uses: actions/checkout@v2
+     - name: Download infra-as-code folder from artifacts
+       uses: actions/download-artifact@v2
+       with:
+         name: infra-as-code-artifact
+         path: .
+     - name: Download deploy-as-code folder from artifacts
+       uses: actions/download-artifact@v2
+       with:
+         name: deploy-as-code-artifact
+         path: .
+     - name: Extract infra-as-code folder
+       run: tar -xzf infra-as-code.tar.gz
+     - name: Extract deploy-as-code folder
+       run: tar -xzf deploy-as-code.tar.gz
+     - name: Convert YAML to ENV
+       uses: dcarbone/yaml-to-env-action@main
+       with:
+         yaml-file: infra-as-code/terraform/azure-pucar/input.yaml
+         debug: true # Optional: set to true to output some debug information
+     # Now, use the env vars in subsequent steps
+     - name: Install dependencies
+       run: sudo apt-get install -y jq
+     - name: Convert YAML to JSON
+       run: |
+         cat deploy-as-code/charts/environments/env-secrets.yaml | yq e -j - > secrets.json
+     - name: Extract flywayPassword
+       id: extract
+       run: |
+         db_password=$(jq -r '.secrets.db.password' secrets.json)
+         echo "db_password=$db_password" >> $GITHUB_ENV
+     - name: Generate kubeconfig
+       run: |
+         az aks get-credentials --resource-group $RESOURCE_GROUP --name $ENVIRONMENT
+         cat ~/.kube/config > kubeconfig
+     - name: Kubectl setup
+     - uses: azure/setup-kubectl@v3
+       with:
+         version: 'latest'
+       id: install
 #      - name: Creating namespace
 #        run: kubectl create namespace egov
 #        continue-on-error: true
