@@ -250,12 +250,12 @@ jobs:
        with:
          version: 'latest'
        id: install
-#      - name: Creating namespace
-#        run: kubectl create namespace egov
-#        continue-on-error: true
-#      - name: Verify kubectl get nodes
-#        run: |
-#          kubectl get nodes
+     - name: Creating namespace
+       run: kubectl create namespace egov
+       continue-on-error: true
+     - name: Verify kubectl get nodes
+       run: |
+         kubectl get nodes
 #      - name: Install sops
 #        run: |
 #          sudo apt update
