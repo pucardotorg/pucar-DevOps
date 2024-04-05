@@ -181,9 +181,9 @@ jobs:
       - name: Verify kubectl get nodes
         run: |
           kubectl get nodes
-      - name: Updating the terraform output data in environment.yaml files for deployment
-        run: terraform output -json | go run ../scripts/envYAMLUpdater.go
-        working-directory: infra-as-code/terraform/azure-pucar
+      # - name: Updating the terraform output data in environment.yaml files for deployment
+      #   run: terraform output -json | go run ../scripts/envYAMLUpdater.go
+      #   working-directory: infra-as-code/terraform/azure-pucar
       - name: Archive infra-as-code folder
         run: tar -czf infra-as-code.tar.gz infra-as-code/
       - name: Archive deploy-as-code folder
