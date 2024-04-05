@@ -270,7 +270,7 @@ jobs:
      - name: Install Helmfile
        uses: helmfile/helmfile-action@v1.9.0
        with:
-        helmfile-version: 'v0.140.0'
+        helmfile-version: 'v0.150.0'
         helm-plugins: >
             https://github.com/databus23/helm-diff
      # - name: digit deployment
