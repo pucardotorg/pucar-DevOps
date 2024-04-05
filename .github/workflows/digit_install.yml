@@ -279,6 +279,7 @@ jobs:
 
            # Move Helmfile to a location in your PATH
          sudo mv helmfile /usr/local/bin/helmfile
+         export HELM_HOME="${HELM_HOME:-$HOME/.helm}"
 
          helm plugin install https://github.com/databus23/helm-diff
 
