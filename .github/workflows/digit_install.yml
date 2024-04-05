@@ -272,11 +272,11 @@ jobs:
        with:
         helmfile-version: 'v0.150.0'
         helm-plugins: >
-            https://github.com/databus23/helm-diff,
-#      - name: digit deployment
-#        run: helmfile -f digit-helmfile.yaml apply --include-needs=true
-#        working-directory: deploy-as-code
-#
+            https://github.com/databus23/helm-diff
+     - name: digit deployment
+       run: helmfile -f digit-helmfile.yaml apply --include-needs=true
+       working-directory: deploy-as-code
+
 #  terraform_infra_destruction:
 #    if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.destroyCommand == 'destroy' }}
 #    runs-on: ubuntu-latest
