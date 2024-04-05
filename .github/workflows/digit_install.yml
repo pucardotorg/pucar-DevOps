@@ -270,12 +270,12 @@ jobs:
      - name: Install Helmfile
        uses: helmfile/helmfile-action@v1.9.0
        with:
-        helmfile-version: 'v0.150.0'
+        helmfile-version: 'v0.140.0'
         helm-plugins: >
             https://github.com/databus23/helm-diff
-     - name: digit deployment
-       run: helmfile -f digit-helmfile.yaml apply --include-needs=true
-       working-directory: deploy-as-code
+     # - name: digit deployment
+     #   run: helmfile -f digit-helmfile.yaml apply --include-needs=true
+     #   working-directory: deploy-as-code
 
 #  terraform_infra_destruction:
 #    if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.destroyCommand == 'destroy' }}
