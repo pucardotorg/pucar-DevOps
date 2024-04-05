@@ -268,22 +268,9 @@ jobs:
        with:
          version: 'latest' # Specify the version of Helm
      - name: Install Helmfile
-       run: |
-         HELMFILE_VERSION="v0.140.0"
-
-           # Download Helmfile
-         curl -L "https://github.com/roboll/helmfile/releases/download/${HELMFILE_VERSION}/helmfile_linux_amd64" -o helmfile
-
-           # Make the Helmfile binary executable
-         chmod +x helmfile
-
-           # Move Helmfile to a location in your PATH
-         sudo mv helmfile /usr/local/bin/helmfile
-         
-         helm plugin install https://github.com/databus23/helm-diff
-
-           # Verify installation
-         helmfile --version
+       uses: helmfile/helmfile-action@v1.9.0
+       with:
+          helmfile-version: "v0.140.0"  
 #      - name: digit deployment
 #        run: helmfile -f digit-helmfile.yaml apply --include-needs=true
 #        working-directory: deploy-as-code
