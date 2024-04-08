@@ -264,6 +264,7 @@ jobs:
      - name: sops decryption
        run: |
          sudo sops --decrypt --age ${{ secrets.PUBLIC_AGE_KEY }} env-secrets.yaml > env-secrets1.yaml
+         cp env-secrets1.yaml env-secrets.yaml
          cat env-secrets.yaml
        working-directory: deploy-as-code/charts/environments
 
@@ -278,11 +279,10 @@ jobs:
         helm-plugins: >
             https://github.com/databus23/helm-diff
 
-#     - name: digit deployment
-#       run: |
-#         sudo sops --decrypt --age ${{ secrets.PUBLIC_AGE_KEY }} env-secrets.yaml > env-secrets1.yaml
-#         cat env-secrets.yaml
-#       working-directory: deploy-as-code/charts/environments
+     - name: digit deployment
+       run: |
+         cat env-secrets.yaml
+       working-directory: deploy-as-code/charts/environments
 #         helmfile -f digit-helmfile.yaml apply --include-needs=true
 #  terraform_infra_destruction:
 #    if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.destroyCommand == 'destroy' }}
