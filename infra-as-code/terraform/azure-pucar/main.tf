@@ -113,7 +113,6 @@ module "kubernetes" {
   max_count                 = var.max_count
   aks_service_cidr          = var.aks_service_cidr
   aks_dns_service_ip        = var.aks_dns_service_ip
-  api_authorized_ip_ranges  = var.api_authorized_ip_ranges
   network_security_group_id = azurerm_network_security_group.aks_nsg.id
   subnet_id                 = azurerm_subnet.aks.id
 }
@@ -125,7 +124,7 @@ module "postgres-db" {
   sku_tier                  = "GP_Standard_D2ds_v4"
   storage_mb                = "65536"
   backup_retention_days     = "7"
-  administrator_login       = var.db_user
+  administrator_login       = var.db_username
   administrator_password    = var.db_password
   db_version                = var.db_version
   subnet_id                 = azurerm_subnet.postgres.id

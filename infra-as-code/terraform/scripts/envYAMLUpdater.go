@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"io/ioutil"
 	"os"
-	"path/filepath"
 	"strings"
 )
 
@@ -16,122 +15,58 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error reading input: %v\n", err)
 		os.Exit(1)
 	}
-	// Unmarshal the JSON output into a Go struct
-	type TfOutput struct {
-		EsDataVolumeIDs struct {
-			Value []string `json:"value"`
-		} `json:"es_data_volume_ids"`
-		EsMasterVolumeIDs struct {
-			Value []string `json:"value"`
-		} `json:"es_master_volume_ids"`
-		DBHost struct {
-			Value string `json:"value"`
-		} `json:"db_instance_endpoint"`
-		DBName struct {
-			Value string `json:"value"`
-		} `json:"db_instance_name"`
-		Zones struct {
-			Value []string `json:"value"`
-		} `json:"zone"`
-		KubeConfig struct {
-			Value string `json:"value"`
-		} `json:"kubectl_config"`
+
+	// Define struct to unmarshal JSON data
+	var tfOutput map[string]struct {
+		Value string `json:"value"`
 	}
-	var tfOutput TfOutput
-	err = json.Unmarshal(input, &tfOutput)
-	if err != nil {
+
+	// Unmarshal the JSON output into the struct
+	if err := json.Unmarshal(input, &tfOutput); err != nil {
 		fmt.Fprintf(os.Stderr, "Error parsing JSON: %v\n", err)
 		os.Exit(1)
 	}
+
 	// Read the YAML file
 	yamlFile, err := ioutil.ReadFile("../../../deploy-as-code/charts/environments/env.yaml")
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error reading YAML file: %v\n", err)
 		os.Exit(1)
 	}
-	// Replace the placeholders with the actual volume IDs
-	output := strings.ReplaceAll(string(yamlFile), "<elasticsearch-data_volume_id_1>", tfOutput.EsDataVolumeIDs.Value[0])
-	output = strings.ReplaceAll(output, "<elasticsearch-data_volume_id_2>", tfOutput.EsDataVolumeIDs.Value[1])
-	output = strings.ReplaceAll(output, "<elasticsearch-data_volume_id_3>", tfOutput.EsDataVolumeIDs.Value[2])
-	output = strings.ReplaceAll(output, "<elasticsearch-master_volume_id_1>", tfOutput.EsMasterVolumeIDs.Value[0])
-	output = strings.ReplaceAll(output, "<elasticsearch-master_volume_id_2>", tfOutput.EsMasterVolumeIDs.Value[1])
-	output = strings.ReplaceAll(output, "<elasticsearch-master_volume_id_3>", tfOutput.EsMasterVolumeIDs.Value[2])
-	output = strings.ReplaceAll(output, "<db_host_name>", tfOutput.DBHost.Value)
-	output = strings.ReplaceAll(output, "<db_name>", tfOutput.DBName.Value)
-	output = strings.ReplaceAll(output, "<zone>", tfOutput.Zones.Value[0])
 
-	// Write the updated YAML to stdout
-	fmt.Println(output)
+	// Replace placeholders with values from Terraform output
+	output := string(yamlFile)
+	for key, value := range tfOutput {
+		placeholder := fmt.Sprintf("<%s>", key)
+		output = strings.ReplaceAll(output, placeholder, value.Value)
+	}
 
-	err = ioutil.WriteFile("../../../deploy-as-code/charts/environments/env.yaml", []byte(output), 0644)
-	if err != nil {
+	// Write the updated YAML to file
+	yamlPath := "../../../deploy-as-code/charts/environments/env.yaml"
+	if err := ioutil.WriteFile(yamlPath, []byte(output), 0644); err != nil {
 		fmt.Fprintf(os.Stderr, "Error writing YAML file: %v\n", err)
 		os.Exit(1)
 	}
+	fmt.Println("YAML successfully written to file:", yamlPath)
 
-	kubeConfigString := tfOutput.KubeConfig.Value
-
-	// Unescape the input string
-	kubeConfigString = strings.ReplaceAll(kubeConfigString, "\\n", "\n")
-	kubeConfigString = strings.ReplaceAll(kubeConfigString, "\\\"", "\"")
-
-	// Split the string by newlines
-	lines := strings.Split(kubeConfigString, "\n")
-
-	// Remove leading and trailing whitespaces from each line
-	for i, line := range lines {
-		lines[i] = line
-	}
-
-	// Set initial indentation level to 0
-	indentationLevel := 0
-
-	// Build the properly indented YAML string
-	var builder strings.Builder
-	for _, line := range lines {
-
-		// Adjust the indentation level based on the line's content
-		if strings.Contains(line, "contexts:") || strings.Contains(line, "users:") {
-			indentationLevel = 0
-		} else if strings.Contains(line, "- name:") && indentationLevel > 0 {
-			indentationLevel--
-		}
-
-		// Apply indentation to the line
-		indentedLine := strings.Repeat("  ", indentationLevel) + line
-
-		// Append the indented line to the builder
-		builder.WriteString(indentedLine)
-		builder.WriteString("\n")
-	}
-
-	yamlString := builder.String()
-	fmt.Println(yamlString)
-
-	// Write the YAML to a new file
-	relativePath := "../../../deploy-as-code/deployer/kubeConfig"
-	file, err := os.Create(relativePath)
+	// Create kubeConfig file
+	/* kubeConfigPath := "../../../deploy-as-code/deployer/kubeConfig"
+	kubeConfigFile, err := os.Create(kubeConfigPath)
 	if err != nil {
-		fmt.Println("Error creating file:", err)
-		return
+		fmt.Fprintf(os.Stderr, "Error creating kubeConfig file: %v\n", err)
+		os.Exit(1)
 	}
-	defer file.Close()
+	defer kubeConfigFile.Close()
 
-	_, err = file.WriteString(yamlString)
-	if err != nil {
-		fmt.Println("Error writing to file:", err)
-		return
+	// Write kubeConfigString to kubeConfig file
+	kubeConfigString := tfOutput["KubeConfig"].Value
+	if _, err := kubeConfigFile.WriteString(kubeConfigString); err != nil {
+		fmt.Fprintf(os.Stderr, "Error writing to kubeConfig file: %v\n", err)
+		os.Exit(1)
 	}
+	fmt.Println("KubeConfig successfully written to file:", kubeConfigPath) */
 
-	fmt.Println("YAML successfully written to file kubeConfig")
-
-	absolutePath, err := filepath.Abs(relativePath)
-	if err != nil {
-		fmt.Println("Error:", err)
-		return
-	}
-
-	fmt.Println("Please run the following command to set the kubeConfig:")
-	fmt.Printf("\texport KUBECONFIG=\"%s\"\n", strings.TrimSpace(absolutePath))
-
+	// Print command to set KUBECONFIG
+	/* fmt.Println("Please run the following command to set the kubeConfig:")
+	fmt.Printf("\texport KUBECONFIG=\"%s\"\n", kubeConfigPath) */
 }

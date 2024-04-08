@@ -64,7 +64,7 @@ variable "db_version" {
     default = "11"
 }
 
-variable "db_user" {
+variable "db_username" {
     type = string
 }
 
@@ -98,10 +98,6 @@ variable "aks_service_cidr" {
 
 variable "aks_dns_service_ip" {
     type = string
-}
-
-variable "api_authorized_ip_ranges" {
-    type = list(string)
 }
 
 variable "vm_size" {
