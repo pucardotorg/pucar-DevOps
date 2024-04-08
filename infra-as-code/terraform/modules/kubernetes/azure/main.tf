@@ -28,6 +28,11 @@ resource "azurerm_kubernetes_cluster" "aks" {
     outbound_type  = "loadBalancer"
   }
 
+  lifecycle {
+    ignore_changes = [
+      default_node_pool["node_count"],
+    ]
+  }
   tags = {
     Environment = "${var.environment}"
   }
