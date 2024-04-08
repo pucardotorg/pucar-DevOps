@@ -273,8 +273,7 @@ jobs:
        run: |
          sops --decrypt --age ${{ secrets.PUBLIC_AGE_KEY }} env-secrets.yaml
          cat env-secrets.yaml
-
-        working-directory: deploy-as-code
+       working-directory: deploy-as-code
 #         helmfile -f digit-helmfile.yaml apply --include-needs=true
 #  terraform_infra_destruction:
 #    if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.destroyCommand == 'destroy' }}
