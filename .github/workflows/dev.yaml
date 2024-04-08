@@ -1,15 +1,10 @@
-name: DIGIT-Install Workflow Dev
+name: Pukar-Install Workflow Dev
 # Workflow branch creating cluster against the input.yaml file  
 on:
   push:
     branches:
-      - DEV-0  
-  workflow_dispatch:
-    inputs:
-      destroyCommand:
-        description: 'Type "destroy" to run the terraform_infra_destruction job.'
-        required: true
-        default: ''        
+      - main 
+  workflow_dispatch:    
 permissions:
   id-token: write
   contents: write 
@@ -31,7 +26,6 @@ jobs:
           deploy-as-code/**
       
   Input_validation:
-    if: ${{ github.event_name == 'push' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -72,8 +66,7 @@ jobs:
           path: deploy-as-code.tar.gz     
 
   Terraform_Infra_Creation:
-    if: ${{ github.event_name == 'push' }}
-    needs: input_validation
+    needs: Input_validation
     runs-on: ubuntu-latest
     env:
       TF_IN_AUTOMATION: "true"
