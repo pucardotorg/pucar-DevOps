@@ -36,8 +36,8 @@ func main() {
 	replaceInFile("../../../deploy-as-code/charts/environments/env.yaml", data, true)
 	fmt.Println("env yaml file updated successfully!")
 
-	replaceInFile("../../../deploy-as-code/charts/environments/env-secrets.yaml", data, true)
-	fmt.Println("env secrets yaml file updated successfully!")
+// 	replaceInFile("../../../deploy-as-code/charts/environments/env-secrets.yaml", data, true)
+// 	fmt.Println("env secrets yaml file updated successfully!")
 }
 
 func validateInputs(data map[string]interface{}) {

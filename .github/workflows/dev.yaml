@@ -3,7 +3,7 @@ name: Pukar-Install Workflow Dev
 on:
   push:
     branches:
-      - main 
+      - DEV-1
   pull_request:
     branches:
       - main     
@@ -148,12 +148,12 @@ jobs:
         env:
           DB_USERNAME: ${{ env.DB_USERNAME }}
         working-directory: infra-as-code/terraform/azure-pucar
-      - name: Terraform Apply - Infra creation
-        id: apply-Infra
-        run: terraform apply -no-color -input=false -auto-approve -var-file="tfvars/dev.tfvars" -var "db_password=${{ secrets.TF_VAR_db_password }}" -var "db_username=${{ env.DB_USERNAME }}" -var "subscription_id=${{ secrets.AZURE_SUBSCRIPTION_ID }}" -var "tenant_id=${{ secrets.AZURE_TENANT_ID }}" -var "client_id=${{ secrets.AZURE_CLIENT_ID }}" -var "client_secret=${{ secrets.AZURE_CLIENT_SECRET }}"
-        env:
-          DB_USERNAME: ${{ env.DB_USERNAME }}
-        working-directory: infra-as-code/terraform/azure-pucar
+#      - name: Terraform Apply - Infra creation
+#        id: apply-Infra
+#        run: terraform apply -no-color -input=false -auto-approve -var-file="tfvars/dev.tfvars" -var "db_password=${{ secrets.TF_VAR_db_password }}" -var "db_username=${{ env.DB_USERNAME }}" -var "subscription_id=${{ secrets.AZURE_SUBSCRIPTION_ID }}" -var "tenant_id=${{ secrets.AZURE_TENANT_ID }}" -var "client_id=${{ secrets.AZURE_CLIENT_ID }}" -var "client_secret=${{ secrets.AZURE_CLIENT_SECRET }}"
+#        env:
+#          DB_USERNAME: ${{ env.DB_USERNAME }}
+#        working-directory: infra-as-code/terraform/azure-pucar
       - name: Generate kubeconfig
         run: |
           az aks get-credentials --resource-group $RESOURCE_GROUP --name $ENVIRONMENT
@@ -219,16 +219,17 @@ jobs:
          yaml-file: infra-as-code/terraform/azure-pucar/input.yaml
          debug: true # Optional: set to true to output some debug information
      # Now, use the env vars in subsequent steps
-     - name: Install dependencies
-       run: sudo apt-get install -y jq
-     - name: Convert YAML to JSON
-       run: |
-         cat deploy-as-code/charts/environments/env-secrets.yaml | yq e -j - > secrets.json
-     - name: Extract flywayPassword
-       id: extract
-       run: |
-         db_password=$(jq -r '.secrets.db.password' secrets.json)
-         echo "db_password=$db_password" >> $GITHUB_ENV
+#     - name: Install dependencies
+#       run: sudo apt-get install -y jq
+#     - name: Convert YAML to JSON
+#       run: |
+#         cat deploy-as-code/charts/environments/env-secrets.yaml | yq e -j - > secrets.json
+#     - name: Extract flywayPassword
+#       id: extract
+#       run: |
+#         db_password=${{ secrets.TF_VAR_db_password }}
+#         db_password=$(jq -r '.secrets.db.password' secrets.json)
+#         echo "db_password=$db_password" >> $GITHUB_ENV
      - name: Azure login
        uses: azure/login@v1
        with:
@@ -251,7 +252,10 @@ jobs:
      - name: Install sops
        run: |
          sudo apt update
-         sudo apt install -y gnupg
+         sudo apt install -y age
+         mkdir -p $HOME/.config/sops/age/
+         echo ${{ secrets.PUBLIC_AGE_KEY }} > $HOME/.config/sops/age/keys.txt
+         echo ${{ secrets.PRIVATE_AGE_KEY }} >> $HOME/.config/sops/age/keys.txt
          wget https://github.com/mozilla/sops/releases/download/v3.7.1/sops-v3.7.1.linux
          chmod +x sops-v3.7.1.linux
          sudo mv sops-v3.7.1.linux /usr/local/bin/sops
@@ -265,10 +269,13 @@ jobs:
         helmfile-version: 'v0.150.0'
         helm-plugins: >
             https://github.com/databus23/helm-diff
-     # - name: digit deployment
-     #   run: helmfile -f digit-helmfile.yaml apply --include-needs=true
-     #   working-directory: deploy-as-code
+     - name: digit deployment
+       run: |
+         sops --decrypt --age ${{ secrets.PUBLIC_AGE_KEY }} env-secrets.yaml
+         cat env-secrets.yaml
 
+        working-directory: deploy-as-code
+#         helmfile -f digit-helmfile.yaml apply --include-needs=true
 #  terraform_infra_destruction:
 #    if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.destroyCommand == 'destroy' }}
 #    runs-on: ubuntu-latest
