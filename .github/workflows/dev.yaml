@@ -253,13 +253,20 @@ jobs:
        run: |
          sudo apt update
          sudo apt install -y age
+         age --version
          mkdir -p $HOME/.config/sops/age/
-         echo ${{ secrets.PUBLIC_AGE_KEY }} > $HOME/.config/sops/age/keys.txt
+         echo public key: ${{ secrets.PUBLIC_AGE_KEY }} > $HOME/.config/sops/age/keys.txt
          echo ${{ secrets.PRIVATE_AGE_KEY }} >> $HOME/.config/sops/age/keys.txt
          cat $HOME/.config/sops/age/keys.txt
          wget https://github.com/mozilla/sops/releases/download/v3.7.1/sops-v3.7.1.linux
          chmod +x sops-v3.7.1.linux
          sudo mv sops-v3.7.1.linux /usr/local/bin/sops
+     - name: sops decryption
+       run: |
+         sudo sops --decrypt --age ${{ secrets.PUBLIC_AGE_KEY }} env-secrets.yaml > env-secrets1.yaml
+         cat env-secrets.yaml
+       working-directory: deploy-as-code/charts/environments
+
      - name: Set up Helm
        uses: azure/setup-helm@v1
        with:
@@ -270,11 +277,11 @@ jobs:
         helmfile-version: 'v0.150.0'
         helm-plugins: >
             https://github.com/databus23/helm-diff
-     - name: digit deployment
-       run: |
-         sudo sops --decrypt --age ${{ secrets.PUBLIC_AGE_KEY }} env-secrets.yaml > env-secrets1.yaml
-         cat env-secrets.yaml
-       working-directory: deploy-as-code/charts/environments
+#     - name: digit deployment
+#       run: |
+#         sudo sops --decrypt --age ${{ secrets.PUBLIC_AGE_KEY }} env-secrets.yaml > env-secrets1.yaml
+#         cat env-secrets.yaml
+#       working-directory: deploy-as-code/charts/environments
 #         helmfile -f digit-helmfile.yaml apply --include-needs=true
 #  terraform_infra_destruction:
 #    if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.destroyCommand == 'destroy' }}
