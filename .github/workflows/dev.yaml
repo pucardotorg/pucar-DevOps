@@ -277,6 +277,7 @@ jobs:
         helmfile-version: 'v0.150.0'
         helm-plugins: >
             https://github.com/databus23/helm-diff
+
 #     - name: digit deployment
 #       run: |
 #         sudo sops --decrypt --age ${{ secrets.PUBLIC_AGE_KEY }} env-secrets.yaml > env-secrets1.yaml
