@@ -148,12 +148,12 @@ jobs:
         env:
           DB_USERNAME: ${{ env.DB_USERNAME }}
         working-directory: infra-as-code/terraform/azure-pucar
-#      - name: Terraform Apply - Infra creation
-#        id: apply-Infra
-#        run: terraform apply -no-color -input=false -auto-approve -var-file="tfvars/dev.tfvars" -var "db_password=${{ secrets.TF_VAR_db_password }}" -var "db_username=${{ env.DB_USERNAME }}" -var "subscription_id=${{ secrets.AZURE_SUBSCRIPTION_ID }}" -var "tenant_id=${{ secrets.AZURE_TENANT_ID }}" -var "client_id=${{ secrets.AZURE_CLIENT_ID }}" -var "client_secret=${{ secrets.AZURE_CLIENT_SECRET }}"
-#        env:
-#          DB_USERNAME: ${{ env.DB_USERNAME }}
-#        working-directory: infra-as-code/terraform/azure-pucar
+      - name: Terraform Apply - Infra creation
+        id: apply-Infra
+        run: terraform apply -no-color -input=false -auto-approve -var-file="tfvars/dev.tfvars" -var "db_password=${{ secrets.TF_VAR_db_password }}" -var "db_username=${{ env.DB_USERNAME }}" -var "subscription_id=${{ secrets.AZURE_SUBSCRIPTION_ID }}" -var "tenant_id=${{ secrets.AZURE_TENANT_ID }}" -var "client_id=${{ secrets.AZURE_CLIENT_ID }}" -var "client_secret=${{ secrets.AZURE_CLIENT_SECRET }}"
+        env:
+          DB_USERNAME: ${{ env.DB_USERNAME }}
+        working-directory: infra-as-code/terraform/azure-pucar
       - name: Generate kubeconfig
         run: |
           az aks get-credentials --resource-group $RESOURCE_GROUP --name $ENVIRONMENT
@@ -253,11 +253,9 @@ jobs:
        run: |
          sudo apt update
          sudo apt install -y age
-         age --version
          mkdir -p $HOME/.config/sops/age/
          echo # public key: ${{ secrets.PUBLIC_AGE_KEY }} > $HOME/.config/sops/age/keys.txt
          echo ${{ secrets.PRIVATE_AGE_KEY }} >> $HOME/.config/sops/age/keys.txt
-         cat $HOME/.config/sops/age/keys.txt
          wget https://github.com/mozilla/sops/releases/download/v3.7.1/sops-v3.7.1.linux
          chmod +x sops-v3.7.1.linux
          sudo mv sops-v3.7.1.linux /usr/local/bin/sops
@@ -265,7 +263,6 @@ jobs:
        run: |
          sudo sops --decrypt --age ${{ secrets.PUBLIC_AGE_KEY }} env-secrets.yaml > env-secrets1.yaml
          cp env-secrets1.yaml env-secrets.yaml
-         cat env-secrets.yaml
        working-directory: deploy-as-code/charts/environments
 
      - name: Set up Helm
@@ -281,9 +278,9 @@ jobs:
 
      - name: digit deployment
        run: |
-         cat env-secrets.yaml
-       working-directory: deploy-as-code/charts/environments
-#         helmfile -f digit-helmfile.yaml apply --include-needs=true
+         helmfile -f digit-helmfile.yaml apply --include-needs=true
+       working-directory: deploy-as-code
+
 #  terraform_infra_destruction:
 #    if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.destroyCommand == 'destroy' }}
 #    runs-on: ubuntu-latest
