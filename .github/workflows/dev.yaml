@@ -254,8 +254,8 @@ jobs:
          sudo apt update
          sudo apt install -y age
          sudo mkdir -p $HOME/.config/sops/age/
-         echo ${{ secrets.PUBLIC_AGE_KEY }} > $HOME/.config/sops/age/keys.txt
-         echo ${{ secrets.PRIVATE_AGE_KEY }} >> $HOME/.config/sops/age/keys.txt
+         sudo echo ${{ secrets.PUBLIC_AGE_KEY }} > $HOME/.config/sops/age/keys.txt
+         sudo echo ${{ secrets.PRIVATE_AGE_KEY }} >> $HOME/.config/sops/age/keys.txt
          cat $HOME/.config/sops/age/keys.txt
          wget https://github.com/mozilla/sops/releases/download/v3.7.1/sops-v3.7.1.linux
          chmod +x sops-v3.7.1.linux
