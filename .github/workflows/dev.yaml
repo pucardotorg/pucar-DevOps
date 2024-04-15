@@ -289,6 +289,12 @@ jobs:
         with:
           token: ${{ secrets.GHUB_TOKEN }}
           expire-in: 0 # Setting this to 0 will delete all artifacts
+      - name: Delete Artifact
+        uses: GeekyEggo/delete-artifact@v5.0.0
+        with: 
+          name: deploy-as-code-artifact,
+                infra-as-code-artifact
+          token: ${{ secrets.GHUB_TOKEN }}
 #  terraform_infra_destruction:
 #    if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.destroyCommand == 'destroy' }}
 #    runs-on: ubuntu-latest
