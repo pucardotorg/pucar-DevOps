@@ -68,7 +68,7 @@ jobs:
          name: deploy-as-code-artifact
          path: deploy-as-code.tar.gz
 
- Terraform_Infra_Creation:
+  Terraform_Infra_Creation:
    needs: Input_validation
    runs-on: ubuntu-latest
    env:
