@@ -282,6 +282,7 @@ jobs:
     #   working-directory: deploy-as-code
 
   delete-artifacts:
+    needs: DIGIT-deployment
     runs-on: ubuntu-latest
     steps:
       - uses: kolpav/purge-artifacts-action@v1
