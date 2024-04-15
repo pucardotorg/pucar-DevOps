@@ -186,17 +186,17 @@ jobs:
          name: deploy-as-code-artifact
          path: deploy-as-code.tar.gz
 
- DIGIT-deployment:
-  if: ${{ github.event_name == 'push' }}
-  needs: Terraform_Infra_Creation
-  runs-on: ubuntu-latest
-  env:
+  DIGIT-deployment:
+   if: ${{ github.event_name == 'push' }}
+   needs: Terraform_Infra_Creation
+   runs-on: ubuntu-latest
+   env:
      TF_IN_AUTOMATION: "true"
      ARM_CLIENT_ID:  ${{ secrets.AZURE_CLIENT_ID }}
      ARM_CLIENT_SECRET:  ${{ secrets.AZURE_CLIENT_SECRET }}
      ARM_TENANT_ID:  ${{ secrets.AZURE_TENANT_ID }}
      ARM_SUBSCRIPTION_ID:  ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-  steps:
+   steps:
     - name: Checkout code
       uses: actions/checkout@v2
     - name: Download infra-as-code folder from artifacts
@@ -286,7 +286,7 @@ jobs:
     steps:
       - uses: kolpav/purge-artifacts-action@v1
         with:
-          token: ${{ secrets.GHUB_TOKEN }}
+#          token: ${{ secrets.GITHUB_TOKEN }}
           expire-in: 0 # Setting this to 0 will delete all artifacts
 #  terraform_infra_destruction:
 #    if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.destroyCommand == 'destroy' }}
