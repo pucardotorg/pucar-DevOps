@@ -286,7 +286,7 @@ jobs:
     steps:
       - uses: kolpav/purge-artifacts-action@v1
         with:
-#          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.GHUB_TOKEN }}
           expire-in: 0 # Setting this to 0 will delete all artifacts
 #  terraform_infra_destruction:
 #    if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.destroyCommand == 'destroy' }}
