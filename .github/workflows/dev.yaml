@@ -3,7 +3,7 @@ name: Pucar-Install Workflow Dev
 on:
   push:
     branches:
-      - DEV-1
+      - main
   pull_request:
     branches:
       - main
