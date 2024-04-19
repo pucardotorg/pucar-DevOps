@@ -16,7 +16,7 @@ initContainers: {}
 # Container Configs
 image:
   repository: "workbench-ui"
-  tag: v1.0.0-2d178330ff-94
+  tag: v1.0.0-0df8b027ab-144
 replicas: "1"
 httpPort: 80
 healthChecks:

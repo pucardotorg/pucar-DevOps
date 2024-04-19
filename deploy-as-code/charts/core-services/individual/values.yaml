@@ -15,13 +15,13 @@ initContainers:
     enabled: true
     schemaTable: "individual_schema"
     image:
-      repository: "individual-db"
-      tag: db-upgrade-bd5e61bc9f-200
+      repository: "pucardev.azurecr.io/individual_db"
+      tag: latest
 
 # Container Configs
 image:
-  repository: "individual"
-  tag: db-upgrade-bd5e61bc9f-200
+  repository: "pucardev.azurecr.io/individual"
+  tag: latest1
 replicas: "1"
 healthChecks:
   enabled: true
