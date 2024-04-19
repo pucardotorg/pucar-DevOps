@@ -275,10 +275,15 @@ jobs:
           helmfile-version: 'v0.150.0'
           helm-plugins: >
             https://github.com/databus23/helm-diff
-      # - name: digit deployment
-      #   run: |
-      #     helmfile -f digit-helmfile.yaml apply --include-needs=true
-      #   working-directory: deploy-as-code
+     # - name: digit deployment
+     #   run: helmfile -f digit-helmfile.yaml apply --include-needs=true
+     #   working-directory: deploy-as-code
+     - name: Delete Artifact
+       uses: GeekyEggo/delete-artifact@v5.0.0
+       with: 
+          name: deploy-as-code-artifact,
+                infra-as-code-artifact
+          token: ${{ secrets.GHUB_TOKEN }}
 
   delete-artifacts:
     needs: DIGIT-deployment
