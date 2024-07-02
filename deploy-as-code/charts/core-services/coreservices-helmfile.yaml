@@ -108,9 +108,9 @@ releases:
     installed: true
     <<: *default
 
-  # - name: task  # Replace with your desired namespace
-  #   installed: true
-  #   <<: *default
+  - name: task  # Replace with your desired namespace
+    installed: true
+    <<: *default
 
 #  - name: employee # Replace with your desired namespace
 #    installed: true
@@ -148,33 +148,33 @@ releases:
   #   installed: true
   #   <<: *default
 
-  # - name: advocate  # Replace with your desired namespace
-  #   installed: true
-  #   <<: *default
+  - name: advocate  # Replace with your desired namespace
+    installed: true
+    <<: *default
 
-  # - name: case  # Replace with your desired namespace
-  #   installed: true
-  #   <<: *default
+  - name: case  # Replace with your desired namespace
+    installed: true
+    <<: *default
 
   # - name: inbox  # Replace with your desired namespace
   #   installed: true
   #   <<: *default
 
-  # - name: order  # Replace with your desired namespace
-  #   installed: true
-  #   <<: *default
+  - name: order  # Replace with your desired namespace
+    installed: true
+    <<: *default
 
-  # - name: application  # Replace with your desired namespace
-  #   installed: true
-  #   <<: *default
+  - name: application  # Replace with your desired namespace
+    installed: true
+    <<: *default
 
-  # - name: evidence  # Replace with your desired namespace
-  #   installed: true
-  #   <<: *default
+  - name: evidence  # Replace with your desired namespace
+    installed: true
+    <<: *default
 
-  # - name: hearing  # Replace with your desired namespace
-  #   installed: true
-  #   <<: *default
+  - name: hearing  # Replace with your desired namespace
+    installed: true
+    <<: *default
 
 
 
@@ -193,9 +193,10 @@ releases:
   # - name: egov-apportion-service  # Replace with your desired namespace
   #   installed: true
   #   <<: *default
-  # - name: casemanagement  # Replace with your desired namespace
-  #   installed: true
-  #   <<: *default
-  - name: boundary-service  # Replace with your desired namespace
+  - name: casemanagement  # Replace with your desired namespace
     installed: true
     <<: *default
+#
+#  - name: boundary-service  # Replace with your desired namespace
+#    installed: true
+#    <<: *default

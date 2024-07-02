@@ -136,6 +136,26 @@ jobs:
           helmfile-version: 'v0.150.0'
           helm-plugins: >
             https://github.com/databus23/helm-diff
+
+      - name: Commit Id for Latest Deployment
+        run: |
+          git clone https://github.com/pucardotorg/dristi.git
+          cd dristi
+          git checkout develop
+          advocate_commit=$(git log -1 --pretty=format:%H -- backend/advocate)
+          echo "advocate_commit=$advocate_commit" >> $GITHUB_ENV
+          case_commit=$(git log -1 --pretty=format:%H -- backend/case)
+          echo "case_commit=$case_commit" >> $GITHUB_ENV
+          casemanagement_commit=$(git log -1 --pretty=format:%H -- backend/casemanagement)
+          echo "casemanagement_commit=$casemanagement_commit" >> $GITHUB_ENV
+          evidence_commit=$(git log -1 --pretty=format:%H -- backend/evidence)
+          echo "evidence_commit=$evidence_commit" >> $GITHUB_ENV
+          hearing_commit=$(git log -1 --pretty=format:%H -- backend/hearing)
+          echo "hearing_commit=$hearing_commit" >> $GITHUB_ENV
+          order_commit=$(git log -1 --pretty=format:%H -- backend/order)
+          echo "order_commit=$order_commit" >> $GITHUB_ENV
+          task_commit=$(git log -1 --pretty=format:%H -- backend/task)
+          echo "task_commit=$task_commit" >> $GITHUB_ENV
       - name: DIGIT Deployment with updated tag
         run: |
           digit_ui_commitId=$(git ls-remote https://github.com/pucardotorg/dristi.git dev-env | awk '{print $1}')
@@ -145,6 +165,19 @@ jobs:
 
           helmfile -f digit-helmfile.yaml apply --include-needs=true \
            --set digit-ui.image.tag=v1.0.0-${digit_ui_commitId} \
+           --set advocate.image.tag=v1.0.0-${advocate_commit} \
+           --set advocate.initContainers.dbMigration.image.tag=v1.0.0-${advocate_commit} \
+           --set case.image.tag=v1.0.0-${case_commit} \
+           --set case.initContainers.dbMigration.image.tag=v1.0.0-${case_commit} \
+           --set casemanagement.image.tag=v1.0.0-${casemanagement_commit} \
+           --set evidence.image.tag=v1.0.0-${evidence_commit} \
+           --set evidence.initContainers.dbMigration.image.tag=v1.0.0-${evidence_commit} \
+           --set hearing.image.tag=v1.0.0-${hearing_commit} \
+           --set hearing.initContainers.dbMigration.image.tag=v1.0.0-${hearing_commit} \
+           --set order.image.tag=v1.0.0-${order_commit} \
+           --set order.initContainers.dbMigration.image.tag=v1.0.0-${order_commit} \
+           --set task.image.tag=v1.0.0-${task_commit} \
+           --set task.initContainers.dbMigration.image.tag=v1.0.0-${task_commit} \
            --set analytics.image.tag=v1.0.0-${analytics_commitId}
         env:
           HELMFILE_ENV: dev

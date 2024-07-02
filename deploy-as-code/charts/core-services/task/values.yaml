@@ -126,6 +126,11 @@ env: |
       configMapKeyRef:
         key: egov-url-shortening
         name: egov-service-host
+  - name: EGOV_ORDER_HOST
+    valueFrom:
+      configMapKeyRef:
+        key: order
+          name: egov-service-host
 
 
     

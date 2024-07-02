@@ -86,11 +86,6 @@ env: |
       configMapKeyRef:
         name: egov-service-host
         key: egov-hrms
-  - name: EGOV_HRMS_HOST
-    valueFrom:
-      configMapKeyRef:
-        name: egov-service-host
-        key: egov-hrms
   - name: EGOV_MDMS_HOST
     valueFrom:
       configMapKeyRef:
@@ -141,10 +136,11 @@ env: |
       configMapKeyRef:
         name: egov-service-host
         key: advocate
- - name: EGOV_BILLING_HOST
-   valueFrom:
-    configMapKeyRef:
-      name: egov-service-host
-      key: billing-service
-  
+  - name: EGOV_BILLING_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: billing-service
+  - name: KAFKA_TOPICS_RECEIPT_CREATE
+    value: egov.collection.payment-create
     

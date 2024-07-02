@@ -141,5 +141,6 @@ env: |
       configMapKeyRef:
         name: egov-service-host
         key: case
-  
+  - name: EGOV_CASE_PATH
+    value: case/case/v1/_exists
     
