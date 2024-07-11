@@ -187,6 +187,8 @@ jobs:
           echo "esign_interceptor_commit=$esign_interceptor_commit" >> $GITHUB_ENV
           esign_svc_commit=$(git log -1 --pretty=format:%H -- backend/e-sign-svc)
           echo "esign_svc_commit=$esign_svc_commit" >> $GITHUB_ENV
+          application_commit=$(git log -1 --pretty=format:%H -- backend/application)
+          echo "application_commit=$application_commit" >> $GITHUB_ENV 
 
       - name: digit deployment
         run: |
@@ -216,7 +218,9 @@ jobs:
             --set individual.image.tag=v1.0.0-${{ env.individual_commit }} \
             --set individual.initContainers.dbMigration.image.tag=v1.0.0-${{ env.individual_commit }} \
             --set e-sign-svc.image.tag=v1.0.0-${{ env.esign_svc_commit }} \
-            --set esign-interceptor.image.tag=v1.0.0-${{ env.esign_interceptor_commit }}
+            --set esign-interceptor.image.tag=v1.0.0-${{ env.esign_interceptor_commit }} \
+            --set application.image.tag=v1.0.0-${{ env.application_commit }} \
+            --set application.initContainers.dbMigration.image.tag=v1.0.0-${{ env.application_commit }} 
         working-directory: deploy-as-code
         env:
           HELMFILE_ENV: "solutions-qa"
