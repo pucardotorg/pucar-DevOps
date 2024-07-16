@@ -246,6 +246,11 @@ releases:
       team: "solutions"
     <<: *default
 
+  - name: summons-svc  # Replace with your desired namespace
+    installed: true
+    labels:
+      team: "solutions"
+    <<: *default
 #  - name: e-sign  # Replace with your desired namespace
 #    installed: true
 #    labels:

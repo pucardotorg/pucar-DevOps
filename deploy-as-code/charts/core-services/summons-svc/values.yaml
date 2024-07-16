@@ -1,0 +1,135 @@
+# Common Labels
+labels:
+  app: "summons"
+  group: "rainmaker"
+
+# Ingress Configs
+ingress:
+  enabled: true
+  zuul: true
+  context: "summons"
+
+# Init Containers Configs
+initContainers:
+  dbMigration:
+    enabled: true
+    schemaTable: "summons_schema"
+    image:
+      repository: "pucarsolutionsdev.azurecr.io/summons-svc_db"
+      tag: v1.0.0-8c02e5adff1f1cb2f7c91f73282203609d0132b5
+
+
+# Container Configs
+image:
+  repository: "pucarsolutionsdev.azurecr.io/summons-svc"
+  tag: v1.0.0-8c02e5adff1f1cb2f7c91f73282203609d0132b5
+replicas: "1"
+# healthChecks:
+#   enabled: true
+#   livenessProbePath: "/summons/health"
+#   readinessProbePath: "/summons/health"
+appType: "java-spring"
+tracing-enabled: true
+heap: "-Xmx64m -Xms64m"
+java-args: "-Dspring.profiles.active=monitoring"
+
+# Additional Container Envs
+env: |
+  - name: SPRING_DATASOURCE_URL
+    valueFrom:
+      configMapKeyRef:
+        name: egov-config
+        key: db-url
+  - name: SPRING_DATASOURCE_USERNAME
+    valueFrom:
+      secretKeyRef:
+        name: db
+        key: username
+  - name: SPRING_DATASOURCE_PASSWORD
+    valueFrom:
+      secretKeyRef:
+        name: db
+        key: password
+  - name: SPRING_FLYWAY_URL
+    valueFrom:
+      configMapKeyRef:
+        key: db-url
+        name: egov-config
+  - name: SPRING_FLYWAY_USER
+    valueFrom:
+      secretKeyRef:
+        key: username
+        name: db
+  - name: SPRING_FLYWAY_PASSWORD
+    valueFrom:
+      secretKeyRef:
+        name: db
+        key: password
+  - name: EGOV_MDMS_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: egov-mdms-service
+  - name: EGOV_HRMS_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: egov-hrms
+  - name: EGOV_USER_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: egov-user
+  - name: EGOV_IDGEN_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: egov-idgen
+  - name: EGOV_WORKFLOW_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: egov-workflow-v2
+  - name: EGOV_URL_SHORTNER_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: egov-url-shortening
+  - name: EGOV_FILE_STORE_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: egov-filestore
+  - name: KAFKA_CONFIG_BOOTSTRAP_SERVER_CONFIG
+    valueFrom:
+      configMapKeyRef:
+        key: kafka-brokers
+        name: egov-config
+  - name: EGOV_PDF_SERVICE_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: pdf-service
+  - name: EGOv_ICOPS_HOST
+    valueFrom:
+      configMapKeyRef:
+        key: icops-integration
+        name: egov-service-host
+       
+  - name: PAYMENT_CALCULATOR_HOST
+    valueFrom:
+      configMapKeyRef:
+        key: payment-calculator
+        name: egov-service-host
+       
+  - name: EGOV_BILLINGSERVICE_HOST
+    valueFrom:
+      configMapKeyRef:
+        key: billing-service
+        name: egov-service-host
+
+  
+  
+  
+  
+  
