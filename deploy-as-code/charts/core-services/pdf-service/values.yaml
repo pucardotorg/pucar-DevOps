@@ -65,6 +65,11 @@ env: |
       secretKeyRef:
         name: db
         key: password
+  - name: KAFKA_BROKER_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-config
+        key: kafka-brokers
   - name: EGOV_EXTERNAL_HOST
     valueFrom:
       configMapKeyRef:
