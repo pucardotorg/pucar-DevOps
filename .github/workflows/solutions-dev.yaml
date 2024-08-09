@@ -171,6 +171,8 @@ jobs:
           echo "evidence_commit=$evidence_commit" >> $GITHUB_ENV
           hearing_commit=$(git log -1 --pretty=format:%H -- backend/hearing)
           echo "hearing_commit=$hearing_commit" >> $GITHUB_ENV
+          dristi_case_pdf_commit=$(git log -1 --pretty=format:%H -- backend/dristi-case-pdf)
+          echo "dristi_case_pdf_commit=$dristi_case_pdf_commit" >> $GITHUB_ENV
           order_commit=$(git log -1 --pretty=format:%H -- backend/order)
           echo "order_commit=$order_commit" >> $GITHUB_ENV
           task_commit=$(git log -1 --pretty=format:%H -- backend/task)
@@ -210,6 +212,7 @@ jobs:
             --set payment-calculator.image.tag=v1.0.0-${{ env.payment_calculator_commit }} \
             --set payment-calculator.initContainers.dbMigration.image.tag=v1.0.0-${{ env.payment_calculator_commit }} \
             --set digit-ui.image.tag=v1.0.0-${{ env.digit_ui_commit }} \
+            --set dristi-case-pdf.image.tag=v1.0.0-${{ env.dristi_case_pdf_commit }} \
             --set advocate.image.tag=v1.0.0-${{ env.advocate_commit }} \
             --set advocate.initContainers.dbMigration.image.tag=v1.0.0-${{ env.advocate_commit }} \
             --set case.image.tag=v1.0.0-${{ env.case_commit }} \

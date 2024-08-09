@@ -30,8 +30,8 @@ image:
 replicas: "1"
 appType: "java-spring"
 tracing-enabled: true
-data-config-urls: "https://github.com/pucardotorg/kerala-configs/blob/develop/pdf-service/data-config/causelist.json"
-format-config-urls: "https://github.com/pucardotorg/kerala-configs/blob/develop/pdf-service/format-config/causelist.json"
+data-config-urls: "file:///work-dir/kerala-configs/pdf-service/data-config/summons-accused-qr.json,file:///work-dir/kerala-configs/pdf-service/data-config/warrants-bailable.json,file:///work-dir/kerala-configs/pdf-service/data-config/warrants-non-bailable.json,file:///work-dir/kerala-configs/pdf-service/data-config/summons-accused.json,file:///work-dir/kerala-configs/pdf-service/data-config/causelist.json,file:///work-dir/kerala-configs/pdf-service/data-config/case.json,file:///work-dir/kerala-configs/pdf-service/data-config/witness-deposition.json"
+format-config-urls: "file:///work-dir/kerala-configs/pdf-service/format-config/summons-accused-qr.json,file:///work-dir/kerala-configs/pdf-service/format-config/summons-accused.json,file:///work-dir/kerala-configs/pdf-service/format-config/causelist.json,file:///work-dir/kerala-configs/pdf-service/format-config/warrants-bailable.json,file:///work-dir/kerala-configs/pdf-service/format-config/warrants-non-bailable.json,file:///work-dir/kerala-configs/pdf-service/format-config/case.json,file:///work-dir/kerala-configs/pdf-service/format-config/witness-deposition.json"
 #healthChecks:
 #  enabled: true
 #  livenessProbePath: "/pdf-service/health"

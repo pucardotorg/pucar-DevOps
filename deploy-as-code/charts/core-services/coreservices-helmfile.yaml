@@ -149,6 +149,12 @@ releases:
       team: "dpg"
     <<: *default
 
+  - name: dristi-case-pdf  # Replace with your desired namespace
+    installed: true
+    labels:
+      team: "dpg"
+    <<: *default
+
   - name: scheduler  # Replace with your desired namespace
     installed: true
     labels:
