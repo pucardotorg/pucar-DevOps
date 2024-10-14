@@ -28,6 +28,11 @@ SET default_table_access_method = heap;
 --
 
 DROP TABLE IF EXISTS public.eg_mdms_data;
+DROP TABLE IF EXISTS public.eg_mdms_schema_definition;
+DROP TABLE IF EXISTS public.eg_wf_action_v2;
+DROP TABLE IF EXISTS public.eg_wf_businessservice_v2;
+DROP TABLE IF EXISTS public.eg_wf_state_v2;
+
 CREATE TABLE public.eg_mdms_data (
     id character varying(64) NOT NULL,
     tenantid character varying(255) NOT NULL,
@@ -49,7 +54,6 @@ ALTER TABLE public.eg_mdms_data OWNER TO solutions_dev;
 -- Name: eg_mdms_schema_definition; Type: TABLE; Schema: public; Owner: solutions_dev
 --
 
-DROP TABLE IF EXISTS public.eg_mdms_schema_definition;
 CREATE TABLE public.eg_mdms_schema_definition (
     id character varying(64) NOT NULL,
     tenantid character varying(255) NOT NULL,
@@ -71,7 +75,6 @@ ALTER TABLE public.eg_mdms_schema_definition OWNER TO solutions_dev;
 -- Name: eg_wf_action_v2; Type: TABLE; Schema: public; Owner: solutions_dev
 --
 
-DROP TABLE IF EXISTS public.eg_wf_action_v2;
 CREATE TABLE public.eg_wf_action_v2 (
     uuid character varying(256) NOT NULL,
     tenantid character varying(256) NOT NULL,
@@ -94,7 +97,6 @@ ALTER TABLE public.eg_wf_action_v2 OWNER TO solutions_dev;
 -- Name: eg_wf_businessservice_v2; Type: TABLE; Schema: public; Owner: solutions_dev
 --
 
-DROP TABLE IF EXISTS public.eg_wf_businessservice_v2;
 CREATE TABLE public.eg_wf_businessservice_v2 (
     businessservice character varying(256) NOT NULL,
     business character varying(256) NOT NULL,
@@ -117,7 +119,6 @@ ALTER TABLE public.eg_wf_businessservice_v2 OWNER TO solutions_dev;
 -- Name: eg_wf_state_v2; Type: TABLE; Schema: public; Owner: solutions_dev
 --
 
-DROP TABLE IF EXISTS public.eg_wf_state_v2;
 CREATE TABLE public.eg_wf_state_v2 (
     uuid character varying(256) NOT NULL,
     tenantid character varying(256) NOT NULL,
