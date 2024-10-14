@@ -235,11 +235,11 @@ releases:
         team: "solutions"
       <<: *default
 
-    - name: e-sign-svc  # Replace with your desired namespace
-      installed: true
-      labels:
-        team: "solutions"
-      <<: *default
+#    - name: e-sign-svc  # Replace with your desired namespace
+#      installed: true
+#      labels:
+#        team: "solutions"
+#      <<: *default
 
     - name: esign-interceptor  # Replace with your desired namespace
       installed: true
