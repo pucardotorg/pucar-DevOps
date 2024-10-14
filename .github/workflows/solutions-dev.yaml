@@ -265,8 +265,18 @@ jobs:
             --set transformer.image.tag=v1.0.0-${{ env.transformer_commit }} \
             --set icops-integration.image.tag=v1.0.0-${{ env.integration_commit }} \
             --set icops-integration.initContainers.dbMigration.image.tag=v1.0.0-${{ env.integration_commit }} \
-          
+
 
         working-directory: deploy-as-code
         env:
           HELMFILE_ENV: "solutions-dev"
+#      - name: Postgres Data Migration
+#        run: |
+#          POSTGRES_POD=$(kubectl get pods -n default -l app=postgres -o jsonpath='{.items[0].metadata.name}')
+#          kubectl exec -n default $POSTGRES_POD -- bash -c 'if [ -f /tmp/init-scripts/dev.sql ]; then rm /tmp/dev.sql; echo "File deleted"; else echo "File does not exist"; fi'
+#          kubectl cp deploy-as-code/charts/backbone-services/postgresql/init-scripts/dev.sql default/$POSTGRES_POD:/tmp/dev.sql
+#          kubectl exec -n default $POSTGRES_POD -- bash -c "PGPASSWORD=$PGPASSWORD psql -h solutions-pucar-dev-server.postgres.database.azure.com -U solutions_dev -d solutions-pucar-dev-db -f /tmp/dev.sql"
+#        env:
+#          PGPASSWORD: ${{ secrets.TF_VAR_DB_PASSWORD_SOLUTIONS }}
+
+
