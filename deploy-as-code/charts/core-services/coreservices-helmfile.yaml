@@ -194,11 +194,11 @@ releases:
         deployment: "application"
       <<: *default
 
-#    - name: casemanagement  # Replace with your desired namespace
-#      installed: true
-#      labels:
-#        deployment: "casemanagement"
-#      <<: *default
+    - name: casemanagement  # Replace with your desired namespace
+      installed: true
+      labels:
+        deployment: "casemanagement"
+      <<: *default
 
 #    - name: egov-apportion-service  # Replace with your desired namespace
 #      installed: true
