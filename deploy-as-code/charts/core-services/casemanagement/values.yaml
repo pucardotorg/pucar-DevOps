@@ -25,8 +25,11 @@ image:
   imagePullPolicy: Always
 replicas: "1"
 httpPort: 8080
+debugPort: 8000
+remote_debug:
+  enabled: true
 appType: "java-spring"
-heap: "-Xmx64m -Xms64m"
+heap: "-Xmx64m -Xms64m -agentlib:jdwp=transport=dt_socket,address=*:8000,server=y,suspend=n"
 java-args: "-Dspring.profiles.active=monitoring"
 memory_limits: 640Mi
 
