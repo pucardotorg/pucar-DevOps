@@ -23,7 +23,9 @@ configmaps:
       sbi-tranction-success-url: https://dristi-kerala-uat.pucar.org/sbi-payment/success.jsp
       sbi-tranction-fail-url: https://dristi-kerala-uat.pucar.org/sbi-payment/fail.jsp
       sbi-redirect-url: https://dristi-kerala-uat.pucar.org/digit-ui/citizen/home/sbi-payment-screen
-
+      service-name: icops
+      service-ky: IC0001
+      auth-type: get_auth_token
 egov-user:
   heap: "-Xmx256m -Xms256m"
   memory_limits: 512Mi

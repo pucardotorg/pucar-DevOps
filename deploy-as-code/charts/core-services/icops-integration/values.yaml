@@ -87,7 +87,21 @@ env: |
       configMapKeyRef:
         key: kafka-brokers
         name: egov-config
-
+  - name: SERVICE_NAME
+    valueFrom:
+      configMapKeyRef:
+        key: service-name
+        name: egov-config
+  - name: SERVICE_KY
+    valueFrom:
+      configMapKeyRef:
+        key: service-ky
+        name: egov-config
+  - name: AUTH_TYPE
+    valueFrom:
+      configMapKeyRef:
+        key: auth-type
+        name: egov-config
 
 
 
