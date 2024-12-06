@@ -16,7 +16,7 @@ initContainers:
     schemaTable: "audit_service_schema"
     image:
       repository: "audit-service-db"
-      tag: core-2.9-lts-mvn-check-c33cfe45ab-9
+      tag: audit-details-extractSanitizedFieldNameFromJsonPath-d99f6c4a5b-14
   gitSync:
     enabled: true
     repo: "git@github.com:egovernments/configs"
@@ -25,7 +25,7 @@ initContainers:
 # Container Configs
 image:
   repository: "audit-service"
-  tag: core-2.9-lts-mvn-check-c33cfe45ab-9
+  tag: audit-details-extractSanitizedFieldNameFromJsonPath-d99f6c4a5b-14
 replicas: "1"
 healthChecks:
   enabled: true
