@@ -102,6 +102,11 @@ env: |
       configMapKeyRef:
         key: auth-type
         name: egov-config
+  - name: EGOV_OAUTH_URL
+    valueFrom:
+      configMapKeyRef:
+        key: dristi-url
+        name: egov-config
 
 
 
