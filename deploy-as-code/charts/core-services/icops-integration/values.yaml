@@ -55,8 +55,6 @@ env: |
       secretKeyRef:
         name: db
         key: password
-  - name: "SCHEMA_TABLE"
-    value: "advocate_service_schema"
   - name: EGOV_IDGEN_HOST
     valueFrom:
       configMapKeyRef:
