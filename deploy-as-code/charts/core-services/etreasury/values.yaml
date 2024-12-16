@@ -30,15 +30,19 @@ image:
 replicas: "1"
 appType: "java-spring"
 tracing-enabled: true
-heap: "-Xmx192m -Xms192m"
 java-args: ""
-
+heap: "-Xmx192m -Xms192m -agentlib:jdwp=transport=dt_socket,address=*:8000,server=y,suspend=n"
+debugPort: 8000
+remote_debug:
+  enabled: true
 # Additional Container Envs
 env: |
   - name: ISTEST_ENABLED
     value: "true"
   - name: SERVER_PORT
     value: "8080"
+  - name: JAVA_OPTS
+    value: {{ index .Values "heap" | quote }}
   - name: EGOV_STATE_LEVEL_TENANT_ID
     valueFrom:
       configMapKeyRef:
