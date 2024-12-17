@@ -5,9 +5,8 @@ labels:
 
 # Ingress Configs
 ingress:
-  zuul: true
   enabled: true
-  context: "OpenAPI"
+  context: "openapi"
 
 
 # Init Containers Configs
@@ -60,12 +59,12 @@ env: |
       configMapKeyRef:
         key: kafka-brokers
         name: egov-config
-  - name: EGOV_HEARING_HOST
+  - name: HEARING_SERVICE_HOST
     valueFrom:
       configMapKeyRef:
         key: hearing
         name: egov-service-host
-  - name: EGOV_CASE_HOST
+  - name: CASE_SERVICE_HOST
     valueFrom:
       configMapKeyRef:
         name: egov-service-host
