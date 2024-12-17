@@ -16,7 +16,7 @@ ingress:
 # Container Configs
 image:
   repository: "pucarsolutionsdev.azurecr.io/pucar_openapi"
-  tag: develop-046c64baca6a9631f42862f0f2d5a76e28649fc1
+  tag: develop-64544fb50f20302915a9a766883b0106b1e9a8cf
   imagePullPolicy: Always
 replicas: "1"
 httpPort: 8080
