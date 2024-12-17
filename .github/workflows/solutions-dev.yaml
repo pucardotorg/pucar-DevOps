@@ -214,6 +214,8 @@ jobs:
           echo "dristi_pdf_commit=$dristi_pdf_commit" >> $GITHUB_ENV
           pdf_service=$(git log -1 --pretty=format:%H -- common/pdf-service)
           echo "pdf_service=$pdf_service" >> $GITHUB_ENV
+          openapi_service=$(git log -1 --pretty=format:%H -- backend/openapi)
+          echo "openapi_service=$openapi_service" >> $GITHUB_ENV
 
       - name: digit deployment
         run: |
@@ -267,6 +269,7 @@ jobs:
             --set summons-svc.image.tag=develop-${{ env.summons_svc_commit }} \
             --set summons-svc.initContainers.dbMigration.image.tag=develop-${{ env.summons_svc_commit }} \
             --set transformer.image.tag=develop-${{ env.transformer_commit }} \
+            --set openapi.image.tag=develop-${{ env.openapi_service }} \
             --set icops-integration.image.tag=develop-${{ env.integration_commit }} \
             --set icops-integration.initContainers.dbMigration.image.tag=develop-${{ env.integration_commit }} \
 
