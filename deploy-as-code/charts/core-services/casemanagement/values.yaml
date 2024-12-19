@@ -199,6 +199,8 @@ env: |
         name: egov-service-host
   - name: CASEMANAGEMENT_KAFKA_WORKFLOW_TRANSITION_TOPIC
     value: save-wf-transitions
+  - name: EGOV_DRISTI_PDF_PROCESS_BUNDLE
+    value: egov-pdf/dristi-pdf/process-case-bundle
   - name: GENERATE_VC_CODE
     value: "Pucar.SummonOrder14"
   
