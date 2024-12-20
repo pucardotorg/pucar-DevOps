@@ -1,0 +1,65 @@
+name: Pucar-Install Azure Infra
+on:
+  #  push:
+  #   branches:
+  #     - Solutions-Pipeline
+  #  pull_request:
+  #    branches:
+  #      - main
+  workflow_dispatch:
+  repository_dispatch:
+jobs:
+   Terraform_Infra_Creation:
+     needs: check-changed-files
+     runs-on: ubuntu-latest
+     env:
+       db_password: ${{ secrets.TF_VAR_db_password }}
+     steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+#      - name: Setup Terraform
+#        uses: hashicorp/setup-terraform@v2
+#
+#       - name: Azure login
+#         uses: azure/login@v2
+#         with:
+#           creds: ${{ secrets.SOLUTIONS_AZURE_CREDENTIALS }}
+# #
+#       - name: Terraform init - Infra creation
+#         id: init-Infra
+#         run: |
+#           terraform --version
+#           terraform init -backend-config="resource_group_name=pucar-solutions-dev" -backend-config="storage_account_name=tfstate771y4" -backend-config="container_name=pucar-solutions-dev-tfstate" -backend-config="key=infra.tfstate" -reconfigure
+#         working-directory: infra-as-code/terraform/azure-pucar
+
+#       - name: Terraform Validate - Infra creation
+#         id: validate-Infra
+#         run: terraform validate -no-color
+#         working-directory: infra-as-code/terraform/azure-pucar
+
+#       - name: Terraform Plan - Infra creation
+#         id: plan-Infra
+#         run: terraform plan -no-color -input=false -var-file="tfvars/pucar-solutions/dev.tfvars" -var "db_password=${{ secrets.TF_VAR_db_password }}"
+#         working-directory: infra-as-code/terraform/azure-pucar
+
+#       - name: Terraform Apply - Infra creation
+#         id: apply-Infra
+#         run: terraform destroy -auto-approve -var-file="tfvars/pucar-solutions/dev.tfvars" -var "db_password=${{ secrets.TF_VAR_db_password }}"
+#         working-directory: infra-as-code/terraform/azure-pucar
+
+#       - name: Generate kubeconfig
+#         run: |
+#           az aks get-credentials --resource-group "pucar-solutions-dev" --name "solutions-dev"
+#           cat ~/.kube/config > kubeconfig
+#      - name: Kubectl setup
+#        uses: azure/setup-kubectl@v3
+#        with:
+#          version: 'latest'
+#        id: install
+#
+#      - name: Verify kubectl configuration
+#        run: kubectl config view
+#      - name: Verify kubectl get nodes
+#        run: |
+#          kubectl get nodes
