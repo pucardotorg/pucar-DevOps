@@ -140,4 +140,4 @@ env: |
   - name: EGOV_TASK_BUSINESS_SERVICES
     value: "task-default,task-bail,task-summons,task-warrant,task-notice"
   - name: EGOV_APPLICATION_BUSINESS_SERVICES
-    value: "application-order-submission-default,application-order-submission-feedback,application-voluntary-submission"
+    value: "application-order-submission-default,application-order-submission-feedback,application-voluntary-submission,delay-condonation-submission"
