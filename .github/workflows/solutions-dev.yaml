@@ -216,6 +216,8 @@ jobs:
           echo "pdf_service=$pdf_service" >> $GITHUB_ENV
           openapi_service=$(git log -1 --pretty=format:%H -- backend/openapi)
           echo "openapi_service=$openapi_service" >> $GITHUB_ENV
+          lock_service=$(git log -1 --pretty=format:%H -- common/lock-svc)
+          echo "lock_service=$lock_service" >> $GITHUB_ENV
 
       - name: digit deployment
         run: |
@@ -270,6 +272,8 @@ jobs:
             --set summons-svc.initContainers.dbMigration.image.tag=develop-${{ env.summons_svc_commit }} \
             --set transformer.image.tag=develop-${{ env.transformer_commit }} \
             --set openapi.image.tag=develop-${{ env.openapi_service }} \
+            --set lock-svc.image.tag=develop-${{ env.lock_service }} \
+            --set lock-svc.initContainers.dbMigration.image.tag=develop-${{ env.lock_service }} \
             --set icops-integration.image.tag=develop-${{ env.integration_commit }} \
             --set icops-integration.initContainers.dbMigration.image.tag=develop-${{ env.integration_commit }} \
 
