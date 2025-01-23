@@ -95,4 +95,6 @@ env: |
       configMapKeyRef:
         name: egov-service-host
         key: individual
+  - name: PUCAR_LOCK_DURATION
+    value: "1200000"
 

@@ -166,6 +166,11 @@ env: |
         key: billing-service
   - name: KAFKA_TOPICS_RECEIPT_CREATE
     value: egov.collection.payment-create
+  - name: PUCAR_LOCK_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: lock-service
   - name: EGOV_ENC_HOST
     valueFrom:
       configMapKeyRef:

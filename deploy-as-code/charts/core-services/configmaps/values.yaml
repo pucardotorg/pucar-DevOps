@@ -123,6 +123,7 @@ configmaps:
       lcms-services: http://lcms-services:8080/
       lcms-workflow: http://lcms-workflow:8080/
       location: http://location:8080/
+      lock-service: http://lock-svc:8080/
       mdms-service-v2: http://mdms-v2.egov:8080/
       mdms-v2: http://mdms-v2.egov:8080/
       minio-url: https://minio-uat.digit.org/
