@@ -236,11 +236,11 @@ releases:
         deployment: "payment-calculator"
       <<: *default
 
-#    - name: e-sign-svc  # Replace with your desired namespace
-#      installed: true
-#      labels:
-#        deployment: "e-sign-svc"
-#      <<: *default
+    - name: e-sign-svc  # Replace with your desired namespace
+      installed: true
+      labels:
+        deployment: "e-sign-svc"
+      <<: *default
 
     - name: esign-interceptor  # Replace with your desired namespace
       installed: true
