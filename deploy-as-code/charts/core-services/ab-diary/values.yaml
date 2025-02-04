@@ -80,6 +80,11 @@ env: |
       configMapKeyRef:
         name: egov-service-host
         key: egov-filestore
+  - name: EGOV_PDF_SERVICE_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: pdf-service
   - name: EGOV_MDMS_HOST
     valueFrom:
       configMapKeyRef:
