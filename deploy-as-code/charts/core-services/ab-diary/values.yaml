@@ -34,6 +34,10 @@ memory_limits: 768Mi
 
 
 env: |
+  - name: JAVA_ENABLE_DEBUG
+    value: "true"
+  - name: JAVA_DEBUG_PORT
+    value: "5005"
   - name: JAVA_OPTS
     value: {{ index .Values "heap" | quote }}
   - name: SERVER_PORT
