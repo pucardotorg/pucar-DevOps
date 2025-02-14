@@ -195,6 +195,11 @@ jobs:
            --set summons-svc.image.tag=main-${{ env.summons_svc_commit }} \
            --set summons-svc.initContainers.dbMigration.image.tag=main-${{ env.summons_svc_commit }} \
            --set transformer.image.tag=main-${{ env.transformer_commit }} \
+           --set openapi.image.tag=main-${{ env.openapi_service }} \
+           --set lock-svc.image.tag=main-${{ env.lock_service }} \
+           --set lock-svc.initContainers.dbMigration.image.tag=main-${{ env.lock_service }} \
+           --set ab-diary.image.tag=main-${{ env.ab_diary_service }} \
+           --set ab-diary.initContainers.dbMigration.image.tag=main-${{ env.ab_diary_service }} \
            --set icops-integration.image.tag=main-${{ env.integration_commit }} \
            --set icops-integration.initContainers.dbMigration.image.tag=main-${{ env.integration_commit }}
         working-directory: deploy-as-code
