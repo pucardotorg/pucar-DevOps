@@ -46,15 +46,15 @@ releases:
     - name: query.ingress.hosts[0]
       value: "{{ .Values.global.domain }}"
 
-- name: grafana
-  installed: true
-  namespace: {{ .Values.namespace | default "default-namespace" }}
-  chart: grafana/grafana
-  version: 7.3.0
-  values:
-  - ./values/grafana.yaml
-  set:
-    - name: ingress.hosts[0]
-      value: "{{ .Values.global.domain }}"
-    - name: ingress.tls[0].hosts[0]
-      value: {{ .Values.global.domain | quote }}
+#- name: grafana
+#  installed: true
+#  namespace: {{ .Values.namespace | default "default-namespace" }}
+#  chart: grafana/grafana
+#  version: 7.3.0
+#  values:
+#  - ./values/grafana.yaml
+#  set:
+#    - name: ingress.hosts[0]
+#      value: "{{ .Values.global.domain }}"
+#    - name: ingress.tls[0].hosts[0]
+#      value: {{ .Values.global.domain | quote }}

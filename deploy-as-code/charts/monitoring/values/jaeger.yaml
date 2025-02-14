@@ -29,7 +29,7 @@ allInOne:
     #   mountPath: /tls
     #   subPath: ""
     #   secretName: jaeger-tls
-    #   readOnly: true
+  #   readOnly: true
   # command line arguments / CLI flags
   # See https://www.jaegertracing.io/docs/cli/
   args: []
@@ -83,41 +83,8 @@ allInOne:
 storage:
   # allowed values (cassandra, elasticsearch)
   type: elasticsearch
-  cassandra:
-    host: cassandra
-    port: 9042
-    # Change this value to false if you want to avoid starting the
-    # -cassandra-schema Job
-    schemaJobEnabled: true
-    tls:
-      enabled: false
-      secretName: cassandra-tls-secret
-    user: user
-    usePassword: true
-    password: password
-    keyspace: jaeger_v1_test
-    ## Use existing secret (ignores previous password)
-    # existingSecret:
-    ## Cassandra related env vars to be configured on the concerned components
-    extraEnv:
-      []
-      # - name: CASSANDRA_SERVERS
-      #   value: cassandra
-      # - name: CASSANDRA_PORT
-      #   value: "9042"
-      # - name: CASSANDRA_KEYSPACE
-      #   value: jaeger_v1_test
-      # - name: CASSANDRA_TLS_ENABLED
-      #   value: "false"
-    ## Cassandra related cmd line opts to be configured on the concerned components
-    cmdlineParams:
-      {}
-      # cassandra.servers: cassandra
-      # cassandra.port: 9042
-      # cassandra.keyspace: jaeger_v1_test
-      # cassandra.tls.enabled: "false"
   elasticsearch:
-    scheme: https
+    scheme: http
     host: elasticsearch-master
     port: 9200
     anonymous: false
@@ -130,8 +97,8 @@ storage:
     nodesWanOnly: false
     extraEnv: []
     ## ES related env vars to be configured on the concerned components
-      # - name: ES_SERVER_URLS
-      #   value: https://elasticsearch-master.backbone:9200
+    # - name: ES_SERVER_URLS
+    #   value: http://elasticsearch-master:9200
     # - name: ES_USERNAME
     #   value: elastic
     # - name: ES_INDEX_PREFIX
@@ -141,15 +108,15 @@ storage:
       {}
       # es.server-urls: http://elasticsearch-master:9200
       # es.username: elastic
-      # es.index-prefix: test
+    # es.index-prefix: test
     tls:
-      enabled: true
-      secretName: elasticsearch-master-certs
+      enabled: false
+      secretName: es-tls-secret
       # The mount properties of the secret
-      mountPath: /usr/share/elasticsearch/config/certs
-      subPath: ca.crt
+      mountPath: /es-tls/ca-cert.pem
+      subPath: ca-cert.pem
       # How ES_TLS_CA variable will be set in the various components
-      ca: /usr/share/elasticsearch/config/certs
+      ca: /es-tls/ca-cert.pem
 
   kafka:
     brokers:
@@ -175,12 +142,27 @@ cassandra:
 
 # Begin: Override values on the Kafka subchart to customize for Jaeger
 kafka:
-  replicaCount: 1
-  autoCreateTopicsEnable: true
-  zookeeper:
-    replicaCount: 1
-    serviceAccount:
-      create: true
+  listeners:
+    client:
+      protocol: PLAINTEXT
+    controller:
+      protocol: PLAINTEXT
+    interbroker:
+      protocol: PLAINTEXT
+    external:
+      protocol: PLAINTEXT
+  controller:
+    replicaCount: 3
+    extraConfig: |
+      auto.create.topics.enable=true
+  # Zookeeper has been deprecated by Kafka in favor of Kraft Mode: https://developer.confluent.io/learn/kraft/
+  # Documentation for upgrading Kafka and keeping Zookeeper: https://github.com/bitnami/charts/tree/main/bitnami/kafka#upgrading-from-zookeeper-mode
+  # Documentation for migrating away from Zookeeper to Kraft Mode: https://github.com/bitnami/charts/tree/main/bitnami/kafka#migrating-from-zookeeper-early-access
+  # zookeeper:
+  #   enabled: false
+  #   replicaCount: 1
+  #   serviceAccount:
+  #     create: true
 
 # End: Override values on the Kafka subchart to customize for Jaeger
 
@@ -600,7 +582,6 @@ query:
     # See https://kubernetes.io/blog/2020/04/02/improvements-to-the-ingress-api-in-kubernetes-1.18/#specifying-the-class-of-an-ingress
     ingressClassName: nginx
     annotations: {}
-    labels: {}
     # Used to create an Ingress record.
     hosts:
       - ""
@@ -624,7 +605,7 @@ query:
     #   memory: 512Mi
     # requests:
     #    cpu: 256m
-    #    memory: 128Mi
+  #    memory: 128Mi
   serviceAccount:
     create: true
     # Explicitly mounts the API credentials for the Service Account
