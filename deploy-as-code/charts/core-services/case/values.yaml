@@ -186,6 +186,11 @@ env: |
     value: CaseDecryptSelfNew
   - name: EGOV_ENC_MDMS_SECURITY_POLICY_COURT_CASE
     value: CourtCaseNew
+  - name: EGOV_ENC_MDMS_SECURITY_POLICY_CASE_DECRYPT_SELF_NEW
+    value: CaseDecryptSelfNew
+  - name: EGOV_ENC_MDMS_SECURITY_POLICY_COURT_CASE_NEW
+    value: CourtCaseNew
+
 
 
 
