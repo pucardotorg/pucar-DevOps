@@ -143,6 +143,12 @@ jobs:
           echo "pdf_service=$pdf_service" >> $GITHUB_ENV
           esign_svc_commit=$(git log -1 --pretty=format:%H -- backend/e-sign-svc)
           echo "esign_svc_commit=$esign_svc_commit" >> $GITHUB_ENV
+          openapi_service=$(git log -1 --pretty=format:%H -- backend/openapi)
+          echo "openapi_service=$openapi_service" >> $GITHUB_ENV
+          ab_diary_service=$(git log -1 --pretty=format:%H -- backend/ab-diary)
+          echo "ab_diary_service=$ab_diary_service" >> $GITHUB_ENV
+          lock_service=$(git log -1 --pretty=format:%H -- common/lock-svc)
+          echo "lock_service=$lock_service" >> $GITHUB_ENV
       - name: digit deployment
         run: |
           helmfile -l deployment=pucar -f digit-helmfile.yaml apply --include-needs=true \
