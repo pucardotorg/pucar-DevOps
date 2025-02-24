@@ -51,21 +51,21 @@ releases:
 #  values:
 #    - ./redis/values.yaml
 #
-#- name: elasticsearch
-#  chart: ./elasticsearch
-#  version: 8.11.3
-#  <<: *default
-#  values:
-#    - ./elasticsearch/values.yaml
-#    - secret:
-#        password: {{ .Values.secrets.elasticsearch.password }}
-#
-#- name: elasticsearch-data
-#  chart: ./elasticsearch-data
-#  version: 8.11.3
-#  <<: *default
-#  values:
-#    - ./elasticsearch-data/values.yaml
+- name: elasticsearch
+  chart: ./elasticsearch
+  version: 8.11.3
+  <<: *default
+  values:
+    - ./elasticsearch/values.yaml
+    - secret:
+        password: {{ .Values.secrets.elasticsearch.password }}
+
+- name: elasticsearch-data
+  chart: ./elasticsearch-data
+  version: 8.11.3
+  <<: *default
+  values:
+    - ./elasticsearch-data/values.yaml
 #
 #- name: kibana
 #  chart: ./kibana

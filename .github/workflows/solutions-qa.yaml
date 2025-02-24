@@ -155,7 +155,7 @@ jobs:
         run: |
           git clone https://github.com/pucardotorg/dristi-solutions.git
           cd dristi-solutions
-          git checkout main
+          git checkout develop
           payment_calculator_commit=$(git log -1 --pretty=format:%H -- backend/payment-calculator-svc)
           echo "payment_calculator_commit=$payment_calculator_commit" >> $GITHUB_ENV
           advocate_commit=$(git log -1 --pretty=format:%H -- backend/advocate)
@@ -169,7 +169,9 @@ jobs:
           dristi_case_pdf_commit=$(git log -1 --pretty=format:%H -- backend/dristi-case-pdf)
           echo "dristi_case_pdf_commit=$dristi_case_pdf_commit" >> $GITHUB_ENV
           esign_interceptor_commit=$(git log -1 --pretty=format:%H -- backend/esign-interceptor)
-          echo "esign_interceptor_commit=$esign_interceptor_commit" >> $GITHUB_ENV    
+          echo "esign_interceptor_commit=$esign_interceptor_commit" >> $GITHUB_ENV
+          esign_svc_commit=$(git log -1 --pretty=format:%H -- backend/e-sign-svc)
+          echo "esign_svc_commit=$esign_svc_commit" >> $GITHUB_ENV     
           epost_tracker_commit=$(git log -1 --pretty=format:%H -- backend/epost-tracker)
           echo "epost_tracker_commit=$epost_tracker_commit" >> $GITHUB_ENV 
           transformer_commit=$(git log -1 --pretty=format:%H -- backend/transformer)
@@ -218,65 +220,73 @@ jobs:
           echo "pdf_service=$pdf_service" >> $GITHUB_ENV
           esign_svc_commit=$(git log -1 --pretty=format:%H -- backend/e-sign-svc)
           echo "esign_svc_commit=$esign_svc_commit" >> $GITHUB_ENV
+          openapi_service=$(git log -1 --pretty=format:%H -- backend/openapi)
+          echo "openapi_service=$openapi_service" >> $GITHUB_ENV
+          ab_diary_service=$(git log -1 --pretty=format:%H -- backend/ab-diary)
+          echo "ab_diary_service=$ab_diary_service" >> $GITHUB_ENV
+          lock_service=$(git log -1 --pretty=format:%H -- common/lock-svc)
+          echo "lock_service=$lock_service" >> $GITHUB_ENV
       - name: digit deployment
         run: |
           helmfile -l deployment=pucar -f digit-helmfile.yaml apply --include-needs=true \
-           --set scheduler.image.tag=main-${{ env.scheduler_commit }} \
-           --set scheduler.initContainers.dbMigration.image.tag=main-${{ env.scheduler_commit }} \
-           --set payment-calculator.image.tag=main-${{ env.payment_calculator_commit }} \
-           --set payment-calculator.initContainers.dbMigration.image.tag=main-${{ env.payment_calculator_commit }} \
-           --set digit-ui.image.tag=main-${{ env.digit_ui_commit }} \
-           --set dristi-case-pdf.image.tag=main-${{ env.dristi_case_pdf_commit }} \
-           --set dristi-pdf.image.tag=main-${{ env.dristi_pdf_commit }} \
-           --set advocate.image.tag=main-${{ env.advocate_commit }} \
-           --set advocate.initContainers.dbMigration.image.tag=main-${{ env.advocate_commit }} \
-           --set case.image.tag=main-${{ env.case_commit }} \
-           --set case.initContainers.dbMigration.image.tag=main-${{ env.case_commit }} \
-           --set ocr-service.image.tag=main-${{ env.ocr_service_commit }} \
-           --set ocr-service.initContainers.dbMigration.image.tag=main-${{ env.ocr_service_commit }} \
-           --set casemanagement.image.tag=main-${{ env.casemanagement_commit }} \
-           --set casemanagement.initContainers.dbMigration.image.tag=main-${{ env.casemanagement_commit }} \
-           --set evidence.image.tag=main-${{ env.evidence_commit }} \
-           --set evidence.initContainers.dbMigration.image.tag=main-${{ env.evidence_commit }} \
-           --set hearing.image.tag=main-${{ env.hearing_commit }} \
-           --set hearing.initContainers.dbMigration.image.tag=main-${{ env.hearing_commit }} \
-           --set order.image.tag=main-${{ env.order_commit }} \
-           --set order.initContainers.dbMigration.image.tag=main-${{ env.order_commit }} \
-           --set task.image.tag=main-${{ env.task_commit }} \
-           --set task.initContainers.dbMigration.image.tag=main-${{ env.task_commit }} \
-           --set billing-service.image.tag=main-${{ env.billing_service_commit }} \
-           --set billing-service.initContainers.dbMigration.image.tag=main-${{ env.billing_service_commit }} \
-           --set collection-services.image.tag=main-${{ env.collection_service_commit }} \
-           --set collection-services.initContainers.dbMigration.image.tag=main-${{ env.collection_service_commit }} \
-           --set individual.image.tag=main-${{ env.individual_commit }} \
-           --set individual.initContainers.dbMigration.image.tag=main-${{ env.individual_commit }} \
-           --set inbox.image.tag=main-${{ env.inbox_commit }} \
-           --set e-sign-svc.image.tag=main-${{ env.esign_svc_commit }} \
-           --set e-sign-svc.initContainers.dbMigration.image.tag=main-${{ env.esign_svc_commit }} \
-           --set esign-interceptor.image.tag=main-${{ env.esign_interceptor_commit }} \
-           --set application.image.tag=main-${{ env.application_commit }} \
-           --set application.initContainers.dbMigration.image.tag=main-${{ env.application_commit }} \
-           --set analytics.image.tag=main-${{ env.analytics_commit }} \
-           --set epayments.image.tag=main-${{ env.epayment_commit }} \
-           --set etreasury.image.tag=main-${{ env.etreasury_commit }} \
-           --set etreasury.initContainers.dbMigration.image.tag=main-${{ env.etreasury_commit }} \
-           --set pdf-service.image.tag=main-${{ env.pdf_service }} \
-           --set pdf-service.initContainers.dbMigration.image.tag=main-${{ env.pdf_service }} \
-           --set sbi-webpage.image.tag=main-${{ env.sbi_ui_commit }} \
-           --set sbi-svc.image.tag=main-${{ env.sbi_svc_commit }} \
-           --set sbi-svc.initContainers.dbMigration.image.tag=main-${{ env.sbi_svc_commit }} \
-           --set epost-tracker.image.tag=main-${{ env.epost_tracker_commit }} \
-           --set epost-tracker.initContainers.dbMigration.image.tag=main-${{ env.epost_tracker_commit }} \
-           --set summons-svc.image.tag=main-${{ env.summons_svc_commit }} \
-           --set summons-svc.initContainers.dbMigration.image.tag=main-${{ env.summons_svc_commit }} \
-           --set transformer.image.tag=main-${{ env.transformer_commit }} \
-           --set openapi.image.tag=main-${{ env.openapi_service }} \
-           --set lock-svc.image.tag=main-${{ env.lock_service }} \
-           --set lock-svc.initContainers.dbMigration.image.tag=main-${{ env.lock_service }} \
-           --set ab-diary.image.tag=main-${{ env.ab_diary_service }} \
-           --set ab-diary.initContainers.dbMigration.image.tag=main-${{ env.ab_diary_service }} \
-           --set icops-integration.image.tag=main-${{ env.integration_commit }} \
-           --set icops-integration.initContainers.dbMigration.image.tag=main-${{ env.integration_commit }}
+            --set scheduler.image.tag=develop-${{ env.scheduler_commit }} \
+            --set scheduler.initContainers.dbMigration.image.tag=develop-${{ env.scheduler_commit }} \
+            --set payment-calculator.image.tag=develop-${{ env.payment_calculator_commit }} \
+            --set payment-calculator.initContainers.dbMigration.image.tag=develop-${{ env.payment_calculator_commit }} \
+            --set digit-ui.image.tag=develop-${{ env.digit_ui_commit }} \
+            --set dristi-case-pdf.image.tag=develop-${{ env.dristi_case_pdf_commit }} \
+            --set dristi-pdf.image.tag=develop-${{ env.dristi_pdf_commit }} \
+            --set advocate.image.tag=develop-${{ env.advocate_commit }} \
+            --set advocate.initContainers.dbMigration.image.tag=develop-${{ env.advocate_commit }} \
+            --set case.image.tag=develop-${{ env.case_commit }} \
+            --set case.initContainers.dbMigration.image.tag=develop-${{ env.case_commit }} \
+            --set ocr-service.image.tag=develop-${{ env.ocr_service_commit }} \
+            --set ocr-service.initContainers.dbMigration.image.tag=develop-${{ env.ocr_service_commit }} \
+            --set casemanagement.image.tag=develop-${{ env.casemanagement_commit }} \
+            --set casemanagement.initContainers.dbMigration.image.tag=develop-${{ env.casemanagement_commit }} \
+            --set evidence.image.tag=develop-${{ env.evidence_commit }} \
+            --set evidence.initContainers.dbMigration.image.tag=develop-${{ env.evidence_commit }} \
+            --set hearing.image.tag=develop-${{ env.hearing_commit }} \
+            --set hearing.initContainers.dbMigration.image.tag=develop-${{ env.hearing_commit }} \
+            --set order.image.tag=develop-${{ env.order_commit }} \
+            --set order.initContainers.dbMigration.image.tag=develop-${{ env.order_commit }} \
+            --set task.image.tag=develop-${{ env.task_commit }} \
+            --set task.initContainers.dbMigration.image.tag=develop-${{ env.task_commit }} \
+            --set billing-service.image.tag=develop-${{ env.billing_service_commit }} \
+            --set billing-service.initContainers.dbMigration.image.tag=develop-${{ env.billing_service_commit }} \
+            --set collection-services.image.tag=develop-${{ env.collection_service_commit }} \
+            --set collection-services.initContainers.dbMigration.image.tag=develop-${{ env.collection_service_commit }} \
+            --set individual.image.tag=develop-${{ env.individual_commit }} \
+            --set individual.initContainers.dbMigration.image.tag=develop-${{ env.individual_commit }} \
+            --set inbox.image.tag=develop-${{ env.inbox_commit }} \
+            --set e-sign-svc.image.tag=develop-${{ env.esign_svc_commit }} \
+            --set e-sign-svc.initContainers.dbMigration.image.tag=develop-${{ env.esign_svc_commit }} \
+            --set esign-interceptor.image.tag=develop-${{ env.esign_interceptor_commit }} \
+            --set application.image.tag=develop-${{ env.application_commit }} \
+            --set application.initContainers.dbMigration.image.tag=develop-${{ env.application_commit }} \
+            --set analytics.image.tag=develop-${{ env.analytics_commit }} \
+            --set epayments.image.tag=develop-${{ env.epayment_commit }} \
+            --set etreasury.image.tag=develop-${{ env.etreasury_commit }} \
+            --set etreasury.initContainers.dbMigration.image.tag=develop-${{ env.etreasury_commit }} \
+            --set pdf-service.image.tag=develop-${{ env.pdf_service }} \
+            --set pdf-service.initContainers.dbMigration.image.tag=develop-${{ env.pdf_service }} \
+            --set sbi-webpage.image.tag=develop-${{ env.sbi_ui_commit }} \
+            --set sbi-svc.image.tag=develop-${{ env.sbi_svc_commit }} \
+            --set sbi-svc.initContainers.dbMigration.image.tag=develop-${{ env.sbi_svc_commit }} \
+            --set epost-tracker.image.tag=develop-${{ env.epost_tracker_commit }} \
+            --set epost-tracker.initContainers.dbMigration.image.tag=develop-${{ env.epost_tracker_commit }} \
+            --set summons-svc.image.tag=develop-${{ env.summons_svc_commit }} \
+            --set summons-svc.initContainers.dbMigration.image.tag=develop-${{ env.summons_svc_commit }} \
+            --set transformer.image.tag=develop-${{ env.transformer_commit }} \
+            --set openapi.image.tag=develop-${{ env.openapi_service }} \
+            --set lock-svc.image.tag=develop-${{ env.lock_service }} \
+            --set lock-svc.initContainers.dbMigration.image.tag=develop-${{ env.lock_service }} \
+            --set ab-diary.image.tag=develop-${{ env.ab_diary_service }} \
+            --set ab-diary.initContainers.dbMigration.image.tag=develop-${{ env.ab_diary_service }} \
+            --set icops-integration.image.tag=develop-${{ env.integration_commit }} \
+            --set icops-integration.initContainers.dbMigration.image.tag=develop-${{ env.integration_commit }} \
+
+
         working-directory: deploy-as-code
         env:
           HELMFILE_ENV: "solutions-qa"
