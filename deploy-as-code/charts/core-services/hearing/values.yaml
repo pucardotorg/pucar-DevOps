@@ -148,6 +148,12 @@ env: |
       configMapKeyRef:
         name: egov-service-host
         key: egov-filestore
+  - name: DRISTI_SCHEDULER_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: scheduler
+
 
 
   
