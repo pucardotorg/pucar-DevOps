@@ -220,6 +220,8 @@ jobs:
           echo "ab_diary_service=$ab_diary_service" >> $GITHUB_ENV
           lock_service=$(git log -1 --pretty=format:%H -- common/lock-svc)
           echo "lock_service=$lock_service" >> $GITHUB_ENV
+          notification_service=$(git log -1 --pretty=format:%H -- backend/Notification)
+          echo "notification_service=$notification_service" >> $GITHUB_ENV
 
       - name: digit deployment
         run: |
@@ -276,6 +278,8 @@ jobs:
             --set openapi.image.tag=develop-${{ env.openapi_service }} \
             --set lock-svc.image.tag=develop-${{ env.lock_service }} \
             --set lock-svc.initContainers.dbMigration.image.tag=develop-${{ env.lock_service }} \
+            --set notification.image.tag=develop-${{ env.notification_service }} \
+            --set notification.initContainers.dbMigration.image.tag=develop-${{ env.notification_service }} \
             --set ab-diary.image.tag=develop-${{ env.ab_diary_service }} \
             --set ab-diary.initContainers.dbMigration.image.tag=develop-${{ env.ab_diary_service }} \
             --set icops-integration.image.tag=develop-${{ env.integration_commit }} \
