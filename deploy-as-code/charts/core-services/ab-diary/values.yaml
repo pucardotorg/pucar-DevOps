@@ -142,4 +142,18 @@ env: |
       configMapKeyRef:
         name: egov-service-host
         key: egov-url-shortening
-
+  - name: COURT_NAME
+    valueFrom:
+      configMapKeyRef:
+        name: egov-config
+        key: COURT_NAME
+  - name: JUDGE_NAME
+    valueFrom:
+      configMapKeyRef:
+        name: egov-config
+        key: judge-name
+  - name: JUDGE_DESIGNATION
+    valueFrom:
+      configMapKeyRef:
+        name: egov-config
+        key: judge-designation
