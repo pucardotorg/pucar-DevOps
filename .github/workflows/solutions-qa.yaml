@@ -218,8 +218,6 @@ jobs:
           echo "dristi_pdf_commit=$dristi_pdf_commit" >> $GITHUB_ENV
           pdf_service=$(git log -1 --pretty=format:%H -- common/pdf-service)
           echo "pdf_service=$pdf_service" >> $GITHUB_ENV
-          esign_svc_commit=$(git log -1 --pretty=format:%H -- backend/e-sign-svc)
-          echo "esign_svc_commit=$esign_svc_commit" >> $GITHUB_ENV
           openapi_service=$(git log -1 --pretty=format:%H -- backend/openapi)
           echo "openapi_service=$openapi_service" >> $GITHUB_ENV
           ab_diary_service=$(git log -1 --pretty=format:%H -- backend/ab-diary)
@@ -281,6 +279,8 @@ jobs:
             --set openapi.image.tag=develop-${{ env.openapi_service }} \
             --set lock-svc.image.tag=develop-${{ env.lock_service }} \
             --set lock-svc.initContainers.dbMigration.image.tag=develop-${{ env.lock_service }} \
+            --set notification.image.tag=develop-${{ env.notification_service }} \
+            --set notification.initContainers.dbMigration.image.tag=develop-${{ env.notification_service }} \
             --set ab-diary.image.tag=develop-${{ env.ab_diary_service }} \
             --set ab-diary.initContainers.dbMigration.image.tag=develop-${{ env.ab_diary_service }} \
             --set icops-integration.image.tag=develop-${{ env.integration_commit }} \

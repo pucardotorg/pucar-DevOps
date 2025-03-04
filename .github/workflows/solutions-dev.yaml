@@ -220,9 +220,6 @@ jobs:
           echo "ab_diary_service=$ab_diary_service" >> $GITHUB_ENV
           lock_service=$(git log -1 --pretty=format:%H -- common/lock-svc)
           echo "lock_service=$lock_service" >> $GITHUB_ENV
-          notification_service=$(git log -1 --pretty=format:%H -- backend/Notification)
-          echo "notification_service=$notification_service" >> $GITHUB_ENV
-
       - name: digit deployment
         run: |
           helmfile -l deployment=pucar -f digit-helmfile.yaml apply --include-needs=true \
