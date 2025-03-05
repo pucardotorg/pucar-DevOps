@@ -94,7 +94,9 @@ jobs:
           dristi_case_pdf_commit=$(git log -1 --pretty=format:%H -- backend/dristi-case-pdf)
           echo "dristi_case_pdf_commit=$dristi_case_pdf_commit" >> $GITHUB_ENV
           esign_interceptor_commit=$(git log -1 --pretty=format:%H -- backend/esign-interceptor)
-          echo "esign_interceptor_commit=$esign_interceptor_commit" >> $GITHUB_ENV    
+          echo "esign_interceptor_commit=$esign_interceptor_commit" >> $GITHUB_ENV
+          esign_svc_commit=$(git log -1 --pretty=format:%H -- backend/e-sign-svc)
+          echo "esign_svc_commit=$esign_svc_commit" >> $GITHUB_ENV     
           epost_tracker_commit=$(git log -1 --pretty=format:%H -- backend/epost-tracker)
           echo "epost_tracker_commit=$epost_tracker_commit" >> $GITHUB_ENV 
           transformer_commit=$(git log -1 --pretty=format:%H -- backend/transformer)
@@ -141,8 +143,6 @@ jobs:
           echo "dristi_pdf_commit=$dristi_pdf_commit" >> $GITHUB_ENV
           pdf_service=$(git log -1 --pretty=format:%H -- common/pdf-service)
           echo "pdf_service=$pdf_service" >> $GITHUB_ENV
-          esign_svc_commit=$(git log -1 --pretty=format:%H -- backend/e-sign-svc)
-          echo "esign_svc_commit=$esign_svc_commit" >> $GITHUB_ENV
           openapi_service=$(git log -1 --pretty=format:%H -- backend/openapi)
           echo "openapi_service=$openapi_service" >> $GITHUB_ENV
           ab_diary_service=$(git log -1 --pretty=format:%H -- backend/ab-diary)
@@ -204,6 +204,8 @@ jobs:
            --set openapi.image.tag=main-${{ env.openapi_service }} \
            --set lock-svc.image.tag=main-${{ env.lock_service }} \
            --set lock-svc.initContainers.dbMigration.image.tag=main-${{ env.lock_service }} \
+           --set notification.image.tag=main-${{ env.notification_service }} \
+           --set notification.initContainers.dbMigration.image.tag=main-${{ env.notification_service }} \
            --set ab-diary.image.tag=main-${{ env.ab_diary_service }} \
            --set ab-diary.initContainers.dbMigration.image.tag=main-${{ env.ab_diary_service }} \
            --set icops-integration.image.tag=main-${{ env.integration_commit }} \
