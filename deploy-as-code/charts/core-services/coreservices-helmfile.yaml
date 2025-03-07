@@ -17,11 +17,11 @@ releases:
 #    - name: egov-accesscontrol # Replace with your desired namespace
 #      installed: true # Replace with the version of your chart, if needed
 #      <<: *default
-#
-    - name: audit-service # Replace with your desired namespace
-      installed: true # Replace with the version of your chart, if needed
-      <<: *default
-#
+##
+#    - name: audit-service # Replace with your desired namespace
+#      installed: true # Replace with the version of your chart, if needed
+#      <<: *default
+##
 #    - name: egov-enc-service # Replace with your desired namespace
 #      installed: true
 #      <<: *default
@@ -141,11 +141,11 @@ releases:
 #        deployment: "individual"
 #      <<: *default
 
-    - name: dristi-case-pdf  # Replace with your desired namespace
-      installed: true
-      labels:
-        deployment: "dristi-case-pdf"
-      <<: *default
+#    - name: dristi-case-pdf  # Replace with your desired namespace
+#      installed: true
+#      labels:
+#        deployment: "dristi-case-pdf"
+#      <<: *default
 
     - name: pdf-service  # Replace with your desired namespace
       installed: true
@@ -264,27 +264,27 @@ releases:
 #         deployment: "qr-code-service"
 #       <<: *default
 
-    - name: etreasury  # Replace with your desired namespace
-      installed: true
-      labels:
-        deployment: "etreasury"
-      <<: *default
-
-    - name: epayments  # Replace with your desired namespace
-      installed: true
-      labels:
-        deployment: "epayments"
-      <<: *default
+#    - name: etreasury  # Replace with your desired namespace
+#      installed: true
+#      labels:
+#        deployment: "etreasury"
+#      <<: *default
+#
+#    - name: epayments  # Replace with your desired namespace
+#      installed: true
+#      labels:
+#        deployment: "epayments"
+#      <<: *default
     - name: analytics  # Replace with your desired namespace
       installed: true
       labels:
         deployment: "analytics"
       <<: *default
-#    - name: transformer # Replace with your desired namespace
-#      installed: true
-#      labels:
-#        deployment: "transformer"
-#      <<: *default
+    - name: transformer # Replace with your desired namespace
+      installed: true
+      labels:
+        deployment: "transformer"
+      <<: *default
 
     - name: epost-tracker # Replace with your desired namespace
       installed: true
@@ -296,26 +296,26 @@ releases:
       labels:
         deployment: "icops-integration"
       <<: *default
-    - name: ocr-service # Replace with your desired namespace
-      installed: true
-      labels:
-        deployment: "ocr-service"
-      <<: *default
+#    - name: ocr-service # Replace with your desired namespace
+#      installed: true
+#      labels:
+#        deployment: "ocr-service"
+#      <<: *default
     - name: dristi-pdf # Replace with your desired namespace
       installed: true
       labels:
         deployment: "dristi-pdf"
       <<: *default
-    - name: sbi-webpage # Replace with your desired namespace
-      installed: true
-      labels:
-        deployment: "sbi-webpage"
-      <<: *default
-    - name: sbi-svc # Replace with your desired namespace
-      installed: true
-      labels:
-        deployment: "sbi-svc"
-      <<: *default
+#    - name: sbi-webpage # Replace with your desired namespace
+#      installed: true
+#      labels:
+#        deployment: "sbi-webpage"
+#      <<: *default
+#    - name: sbi-svc # Replace with your desired namespace
+#      installed: true
+#      labels:
+#        deployment: "sbi-svc"
+#      <<: *default
 #    - name: transcription # Replace with your desired namespace
 #      installed: true
 #      labels:
