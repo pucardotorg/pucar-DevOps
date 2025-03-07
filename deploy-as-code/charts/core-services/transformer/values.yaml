@@ -27,6 +27,10 @@ memory_requests: 256Mi
 
 
 env: |
+  - name: JAVA_ENABLE_DEBUG
+    value: "true"
+  - name: JAVA_DEBUG_PORT
+    value: "5005"
   - name: SERVER_PORT
     value: "8080"
   - name: SERVER_CONTEXT_PATH
