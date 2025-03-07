@@ -145,7 +145,7 @@ jobs:
           echo "pdf_service=$pdf_service" >> $GITHUB_ENV
           openapi_service=$(git log -1 --pretty=format:%H -- backend/openapi)
           echo "openapi_service=$openapi_service" >> $GITHUB_ENV
-          notification_service=$(git log -1 --pretty=format:%H -- backend/notification)
+          notification_service=$(git log -1 --pretty=format:%H -- backend/Notification)
           echo "notification_service=$notification_service" >> $GITHUB_ENV
           ab_diary_service=$(git log -1 --pretty=format:%H -- backend/ab-diary)
           echo "ab_diary_service=$ab_diary_service" >> $GITHUB_ENV
