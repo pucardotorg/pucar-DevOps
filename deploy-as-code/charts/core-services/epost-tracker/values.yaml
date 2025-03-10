@@ -92,4 +92,6 @@ env: |
       configMapKeyRef:
         name: egov-service-host
         key: summons
+  - name: GET_DATA_BASED_USER_LOGGED_IN
+    value: "true"
 
