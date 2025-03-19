@@ -113,7 +113,7 @@ configmaps:
       hr-leave: http://hr-leave:8080/
       hr-masters: http://hr-masters:8080/
       hr-masters-v2: http://hr-masters-v2:8080/
-      icops-integration: http://icops-integration.egov:8080/egov-kerala-icops/
+      icops-integration: http://icops-integration.egov:8080
       inbox: http://inbox.egov:8080/
       individual: http://individual.egov:8080/
       inventory-services: http://inventory-services:8080/
