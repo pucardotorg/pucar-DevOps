@@ -8,7 +8,7 @@ ingress:
   zuul: true
   enabled: true
   context: "order"
-  additionalAnnotations:
+  additionalAnnotations: |
     nginx.ingress.kubernetes.io/proxy-body-size: 2000m
 
 
