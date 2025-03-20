@@ -22,25 +22,25 @@ resource "azurerm_subnet" "aks" {
   address_prefixes     = var.address_prefixes_aks
 }
 
-resource "azurerm_subnet" "postgres" {
-  name                 = "${var.resource_group}-postgres-subnet"
-  resource_group_name  = var.resource_group
-  virtual_network_name = azurerm_virtual_network.vnet.name
-  address_prefixes     = var.address_prefixes_postgres
-  service_endpoints    = ["Microsoft.Storage"]
+# resource "azurerm_subnet" "postgres" {
+#   name                 = "${var.resource_group}-postgres-subnet"
+#   resource_group_name  = var.resource_group
+#   virtual_network_name = azurerm_virtual_network.vnet.name
+#   address_prefixes     = var.address_prefixes_postgres
+#   service_endpoints    = ["Microsoft.Storage"]
 
-  delegation {
-    name = "fs"
+#   delegation {
+#     name = "fs"
 
-    service_delegation {
-      name = "Microsoft.DBforPostgreSQL/flexibleServers"
+#     service_delegation {
+#       name = "Microsoft.DBforPostgreSQL/flexibleServers"
 
-      actions = [
-        "Microsoft.Network/virtualNetworks/subnets/join/action",
-      ]
-    }
-  }
-}
+#       actions = [
+#         "Microsoft.Network/virtualNetworks/subnets/join/action",
+#       ]
+#     }
+#   }
+# }
 
 #resource "azurerm_subnet" "kafka" {
 #  name                 = "${var.resource_group}-kafka-subnet"
@@ -55,11 +55,11 @@ resource "azurerm_network_security_group" "aks_nsg" {
   resource_group_name = var.resource_group
 }
 
-resource "azurerm_network_security_group" "db_nsg" {
-  name                = "${var.environment}-db-nsg"
-  location            = var.location
-  resource_group_name = var.resource_group
-}
+# resource "azurerm_network_security_group" "db_nsg" {
+#   name                = "${var.environment}-db-nsg"
+#   location            = var.location
+#   resource_group_name = var.resource_group
+# }
 
 resource "azurerm_network_security_rule" "pucar_dev_http" {
   name                        = "aks_rule1"
@@ -110,21 +110,21 @@ module "kubernetes" {
   subnet_id                 = azurerm_subnet.aks.id
 }
 
-module "postgres-db" {
-  source                    = "../modules/db/azure"
-  resource_group            = var.resource_group
-  location                  = var.location
-  sku_tier                  = "B_Standard_B1ms"
-  storage_mb                = "65536"
-  backup_retention_days     = "7"
-  administrator_login       = var.db_username
-  administrator_password    = var.db_password
-  db_version                = var.db_version
-  subnet_id                 = azurerm_subnet.postgres.id
-  network_security_group_id = azurerm_network_security_group.db_nsg.id
-  virtual_network_id        = azurerm_virtual_network.vnet.id
-  zone                      = var.zone
-}
+# module "postgres-db" {
+#   source                    = "../modules/db/azure"
+#   resource_group            = var.resource_group
+#   location                  = var.location
+#   sku_tier                  = "B_Standard_B1ms"
+#   storage_mb                = "65536"
+#   backup_retention_days     = "7"
+#   administrator_login       = var.db_username
+#   administrator_password    = var.db_password
+#   db_version                = var.db_version
+#   subnet_id                 = azurerm_subnet.postgres.id
+#   network_security_group_id = azurerm_network_security_group.db_nsg.id
+#   virtual_network_id        = azurerm_virtual_network.vnet.id
+#   zone                      = var.zone
+# }
 
 # module "zookeeper" {
 #   source = "../modules/storage/azure"
