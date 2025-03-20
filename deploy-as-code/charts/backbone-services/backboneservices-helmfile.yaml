@@ -14,15 +14,15 @@ commonLabels:
   deployment: "pucar"
 
 releases:
-- name: cert-manager
-  chart: ./cert-manager
-  namespace: egov
-  installed: true
-  version: v1.13.3
-  disableValidation: true
-  values:
-    - ./cert-manager/values.yaml
-
+#- name: cert-manager
+#  chart: ./cert-manager
+#  namespace: egov
+#  installed: true
+#  version: v1.13.3
+#  disableValidation: true
+#  values:
+#    - ./cert-manager/values.yaml
+##
 #- name: minio
 #  installed: true
 #  chart: ./minio
@@ -31,58 +31,58 @@ releases:
 #  values:
 #    - ./minio/values.yaml
 #
-#- name: postgresql
-#  installed: true
-#  chart: ./postgresql
-#  version: 11.9.13
-#  <<: *default
-#  values:
-#    - ./postgresql/values.yaml
-#    - global:
-#        postgresql:
-#          auth:
-#            postgresPassword: {{ .Values.secrets.db.password | quote }}
-#- name: redis
-#  installed: true
-#  chart: ./redis
-#  version: 7.2.4
-#  <<: *default
-#  values:
-#    - ./redis/values.yaml
-#
-- name: elasticsearch
-  chart: ./elasticsearch
-  version: 8.11.3
-  <<: *default
-  values:
-    - ./elasticsearch/values.yaml
-    - secret:
-        password: {{ .Values.secrets.elasticsearch.password }}
-
-- name: elasticsearch-data
-  chart: ./elasticsearch-data
-  version: 8.11.3
-  <<: *default
-  values:
-    - ./elasticsearch-data/values.yaml
-#
-#- name: kibana
-#  chart: ./kibana
+##- name: postgresql
+##  installed: true
+##  chart: ./postgresql
+##  version: 11.9.13
+##  <<: *default
+##  values:
+##    - ./postgresql/values.yaml
+##    - global:
+##        postgresql:
+##          auth:
+##            postgresPassword: {{ .Values.secrets.db.password | quote }}
+##- name: redis
+##  installed: true
+##  chart: ./redis
+##  version: 7.2.4
+##  <<: *default
+##  values:
+##    - ./redis/values.yaml
+##
+#- name: elasticsearch
+#  chart: ./elasticsearch
 #  version: 8.11.3
-#  force: true
 #  <<: *default
 #  values:
-#    - ./kibana/values.yaml
-#    - ingress:
-#        hosts:
-#          - host: {{ .Values.global.domain }}
-#            paths:
-#              - path: /kibana
-#        tls:
-#          - secretName: {{ .Values.global.domain }}-tls-certs
-#            hosts:
-#              - {{ .Values.global.domain }}
+#    - ./elasticsearch/values.yaml
+#    - secret:
+#        password: {{ .Values.secrets.elasticsearch.password }}
 #
+#- name: elasticsearch-data
+#  chart: ./elasticsearch-data
+#  version: 8.11.3
+#  <<: *default
+#  values:
+#    - ./elasticsearch-data/values.yaml
+##
+- name: kibana
+  chart: ./kibana
+  version: 8.11.3
+  force: true
+  <<: *default
+  values:
+    - ./kibana/values.yaml
+    - ingress:
+        hosts:
+          - host: {{ .Values.global.domain }}
+            paths:
+              - path: /kibana
+        tls:
+          - secretName: {{ .Values.global.domain }}-tls-certs
+            hosts:
+              - {{ .Values.global.domain }}
+
 #
 #
 #- name: kafka-kraft
@@ -105,10 +105,10 @@ releases:
 #    - ./ingress-nginx/values.yaml
 #    - domain: {{ .Values.global.domain }}
 #
-#- name: playground
-#  installed: true
-#  chart: ./playground
-#  version: 0.1.0
-#  <<: *default
-#  values:
-#    - ./playground/values.yaml
+##- name: playground
+##  installed: true
+##  chart: ./playground
+##  version: 0.1.0
+##  <<: *default
+##  values:
+##    - ./playground/values.yaml

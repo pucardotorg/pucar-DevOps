@@ -1,8 +1,8 @@
 name: Pucar-Install Workflow Solutins-Dev
 on:
-#  push:
-#   branches:
-#     - Solutions-Pipeline
+  push:
+   branches:
+     - Solutions-Pipeline
 #  pull_request:
 #    branches:
 #      - main
@@ -101,7 +101,7 @@ jobs:
 
       - name: Generate kubeconfig
         run: |
-          az aks get-credentials --resource-group "solutions-pucar-dev" --name "solutions-dev"
+          az aks get-credentials --resource-group "pucar-solutions-dev" --name "solutions-dev"
           cat ~/.kube/config > kubeconfig
 
       - name: Kubectl setup
@@ -226,7 +226,7 @@ jobs:
           echo "order_management=$order_management" >> $GITHUB_ENV
       - name: digit deployment
         run: |
-          helmfile -l deployment=pucar -f digit-helmfile.yaml apply --include-needs=true \
+          helmfile  -f digit-helmfile.yaml apply \
             --set scheduler.image.tag=develop-${{ env.scheduler_commit }} \
             --set scheduler.initContainers.dbMigration.image.tag=develop-${{ env.scheduler_commit }} \
             --set payment-calculator.image.tag=develop-${{ env.payment_calculator_commit }} \
@@ -285,9 +285,7 @@ jobs:
             --set ab-diary.initContainers.dbMigration.image.tag=develop-${{ env.ab_diary_service }} \
             --set order-management.image.tag=develop-${{ env.order_management }} \
             --set icops-integration.image.tag=develop-${{ env.integration_commit }} \
-            --set icops-integration.initContainers.dbMigration.image.tag=develop-${{ env.integration_commit }} \
-
-
+            --set icops-integration.initContainers.dbMigration.image.tag=develop-${{ env.integration_commit }}
         working-directory: deploy-as-code
         env:
           HELMFILE_ENV: "solutions-dev"
