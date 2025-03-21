@@ -268,11 +268,11 @@ releases:
       deployment: "etreasury"
     <<: *default
   #
-  #    - name: epayments  # Replace with your desired namespace
-  #      installed: true
-  #      labels:
-  #        deployment: "epayments"
-  #      <<: *default
+  - name: epayments  # Replace with your desired namespace
+    installed: true
+    labels:
+      deployment: "epayments"
+    <<: *default
   - name: analytics  # Replace with your desired namespace
     installed: true
     labels:
