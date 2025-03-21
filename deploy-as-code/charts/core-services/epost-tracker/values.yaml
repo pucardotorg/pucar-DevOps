@@ -34,6 +34,11 @@ httpPort: 8080
 #  readinessProbePath: "/advocate/"
 
 env: |
+  - name: EGOV_MDMS_HOST
+    valueFrom:
+      configMapKeyRef:
+        key: egov-mdms-service
+        name: egov-service-host
   - name: SPRING_FLYWAY_URL
     valueFrom:
       configMapKeyRef:

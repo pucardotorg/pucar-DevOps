@@ -12,7 +12,7 @@ ingress:
 # Container Configs
 image:
   repository: "pucarsolutionsdev.azurecr.io/inbox"
-  tag: v1.0.0-6b411fead5ebdac37b9a76c8400c018f20bc24ac
+  tag: develop-c894e72f6ec8e82f4e3bad38f063590d6a4d467b
 replicas: "1"
 healthChecks:
   enabled: true
