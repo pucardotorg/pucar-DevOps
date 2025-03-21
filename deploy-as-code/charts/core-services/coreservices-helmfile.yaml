@@ -14,344 +14,344 @@ commonLabels:
   deployment: "pucar"
 
 releases:
-  - name: egov-accesscontrol # Replace with your desired namespace
-    installed: true # Replace with the version of your chart, if needed
-    <<: *default
-#
-  - name: audit-service # Replace with your desired namespace
-    installed: true # Replace with the version of your chart, if needed
-    <<: *default
-#
-  - name: egov-enc-service # Replace with your desired namespace
-    installed: true
-    <<: *default
+#   - name: egov-accesscontrol # Replace with your desired namespace
+#     installed: true # Replace with the version of your chart, if needed
+#     <<: *default
+# #
+#   - name: audit-service # Replace with your desired namespace
+#     installed: true # Replace with the version of your chart, if needed
+#     <<: *default
+# #
+#   - name: egov-enc-service # Replace with your desired namespace
+#     installed: true
+#     <<: *default
 
-  - name: egov-filestore # Replace with your desired namespace
-    installed: true
-    <<: *default
+#   - name: egov-filestore # Replace with your desired namespace
+#     installed: true
+#     <<: *default
 
-  - name: egov-idgen # Replace with your desired namespace
-    installed: true
-    <<: *default
+#   - name: egov-idgen # Replace with your desired namespace
+#     installed: true
+#     <<: *default
 
-  - name: egov-localization # Replace with your desired namespace
-    installed: true
-    <<: *default
+#   - name: egov-localization # Replace with your desired namespace
+#     installed: true
+#     <<: *default
 
-  - name: egov-location # Replace with your desired namespace
-    installed: true
-    <<: *default
+#   - name: egov-location # Replace with your desired namespace
+#     installed: true
+#     <<: *default
 
-#  - name: egov-mdms-service # Replace with your desired namespace
-#    installed: true
-#    <<: *default
+# #  - name: egov-mdms-service # Replace with your desired namespace
+# #    installed: true
+# #    <<: *default
 
-  - name: egov-hrms # Replace with your desired namespace
-    installed: true
-    <<: *default
+#   - name: egov-hrms # Replace with your desired namespace
+#     installed: true
+#     <<: *default
 
-  - name: egov-indexer # Replace with your desired namespace
-    installed: true
-    <<: *default
+#   - name: egov-indexer # Replace with your desired namespace
+#     installed: true
+#     <<: *default
 
-  - name: egov-notification-mail # Replace with your desired namespace
-    installed: true
-    <<: *default
+#   - name: egov-notification-mail # Replace with your desired namespace
+#     installed: true
+#     <<: *default
 
-  - name: kerala-sms # Replace with your desired namespace
-    installed: true
-    <<: *default
+#   - name: kerala-sms # Replace with your desired namespace
+#     installed: true
+#     <<: *default
 
-  - name: egov-user # Replace with your desired namespace
-    installed: true
-    <<: *default
+#   - name: egov-user # Replace with your desired namespace
+#     installed: true
+#     <<: *default
 
-  - name: egov-otp # Replace with your desired namespace
-    installed: true
-    <<: *default
+#   - name: egov-otp # Replace with your desired namespace
+#     installed: true
+#     <<: *default
 
-  - name: egov-persister # Replace with your desired namespace
-    installed: true
-    <<: *default
+#   - name: egov-persister # Replace with your desired namespace
+#     installed: true
+#     <<: *default
 
-  - name: egov-url-shortening # Replace with your desired namespace
-    installed: true
-    <<: *default
+#   - name: egov-url-shortening # Replace with your desired namespace
+#     installed: true
+#     <<: *default
 
-  - name: egov-workflow-v2 # Replace with your desired namespace
-    installed: true
-    <<: *default
+#   - name: egov-workflow-v2 # Replace with your desired namespace
+#     installed: true
+#     <<: *default
 
-  - name: user-otp # Replace with your desired namespace
-    installed: true
-    <<: *default
+#   - name: user-otp # Replace with your desired namespace
+#     installed: true
+#     <<: *default
 
   - name: configmaps # Replace with your desired namespace
     installed: true
     <<: *default
 
-  - name: citizen # Replace with your desired namespace
-    installed: true
-    <<: *default
+#   - name: citizen # Replace with your desired namespace
+#     installed: true
+#     <<: *default
 
-  - name: digit-ui # Replace with your desired namespace
-    labels:
-      deployment: "digit-ui"
-    <<: *default
+#   - name: digit-ui # Replace with your desired namespace
+#     labels:
+#       deployment: "digit-ui"
+#     <<: *default
 
-  - name: employee # Replace with your desired namespace
-    installed: true
-    <<: *default
+#   - name: employee # Replace with your desired namespace
+#     installed: true
+#     <<: *default
 
-  - name: service-request # Replace with your desired namespace
-    installed: true
-    <<: *default
+#   - name: service-request # Replace with your desired namespace
+#     installed: true
+#     <<: *default
 
-  - name: pgr-services # Replace with your desired namespace
-    installed: true
-    <<: *default
+#   - name: pgr-services # Replace with your desired namespace
+#     installed: true
+#     <<: *default
 
-  - name: gateway # Replace with your desired namespace
-    installed: true
-    <<: *default
+#   - name: gateway # Replace with your desired namespace
+#     installed: true
+#     <<: *default
 
-  - name: egov-pg-service # Replace with your desired namespace
-    installed: true
-    <<: *default
+#   - name: egov-pg-service # Replace with your desired namespace
+#     installed: true
+#     <<: *default
 
-  - name: egov-user-event # Replace with your desired namespace
-    installed: true
-    <<: *default
+#   - name: egov-user-event # Replace with your desired namespace
+#     installed: true
+#     <<: *default
 
-  - name: workbench-ui # Replace with your desired namespace
-    installed: true
-    labels:
-       deployment: "workbench-ui"
-    <<: *default
+#   - name: workbench-ui # Replace with your desired namespace
+#     installed: true
+#     labels:
+#        deployment: "workbench-ui"
+#     <<: *default
 
   - name: mdms-v2
     installed: true
     labels:
      deployment: "mdms-v2"
     <<: *default
-#
-  - name: individual  # Replace with your desired namespace
-    installed: true
-    labels:
-      deployment: "individual"
-    <<: *default
+# #
+#   - name: individual  # Replace with your desired namespace
+#     installed: true
+#     labels:
+#       deployment: "individual"
+#     <<: *default
 
-  - name: dristi-case-pdf  # Replace with your desired namespace
-    installed: true
-    labels:
-      deployment: "dristi-case-pdf"
-    <<: *default
+#   - name: dristi-case-pdf  # Replace with your desired namespace
+#     installed: true
+#     labels:
+#       deployment: "dristi-case-pdf"
+#     <<: *default
 
-  - name: pdf-service  # Replace with your desired namespace
-    installed: true
-    <<: *default
+#   - name: pdf-service  # Replace with your desired namespace
+#     installed: true
+#     <<: *default
 
-  - name: scheduler  # Replace with your desired namespace
-    installed: true
-    labels:
-      deployment: "scheduler"
-    <<: *default
+#   - name: scheduler  # Replace with your desired namespace
+#     installed: true
+#     labels:
+#       deployment: "scheduler"
+#     <<: *default
 
-  - name: advocate  # Replace with your desired namespace
-    installed: true
-    labels:
-      deployment: "advocate"
-    <<: *default
+#   - name: advocate  # Replace with your desired namespace
+#     installed: true
+#     labels:
+#       deployment: "advocate"
+#     <<: *default
 
-  - name: billing-service  # Replace with your desired namespace
-    installed: true
-    labels:
-      deployment: "billing-service"
-    <<: *default
+#   - name: billing-service  # Replace with your desired namespace
+#     installed: true
+#     labels:
+#       deployment: "billing-service"
+#     <<: *default
 
 
-  - name: collection-services  # Replace with your desired namespace
-    installed: true
-    labels:
-      deployment: "collection-services"
-    <<: *default
+#   - name: collection-services  # Replace with your desired namespace
+#     installed: true
+#     labels:
+#       deployment: "collection-services"
+#     <<: *default
 
-  - name: case  # Replace with your desired namespace
-    installed: true
-    labels:
-      deployment: "case"
-    <<: *default
+#   - name: case  # Replace with your desired namespace
+#     installed: true
+#     labels:
+#       deployment: "case"
+#     <<: *default
 
-  - name: inbox  # Replace with your desired namespace
-    installed: true
-    labels:
-      deployment: "inbox"
-    <<: *default
+#   - name: inbox  # Replace with your desired namespace
+#     installed: true
+#     labels:
+#       deployment: "inbox"
+#     <<: *default
 
-  - name: application  # Replace with your desired namespace
-    installed: true
-    labels:
-      deployment: "application"
-    <<: *default
+#   - name: application  # Replace with your desired namespace
+#     installed: true
+#     labels:
+#       deployment: "application"
+#     <<: *default
 
-  - name: casemanagement  # Replace with your desired namespace
-    installed: true
-    <<: *default
+#   - name: casemanagement  # Replace with your desired namespace
+#     installed: true
+#     <<: *default
 
-  - name: egov-apportion-service  # Replace with your desired namespace
-    installed: true
-    labels:
-      deployment: "egov-apportion-service"
-    <<: *default
+#   - name: egov-apportion-service  # Replace with your desired namespace
+#     installed: true
+#     labels:
+#       deployment: "egov-apportion-service"
+#     <<: *default
 
-  - name: evidence  # Replace with your desired namespace
-    installed: true
-    labels:
-      deployment: "evidence"
-    <<: *default
+#   - name: evidence  # Replace with your desired namespace
+#     installed: true
+#     labels:
+#       deployment: "evidence"
+#     <<: *default
 
-  - name: hearing  # Replace with your desired namespace
-    installed: true
-    labels:
-      deployment: "hearing"
-    <<: *default
+#   - name: hearing  # Replace with your desired namespace
+#     installed: true
+#     labels:
+#       deployment: "hearing"
+#     <<: *default
 
-  - name: order  # Replace with your desired namespace
-    installed: true
-    labels:
-      deployment: "order"
-    <<: *default
+#   - name: order  # Replace with your desired namespace
+#     installed: true
+#     labels:
+#       deployment: "order"
+#     <<: *default
 
-  - name: task  # Replace with your desired namespace
-    installed: true
-    labels:
-      deployment: "task"
-    <<: *default
+#   - name: task  # Replace with your desired namespace
+#     installed: true
+#     labels:
+#       deployment: "task"
+#     <<: *default
 
-  - name: payment-calculator  # Replace with your desired namespace
-    installed: true
-    labels:
-      deployment: "payment-calculator"
-    <<: *default
+#   - name: payment-calculator  # Replace with your desired namespace
+#     installed: true
+#     labels:
+#       deployment: "payment-calculator"
+#     <<: *default
 
-  - name: e-sign-svc  # Replace with your desired namespace
-    installed: true
-    labels:
-      deployment: "e-sign-svc"
-    <<: *default
+#   - name: e-sign-svc  # Replace with your desired namespace
+#     installed: true
+#     labels:
+#       deployment: "e-sign-svc"
+#     <<: *default
 
-  - name: esign-interceptor  # Replace with your desired namespace
-    installed: true
-    labels:
-      deployment: "esign-interceptor"
-    <<: *default
+#   - name: esign-interceptor  # Replace with your desired namespace
+#     installed: true
+#     labels:
+#       deployment: "esign-interceptor"
+#     <<: *default
 
-  - name: summons-svc  # Replace with your desired namespace
-    installed: true
-    labels:
-      deployment: "summons-svc"
-    <<: *default
-  #    - name: e-sign  # Replace with your desired namespace
-  #      installed: true
-  #      labels:
-  #        deployment: "e-sign"
-  #      <<: *default
-  #     - name: qr-code-service # Replace with your desired namespace
-  #       installed: true
-  #       labels:
-  #         deployment: "qr-code-service"
-  #       <<: *default
+#   - name: summons-svc  # Replace with your desired namespace
+#     installed: true
+#     labels:
+#       deployment: "summons-svc"
+#     <<: *default
+#   #    - name: e-sign  # Replace with your desired namespace
+#   #      installed: true
+#   #      labels:
+#   #        deployment: "e-sign"
+#   #      <<: *default
+#   #     - name: qr-code-service # Replace with your desired namespace
+#   #       installed: true
+#   #       labels:
+#   #         deployment: "qr-code-service"
+#   #       <<: *default
 
-  - name: etreasury  # Replace with your desired namespace
-    installed: true
-    labels:
-      deployment: "etreasury"
-    <<: *default
-  #
-  - name: epayments  # Replace with your desired namespace
-    installed: true
-    labels:
-      deployment: "epayments"
-    <<: *default
-  - name: analytics  # Replace with your desired namespace
-    installed: true
-    labels:
-      deployment: "analytics"
-    <<: *default
-  - name: transformer # Replace with your desired namespace
-    installed: true
-    labels:
-      deployment: "transformer"
-    <<: *default
+#   - name: etreasury  # Replace with your desired namespace
+#     installed: true
+#     labels:
+#       deployment: "etreasury"
+#     <<: *default
+#   #
+#   - name: epayments  # Replace with your desired namespace
+#     installed: true
+#     labels:
+#       deployment: "epayments"
+#     <<: *default
+#   - name: analytics  # Replace with your desired namespace
+#     installed: true
+#     labels:
+#       deployment: "analytics"
+#     <<: *default
+#   - name: transformer # Replace with your desired namespace
+#     installed: true
+#     labels:
+#       deployment: "transformer"
+#     <<: *default
 
-  - name: epost-tracker # Replace with your desired namespace
-    installed: true
-    labels:
-      deployment: "epost-tracker"
-    <<: *default
-  - name: icops-integration # Replace with your desired namespace
-    installed: true
-    labels:
-      deployment: "icops-integration"
-    <<: *default
-  #    - name: ocr-service # Replace with your desired namespace
-  #      installed: true
-  #      labels:
-  #        deployment: "ocr-service"
-  #      <<: *default
-  - name: dristi-pdf # Replace with your desired namespace
-    installed: true
-    labels:
-      deployment: "dristi-pdf"
-    <<: *default
-  - name: sbi-webpage # Replace with your desired namespace
-    installed: true
-    labels:
-      deployment: "sbi-webpage"
-    <<: *default
-  - name: sbi-svc # Replace with your desired namespace
-    installed: true
-    labels:
-      deployment: "sbi-svc"
-    <<: *default
-  #    - name: transcription # Replace with your desired namespace
-  #      installed: true
-  #      labels:
-  #        deployment: "transcription"
-  #      <<: *default
-  #    - name: kenlm # Replace with your desired namespace
-  #      installed: true
-  #      labels:
-  #        deployment: "kenlm"
-  #      <<: *default
-  #    - name: ocr-svc # Replace with your desired namespace
-  #      installed: true
-  #      labels:
-  #        deployment: "ocr-svc"
-  #      <<: *default
-  #    - name: sunbirdrc-credential-service # Replace with your desired namespace
-  #      installed: true
-  #      labels:
-  #        deployment: "sunbirdrc-credential-service"
-  #      <<: *default
+#   - name: epost-tracker # Replace with your desired namespace
+#     installed: true
+#     labels:
+#       deployment: "epost-tracker"
+#     <<: *default
+#   - name: icops-integration # Replace with your desired namespace
+#     installed: true
+#     labels:
+#       deployment: "icops-integration"
+#     <<: *default
+#   #    - name: ocr-service # Replace with your desired namespace
+#   #      installed: true
+#   #      labels:
+#   #        deployment: "ocr-service"
+#   #      <<: *default
+#   - name: dristi-pdf # Replace with your desired namespace
+#     installed: true
+#     labels:
+#       deployment: "dristi-pdf"
+#     <<: *default
+#   - name: sbi-webpage # Replace with your desired namespace
+#     installed: true
+#     labels:
+#       deployment: "sbi-webpage"
+#     <<: *default
+#   - name: sbi-svc # Replace with your desired namespace
+#     installed: true
+#     labels:
+#       deployment: "sbi-svc"
+#     <<: *default
+#   #    - name: transcription # Replace with your desired namespace
+#   #      installed: true
+#   #      labels:
+#   #        deployment: "transcription"
+#   #      <<: *default
+#   #    - name: kenlm # Replace with your desired namespace
+#   #      installed: true
+#   #      labels:
+#   #        deployment: "kenlm"
+#   #      <<: *default
+#   #    - name: ocr-svc # Replace with your desired namespace
+#   #      installed: true
+#   #      labels:
+#   #        deployment: "ocr-svc"
+#   #      <<: *default
+#   #    - name: sunbirdrc-credential-service # Replace with your desired namespace
+#   #      installed: true
+#   #      labels:
+#   #        deployment: "sunbirdrc-credential-service"
+#   #      <<: *default
 
-  #    - name: verifyapp  # Replace with your desired namespace
-  #      installed: true
-  #      labels:
-  #        deployment: "verifyapp"
-  #      <<: *default
-  - name: openapi # Replace with your desired namespace
-    installed: true # Replace with the version of your chart, if needed
-    <<: *default
-  - name: lock-svc # Replace with your desired namespace
-    installed: true # Replace with the version of your chart, if needed
-    <<: *default
-  - name: ab-diary # Replace with your desired namespace
-    installed: true # Replace with the version of your chart, if needed
-    <<: *default
-  - name: notification # Replace with your desired namespace
-    installed: true # Replace with the version of your chart, if needed
-    <<: *default
-  - name: order-management # Replace with your desired namespace
-    installed: true # Replace with the version of your chart, if needed
-    <<: *default
+#   #    - name: verifyapp  # Replace with your desired namespace
+#   #      installed: true
+#   #      labels:
+#   #        deployment: "verifyapp"
+#   #      <<: *default
+#   - name: openapi # Replace with your desired namespace
+#     installed: true # Replace with the version of your chart, if needed
+#     <<: *default
+#   - name: lock-svc # Replace with your desired namespace
+#     installed: true # Replace with the version of your chart, if needed
+#     <<: *default
+#   - name: ab-diary # Replace with your desired namespace
+#     installed: true # Replace with the version of your chart, if needed
+#     <<: *default
+#   - name: notification # Replace with your desired namespace
+#     installed: true # Replace with the version of your chart, if needed
+#     <<: *default
+#   - name: order-management # Replace with your desired namespace
+#     installed: true # Replace with the version of your chart, if needed
+#     <<: *default
