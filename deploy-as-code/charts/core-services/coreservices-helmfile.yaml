@@ -42,9 +42,9 @@ releases:
     installed: true
     <<: *default
 
-  - name: egov-mdms-service # Replace with your desired namespace
-    installed: true
-    <<: *default
+#  - name: egov-mdms-service # Replace with your desired namespace
+#    installed: true
+#    <<: *default
 
   - name: egov-hrms # Replace with your desired namespace
     installed: true

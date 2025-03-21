@@ -230,7 +230,7 @@ jobs:
           echo "order_management=$order_management" >> $GITHUB_ENV
       - name: digit deployment
         run: |
-          helmfile -l deployment=pucar -f digit-helmfile.yaml apply --include-needs=true \
+          helmfile -f digit-helmfile.yaml apply --include-needs=true \
             --set scheduler.image.tag=develop-${{ env.scheduler_commit }} \
             --set scheduler.initContainers.dbMigration.image.tag=develop-${{ env.scheduler_commit }} \
             --set payment-calculator.image.tag=develop-${{ env.payment_calculator_commit }} \
