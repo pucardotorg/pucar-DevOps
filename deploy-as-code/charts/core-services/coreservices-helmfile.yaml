@@ -200,11 +200,11 @@ releases:
       deployment: "casemanagement"
     <<: *default
 
-  #    - name: egov-apportion-service  # Replace with your desired namespace
-  #      installed: true
-  #      labels:
-  #        deployment: "egov-apportion-service"
-  #      <<: *default
+  - name: egov-apportion-service  # Replace with your desired namespace
+    installed: true
+    labels:
+      deployment: "egov-apportion-service"
+    <<: *default
 
   - name: evidence  # Replace with your desired namespace
     installed: true
