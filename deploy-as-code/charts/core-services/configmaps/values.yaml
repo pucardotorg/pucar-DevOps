@@ -153,7 +153,7 @@ configmaps:
       sw-calculator: http://sw-calculator.egov:8080/
       sw-services: http://sw-services.egov:8080/
       swm-services: http://swm-services:8080/
-      task: http://task:8080/
+      task: http://task.egov:8080/
       tenant: http://tenant:8080/
       tl-calculator: http://tl-calculator:8080/
       tl-indexer: http://tl-indexer:8080/
