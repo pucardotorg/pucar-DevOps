@@ -15,22 +15,22 @@ commonLabels:
   deployment: "pucar"
 
 releases:
-#- name: loki-stack
-#  installed: true
-#  namespace: {{ .Values.namespace | default "default-namespace" }}
-#  chart: grafana/loki-stack
-#  version: 2.10.1
-#  values:
-#  - ./values/loki-stack.yaml
-#
-#- name: kube-prometheus-stack
-#  installed: true
-#  namespace: {{ .Values.namespace | default "default-namespace" }}
-#  chart: prometheus-community/kube-prometheus-stack
-#  version: 56.6.2
-#  disableValidation: true
-#  values:
-#  - ./values/prometheus.yaml
+- name: loki-stack
+  installed: true
+  namespace: {{ .Values.namespace | default "default-namespace" }}
+  chart: grafana/loki-stack
+  version: 2.10.1
+  values:
+  - ./values/loki-stack.yaml
+
+- name: kube-prometheus-stack
+  installed: true
+  namespace: {{ .Values.namespace | default "default-namespace" }}
+  chart: prometheus-community/kube-prometheus-stack
+  version: 56.6.2
+  disableValidation: true
+  values:
+  - ./values/prometheus.yaml
 
 - name: jaeger-tracing
   installed: true
@@ -46,15 +46,15 @@ releases:
     - name: query.ingress.hosts[0]
       value: "{{ .Values.global.domain }}"
 
-#- name: grafana
-#  installed: true
-#  namespace: {{ .Values.namespace | default "default-namespace" }}
-#  chart: grafana/grafana
-#  version: 7.3.0
-#  values:
-#  - ./values/grafana.yaml
-#  set:
-#    - name: ingress.hosts[0]
-#      value: "{{ .Values.global.domain }}"
-#    - name: ingress.tls[0].hosts[0]
-#      value: {{ .Values.global.domain | quote }}
+- name: grafana
+  installed: true
+  namespace: {{ .Values.namespace | default "default-namespace" }}
+  chart: grafana/grafana
+  version: 7.3.0
+  values:
+  - ./values/grafana.yaml
+  set:
+    - name: ingress.hosts[0]
+      value: "{{ .Values.global.domain }}"
+    - name: ingress.tls[0].hosts[0]
+      value: {{ .Values.global.domain | quote }}

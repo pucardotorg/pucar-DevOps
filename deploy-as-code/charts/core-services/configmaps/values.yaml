@@ -3,34 +3,50 @@ configmaps:
     name: egov-config
     namespace: egov
     data:
-      JUDGE_DESIGNATION_HEADER: 'Special Court Of Judicial Magistrate of the First Class , for the trial of cases under section 138 of NI Act , 1881 at Kollam ( "24X7 ON Court" )'
-      ORDER_HEADING: 'In The Special Court Of Judicial Magistrate of the First Class , for the trial of cases under section 138 of NI Act , 1881 at Kollam ( "24X7 ON Court" )'
-      dristi-e-sign: "https://digit-lts.digit.org/"
-      db-host: "postgresql.backbone:5432" ## Add db-host name eg: egov-demo.database.azure.com
-      db-name: "postgres" ## Add db-name
-      db-url: "jdbc:postgresql://postgresql.backbone:5432/postgres" ## example: jdbc:postgresql://egov-demo.postgres.database.azure.com:5432/egov_demo
-      domain: "digit-lts.digit.org" ## Add your Domain Name    
-      egov-services-fqdn-name: "https://digit-lts.digit.org/" ## Add your Domain Name
-      esign-interceptor: "https://digit-lts.digit.org/esign-interceptor/v1/_intercept"
-      egov-state-level-tenant-id: "kl"
-      s3-assets-bucket: "(pg-egov-assets|egov-playground-assets)"
-      es-host: "elasticsearch-data-v1.es-cluster"
-      es-indexer-host: "http://elasticsearch-data-v1.es-cluster:9200/"
-      etreasury: http://etreasury.egov:8080
-      flyway-locations: "filesystem:/flyway/sql,filesystem:/flyway/seed,filesystem:/flyway/qa"
-      kafka-brokers: "release-name-kafka-controller-headless.kafka-kraft:9092"
-      kafka-infra-brokers: kafka-v2-infra.kafka-cluster:9092
-      logging-level-jdbc: "DEBUG"
-      mobile-validation-workaround: "true"
-      serializers-timezone-in-ist: "true"
-      server-tomcat-max-connections: "500"
-      server-tomcat-max-threads: "10"
-      sms-enabled: "true"
-      spring-datasource-tomcat-initialSize: "1"
-      spring-datasource-tomcat-max-active: "2"
-      spring-jpa-show-sql: "true"
+      COURT_ADDRESS: 'Special Court of Judicial Magistrate of the First Class, for the trial of cases under section 138 of Negotiable Instruments Act, 1881 (''24x7 ON COURT''), Kollam, Kerala, 691013'
+      db-url: 'jdbc:postgresql://10.5.94.176:5432/prod'
+      server-tomcat-max-threads: '10'
+      judge-designation: Judicial Magistrate of the First Class
+      judge-name: Michael George
+      egov-services: 'https://oncourts.kerala.gov.in'
+      domain: oncourts.kerala.gov.in
+      spring-datasource-tomcat-initialSize: '1'
+      dristi-e-sign: 'https://oncourts.kerala.gov.in/digit-ui/'
+      esign-id: KRHC-001
+      s3-assets-bucket: (pg-egov-assets|egov-playground-assets)
+      mobile-validation-workaround: 'true'
+      es-host: elasticsearch-data.backbone-prod
+      etreasury: 'http://etreasury.pucar-prod:8080'
+      egov-bnd-freedownload-tenants: pg.testing
+      serializers-timezone-in-ist: 'true'
+      flyway-locations: 'filesystem:/flyway/sql,filesystem:/flyway/seed,filesystem:/flyway/qa'
+      tracer-errors-provideexceptionindetails: 'true'
+      server-tomcat-max-connections: '500'
+      sms-enabled: 'true'
+      esign-filestore-id: 2aefb901-edc6-4a45-95f8-3ea383a513f5
+      dristi-url: 'https://oncourts.kerala.gov.in/user/oauth/token?_=1713357247536'
+      spring-jpa-show-sql: 'true'
+      spring-datasource-tomcat-max-active: '2'
+      sbi-tranction-success-url: 'https://oncourts.kerala.gov.in/sbi-payment/success.jsp'
+      ORDER_HEADING: 'Before The Special Court Of Judicial Magistrate of the First Class , for the trial of cases under section 138 of NI Act , 1881 at Kollam ( "24X7 ON Court" )'
+      sbi-redirect-url: 'https://oncourts.kerala.gov.in/digit-ui/citizen/home/sbi-payment-screen'
+      logging-level-jdbc: DEBUG
+      kafka-brokers: 'kafka-kraft-controller-headless.backbone-prod:9092'
+      sbi-tranction-fail-url: 'https://oncourts.kerala.gov.in/sbi-payment/fail.jsp'
+      egov-state-level-tenant-id: kl
+      es-indexer-host: 'http://elasticsearch-data.backbone-prod:9200/'
+      kafka-infra-brokers: 'kafka-v2-infra.kafka-cluster:9092'
+      db-host: 10.5.94.176
+      egov-services-fqdn-name: 'https://oncourts.kerala.gov.in/'
       timezone: Asia/Kolkata
-      tracer-errors-provideexceptionindetails: "true"
+      esign-interceptor: 'https://oncourts.kerala.gov.in/esign-interceptor/v1/_intercept'
+      db-name: prod
+      sbi-tranction-url: 'https://test.sbiepay.sbi/secure/AggregatorHostedListener'
+      egov-bnd-live-citizen-tenants: pg.testing
+      JUDGE_DESIGNATION_HEADER: 'Special Court Of Judicial Magistrate of the First Class , for the trial of cases under section 138 of NI Act , 1881 at Kollam ( "24X7 ON Court" )'
+      service-dept-code: 01BRAA
+      COURT_NAME: 'Special Court Of Judicial Magistrate of the First Class , for the trial of cases under section 138 of NI Act , 1881 at Kollam ( "24X7 ON Court" )'
+
 
   egov-service-host:
     name: egov-service-host
@@ -113,7 +129,7 @@ configmaps:
       hr-leave: http://hr-leave:8080/
       hr-masters: http://hr-masters:8080/
       hr-masters-v2: http://hr-masters-v2:8080/
-      icops-integration: http://icops-integration.egov:8080
+      icops-integration: http://icops-integration.egov:8080/egov-kerala-icops/
       inbox: http://inbox.egov:8080/
       individual: http://individual.egov:8080/
       inventory-services: http://inventory-services:8080/
@@ -122,7 +138,7 @@ configmaps:
       lcms-services: http://lcms-services:8080/
       lcms-workflow: http://lcms-workflow:8080/
       location: http://location:8080/
-      lock-service: http://lock-svc:8080/
+      lock-service: http://lock-svc.egov:8080/
       mdms-service-v2: http://mdms-v2.egov:8080/
       mdms-v2: http://mdms-v2.egov:8080/
       minio-url: https://minio-uat.digit.org/
@@ -146,6 +162,8 @@ configmaps:
       pt-workflow: http://pt-workflow:8080/
       rainmaker-pgr: http://rainmaker-pgr:8080/
       report: http://report.egov:8080/
+      sbi-url: http://sbi-svc.egov:8080/sbi-backend/payment/v1/_decryptBrowserResponse
+      scheduler: http://scheduler.egov:8080/
       summons: http://summons-svc.egov:8080/
       sunbird-credential-schema: http://sunbird-rc-credential-schema-service.egov:3333/
       sunbird-credential-service: http://sunbird-rc-credentials-service.egov:3000/
@@ -153,7 +171,7 @@ configmaps:
       sw-calculator: http://sw-calculator.egov:8080/
       sw-services: http://sw-services.egov:8080/
       swm-services: http://swm-services:8080/
-      task: http://task.egov:8080/
+      task: http://task:8080/
       tenant: http://tenant:8080/
       tl-calculator: http://tl-calculator:8080/
       tl-indexer: http://tl-indexer:8080/
@@ -168,7 +186,6 @@ configmaps:
       ws-calculator: http://ws-calculator.egov:8080/
       ws-services: http://ws-services.egov:8080/
       zuul: http://zuul:8080/
-      sbi-url: http://sbi-svc.egov:8080/sbi-backend//v1/_decryptBrowserResponse
 
 root-ingress:
   name: root-ingress

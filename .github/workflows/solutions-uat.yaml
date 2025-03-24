@@ -1,6 +1,8 @@
 name: Pucar-Install Workflow Solutins-UAT
 on:
-
+  push:
+   branches:
+     - Solutions-Pipeline
   workflow_dispatch:
   repository_dispatch:
 jobs:
@@ -30,11 +32,11 @@ jobs:
       - name: Azure login
         uses: azure/login@v1
         with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
+          creds: ${{ secrets.SOLUTIONS_AZURE_CREDENTIALS }}
 
       - name: Generate kubeconfig
         run: |
-          az aks get-credentials --resource-group "pucar-uat" --name "uat" --admin
+          az aks get-credentials --resource-group "pucar-solutions-uat" --name "solutions-uat" --admin
           cat ~/.kube/config > kubeconfig
       - name: Kubectl setup
         uses: azure/setup-kubectl@v3
