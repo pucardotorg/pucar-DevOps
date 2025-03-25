@@ -25,6 +25,8 @@ jobs:
     #    if: ${{ github.event_name == 'push' }}
     #    needs: Terraform_Infra_Creation
     runs-on: ubuntu-latest
+    environment: 
+      name: Uat
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
