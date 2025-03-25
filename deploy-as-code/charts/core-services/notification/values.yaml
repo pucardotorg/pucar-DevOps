@@ -73,7 +73,7 @@ env: |
         name: db
         key: password
   - name: "SCHEMA_TABLE"
-    value: "anotification_service_schema"
+    value: "notification_service_schema"
   - name: EGOV_IDGEN_HOST
     valueFrom:
       configMapKeyRef:

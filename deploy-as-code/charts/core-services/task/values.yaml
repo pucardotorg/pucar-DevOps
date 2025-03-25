@@ -105,6 +105,8 @@ env: |
         key: egov-localization
   - name: EGOV_LOCALIZATION_SEARCH_ENDPOINT
     value: /localization/messages/v1/_search
+  - name: EGOV_LOCALIZATION_CONTEXT_PATH
+    value: ""
   - name: EGOV_MDMS_SEARCH_ENDPOINT
     value: /egov-mdms-service/v1/_search
   - name: SERVER_PORT

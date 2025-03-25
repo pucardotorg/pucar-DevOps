@@ -28,6 +28,10 @@ java-args: ""
 
 # Additional Container Envs
 env: |
+  - name: EGOV_SMS_TEMPLATE_ID
+    value: "1107173141022956265"
+  - name: CONFIG_ISTEST
+    value: "false"
   - name: SERVER_PORT
     value: "8080"
   - name: OTP_HOST

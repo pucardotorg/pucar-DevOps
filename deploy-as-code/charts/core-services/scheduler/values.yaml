@@ -32,6 +32,10 @@ java-args: "-Dspring.profiles.active=monitoring"
 
 # Additional Container Envs
 env: |
+  - name: JUDGE_NAME
+    valueFrom:
+      configMapKeyRef:
+        key: judge-name
   - name: JAVA_ENABLE_DEBUG
     value: "true"
   - name: JAVA_DEBUG_PORT
@@ -132,7 +136,16 @@ env: |
       configMapKeyRef:
         name: egov-service-host
         key: egov-filestore
-  
+  - name: EGOV_INDIVIDUAL_HOST
+    valueFrom:
+      configMapKeyRef:
+        key: individual
+        name: egov-service-host
+  - name: EGOV_LOCALIZATION_HOST
+    valueFrom:
+      configMapKeyRef:
+        key: egov-localization
+        name: egov-service-host
   
   
   

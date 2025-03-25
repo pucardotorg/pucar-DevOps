@@ -125,4 +125,4 @@ env: |
         key: egov-apportion-service
         name: egov-service-host
   - name: STATELEVEL_ROLECODE_EXCLUDED_LIST
-    value: EMPLOYEE,BPAREG_DOC_VERIFIER,BPAREG_APPROVER
+    value: PAYMENT_COLLECTOR,BPAREG_DOC_VERIFIER,BPAREG_APPROVER

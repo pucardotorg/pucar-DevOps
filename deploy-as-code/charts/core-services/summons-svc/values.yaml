@@ -34,7 +34,21 @@ heap: "-Xmx64m -Xms64m"
 java-args: "-Dspring.profiles.active=monitoring"
 
 # Additional Container Envs
-env: |
+env: |          
+  - name: DRISTI_COURT_NAME
+    valueFrom:
+      configMapKeyRef:
+        key: COURT_NAME
+        name: egov-config
+  - name: DRISTI_COURT_ADDRESS
+    valueFrom:
+      configMapKeyRef:
+        key: COURT_ADDRESS
+        name: egov-config
+  - name: JAVA_ENABLE_DEBUG
+    value: "true"
+  - name: JAVA_DEBUG_PORT
+    value: "5005"
   - name: SPRING_DATASOURCE_URL
     valueFrom:
       configMapKeyRef:

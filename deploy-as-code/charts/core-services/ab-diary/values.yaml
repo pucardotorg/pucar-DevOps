@@ -157,3 +157,5 @@ env: |
       configMapKeyRef:
         name: egov-config
         key: judge-designation
+  - name: JUDGE_ID
+    value: JUDGE_ID

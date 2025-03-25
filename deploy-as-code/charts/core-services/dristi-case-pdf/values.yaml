@@ -23,6 +23,11 @@ healthChecks:
   readinessProbePath: "/dristi-case-pdf/"
     
 env: |
+  - name: COURT_NAME
+    valueFrom:
+      configMapKeyRef:
+        key: ORDER_HEADING
+        name: egov-config
   - name: NODE_OPTIONS
     value: "--max-old-space-size=2048"
   - name: SERVER_PORT
