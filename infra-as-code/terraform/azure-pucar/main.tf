@@ -20,6 +20,7 @@ resource "azurerm_subnet" "aks" {
   resource_group_name  = var.resource_group
   virtual_network_name = azurerm_virtual_network.vnet.name
   address_prefixes     = var.address_prefixes_aks
+  depends_on = [ azurerm_virtual_network.vnet ]
 }
 
 # resource "azurerm_subnet" "postgres" {
@@ -40,6 +41,7 @@ resource "azurerm_subnet" "aks" {
 #       ]
 #     }
 #   }
+#   depends_on = [ azurerm_virtual_network.vnet ]
 # }
 
 #resource "azurerm_subnet" "kafka" {
@@ -47,6 +49,7 @@ resource "azurerm_subnet" "aks" {
 #  resource_group_name  = var.resource_group
 #  virtual_network_name = azurerm_virtual_network.vnet.name
 #  address_prefixes     = var.address_prefixes_kafka
+#  depends_on = [ azurerm_virtual_network.vnet ]
 #}
 
 resource "azurerm_network_security_group" "aks_nsg" {
@@ -108,6 +111,7 @@ module "kubernetes" {
   aks_dns_service_ip        = var.aks_dns_service_ip
   network_security_group_id = azurerm_network_security_group.aks_nsg.id
   subnet_id                 = azurerm_subnet.aks.id
+  depends_on = [ azurerm_network_security_group.aks_nsg, azurerm_subnet.aks ]
 }
 
 # module "postgres-db" {

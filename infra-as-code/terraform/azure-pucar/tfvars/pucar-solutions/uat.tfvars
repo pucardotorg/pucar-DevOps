@@ -1,6 +1,6 @@
 # credentials for creating resources
-resource_group = "pucar-uat"
-environment    = "uat"
+resource_group = "pucar-solutions-uat"
+environment    = "solutions-uat"
 location       = "Central India"
 # networking
 address_space = ["10.4.0.0/16"]
@@ -14,8 +14,8 @@ zone                      = "2"
 # kubernetes variables
 private_cluster_enabled  = false
 vm_size                  = "Standard_E2ads_v5"
-node_count               = "5"
-min_count                = "2"
+node_count               = "4"
+min_count                = "3"
 max_count                = "4"
 max_pod                  = "45"
 address_prefixes_aks     = ["10.4.0.0/22"]

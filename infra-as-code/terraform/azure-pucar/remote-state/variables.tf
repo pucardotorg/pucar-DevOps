@@ -20,5 +20,4 @@ variable "resource_group" {
 
 variable "subscription_id" {
   type = string
-#  default = "44e70aaa-6d39-441a-b282-352886e1ede7"
 }
