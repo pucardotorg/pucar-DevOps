@@ -131,3 +131,8 @@ env: |
       configMapKeyRef:
         key: JUDGE_DESIGNATION_HEADER
         name: egov-config
+  - name: DRISTI_TASK_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: task
