@@ -176,11 +176,11 @@ releases:
   #        deployment: "collection-services"
   #      <<: *default
   #
-#  - name: case  # Replace with your desired namespace
-#    installed: true
-#    labels:
-#      deployment: "case"
-#    <<: *default
+  - name: case  # Replace with your desired namespace
+    installed: true
+    labels:
+      deployment: "case"
+    <<: *default
 #
   #    - name: inbox  # Replace with your desired namespace
   #      installed: true
@@ -224,11 +224,11 @@ releases:
       deployment: "order"
     <<: *default
 
-#  - name: task  # Replace with your desired namespace
-#    installed: true
-#    labels:
-#      deployment: "task"
-#    <<: *default
+  - name: task  # Replace with your desired namespace
+    installed: true
+    labels:
+      deployment: "task"
+    <<: *default
 
   - name: payment-calculator  # Replace with your desired namespace
     installed: true
@@ -275,11 +275,11 @@ releases:
   #      labels:
   #        deployment: "epayments"
   #      <<: *default
-#  - name: analytics  # Replace with your desired namespace
-#    installed: true
-#    labels:
-#      deployment: "analytics"
-#    <<: *default
+  - name: analytics  # Replace with your desired namespace
+    installed: true
+    labels:
+      deployment: "analytics"
+    <<: *default
   - name: transformer # Replace with your desired namespace
     installed: true
     labels:
