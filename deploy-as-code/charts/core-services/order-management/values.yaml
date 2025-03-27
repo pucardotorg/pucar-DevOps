@@ -110,7 +110,7 @@ env: |
       configMapKeyRef:
         name: egov-service-host
         key: application
-  - name: PUCAR_ESIGN_HOST
+  - name: DRISTI_ESIGN_HOST
     valueFrom:
       configMapKeyRef:
         name: egov-service-host
@@ -125,14 +125,66 @@ env: |
       secretKeyRef:
         name: elasticsearch-credentials
         key: password
-  - name: PUCAR_FILESTORE_HOST
+
+  - name: DRISTI_FILESTORE_HOST
     valueFrom:
       configMapKeyRef:
         key: egov-filestore
         name: egov-service-host
-
-  - name: PUCAR_ORDER_HOST
+  - name: DRISTI_ORDER_HOST
     valueFrom:
       configMapKeyRef:
         name: egov-service-host
         key: order
+  - name: DRISTI_ADVOCATE_HOST
+    valueFrom:
+      configMapKeyRef:
+        key: advocate
+        name: egov-service-host
+  - name: DRISTI_TASK_HOST
+    valueFrom:
+      configMapKeyRef:
+        key: task
+        name: egov-service-host
+  - name: DRISTI_APPLICATION_HOST
+    valueFrom:
+      configMapKeyRef:
+        key: application
+        name: egov-service-host
+  - name: DRISTI_CASE_HOST
+    valueFrom:
+      configMapKeyRef:
+        key: case
+        name: egov-service-host
+  - name: DRISTI_HEARING_HOST
+    valueFrom:
+      configMapKeyRef:
+        key: hearing
+        name: egov-service-host
+  - name: DRISTI_ADIARY_HOST
+    valueFrom:
+      configMapKeyRef:
+        key: ab-diary
+        name: egov-service-host
+  - name: DRISTI_INBOX_HOST
+    valueFrom:
+      configMapKeyRef:
+        key: inbox
+        name: egov-service-host
+  - name: DRISTI_ANALYTICS_HOST
+    valueFrom:
+        configMapKeyRef:
+          key: analytics
+          name: egov-service-host
+  - name: DRISTI_SCHEDULER_HOST
+    valueFrom:
+        configMapKeyRef:
+          key: scheduler
+          name: egov-service-host
+  - name: SPRING_REDIS_HOST
+    valueFrom:
+        configMapKeyRef:
+          key: redis
+          name: egov-service-host
+  - name: SPRING_REDIS_PORT
+    value: "6379"
