@@ -52,6 +52,7 @@ configmaps:
     name: egov-service-host
     namespace: egov
     data:
+      ab-diary: http://ab-diary.egov:8080/
       advocate: http://advocate.egov:8080/
       analytics: http://analytics.egov:8080/
       application: http://application.egov:8080/
@@ -161,6 +162,7 @@ configmaps:
       pt-tax-enrichment: http://pt-tax-enrichment:8080/
       pt-workflow: http://pt-workflow:8080/
       rainmaker-pgr: http://rainmaker-pgr:8080/
+      redis: redis.backbone
       report: http://report.egov:8080/
       sbi-url: http://sbi-svc.egov:8080/sbi-backend/payment/v1/_decryptBrowserResponse
       scheduler: http://scheduler.egov:8080/
