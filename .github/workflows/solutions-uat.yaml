@@ -216,7 +216,7 @@ jobs:
            --set notification.initContainers.dbMigration.image.tag=main-${{ env.notification_service }} \
            --set ab-diary.image.tag=main-${{ env.ab_diary_service }} \
            --set ab-diary.initContainers.dbMigration.image.tag=main-${{ env.ab_diary_service }} \
-           --set order-management.image.tag=develop-${{ env.order_management }} \
+           --set order-management.image.tag=main-${{ env.order_management }} \
            --set icops-integration.image.tag=main-${{ env.integration_commit }} \
            --set icops-integration.initContainers.dbMigration.image.tag=main-${{ env.integration_commit }}
         working-directory: deploy-as-code

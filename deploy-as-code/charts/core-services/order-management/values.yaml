@@ -182,9 +182,6 @@ env: |
           key: scheduler
           name: egov-service-host
   - name: SPRING_REDIS_HOST
-    valueFrom:
-        configMapKeyRef:
-          key: redis
-          name: egov-service-host
+    value: redis.backbone
   - name: SPRING_REDIS_PORT
     value: "6379"
