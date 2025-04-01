@@ -23,6 +23,8 @@ image:
 replicas: "1"
 
 env: |
+  - name: TOMCAT_MAX_HTTP_POST_SIZE
+    value: "104857600"
   - name: JAVA_OPTS
     value: -Xmx128m -Xms128m
   - name: SPRING_FLYWAY_URL

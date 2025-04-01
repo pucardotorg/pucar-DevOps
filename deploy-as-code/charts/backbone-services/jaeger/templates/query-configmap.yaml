@@ -1,0 +1,13 @@
+{{- if .Values.query.config }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ template "name" . }}-ui-configuration
+  namespace: {{ .Values.namespace }}
+  labels:
+    app: {{ template "name" . }}
+    app.kubernetes.io/component: query
+data:
+  query-ui-config.json: |-
+{{ tpl .Values.query.config . | indent 4 }}
+{{- end }}

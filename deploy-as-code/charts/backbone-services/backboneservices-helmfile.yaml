@@ -120,3 +120,14 @@ releases:
 #  <<: *default
 #  values:
 #    - ./kibana/values.yaml
+
+#- name: jaeger
+#  chart: jaeger
+#  installed: true
+#  version: 0.34.0
+#  values:
+#    - ./jaeger/value.yaml
+#  <<: *default
+#  set:
+#    - name: query.ingress.hosts[0]
+#      value: "{{ .Values.global.domain }}"
