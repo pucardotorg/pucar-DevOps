@@ -8,8 +8,8 @@ repositories:
 
 values:
   - namespace: monitoring
-  - ../environments/solutions-qa-secrets.yaml
-  - ../environments/solutions-qa.yaml
+  - ../environments/{{ requiredEnv "HELMFILE_ENV" }}-secrets.yaml
+  - ../environments/{{ requiredEnv "HELMFILE_ENV" }}.yaml
 
 commonLabels:
   deployment: "pucar"
@@ -32,19 +32,19 @@ releases:
   values:
   - ./values/prometheus.yaml
 
-- name: jaeger-tracing
-  installed: true
-  namespace: backbone
-  chart: jaegertracing/jaeger
-  version: 1.0.0 
-  values:
-  - ./values/jaeger.yaml
-  - storage:
-      elasticsearch:
-        password: {{ .Values.secrets.elasticsearch.password }}
-  set:
-    - name: query.ingress.hosts[0]
-      value: "{{ .Values.global.domain }}"
+#- name: jaeger-tracing
+#  installed: true
+#  namespace: backbone
+#  chart: jaegertracing/jaeger
+#  version: 1.0.0
+#  values:
+#  - ./values/jaeger.yaml
+#  - storage:
+#      elasticsearch:
+#        password: {{ .Values.secrets.elasticsearch.password }}
+#  set:
+#    - name: query.ingress.hosts[0]
+#      value: "{{ .Values.global.domain }}"
 
 - name: grafana
   installed: true
