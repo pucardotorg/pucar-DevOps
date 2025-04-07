@@ -37,6 +37,18 @@ remote_debug:
   enabled: true
 # Additional Container Envs
 env: |
+  - name: PUCAR_TSB_RECEIPT
+    value: "Y"
+  - name: TREASURY_HEAD_IDS
+    value: 56685,55622,00027,00029
+  - name: TREASURY_ACCOUNT_NUMBERS
+    value: 8031-00-102-94-07-00-00-N-V,8031-00-102-94-03-00-00-N-V
+  - name: OFFICE_CODE
+    value: 030101B0019
+  - name: TREASURY_ACCOUNT_TYPE
+    value: 01,14
+  - name: CHALLAN_TEST_AMOUNT
+    value: "4"
   - name: ISTEST_ENABLED
     value: "true"
   - name: SERVER_PORT

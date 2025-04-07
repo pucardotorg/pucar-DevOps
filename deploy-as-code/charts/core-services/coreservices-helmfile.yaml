@@ -264,12 +264,12 @@ releases:
   #         deployment: "qr-code-service"
   #       <<: *default
 
-  #    - name: etreasury  # Replace with your desired namespace
-  #      installed: true
-  #      labels:
-  #        deployment: "etreasury"
-  #      <<: *default
-  #
+  - name: etreasury  # Replace with your desired namespace
+    installed: true
+    labels:
+      deployment: "etreasury"
+    <<: *default
+
   #    - name: epayments  # Replace with your desired namespace
   #      installed: true
   #      labels:
