@@ -195,14 +195,23 @@ env: |
       configMapKeyRef:
         name: egov-service-host
         key: task
-  - name: EGOV_hearing_HOST
+  - name: EGOV_HEARING_HOST
     valueFrom:
       configMapKeyRef:
         name: egov-service-host
         key: hearing
-  - name: EGOV_evidence_HOST
+  - name: EGOV_EVIDENCE_HOST
     valueFrom:
       configMapKeyRef:
         name: egov-service-host
         key: evidence
-
+  - name: EGOV_PAYMENT_CALCULATOR_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: payment-calculator
+  - name: EGOV_ETREASURY_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: etreasury

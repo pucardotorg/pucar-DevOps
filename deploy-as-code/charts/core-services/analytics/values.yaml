@@ -138,6 +138,6 @@ env: |
         name: egov-service-host
         key: billing-service
   - name: EGOV_TASK_BUSINESS_SERVICES
-    value: "task-default,task-bail,task-summons,task-warrant,task-notice,task-join-case"
+    value: "task-default,task-bail,task-summons,task-warrant,task-notice,task-join-case,task-payment"
   - name: EGOV_APPLICATION_BUSINESS_SERVICES
     value: "application-order-submission-default,application-order-submission-feedback,application-voluntary-submission,delay-condonation-submission,voluntary-application-submission-bail,voluntary-application-submission-bail-documents"
