@@ -28,6 +28,16 @@ env: |
       configMapKeyRef:
         key: esign-filestore-id
         name: egov-config
+  - name: KIBANA_USERNAME
+    valueFrom:
+      secretKeyRef: 
+        name: kibana
+        key: username
+  - name: KIBANA_PASSWORD
+    valueFrom:
+      secretKeyRef: 
+        name: kibana
+        key: password
     
 extraVolumes: |
   - name: js-injection
