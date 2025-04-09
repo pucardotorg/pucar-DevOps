@@ -37,8 +37,8 @@ memory_limits: 2Gi
 
 healthChecks:
   enabled: true
-  livenessProbePath: "/case/"
-  readinessProbePath: "/case/"
+  livenessProbePath: "/case/health"
+  readinessProbePath: "/case/health"
 
 env: |
   - name: NOTIFICATION_SMS_ENABLED
