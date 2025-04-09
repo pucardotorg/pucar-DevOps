@@ -156,6 +156,10 @@ env: |
     value: egov.collection.payment-create
   - name: ROLE_SYSTEM_ADMIN
     value: SYSTEM_ADMIN
-
+  - name: DRISTI_SUMMON_HOST
+    valueFrom:
+        configMapKeyRef:
+          key: summons
+          name: egov-service-host
 
     
