@@ -35,13 +35,10 @@ java-args: "-Dspring.profiles.active=monitoring"
 memory_requests: 2Gi
 memory_limits: 2Gi
 
-
-
-
-#healthChecks:
-#  enabled: true
-#  livenessProbePath: "/case/"
-#  readinessProbePath: "/case/"
+healthChecks:
+  enabled: true
+  livenessProbePath: "/case/"
+  readinessProbePath: "/case/"
 
 env: |
   - name: NOTIFICATION_SMS_ENABLED
