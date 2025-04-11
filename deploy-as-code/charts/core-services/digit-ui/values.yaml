@@ -28,12 +28,12 @@ env: |
       configMapKeyRef:
         key: esign-filestore-id
         name: egov-config
-  - name: KIBANA_USERNAME
+  - name: REACT_APP_KIBANA_USERNAME
     valueFrom:
       secretKeyRef: 
         name: kibana
         key: username
-  - name: KIBANA_PASSWORD
+  - name: REACT_APP_KIBANA_PASSWORD
     valueFrom:
       secretKeyRef: 
         name: kibana

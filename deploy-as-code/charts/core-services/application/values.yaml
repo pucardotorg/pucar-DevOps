@@ -32,10 +32,10 @@ java-args: "-Dspring.profiles.active=monitoring"
 memory_requests: 384Mi
 
 
-#healthChecks:
-#  enabled: true
-#  livenessProbePath: "/application/"
-#  readinessProbePath: "/application/"
+healthChecks:
+  enabled: true
+  livenessProbePath: "/application/health"
+  readinessProbePath: "/application/health"
 
 env: |
   - name: JAVA_ENABLE_DEBUG
