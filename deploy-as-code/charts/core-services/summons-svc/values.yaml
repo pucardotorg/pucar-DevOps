@@ -162,3 +162,8 @@ env: |
       configMapKeyRef:
         key: case
         name: egov-service-host
+  - name: TREASURY_DEMAND_HOST
+    valueFrom:
+      configMapKeyRef:
+        key: etreasury
+        name: egov-service-host
