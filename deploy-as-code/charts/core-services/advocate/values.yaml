@@ -38,6 +38,8 @@ healthChecks:
   readinessProbePath: "/advocate/health"
 
 env: |
+  - name: SPRING_REDIS_HOST
+    value: redis.backbone
   - name: JAVA_OPTS
     value: {{ index .Values "heap" | quote }}
   - name: SERVER_PORT
