@@ -155,7 +155,7 @@ jobs:
         run: |
           git clone https://github.com/pucardotorg/dristi-solutions.git
           cd dristi-solutions
-          git checkout develop
+          git checkout release-sprint-19
           payment_calculator_commit=$(git log -1 --pretty=format:%H -- backend/payment-calculator-svc)
           echo "payment_calculator_commit=$payment_calculator_commit" >> $GITHUB_ENV
           advocate_commit=$(git log -1 --pretty=format:%H -- backend/advocate)
@@ -231,65 +231,65 @@ jobs:
       - name: digit deployment
         run: |
           helmfile -f digit-helmfile.yaml apply --include-needs=true \
-            --set scheduler.image.tag=develop-${{ env.scheduler_commit }} \
-            --set scheduler.initContainers.dbMigration.image.tag=develop-${{ env.scheduler_commit }} \
-            --set payment-calculator.image.tag=develop-${{ env.payment_calculator_commit }} \
-            --set payment-calculator.initContainers.dbMigration.image.tag=develop-${{ env.payment_calculator_commit }} \
-            --set digit-ui.image.tag=develop-${{ env.digit_ui_commit }} \
-            --set dristi-case-pdf.image.tag=develop-${{ env.dristi_case_pdf_commit }} \
-            --set dristi-pdf.image.tag=develop-${{ env.dristi_pdf_commit }} \
-            --set advocate.image.tag=develop-${{ env.advocate_commit }} \
-            --set advocate.initContainers.dbMigration.image.tag=develop-${{ env.advocate_commit }} \
-            --set case.image.tag=develop-${{ env.case_commit }} \
-            --set case.initContainers.dbMigration.image.tag=develop-${{ env.case_commit }} \
-            --set ocr-service.image.tag=develop-${{ env.ocr_service_commit }} \
-            --set ocr-service.initContainers.dbMigration.image.tag=develop-${{ env.ocr_service_commit }} \
-            --set casemanagement.image.tag=develop-${{ env.casemanagement_commit }} \
-            --set casemanagement.initContainers.dbMigration.image.tag=develop-${{ env.casemanagement_commit }} \
-            --set evidence.image.tag=develop-${{ env.evidence_commit }} \
-            --set evidence.initContainers.dbMigration.image.tag=develop-${{ env.evidence_commit }} \
-            --set hearing.image.tag=develop-${{ env.hearing_commit }} \
-            --set hearing.initContainers.dbMigration.image.tag=develop-${{ env.hearing_commit }} \
-            --set order.image.tag=develop-${{ env.order_commit }} \
-            --set order.initContainers.dbMigration.image.tag=develop-${{ env.order_commit }} \
-            --set task.image.tag=develop-${{ env.task_commit }} \
-            --set task.initContainers.dbMigration.image.tag=develop-${{ env.task_commit }} \
-            --set billing-service.image.tag=develop-${{ env.billing_service_commit }} \
-            --set billing-service.initContainers.dbMigration.image.tag=develop-${{ env.billing_service_commit }} \
-            --set collection-services.image.tag=develop-${{ env.collection_service_commit }} \
-            --set collection-services.initContainers.dbMigration.image.tag=develop-${{ env.collection_service_commit }} \
-            --set individual.image.tag=develop-${{ env.individual_commit }} \
-            --set individual.initContainers.dbMigration.image.tag=develop-${{ env.individual_commit }} \
-            --set inbox.image.tag=develop-${{ env.inbox_commit }} \
-            --set e-sign-svc.image.tag=develop-${{ env.esign_svc_commit }} \
-            --set e-sign-svc.initContainers.dbMigration.image.tag=develop-${{ env.esign_svc_commit }} \
-            --set esign-interceptor.image.tag=develop-${{ env.esign_interceptor_commit }} \
-            --set application.image.tag=develop-${{ env.application_commit }} \
-            --set application.initContainers.dbMigration.image.tag=develop-${{ env.application_commit }} \
-            --set analytics.image.tag=develop-${{ env.analytics_commit }} \
-            --set epayments.image.tag=develop-${{ env.epayment_commit }} \
-            --set etreasury.image.tag=develop-${{ env.etreasury_commit }} \
-            --set etreasury.initContainers.dbMigration.image.tag=develop-${{ env.etreasury_commit }} \
-            --set pdf-service.image.tag=develop-${{ env.pdf_service }} \
-            --set pdf-service.initContainers.dbMigration.image.tag=develop-${{ env.pdf_service }} \
-            --set sbi-webpage.image.tag=develop-${{ env.sbi_ui_commit }} \
-            --set sbi-svc.image.tag=develop-${{ env.sbi_svc_commit }} \
-            --set sbi-svc.initContainers.dbMigration.image.tag=develop-${{ env.sbi_svc_commit }} \
-            --set epost-tracker.image.tag=develop-${{ env.epost_tracker_commit }} \
-            --set epost-tracker.initContainers.dbMigration.image.tag=develop-${{ env.epost_tracker_commit }} \
-            --set summons-svc.image.tag=develop-${{ env.summons_svc_commit }} \
-            --set summons-svc.initContainers.dbMigration.image.tag=develop-${{ env.summons_svc_commit }} \
-            --set transformer.image.tag=develop-${{ env.transformer_commit }} \
-            --set openapi.image.tag=develop-${{ env.openapi_service }} \
-            --set lock-svc.image.tag=develop-${{ env.lock_service }} \
-            --set lock-svc.initContainers.dbMigration.image.tag=develop-${{ env.lock_service }} \
-            --set notification.image.tag=develop-${{ env.notification_service }} \
-            --set notification.initContainers.dbMigration.image.tag=develop-${{ env.notification_service }} \
-            --set ab-diary.image.tag=develop-${{ env.ab_diary_service }} \
-            --set ab-diary.initContainers.dbMigration.image.tag=develop-${{ env.ab_diary_service }} \
-            --set order-management.image.tag=develop-${{ env.order_management }} \
-            --set icops-integration.image.tag=develop-${{ env.integration_commit }} \
-            --set icops-integration.initContainers.dbMigration.image.tag=develop-${{ env.integration_commit }} \
+            --set scheduler.image.tag=release-sprint-19-${{ env.scheduler_commit }} \
+            --set scheduler.initContainers.dbMigration.image.tag=release-sprint-19-${{ env.scheduler_commit }} \
+            --set payment-calculator.image.tag=release-sprint-19-${{ env.payment_calculator_commit }} \
+            --set payment-calculator.initContainers.dbMigration.image.tag=release-sprint-19-${{ env.payment_calculator_commit }} \
+            --set digit-ui.image.tag=release-sprint-19-${{ env.digit_ui_commit }} \
+            --set dristi-case-pdf.image.tag=release-sprint-19-${{ env.dristi_case_pdf_commit }} \
+            --set dristi-pdf.image.tag=release-sprint-19-${{ env.dristi_pdf_commit }} \
+            --set advocate.image.tag=release-sprint-19-${{ env.advocate_commit }} \
+            --set advocate.initContainers.dbMigration.image.tag=release-sprint-19-${{ env.advocate_commit }} \
+            --set case.image.tag=release-sprint-19-${{ env.case_commit }} \
+            --set case.initContainers.dbMigration.image.tag=release-sprint-19-${{ env.case_commit }} \
+            --set ocr-service.image.tag=release-sprint-19-${{ env.ocr_service_commit }} \
+            --set ocr-service.initContainers.dbMigration.image.tag=release-sprint-19-${{ env.ocr_service_commit }} \
+            --set casemanagement.image.tag=release-sprint-19-${{ env.casemanagement_commit }} \
+            --set casemanagement.initContainers.dbMigration.image.tag=release-sprint-19-${{ env.casemanagement_commit }} \
+            --set evidence.image.tag=release-sprint-19-${{ env.evidence_commit }} \
+            --set evidence.initContainers.dbMigration.image.tag=release-sprint-19-${{ env.evidence_commit }} \
+            --set hearing.image.tag=release-sprint-19-${{ env.hearing_commit }} \
+            --set hearing.initContainers.dbMigration.image.tag=release-sprint-19-${{ env.hearing_commit }} \
+            --set order.image.tag=release-sprint-19-${{ env.order_commit }} \
+            --set order.initContainers.dbMigration.image.tag=release-sprint-19-${{ env.order_commit }} \
+            --set task.image.tag=release-sprint-19-${{ env.task_commit }} \
+            --set task.initContainers.dbMigration.image.tag=release-sprint-19-${{ env.task_commit }} \
+            --set billing-service.image.tag=release-sprint-19-${{ env.billing_service_commit }} \
+            --set billing-service.initContainers.dbMigration.image.tag=release-sprint-19-${{ env.billing_service_commit }} \
+            --set collection-services.image.tag=release-sprint-19-${{ env.collection_service_commit }} \
+            --set collection-services.initContainers.dbMigration.image.tag=release-sprint-19-${{ env.collection_service_commit }} \
+            --set individual.image.tag=release-sprint-19-${{ env.individual_commit }} \
+            --set individual.initContainers.dbMigration.image.tag=release-sprint-19-${{ env.individual_commit }} \
+            --set inbox.image.tag=release-sprint-19-${{ env.inbox_commit }} \
+            --set e-sign-svc.image.tag=release-sprint-19-${{ env.esign_svc_commit }} \
+            --set e-sign-svc.initContainers.dbMigration.image.tag=release-sprint-19-${{ env.esign_svc_commit }} \
+            --set esign-interceptor.image.tag=release-sprint-19-${{ env.esign_interceptor_commit }} \
+            --set application.image.tag=release-sprint-19-${{ env.application_commit }} \
+            --set application.initContainers.dbMigration.image.tag=release-sprint-19-${{ env.application_commit }} \
+            --set analytics.image.tag=release-sprint-19-${{ env.analytics_commit }} \
+            --set epayments.image.tag=release-sprint-19-${{ env.epayment_commit }} \
+            --set etreasury.image.tag=release-sprint-19-${{ env.etreasury_commit }} \
+            --set etreasury.initContainers.dbMigration.image.tag=release-sprint-19-${{ env.etreasury_commit }} \
+            --set pdf-service.image.tag=release-sprint-19-${{ env.pdf_service }} \
+            --set pdf-service.initContainers.dbMigration.image.tag=release-sprint-19-${{ env.pdf_service }} \
+            --set sbi-webpage.image.tag=release-sprint-19-${{ env.sbi_ui_commit }} \
+            --set sbi-svc.image.tag=release-sprint-19-${{ env.sbi_svc_commit }} \
+            --set sbi-svc.initContainers.dbMigration.image.tag=release-sprint-19-${{ env.sbi_svc_commit }} \
+            --set epost-tracker.image.tag=release-sprint-19-${{ env.epost_tracker_commit }} \
+            --set epost-tracker.initContainers.dbMigration.image.tag=release-sprint-19-${{ env.epost_tracker_commit }} \
+            --set summons-svc.image.tag=release-sprint-19-${{ env.summons_svc_commit }} \
+            --set summons-svc.initContainers.dbMigration.image.tag=release-sprint-19-${{ env.summons_svc_commit }} \
+            --set transformer.image.tag=release-sprint-19-${{ env.transformer_commit }} \
+            --set openapi.image.tag=release-sprint-19-${{ env.openapi_service }} \
+            --set lock-svc.image.tag=release-sprint-19-${{ env.lock_service }} \
+            --set lock-svc.initContainers.dbMigration.image.tag=release-sprint-19-${{ env.lock_service }} \
+            --set notification.image.tag=release-sprint-19-${{ env.notification_service }} \
+            --set notification.initContainers.dbMigration.image.tag=release-sprint-19-${{ env.notification_service }} \
+            --set ab-diary.image.tag=release-sprint-19-${{ env.ab_diary_service }} \
+            --set ab-diary.initContainers.dbMigration.image.tag=release-sprint-19-${{ env.ab_diary_service }} \
+            --set order-management.image.tag=release-sprint-19-${{ env.order_management }} \
+            --set icops-integration.image.tag=release-sprint-19-${{ env.integration_commit }} \
+            --set icops-integration.initContainers.dbMigration.image.tag=release-sprint-19-${{ env.integration_commit }} \
 
 
         working-directory: deploy-as-code
