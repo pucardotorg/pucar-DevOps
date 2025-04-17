@@ -128,20 +128,17 @@ env: |
     valueFrom:
       configMapKeyRef:
         key: icops-integration
-        name: egov-service-host
-       
+        name: egov-service-host      
   - name: PAYMENT_CALCULATOR_HOST
     valueFrom:
       configMapKeyRef:
         key: payment-calculator
-        name: egov-service-host
-       
+        name: egov-service-host       
   - name: EGOV_BILLINGSERVICE_HOST
     valueFrom:
       configMapKeyRef:
         key: billing-service
-        name: egov-service-host
-  
+        name: egov-service-host 
   - name: EGOV_TASK_SERVICE_HOST
     valueFrom:
       configMapKeyRef:
