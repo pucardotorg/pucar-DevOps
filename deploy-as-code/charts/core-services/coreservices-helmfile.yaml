@@ -54,9 +54,9 @@ releases:
   #      installed: true
   #      <<: *default
   #
-  #    - name: egov-notification-mail # Replace with your desired namespace
-  #      installed: true
-  #      <<: *default
+#  - name: egov-notification-mail # Replace with your desired namespace
+#    installed: true
+#    <<: *default
   #
   #    - name: kerala-sms # Replace with your desired namespace
   #      installed: true
@@ -94,10 +94,10 @@ releases:
   #      installed: true
   #      <<: *default
 
-#  - name: digit-ui # Replace with your desired namespace
-#    labels:
-#      deployment: "digit-ui"
-#    <<: *default
+  - name: digit-ui # Replace with your desired namespace
+    labels:
+      deployment: "digit-ui"
+    <<: *default
 
   #    - name: employee # Replace with your desired namespace
   #      installed: true
@@ -141,11 +141,11 @@ releases:
   #        deployment: "individual"
   #      <<: *default
 
-#  - name: dristi-case-pdf  # Replace with your desired namespace
-#    installed: true
-#    labels:
-#      deployment: "dristi-case-pdf"
-#    <<: *default
+  - name: dristi-case-pdf  # Replace with your desired namespace
+    installed: true
+    labels:
+      deployment: "dristi-case-pdf"
+    <<: *default
 
   - name: pdf-service  # Replace with your desired namespace
     installed: true
@@ -242,11 +242,11 @@ releases:
       deployment: "e-sign-svc"
     <<: *default
 
-  - name: esign-interceptor  # Replace with your desired namespace
-    installed: true
-    labels:
-      deployment: "esign-interceptor"
-    <<: *default
+#  - name: esign-interceptor  # Replace with your desired namespace
+#    installed: true
+#    labels:
+#      deployment: "esign-interceptor"
+#    <<: *default
 
   - name: summons-svc  # Replace with your desired namespace
     installed: true
@@ -286,11 +286,11 @@ releases:
       deployment: "transformer"
     <<: *default
 
-  - name: epost-tracker # Replace with your desired namespace
-    installed: true
-    labels:
-      deployment: "epost-tracker"
-    <<: *default
+#  - name: epost-tracker # Replace with your desired namespace
+#    installed: true
+#    labels:
+#      deployment: "epost-tracker"
+#    <<: *default
   - name: icops-integration # Replace with your desired namespace
     installed: true
     labels:
