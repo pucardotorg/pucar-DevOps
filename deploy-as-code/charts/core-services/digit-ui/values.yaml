@@ -6,7 +6,7 @@ labels:
 # Ingress Configs
 ingress:
   enabled: true
-  context: "digit-ui"
+  context: "ui"
 
 # Init Containers Configs
 initContainers: {}
@@ -19,8 +19,8 @@ replicas: "1"
 httpPort: 80
 healthChecks:
   enabled: true
-  livenessProbePath: "/digit-ui/"
-  readinessProbePath: "/digit-ui/"
+  livenessProbePath: "/ui/"
+  readinessProbePath: "/ui/"
 
 env: |
   - name: REACT_APP_ESIGN_FILESTORE_ID
