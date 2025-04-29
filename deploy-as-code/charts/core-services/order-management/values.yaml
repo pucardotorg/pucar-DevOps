@@ -35,7 +35,7 @@ env: |
   - name: SERVER_PORT
     value: "8080"
   - name: SERVER_CONTEXT_PATH
-    value: /analytics
+    value: /order-management
   - name: EGOV_IDGEN_PATH
     value: "egov-idgen/id/_generate"
   - name: EGOV_STATELEVEL_TENANTID
@@ -43,15 +43,10 @@ env: |
       configMapKeyRef:
         name: egov-config
         key: egov-state-level-tenant-id
-  - name: EGOV_INDIVIDUAL_HOST
+  - name: DRISTI_INDIVIDUAL_HOST
     valueFrom:
       configMapKeyRef:
         key: individual
-        name: egov-service-host
-  - name: EGOV_ADVOCATE_HOST
-    valueFrom:
-      configMapKeyRef:
-        key: advocate
         name: egov-service-host
   - name: EGOV_WORKFLOW_HOST
     valueFrom:
@@ -65,11 +60,6 @@ env: |
         key: egov-localization
   - name: EGOV_LOCALIZATION_SEARCH_ENDPOINT
     value: /_search
-  - name: EGOV_INDIVIDUAL_HOST
-    valueFrom:
-      configMapKeyRef:
-        key: individual
-        name: egov-service-host
   - name: KAFKA_CONFIG_BOOTSTRAP_SERVER_CONFIG
     valueFrom:
       configMapKeyRef:
@@ -85,31 +75,6 @@ env: |
       configMapKeyRef:
         key: es-indexer-host
         name: egov-config
-  - name: EGOV_HEARING_HOST
-    valueFrom:
-      configMapKeyRef:
-        key: hearing
-        name: egov-service-host
-  - name: EGOV_CASE_HOST
-    valueFrom:
-      configMapKeyRef:
-        name: egov-service-host
-        key: case
-  - name: EGOV_EVIDENCE_HOST
-    valueFrom:
-      configMapKeyRef:
-        name: egov-service-host
-        key: evidence
-  - name: EGOV_TASK_HOST
-    valueFrom:
-      configMapKeyRef:
-        name: egov-service-host
-        key: task
-  - name: EGOV_APPLICATION_HOST
-    valueFrom:
-      configMapKeyRef:
-        name: egov-service-host
-        key: application
   - name: DRISTI_ESIGN_HOST
     valueFrom:
       configMapKeyRef:
