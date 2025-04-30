@@ -203,5 +203,35 @@ env: |
     value: egov-pdf/dristi-pdf/process-case-bundle
   - name: GENERATE_VC_CODE
     value: "Pucar.SummonOrder14"
-  
+  - name: SPRING_DATASOURCE_WRITER_URL
+    valueFrom:
+      configMapKeyRef:
+        key: db-url
+        name: egov-config
+  - name: SPRING_DATASOURCE_READER_URL
+    valueFrom:
+      configMapKeyRef:
+        key: db-url
+        name: egov-config
+  - name: SPRING_DATASOURCE_WRITER_USERNAME
+    valueFrom:
+      secretKeyRef:
+        key: writeusername
+        name: db
+  - name: SPRING_DATASOURCE_READER_USERNAME
+    valueFrom:
+      secretKeyRef:
+        key: readusername
+        name: db
+  - name: SPRING_DATASOURCE_WRITER_PASSWORD
+    valueFrom:
+      secretKeyRef:
+        key: writepassword
+        name: db
+  - name: SPRING_DATASOURCE_READER_PASSWORD
+    valueFrom:
+      secretKeyRef:
+        key: readpassword
+        name: db
+
   
