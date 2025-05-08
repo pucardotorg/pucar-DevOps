@@ -225,7 +225,7 @@ jobs:
           order_management=$(git log -1 --pretty=format:%H -- backend/order-management)
           echo "order_management=$order_management" >> $GITHUB_ENV
           hearing_management=$(git log -1 --pretty=format:%H -- backend/hearing-management)
-          echo "hearing_management=$order_management" >> $GITHUB_ENV
+          echo "hearing_management=$hearing_management" >> $GITHUB_ENV
       - name: digit deployment
         run: |
           helmfile  -f digit-helmfile.yaml apply \
