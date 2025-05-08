@@ -224,6 +224,8 @@ jobs:
           echo "lock_service=$lock_service" >> $GITHUB_ENV
           order_management=$(git log -1 --pretty=format:%H -- backend/order-management)
           echo "order_management=$order_management" >> $GITHUB_ENV
+          hearing_management=$(git log -1 --pretty=format:%H -- backend/hearing-management)
+          echo "hearing_management=$order_management" >> $GITHUB_ENV
       - name: digit deployment
         run: |
           helmfile  -f digit-helmfile.yaml apply \
@@ -284,6 +286,7 @@ jobs:
             --set ab-diary.image.tag=develop-${{ env.ab_diary_service }} \
             --set ab-diary.initContainers.dbMigration.image.tag=develop-${{ env.ab_diary_service }} \
             --set order-management.image.tag=develop-${{ env.order_management }} \
+            --set hearing-management.image.tag=develop-${{ env.hearing_management }} \
             --set icops-integration.image.tag=develop-${{ env.integration_commit }} \
             --set icops-integration.initContainers.dbMigration.image.tag=develop-${{ env.integration_commit }}
         working-directory: deploy-as-code
