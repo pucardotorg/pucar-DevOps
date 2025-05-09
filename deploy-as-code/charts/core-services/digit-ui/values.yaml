@@ -22,23 +22,6 @@ healthChecks:
   livenessProbePath: "/ui/"
   readinessProbePath: "/ui/"
 
-env: |
-  - name: REACT_APP_ESIGN_FILESTORE_ID
-    valueFrom:
-      configMapKeyRef:
-        key: esign-filestore-id
-        name: egov-config
-  - name: REACT_APP_KIBANA_USERNAME
-    valueFrom:
-      secretKeyRef: 
-        name: kibana
-        key: username
-  - name: REACT_APP_KIBANA_PASSWORD
-    valueFrom:
-      secretKeyRef: 
-        name: kibana
-        key: password
-    
 extraVolumes: |
   - name: js-injection
     configMap:
