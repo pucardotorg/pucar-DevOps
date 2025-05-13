@@ -11,7 +11,10 @@ ingress:
 
 
 # Init Containers Configs
-
+healthChecks:
+  enabled: true
+  livenessProbePath: "/analytics/health"
+  readinessProbePath: "/analytics/health"
 
 # Container Configs
 image:

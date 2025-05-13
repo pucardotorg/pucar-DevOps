@@ -17,7 +17,10 @@ image:
   repository: "pucarsolutionsdev.azurecr.io/dristi-pdf"
   tag: v1.0.0-64e9183c360d73936861b5772ecdf15b5c733e04
 replicas: "1"
-
+#healthChecks:
+#  enabled: true
+#  livenessProbePath: "/egov-pdf/health"
+#  readinessProbePath: "/egov-pdf/health"
 # Additional Container Envs
 env: |
   - name: DB_HOST

@@ -29,10 +29,10 @@ appType: "java-spring"
 heap: "-Xmx256m -Xms256m"
 java-args: "-Dspring.profiles.active=monitoring"
 
-#healthChecks:
-#  enabled: true
-#  livenessProbePath: "/hearing/"
-#  readinessProbePath: "/hearing/"
+healthChecks:
+  enabled: true
+  livenessProbePath: "/hearing/health"
+  readinessProbePath: "/hearing/health"
 
 env: |
   - name: JAVA_ENABLE_DEBUG

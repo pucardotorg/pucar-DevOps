@@ -35,10 +35,10 @@ memory_limits: 768Mi
 
 
 
-#healthChecks:
-#  enabled: true
-#  livenessProbePath: "/order/"
-#  readinessProbePath: "/order/"
+healthChecks:
+  enabled: true
+  livenessProbePath: "/order/health"
+  readinessProbePath: "/order/health"
 
 env: |
   - name: JAVA_OPTS

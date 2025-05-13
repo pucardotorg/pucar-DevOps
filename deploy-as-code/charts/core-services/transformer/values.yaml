@@ -11,7 +11,10 @@ ingress:
 
 
 # Init Containers Configs
-
+healthChecks:
+  enabled: true
+  livenessProbePath: "/transformer/health"
+  readinessProbePath: "/transformer/health"
 
 # Container Configs
 image:
@@ -27,6 +30,10 @@ memory_requests: 256Mi
 
 
 env: |
+  - name: MANAGEMENT_HEALTH_ELASTICSEARCH_ENABLED
+    value: "false"
+  - name: MANAGEMENT_HEALTH_REDIS_ENABLED
+    value: "false"
   - name: JAVA_ENABLE_DEBUG
     value: "true"
   - name: JAVA_DEBUG_PORT

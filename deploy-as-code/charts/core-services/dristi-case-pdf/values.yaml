@@ -17,10 +17,10 @@ image:
 replicas: "1"
 
 
-healthChecks:
-  enabled: false
-  livenessProbePath: "/dristi-case-pdf/"
-  readinessProbePath: "/dristi-case-pdf/"
+#healthChecks:
+#  enabled: true
+#  livenessProbePath: "/dristi-case-pdf/health"
+#  readinessProbePath: "/dristi-case-pdf/health"
     
 env: |
   - name: COURT_NAME

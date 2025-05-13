@@ -32,10 +32,10 @@ java-args: "-Dspring.profiles.active=monitoring"
 memory_limits: 768Mi
 
 
-#healthChecks:
-#  enabled: true
-#  livenessProbePath: "/advocate/"
-#  readinessProbePath: "/advocate/"
+healthChecks:
+  enabled: true
+  livenessProbePath: "/notification/health"
+  readinessProbePath: "/notification/health"
 
 env: |
   - name: JAVA_OPTS

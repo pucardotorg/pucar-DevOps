@@ -8,6 +8,10 @@ ingress:
   enabled: true
 #  zuul: true
   context: "kerala-icops"
+#healthChecks:
+#  enabled: true
+#  livenessProbePath: "/kerala-icops/health"
+#  readinessProbePath: "/kerala-icops/health"
 
 initContainers:
   dbMigration:

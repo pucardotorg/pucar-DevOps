@@ -32,10 +32,10 @@ heap: "-Xmx256m -Xms256m"
 java-args: "-Dspring.profiles.active=monitoring"
 memory_limits: 768Mi
 
-#healthChecks:
-#  enabled: true
-#  livenessProbePath: "/task/"
-#  readinessProbePath: "/task/"
+healthChecks:
+  enabled: true
+  livenessProbePath: "/task/health"
+  readinessProbePath: "/task/health"
 
 env: |
   - name: JAVA_ENABLE_DEBUG

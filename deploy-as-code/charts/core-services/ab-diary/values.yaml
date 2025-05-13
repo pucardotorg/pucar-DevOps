@@ -30,7 +30,10 @@ appType: "java-spring"
 heap: "-Xmx256m -Xms256m"
 java-args: "-Dspring.profiles.active=monitoring"
 memory_limits: 768Mi
-
+healthChecks:
+  enabled: true
+  livenessProbePath: "/ab-diary/health"
+  readinessProbePath: "/ab-diary/health"
 
 
 env: |

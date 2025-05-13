@@ -9,8 +9,11 @@ ingress:
   context: "openapi"
 
 
-# Init Containers Configs
 
+#healthChecks:
+#  enabled: true
+#  livenessProbePath: "/openapi/health"
+#  readinessProbePath: "/openapi/health"
 
 # Container Configs
 image:

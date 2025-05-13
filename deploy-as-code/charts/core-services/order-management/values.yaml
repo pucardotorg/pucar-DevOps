@@ -9,8 +9,10 @@ ingress:
   enabled: true
   context: "order-management"
 
-
-# Init Containers Configs
+healthChecks:
+  enabled: true
+  livenessProbePath: "/order-management/health"
+  readinessProbePath: "/order-management/health"
 
 
 # Container Configs

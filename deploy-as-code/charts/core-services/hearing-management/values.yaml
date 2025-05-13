@@ -10,8 +10,10 @@ ingress:
   context: "hearing-management"
 
 
-# Init Containers Configs
-
+healthChecks:
+  enabled: true
+  livenessProbePath: "/hearing-management/health"
+  readinessProbePath: "/hearing-management/health"
 
 # Container Configs
 image:
