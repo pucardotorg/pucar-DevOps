@@ -94,21 +94,17 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Azure login
-        uses: azure/login@v1
-        with:
-          creds: ${{ secrets.SOLUTIONS_AZURE_CREDENTIALS }}
-
-      - name: Generate kubeconfig
-        run: |
-          az aks get-credentials --resource-group "pucar-solutions-dev" --name "solutions-dev"
-          cat ~/.kube/config > kubeconfig
-
       - name: Kubectl setup
         uses: azure/setup-kubectl@v3
         with:
           version: 'latest'
           id: install
+      - name: Set up kubeconfig from secret
+        run: |
+          echo "${{ secrets.SOLUTIONS_DEV_CONFIG }}" > $HOME/kubeconfig
+          echo "KUBECONFIG=$HOME/kubeconfig" >> $GITHUB_ENV
+          export KUBECONFIG=$HOME/kubeconfig
+          kubectl get namespaces
 
       - name: Creating namespace
         run: kubectl create namespace egov
