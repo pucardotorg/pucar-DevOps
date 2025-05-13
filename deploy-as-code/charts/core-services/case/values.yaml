@@ -212,3 +212,5 @@ env: |
       configMapKeyRef:
         name: egov-service-host
         key: etreasury
+  - name: EGOV_SMS_NOTIFICATION_CASE_JUDGE_REGISTER_TEMPLATE_ID
+    value: "1107174288665718004"
