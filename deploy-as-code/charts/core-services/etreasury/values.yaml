@@ -38,7 +38,7 @@ remote_debug:
 # Additional Container Envs
 env: |
   - name: PUCAR_TSB_RECEIPT
-    value: "Y"
+    value: "N"
   - name: TREASURY_HEAD_IDS
     value: 56685,55622,00027,00029
   - name: TREASURY_ACCOUNT_NUMBERS
