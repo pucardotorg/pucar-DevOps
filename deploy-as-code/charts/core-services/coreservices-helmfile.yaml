@@ -279,11 +279,11 @@ releases:
     labels:
       deployment: "analytics"
     <<: *default
-  - name: transformer # Replace with your desired namespace
-    installed: true
-    labels:
-      deployment: "transformer"
-    <<: *default
+#  - name: transformer # Replace with your desired namespace
+#    installed: true
+#    labels:
+#      deployment: "transformer"
+#    <<: *default
 
 #  - name: epost-tracker # Replace with your desired namespace
 #    installed: true
