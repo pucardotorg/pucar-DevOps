@@ -164,3 +164,8 @@ env: |
       configMapKeyRef:
         key: etreasury
         name: egov-service-host
+  - name: DRISTI_EVIDENCE_HOST
+    valueFrom:
+      configMapKeyRef:
+        key: evidence
+        name: egov-service-host
