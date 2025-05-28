@@ -151,3 +151,8 @@ env: |
       configMapKeyRef:
         key: egov-hrms
         name: egov-service-host
+  - name: EGOV_USER_HOST
+    valueFrom:
+      configMapKeyRef:
+        key: egov-user
+        name: egov-service-host
