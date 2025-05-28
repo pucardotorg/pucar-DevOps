@@ -144,3 +144,10 @@ env: |
     value: "task-default,task-bail,task-summons,task-warrant,task-notice,task-join-case,task-payment"
   - name: EGOV_APPLICATION_BUSINESS_SERVICES
     value: "application-order-submission-default,application-order-submission-feedback,application-voluntary-submission,delay-condonation-submission,voluntary-application-submission-bail,voluntary-application-submission-bail-documents"
+  - name: EGOV_HRMS_SEARCH_ENDPOINT
+    value: /egov-hrms/employees/_search
+  - name: EGOV_HRMS_HOST
+    valueFrom:
+      configMapKeyRef:
+        key: egov-hrms
+        name: egov-service-host
