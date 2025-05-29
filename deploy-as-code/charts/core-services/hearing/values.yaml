@@ -187,7 +187,6 @@ env: |
       secretKeyRef:
         key: readpassword
         name: db
-
   - name: MANAGEMENT_HEALTH_JDBC_ENABLED
     value: "false"
   - name: MANAGEMENT_HEALTH_REDIS_ENABLED
