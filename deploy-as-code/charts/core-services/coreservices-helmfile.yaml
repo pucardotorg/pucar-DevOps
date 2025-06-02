@@ -149,12 +149,12 @@ releases:
   - name: pdf-service  # Replace with your desired namespace
     installed: true
     <<: *default
-
-  - name: scheduler  # Replace with your desired namespace
-    installed: true
-    labels:
-      deployment: "scheduler"
-    <<: *default
+#
+#  - name: scheduler  # Replace with your desired namespace
+#    installed: true
+#    labels:
+#      deployment: "scheduler"
+#    <<: *default
 
   - name: advocate  # Replace with your desired namespace
     installed: true
@@ -211,11 +211,11 @@ releases:
       deployment: "evidence"
     <<: *default
 
-  - name: hearing  # Replace with your desired namespace
-    installed: true
-    labels:
-      deployment: "hearing"
-    <<: *default
+#  - name: hearing  # Replace with your desired namespace
+#    installed: true
+#    labels:
+#      deployment: "hearing"
+#    <<: *default
 
   - name: order  # Replace with your desired namespace
     installed: true
