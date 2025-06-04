@@ -35,6 +35,8 @@ healthChecks:
   readinessProbePath: "/scheduler/health"
 # Additional Container Envs
 env: |
+  - name: email.cause.list.recipients
+    value: yoyogogeta@gmail.com
   - name: MANAGEMENT_HEALTH_REDIS_ENABLED
     value: "false"
   - name: JUDGE_NAME
