@@ -150,11 +150,11 @@ releases:
     installed: true
     <<: *default
 #
-#  - name: scheduler  # Replace with your desired namespace
-#    installed: true
-#    labels:
-#      deployment: "scheduler"
-#    <<: *default
+  - name: scheduler  # Replace with your desired namespace
+    installed: true
+    labels:
+      deployment: "scheduler"
+    <<: *default
 
   - name: advocate  # Replace with your desired namespace
     installed: true
