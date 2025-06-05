@@ -32,10 +32,10 @@ appType: "java-spring"
 tracing-enabled: true
 data-config-urls: "file:///work-dir/kerala-configs/pdf-service/data-config/summons-accused-qr.json,file:///work-dir/kerala-configs/pdf-service/data-config/warrants-bailable.json,file:///work-dir/kerala-configs/pdf-service/data-config/warrants-non-bailable.json,file:///work-dir/kerala-configs/pdf-service/data-config/summons-accused.json,file:///work-dir/kerala-configs/pdf-service/data-config/causelist.json,file:///work-dir/kerala-configs/pdf-service/data-config/case.json,file:///work-dir/kerala-configs/pdf-service/data-config/witness-deposition.json"
 format-config-urls: "file:///work-dir/kerala-configs/pdf-service/format-config/summons-accused-qr.json,file:///work-dir/kerala-configs/pdf-service/format-config/summons-accused.json,file:///work-dir/kerala-configs/pdf-service/format-config/causelist.json,file:///work-dir/kerala-configs/pdf-service/format-config/warrants-bailable.json,file:///work-dir/kerala-configs/pdf-service/format-config/warrants-non-bailable.json,file:///work-dir/kerala-configs/pdf-service/format-config/case.json,file:///work-dir/kerala-configs/pdf-service/format-config/witness-deposition.json"
-#healthChecks:
-#  enabled: false
-#  livenessProbePath: "/pdf-service/health"
-#  readinessProbePath: "/pdf-service/health"
+healthChecks:
+  enabled: false
+  livenessProbePath: "/"
+  readinessProbePath: "/"
 
 
 # Additional Container Envs
