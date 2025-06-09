@@ -211,11 +211,11 @@ releases:
       deployment: "evidence"
     <<: *default
 
-#  - name: hearing  # Replace with your desired namespace
-#    installed: true
-#    labels:
-#      deployment: "hearing"
-#    <<: *default
+  - name: hearing  # Replace with your desired namespace
+    installed: true
+    labels:
+      deployment: "hearing"
+    <<: *default
 
   - name: order  # Replace with your desired namespace
     installed: true
