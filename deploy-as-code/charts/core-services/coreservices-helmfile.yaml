@@ -300,11 +300,11 @@ releases:
   #      labels:
   #        deployment: "ocr-service"
   #      <<: *default
-#  - name: dristi-pdf # Replace with your desired namespace
-#    installed: true
-#    labels:
-#      deployment: "dristi-pdf"
-#    <<: *default
+  - name: dristi-pdf # Replace with your desired namespace
+    installed: true
+    labels:
+      deployment: "dristi-pdf"
+    <<: *default
   #    - name: sbi-webpage # Replace with your desired namespace
   #      installed: true
   #      labels:
