@@ -225,7 +225,6 @@ jobs:
           echo "order_management=$order_management" >> $GITHUB_ENV
           hearing_management=$(git log -1 --pretty=format:%H -- backend/hearing-management)
           echo "hearing_management=$hearing_management" >> $GITHUB_ENV
-          git checkout release-qa-hrms-changes
           digit_ui_commit=$(git log -1 --pretty=format:%H -- frontend/micro-ui)
           echo "digit_ui_commit=$digit_ui_commit" >> $GITHUB_ENV
       - name: digit deployment
@@ -235,7 +234,7 @@ jobs:
             --set scheduler.initContainers.dbMigration.image.tag=develop-${{ env.scheduler_commit }} \
             --set payment-calculator.image.tag=develop-${{ env.payment_calculator_commit }} \
             --set payment-calculator.initContainers.dbMigration.image.tag=develop-${{ env.payment_calculator_commit }} \
-            --set digit-ui.image.tag=release-qa-hrms-changes-${{ env.digit_ui_commit }} \
+            --set digit-ui.image.tag=develop-${{ env.digit_ui_commit }} \
             --set dristi-case-pdf.image.tag=develop-${{ env.dristi_case_pdf_commit }} \
             --set dristi-pdf.image.tag=develop-${{ env.dristi_pdf_commit }} \
             --set advocate.image.tag=develop-${{ env.advocate_commit }} \
