@@ -191,3 +191,13 @@ env: |
     value: "false"
   - name: MANAGEMENT_HEALTH_REDIS_ENABLED
     value: "false"
+  - name: EGOV_INFRA_INDEXER_HOST
+    valueFrom:
+      configMapKeyRef:
+        key: es-indexer-host
+        name: egov-config
+  - name: EGOV_INBOX_HOST
+    valueFrom:
+      configMapKeyRef:
+        key: inbox
+        name: egov-service-host
