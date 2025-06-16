@@ -1,7 +1,17 @@
 name: Pucar-Install Workflow Solutions
 on:
+#  push:
+#   branches:
+#     - Solutions-Pipeline
+#  pull_request:
+#    branches:
+#      - main
   workflow_dispatch:
   repository_dispatch:
+
+permissions:
+  id-token: write
+  contents: write
 jobs:
   check-changed-files:
     runs-on: ubuntu-latest
@@ -76,12 +86,16 @@ jobs:
 #          kubectl get nodes
 
   DIGIT-deployment:
-#   if: ${{ github.event_name == 'push' }}
+#    if: ${{ github.event_name == 'push' }}
 #    needs: Terraform_Infra_Creation
     runs-on: ubuntu-latest
     strategy:
       matrix:
         environment: [dev, qa]
+    concurrency:
+      group: ${{ matrix.environment }}
+      cancel-in-progress: true
+    continue-on-error: true
     environment: 
       name: ${{ matrix.environment }}
     steps:
@@ -95,7 +109,7 @@ jobs:
           id: install
       - name: Set up kubeconfig from secret
         run: |
-          echo "${{ env.KUBECONFIG }}" > $HOME/kubeconfig
+          echo "${{ vars.KUBECONFIG }}" > $HOME/kubeconfig
           echo "KUBECONFIG=$HOME/kubeconfig" >> $GITHUB_ENV
           export KUBECONFIG=$HOME/kubeconfig
           kubectl get namespaces
@@ -121,7 +135,7 @@ jobs:
 
       - name: sops decryption
         run: |
-          sudo sops --decrypt --age ${{ secrets.PUBLIC_AGE_KEY }} -i $HOME/work/pucar-DevOps/pucar-DevOps/deploy-as-code/charts/environments/${{ env.ENV_FILE }}-secrets.yaml
+          sudo sops --decrypt --age ${{ secrets.PUBLIC_AGE_KEY }} -i $HOME/work/pucar-DevOps/pucar-DevOps/deploy-as-code/charts/environments/${{ vars.ENV_FILE }}-secrets.yaml
 
       - name: Set up Helm
         uses: azure/setup-helm@v1
@@ -139,7 +153,7 @@ jobs:
         run: |
           git clone https://github.com/pucardotorg/dristi-solutions.git
           cd dristi-solutions
-          git checkout ${{ env.BACKEND_BRANCH }}
+          git checkout ${{ vars.BACKEND_BRANCH }}
           payment_calculator_commit=$(git log -1 --pretty=format:%H -- backend/payment-calculator-svc)
           echo "payment_calculator_commit=$payment_calculator_commit" >> $GITHUB_ENV
           advocate_commit=$(git log -1 --pretty=format:%H -- backend/advocate)
@@ -214,7 +228,11 @@ jobs:
           echo "order_management=$order_management" >> $GITHUB_ENV
           hearing_management=$(git log -1 --pretty=format:%H -- backend/hearing-management)
           echo "hearing_management=$hearing_management" >> $GITHUB_ENV
+
       - name: digit deployment
+        env:
+          BACKEND_BRANCH: ${{ vars.BACKEND_BRANCH }}
+          HELMFILE_ENV: ${{ vars.ENV_FILE }}
         run: |
           helmfile  -f digit-helmfile.yaml template \
             --set scheduler.image.tag=${{ env.BACKEND_BRANCH }}-${{ env.scheduler_commit }} \
@@ -279,8 +297,6 @@ jobs:
             --set icops-integration.initContainers.dbMigration.image.tag=${{ env.BACKEND_BRANCH }}-${{ env.integration_commit }}
 
         working-directory: deploy-as-code
-        env:
-          HELMFILE_ENV: ${{ env.ENV_FILE }}
 #      - name: Postgres Data Migration
 #        run: |
 #          POSTGRES_POD=$(kubectl get pods -n default -l app=postgres -o jsonpath='{.items[0].metadata.name}')
