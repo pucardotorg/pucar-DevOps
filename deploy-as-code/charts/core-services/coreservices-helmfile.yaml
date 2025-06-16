@@ -359,3 +359,6 @@ releases:
   - name: hearing-management # Replace with your desired namespace
     installed: true # Replace with the version of your chart, if needed
     <<: *default
+#  - name: landing-page # Replace with your desired namespace
+#    installed: true # Replace with the version of your chart, if needed
+#    <<: *default

@@ -1,0 +1,29 @@
+# Common Labels
+labels:
+  app: "oncourts-website"
+  group: "web"
+
+# Ingress Configs
+ingress:
+  enabled: false
+  context: "home"
+
+
+httpPort: 3000
+# Container Configs
+image:
+  repository: "pucarsolutionsdev.azurecr.io/oncourts-landing-page"
+  tag: v1.0.0-prod10
+
+env: |
+  - name: ONCOURTS_API_ENDPOINT
+    value: https://dristi-kerala-uat.pucar.org
+  
+  - name: ONCOURTS_CITIZEN_APP_ENDPOINT
+    value: https://dristi-kerala-uat.pucar.org/digit-ui/citizen/login
+  
+  - name: ONCOURTS_EMPLOYEE_APP_ENDPOINT
+    value: https://dristi-kerala-uat.pucar.org/digit-ui/employee/login
+
+
+
