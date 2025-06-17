@@ -112,6 +112,8 @@ env: |
     value: /hearing
   - name: EGOV_IDGEN_PATH
     value: "egov-idgen/id/_generate"
+  - name: EGOV_BULK_INDEX_PATH
+    value: "_bulk?refresh=true"
   - name: EGOV_INDIVIDUAL_HOST
     valueFrom:
       configMapKeyRef:
