@@ -14,14 +14,14 @@ commonLabels:
   deployment: "pucar"
 
 releases:
-#- name: cert-manager
-#  chart: ./cert-manager
-#  namespace: egov
-#  installed: true
-#  version: v1.13.3
-#  disableValidation: true
-#  values:
-#    - ./cert-manager/values.yaml
+- name: cert-manager
+  chart: ./cert-manager
+  namespace: egov
+  installed: true
+  version: v1.13.3
+  disableValidation: true
+  values:
+    - ./cert-manager/values.yaml
 ##
 #- name: minio
 #  installed: true
