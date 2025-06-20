@@ -159,6 +159,9 @@ jobs:
           echo "order_management=$order_management" >> $GITHUB_ENV
           hearing_management=$(git log -1 --pretty=format:%H -- backend/hearing-management)
           echo "hearing_management=$hearing_management" >> $GITHUB_ENV
+          hrms_commit=$(git log -1 --pretty=format:%H -- common/egov-hrms)
+          echo "hrms_commit=$hrms_commit" >> $GITHUB_ENV
+
       - name: digit deployment
         run: |
           helmfile -l deployment=pucar -f digit-helmfile.yaml apply --include-needs=true \
@@ -222,6 +225,9 @@ jobs:
            --set hearing-management.image.tag=main-${{ env.hearing_management }} \
            --set icops-integration.image.tag=main-${{ env.integration_commit }} \
            --set icops-integration.initContainers.dbMigration.image.tag=main-${{ env.integration_commit }}
+           --set egov-hrms.image.tag=main-${{ env.hrms_commit }} \
+           --set egov-hrms.initContainers.dbMigration.image.tag=main-${{ env.hrms_commit }}
+
         working-directory: deploy-as-code
         env:
           HELMFILE_ENV: "solutions-uat"

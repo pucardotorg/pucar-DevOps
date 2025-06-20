@@ -187,6 +187,8 @@ jobs:
           echo "collection_service_commit=$collection_service_commit" >> $GITHUB_ENV
           task_commit=$(git log -1 --pretty=format:%H -- backend/task)
           echo "task_commit=$task_commit" >> $GITHUB_ENV
+          digit_ui_commit=$(git log -1 --pretty=format:%H -- frontend/micro-ui)
+          echo "digit_ui_commit=$digit_ui_commit" >> $GITHUB_ENV
           analytics_commit=$(git log -1 --pretty=format:%H -- backend/analytics)
           echo "analytics_commit=$analytics_commit" >> $GITHUB_ENV 
           individual_commit=$(git log -1 --pretty=format:%H -- common/individual)
@@ -225,8 +227,9 @@ jobs:
           echo "order_management=$order_management" >> $GITHUB_ENV
           hearing_management=$(git log -1 --pretty=format:%H -- backend/hearing-management)
           echo "hearing_management=$hearing_management" >> $GITHUB_ENV
-          digit_ui_commit=$(git log -1 --pretty=format:%H -- frontend/micro-ui)
-          echo "digit_ui_commit=$digit_ui_commit" >> $GITHUB_ENV
+          hrms_commit=$(git log -1 --pretty=format:%H -- common/egov-hrms)
+          echo "hrms_commit=$hrms_commit" >> $GITHUB_ENV
+
       - name: digit deployment
         run: |
           helmfile -f digit-helmfile.yaml apply --include-needs=true \
@@ -290,6 +293,9 @@ jobs:
             --set hearing-management.image.tag=develop-${{ env.hearing_management }} \
             --set icops-integration.image.tag=develop-${{ env.integration_commit }} \
             --set icops-integration.initContainers.dbMigration.image.tag=develop-${{ env.integration_commit }}
+            --set egov-hrms.image.tag=develop-${{ env.hrms_commit }} \
+            --set egov-hrms.initContainers.dbMigration.image.tag=develop-${{ env.hrms_commit }}
+
         working-directory: deploy-as-code
         env:
           HELMFILE_ENV: "solutions-qa"
