@@ -296,7 +296,7 @@ jobs:
             --set order-management.image.tag=${{ env.BACKEND_BRANCH }}-${{ env.order_management }} \
             --set hearing-management.image.tag=${{ env.BACKEND_BRANCH }}-${{ env.hearing_management }} \
             --set icops-integration.image.tag=${{ env.BACKEND_BRANCH }}-${{ env.integration_commit }} \
-            --set icops-integration.initContainers.dbMigration.image.tag=${{ env.BACKEND_BRANCH }}-${{ env.integration_commit }}
+            --set icops-integration.initContainers.dbMigration.image.tag=${{ env.BACKEND_BRANCH }}-${{ env.integration_commit }} \
             --set egov-hrms.image.tag=${{ env.BACKEND_BRANCH }}-${{ env.hrms_commit }} \
             --set egov-hrms.initContainers.dbMigration.image.tag=${{ env.BACKEND_BRANCH }}-${{ env.hrms_commit }}
 
