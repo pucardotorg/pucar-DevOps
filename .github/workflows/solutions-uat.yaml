@@ -224,7 +224,7 @@ jobs:
            --set order-management.image.tag=main-${{ env.order_management }} \
            --set hearing-management.image.tag=main-${{ env.hearing_management }} \
            --set icops-integration.image.tag=main-${{ env.integration_commit }} \
-           --set icops-integration.initContainers.dbMigration.image.tag=main-${{ env.integration_commit }}
+           --set icops-integration.initContainers.dbMigration.image.tag=main-${{ env.integration_commit }} \
            --set egov-hrms.image.tag=main-${{ env.hrms_commit }} \
            --set egov-hrms.initContainers.dbMigration.image.tag=main-${{ env.hrms_commit }}
 
