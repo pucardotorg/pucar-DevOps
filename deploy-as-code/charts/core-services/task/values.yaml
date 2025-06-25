@@ -171,3 +171,13 @@ env: |
       configMapKeyRef:
         name: egov-service-host
         key: etreasury
+  - name: DRISTI_ANALYTICS_HOST
+    valueFrom:
+        configMapKeyRef:
+          key: analytics
+          name: egov-service-host
+  - name: DRISTI_ADVOCATE_HOST
+    valueFrom:
+        configMapKeyRef:
+          key: advocate
+          name: egov-service-host
