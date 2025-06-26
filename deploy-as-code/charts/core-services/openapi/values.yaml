@@ -104,3 +104,8 @@ env: |
       configMapKeyRef:
         key: inbox
         name: egov-service-host
+  - name: EGOV_FILESTORE_HOST
+    valueFrom:
+      configMapKeyRef:
+        key: egov-filestore
+        name: egov-service-host
