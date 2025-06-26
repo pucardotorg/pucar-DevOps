@@ -116,3 +116,13 @@ env: |
     value: http
   - name: egov.user.search.path
     value: /user/v1/_search
+  - name: EGOV_MDMS_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: egov-mdms-service
+  - name: DRISTI_HEARING_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: hearing
