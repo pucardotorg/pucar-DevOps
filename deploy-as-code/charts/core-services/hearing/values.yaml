@@ -211,10 +211,15 @@ env: |
   - name: EGOV_BILLINGSERVICE_HOST
     valueFrom:
       configMapKeyRef:
-        key: inbox
+        key: billing-service
         name: egov-service-host
   - name: DRISTI_ORDER_HOST
     valueFrom:
       configMapKeyRef:
         key: order
+        name: egov-service-host
+  - name: DRISTI_ANALYTICS_HOST
+    valueFrom:
+      configMapKeyRef:
+        key: analytics
         name: egov-service-host
