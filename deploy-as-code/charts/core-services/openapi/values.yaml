@@ -10,10 +10,10 @@ ingress:
 
 
 
-#healthChecks:
-#  enabled: true
-#  livenessProbePath: "/openapi/health"
-#  readinessProbePath: "/openapi/health"
+healthChecks:
+  enabled: true
+  livenessProbePath: "/openapi/health"
+  readinessProbePath: "/openapi/health"
 
 # Container Configs
 image:
