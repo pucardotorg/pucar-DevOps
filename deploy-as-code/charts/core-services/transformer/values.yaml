@@ -114,3 +114,5 @@ env: |
         key: password
   - name: ELASTICSEARCH_CONNECTION_TYPE
     value: http
+  - name: egov.user.search.path
+    value: /user/v1/_search
