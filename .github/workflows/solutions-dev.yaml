@@ -233,10 +233,10 @@ jobs:
 
       - name: digit deployment
         env:
-          BACKEND_BRANCH: ${{ vars.BACKEND_BRANCH }}
+          BACKEND_BRANCH: ${{ vars.IMAGE_TAG_PREFIX }}
           HELMFILE_ENV: ${{ vars.ENV_FILE }}
         run: |
-          helmfile  -f digit-helmfile.yaml apply \
+          helmfile  -f ${{ vars.HELMFILE }}-helmfile.yaml apply \
             --set scheduler.image.tag=${{ env.BACKEND_BRANCH }}-${{ env.scheduler_commit }} \
             --set scheduler.initContainers.dbMigration.image.tag=${{ env.BACKEND_BRANCH }}-${{ env.scheduler_commit }} \
             --set payment-calculator.image.tag=${{ env.BACKEND_BRANCH }}-${{ env.payment_calculator_commit }} \
