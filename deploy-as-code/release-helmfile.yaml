@@ -46,3 +46,6 @@ releases:
   - name: scheduler # Replace with your desired namespace
     installed: true
     <<: *default
+  - name: dristi-pdf # Replace with your desired namespace
+    installed: true
+    <<: *default
