@@ -154,7 +154,11 @@ env: |
       configMapKeyRef:
         key: egov-localization
         name: egov-service-host
-  
+  - name: EGOV_INBOX_HOST
+    valueFrom:
+      configMapKeyRef:
+        key: inbox
+        name: egov-service-host  
   
   
   
