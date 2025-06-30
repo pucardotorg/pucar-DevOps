@@ -43,3 +43,6 @@ releases:
   - name: digit-ui # Replace with your desired namespace
     installed: true
     <<: *default
+  - name: scheduler # Replace with your desired namespace
+    installed: true
+    <<: *default
