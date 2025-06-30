@@ -141,5 +141,6 @@ env: |
       configMapKeyRef:
         key: billing-service
         name: egov-service-host
-
+  - name: isMock.enabled
+    value: "true"
 
