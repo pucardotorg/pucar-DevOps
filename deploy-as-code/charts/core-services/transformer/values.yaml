@@ -131,3 +131,8 @@ env: |
       configMapKeyRef:
         name: egov-service-host
         key: advocate
+  - name: EGOV_INBOX_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: inbox
