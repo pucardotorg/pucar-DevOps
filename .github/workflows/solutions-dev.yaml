@@ -230,7 +230,8 @@ jobs:
           echo "hearing_management=$hearing_management" >> $GITHUB_ENV
           hrms_commit=$(git log -1 --pretty=format:%H -- common/egov-hrms)
           echo "hrms_commit=$hrms_commit" >> $GITHUB_ENV
-
+          landing_page_commit=$(git ls-remote https://github.com/pucardotorg/Oncourts_Landing_page.git ${{ vars.BACKEND_BRANCH }} | awk '{print $1}')
+          echo "landing_page_commit=$landing_page_commit" >> $GITHUB_ENV
       - name: digit deployment
         env:
           BACKEND_BRANCH: ${{ vars.IMAGE_TAG_PREFIX }}
@@ -298,7 +299,8 @@ jobs:
             --set icops-integration.image.tag=${{ env.BACKEND_BRANCH }}-${{ env.integration_commit }} \
             --set icops-integration.initContainers.dbMigration.image.tag=${{ env.BACKEND_BRANCH }}-${{ env.integration_commit }} \
             --set egov-hrms.image.tag=${{ env.BACKEND_BRANCH }}-${{ env.hrms_commit }} \
-            --set egov-hrms.initContainers.dbMigration.image.tag=${{ env.BACKEND_BRANCH }}-${{ env.hrms_commit }}
+            --set egov-hrms.initContainers.dbMigration.image.tag=${{ env.BACKEND_BRANCH }}-${{ env.hrms_commit }} \
+            --set oncourts-website.image.tag=${{ env.BACKEND_BRANCH }}-${{ env.landing_page_commit }} 
 
         working-directory: deploy-as-code
 #      - name: Postgres Data Migration
