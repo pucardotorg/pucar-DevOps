@@ -288,6 +288,7 @@ jobs:
             --set summons-svc.initContainers.dbMigration.image.tag=${{ env.BACKEND_BRANCH }}-${{ env.summons_svc_commit }} \
             --set transformer.image.tag=${{ env.BACKEND_BRANCH }}-${{ env.transformer_commit }} \
             --set openapi.image.tag=${{ env.BACKEND_BRANCH }}-${{ env.openapi_service }} \
+            --set openapi.initContainers.dbMigration.image.tag=${{ env.BACKEND_BRANCH }}-${{ env.openapi_service }} \
             --set lock-svc.image.tag=${{ env.BACKEND_BRANCH }}-${{ env.lock_service }} \
             --set lock-svc.initContainers.dbMigration.image.tag=${{ env.BACKEND_BRANCH }}-${{ env.lock_service }} \
             --set notification.image.tag=${{ env.BACKEND_BRANCH }}-${{ env.notification_service }} \
