@@ -14,6 +14,9 @@ commonLabels:
   deployment: "pucar"
 
 releases:
+  - name: landing-page # Replace with your desired namespace
+    installed: true # Replace with the version of your chart, if needed
+    <<: *default
 #  - name: openapi # Replace with your desired namespace
 #    installed: true # Replace with the version of your chart, if needed
 #    <<: *default
