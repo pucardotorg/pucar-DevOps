@@ -14,38 +14,38 @@ commonLabels:
   deployment: "pucar"
 
 releases:
-  - name: openapi # Replace with your desired namespace
-    installed: true # Replace with the version of your chart, if needed
-    <<: *default
-  - name: task  # Replace with your desired namespace
-    installed: true
-    labels:
-      deployment: "task"
-    <<: *default
-  - name: order-management # Replace with your desired namespace
-    installed: true # Replace with the version of your chart, if needed
-    <<: *default
-  - name: transformer # Replace with your desired namespace
-    installed: true
-    labels:
-      deployment: "transformer"
-    <<: *default
-  - name: hearing  # Replace with your desired namespace
-    installed: true
-    labels:
-      deployment: "hearing"
-    <<: *default
-  - name: case  # Replace with your desired namespace
-    installed: true
-    labels:
-      deployment: "case"
-    <<: *default
-  - name: digit-ui # Replace with your desired namespace
-    installed: true
-    <<: *default
-  - name: scheduler # Replace with your desired namespace
-    installed: true
-    <<: *default
-  - name: dristi-pdf # Replace with your desired namespace
-    installed: true
-    <<: *default
+#  - name: openapi # Replace with your desired namespace
+#    installed: true # Replace with the version of your chart, if needed
+#    <<: *default
+#  - name: task  # Replace with your desired namespace
+#    installed: true
+#    labels:
+#      deployment: "task"
+#    <<: *default
+#  - name: order-management # Replace with your desired namespace
+#    installed: true # Replace with the version of your chart, if needed
+#    <<: *default
+#  - name: transformer # Replace with your desired namespace
+#    installed: true
+#    labels:
+#      deployment: "transformer"
+#    <<: *default
+#  - name: hearing  # Replace with your desired namespace
+#    installed: true
+#    labels:
+#      deployment: "hearing"
+#    <<: *default
+#  - name: case  # Replace with your desired namespace
+#    installed: true
+#    labels:
+#      deployment: "case"
+#    <<: *default
+#  - name: digit-ui # Replace with your desired namespace
+#    installed: true
+#    <<: *default
+#  - name: scheduler # Replace with your desired namespace
+#    installed: true
+#    <<: *default
+#  - name: dristi-pdf # Replace with your desired namespace
+#    installed: true
+#    <<: *default
