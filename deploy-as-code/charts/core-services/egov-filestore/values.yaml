@@ -10,7 +10,7 @@ initContainers:
     schemaTable: "egov_filestore_schema"
     image:
       repository: "pucarsolutionsdev.azurecr.io/egov-filestore-db"
-      tag: v1.4.2-ebcbe18bff6b379072668fc7c6b8f1a9f420bb1f
+      tag: main-98ec8dc97569afa6e1e52c0b43a95d596c9dd1d3
 
 # Ingress Configs
 ingress:
@@ -21,8 +21,8 @@ ingress:
 # Container Configs
 image:
   repository: "pucarsolutionsdev.azurecr.io/egov-filestore"
-  tag: v1.4.2-ebcbe18bff6b379072668fc7c6b8f1a9f420bb1f
-replicas: "1"
+  tag: main-98ec8dc97569afa6e1e52c0b43a95d596c9dd1d3
+replicas: "2"
 healthChecks:
   enabled: true
   livenessProbePath: "/filestore/health"
@@ -34,18 +34,21 @@ is-bucket-fixed: "true"
 heap: "-Xmx1g -Xms1g"
 file-storage-mount-path: "/filestore"
 is-nfs-enabled: false
-is-azure-storage-enabled: true
+is-azure-storage-enabled: false
 is-container-fixed: "true"
+is-s3-enabled: "true"
 
 persistence:
   enabled: false
 
 # Additional Container Envs
 env: |
+  - name: JAVA_ENABLE_DEBUG
+    value: "true"
+  - name: JAVA_DEBUG_PORT
+    value: "5005"
   - name: JAVA_OPTS
     value: {{ index .Values "heap" | quote }}
-  - name: SERVER_PORT
-    value: "8080"
   - name: JAVA_ARGS
     value: {{ index .Values "java-args" | quote }}
   - name: SERVER_PORT
@@ -67,8 +70,6 @@ env: |
   - name: ISNFSSTORAGEENABLED
     value: {{ index .Values "is-nfs-enabled" | quote }}
   {{- if index .Values "is-nfs-enabled" }}
-  - name: ISNFSSTORAGEENABLED
-    value: "true"
   - name: DISK_STORAGE_HOST_URL
     valueFrom:
       configMapKeyRef:
@@ -84,21 +85,17 @@ env: |
   - name: ISS3ENABLED
     value: "false"
   {{- end }}  
-  {{- if index .Values "is-azure-storage-enabled" }}
-  - name: ISAZURESTORAGEENABLED
-    value: "true"
-  {{- end }}  
   {{- if index .Values "minio-enabled" }}
   - name: AWS_KEY
     valueFrom:
       secretKeyRef:
-        key: accesskey
-        name: minio
+        key: minioaccesskey
+        name: egov-filestore
   - name: AWS_SECRETKEY
     valueFrom:
       secretKeyRef:
-        key: secretkey
-        name: minio
+        key: miniosecretkey
+        name: egov-filestore
   {{- else if index .Values "is-azure-storage-enabled"}}
   - name: AZURE_ACCOUNTNAME
     valueFrom:
@@ -110,6 +107,8 @@ env: |
       secretKeyRef:
         name: egov-filestore
         key: azuresecretkey
+  - name: ISAZURESTORAGEENABLED
+    value: "true"
   {{else}}
   - name: AWS_KEY
     valueFrom:

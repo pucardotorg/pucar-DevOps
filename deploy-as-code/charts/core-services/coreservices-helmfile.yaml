@@ -26,9 +26,9 @@ releases:
   #      installed: true
   #      <<: *default
   #
-  #    - name: egov-filestore # Replace with your desired namespace
-  #      installed: true
-  #      <<: *default
+  - name: egov-filestore # Replace with your desired namespace
+    installed: true
+    <<: *default
   #
   #    - name: egov-idgen # Replace with your desired namespace
   #      installed: true
