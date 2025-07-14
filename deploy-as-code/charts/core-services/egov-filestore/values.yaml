@@ -43,6 +43,8 @@ persistence:
 
 # Additional Container Envs
 env: |
+  - name: LOGGING_LEVEL_ROOT
+    value: "ERROR"
   - name: JAVA_ENABLE_DEBUG
     value: "true"
   - name: JAVA_DEBUG_PORT
