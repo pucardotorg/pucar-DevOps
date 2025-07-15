@@ -140,3 +140,5 @@ env: |
       configMapKeyRef:
         key: egov-services
         name: egov-config
+  - name: state.level.tenant.id
+    value: "kl"
