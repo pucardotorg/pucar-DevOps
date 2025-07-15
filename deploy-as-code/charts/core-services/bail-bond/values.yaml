@@ -1,0 +1,142 @@
+# Common Labels
+labels:
+  app: "bail-bond"
+  group: "backend"
+
+# Ingress Configs
+ingress:
+  zuul: true
+  enabled: true
+  context: "bail-bond"
+
+
+# Init Containers Configs
+initContainers:
+  dbMigration:
+    enabled: true
+    schemaTable: "bail-bond_service_schema"
+    image:
+      repository: "pucarsolutionsdev.azurecr.io/bail-bond-db"
+      tag: v1.0.0-08ab38363f9c4b0b70d0763331c9773f8bbf9820
+
+# Container Configs
+image:
+  repository: "pucarsolutionsdev.azurecr.io/bail-bond"
+  tag: develop-9d53b7e69451a539a8b8607f74407bcfa4b15953
+  imagePullPolicy: Always
+replicas: "1"
+httpPort: 8080
+appType: "java-spring"
+heap: "-Xmx256m -Xms256m"
+java-args: "-Dspring.profiles.active=monitoring"
+memory_limits: 768Mi
+
+
+healthChecks:
+  enabled: true
+  livenessProbePath: "/bail-bond/health"
+  readinessProbePath: "/bail-bond/health"
+
+env: |
+  - name: MANAGEMENT_HEALTH_REDIS_ENABLED
+    value: "false"
+  - name: JAVA_OPTS
+    value: {{ index .Values "heap" | quote }}
+  - name: SERVER_PORT
+    value: "8080"
+  - name: JAVA_ARGS
+    value: {{ index .Values "java-args" | quote }}
+  - name: SPRING_FLYWAY_URL
+    valueFrom:
+      configMapKeyRef:
+        key: db-url
+        name: egov-config
+  - name: SPRING_FLYWAY_USER
+    valueFrom:
+      secretKeyRef:
+        name: db
+        key: username
+  - name: SPRING_FLYWAY_PASSWORD
+    valueFrom:
+      secretKeyRef:
+        name: db
+        key: password
+  - name: SPRING_DATASOURCE_URL
+    valueFrom:
+      configMapKeyRef:
+        key: db-url
+        name: egov-config
+  - name: SPRING_DATASOURCE_USERNAME
+    valueFrom:
+      secretKeyRef:
+        name: db
+        key: username
+  - name: SPRING_DATASOURCE_PASSWORD
+    valueFrom:
+      secretKeyRef:
+        name: db
+        key: password
+  - name: "SCHEMA_TABLE"
+    value: "bail-bond_service_schema"
+  - name: EGOV_IDGEN_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: egov-idgen
+  - name: EGOV_MDMS_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: egov-mdms-service
+  - name: EGOV_USER_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: egov-user
+  - name: EGOV_HRMS_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: egov-hrms
+  - name: KAFKA_CONFIG_BOOTSTRAP_SERVER_CONFIG
+    valueFrom:
+      configMapKeyRef:
+        key: kafka-brokers
+        name: egov-config
+  - name: EGOV_LOCALIZATION_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: egov-localization
+  - name: EGOV_LOCALIZATION_SEARCH_ENDPOINT
+    value: /localization/messages/v1/_search
+  - name: EGOV_MDMS_SEARCH_ENDPOINT
+    value: /egov-mdms-service/v1/_search
+  - name: SERVER_PORT
+    value: "8080"
+  - name: SERVER_CONTEXT_PATH
+    value: /bail-bond
+  - name: ADVCLERK_KAFKA_CREATE_TOPIC
+    value: save-bail-bond-clerk
+  - name: EGOV_IDGEN_PATH
+    value: "egov-idgen/id/_generate"
+  - name: EGOV_IDGEN_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: egov-idgen
+  - name: EGOV_INDIVIDUAL_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: individual
+  - name: EGOV_WORKFLOW_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: egov-workflow-v2
+  - name: DOMAIN_URL
+    valueFrom:
+      configMapKeyRef:
+        key: egov-services
+        name: egov-config

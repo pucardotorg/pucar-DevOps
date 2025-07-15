@@ -58,6 +58,7 @@ configmaps:
       application: http://application.egov:8080/
       asset-services: http://asset-services:8080/
       asset-services-maha: http://asset-services-maha:8080/
+      bail-bond: http://bail-bond.egov:8080/
       billing-service: http://billing-service.egov:8080/
       birth-death-services: http://birth-death-services.egov:8080/
       bpa-calculator: http://bpa-calculator.egov:8080/

@@ -102,3 +102,8 @@ env: |
       configMapKeyRef:
         name: egov-config
         key: egov-services-fqdn-name
+  - name: DRISTI_BAIL_BOND_HOST
+    valueFrom:
+      configMapKeyRef:
+        key: bail-bond
+        name: egov-service-host

@@ -122,3 +122,13 @@ env: |
       configMapKeyRef:
         key: egov-filestore
         name: egov-service-host
+  - name: BAIL_SERVICE_HOST
+    valueFrom:
+      configMapKeyRef:
+        key: bail-bond
+        name: egov-service-host
+  - name: ESIGN_SERVICE_HOST
+    valueFrom:
+      configMapKeyRef:
+        key: egov-filestore
+        name: egov-service-host
