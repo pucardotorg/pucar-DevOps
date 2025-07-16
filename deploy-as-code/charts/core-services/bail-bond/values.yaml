@@ -181,3 +181,8 @@ env: |
       configMapKeyRef:
         name: egov-service-host
         key: e-sign
+  - name: EGOV_URL_SHORTNER_HOST
+    valueFrom:
+      configMapKeyRef:
+        key: egov-url-shortening
+        name: egov-service-host
