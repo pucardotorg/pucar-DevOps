@@ -144,3 +144,8 @@ env: |
       configMapKeyRef:
         name: egov-service-host
         key: evidence
+  - name: DRISTI_BAIL_BOND_HOST
+    valueFrom:
+      configMapKeyRef:
+        key: bail-bond
+        name: egov-service-host

@@ -26,9 +26,9 @@ releases:
   #      installed: true
   #      <<: *default
   #
-  - name: egov-filestore # Replace with your desired namespace
-    installed: true
-    <<: *default
+#  - name: egov-filestore # Replace with your desired namespace
+#    installed: true
+#    <<: *default
   #
   #    - name: egov-idgen # Replace with your desired namespace
   #      installed: true
@@ -94,9 +94,9 @@ releases:
   #      installed: true
   #      <<: *default
 
-#  - name: digit-ui # Replace with your desired namespace
-#    installed: true
-#    <<: *default
+  - name: digit-ui # Replace with your desired namespace
+    installed: true
+    <<: *default
 
   #    - name: employee # Replace with your desired namespace
   #      installed: true
@@ -279,11 +279,11 @@ releases:
     labels:
       deployment: "analytics"
     <<: *default
-#  - name: transformer # Replace with your desired namespace
-#    installed: true
-#    labels:
-#      deployment: "transformer"
-#    <<: *default
+  - name: transformer # Replace with your desired namespace
+    installed: true
+    labels:
+      deployment: "transformer"
+    <<: *default
 
 #  - name: epost-tracker # Replace with your desired namespace
 #    installed: true
@@ -347,9 +347,9 @@ releases:
 #  - name: lock-svc # Replace with your desired namespace
 #    installed: true # Replace with the version of your chart, if needed
 #    <<: *default
-#  - name: ab-diary # Replace with your desired namespace
-#    installed: true # Replace with the version of your chart, if needed
-#    <<: *default
+  - name: ab-diary # Replace with your desired namespace
+    installed: true # Replace with the version of your chart, if needed
+    <<: *default
   - name: notification # Replace with your desired namespace
     installed: true # Replace with the version of your chart, if needed
     <<: *default
@@ -362,6 +362,6 @@ releases:
   - name: landing-page # Replace with your desired namespace
     installed: true # Replace with the version of your chart, if needed
     <<: *default
-#  - name: bail-bond # Replace with your desired namespace
-#    installed: true # Replace with the version of your chart, if needed
-#    <<: *default
+  - name: bail-bond # Replace with your desired namespace
+    installed: true # Replace with the version of your chart, if needed
+    <<: *default
