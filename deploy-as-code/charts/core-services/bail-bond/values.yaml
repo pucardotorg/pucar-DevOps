@@ -176,3 +176,8 @@ env: |
       secretKeyRef:
         name: elasticsearch-credentials
         key: password
+  - name: EGOV_ESIGN_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: e-sign
