@@ -180,4 +180,4 @@ env: |
     valueFrom:
       configMapKeyRef:
         name: egov-service-host
-        key: e-sign
+        key: e-sign-svc
