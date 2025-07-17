@@ -184,5 +184,5 @@ env: |
   - name: EGOV_URL_SHORTNER_HOST
     valueFrom:
       configMapKeyRef:
-        key: egov-url-shortening
+        key: eus-host
         name: egov-service-host

@@ -130,5 +130,5 @@ env: |
   - name: ESIGN_SERVICE_HOST
     valueFrom:
       configMapKeyRef:
-        key: egov-filestore
+        key: e-sign-svc
         name: egov-service-host
