@@ -43,15 +43,18 @@ releases:
 #    labels:
 #      deployment: "case"
 #    <<: *default
-#  - name: digit-ui # Replace with your desired namespace
-#    installed: true
-#    <<: *default
+  - name: digit-ui # Replace with your desired namespace
+    installed: true
+    <<: *default
 #  - name: scheduler # Replace with your desired namespace
 #    installed: true
 #    <<: *default
-#  - name: dristi-pdf # Replace with your desired namespace
-#    installed: true
-#    <<: *default
+  - name: dristi-pdf # Replace with your desired namespace
+    installed: true
+    <<: *default
   - name: pdf-service # Replace with your desired namespace
+    installed: true
+    <<: *default
+  - name: bail-bond
     installed: true
     <<: *default
