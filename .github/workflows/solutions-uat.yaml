@@ -153,6 +153,8 @@ jobs:
           echo "notification_service=$notification_service" >> $GITHUB_ENV
           ab_diary_service=$(git log -1 --pretty=format:%H -- backend/ab-diary)
           echo "ab_diary_service=$ab_diary_service" >> $GITHUB_ENV
+          bail_bond=$(git log -1 --pretty=format:%H -- backend/bail-bond)
+          echo "bail_bond=$bail_bond" >> $GITHUB_ENV
           lock_service=$(git log -1 --pretty=format:%H -- common/lock-svc)
           echo "lock_service=$lock_service" >> $GITHUB_ENV
           order_management=$(git log -1 --pretty=format:%H -- backend/order-management)
@@ -228,6 +230,8 @@ jobs:
            --set icops-integration.initContainers.dbMigration.image.tag=main-${{ env.integration_commit }} \
            --set egov-hrms.image.tag=main-${{ env.hrms_commit }} \
            --set egov-hrms.initContainers.dbMigration.image.tag=main-${{ env.hrms_commit }} \
+           --set bail-bond.image.tag=main-${{ env.bail_bond }} \
+           --set bail-bond.initContainers.dbMigration.image.tag=main-${{ env.bail_bond }} \
            --set oncourts-website.image.tag=main-${{ env.landing_page_commit }} 
 
         working-directory: deploy-as-code
