@@ -17,7 +17,7 @@ healthChecks:
 
 # Container Configs
 image:
-  repository: "pucarsolutionsdev.azurecr.io/hearing-management"
+  repository: "docker.io/venkatramireddyb/hearing-management"
   tag: v1.0.0-78a6b1093a50e53a427de8e49b404f220d905739
   imagePullPolicy: Always
 replicas: "1"

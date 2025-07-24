@@ -14,7 +14,7 @@ ingress:
 
 # Container Configs
 image:
-  repository: "pucarsolutionsdev.azurecr.io/dristi-pdf"
+  repository: "docker.io/venkatramireddyb/dristi-pdf"
   tag: v1.0.0-64e9183c360d73936861b5772ecdf15b5c733e04
 replicas: "1"
 #healthChecks:

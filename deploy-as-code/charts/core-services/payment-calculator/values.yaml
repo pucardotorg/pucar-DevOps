@@ -15,13 +15,13 @@ initContainers:
     enabled: true
     schemaTable: "payment-calculator_schema"
     image:
-      repository: "pucarsolutionsdev.azurecr.io/payment-calculator-svc_db"
+      repository: "docker.io/venkatramireddyb/payment-calculator-svc_db"
       tag: v1.0.0-cd4732437b8cb6f303b646d67a24d374ef44d4e3
 
 
 # Container Configs
 image:
-  repository: "pucarsolutionsdev.azurecr.io/payment-calculator-svc"
+  repository: "docker.io/venkatramireddyb/payment-calculator-svc"
   tag: v1.0.0-cd4732437b8cb6f303b646d67a24d374ef44d4e3
 replicas: "1"
 healthChecks:

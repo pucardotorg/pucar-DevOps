@@ -15,12 +15,12 @@ initContainers:
     enabled: true
     schemaTable: "egov_idgen_schema"
     image:
-      repository: "pucarsolutionsdev.azurecr.io/egov-idgen-db"
+      repository: "docker.io/venkatramireddyb/egov-idgen-db"
       tag: v1.1.3-cca7ee351c8607607a6d73b2adfb2bba2a34cac7
 
 # Container Configs
 image:
-  repository: "pucarsolutionsdev.azurecr.io/egov-idgen"
+  repository: "docker.io/venkatramireddyb/egov-idgen"
   tag: v1.1.3-cca7ee351c8607607a6d73b2adfb2bba2a34cac7
 replicas: "1"
 healthChecks:

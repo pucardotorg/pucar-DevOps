@@ -13,7 +13,7 @@ initContainers: {}
 
 # Container Configs
 image:
-  repository: "pucarsolutionsdev.azurecr.io/verifierapp"
+  repository: "docker.io/venkatramireddyb/verifierapp"
   tag: v1.0.0-main-c4ee738-4
 replicas: "1"
 httpPort: 80

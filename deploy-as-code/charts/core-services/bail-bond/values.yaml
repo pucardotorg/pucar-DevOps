@@ -16,12 +16,12 @@ initContainers:
     enabled: true
     schemaTable: "bail-bond_service_schema"
     image:
-      repository: "pucarsolutionsdev.azurecr.io/bail-bond-db"
+      repository: "docker.io/venkatramireddyb/bail-bond-db"
       tag: v1.0.0-08ab38363f9c4b0b70d0763331c9773f8bbf9820
 
 # Container Configs
 image:
-  repository: "pucarsolutionsdev.azurecr.io/bail-bond"
+  repository: "docker.io/venkatramireddyb/bail-bond"
   tag: develop-9d53b7e69451a539a8b8607f74407bcfa4b15953
   imagePullPolicy: Always
 replicas: "1"

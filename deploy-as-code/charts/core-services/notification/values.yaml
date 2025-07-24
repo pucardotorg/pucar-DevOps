@@ -16,12 +16,12 @@ initContainers:
     enabled: true
     schemaTable: "anotification_service_schema"
     image:
-      repository: "pucarsolutionsdev.azurecr.io/notification-db"
+      repository: "docker.io/venkatramireddyb/notification-db"
       tag: develop-dd7117089ef3260f958da3433ec9424919e35246
 
 # Container Configs
 image:
-  repository: "pucarsolutionsdev.azurecr.io/notification"
+  repository: "docker.io/venkatramireddyb/notification"
   tag: develop-dd7117089ef3260f958da3433ec9424919e35246
   imagePullPolicy: Always
 replicas: "1"

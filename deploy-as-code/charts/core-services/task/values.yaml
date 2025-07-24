@@ -16,12 +16,12 @@ initContainers:
     enabled: true
     schemaTable: "task_service_schema"
     image:
-      repository: "pucarsolutionsdev.azurecr.io/pucar_task_db"
+      repository: "docker.io/venkatramireddyb/pucar_task_db"
       tag: v1.0.0-4804b32bb9433d663957b381692e2bc68033c198
 
 # Container Configs
 image:
-  repository: "pucarsolutionsdev.azurecr.io/pucar_task"
+  repository: "docker.io/venkatramireddyb/pucar_task"
   tag: v1.0.0-4804b32bb9433d663957b381692e2bc68033c198
   imagePullPolicy: Always
 replicas: "1"

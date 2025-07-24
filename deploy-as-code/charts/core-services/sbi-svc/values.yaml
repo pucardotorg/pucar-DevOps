@@ -15,12 +15,12 @@ initContainers:
     enabled: true
     schemaTable: "sbi_svc_schema"
     image:
-      repository: "pucarsolutionsdev.azurecr.io/sbi-svc-db"
+      repository: "docker.io/venkatramireddyb/sbi-svc-db"
       tag: v1.0.0-a59f8a91d4f77728a9076fa72d39975ba294c526
 
 # Container Configs
 image:
-  repository: "pucarsolutionsdev.azurecr.io/sbi-svc"
+  repository: "docker.io/venkatramireddyb/sbi-svc"
   tag: v1.0.0-a59f8a91d4f77728a9076fa72d39975ba294c526
 
 

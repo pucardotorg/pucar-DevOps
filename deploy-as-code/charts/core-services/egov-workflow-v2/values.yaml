@@ -15,12 +15,12 @@ initContainers:
     enabled: true
     schemaTable: "egov_workflow_v2_schema"
     image:
-      repository: "pucarsolutionsdev.azurecr.io/egov-workflow-v2-db"
+      repository: "docker.io/venkatramireddyb/egov-workflow-v2-db"
       tag: v1.4.2-ebcbe18bff6b379072668fc7c6b8f1a9f420bb1f
 
 # Container Configs
 image:
-  repository: "pucarsolutionsdev.azurecr.io/egov-workflow-v2"
+  repository: "docker.io/venkatramireddyb/egov-workflow-v2"
   tag: v1.4.2-ebcbe18bff6b379072668fc7c6b8f1a9f420bb1f
 replicas: "1"
 healthChecks:

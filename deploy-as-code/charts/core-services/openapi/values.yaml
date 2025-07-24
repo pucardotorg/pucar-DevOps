@@ -19,11 +19,11 @@ initContainers:
     enabled: true
     schemaTable: "openapi_service_schema"
     image:
-      repository: "pucarsolutionsdev.azurecr.io/openapi-db"
+      repository: "docker.io/venkatramireddyb/openapi-db"
       tag: develop-1a74c7135d21b08a63af0c98d3cba2c4643d3670
 # Container Configs
 image:
-  repository: "pucarsolutionsdev.azurecr.io/pucar_openapi"
+  repository: "docker.io/venkatramireddyb/pucar_openapi"
   tag: develop-64544fb50f20302915a9a766883b0106b1e9a8cf
   imagePullPolicy: Always
 replicas: "1"

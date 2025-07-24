@@ -18,11 +18,11 @@ initContainers:
     enabled: true
     schemaTable: "integration_service_schema"
     image:
-      repository: "pucarsolutionsdev.azurecr.io/integration_db"
+      repository: "docker.io/venkatramireddyb/integration_db"
       tag: v1.0.0-2ee8513e9dcefdb51c4eb7d38be4d6661c665167
 # Container Configs
 image:
-   repository: "pucarsolutionsdev.azurecr.io/integration"
+   repository: "docker.io/venkatramireddyb/integration"
    tag: v1.0.0-2ee8513e9dcefdb51c4eb7d38be4d6661c665167
 replicas: "1"
 

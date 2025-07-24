@@ -13,7 +13,7 @@ initContainers: {}
 
 # Container Configs
 image:
-  repository: "pucarsolutionsdev.azurecr.io/digit-ui"
+  repository: "docker.io/venkatramireddyb/digit-ui"
   tag: v1.0.0-d6576c3d536fa779c0ec2e0341d788821550841f
 replicas: "1"
 httpPort: 80

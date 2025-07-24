@@ -16,12 +16,12 @@ initContainers:
     enabled: true
     schemaTable: "application_service_schema"
     image:
-      repository: "pucarsolutionsdev.azurecr.io/pucar_application_db"
+      repository: "docker.io/venkatramireddyb/pucar_application_db"
       tag: v1.0.0-4ed1615e626ac769c5fde46cda23b079e755ce67
 
 # Container Configs
 image:
-  repository: "pucarsolutionsdev.azurecr.io/pucar_application"
+  repository: "docker.io/venkatramireddyb/pucar_application"
   tag: v1.0.0-4ed1615e626ac769c5fde46cda23b079e755ce67
   imagePullPolicy: Always
 replicas: "1"

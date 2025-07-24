@@ -16,12 +16,12 @@ initContainers:
     enabled: true
     schemaTable: "hearing_service_schema"
     image:
-      repository: "pucarsolutionsdev.azurecr.io/pucar_hearing_db"
+      repository: "docker.io/venkatramireddyb/pucar_hearing_db"
       tag: v1.0.0-08ab38363f9c4b0b70d0763331c9773f8bbf9820
 
 # Container Configs
 image:
-  repository: "pucarsolutionsdev.azurecr.io/pucar_hearing"
+  repository: "docker.io/venkatramireddyb/pucar_hearing"
   tag: v1.0.0-08ab38363f9c4b0b70d0763331c9773f8bbf9820
 replicas: "1"
 httpPort: 8080

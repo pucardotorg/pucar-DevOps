@@ -16,12 +16,12 @@ initContainers:
     enabled: true
     schemaTable: "apportion_service_schema"
     image:
-      repository: "pucarsolutionsdev.azurecr.io/pucar_apportion_service_db"
+      repository: "docker.io/venkatramireddyb/pucar_apportion_service_db"
       tag: v1.0.0-911977062f07eda09758a1bb13daed6eee84b7d1
 
 # Container Configs
 image:
-  repository: "pucarsolutionsdev.azurecr.io/pucar_apportion_service"
+  repository: "docker.io/venkatramireddyb/pucar_apportion_service"
   tag: v1.0.0-911977062f07eda09758a1bb13daed6eee84b7d1
   imagePullPolicy: Always
 replicas: "1"

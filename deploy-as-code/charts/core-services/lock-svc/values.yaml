@@ -16,12 +16,12 @@ initContainers:
     enabled: true
     schemaTable: "lock_svc_service_schema"
     image:
-      repository: "pucarsolutionsdev.azurecr.io/lock-svc-db"
+      repository: "docker.io/venkatramireddyb/lock-svc-db"
       tag: develop-c639832b3430c2849ba4c054d6b86edf6f2d7586
 
 # Container Configs
 image:
-  repository: "pucarsolutionsdev.azurecr.io/lock-svc"
+  repository: "docker.io/venkatramireddyb/lock-svc"
   tag: develop-c639832b3430c2849ba4c054d6b86edf6f2d7586
   imagePullPolicy: Always
 replicas: "1"

@@ -12,7 +12,7 @@ ingress:
 httpPort: 3000
 # Container Configs
 image:
-  repository: "pucarsolutionsdev.azurecr.io/oncourts-landing-page"
+  repository: "docker.io/venkatramireddyb/oncourts-landing-page"
   tag: v1.0.0-prod10
 
 env: |

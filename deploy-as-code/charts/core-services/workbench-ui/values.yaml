@@ -15,7 +15,7 @@ initContainers: {}
 
 # Container Configs
 image:
-  repository: "pucarsolutionsdev.azurecr.io/workbench-ui"
+  repository: "docker.io/venkatramireddyb/workbench-ui"
   tag: main-be4dcf578fa5e69552537150cf52d3b2b1afc9af
 replicas: "1"
 httpPort: 80

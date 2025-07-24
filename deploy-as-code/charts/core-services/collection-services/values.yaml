@@ -16,12 +16,12 @@ initContainers:
     enabled: true
     schemaTable: "collection_services_schema"
     image:
-      repository: "pucarsolutionsdev.azurecr.io/pucar_collection_db"
+      repository: "docker.io/venkatramireddyb/pucar_collection_db"
       tag: v1.0.0-3345f6bb9536054a0050db6a05e88de50a1f6647
 
 # Container Configs
 image:
-  repository: "pucarsolutionsdev.azurecr.io/pucar_collection"
+  repository: "docker.io/venkatramireddyb/pucar_collection"
   tag: v1.0.0-3345f6bb9536054a0050db6a05e88de50a1f6647
   imagePullPolicy: Always
 replicas: "1"

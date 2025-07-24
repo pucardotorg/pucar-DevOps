@@ -9,7 +9,7 @@ initContainers:
     enabled: true
     schemaTable: "egov_filestore_schema"
     image:
-      repository: "pucarsolutionsdev.azurecr.io/egov-filestore-db"
+      repository: "docker.io/venkatramireddyb/egov-filestore-db"
       tag: main-98ec8dc97569afa6e1e52c0b43a95d596c9dd1d3
 
 # Ingress Configs
@@ -20,7 +20,7 @@ ingress:
 
 # Container Configs
 image:
-  repository: "pucarsolutionsdev.azurecr.io/egov-filestore"
+  repository: "docker.io/venkatramireddyb/egov-filestore"
   tag: main-98ec8dc97569afa6e1e52c0b43a95d596c9dd1d3
 replicas: "2"
 healthChecks:

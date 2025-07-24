@@ -15,12 +15,12 @@ initContainers:
     enabled: true
     schemaTable: "egov_hrms_schema"
     image:
-      repository: "pucarsolutionsdev.azurecr.io/egov-hrms-db"
+      repository: "docker.io/venkatramireddyb/egov-hrms-db"
       tag: v1.4.1-71f7c6774d2498ecdd59b09220809887fb69ded1
 
 # Container Configs
 image:
-  repository: "pucarsolutionsdev.azurecr.io/egov-hrms"
+  repository: "docker.io/venkatramireddyb/egov-hrms"
   tag: v1.4.1-71f7c6774d2498ecdd59b09220809887fb69ded1
 replicas: "1"
 healthChecks:

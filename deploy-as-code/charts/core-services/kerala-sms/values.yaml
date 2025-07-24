@@ -8,7 +8,7 @@ initContainers: {}
 
 # Container Configs
 image:
-  repository: "pucarsolutionsdev.azurecr.io/kerala-sms"
+  repository: "docker.io/venkatramireddyb/kerala-sms"
   tag: v1.0.0-fff8e13e94464713c3c2dbc75d7ac5235509f119
 replicas: "1"
 appType: "java-spring"

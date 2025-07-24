@@ -18,7 +18,7 @@ healthChecks:
 
 # Container Configs
 image:
-  repository: "pucarsolutionsdev.azurecr.io/pucar_transformer"
+  repository: "docker.io/venkatramireddyb/pucar_transformer"
   tag: v1.0.0-7471513f26785fb63b13c6d7ad1f47e1fb65ce77
   imagePullPolicy: Always
 replicas: "1"

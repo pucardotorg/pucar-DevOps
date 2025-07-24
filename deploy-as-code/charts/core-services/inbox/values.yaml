@@ -11,7 +11,7 @@ ingress:
 
 # Container Configs
 image:
-  repository: "pucarsolutionsdev.azurecr.io/inbox"
+  repository: "docker.io/venkatramireddyb/inbox"
   tag: develop-c894e72f6ec8e82f4e3bad38f063590d6a4d467b
 replicas: "1"
 healthChecks:

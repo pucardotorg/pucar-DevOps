@@ -15,12 +15,12 @@ initContainers:
     enabled: true
     schemaTable: "individual_schema"
     image:
-      repository: "pucarsolutionsdev.azurecr.io/individual_db"
+      repository: "docker.io/venkatramireddyb/individual_db"
       tag: v1.3.1-3cd967542ec02916a460cff31440bcc1344608f0
 
 # Container Configs
 image:
-  repository: "pucarsolutionsdev.azurecr.io/individual"
+  repository: "docker.io/venkatramireddyb/individual"
   tag: v1.3.1-3cd967542ec02916a460cff31440bcc1344608f0
 replicas: "1"
 healthChecks:

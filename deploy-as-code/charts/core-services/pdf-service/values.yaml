@@ -14,7 +14,7 @@ initContainers:
     enabled: true
     schemaTable: "pdf_service_schema"
     image:
-      repository: "pucarsolutionsdev.azurecr.io/pdf-service-db"
+      repository: "docker.io/venkatramireddyb/pdf-service-db"
       tag: v1.0.0-b694f2a520be2fef095d8f92a21eb00ae52a9673
 
   gitSync:
@@ -25,7 +25,7 @@ initContainers:
 
 # Container Configs
 image:
-  repository: "pucarsolutionsdev.azurecr.io/pdf-service"
+  repository: "docker.io/venkatramireddyb/pdf-service"
   tag: v1.0.0-b694f2a520be2fef095d8f92a21eb00ae52a9673
 replicas: "1"
 appType: "java-spring"
