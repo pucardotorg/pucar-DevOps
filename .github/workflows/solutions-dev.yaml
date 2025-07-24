@@ -281,8 +281,6 @@ jobs:
             --set epayments.image.tag=${{ env.BACKEND_BRANCH }}-${{ env.epayment_commit }} \
             --set etreasury.image.tag=${{ env.BACKEND_BRANCH }}-${{ env.etreasury_commit }} \
             --set etreasury.initContainers.dbMigration.image.tag=${{ env.BACKEND_BRANCH }}-${{ env.etreasury_commit }} \
-            --set pdf-service.image.tag=${{ env.BACKEND_BRANCH }}-${{ env.pdf_service }} \
-            --set pdf-service.initContainers.dbMigration.image.tag=${{ env.BACKEND_BRANCH }}-${{ env.pdf_service }} \
             --set sbi-webpage.image.tag=${{ env.BACKEND_BRANCH }}-${{ env.sbi_ui_commit }} \
             --set sbi-svc.image.tag=${{ env.BACKEND_BRANCH }}-${{ env.sbi_svc_commit }} \
             --set sbi-svc.initContainers.dbMigration.image.tag=${{ env.BACKEND_BRANCH }}-${{ env.sbi_svc_commit }} \
