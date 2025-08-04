@@ -15,7 +15,7 @@ initContainers:
     schemaTable: "pdf_service_schema"
     image:
       repository: "docker.io/venkatramireddyb/pdf-service-db"
-      tag: v1.0.0-b694f2a520be2fef095d8f92a21eb00ae52a9673
+      tag: develop-026e2594c17944fc069afd6d762b36fd70cde5ed
 
   gitSync:
     enabled: true
@@ -26,7 +26,7 @@ initContainers:
 # Container Configs
 image:
   repository: "docker.io/venkatramireddyb/pdf-service"
-  tag: v1.0.0-b694f2a520be2fef095d8f92a21eb00ae52a9673
+  tag: develop-026e2594c17944fc069afd6d762b36fd70cde5ed
 replicas: "1"
 appType: "java-spring"
 tracing-enabled: true
