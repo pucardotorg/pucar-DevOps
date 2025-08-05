@@ -155,3 +155,13 @@ env: |
       configMapKeyRef:
         name: egov-service-host
         key: egov-url-shortening
+  - name: EGOV_ESIGN_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: e-sign-svc
+  - name: EGOV_FILESTORE_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: egov-filestore
