@@ -150,3 +150,8 @@ env: |
       configMapKeyRef:
         key: hearing
         name: egov-service-host
+  - name: EGOV_URL_SHORTNER_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: egov-url-shortening
