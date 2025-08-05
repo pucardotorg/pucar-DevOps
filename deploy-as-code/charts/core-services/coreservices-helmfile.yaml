@@ -187,11 +187,11 @@ releases:
   #        deployment: "inbox"
   #      <<: *default
 
-  - name: application  # Replace with your desired namespace
-    installed: true
-    labels:
-      deployment: "application"
-    <<: *default
+  # - name: application  # Replace with your desired namespace
+  #   installed: true
+  #   labels:
+  #     deployment: "application"
+  #   <<: *default
 
   - name: casemanagement  # Replace with your desired namespace
     installed: true
@@ -223,11 +223,11 @@ releases:
       deployment: "order"
     <<: *default
 
-  - name: task  # Replace with your desired namespace
-    installed: true
-    labels:
-      deployment: "task"
-    <<: *default
+  # - name: task  # Replace with your desired namespace
+  #   installed: true
+  #   labels:
+  #     deployment: "task"
+  #   <<: *default
 
   - name: payment-calculator  # Replace with your desired namespace
     installed: true
