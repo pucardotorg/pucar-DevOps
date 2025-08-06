@@ -156,3 +156,5 @@ env: |
       configMapKeyRef:
         key: egov-user
         name: egov-service-host
+  - name: EGOV_EVIDENCE_SEARCH_ENDPOINT
+    value: /evidence/v1/_search
