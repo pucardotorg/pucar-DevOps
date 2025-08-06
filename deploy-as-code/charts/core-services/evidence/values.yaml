@@ -170,3 +170,12 @@ env: |
       configMapKeyRef:
         name: egov-service-host
         key: egov-filestore
+  - name: EGOV_ADIARY_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: ab-diary
+  - name: SPRING_REDIS_HOST
+    value: "redis.backbone"
+  - name: SPRING_REDIS_PORT
+    value: "6379"
