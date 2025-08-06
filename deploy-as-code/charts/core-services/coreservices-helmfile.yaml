@@ -205,11 +205,11 @@ releases:
   #        deployment: "egov-apportion-service"
   #      <<: *default
 
-  # - name: evidence  # Replace with your desired namespace
-  #   installed: true
-  #   labels:
-  #     deployment: "evidence"
-  #   <<: *default
+  - name: evidence  # Replace with your desired namespace
+    installed: true
+    labels:
+      deployment: "evidence"
+    <<: *default
 
   - name: hearing  # Replace with your desired namespace
     installed: true
