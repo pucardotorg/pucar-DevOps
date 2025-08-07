@@ -160,11 +160,6 @@ env: |
       configMapKeyRef:
         name: egov-service-host
         key: e-sign-svc
-  - name: EGOV_URL_SHORTNER_HOST
-    valueFrom:
-      configMapKeyRef:
-        key: eus-host
-        name: egov-service-host
   - name: EGOV_FILESTORE_HOST
     valueFrom:
       configMapKeyRef:
