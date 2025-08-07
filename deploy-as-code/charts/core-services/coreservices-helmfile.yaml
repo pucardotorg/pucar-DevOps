@@ -304,7 +304,7 @@ releases:
     installed: true
     labels:
       deployment: "dristi-pdf"
-  #   <<: *default
+    <<: *default
   #    - name: sbi-webpage # Replace with your desired namespace
   #      installed: true
   #      labels:
