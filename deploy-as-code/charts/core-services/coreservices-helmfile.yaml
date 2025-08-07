@@ -175,11 +175,11 @@ releases:
   #        deployment: "collection-services"
   #      <<: *default
   #
-  # - name: case  # Replace with your desired namespace
-  #   installed: true
-  #   labels:
-  #     deployment: "case"
-  #   <<: *default
+  - name: case  # Replace with your desired namespace
+    installed: true
+    labels:
+      deployment: "case"
+    <<: *default
 #
   #    - name: inbox  # Replace with your desired namespace
   #      installed: true
