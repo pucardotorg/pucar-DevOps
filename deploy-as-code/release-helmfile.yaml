@@ -43,10 +43,10 @@ releases:
     labels:
       deployment: "hearing"
     <<: *default
- - name: case  # Replace with your desired namespace
-   installed: true
-   labels:
-     deployment: "case"
+  - name: case  # Replace with your desired namespace
+    installed: true
+    labels:
+      deployment: "case"
    <<: *default
   - name: digit-ui # Replace with your desired namespace
     installed: true
