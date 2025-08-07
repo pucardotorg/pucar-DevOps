@@ -131,11 +131,11 @@ env: |
     valueFrom:
       configMapKeyRef:
         key: e-sign-svc
+        name: egov-service-host
   - name: EGOV_EVIDENCE_HOST
     valueFrom:
       configMapKeyRef:
         name: egov-service-host
-
-        name: egov-service-host
+        key: evidence
   - name: esign.service.endpoint
     value: "e-sign-svc/v1/_esign"
