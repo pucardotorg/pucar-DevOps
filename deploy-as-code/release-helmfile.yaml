@@ -47,7 +47,7 @@ releases:
     installed: true
     labels:
       deployment: "case"
-   <<: *default
+    <<: *default
   - name: digit-ui # Replace with your desired namespace
     installed: true
     <<: *default
