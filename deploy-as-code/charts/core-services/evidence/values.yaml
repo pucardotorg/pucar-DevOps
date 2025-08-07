@@ -174,3 +174,9 @@ env: |
     value: "redis.backbone"
   - name: SPRING_REDIS_PORT
     value: "6379"
+  - name: DOMAIN_URL
+    valueFrom:
+      configMapKeyRef:
+        key: domain-url
+        name: egov-config
+
