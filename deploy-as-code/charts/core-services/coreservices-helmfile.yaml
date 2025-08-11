@@ -247,11 +247,11 @@ releases:
 #      deployment: "esign-interceptor"
 #    <<: *default
 
-  - name: summons-svc  # Replace with your desired namespace
-    installed: true
-    labels:
-      deployment: "summons-svc"
-    <<: *default
+  # - name: summons-svc  # Replace with your desired namespace
+  #   installed: true
+  #   labels:
+  #     deployment: "summons-svc"
+  #   <<: *default
   #    - name: e-sign  # Replace with your desired namespace
   #      installed: true
   #      labels:
@@ -300,11 +300,11 @@ releases:
   #      labels:
   #        deployment: "ocr-service"
   #      <<: *default
-  - name: dristi-pdf # Replace with your desired namespace
-    installed: true
-    labels:
-      deployment: "dristi-pdf"
-    <<: *default
+  # - name: dristi-pdf # Replace with your desired namespace
+  #   installed: true
+  #   labels:
+  #     deployment: "dristi-pdf"
+  #   <<: *default
   #    - name: sbi-webpage # Replace with your desired namespace
   #      installed: true
   #      labels:
@@ -353,9 +353,9 @@ releases:
   - name: notification # Replace with your desired namespace
     installed: true # Replace with the version of your chart, if needed
     <<: *default
-  - name: order-management # Replace with your desired namespace
-    installed: true # Replace with the version of your chart, if needed
-    <<: *default
+  # - name: order-management # Replace with your desired namespace
+  #   installed: true # Replace with the version of your chart, if needed
+  #   <<: *default
   - name: hearing-management # Replace with your desired namespace
     installed: true # Replace with the version of your chart, if needed
     <<: *default
