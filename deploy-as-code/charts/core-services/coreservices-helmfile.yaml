@@ -74,9 +74,9 @@ releases:
   #      installed: true
   #      <<: *default
   #
-  #    - name: egov-url-shortening # Replace with your desired namespace
-  #      installed: true
-  #      <<: *default
+  - name: egov-url-shortening # Replace with your desired namespace
+    installed: true
+    <<: *default
   #
   #    - name: egov-workflow-v2 # Replace with your desired namespace
   #      installed: true
@@ -114,9 +114,9 @@ releases:
 #        installed: true
 #        <<: *default
 
-  #    - name: egov-pg-service # Replace with your desired namespace
-  #      installed: true
-  #      <<: *default
+  - name: egov-pg-service # Replace with your desired namespace
+    installed: true
+    <<: *default
   #
   #    - name: egov-user-event # Replace with your desired namespace
   #      installed: true
