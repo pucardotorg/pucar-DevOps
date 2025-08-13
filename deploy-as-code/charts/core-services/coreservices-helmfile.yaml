@@ -46,9 +46,9 @@ releases:
   #      installed: true
   #      <<: *default
 
-  - name: egov-hrms # Replace with your desired namespace
-    installed: true
-    <<: *default
+  # - name: egov-hrms # Replace with your desired namespace
+  #   installed: true
+  #   <<: *default
   #
   #    - name: egov-indexer # Replace with your desired namespace
   #      installed: true
@@ -140,21 +140,21 @@ releases:
   #        deployment: "individual"
   #      <<: *default
 
-  - name: dristi-case-pdf  # Replace with your desired namespace
-    installed: true
-    labels:
-      deployment: "dristi-case-pdf"
-    <<: *default
+  # - name: dristi-case-pdf  # Replace with your desired namespace
+  #   installed: true
+  #   labels:
+  #     deployment: "dristi-case-pdf"
+  #   <<: *default
 
   - name: pdf-service  # Replace with your desired namespace
     installed: true
     <<: *default
 #
-  - name: scheduler  # Replace with your desired namespace
-    installed: true
-    labels:
-      deployment: "scheduler"
-    <<: *default
+  # - name: scheduler  # Replace with your desired namespace
+  #   installed: true
+  #   labels:
+  #     deployment: "scheduler"
+  #   <<: *default
 
   - name: advocate  # Replace with your desired namespace
     installed: true
@@ -223,11 +223,11 @@ releases:
       deployment: "order"
     <<: *default
 
-  # - name: task  # Replace with your desired namespace
-  #   installed: true
-  #   labels:
-  #     deployment: "task"
-  #   <<: *default
+  - name: task  # Replace with your desired namespace
+    installed: true
+    labels:
+      deployment: "task"
+    <<: *default
 
   - name: payment-calculator  # Replace with your desired namespace
     installed: true
@@ -247,11 +247,11 @@ releases:
 #      deployment: "esign-interceptor"
 #    <<: *default
 
-  # - name: summons-svc  # Replace with your desired namespace
-  #   installed: true
-  #   labels:
-  #     deployment: "summons-svc"
-  #   <<: *default
+  - name: summons-svc  # Replace with your desired namespace
+    installed: true
+    labels:
+      deployment: "summons-svc"
+    <<: *default
   #    - name: e-sign  # Replace with your desired namespace
   #      installed: true
   #      labels:
@@ -300,11 +300,11 @@ releases:
   #      labels:
   #        deployment: "ocr-service"
   #      <<: *default
-  # - name: dristi-pdf # Replace with your desired namespace
-  #   installed: true
-  #   labels:
-  #     deployment: "dristi-pdf"
-  #   <<: *default
+  - name: dristi-pdf # Replace with your desired namespace
+    installed: true
+    labels:
+      deployment: "dristi-pdf"
+    <<: *default
   #    - name: sbi-webpage # Replace with your desired namespace
   #      installed: true
   #      labels:
@@ -353,9 +353,9 @@ releases:
   - name: notification # Replace with your desired namespace
     installed: true # Replace with the version of your chart, if needed
     <<: *default
-  # - name: order-management # Replace with your desired namespace
-  #   installed: true # Replace with the version of your chart, if needed
-  #   <<: *default
+  - name: order-management # Replace with your desired namespace
+    installed: true # Replace with the version of your chart, if needed
+    <<: *default
   - name: hearing-management # Replace with your desired namespace
     installed: true # Replace with the version of your chart, if needed
     <<: *default
