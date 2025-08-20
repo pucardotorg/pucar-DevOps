@@ -18,9 +18,9 @@ releases:
   #      installed: true # Replace with the version of your chart, if needed
   #      <<: *default
   ##
-  - name: audit-service # Replace with your desired namespace
-    installed: true # Replace with the version of your chart, if needed
-    <<: *default
+  # - name: audit-service # Replace with your desired namespace
+  #   installed: true # Replace with the version of your chart, if needed
+  #   <<: *default
   ##
   #    - name: egov-enc-service # Replace with your desired namespace
   #      installed: true
@@ -50,9 +50,9 @@ releases:
   #   installed: true
   #   <<: *default
   #
-  - name: egov-indexer # Replace with your desired namespace
-    installed: true
-    <<: *default
+  # - name: egov-indexer # Replace with your desired namespace
+  #   installed: true
+  #   <<: *default
   #
 #  - name: egov-notification-mail # Replace with your desired namespace
 #    installed: true
@@ -70,9 +70,9 @@ releases:
   #      installed: true
   #      <<: *default
   #
-  - name: egov-persister # Replace with your desired namespace
-    installed: true
-    <<: *default
+  # - name: egov-persister # Replace with your desired namespace
+  #   installed: true
+  #   <<: *default
   #
 #  - name: egov-url-shortening # Replace with your desired namespace
  #   installed: true
