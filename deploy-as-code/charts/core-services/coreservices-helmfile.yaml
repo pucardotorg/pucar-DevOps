@@ -274,11 +274,11 @@ releases:
   #      labels:
   #        deployment: "epayments"
   #      <<: *default
-  - name: analytics  # Replace with your desired namespace
-    installed: true
-    labels:
-      deployment: "analytics"
-    <<: *default
+  # - name: analytics  # Replace with your desired namespace
+  #   installed: true
+  #   labels:
+  #     deployment: "analytics"
+  #   <<: *default
   - name: transformer # Replace with your desired namespace
     installed: true
     labels:
