@@ -175,11 +175,11 @@ releases:
   #        deployment: "collection-services"
   #      <<: *default
   #
-  # - name: case  # Replace with your desired namespace
-  #   installed: true
-  #   labels:
-  #     deployment: "case"
-  #   <<: *default
+  - name: case  # Replace with your desired namespace
+    installed: true
+    labels:
+      deployment: "case"
+    <<: *default
 #
   #    - name: inbox  # Replace with your desired namespace
   #      installed: true
@@ -217,11 +217,11 @@ releases:
       deployment: "hearing"
     <<: *default
 
-  - name: order  # Replace with your desired namespace
-    installed: true
-    labels:
-      deployment: "order"
-    <<: *default
+  # - name: order  # Replace with your desired namespace
+  #   installed: true
+  #   labels:
+  #     deployment: "order"
+  #   <<: *default
 
   - name: task  # Replace with your desired namespace
     installed: true
@@ -353,9 +353,9 @@ releases:
   - name: notification # Replace with your desired namespace
     installed: true # Replace with the version of your chart, if needed
     <<: *default
-  - name: order-management # Replace with your desired namespace
-    installed: true # Replace with the version of your chart, if needed
-    <<: *default
+  # - name: order-management # Replace with your desired namespace
+  #   installed: true # Replace with the version of your chart, if needed
+  #   <<: *default
   - name: hearing-management # Replace with your desired namespace
     installed: true # Replace with the version of your chart, if needed
     <<: *default
