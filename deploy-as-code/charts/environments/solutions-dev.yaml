@@ -120,6 +120,8 @@ digit-ui:
                     return judgeName;
                 } else if (key === "MOCKENABLED") {
                     return mockEnabled;
+                } else if (key === "mockESignEnabled") {
+                    return mockESignEnabled;
                 } else if (key === "ESIGN_URL") {
                     return esignUrl;
                 } else if (key === "PUCAR_FILESTORE_BLOB") {
