@@ -24,7 +24,7 @@ replicas: "1"
 httpPort: 8080
 appType: "java-spring"
 java-args: "-Dspring.profiles.active=monitoring"
-heap: "-Xmx256m -Xms256m -agentlib:jdwp=transport=dt_socket,address=*:8000,server=y,suspend=n"
+heap: "-Xmx256m -Xms256m"
 debugPort: 8000
 remote_debug:
   enabled: true
