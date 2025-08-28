@@ -309,7 +309,7 @@ jobs:
             --set bail-bond.initContainers.dbMigration.image.tag=${{ env.BACKEND_BRANCH }}-${{ env.bail_bond }} \
             --set oncourts-website.image.tag=${{ env.BACKEND_BRANCH }}-${{ env.landing_page_commit }} 
 
-        working-directory: deploy-as-code
+        working-directory: deploy-as-code/helmfile
 #      - name: Postgres Data Migration
 #        run: |
 #          POSTGRES_POD=$(kubectl get pods -n default -l app=postgres -o jsonpath='{.items[0].metadata.name}')
