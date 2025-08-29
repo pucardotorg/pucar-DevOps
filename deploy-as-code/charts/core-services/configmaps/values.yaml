@@ -105,7 +105,7 @@ configmaps:
       egov-otp: http://egov-otp.egov:8080/
       egov-pdf: http://egov-pdf.egov:8080/
       egov-searcher: http://egov-searcher.egov:8080/
-      egov-url-shortening: http://eus:8080/
+      egov-url-shortening: http://egov-url-shortening.egov:8080/
       egov-user: http://egov-user.egov:8080/
       egov-user-chatbot: http://egov-user-chatbot:8080/
       egov-user-egov: http://egov-user.egov:8080/
@@ -114,6 +114,9 @@ configmaps:
       egov-workflow-v2: http://egov-workflow-v2.egov:8080/
       epost: http://epost-tracker.egov:8080/
       es-client: http://elasticsearch-data-v1.es-cluster:9200
+      etreasury: http://etreasury.egov:8080/
+      etreasury-case: http://case.egov:8080
+      eus-host: http://egov-url-shortening.egov:8080/
       evidence: http://evidence:8080/
       facility: http://facility.health:8080/
       firenoc-calculator: http://firenoc-calculator:8080/
@@ -131,7 +134,7 @@ configmaps:
       hr-leave: http://hr-leave:8080/
       hr-masters: http://hr-masters:8080/
       hr-masters-v2: http://hr-masters-v2:8080/
-      icops-integration: http://icops-integration.egov:8080/egov-kerala-icops/
+      icops-integration: http://icops-integration.egov:8080
       inbox: http://inbox.egov:8080/
       individual: http://individual.egov:8080/
       inventory-services: http://inventory-services:8080/
@@ -140,7 +143,7 @@ configmaps:
       lcms-services: http://lcms-services:8080/
       lcms-workflow: http://lcms-workflow:8080/
       location: http://location:8080/
-      lock-service: http://lock-svc.egov:8080/
+      lock-service: http://lock-svc:8080/
       mdms-service-v2: http://mdms-v2.egov:8080/
       mdms-v2: http://mdms-v2.egov:8080/
       minio-url: https://minio-uat.digit.org/
@@ -165,7 +168,7 @@ configmaps:
       rainmaker-pgr: http://rainmaker-pgr:8080/
       redis: redis.backbone
       report: http://report.egov:8080/
-      sbi-url: http://sbi-svc.egov:8080/sbi-backend/payment/v1/_decryptBrowserResponse
+      sbi-url: http://sbi-svc.egov:8080/sbi-backend//v1/_decryptBrowserResponse
       scheduler: http://scheduler.egov:8080/
       summons: http://summons-svc.egov:8080/
       sunbird-credential-schema: http://sunbird-rc-credential-schema-service.egov:3333/
@@ -174,7 +177,7 @@ configmaps:
       sw-calculator: http://sw-calculator.egov:8080/
       sw-services: http://sw-services.egov:8080/
       swm-services: http://swm-services:8080/
-      task: http://task:8080/
+      task: http://task.egov:8080/
       tenant: http://tenant:8080/
       tl-calculator: http://tl-calculator:8080/
       tl-indexer: http://tl-indexer:8080/
