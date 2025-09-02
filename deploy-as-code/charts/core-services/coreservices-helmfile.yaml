@@ -223,11 +223,11 @@ releases:
       deployment: "order"
     <<: *default
 
-  - name: task  # Replace with your desired namespace
-    installed: true
-    labels:
-      deployment: "task"
-    <<: *default
+  # - name: task  # Replace with your desired namespace
+  #   installed: true
+  #   labels:
+  #     deployment: "task"
+  #   <<: *default
 
   - name: payment-calculator  # Replace with your desired namespace
     installed: true
@@ -247,11 +247,11 @@ releases:
 #      deployment: "esign-interceptor"
 #    <<: *default
 
-  - name: summons-svc  # Replace with your desired namespace
-    installed: true
-    labels:
-      deployment: "summons-svc"
-    <<: *default
+  # - name: summons-svc  # Replace with your desired namespace
+  #   installed: true
+  #   labels:
+  #     deployment: "summons-svc"
+  #   <<: *default
   #    - name: e-sign  # Replace with your desired namespace
   #      installed: true
   #      labels:
