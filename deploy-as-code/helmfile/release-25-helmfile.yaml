@@ -14,9 +14,9 @@ commonLabels:
   deployment: "pucar"
 
 releases:
-  # - name: ab-diary
-  #   installed: true
-  #   <<: *default
+  - name: ab-diary
+    installed: true
+    <<: *default
 
   # - name: advocate
   #   installed: true
