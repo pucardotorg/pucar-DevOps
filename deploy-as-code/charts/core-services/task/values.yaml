@@ -181,3 +181,5 @@ env: |
         configMapKeyRef:
           key: advocate
           name: egov-service-host
+  - name: EGOV_USER_SEARCH_PATH
+    value: /user/v1/_search
