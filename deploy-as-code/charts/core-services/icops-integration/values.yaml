@@ -109,7 +109,7 @@ env: |
   - name: EGOV_OAUTH_URL
     valueFrom:
       configMapKeyRef:
-        key: dristi-url
+        key: egov-user
         name: egov-config
 
 
