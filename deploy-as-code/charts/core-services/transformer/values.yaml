@@ -153,3 +153,8 @@ env: |
       secretKeyRef:
         name: elasticsearch-credentials
         key: password
+  - name: EGOV_LOCALIZATION_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: egov-localization
