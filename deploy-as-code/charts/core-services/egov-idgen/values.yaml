@@ -55,3 +55,5 @@ env: |
     value: "false"  
   - name: MANAGEMENT_SECURITY_ENABLED
     value: "false" 
+  - name: SEQUENCE_LIST_REQUIRE_COURT_ID
+    value: SEQ_CNR_,SEQ_CMP_
