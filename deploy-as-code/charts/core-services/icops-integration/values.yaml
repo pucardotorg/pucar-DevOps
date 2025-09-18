@@ -110,7 +110,7 @@ env: |
     valueFrom:
       configMapKeyRef:
         key: egov-user
-        name: egov-config
+        name: egov-service-host
 
 
 
