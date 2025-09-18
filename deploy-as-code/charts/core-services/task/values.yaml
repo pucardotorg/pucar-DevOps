@@ -183,3 +183,8 @@ env: |
           name: egov-service-host
   - name: EGOV_USER_SEARCH_PATH
     value: /user/v1/_search
+  - name: DRISTI_ESIGN_HOST
+    valueFrom:
+      configMapKeyRef:
+        key: e-sign-svc
+        name: egov-service-host
