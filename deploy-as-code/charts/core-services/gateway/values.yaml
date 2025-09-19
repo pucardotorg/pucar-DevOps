@@ -30,7 +30,7 @@ extraVolumeMounts: |
 # Container Configs
 image:
   repository: "gateway"
-  tag: gateway-2.9.2-a916a090e6-41
+  tag: gateway-2.9.3-56a8630218-44
 replicas: "1"
 healthChecks:
   enabled: true
