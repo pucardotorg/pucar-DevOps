@@ -223,11 +223,11 @@ releases:
       deployment: "order"
     <<: *default
 
-  - name: task  # Replace with your desired namespace
-    installed: true
-    labels:
-      deployment: "task"
-    <<: *default
+  # - name: task  # Replace with your desired namespace
+  #   installed: true
+  #   labels:
+  #     deployment: "task"
+  #   <<: *default
 
   - name: payment-calculator  # Replace with your desired namespace
     installed: true
