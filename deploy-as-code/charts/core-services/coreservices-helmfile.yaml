@@ -341,6 +341,9 @@ releases:
   #      labels:
   #        deployment: "verifyapp"
   #      <<: *default
+  # - name: opencv # Replace with your desired namespace
+  #   installed: true # Replace with the version of your chart, if needed
+  #   <<: *default
   - name: openapi # Replace with your desired namespace
     installed: true # Replace with the version of your chart, if needed
     <<: *default
