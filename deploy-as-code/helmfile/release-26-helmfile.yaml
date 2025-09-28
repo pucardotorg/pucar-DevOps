@@ -62,9 +62,9 @@ releases:
   #   installed: true
   #   <<: *default
 
-  # - name: digit-ui
-  #   installed: true
-  #   <<: *default
+  - name: digit-ui
+    installed: true
+    <<: *default
 
   # - name: dristi-case-pdf
   #   installed: true
