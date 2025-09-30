@@ -28,4 +28,5 @@ dependencies:
   - name: ingress-nginx
     version: 4.10.0
     repository: file://../../charts/backbone-services/ingress-nginx
+    alias: nginx-ingress
 
