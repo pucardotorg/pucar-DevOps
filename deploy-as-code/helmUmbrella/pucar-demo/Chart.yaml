@@ -46,213 +46,213 @@ dependencies:
   #   version: 26.2.0
   #   repository: file://../../charts/backbone-services/kafka-kraft
 
-  - name: ab-diary
-    version: 0.1.0
-    repository: file://../../charts/core-services/ab-diary
+  # - name: ab-diary
+  #   version: 0.1.0
+  #   repository: file://../../charts/core-services/ab-diary
 
-  - name: advocate
-    version: 0.1.0
-    repository: file://../../charts/core-services/advocate
+  # - name: advocate
+  #   version: 0.1.0
+  #   repository: file://../../charts/core-services/advocate
 
-  - name: analytics
-    version: 0.1.0
-    repository: file://../../charts/core-services/analytics
+  # - name: analytics
+  #   version: 0.1.0
+  #   repository: file://../../charts/core-services/analytics
 
-  - name: application
-    version: 0.1.0
-    repository: file://../../charts/core-services/application
+  # - name: application
+  #   version: 0.1.0
+  #   repository: file://../../charts/core-services/application
 
-  - name: audit-service
-    version: 0.1.0
-    repository: file://../../charts/core-services/audit-service
+  # - name: audit-service
+  #   version: 0.1.0
+  #   repository: file://../../charts/core-services/audit-service
 
-  - name: bail-bond
-    version: 0.1.0
-    repository: file://../../charts/core-services/bail-bond
+  # - name: bail-bond
+  #   version: 0.1.0
+  #   repository: file://../../charts/core-services/bail-bond
 
-  - name: billing-service
-    version: 0.1.0
-    repository: file://../../charts/core-services/billing-service
+  # - name: billing-service
+  #   version: 0.1.0
+  #   repository: file://../../charts/core-services/billing-service
 
-  - name: case
-    version: 0.1.0
-    repository: file://../../charts/core-services/case
+  # - name: case
+  #   version: 0.1.0
+  #   repository: file://../../charts/core-services/case
 
-  - name: casemanagement
-    version: 0.1.0
-    repository: file://../../charts/core-services/casemanagement
+  # - name: casemanagement
+  #   version: 0.1.0
+  #   repository: file://../../charts/core-services/casemanagement
 
-  - name: citizen
-    version: 0.1.0
-    repository: file://../../charts/core-services/citizen
+  # - name: citizen
+  #   version: 0.1.0
+  #   repository: file://../../charts/core-services/citizen
 
-  - name: collection-services
-    version: 0.1.0
-    repository: file://../../charts/core-services/collection-services
+  # - name: collection-services
+  #   version: 0.1.0
+  #   repository: file://../../charts/core-services/collection-services
 
   - name: digit-ui
     version: 0.1.0
     repository: file://../../charts/core-services/digit-ui
 
-  - name: dristi-case-pdf
-    version: 0.1.0
-    repository: file://../../charts/core-services/dristi-case-pdf
+  # - name: dristi-case-pdf
+  #   version: 0.1.0
+  #   repository: file://../../charts/core-services/dristi-case-pdf
 
-  - name: dristi-pdf
-    version: 0.1.0
-    repository: file://../../charts/core-services/dristi-pdf
+  # - name: dristi-pdf
+  #   version: 0.1.0
+  #   repository: file://../../charts/core-services/dristi-pdf
 
-  - name: e-sign
-    version: 0.1.0
-    repository: file://../../charts/core-services/e-sign
+  # - name: e-sign
+  #   version: 0.1.0
+  #   repository: file://../../charts/core-services/e-sign
 
-  - name: e-sign-svc
-    version: 0.1.0
-    repository: file://../../charts/core-services/e-sign-svc
+  # - name: e-sign-svc
+  #   version: 0.1.0
+  #   repository: file://../../charts/core-services/e-sign-svc
 
-  - name: egov-accesscontrol
-    version: 0.1.0
-    repository: file://../../charts/core-services/egov-accesscontrol
+  # - name: egov-accesscontrol
+  #   version: 0.1.0
+  #   repository: file://../../charts/core-services/egov-accesscontrol
 
-  - name: egov-apportion-service
-    version: 0.1.0
-    repository: file://../../charts/core-services/egov-apportion-service
+  # - name: egov-apportion-service
+  #   version: 0.1.0
+  #   repository: file://../../charts/core-services/egov-apportion-service
 
-  - name: egov-enc-service
-    version: 0.1.0
-    repository: file://../../charts/core-services/egov-enc-service
+  # - name: egov-enc-service
+  #   version: 0.1.0
+  #   repository: file://../../charts/core-services/egov-enc-service
 
-  - name: egov-filestore
-    version: 0.1.0
-    repository: file://../../charts/core-services/egov-filestore
+  # - name: egov-filestore
+  #   version: 0.1.0
+  #   repository: file://../../charts/core-services/egov-filestore
 
-  - name: egov-hrms
-    version: 0.1.0
-    repository: file://../../charts/core-services/egov-hrms
+  # - name: egov-hrms
+  #   version: 0.1.0
+  #   repository: file://../../charts/core-services/egov-hrms
 
-  - name: egov-idgen
-    version: 0.1.0
-    repository: file://../../charts/core-services/egov-idgen
+  # - name: egov-idgen
+  #   version: 0.1.0
+  #   repository: file://../../charts/core-services/egov-idgen
 
-  - name: egov-indexer
-    version: 0.1.0
-    repository: file://../../charts/core-services/egov-indexer
+  # - name: egov-indexer
+  #   version: 0.1.0
+  #   repository: file://../../charts/core-services/egov-indexer
 
-  - name: egov-localization
-    version: 0.1.0
-    repository: file://../../charts/core-services/egov-localization
+  # - name: egov-localization
+  #   version: 0.1.0
+  #   repository: file://../../charts/core-services/egov-localization
 
-  - name: egov-location
-    version: 0.1.0
-    repository: file://../../charts/core-services/egov-location
+  # - name: egov-location
+  #   version: 0.1.0
+  #   repository: file://../../charts/core-services/egov-location
 
-  - name: egov-mdms-service
-    version: 0.1.0
-    repository: file://../../charts/core-services/egov-mdms-service
+  # - name: egov-mdms-service
+  #   version: 0.1.0
+  #   repository: file://../../charts/core-services/egov-mdms-service
 
-  - name: egov-notification-mail
-    version: 0.1.0
-    repository: file://../../charts/core-services/egov-notification-mail
+  # - name: egov-notification-mail
+  #   version: 0.1.0
+  #   repository: file://../../charts/core-services/egov-notification-mail
 
-  - name: egov-otp
-    version: 0.1.0
-    repository: file://../../charts/core-services/egov-otp
+  # - name: egov-otp
+  #   version: 0.1.0
+  #   repository: file://../../charts/core-services/egov-otp
 
-  - name: egov-persister
-    version: 0.1.0
-    repository: file://../../charts/core-services/egov-persister
+  # - name: egov-persister
+  #   version: 0.1.0
+  #   repository: file://../../charts/core-services/egov-persister
 
-  - name: egov-pg-service
-    version: 0.1.0
-    repository: file://../../charts/core-services/egov-pg-service
+  # - name: egov-pg-service
+  #   version: 0.1.0
+  #   repository: file://../../charts/core-services/egov-pg-service
 
-  - name: egov-url-shortening
-    version: 0.1.0
-    repository: file://../../charts/core-services/egov-url-shortening
+  # - name: egov-url-shortening
+  #   version: 0.1.0
+  #   repository: file://../../charts/core-services/egov-url-shortening
 
-  - name: egov-user
-    version: 0.1.0
-    repository: file://../../charts/core-services/egov-user
+  # - name: egov-user
+  #   version: 0.1.0
+  #   repository: file://../../charts/core-services/egov-user
 
-  - name: egov-user-event
-    version: 0.1.0
-    repository: file://../../charts/core-services/egov-user-event
+  # - name: egov-user-event
+  #   version: 0.1.0
+  #   repository: file://../../charts/core-services/egov-user-event
 
-  - name: egov-workflow-v2
-    version: 0.1.0
-    repository: file://../../charts/core-services/egov-workflow-v2
+  # - name: egov-workflow-v2
+  #   version: 0.1.0
+  #   repository: file://../../charts/core-services/egov-workflow-v2
 
-  - name: employee
-    version: 0.1.0
-    repository: file://../../charts/core-services/employee
+  # - name: employee
+  #   version: 0.1.0
+  #   repository: file://../../charts/core-services/employee
 
-  - name: epayments
-    version: 0.1.0
-    repository: file://../../charts/core-services/epayments
+  # - name: epayments
+  #   version: 0.1.0
+  #   repository: file://../../charts/core-services/epayments
 
-  - name: epost-tracker
-    version: 0.1.0
-    repository: file://../../charts/core-services/epost-tracker
+  # - name: epost-tracker
+  #   version: 0.1.0
+  #   repository: file://../../charts/core-services/epost-tracker
 
-  - name: esign-interceptor
-    version: 0.1.0
-    repository: file://../../charts/core-services/esign-interceptor
+  # - name: esign-interceptor
+  #   version: 0.1.0
+  #   repository: file://../../charts/core-services/esign-interceptor
 
-  - name: etreasury
-    version: 0.1.0
-    repository: file://../../charts/core-services/etreasury
+  # - name: etreasury
+  #   version: 0.1.0
+  #   repository: file://../../charts/core-services/etreasury
 
-  - name: evidence
-    version: 0.1.0
-    repository: file://../../charts/core-services/evidence
+  # - name: evidence
+  #   version: 0.1.0
+  #   repository: file://../../charts/core-services/evidence
 
-  - name: gateway
-    version: 0.1.0
-    repository: file://../../charts/core-services/gateway
+  # - name: gateway
+  #   version: 0.1.0
+  #   repository: file://../../charts/core-services/gateway
 
-  - name: hearing
-    version: 0.1.0
-    repository: file://../../charts/core-services/hearing
+  # - name: hearing
+  #   version: 0.1.0
+  #   repository: file://../../charts/core-services/hearing
 
-  - name: hearing-management
-    version: 0.1.0
-    repository: file://../../charts/core-services/hearing-management
+  # - name: hearing-management
+  #   version: 0.1.0
+  #   repository: file://../../charts/core-services/hearing-management
 
-  - name: icops-integration
-    version: 0.1.0
-    repository: file://../../charts/core-services/icops-integration
+  # - name: icops-integration
+  #   version: 0.1.0
+  #   repository: file://../../charts/core-services/icops-integration
 
-  - name: inbox
-    version: 0.1.0
-    repository: file://../../charts/core-services/inbox
+  # - name: inbox
+  #   version: 0.1.0
+  #   repository: file://../../charts/core-services/inbox
 
-  - name: individual
-    version: 0.1.0
-    repository: file://../../charts/core-services/individual
+  # - name: individual
+  #   version: 0.1.0
+  #   repository: file://../../charts/core-services/individual
 
-  - name: kenlm
-    version: 0.1.0
-    repository: file://../../charts/core-services/kenlm
+  # - name: kenlm
+  #   version: 0.1.0
+  #   repository: file://../../charts/core-services/kenlm
 
-  - name: kerala-sms
-    version: 0.1.0
-    repository: file://../../charts/core-services/kerala-sms
+  # - name: kerala-sms
+  #   version: 0.1.0
+  #   repository: file://../../charts/core-services/kerala-sms
 
-  - name: landing-page
-    version: 0.1.0
-    repository: file://../../charts/core-services/landing-page
+  # - name: landing-page
+  #   version: 0.1.0
+  #   repository: file://../../charts/core-services/landing-page
 
-  - name: lock-svc
-    version: 0.1.0
-    repository: file://../../charts/core-services/lock-svc
+  # - name: lock-svc
+  #   version: 0.1.0
+  #   repository: file://../../charts/core-services/lock-svc
 
   # - name: mdms-v2
   #   version: 0.1.0
   #   repository: file://../../charts/core-services/mdms-v2
 
-  - name: notification
-    version: 0.1.0
-    repository: file://../../charts/core-services/notification
+  # - name: notification
+  #   version: 0.1.0
+  #   repository: file://../../charts/core-services/notification
 
   # - name: ocr-service
   #   version: 0.1.0
@@ -262,37 +262,37 @@ dependencies:
   #   version: 0.1.0
   #   repository: file://../../charts/core-services/ocr-svc
 
-  - name: openapi
-    version: 0.1.0
-    repository: file://../../charts/core-services/openapi
+  # - name: openapi
+  #   version: 0.1.0
+  #   repository: file://../../charts/core-services/openapi
 
-  - name: opencv
-    version: 0.1.0
-    repository: file://../../charts/core-services/opencv
+  # - name: opencv
+  #   version: 0.1.0
+  #   repository: file://../../charts/core-services/opencv
 
-  - name: order
-    version: 0.1.0
-    repository: file://../../charts/core-services/order
+  # - name: order
+  #   version: 0.1.0
+  #   repository: file://../../charts/core-services/order
 
-  - name: order-management
-    version: 0.1.0
-    repository: file://../../charts/core-services/order-management
+  # - name: order-management
+  #   version: 0.1.0
+  #   repository: file://../../charts/core-services/order-management
 
-  - name: payment-calculator
-    version: 0.1.0
-    repository: file://../../charts/core-services/payment-calculator
+  # - name: payment-calculator
+  #   version: 0.1.0
+  #   repository: file://../../charts/core-services/payment-calculator
 
-  - name: pdf-service
-    version: 0.1.0
-    repository: file://../../charts/core-services/pdf-service
+  # - name: pdf-service
+  #   version: 0.1.0
+  #   repository: file://../../charts/core-services/pdf-service
 
-  - name: pgr-services
-    version: 0.1.0
-    repository: file://../../charts/core-services/pgr-services
+  # - name: pgr-services
+  #   version: 0.1.0
+  #   repository: file://../../charts/core-services/pgr-services
 
-  - name: qr-code-service
-    version: 0.1.0
-    repository: file://../../charts/core-services/qr-code-service
+  # - name: qr-code-service
+  #   version: 0.1.0
+  #   repository: file://../../charts/core-services/qr-code-service
 
   # - name: sbi-svc
   #   version: 0.1.0
@@ -302,46 +302,46 @@ dependencies:
   #   version: 0.1.0
   #   repository: file://../../charts/core-services/sbi-webpage
 
-  - name: scheduler
-    version: 0.1.0
-    repository: file://../../charts/core-services/scheduler
+  # - name: scheduler
+  #   version: 0.1.0
+  #   repository: file://../../charts/core-services/scheduler
 
-  - name: service-request
-    version: 0.1.0
-    repository: file://../../charts/core-services/service-request
+  # - name: service-request
+  #   version: 0.1.0
+  #   repository: file://../../charts/core-services/service-request
 
-  - name: summons-svc
-    version: 0.1.0
-    repository: file://../../charts/core-services/summons-svc
+  # - name: summons-svc
+  #   version: 0.1.0
+  #   repository: file://../../charts/core-services/summons-svc
 
-  - name: sunbirdrc-credential-service
-    version: 0.1.0
-    repository: file://../../charts/core-services/sunbirdrc-credential-service
+  # - name: sunbirdrc-credential-service
+  #   version: 0.1.0
+  #   repository: file://../../charts/core-services/sunbirdrc-credential-service
 
-  - name: task
-    version: 0.1.0
-    repository: file://../../charts/core-services/task
+  # - name: task
+  #   version: 0.1.0
+  #   repository: file://../../charts/core-services/task
 
   # - name: transcription
   #   version: 0.1.0
   #   repository: file://../../charts/core-services/transcription
 
-  - name: transformer
-    version: 0.1.0
-    repository: file://../../charts/core-services/transformer
+  # - name: transformer
+  #   version: 0.1.0
+  #   repository: file://../../charts/core-services/transformer
 
   # - name: user-onboard
   #   version: 0.1.0
   #   repository: file://../../charts/core-services/user-onboard
 
-  - name: user-otp
-    version: 0.1.0
-    repository: file://../../charts/core-services/user-otp
+  # - name: user-otp
+  #   version: 0.1.0
+  #   repository: file://../../charts/core-services/user-otp
 
   # - name: verifyapp
   #   version: 0.1.0
   #   repository: file://../../charts/core-services/verifyapp
 
-  - name: workbench-ui
-    version: 0.1.0
-    repository: file://../../charts/core-services/workbench-ui
+  # - name: workbench-ui
+  #   version: 0.1.0
+  #   repository: file://../../charts/core-services/workbench-ui
