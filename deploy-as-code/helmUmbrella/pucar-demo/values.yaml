@@ -13,3 +13,7 @@ cert-manager:
 
 redis:
   namespace: "backbone"
+
+kafka-kraft:
+  fullnameOverride: "kafka-kraft"
+  namespace: "backbone"
