@@ -10,3 +10,6 @@ nginx-ingress:
 
 cert-manager:
   namespaceOverride: "backbone"
+
+redis:
+  namespace: "backbone"
