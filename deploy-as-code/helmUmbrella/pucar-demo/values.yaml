@@ -1,4 +1,6 @@
 nginx-ingress:
+  namespaceOverride: "backbone"
+  fullnameOverride: "nginx-ingress"
   controller:
     service:
       type: NodePort
