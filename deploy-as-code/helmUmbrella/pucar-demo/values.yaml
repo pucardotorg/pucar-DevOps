@@ -7,3 +7,6 @@ nginx-ingress:
       nodePorts:
         http: 32001
         https: 32000
+
+cert-manager:
+  namespaceOverride: "backbone"
