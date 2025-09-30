@@ -43,5 +43,5 @@ dependencies:
     repository: file://../../charts/backbone-services/redis
   
   - name: kafka-kraft
-    version: 3.6.0
+    version: 26.2.0
     repository: file://../../charts/backbone-services/kafka-kraft
