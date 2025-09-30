@@ -17,3 +17,5 @@ redis:
 kafka-kraft:
   fullnameOverride: "kafka-kraft"
   namespace: "backbone"
+  image:
+    repository: "venkatramireddyb/kafka-kraft"
