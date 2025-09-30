@@ -33,3 +33,7 @@ dependencies:
   - name: configmaps
     version: 0.1.0
     repository: file://../../charts/core-services/configmaps
+
+  - name: cert-manager
+    version: v1.13.3
+    repository: file://../../charts/backbone-services/cert-manager
