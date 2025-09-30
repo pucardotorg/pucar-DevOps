@@ -5,9 +5,9 @@ root-ingress:
 configmaps:
   egov-config:
     data:
-      db-host: "solutions-pucar-dev-server.postgres.database.azure.com"
-      db-name: "solutions-pucar-dev-db" ## Add db-name
-      db-url: "jdbc:postgresql://solutions-pucar-dev-server.postgres.database.azure.com/solutions-pucar-dev-db"
+      db-host: "178.236.185.120:5432"
+      db-name: "demo_db" ## Add db-name
+      db-url: "jdbc:postgresql://178.236.185.120:5432/demo_db"
       es-host: "elasticsearch-data.backbone"
       es-indexer-host: "http://elasticsearch-data.backbone:9200/"
       kafka-brokers: "kafka-kraft-controller-headless.backbone:9092"
