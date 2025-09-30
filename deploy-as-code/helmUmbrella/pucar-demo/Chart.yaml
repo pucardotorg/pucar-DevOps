@@ -39,5 +39,5 @@ dependencies:
     repository: file://../../charts/backbone-services/cert-manager
 
   - name: redis
-    version: 19.5.1
+    version: 7.2.4
     repository: file://../../charts/backbone-services/redis
