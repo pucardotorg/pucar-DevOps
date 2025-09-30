@@ -17,12 +17,12 @@ initContainers:
     schemaTable: "case_service_schema"
     image:
       repository: "docker.io/venkatramireddyb/case_db"
-      tag: v1.0.0-66cf9764c39721c25d36ee62799cec6953427d9e
+      tag: develop-fdfb4f4029c9a25da8c44f391c0885dd79a6ac4f
 
 # Container Configs
 image:
   repository: "docker.io/venkatramireddyb/pucar_case"
-  tag: v1.0.0-66cf9764c39721c25d36ee62799cec6953427d9e
+  tag: develop-fdfb4f4029c9a25da8c44f391c0885dd79a6ac4f
   imagePullPolicy: Always
 replicas: "1"
 httpPort: 8080

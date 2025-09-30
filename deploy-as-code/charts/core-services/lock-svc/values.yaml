@@ -17,12 +17,12 @@ initContainers:
     schemaTable: "lock_svc_service_schema"
     image:
       repository: "docker.io/venkatramireddyb/lock-svc-db"
-      tag: develop-c639832b3430c2849ba4c054d6b86edf6f2d7586
+      tag: develop-96a91badedd62c68f2f397bd5d8f7bd7ba0d6fcc
 
 # Container Configs
 image:
   repository: "docker.io/venkatramireddyb/lock-svc"
-  tag: develop-c639832b3430c2849ba4c054d6b86edf6f2d7586
+  tag: develop-96a91badedd62c68f2f397bd5d8f7bd7ba0d6fcc
   imagePullPolicy: Always
 replicas: "1"
 httpPort: 8080

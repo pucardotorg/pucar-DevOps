@@ -16,12 +16,12 @@ initContainers:
     schemaTable: "egov-url-shortening_schema"
     image:
       repository: "egov-url-shortening-db"
-      tag: core-2.9-lts-mvn-check-ecf5d0a880-11
+      tag: develop-5d28208d351a40488d349525616019cbe69a716b
 
 # Container Configs
 image:
   repository: "egov-url-shortening"
-  tag: core-2.9-lts-mvn-check-ecf5d0a880-11
+  tag: develop-5d28208d351a40488d349525616019cbe69a716b
 replicas: "1"
 healthChecks:
   enabled: true

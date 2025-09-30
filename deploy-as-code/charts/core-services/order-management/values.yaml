@@ -18,7 +18,7 @@ healthChecks:
 # Container Configs
 image:
   repository: "docker.io/venkatramireddyb/order-management"
-  tag: v1.0.0-78a6b1093a50e53a427de8e49b404f220d905739
+  tag: develop-aa9bfbc2f6f622c142f48b8022ba73479ceb3b70
   imagePullPolicy: Always
 replicas: "1"
 httpPort: 8080

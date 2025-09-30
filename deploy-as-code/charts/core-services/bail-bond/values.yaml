@@ -17,12 +17,12 @@ initContainers:
     schemaTable: "bail-bond_service_schema"
     image:
       repository: "docker.io/venkatramireddyb/bail-bond-db"
-      tag: v1.0.0-08ab38363f9c4b0b70d0763331c9773f8bbf9820
+      tag: develop-69975645639b951b4d2857b48d9ed89f3a91dd8a
 
 # Container Configs
 image:
   repository: "docker.io/venkatramireddyb/bail-bond"
-  tag: develop-9d53b7e69451a539a8b8607f74407bcfa4b15953
+  tag: develop-69975645639b951b4d2857b48d9ed89f3a91dd8a
   imagePullPolicy: Always
 replicas: "1"
 httpPort: 8080

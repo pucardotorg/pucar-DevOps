@@ -17,12 +17,12 @@ initContainers:
     schemaTable: "anotification_service_schema"
     image:
       repository: "docker.io/venkatramireddyb/notification-db"
-      tag: develop-dd7117089ef3260f958da3433ec9424919e35246
+      tag: develop-f03f1a9d94bfa904797b0987e0d4d5c5935f903c
 
 # Container Configs
 image:
   repository: "docker.io/venkatramireddyb/notification"
-  tag: develop-dd7117089ef3260f958da3433ec9424919e35246
+  tag: develop-f03f1a9d94bfa904797b0987e0d4d5c5935f903c
   imagePullPolicy: Always
 replicas: "1"
 httpPort: 8080

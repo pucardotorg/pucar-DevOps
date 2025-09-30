@@ -18,11 +18,11 @@ e-sign-svc:
       schemaTable: "e_sign_svc_schema"
       image:
         repository: "docker.io/venkatramireddyb/pucar_e-sign-svc-db"
-        tag: v1.0.0-36e4cd719e16aedec416b518f48bf84b56e60389
+        tag: develop-e64b5dc7d9b818e381b4f0a858692fc44edc11be
 # Container Configs
 image:
   repository: "docker.io/venkatramireddyb/pucar_e-sign-svc"
-  tag: v1.0.0-36e4cd719e16aedec416b518f48bf84b56e60389
+  tag: develop-e64b5dc7d9b818e381b4f0a858692fc44edc11be
   imagePullPolicy: Always
 replicas: "1"
 httpPort: 8080

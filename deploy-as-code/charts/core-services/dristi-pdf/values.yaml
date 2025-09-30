@@ -15,7 +15,7 @@ ingress:
 # Container Configs
 image:
   repository: "docker.io/venkatramireddyb/dristi-pdf"
-  tag: v1.0.0-64e9183c360d73936861b5772ecdf15b5c733e04
+  tag: develop-fb2913a52196e65e4ba5ac6bcf50aeb1ceee100d
 replicas: "1"
 #healthChecks:
 #  enabled: true

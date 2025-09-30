@@ -19,12 +19,12 @@ initContainers:
     schemaTable: "order_service_schema"
     image:
       repository: "docker.io/venkatramireddyb/pucar_order_db"
-      tag: v1.0.0-08ab38363f9c4b0b70d0763331c9773f8bbf9820
+      tag: develop-2ce38f2664860fbf3ec6968d6c1f6e39ce948fe1
 
 # Container Configs
 image:
   repository: "docker.io/venkatramireddyb/pucar_order"
-  tag: v1.0.0-08ab38363f9c4b0b70d0763331c9773f8bbf9820
+  tag: develop-2ce38f2664860fbf3ec6968d6c1f6e39ce948fe1
   imagePullPolicy: Always
 replicas: "1"
 httpPort: 8080

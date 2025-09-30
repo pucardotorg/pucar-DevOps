@@ -16,13 +16,13 @@ initContainers:
     schemaTable: "scheduler_schema"
     image:
       repository: "docker.io/venkatramireddyb/scheduler-svc_db"
-      tag: v1.0.0-471b0d2c2f192d122797c17ef344943f7960fb72
+      tag: develop-1ef5249f78d024468da5e970a60c9ea61f0b2ad1
 
 
 # Container Configs
 image:
   repository: "docker.io/venkatramireddyb/scheduler-svc"
-  tag: v1.0.0-471b0d2c2f192d122797c17ef344943f7960fb72
+  tag: develop-1ef5249f78d024468da5e970a60c9ea61f0b2ad1
 replicas: "1"
 
 appType: "java-spring"

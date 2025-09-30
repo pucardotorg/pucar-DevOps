@@ -17,12 +17,12 @@ initContainers:
     schemaTable: "diary_service_schema"
     image:
       repository: "docker.io/venkatramireddyb/pucar_ab_diary_db"
-      tag: develop-95591d7d1ba5d396709059a83758ef1a99423fc0
+      tag: develop-31d93196cb6d4dc6826640ac88efdec4dd0e6a20
 
 # Container Configs
 image:
   repository: "docker.io/venkatramireddyb/pucar_ab_diary"
-  tag: develop-95591d7d1ba5d396709059a83758ef1a99423fc0
+  tag: develop-31d93196cb6d4dc6826640ac88efdec4dd0e6a20
   imagePullPolicy: Always
 replicas: "1"
 httpPort: 8080

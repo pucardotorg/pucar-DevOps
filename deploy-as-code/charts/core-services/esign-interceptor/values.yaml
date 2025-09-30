@@ -15,7 +15,7 @@ ingress:
 # Container Configs
 image:
   repository: "docker.io/venkatramireddyb/pucar_esign-interceptor"
-  tag: v1.0.0-b5c52aefbf9b7ccf296854f1b0393a598b757e78
+  tag: develop-026e2594c17944fc069afd6d762b36fd70cde5ed
   imagePullPolicy: Always
 replicas: "1"
 httpPort: 8080

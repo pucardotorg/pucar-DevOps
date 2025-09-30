@@ -17,12 +17,12 @@ initContainers:
     schemaTable: "application_service_schema"
     image:
       repository: "docker.io/venkatramireddyb/pucar_application_db"
-      tag: v1.0.0-4ed1615e626ac769c5fde46cda23b079e755ce67
+      tag: develop-8220ea6b41b44305139c2facb61585d1ba5e35b8
 
 # Container Configs
 image:
   repository: "docker.io/venkatramireddyb/pucar_application"
-  tag: v1.0.0-4ed1615e626ac769c5fde46cda23b079e755ce67
+  tag: develop-8220ea6b41b44305139c2facb61585d1ba5e35b8
   imagePullPolicy: Always
 replicas: "1"
 httpPort: 8080

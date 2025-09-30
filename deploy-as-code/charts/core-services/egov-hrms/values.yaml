@@ -16,12 +16,12 @@ initContainers:
     schemaTable: "egov_hrms_schema"
     image:
       repository: "docker.io/venkatramireddyb/egov-hrms-db"
-      tag: v1.4.1-71f7c6774d2498ecdd59b09220809887fb69ded1
+      tag: develop-01cdd360b736d38bebe27f775b346bbef31d7f43
 
 # Container Configs
 image:
   repository: "docker.io/venkatramireddyb/egov-hrms"
-  tag: v1.4.1-71f7c6774d2498ecdd59b09220809887fb69ded1
+  tag: develop-01cdd360b736d38bebe27f775b346bbef31d7f43
 replicas: "1"
 healthChecks:
   enabled: true

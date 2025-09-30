@@ -16,13 +16,13 @@ initContainers:
     schemaTable: "payment-calculator_schema"
     image:
       repository: "docker.io/venkatramireddyb/payment-calculator-svc_db"
-      tag: v1.0.0-cd4732437b8cb6f303b646d67a24d374ef44d4e3
+      tag: develop-9165469f8678d42e087fbb3b0a07b38f64432df1
 
 
 # Container Configs
 image:
   repository: "docker.io/venkatramireddyb/payment-calculator-svc"
-  tag: v1.0.0-cd4732437b8cb6f303b646d67a24d374ef44d4e3
+  tag: develop-9165469f8678d42e087fbb3b0a07b38f64432df1
 replicas: "1"
 healthChecks:
   enabled: true

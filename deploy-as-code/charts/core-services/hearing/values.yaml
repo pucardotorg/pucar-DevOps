@@ -17,12 +17,12 @@ initContainers:
     schemaTable: "hearing_service_schema"
     image:
       repository: "docker.io/venkatramireddyb/pucar_hearing_db"
-      tag: v1.0.0-08ab38363f9c4b0b70d0763331c9773f8bbf9820
+      tag: develop-8220ea6b41b44305139c2facb61585d1ba5e35b8
 
 # Container Configs
 image:
   repository: "docker.io/venkatramireddyb/pucar_hearing"
-  tag: v1.0.0-08ab38363f9c4b0b70d0763331c9773f8bbf9820
+  tag: develop-8220ea6b41b44305139c2facb61585d1ba5e35b8
 replicas: "1"
 httpPort: 8080
 appType: "java-spring"

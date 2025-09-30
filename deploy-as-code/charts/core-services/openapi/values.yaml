@@ -20,11 +20,11 @@ initContainers:
     schemaTable: "openapi_service_schema"
     image:
       repository: "docker.io/venkatramireddyb/openapi-db"
-      tag: develop-1a74c7135d21b08a63af0c98d3cba2c4643d3670
+      tag: develop-98c1ddfc97d51013937d7f324353ac0a564d6135
 # Container Configs
 image:
   repository: "docker.io/venkatramireddyb/pucar_openapi"
-  tag: develop-64544fb50f20302915a9a766883b0106b1e9a8cf
+  tag: develop-98c1ddfc97d51013937d7f324353ac0a564d6135
   imagePullPolicy: Always
 replicas: "1"
 httpPort: 8080

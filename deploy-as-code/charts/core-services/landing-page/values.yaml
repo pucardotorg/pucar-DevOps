@@ -13,7 +13,7 @@ httpPort: 3000
 # Container Configs
 image:
   repository: "docker.io/venkatramireddyb/oncourts-landing-page"
-  tag: v1.0.0-prod10
+  tag: develop-be1164682b9b84e7a77b6a54fae1096e5d3f5160
 
 env: |
   - name: ONCOURTS_API_ENDPOINT

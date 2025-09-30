@@ -17,12 +17,12 @@ initContainers:
     schemaTable: "epost_tracker_service_schema"
     image:
       repository: "docker.io/venkatramireddyb/epost-tracker-db"
-      tag: v1.0.0-b5c52aefbf9b7ccf296854f1b0393a598b757e78
+      tag: develop-09d450d9508ea97902e45916dea69599542c89c5
 
 # Container Configs
 image:
   repository: "docker.io/venkatramireddyb/epost-tracker"
-  tag: v1.0.0-b5c52aefbf9b7ccf296854f1b0393a598b757e78
+  tag: develop-09d450d9508ea97902e45916dea69599542c89c5
   imagePullPolicy: Always
 replicas: "1"
 httpPort: 8080

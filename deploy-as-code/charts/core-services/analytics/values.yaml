@@ -19,7 +19,7 @@ healthChecks:
 # Container Configs
 image:
   repository: "docker.io/venkatramireddyb/pucar_analytics"
-  tag: v1.0.0-78a6b1093a50e53a427de8e49b404f220d905739
+  tag: develop-8220ea6b41b44305139c2facb61585d1ba5e35b8
   imagePullPolicy: Always
 replicas: "1"
 httpPort: 8080

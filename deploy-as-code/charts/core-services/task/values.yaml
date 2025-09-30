@@ -17,12 +17,12 @@ initContainers:
     schemaTable: "task_service_schema"
     image:
       repository: "docker.io/venkatramireddyb/pucar_task_db"
-      tag: v1.0.0-4804b32bb9433d663957b381692e2bc68033c198
+      tag: develop-343e941fbddf13808cbb702a906ae96266613322
 
 # Container Configs
 image:
   repository: "docker.io/venkatramireddyb/pucar_task"
-  tag: v1.0.0-4804b32bb9433d663957b381692e2bc68033c198
+  tag: develop-343e941fbddf13808cbb702a906ae96266613322
   imagePullPolicy: Always
 replicas: "1"
 httpPort: 8080

@@ -12,7 +12,7 @@ ingress:
 # Container Configs
 image:
   repository: "docker.io/venkatramireddyb/inbox"
-  tag: develop-c894e72f6ec8e82f4e3bad38f063590d6a4d467b
+  tag: develop-8220ea6b41b44305139c2facb61585d1ba5e35b8
 replicas: "1"
 healthChecks:
   enabled: true

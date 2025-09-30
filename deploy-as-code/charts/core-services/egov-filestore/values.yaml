@@ -10,7 +10,7 @@ initContainers:
     schemaTable: "egov_filestore_schema"
     image:
       repository: "docker.io/venkatramireddyb/egov-filestore-db"
-      tag: main-98ec8dc97569afa6e1e52c0b43a95d596c9dd1d3
+      tag: develop-7a3a056f321a36c205fc30a5371370945d29ccbd
 
 # Ingress Configs
 ingress:
@@ -21,7 +21,7 @@ ingress:
 # Container Configs
 image:
   repository: "docker.io/venkatramireddyb/egov-filestore"
-  tag: main-98ec8dc97569afa6e1e52c0b43a95d596c9dd1d3
+  tag: develop-7a3a056f321a36c205fc30a5371370945d29ccbd
 replicas: "2"
 healthChecks:
   enabled: true

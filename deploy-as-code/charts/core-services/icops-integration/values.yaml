@@ -19,11 +19,11 @@ initContainers:
     schemaTable: "integration_service_schema"
     image:
       repository: "docker.io/venkatramireddyb/integration_db"
-      tag: v1.0.0-2ee8513e9dcefdb51c4eb7d38be4d6661c665167
+      tag: develop-c30a1e01430d3d8feba233705ff41272e91e61fa
 # Container Configs
 image:
    repository: "docker.io/venkatramireddyb/integration"
-   tag: v1.0.0-2ee8513e9dcefdb51c4eb7d38be4d6661c665167
+   tag: develop-c30a1e01430d3d8feba233705ff41272e91e61fa
 replicas: "1"
 
 env: |
