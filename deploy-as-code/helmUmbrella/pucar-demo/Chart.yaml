@@ -30,3 +30,6 @@ dependencies:
     repository: file://../../charts/backbone-services/ingress-nginx
     alias: nginx-ingress
 
+  - name: configmaps
+    version: 0.1.0
+    repository: file://../../charts/core-services/configmaps
