@@ -114,9 +114,9 @@ releases:
 #        installed: true
 #        <<: *default
 
-  - name: egov-pg-service # Replace with your desired namespace
-    installed: true
-    <<: *default
+  # - name: egov-pg-service # Replace with your desired namespace
+  #   installed: true
+  #   <<: *default
   #
   #    - name: egov-user-event # Replace with your desired namespace
   #      installed: true
@@ -229,11 +229,11 @@ releases:
   #     deployment: "task"
   #   <<: *default
 
-  - name: payment-calculator  # Replace with your desired namespace
-    installed: true
-    labels:
-      deployment: "payment-calculator"
-    <<: *default
+  # - name: payment-calculator  # Replace with your desired namespace
+  #   installed: true
+  #   labels:
+  #     deployment: "payment-calculator"
+  #   <<: *default
 
 #  - name: e-sign-svc  # Replace with your desired namespace
 #    installed: true
