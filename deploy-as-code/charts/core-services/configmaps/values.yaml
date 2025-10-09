@@ -102,6 +102,7 @@ configmaps:
       egov-mdms-create: http://egov-mdms-create:8080/
       egov-mdms-service: http://egov-mdms-service.egov:8080/
       egov-mdms-service-test: http://egov-mdms-service-test:8080/
+      egov-oauth-url: https://dristi-kerala-dev.pucar.org/user/oauth/token?_=1730963461827
       egov-otp: http://egov-otp.egov:8080/
       egov-pdf: http://egov-pdf.egov:8080/
       egov-searcher: http://egov-searcher.egov:8080/
