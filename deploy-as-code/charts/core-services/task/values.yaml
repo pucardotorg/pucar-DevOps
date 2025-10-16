@@ -8,7 +8,7 @@ ingress:
   zuul: true
   enabled: true
   context: "task"
-  additionalAnnotations:
+  additionalAnnotations: |
     nginx.ingress.kubernetes.io/proxy-body-size: "10m"
 
 
