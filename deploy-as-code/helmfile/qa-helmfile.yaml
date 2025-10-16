@@ -198,6 +198,10 @@ releases:
     installed: true
     <<: *default
 
+  - name: inportal-survey
+    installed: true
+    <<: *default
+
   # - name: individual
   #   installed: true
   #   <<: *default
