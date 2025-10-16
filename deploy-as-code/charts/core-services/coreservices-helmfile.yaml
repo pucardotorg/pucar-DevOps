@@ -34,9 +34,9 @@ releases:
   #      installed: true
   #      <<: *default
   #
-  #    - name: egov-localization # Replace with your desired namespace
-  #      installed: true
-  #      <<: *default
+  - name: egov-localization # Replace with your desired namespace
+    installed: true
+    <<: *default
   #
   #    - name: egov-location # Replace with your desired namespace
   #      installed: true
@@ -82,9 +82,9 @@ releases:
   #      installed: true
   #      <<: *default
   #
-  #    - name: user-otp # Replace with your desired namespace
-  #      installed: true
-  #      <<: *default
+  - name: user-otp # Replace with your desired namespace
+    installed: true
+    <<: *default
   #
   #    - name: configmaps # Replace with your desired namespace
   #      installed: true
@@ -94,9 +94,9 @@ releases:
   #      installed: true
   #      <<: *default
 
-  # - name: digit-ui # Replace with your desired namespace
-  #   installed: true
-  #   <<: *default
+  - name: digit-ui # Replace with your desired namespace
+    installed: true
+    <<: *default
 
   #    - name: employee # Replace with your desired namespace
   #      installed: true
@@ -162,11 +162,11 @@ releases:
       deployment: "advocate"
     <<: *default
 
-  #    - name: billing-service  # Replace with your desired namespace
-  #      installed: true
-  #      labels:
-  #        deployment: "billing-service"
-  #      <<: *default
+  - name: billing-service  # Replace with your desired namespace
+    installed: true
+    labels:
+      deployment: "billing-service"
+    <<: *default
   #
   #
   #    - name: collection-services  # Replace with your desired namespace
@@ -269,11 +269,11 @@ releases:
       deployment: "etreasury"
     <<: *default
 
-  #    - name: epayments  # Replace with your desired namespace
-  #      installed: true
-  #      labels:
-  #        deployment: "epayments"
-  #      <<: *default
+  - name: epayments  # Replace with your desired namespace
+    installed: true
+    labels:
+      deployment: "epayments"
+    <<: *default
   # - name: analytics  # Replace with your desired namespace
   #   installed: true
   #   labels:
