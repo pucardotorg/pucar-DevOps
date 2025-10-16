@@ -368,3 +368,7 @@ releases:
   # - name: bail-bond # Replace with your desired namespace
   #   installed: true # Replace with the version of your chart, if needed
   #   <<: *default
+
+  - name: inportal-survey # Replace with your desired namespace
+    installed: true # Replace with the version of your chart, if needed
+    <<: *default
