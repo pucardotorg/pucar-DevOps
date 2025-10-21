@@ -230,6 +230,8 @@ jobs:
           echo "order_management=$order_management" >> $GITHUB_ENV
           hearing_management=$(git log -1 --pretty=format:%H -- backend/hearing-management)
           echo "hearing_management=$hearing_management" >> $GITHUB_ENV
+          inportal-survey=$(git log -1 --pretty=format:%H -- backend/hearing-management)
+          echo "inportal-survey=$inportal-survey" >> $GITHUB_ENV
           hrms_commit=$(git log -1 --pretty=format:%H -- common/egov-hrms)
           echo "hrms_commit=$hrms_commit" >> $GITHUB_ENV
           filestore_commit=$(git log -1 --pretty=format:%H -- common/egov-filestore)
@@ -272,6 +274,8 @@ jobs:
             --set individual.image.tag=${{ env.BACKEND_BRANCH }}-${{ env.individual_commit }} \
             --set individual.initContainers.dbMigration.image.tag=${{ env.BACKEND_BRANCH }}-${{ env.individual_commit }} \
             --set inbox.image.tag=${{ env.BACKEND_BRANCH }}-${{ env.inbox_commit }} \
+            --set inportal-survey.image.tag=${{ env.BACKEND_BRANCH }}-${{ env.inportal-survey }} \
+            --set inportal-survey.initContainers.dbMigration.image.tag=${{ env.BACKEND_BRANCH }}-${{ env.inportal-survey }} \
             --set e-sign-svc.image.tag=${{ env.BACKEND_BRANCH }}-${{ env.esign_svc_commit }} \
             --set e-sign-svc.initContainers.dbMigration.image.tag=${{ env.BACKEND_BRANCH }}-${{ env.esign_svc_commit }} \
             --set esign-interceptor.image.tag=${{ env.BACKEND_BRANCH }}-${{ env.esign_interceptor_commit }} \
