@@ -7,8 +7,6 @@ global:
 replicas: 1
 httpPort: 8080
 debugPort: 5005
-remote_debug:
-  enabled: false
 appType: ""
 
 ingress:
@@ -123,6 +121,12 @@ resources: |
 ## Allows specification of additional environment variables
 extraEnv:
   java: |
+      {{- if .Values.debugPort }}
+      - name: JAVA_ENABLE_DEBUG
+        value: 'true'
+      - name: JAVA_DEBUG_PORT
+        value: '{{ .Values.debugPort | quote }}'
+      {{- end }}
       - name: SPRING_DATASOURCE_URL
         valueFrom:
           configMapKeyRef:

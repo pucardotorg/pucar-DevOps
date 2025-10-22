@@ -34,9 +34,7 @@ httpPort: 8080
 appType: "java-spring"
 java-args: "-Dspring.profiles.active=monitoring"
 heap: "-Xmx256m -Xms256m"
-debugPort: 8000
-remote_debug:
-  enabled: true
+debugPort: 5005
 memory_limits: 512Mi
 env: |
   - name: JAVA_OPTS

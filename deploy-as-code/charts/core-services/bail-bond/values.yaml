@@ -30,7 +30,7 @@ appType: "java-spring"
 heap: "-Xmx256m -Xms256m"
 java-args: "-Dspring.profiles.active=monitoring"
 memory_limits: 768Mi
-
+debugPort: 5005
 
 healthChecks:
   enabled: true
@@ -38,10 +38,6 @@ healthChecks:
   readinessProbePath: "/bail-bond/health"
 
 env: |
-  - name: JAVA_ENABLE_DEBUG
-    value: "true"
-  - name: JAVA_DEBUG_PORT
-    value: "5005"
   - name: MANAGEMENT_HEALTH_REDIS_ENABLED
     value: "false"
   - name: JAVA_OPTS

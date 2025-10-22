@@ -117,11 +117,6 @@ spec:
             - name: http
               containerPort: {{ .Values.httpPort }}
               protocol: TCP
-          {{- if .Values.remote_debug.enabled }}
-            - name: debug
-              containerPort: {{ .Values.debugPort }}
-              protocol: TCP
-          {{- end }}
       {{- if .Values.healthChecks.enabled }}              
           readinessProbe:
           {{- tpl  .Values.healthChecks.readinessProbe . | nindent 12 }} 

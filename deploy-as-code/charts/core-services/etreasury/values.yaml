@@ -31,10 +31,8 @@ replicas: "1"
 appType: "java-spring"
 tracing-enabled: true
 java-args: ""
-heap: "-Xmx192m -Xms192m -agentlib:jdwp=transport=dt_socket,address=*:8000,server=y,suspend=n"
-debugPort: 8000
-remote_debug:
-  enabled: true
+heap: "-Xmx192m -Xms192m"
+debugPort: 5005
 # Additional Container Envs
 env: |
   - name: PUCAR_TSB_RECEIPT
