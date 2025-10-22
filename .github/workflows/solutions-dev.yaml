@@ -230,7 +230,7 @@ jobs:
           echo "order_management=$order_management" >> $GITHUB_ENV
           hearing_management=$(git log -1 --pretty=format:%H -- backend/hearing-management)
           echo "hearing_management=$hearing_management" >> $GITHUB_ENV
-          inportal-survey=$(git log -1 --pretty=format:%H -- backend/hearing-management)
+          inportal-survey=$(git log -1 --pretty=format:%H -- backend/inportal-survey)
           echo "inportal-survey=$inportal-survey" >> $GITHUB_ENV
           hrms_commit=$(git log -1 --pretty=format:%H -- common/egov-hrms)
           echo "hrms_commit=$hrms_commit" >> $GITHUB_ENV
