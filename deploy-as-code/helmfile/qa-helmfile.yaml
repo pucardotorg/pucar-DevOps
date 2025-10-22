@@ -38,9 +38,9 @@ releases:
   #   installed: true
   #   <<: *default
 
-  - name: billing-service
-    installed: true
-    <<: *default
+  # - name: billing-service
+  #   installed: true
+  #   <<: *default
 
   # - name: case
   #   installed: true
@@ -86,9 +86,9 @@ releases:
   #   installed: true
   #   <<: *default
 
-  - name: egov-filestore
-    installed: true
-    <<: *default
+  # - name: egov-filestore
+  #   installed: true
+  #   <<: *default
 
   # - name: egov-hrms
   #   installed: true
@@ -150,9 +150,9 @@ releases:
   #   installed: true
   #   <<: *default
 
-  - name: epayments
-    installed: true
-    <<: *default
+  # - name: epayments
+  #   installed: true
+  #   <<: *default
 
   # - name: epost-tracker
   #   installed: true
