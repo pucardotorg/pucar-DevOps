@@ -22,29 +22,29 @@ releases:
   #   installed: true
   #   <<: *default
 
-  - name: analytics
-    installed: true
-    <<: *default
+  # - name: analytics
+  #   installed: true
+  #   <<: *default
 
-  - name: application
-    installed: true
-    <<: *default
+  # - name: application
+  #   installed: true
+  #   <<: *default
 
   # - name: audit-service
   #   installed: true
   #   <<: *default
 
-  - name: bail-bond
-    installed: true
-    <<: *default
+  # - name: bail-bond
+  #   installed: true
+  #   <<: *default
 
   - name: billing-service
     installed: true
     <<: *default
 
-  - name: case
-    installed: true
-    <<: *default
+  # - name: case
+  #   installed: true
+  #   <<: *default
 
   # - name: casemanagement
   #   installed: true
@@ -174,17 +174,17 @@ releases:
   #   installed: true
   #   <<: *default
 
-  - name: evidence
-    installed: true
-    <<: *default
+  # - name: evidence
+  #   installed: true
+  #   <<: *default
 
   # - name: gateway
   #   installed: true
   #   <<: *default
 
-  - name: hearing
-    installed: true
-    <<: *default
+  # - name: hearing
+  #   installed: true
+  #   <<: *default
 
   # - name: hearing-management
   #   installed: true
@@ -242,13 +242,13 @@ releases:
   #   installed: true
   #   <<: *default
 
-  - name: order
-    installed: true
-    <<: *default
+  # - name: order
+  #   installed: true
+  #   <<: *default
 
-  - name: order-management
-    installed: true
-    <<: *default
+  # - name: order-management
+  #   installed: true
+  #   <<: *default
 
   # - name: payment-calculator
   #   installed: true
@@ -290,9 +290,9 @@ releases:
   #   installed: true
   #   <<: *default
 
-  - name: task
-    installed: true
-    <<: *default
+  # - name: task
+  #   installed: true
+  #   <<: *default
 
   # - name: transcription
   #   installed: true
