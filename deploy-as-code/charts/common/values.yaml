@@ -124,7 +124,7 @@ extraEnv:
       - name: JAVA_ENABLE_DEBUG
         value: 'true'
       - name: JAVA_DEBUG_PORT
-        value: '{{ .Values.debugPort | quote }}'
+        value: '{{ .Values.debugPort }}'
       {{- end }}
       - name: SPRING_DATASOURCE_URL
         valueFrom:
