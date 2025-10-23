@@ -155,3 +155,8 @@ env: |
     value: "1107174288673936495"
   - name: EGOV_SMS_NOTIFICATION_ADDITIONAL_INFORMATION_TEMPLATE_ID
     value: "1107174288681413433"
+  - name: EGOV_HEARING_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: hearing

@@ -220,3 +220,8 @@ env: |
       configMapKeyRef:
         key: analytics
         name: egov-service-host
+  - name: EGOV_ADVOCATE_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: advocate
