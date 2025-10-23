@@ -1,0 +1,40 @@
+# Common Labels
+labels:
+  app: "njdg-transformer"
+  group: "backend"
+
+# Init Containers Configs
+healthChecks:
+  enabled: true
+  livenessProbePath: "/njdg-transformer/actuator/health"
+  readinessProbePath: "/njdg-transformer/actuator/health"
+namespace: pucar-stg
+
+# Init Containers Configs
+initContainers:
+  dbMigration:
+    enabled: true
+    schemaTable: "njdg-transformer_service_schema"
+    image:
+      repository: "docker.io/venkatramireddyb/njdg-transformer-db"
+      tag: feature-4625-njdg-6f2e02fea6ef8c6ecf187775c80ccc91e68d48a0
+
+# Container Configs
+image:
+  repository: "docker.io/venkatramireddyb/njdg-transformer"
+  tag: feature-4625-njdg-7ce194cc4203df1cd3d3388fc140bea4ad8c0979
+  imagePullPolicy: Always
+replicas: "1"
+httpPort: 8080
+appType: "java-spring"
+db: "njdg"
+heap: "-Xmx64m -Xms64m"
+java-args: "-Dspring.profiles.active=monitoring"
+memory_requests: 256Mi
+debugPort: 5005
+
+env: |
+  - name: SERVER_PORT
+    value: "8080"
+  - name: SERVER_CONTEXT_PATH
+    value: /njdg-transformer

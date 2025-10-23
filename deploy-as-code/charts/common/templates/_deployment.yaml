@@ -137,8 +137,14 @@ spec:
           {{- tpl . $ | nindent 10 }}
         {{- end }}          
         {{- end }}     
-      {{- if or .Values.env (eq .Values.appType "java-spring") (index .Values "global" "tracing-enabled") }}                         
-          env:  
+      {{- if or .Values.env .Values.debugPort (eq .Values.appType "java-spring") (index .Values "global" "tracing-enabled") }}                         
+          env:
+        {{- if .Values.debugPort }}
+            - name: JAVA_ENABLE_DEBUG
+              value: 'true'
+            - name: JAVA_DEBUG_PORT
+              value: '{{ .Values.debugPort }}'
+        {{- end }}
         {{- if .Values.env }}                                   
           {{- tpl  .Values.env . | nindent 12 }}
         {{- end -}}         
