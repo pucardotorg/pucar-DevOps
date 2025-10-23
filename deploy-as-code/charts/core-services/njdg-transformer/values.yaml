@@ -38,3 +38,8 @@ env: |
     value: "8080"
   - name: SERVER_CONTEXT_PATH
     value: /njdg-transformer
+  - name: EGOV_FILESTORE_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: egov-filestore
