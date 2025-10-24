@@ -45,3 +45,9 @@ env: |
     value: "8080"
   - name: SERVER_CONTEXT_PATH
     value: /inportal-survey
+  - name: EGOV_MDMS_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: egov-mdms-service
+ 
