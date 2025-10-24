@@ -20,7 +20,7 @@ initContainers:
 
 # Container Configs
 image:
-  repository: "egov-localization"
+  repository: "docker.io/egovio/egov-localization"
   tag: core-2.9-lts-mvn-check-59c2e5ea5b-9
 replicas: "1"
 appType: "java-spring"
