@@ -135,4 +135,8 @@ env: |
       configMapKeyRef:
         name: egov-service-host
         key: egov-workflow-v2
-
+  - name: EGOV_LOCALIZATION_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: egov-localization
