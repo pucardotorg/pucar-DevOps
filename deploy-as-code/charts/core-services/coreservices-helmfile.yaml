@@ -70,9 +70,9 @@ releases:
   #      installed: true
   #      <<: *default
   #
-  - name: egov-persister # Replace with your desired namespace
-    installed: true
-    <<: *default
+  # - name: egov-persister # Replace with your desired namespace
+  #   installed: true
+  #   <<: *default
   #
 #  - name: egov-url-shortening # Replace with your desired namespace
  #   installed: true
