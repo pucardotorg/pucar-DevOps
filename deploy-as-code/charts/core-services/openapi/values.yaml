@@ -66,7 +66,7 @@ env: |
   - name: KAFKA_CONFIG_BOOTSTRAP_SERVER_CONFIG
     valueFrom:
       configMapKeyRef:
-        key: kafka-brokers
+        key: kafka-brokerse
         name: egov-config
   - name: HEARING_SERVICE_HOST
     valueFrom:
@@ -137,3 +137,23 @@ env: |
         key: evidence
   - name: esign.service.endpoint
     value: "e-sign-svc/v1/_esign"
+  - name: BILLING_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: billing-service
+  - name: ETREASURY_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: etreasury
+  - name: TASK_MANAGEMENT_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: task-management
+  - name: PAYMENT_CALCULATOR_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: payment-calculator
