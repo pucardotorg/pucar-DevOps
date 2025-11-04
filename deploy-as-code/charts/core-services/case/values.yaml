@@ -27,10 +27,8 @@ image:
 replicas: "1"
 httpPort: 8080
 appType: "java-spring"
-heap: "-Xmx1536m -Xms1536m -agentlib:jdwp=transport=dt_socket,address=*:8000,server=y,suspend=n"
-debugPort: 8000
-remote_debug:
-  enabled: true
+heap: "-Xmx1536m -Xms1536m"
+debugPort: 5005
 java-args: "-Dspring.profiles.active=monitoring"
 memory_requests: 2Gi
 memory_limits: 2Gi
@@ -214,3 +212,8 @@ env: |
         key: etreasury
   - name: EGOV_SMS_NOTIFICATION_CASE_JUDGE_REGISTER_TEMPLATE_ID
     value: "1107174288665718004"
+  - name: EGOV_ORDER_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: order

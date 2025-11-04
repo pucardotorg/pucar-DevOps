@@ -34,9 +34,9 @@ releases:
   #      installed: true
   #      <<: *default
   #
-  #    - name: egov-localization # Replace with your desired namespace
-  #      installed: true
-  #      <<: *default
+  - name: egov-localization # Replace with your desired namespace
+    installed: true
+    <<: *default
   #
   #    - name: egov-location # Replace with your desired namespace
   #      installed: true
@@ -82,9 +82,9 @@ releases:
   #      installed: true
   #      <<: *default
   #
-  #    - name: user-otp # Replace with your desired namespace
-  #      installed: true
-  #      <<: *default
+  - name: user-otp # Replace with your desired namespace
+    installed: true
+    <<: *default
   #
   #    - name: configmaps # Replace with your desired namespace
   #      installed: true
@@ -114,9 +114,9 @@ releases:
 #        installed: true
 #        <<: *default
 
-  - name: egov-pg-service # Replace with your desired namespace
-    installed: true
-    <<: *default
+  # - name: egov-pg-service # Replace with your desired namespace
+  #   installed: true
+  #   <<: *default
   #
   #    - name: egov-user-event # Replace with your desired namespace
   #      installed: true
@@ -162,11 +162,11 @@ releases:
       deployment: "advocate"
     <<: *default
 
-  #    - name: billing-service  # Replace with your desired namespace
-  #      installed: true
-  #      labels:
-  #        deployment: "billing-service"
-  #      <<: *default
+  - name: billing-service  # Replace with your desired namespace
+    installed: true
+    labels:
+      deployment: "billing-service"
+    <<: *default
   #
   #
   #    - name: collection-services  # Replace with your desired namespace
@@ -175,11 +175,11 @@ releases:
   #        deployment: "collection-services"
   #      <<: *default
   #
-  - name: case  # Replace with your desired namespace
-    installed: true
-    labels:
-      deployment: "case"
-    <<: *default
+#  - name: case  # Replace with your desired namespace
+#    installed: true
+#    labels:
+#      deployment: "case"
+#    <<: *default
 #
   #    - name: inbox  # Replace with your desired namespace
   #      installed: true
@@ -247,11 +247,11 @@ releases:
 #      deployment: "esign-interceptor"
 #    <<: *default
 
-  # - name: summons-svc  # Replace with your desired namespace
-  #   installed: true
-  #   labels:
-  #     deployment: "summons-svc"
-  #   <<: *default
+  - name: summons-svc  # Replace with your desired namespace
+    installed: true
+    labels:
+      deployment: "summons-svc"
+    <<: *default
   #    - name: e-sign  # Replace with your desired namespace
   #      installed: true
   #      labels:
@@ -263,17 +263,17 @@ releases:
   #         deployment: "qr-code-service"
   #       <<: *default
 
-#  - name: etreasury  # Replace with your desired namespace
-#    installed: true
-#    labels:
-#      deployment: "etreasury"
-#    <<: *default
+  - name: etreasury  # Replace with your desired namespace
+    installed: true
+    labels:
+      deployment: "etreasury"
+    <<: *default
 
-  #    - name: epayments  # Replace with your desired namespace
-  #      installed: true
-  #      labels:
-  #        deployment: "epayments"
-  #      <<: *default
+  - name: epayments  # Replace with your desired namespace
+    installed: true
+    labels:
+      deployment: "epayments"
+    <<: *default
   # - name: analytics  # Replace with your desired namespace
   #   installed: true
   #   labels:
@@ -285,11 +285,11 @@ releases:
       deployment: "transformer"
     <<: *default
 
-#  - name: epost-tracker # Replace with your desired namespace
-#    installed: true
-#    labels:
-#      deployment: "epost-tracker"
-#    <<: *default
+  - name: epost-tracker # Replace with your desired namespace
+    installed: true
+    labels:
+      deployment: "epost-tracker"
+    <<: *default
   - name: icops-integration # Replace with your desired namespace
     installed: true
     labels:
@@ -344,27 +344,31 @@ releases:
   # - name: opencv # Replace with your desired namespace
   #   installed: true # Replace with the version of your chart, if needed
   #   <<: *default
-  - name: openapi # Replace with your desired namespace
-    installed: true # Replace with the version of your chart, if needed
-    <<: *default
+  # - name: openapi # Replace with your desired namespace
+  #   installed: true # Replace with the version of your chart, if needed
+  #   <<: *default
 #  - name: lock-svc # Replace with your desired namespace
 #    installed: true # Replace with the version of your chart, if needed
 #    <<: *default
-  - name: ab-diary # Replace with your desired namespace
-    installed: true # Replace with the version of your chart, if needed
-    <<: *default
-  - name: notification # Replace with your desired namespace
-    installed: true # Replace with the version of your chart, if needed
-    <<: *default
-  - name: order-management # Replace with your desired namespace
-    installed: true # Replace with the version of your chart, if needed
-    <<: *default
-  - name: hearing-management # Replace with your desired namespace
-    installed: true # Replace with the version of your chart, if needed
-    <<: *default
-  - name: landing-page # Replace with your desired namespace
-    installed: true # Replace with the version of your chart, if needed
-    <<: *default
-  - name: bail-bond # Replace with your desired namespace
+  # - name: ab-diary # Replace with your desired namespace
+  #   installed: true # Replace with the version of your chart, if needed
+  #   <<: *default
+  # - name: notification # Replace with your desired namespace
+  #   installed: true # Replace with the version of your chart, if needed
+  #   <<: *default
+  # - name: order-management # Replace with your desired namespace
+  #   installed: true # Replace with the version of your chart, if needed
+  #   <<: *default
+  # - name: hearing-management # Replace with your desired namespace
+  #   installed: true # Replace with the version of your chart, if needed
+  #   <<: *default
+  # - name: landing-page # Replace with your desired namespace
+  #   installed: true # Replace with the version of your chart, if needed
+  #   <<: *default
+  # - name: bail-bond # Replace with your desired namespace
+  #   installed: true # Replace with the version of your chart, if needed
+  #   <<: *default
+
+  - name: inportal-survey # Replace with your desired namespace
     installed: true # Replace with the version of your chart, if needed
     <<: *default

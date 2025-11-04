@@ -33,6 +33,7 @@ healthChecks:
   enabled: true
   livenessProbePath: "/scheduler/health"
   readinessProbePath: "/scheduler/health"
+debugPort: 5005
 # Additional Container Envs
 env: |
   - name: email.cause.list.recipients
@@ -44,10 +45,6 @@ env: |
       configMapKeyRef:
         key: judge-name
         name: egov-config
-  - name: JAVA_ENABLE_DEBUG
-    value: "true"
-  - name: JAVA_DEBUG_PORT
-    value: "5005"
   - name: SERVER_PORT
     value: "8080"
   - name: COURT_ENABLED

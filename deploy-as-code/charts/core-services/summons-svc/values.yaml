@@ -32,6 +32,7 @@ appType: "java-spring"
 tracing-enabled: true
 heap: "-Xmx64m -Xms64m"
 java-args: "-Dspring.profiles.active=monitoring"
+debugPort: 5005
 
 # Additional Container Envs
 env: |          
@@ -45,10 +46,6 @@ env: |
       configMapKeyRef:
         key: COURT_ADDRESS
         name: egov-config
-  - name: JAVA_ENABLE_DEBUG
-    value: "true"
-  - name: JAVA_DEBUG_PORT
-    value: "5005"
   - name: SPRING_DATASOURCE_URL
     valueFrom:
       configMapKeyRef:

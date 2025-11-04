@@ -30,10 +30,8 @@ replicas: "1"
 httpPort: 8080
 appType: "java-spring"
 java-args: "-Dspring.profiles.active=monitoring"
-heap: "-Xmx256m -Xms256m -agentlib:jdwp=transport=dt_socket,address=*:8000,server=y,suspend=n"
-debugPort: 8000
-remote_debug:
-  enabled: true
+heap: "-Xmx256m -Xms256m"
+debugPort: 5005
 memory_limits: 640Mi
 env: |
   - name: MANAGEMENT_HEALTH_REDIS_ENABLED
@@ -139,3 +137,28 @@ env: |
         key: evidence
   - name: esign.service.endpoint
     value: "e-sign-svc/v1/_esign"
+  - name: EGOV_BILLING_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: billing-service
+  - name: EGOV_ETREASURY_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: etreasury
+  - name: EGOV_TASK_MANAGEMENT_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: task-management
+  - name: EGOV_PAYMENT_CALCULATOR_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: payment-calculator
+  - name: EGOV_LOCK_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: lock-service

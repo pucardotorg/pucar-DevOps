@@ -1,0 +1,29 @@
+templates:
+  default: &default
+    chart: ./{{`{{ .Release.Name }}`}}
+    version: 0.1.0
+    namespace: cronjobs
+    # This prevents helmfile exiting when it encounters a missing file
+    # Valid values are "Error", "Warn", "Info", "Debug". The default is "Error"
+    # Use "Debug" to make missing files errors invisible at the default log level(--log-level=INFO)
+    missingFileHandler: Warn
+    values:
+      - ../environments/{{ requiredEnv "HELMFILE_ENV" }}.yaml
+
+
+releases:
+  - name: case-status-cron
+    <<: *default
+    installed: true
+
+  - name: hearing-scheduled-completed-cron
+    <<: *default
+    installed: true
+
+  - name: ordermanagement-mandatory-submission
+    <<: *default
+    installed: true
+
+  - name: payment-pending-cron
+    <<: *default
+    installed: true

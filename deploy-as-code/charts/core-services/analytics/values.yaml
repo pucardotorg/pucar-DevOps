@@ -25,10 +25,8 @@ replicas: "1"
 httpPort: 8080
 appType: "java-spring"
 java-args: "-Dspring.profiles.active=monitoring"
-heap: "-Xmx256m -Xms256m -agentlib:jdwp=transport=dt_socket,address=*:8000,server=y,suspend=n"
-debugPort: 8000
-remote_debug:
-  enabled: true
+heap: "-Xmx256m -Xms256m"
+debugPort: 5005
 memory_limits: 640Mi
 env: |
   - name: JAVA_OPTS

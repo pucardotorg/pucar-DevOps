@@ -2,13 +2,10 @@
 # This is a YAML-formatted file.
 # Declare name/value pairs to be passed into your templates.
 global:
-    containerRegistry: egovio
+    containerRegistry: docker.io/venkarramireddyb
 
 replicas: 1
 httpPort: 8080
-debugPort: 5005
-remote_debug:
-  enabled: false
 appType: ""
 
 ingress:
@@ -44,19 +41,31 @@ initContainers:
           valueFrom: 
             configMapKeyRef: 
               name: egov-config
+          {{- if eq .Values.db "njdg" }}
+              key: njdg-db-url
+          {{- else }}
               key: db-url
+          {{- end }}
         - name: "SCHEMA_TABLE"
           value: {{ .Values.initContainers.dbMigration.schemaTable | quote }}              
         - name: "FLYWAY_USER"
           valueFrom: 
             secretKeyRef: 
                 name: db
+          {{- if eq .Values.db "njdg" }}
+                key: njdg-username
+          {{- else }}
                 key: flyway-username
+          {{- end }}
         - name: "FLYWAY_PASSWORD"
           valueFrom:
             secretKeyRef: 
                 name: db
+          {{- if eq .Values.db "njdg" }}
+                key: njdg-password
+          {{- else }}
                 key: flyway-password
+          {{- end }}
         - name: "FLYWAY_LOCATIONS"
           valueFrom: 
             configMapKeyRef: 
@@ -123,11 +132,6 @@ resources: |
 ## Allows specification of additional environment variables
 extraEnv:
   java: |
-      - name: SPRING_DATASOURCE_URL
-        valueFrom:
-          configMapKeyRef:
-            name: egov-config
-            key: db-url
       - name: FLYWAY_ENABLED
         value: "false"      
       - name: SPRING_FLYWAY_ENABLED
@@ -143,17 +147,38 @@ extraEnv:
         valueFrom:
           configMapKeyRef:
             name: egov-config
+      {{- if eq .Values.db "njdg" }}
+            key: njdg-db-url
+      {{- else }}
             key: db-url
+      {{- end }}
+      - name: SPRING_DATASOURCE_URL
+        valueFrom:
+          configMapKeyRef:
+            name: egov-config
+      {{- if eq .Values.db "njdg" }}
+            key: njdg-db-url
+      {{- else }}
+            key: db-url
+      {{- end }}
       - name: SPRING_DATASOURCE_USERNAME
         valueFrom:
           secretKeyRef:
             name: db
+      {{- if eq .Values.db "njdg" }}
+            key: njdg-username
+      {{- else }}
             key: username
+      {{- end }}
       - name: SPRING_DATASOURCE_PASSWORD
         valueFrom:
           secretKeyRef:
             name: db
+      {{- if eq .Values.db "njdg" }}
+            key: njdg-password
+      {{- else }}
             key: password
+      {{- end }}
       - name: SPRING_DATASOURCE_TOMCAT_INITIAL_SIZE
         valueFrom:
           configMapKeyRef:

@@ -26,7 +26,7 @@ spec:
   - name: http
     port: {{ .Values.httpPort }}
     targetPort: {{ .Values.httpPort }}
-  {{- if .Values.remote_debug.enabled }}
+  {{- if .Values.debugPort }}
   - name: debug
     port: {{ .Values.debugPort }}
     targetPort: {{ .Values.debugPort }}
