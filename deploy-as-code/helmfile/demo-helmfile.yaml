@@ -283,7 +283,7 @@ releases:
     <<: *default
 
   # - name: sunbirdrc-credential-service
-  #   installed: true
+  #   installed: fasle
   #   <<: *default
 
   # - name: task
@@ -291,7 +291,7 @@ releases:
   #   <<: *default
 
   - name: transcription
-    installed: true
+    installed: false
     <<: *default
 
   # - name: transformer
@@ -299,7 +299,7 @@ releases:
   #   <<: *default
 
   - name: user-onboard
-    installed: true
+    installed: false
     <<: *default
 
   - name: user-otp
@@ -307,13 +307,9 @@ releases:
     <<: *default
 
   - name: verifyapp
-    installed: true
+    installed: false
     <<: *default
 
   # - name: workbench-ui
-  #   installed: true
-  #   <<: *default
-
-  # - name: xstate-chatbot
   #   installed: true
   #   <<: *default
