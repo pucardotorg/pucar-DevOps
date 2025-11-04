@@ -46,7 +46,10 @@ configmaps:
       JUDGE_DESIGNATION_HEADER: 'Special Court Of Judicial Magistrate of the First Class , for the trial of cases under section 138 of NI Act , 1881 at Kollam ( "24X7 ON Court" )'
       service-dept-code: 01BRAA
       COURT_NAME: 'Special Court Of Judicial Magistrate of the First Class , for the trial of cases under section 138 of NI Act , 1881 at Kollam ( "24X7 ON Court" )'
-
+      service-name: 'icops'
+      service-ky: IC0001
+      auth-type: get_auth_token
+      domain-url: https://demo.pucar.org
 
   egov-service-host:
     name: egov-service-host
@@ -196,10 +199,9 @@ configmaps:
 root-ingress:
   name: root-ingress
   namespace: egov
-  cert-issuer: "letsencrypt-staging"
-  appRoot: citizen
-  serviceName: citizen
-  servicePort: 80
+  cert-issuer: "letsencrypt-prod"
+  serviceName: oncourts-website
+  servicePort: 3000
 secrets:
   db:
     name: db
