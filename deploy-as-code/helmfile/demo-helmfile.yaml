@@ -14,177 +14,177 @@ commonLabels:
   deployment: "pucar"
 
 releases:
-  - name: ab-diary
-    installed: true
-    <<: *default
+  # - name: ab-diary
+  #   installed: true
+  #   <<: *default
 
-  - name: advocate
-    installed: true
-    <<: *default
+  # - name: advocate
+  #   installed: true
+  #   <<: *default
 
-  - name: analytics
-    installed: true
-    <<: *default
+  # - name: analytics
+  #   installed: true
+  #   <<: *default
 
-  - name: application
-    installed: true
-    <<: *default
+  # - name: application
+  #   installed: true
+  #   <<: *default
 
-  - name: audit-service
-    installed: true
-    <<: *default
+  # - name: audit-service
+  #   installed: true
+  #   <<: *default
 
-  - name: bail-bond
-    installed: true
-    <<: *default
+  # - name: bail-bond
+  #   installed: true
+  #   <<: *default
 
-  - name: billing-service
-    installed: true
-    <<: *default
+  # - name: billing-service
+  #   installed: true
+  #   <<: *default
 
-  - name: case
-    installed: true
-    <<: *default
+  # - name: case
+  #   installed: true
+  #   <<: *default
 
-  - name: casemanagement
-    installed: true
-    <<: *default
+  # - name: casemanagement
+  #   installed: true
+  #   <<: *default
 
-  - name: citizen
-    installed: true
-    <<: *default
+  # - name: citizen
+  #   installed: true
+  #   <<: *default
 
-  - name: collection-services
-    installed: true
-    <<: *default
+  # - name: collection-services
+  #   installed: true
+  #   <<: *default
 
   # - name: configmaps
   #   installed: true
   #   <<: *default
 
-  - name: digit-ui
+  # - name: digit-ui
+  #   installed: true
+  #   <<: *default
+
+  # - name: dristi-case-pdf
+  #   installed: true
+  #   <<: *default
+
+  # - name: dristi-pdf
+  #   installed: true
+  #   <<: *default
+
+  # - name: egov-accesscontrol
+  #   installed: true
+  #   <<: *default
+
+  # - name: egov-apportion-service
+  #   installed: true
+  #   <<: *default
+#######################################################################
+  - name: egov-enc-service
     installed: true
     <<: *default
 
-  - name: dristi-case-pdf
+  - name: egov-filestore
     installed: true
     <<: *default
 
-  - name: dristi-pdf
+  - name: egov-hrms
     installed: true
     <<: *default
 
-  - name: egov-accesscontrol
+  - name: egov-idgen
     installed: true
     <<: *default
 
-  - name: egov-apportion-service
+  - name: egov-indexer
     installed: true
     <<: *default
 
-  # - name: egov-enc-service
-  #   installed: true
-  #   <<: *default
-
-  # - name: egov-filestore
-  #   installed: true
-  #   <<: *default
-
-  # - name: egov-hrms
-  #   installed: true
-  #   <<: *default
-
-  # - name: egov-idgen
-  #   installed: true
-  #   <<: *default
-
-  # - name: egov-indexer
-  #   installed: true
-  #   <<: *default
-
-  # - name: egov-localization
-  #   installed: true
-  #   <<: *default
-
-  # - name: egov-location
-  #   installed: true
-  #   <<: *default
-
-  # - name: egov-mdms-service
-  #   installed: true
-  #   <<: *default
-
-  # - name: egov-notification-mail
-  #   installed: true
-  #   <<: *default
-
-  # - name: egov-otp
-  #   installed: true
-  #   <<: *default
-
-  # - name: egov-persister
-  #   installed: true
-  #   <<: *default
-
-  # - name: egov-pg-service
-  #   installed: true
-  #   <<: *default
-
-  # - name: egov-url-shortening
-  #   installed: true
-  #   <<: *default
-
-  # - name: egov-user
-  #   installed: true
-  #   <<: *default
-
-  # - name: egov-user-event
-  #   installed: true
-  #   <<: *default
-
-  # - name: egov-workflow-v2
-  #   installed: true
-  #   <<: *default
-
-  # - name: employee
-  #   installed: true
-  #   <<: *default
-
-  # - name: epayments
-  #   installed: true
-  #   <<: *default
-
-  # - name: epost-tracker
-  #   installed: true
-  #   <<: *default
-
-  # - name: e-sign
-  #   installed: true
-  #   <<: *default
-
-  # - name: esign-interceptor
-  #   installed: true
-  #   <<: *default
-
-  # - name: e-sign-svc
-  #   installed: true
-  #   <<: *default
-
-  # - name: etreasury
-  #   installed: true
-  #   <<: *default
-
-  - name: evidence
+  - name: egov-localization
     installed: true
     <<: *default
+
+  - name: egov-location
+    installed: true
+    <<: *default
+
+  - name: egov-mdms-service
+    installed: true
+    <<: *default
+
+  - name: egov-notification-mail
+    installed: true
+    <<: *default
+
+  - name: egov-otp
+    installed: true
+    <<: *default
+
+  - name: egov-persister
+    installed: true
+    <<: *default
+
+  - name: egov-pg-service
+    installed: true
+    <<: *default
+
+  - name: egov-url-shortening
+    installed: true
+    <<: *default
+
+  - name: egov-user
+    installed: true
+    <<: *default
+
+  - name: egov-user-event
+    installed: true
+    <<: *default
+
+  - name: egov-workflow-v2
+    installed: true
+    <<: *default
+
+  - name: employee
+    installed: true
+    <<: *default
+
+  - name: epayments
+    installed: true
+    <<: *default
+
+  - name: epost-tracker
+    installed: true
+    <<: *default
+
+  - name: e-sign
+    installed: true
+    <<: *default
+
+  - name: esign-interceptor
+    installed: true
+    <<: *default
+
+  - name: e-sign-svc
+    installed: true
+    <<: *default
+
+  - name: etreasury
+    installed: true
+    <<: *default
+
+  # # - name: evidence
+  # #   installed: true
+  # #   <<: *default
 
   # - name: gateway
   #   installed: true
   #   <<: *default
 
-  - name: hearing
-    installed: true
-    <<: *default
+  # # - name: hearing
+  # #   installed: true
+  # #   <<: *default
 
   # - name: hearing-management
   #   installed: true
@@ -194,9 +194,9 @@ releases:
   #   installed: true
   #   <<: *default
 
-  - name: inbox
-    installed: true
-    <<: *default
+#   # - name: inbox
+#   #   installed: true
+#   #   <<: *default
 
   # - name: individual
   #   installed: true
@@ -242,9 +242,9 @@ releases:
   #   installed: true
   #   <<: *default
 
-  - name: order-management
-    installed: true
-    <<: *default
+#   # - name: order-management
+#   #   installed: true
+#   #   <<: *default
 
   # - name: payment-calculator
   #   installed: true
@@ -270,9 +270,9 @@ releases:
   #   installed: true
   #   <<: *default
 
-  - name: scheduler
-    installed: true
-    <<: *default
+#   # - name: scheduler
+#   #   installed: true
+#   #   <<: *default
 
   # - name: service-request
   #   installed: true
@@ -286,17 +286,17 @@ releases:
   #   installed: true
   #   <<: *default
 
-  - name: task
-    installed: true
-    <<: *default
+#   # - name: task
+#   #   installed: true
+#   #   <<: *default
 
   # - name: transcription
   #   installed: true
   #   <<: *default
 
-  - name: transformer
-    installed: true
-    <<: *default
+#   # - name: transformer
+#   #   installed: true
+#   #   <<: *default
 
   # - name: user-onboard
   #   installed: true
