@@ -53,8 +53,6 @@ spec:
         {{- tpl . $ | nindent 6 }}
       {{- end }}     
     {{- end }}
-      imagePullSecrets:
-      - name: acr-secret
     {{- if .Values.affinity.preferSpreadAcrossAZ }}
       affinity:
         podAntiAffinity:
