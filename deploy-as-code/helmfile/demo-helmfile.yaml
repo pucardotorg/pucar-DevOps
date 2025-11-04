@@ -203,7 +203,7 @@ releases:
     <<: *default
 
   - name: kenlm
-    installed: true
+    installed: false
     <<: *default
 
   - name: kerala-sms
@@ -215,10 +215,6 @@ releases:
   #   <<: *default
 
   - name: lock-svc
-    installed: true
-    <<: *default
-
-  - name: mdms-v2
     installed: true
     <<: *default
 
@@ -259,7 +255,7 @@ releases:
     <<: *default
 
   - name: qr-code-service
-    installed: true
+    installed: false
     <<: *default
 
   # - name: sbi-svc
