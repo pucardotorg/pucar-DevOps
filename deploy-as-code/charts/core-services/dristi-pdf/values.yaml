@@ -149,3 +149,8 @@ env: |
       configMapKeyRef:
         key: bail-bond
         name: egov-service-host
+  - name: DRISTI_TASK_MANAGEMENT_HOST
+    valueFrom:
+      configMapKeyRef:
+        key: task-management
+        name: egov-service-host
