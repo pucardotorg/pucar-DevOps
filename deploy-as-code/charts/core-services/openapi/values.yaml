@@ -187,3 +187,8 @@ env: |
       secretKeyRef:
         name: elasticsearch-credentials
         key: password
+  - name: DRISTI_ANALYTICS_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: analytics
