@@ -238,6 +238,8 @@ jobs:
           echo "filestore_commit=$filestore_commit" >> $GITHUB_ENV
           landing_page_commit=$(git ls-remote https://github.com/pucardotorg/Oncourts_Landing_page.git ${{ vars.BACKEND_BRANCH }} | awk '{print $1}')
           echo "landing_page_commit=$landing_page_commit" >> $GITHUB_ENV
+          task_management_commit=$(git log -1 --pretty=format:%H -- backend/task-management)
+          echo "task_management_commit=$task_management_commit" >> $GITHUB_ENV
       - name: digit deployment
         env:
           BACKEND_BRANCH: ${{ vars.IMAGE_TAG_PREFIX }}
@@ -267,6 +269,8 @@ jobs:
             --set order.initContainers.dbMigration.image.tag=${{ env.BACKEND_BRANCH }}-${{ env.order_commit }} \
             --set task.image.tag=${{ env.BACKEND_BRANCH }}-${{ env.task_commit }} \
             --set task.initContainers.dbMigration.image.tag=${{ env.BACKEND_BRANCH }}-${{ env.task_commit }} \
+            --set task-management.image.tag=${{ env.BACKEND_BRANCH }}-${{ env.task_management_commit }} \
+            --set task-management.initContainers.dbMigration.image.tag=${{ env.BACKEND_BRANCH }}-${{ env.task_management_commit }} \
             --set billing-service.image.tag=${{ env.BACKEND_BRANCH }}-${{ env.billing_service_commit }} \
             --set billing-service.initContainers.dbMigration.image.tag=${{ env.BACKEND_BRANCH }}-${{ env.billing_service_commit }} \
             --set collection-services.image.tag=${{ env.BACKEND_BRANCH }}-${{ env.collection_service_commit }} \
