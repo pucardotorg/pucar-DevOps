@@ -112,3 +112,8 @@ env: |
         key: etreasury
   - name: KAFKA_TOPICS_RECEIPT_CREATE
     value: egov.collection.payment-create
+  - name: DRISTI_ANALYTICS_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: analytics
