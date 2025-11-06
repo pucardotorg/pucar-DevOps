@@ -95,7 +95,7 @@ env: |
       configMapKeyRef:
         name: egov-service-host
         key: egov-url-shortening
-  - name: EGOV_BILLING_SERVICE_HOSTNAME
+  - name: EGOV_BILLING_SERVICE_HOST
     valueFrom:
       configMapKeyRef:
         name: egov-service-host
