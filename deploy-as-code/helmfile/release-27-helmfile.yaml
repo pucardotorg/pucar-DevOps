@@ -194,9 +194,9 @@ releases:
   #   installed: true
   #   <<: *default
 
-  - name: inbox
-    installed: true
-    <<: *default
+  # - name: inbox
+  #   installed: true
+  #   <<: *default
 
   # - name: individual
   #   installed: true
@@ -234,9 +234,9 @@ releases:
   #   installed: true
   #   <<: *default
 
-  - name: openapi
-    installed: true
-    <<: *default
+  # - name: openapi
+  #   installed: true
+  #   <<: *default
 
   # - name: order
   #   installed: true
