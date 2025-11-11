@@ -210,9 +210,9 @@ releases:
   #   installed: true
   #   <<: *default
 
-  # - name: landing-page
-  #   installed: true
-  #   <<: *default
+  - name: landing-page
+    installed: true
+    <<: *default
 
   # - name: lock-svc
   #   installed: true
