@@ -132,3 +132,8 @@ env: |
       secretKeyRef:
         name: elasticsearch-credentials
         key: password
+  - name: DRISTI_ADVOCATE_HOST
+    valueFrom:
+      configMapKeyRef:
+        key: advocate
+        name: egov-service-host
