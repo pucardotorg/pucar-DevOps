@@ -26,17 +26,17 @@ releases:
      installed: true
      <<: *default
 
-  # - name: application
-  #   installed: true
-  #   <<: *default
+   - name: application
+     installed: true
+     <<: *default
 
   # - name: audit-service
   #   installed: true
   #   <<: *default
 
-  # - name: bail-bond
-  #   installed: true
-  #   <<: *default
+   - name: bail-bond
+     installed: true
+     <<: *default
 
   # - name: billing-service
   #   installed: true
@@ -154,9 +154,9 @@ releases:
   #   installed: true
   #   <<: *default
 
-  # - name: epost-tracker
-  #   installed: true
-  #   <<: *default
+   - name: epost-tracker
+     installed: true
+     <<: *default
 
   # - name: e-sign
   #   installed: true
@@ -170,13 +170,13 @@ releases:
   #   installed: true
   #   <<: *default
 
-  # - name: etreasury
-  #   installed: true
-  #   <<: *default
+   - name: etreasury
+     installed: true
+     <<: *default
 ########################################################
-  # - name: evidence
-  #   installed: true
-  #   <<: *default
+   - name: evidence
+     installed: true
+     <<: *default
 
 #  - name: gateway
 #    installed: true
@@ -202,6 +202,10 @@ releases:
  #   installed: true
 #    <<: *default
 
+   - name: inportal-survey
+     installed: true
+     <: *default
+
 #  - name: kenlm
 #    installed: false
   #  <<: *default
@@ -218,9 +222,9 @@ releases:
  #   installed: true
 #    <<: *default
 
-#  - name: notification
-#    installed: true
-#    <<: *default
+   - name: notification
+     installed: true
+     <<: *default
 
   # - name: ocr-service
   #   installed: true
@@ -234,17 +238,17 @@ releases:
      installed: true
      <<: *default
 
-#  - name: order
- #   installed: true
-#    <<: *default
+   - name: order
+     installed: true
+     <<: *default
 
    - name: order-management
      installed: true
      <<: *default
 
-#  - name: payment-calculator
- #   installed: true
-#    <<: *default
+   - name: payment-calculator
+     installed: true
+     <<: *default
 
  # - name: pdf-service
   #  installed: true
@@ -274,17 +278,17 @@ releases:
  #   installed: true
  #   <<: *default
 
-#  - name: summons-svc
-#    installed: true
-#    <<: *default
+   - name: summons-svc
+     installed: true
+     <<: *default
 
   # - name: sunbirdrc-credential-service
   #   installed: fasle
   #   <<: *default
 
-  # - name: task
-  #   installed: true
-  #   <<: *default
+   - name: task
+     installed: true
+     <<: *default
 
    - name: task-management
      installed: true
