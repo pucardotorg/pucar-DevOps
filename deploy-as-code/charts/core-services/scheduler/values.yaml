@@ -171,5 +171,3 @@ env: |
       secretKeyRef:
         name: elasticsearch-credentials
         key: password
-  - name: CONFIG_CAUSELIST_GENERATE
-    value: '0 55 18 * * *'

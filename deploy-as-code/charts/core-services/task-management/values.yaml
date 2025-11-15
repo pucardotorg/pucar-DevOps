@@ -95,7 +95,7 @@ env: |
       configMapKeyRef:
         name: egov-service-host
         key: egov-url-shortening
-  - name: EGOV_BILLING_SERVICE_HOSTNAME
+  - name: EGOV_BILLING_SERVICE_HOST
     valueFrom:
       configMapKeyRef:
         name: egov-service-host
@@ -110,3 +110,30 @@ env: |
       configMapKeyRef:
         name: egov-service-host
         key: etreasury
+  - name: KAFKA_TOPICS_RECEIPT_CREATE
+    value: egov.collection.payment-create
+  - name: DRISTI_ANALYTICS_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: analytics
+  - name: EGOV_INFRA_INDEXER_HOST
+    valueFrom:
+      configMapKeyRef:
+        key: es-indexer-host
+        name: egov-config
+  - name: EGOV_INDEXER_ES_USERNAME
+    valueFrom:
+      secretKeyRef:
+        name: elasticsearch-credentials
+        key: username
+  - name: EGOV_INDEXER_ES_PASSWORD
+    valueFrom:
+      secretKeyRef:
+        name: elasticsearch-credentials
+        key: password
+  - name: DRISTI_ADVOCATE_HOST
+    valueFrom:
+      configMapKeyRef:
+        key: advocate
+        name: egov-service-host

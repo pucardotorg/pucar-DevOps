@@ -156,3 +156,8 @@ env: |
         name: egov-service-host
   - name: EGOV_EVIDENCE_SEARCH_ENDPOINT
     value: /evidence/v1/_search
+  - name: DRISTI_TASK-MANAGEMENT_HOST
+    valueFrom:
+      configMapKeyRef:
+        key: task-management
+        name: egov-service-host

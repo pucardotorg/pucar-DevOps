@@ -165,3 +165,18 @@ env: |
       configMapKeyRef:
         name: egov-service-host
         key: egov-user
+  - name: DRISTI_TASK-MANAGEMENT_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: task-management
+  - name: EGOV_URL_SHORTNER_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: egov-url-shortening
+  - name: DOMAIN_URL
+    valueFrom:
+      configMapKeyRef:
+        key: domain-url
+        name: egov-config
