@@ -22,9 +22,9 @@ releases:
   #   installed: true
   #   <<: *default
 
-  # - name: analytics
-  #   installed: true
-  #   <<: *default
+   - name: analytics
+     installed: true
+     <<: *default
 
   # - name: application
   #   installed: true
@@ -42,9 +42,9 @@ releases:
   #   installed: true
   #   <<: *default
 
-  # - name: case
-  #   installed: true
-  #   <<: *default
+   - name: case
+     installed: true
+     <<: *default
 
   # - name: casemanagement
   #   installed: true
@@ -62,17 +62,17 @@ releases:
   #   installed: true
   #   <<: *default
 
-  # - name: digit-ui
-  #   installed: true
-  #   <<: *default
+   - name: digit-ui
+     installed: true
+     <<: *default
 
   # - name: dristi-case-pdf
   #   installed: true
   #   <<: *default
 
-  # - name: dristi-pdf
-  #   installed: true
-  #   <<: *default
+   - name: dristi-pdf
+     installed: true
+     <<: *default
 
   # - name: egov-accesscontrol
   #   installed: true
@@ -178,49 +178,49 @@ releases:
   #   installed: true
   #   <<: *default
 
-  - name: gateway
-    installed: true
-    <<: *default
+#  - name: gateway
+#    installed: true
+#    <<: *default
 
-  # - name: hearing
-  #   installed: true
-  #   <<: *default
+   - name: hearing
+     installed: true
+     <<: *default
 
-  - name: hearing-management
-    installed: true
-    <<: *default
+#  - name: hearing-management
+ #   installed: true
+#    <<: *default
 
-  - name: icops-integration
-    installed: true
-    <<: *default
+#  - name: icops-integration
+#    installed: true
+ #   <<: *default
 
-  # - name: inbox
-  #   installed: true
-  #   <<: *default
+   - name: inbox
+     installed: true
+     <<: *default
 
-  - name: individual
-    installed: true
-    <<: *default
+#  - name: individual
+ #   installed: true
+#    <<: *default
 
-  - name: kenlm
-    installed: false
-    <<: *default
+#  - name: kenlm
+#    installed: false
+  #  <<: *default
 
-  - name: kerala-sms
-    installed: true
-    <<: *default
+ # - name: kerala-sms
+ #   installed: true
+#    <<: *default
 
   # - name: landing-page
   #   installed: true
   #   <<: *default
 
-  - name: lock-svc
-    installed: true
-    <<: *default
+#  - name: lock-svc
+ #   installed: true
+#    <<: *default
 
-  - name: notification
-    installed: true
-    <<: *default
+#  - name: notification
+#    installed: true
+#    <<: *default
 
   # - name: ocr-service
   #   installed: true
@@ -230,33 +230,33 @@ releases:
   #   installed: true
   #   <<: *default
 
-  - name: openapi
-    installed: true
-    <<: *default
+   - name: openapi
+     installed: true
+     <<: *default
 
-  - name: order
-    installed: true
-    <<: *default
+#  - name: order
+ #   installed: true
+#    <<: *default
 
-  # - name: order-management
-  #   installed: true
-  #   <<: *default
+   - name: order-management
+     installed: true
+     <<: *default
 
-  - name: payment-calculator
-    installed: true
-    <<: *default
+#  - name: payment-calculator
+ #   installed: true
+#    <<: *default
 
-  - name: pdf-service
-    installed: true
-    <<: *default
+ # - name: pdf-service
+  #  installed: true
+  #  <<: *default
 
-  - name: pgr-services
-    installed: true
-    <<: *default
+ # - name: pgr-services
+ #   installed: true
+#    <<: *default
 
-  - name: qr-code-service
-    installed: false
-    <<: *default
+   - name: qr-code-service
+     installed: false
+     <<: *default
 
   # - name: sbi-svc
   #   installed: true
@@ -266,17 +266,17 @@ releases:
   #   installed: true
   #   <<: *default
 
-  # - name: scheduler
-  #   installed: true
-  #   <<: *default
+   - name: scheduler
+     installed: true
+     <<: *default
 
-  - name: service-request
-    installed: true
-    <<: *default
+ # - name: service-request
+ #   installed: true
+ #   <<: *default
 
-  - name: summons-svc
-    installed: true
-    <<: *default
+#  - name: summons-svc
+#    installed: true
+#    <<: *default
 
   # - name: sunbirdrc-credential-service
   #   installed: fasle
@@ -286,25 +286,29 @@ releases:
   #   installed: true
   #   <<: *default
 
-  - name: transcription
-    installed: false
-    <<: *default
+   - name: task-management
+     installed: true
+     <<: *default
+
+   - name: transcription
+     installed: false
+     <<: *default
 
   # - name: transformer
   #   installed: true
   #   <<: *default
 
-  - name: user-onboard
-    installed: false
-    <<: *default
+   - name: user-onboard
+     installed: false
+     <<: *default
 
-  - name: user-otp
-    installed: true
-    <<: *default
+   - name: user-otp
+     installed: true
+     <<: *default
 
-  - name: verifyapp
-    installed: false
-    <<: *default
+   - name: verifyapp
+     installed: false
+     <<: *default
 
   # - name: workbench-ui
   #   installed: true
