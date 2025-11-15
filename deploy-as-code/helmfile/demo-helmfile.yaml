@@ -204,7 +204,7 @@ releases:
 
    - name: inportal-survey
      installed: true
-     <: *default
+     <<: *default
 
 #  - name: kenlm
 #    installed: false
