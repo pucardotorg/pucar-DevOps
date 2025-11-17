@@ -33,14 +33,6 @@ inputs:
     description: 'Helmfile environment to use for deployment'
     required: true
     type: string
-  public_age_key:
-    description: 'Public AGE key for SOPS'
-    required: true
-    type: string
-  private_age_key:
-    description: 'Private AGE key for SOPS'
-    required: true
-    type: string
 
 runs:
   using: "composite"
@@ -80,8 +72,7 @@ runs:
         sudo apt update
         sudo apt install -y age
         mkdir -p $HOME/.config/sops/age/
-        echo # public key: ${{ inputs.public_age_key }} > $HOME/.config/sops/age/keys.txt
-        echo ${{ inputs.private_age_key }} >> $HOME/.config/sops/age/keys.txt
+        echo ${{ inputs.sops_key }} > $HOME/.config/sops/age/keys.txt
         wget https://github.com/mozilla/sops/releases/download/v3.7.1/sops-v3.7.1.linux
         chmod +x sops-v3.7.1.linux
         sudo mv sops-v3.7.1.linux /usr/local/bin/sops
