@@ -23,6 +23,9 @@ runs:
         elif [[ "$GITHUB_REF" == "refs/heads/main" ]]; then
           echo "deploy_env=demo" >> $GITHUB_OUTPUT
           echo "Deployment Environment set to 'demo' for main branch"
+        else
+          echo "deploy_env=dev" >> $GITHUB_OUTPUT
+          echo "Deployment Environment set to 'dev' for other branches"
         fi
 
         echo "GITHUB_REF is $GITHUB_REF"
