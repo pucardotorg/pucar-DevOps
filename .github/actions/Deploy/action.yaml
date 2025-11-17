@@ -1,0 +1,78 @@
+name: Auto Deploy
+
+description: "Handles the automatic deployment of services based on inputs."
+
+inputs:
+  image_name:
+    description: 'Provide the kubernetes service name'
+    required: true
+    type: string
+  image_tag:
+    description: 'Provide the image tag to deploy'
+    required: true
+    type: string
+  sops_key:
+    description: 'SOPS key for decryption'
+    required: true
+    type: string
+  service_group:
+    description: 'Service group for deployment'
+    required: false
+    type: string
+    default: 'core-services'
+    
+runs:
+  using: "composite"
+
+  steps:
+
+    - name: Checkout DevOps Repo
+      uses: actions/checkout@v4
+      with:
+        repository: pucardotorg/pucar-DevOps
+        ref: ${{ vars.devops_branch }}
+
+    - name: Kubectl setup
+      uses: azure/setup-kubectl@v3
+      with:
+        version: 'latest'
+
+    - name: Set up kubeconfig from secret
+      shell: bash
+      run: |
+        echo "${{ vars.KUBECONFIG }}" > $HOME/kubeconfig
+        echo "KUBECONFIG=$HOME/kubeconfig" >> $GITHUB_ENV
+        export KUBECONFIG=$HOME/kubeconfig
+        kubectl get namespaces
+
+    - name: Install Helmfile
+      uses: helmfile/helmfile-action@v1.9.0
+      with:
+        helmfile-version: 'v0.150.0'
+        helm-version: 'v3.19.0'
+        helm-plugins: >
+          https://github.com/databus23/helm-diff
+
+    - name: Install & Import sops
+      shell: bash
+      run: |
+        sudo apt update
+        sudo apt install -y age
+        mkdir -p $HOME/.config/sops/age/
+        echo # public key: ${{ secrets.PUBLIC_AGE_KEY }} > $HOME/.config/sops/age/keys.txt
+        echo ${{ secrets.PRIVATE_AGE_KEY }} >> $HOME/.config/sops/age/keys.txt
+        wget https://github.com/mozilla/sops/releases/download/v3.7.1/sops-v3.7.1.linux
+        chmod +x sops-v3.7.1.linux
+        sudo mv sops-v3.7.1.linux /usr/local/bin/sops
+
+    - name: Deploy
+      shell: bash
+      env:
+        HELMFILE_ENV: ${{ vars.HELMFILE_ENV }}
+        SERVICE_NAME: ${{ inputs.image_name }}
+        SERVICE_GROUP: ${{ inputs.service_group }}
+      run: |
+        # Display the current context and deploy with Helmfile
+        CURRENT_CONTEXT=$(kubectl config current-context)
+        echo "Deploying the service: \"${SERVICE_NAME}:${{ inputs.image_tag }}\" to ${CURRENT_CONTEXT}"
+        helmfile sync -f deploy-as-code/helmfile/auto-deploy-helmfile.yaml --set ${SERVICE_NAME}.image.tag=${{ inputs.image_tag }}
