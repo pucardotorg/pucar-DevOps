@@ -182,9 +182,9 @@ releases:
   #   installed: true
   #   <<: *default
 
-  - name: hearing
-    installed: true
-    <<: *default
+  # - name: hearing
+  #   installed: true
+  #   <<: *default
 
   # - name: hearing-management
   #   installed: true
@@ -242,9 +242,9 @@ releases:
   #   installed: true
   #   <<: *default
 
-  - name: order-management
-    installed: true
-    <<: *default
+  # - name: order-management
+  #   installed: true
+  #   <<: *default
 
   # - name: payment-calculator
   #   installed: true
@@ -290,9 +290,9 @@ releases:
   #   installed: true
   #   <<: *default
 
-  - name: task-management
-    installed: true
-    <<: *default
+  # - name: task-management
+  #   installed: true
+  #   <<: *default
 
   # - name: transcription
   #   installed: true
