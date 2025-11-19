@@ -20,7 +20,20 @@ inputs:
     required: false
     type: string
     default: 'core-services'
-    
+  devops_branch:
+    description: 'Branch of the DevOps repository to checkout'
+    required: true
+    type: string
+    default: 'Solutions-pipeline'
+  kubeconfig:
+    description: 'Kubeconfig for the target cluster'
+    required: true
+    type: string
+  helmfile_env:
+    description: 'Helmfile environment to use for deployment'
+    required: true
+    type: string
+
 runs:
   using: "composite"
 
@@ -30,7 +43,7 @@ runs:
       uses: actions/checkout@v4
       with:
         repository: pucardotorg/pucar-DevOps
-        ref: ${{ vars.devops_branch }}
+        ref: ${{ inputs.devops_branch }}
 
     - name: Kubectl setup
       uses: azure/setup-kubectl@v3
@@ -40,7 +53,7 @@ runs:
     - name: Set up kubeconfig from secret
       shell: bash
       run: |
-        echo "${{ vars.KUBECONFIG }}" > $HOME/kubeconfig
+        echo "${{ inputs.kubeconfig }}" > $HOME/kubeconfig
         echo "KUBECONFIG=$HOME/kubeconfig" >> $GITHUB_ENV
         export KUBECONFIG=$HOME/kubeconfig
         kubectl get namespaces
@@ -59,8 +72,7 @@ runs:
         sudo apt update
         sudo apt install -y age
         mkdir -p $HOME/.config/sops/age/
-        echo # public key: ${{ secrets.PUBLIC_AGE_KEY }} > $HOME/.config/sops/age/keys.txt
-        echo ${{ secrets.PRIVATE_AGE_KEY }} >> $HOME/.config/sops/age/keys.txt
+        echo ${{ inputs.sops_key }} > $HOME/.config/sops/age/keys.txt
         wget https://github.com/mozilla/sops/releases/download/v3.7.1/sops-v3.7.1.linux
         chmod +x sops-v3.7.1.linux
         sudo mv sops-v3.7.1.linux /usr/local/bin/sops
@@ -68,7 +80,7 @@ runs:
     - name: Deploy
       shell: bash
       env:
-        HELMFILE_ENV: ${{ vars.HELMFILE_ENV }}
+        HELMFILE_ENV: ${{ inputs.helmfile_env }}
         SERVICE_NAME: ${{ inputs.image_name }}
         SERVICE_GROUP: ${{ inputs.service_group }}
       run: |
