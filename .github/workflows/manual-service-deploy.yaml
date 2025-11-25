@@ -34,55 +34,15 @@ jobs:
     environment: 
       name: ${{ inputs.environment }}
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v6
-        with:
-          ref: ${{ vars.DEVOPS_BRANCH }}
-
-      - name: Kubectl setup
-        uses: azure/setup-kubectl@v3
-        with:
-          version: 'latest'
-
-      - name: Set up kubeconfig from secret
-        run: |
-          echo "${{ vars.KUBECONFIG }}" > $HOME/kubeconfig
-          echo "KUBECONFIG=$HOME/kubeconfig" >> $GITHUB_ENV
-          export KUBECONFIG=$HOME/kubeconfig
-          kubectl get namespaces
-
-      - name: Install sops
-        run: |
-          sudo apt update
-          sudo apt install -y age
-          mkdir -p $HOME/.config/sops/age/
-          echo # public key: ${{ secrets.PUBLIC_AGE_KEY }} > $HOME/.config/sops/age/keys.txt
-          echo ${{ secrets.PRIVATE_AGE_KEY }} >> $HOME/.config/sops/age/keys.txt
-          wget https://github.com/mozilla/sops/releases/download/v3.7.1/sops-v3.7.1.linux
-          chmod +x sops-v3.7.1.linux
-          sudo mv sops-v3.7.1.linux /usr/local/bin/sops
-
-      - name: sops decryption
-        run: |
-          sudo sops --decrypt --age ${{ secrets.PUBLIC_AGE_KEY }} -i $HOME/work/pucar-DevOps/pucar-DevOps/deploy-as-code/charts/environments/${{ vars.ENV_FILE }}-secrets.yaml
-
-      - name: Install Helmfile
-        uses: helmfile/helmfile-action@v1.9.0
-        with:
-          helmfile-version: 'v0.150.0'
-          helm-version: 'v3.19.0'
-          helm-plugins: >
-            https://github.com/databus23/helm-diff
-
       - name: Deploy Service
-        env:
-          HELMFILE_ENV: ${{ vars.ENV_FILE }}
-          SERVICE_GROUP: ${{ inputs.service_group }}
-          SERVICE_NAME: ${{ inputs.service_name }}
-        run: |
-          cd deploy-as-code/helmfile
-          
-          echo "Deploying service: ${{ inputs.service_name }} with tag: ${{ inputs.image_tag }}"
-          
-          helmfile sync -f auto-deploy-helmfile.yaml \
-            --set ${{ inputs.service_name }}.image.tag=${{ inputs.image_tag }}
+        uses: ./.github/actions/deploy-service
+        with:
+          environment: ${{ inputs.environment }}
+          service_group: ${{ inputs.service_group }}
+          service_name: ${{ inputs.service_name }}
+          image_tag: ${{ inputs.image_tag }}
+          kubeconfig: ${{ vars.KUBECONFIG }}
+          public_age_key: ${{ secrets.PUBLIC_AGE_KEY }}
+          private_age_key: ${{ secrets.PRIVATE_AGE_KEY }}
+          env_file: ${{ vars.ENV_FILE }}
+          checkout_ref: ${{ vars.DEVOPS_BRANCH }}
