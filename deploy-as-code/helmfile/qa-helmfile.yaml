@@ -42,9 +42,9 @@ releases:
   #   installed: true
   #   <<: *default
 
-  # - name: case
-  #   installed: true
-  #   <<: *default
+  - name: case
+    installed: true
+    <<: *default
 
   # - name: casemanagement
   #   installed: true
@@ -62,17 +62,17 @@ releases:
   #   installed: true
   #   <<: *default
 
-  - name: digit-ui
-    installed: true
-    <<: *default
+  # - name: digit-ui
+  #   installed: true
+  #   <<: *default
 
   # - name: dristi-case-pdf
   #   installed: true
   #   <<: *default
 
-  - name: dristi-pdf
-    installed: true
-    <<: *default
+  # - name: dristi-pdf
+  #   installed: true
+  #   <<: *default
 
   # - name: egov-accesscontrol
   #   installed: true
@@ -102,9 +102,9 @@ releases:
   #   installed: true
   #   <<: *default
 
-  - name: egov-localization
-    installed: true
-    <<: *default
+  # - name: egov-localization
+  #   installed: true
+  #   <<: *default
 
   # - name: egov-location
   #   installed: true
@@ -182,9 +182,9 @@ releases:
   #   installed: true
   #   <<: *default
 
-  # - name: hearing
-  #   installed: true
-  #   <<: *default
+  - name: hearing
+    installed: true
+    <<: *default
 
   # - name: hearing-management
   #   installed: true
@@ -194,13 +194,13 @@ releases:
   #   installed: true
   #   <<: *default
 
-  - name: inbox
-    installed: true
-    <<: *default
+  # - name: inbox
+  #   installed: true
+  #   <<: *default
 
-  - name: inportal-survey
-    installed: true
-    <<: *default
+  # - name: inportal-survey
+  #   installed: true
+  #   <<: *default
 
   # - name: individual
   #   installed: true
@@ -210,9 +210,9 @@ releases:
   #   installed: true
   #   <<: *default
 
-  - name: kerala-sms
-    installed: true
-    <<: *default
+  # - name: kerala-sms
+  #   installed: true
+  #   <<: *default
 
   # - name: landing-page
   #   installed: true
@@ -226,9 +226,9 @@ releases:
   #   installed: true
   #   <<: *default
 
-  - name: notification
-    installed: true
-    <<: *default
+  # - name: notification
+  #   installed: true
+  #   <<: *default
 
   # - name: ocr-service
   #   installed: true
@@ -242,13 +242,13 @@ releases:
   #   installed: true
   #   <<: *default
 
-  # - name: order
-  #   installed: true
-  #   <<: *default
+  - name: order
+    installed: true
+    <<: *default
 
-  # - name: order-management
-  #   installed: true
-  #   <<: *default
+  - name: order-management
+    installed: true
+    <<: *default
 
   # - name: payment-calculator
   #   installed: true
@@ -274,17 +274,17 @@ releases:
   #   installed: true
   #   <<: *default
 
-  # - name: scheduler
-  #   installed: true
-  #   <<: *default
+  - name: scheduler
+    installed: true
+    <<: *default
 
   # - name: service-request
   #   installed: true
   #   <<: *default
 
-  - name: summons-svc
-    installed: true
-    <<: *default
+  # - name: summons-svc
+  #   installed: true
+  #   <<: *default
 
   # - name: sunbirdrc-credential-service
   #   installed: true
@@ -298,17 +298,17 @@ releases:
   #   installed: true
   #   <<: *default
 
-  # - name: transformer
-  #   installed: true
-  #   <<: *default
+  - name: transformer
+    installed: true
+    <<: *default
 
   # - name: user-onboard
   #   installed: true
   #   <<: *default
 
-  - name: user-otp
-    installed: true
-    <<: *default
+  # - name: user-otp
+  #   installed: true
+  #   <<: *default
 
   # - name: verifyapp
   #   installed: true
