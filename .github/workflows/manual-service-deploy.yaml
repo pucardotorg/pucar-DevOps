@@ -1,0 +1,88 @@
+name: Manual Service Deployment
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Environment to deploy to'
+        required: true
+        default: 'dev'
+        type: choice
+        options:
+          - dev
+          - qa
+      service_group:
+        description: 'Service Group'
+        required: true
+        default: 'core-services'
+        type: choice
+        options:
+          - core-services
+          - cronjobs
+      service_name:
+        description: 'Service Name'
+        required: true
+        type: string
+      image_tag:
+        description: 'Image Tag'
+        required: true
+        type: string
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: 
+      name: ${{ inputs.environment }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ vars.DEVOPS_BRANCH }}
+
+      - name: Kubectl setup
+        uses: azure/setup-kubectl@v3
+        with:
+          version: 'latest'
+
+      - name: Set up kubeconfig from secret
+        run: |
+          echo "${{ vars.KUBECONFIG }}" > $HOME/kubeconfig
+          echo "KUBECONFIG=$HOME/kubeconfig" >> $GITHUB_ENV
+          export KUBECONFIG=$HOME/kubeconfig
+          kubectl get namespaces
+
+      - name: Install sops
+        run: |
+          sudo apt update
+          sudo apt install -y age
+          mkdir -p $HOME/.config/sops/age/
+          echo "${{ secrets.PUBLIC_AGE_KEY }}" > $HOME/.config/sops/age/keys.txt
+          echo "${{ secrets.PRIVATE_AGE_KEY }}" >> $HOME/.config/sops/age/keys.txt
+          wget https://github.com/mozilla/sops/releases/download/v3.7.1/sops-v3.7.1.linux
+          chmod +x sops-v3.7.1.linux
+          sudo mv sops-v3.7.1.linux /usr/local/bin/sops
+
+      - name: sops decryption
+        run: |
+          sudo sops --decrypt --age ${{ secrets.PUBLIC_AGE_KEY }} -i $GITHUB_WORKSPACE/deploy-as-code/charts/environments/${{ vars.ENV_FILE }}-secrets.yaml
+
+      - name: Install Helmfile
+        uses: helmfile/helmfile-action@v1.9.0
+        with:
+          helmfile-version: 'v0.150.0'
+          helm-version: 'v3.19.0'
+          helm-plugins: >
+            https://github.com/databus23/helm-diff
+
+      - name: Deploy Service
+        env:
+          HELMFILE_ENV: ${{ vars.ENV_FILE }}
+          SERVICE_GROUP: ${{ inputs.service_group }}
+          SERVICE_NAME: ${{ inputs.service_name }}
+        run: |
+          cd deploy-as-code/helmfile
+          
+          echo "Deploying service: ${{ inputs.service_name }} with tag: ${{ inputs.image_tag }}"
+          
+          helmfile sync -f auto-deploy-helmfile.yaml \
+            --set ${{ inputs.service_name }}.image.tag=${{ inputs.image_tag }}
