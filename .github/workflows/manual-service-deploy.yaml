@@ -56,15 +56,15 @@ jobs:
           sudo apt update
           sudo apt install -y age
           mkdir -p $HOME/.config/sops/age/
-          echo "${{ secrets.PUBLIC_AGE_KEY }}" > $HOME/.config/sops/age/keys.txt
-          echo "${{ secrets.PRIVATE_AGE_KEY }}" >> $HOME/.config/sops/age/keys.txt
+          echo # public key: ${{ secrets.PUBLIC_AGE_KEY }} > $HOME/.config/sops/age/keys.txt
+          echo ${{ secrets.PRIVATE_AGE_KEY }} >> $HOME/.config/sops/age/keys.txt
           wget https://github.com/mozilla/sops/releases/download/v3.7.1/sops-v3.7.1.linux
           chmod +x sops-v3.7.1.linux
           sudo mv sops-v3.7.1.linux /usr/local/bin/sops
 
       - name: sops decryption
         run: |
-          sudo sops --decrypt --age ${{ secrets.PUBLIC_AGE_KEY }} -i $GITHUB_WORKSPACE/deploy-as-code/charts/environments/${{ vars.ENV_FILE }}-secrets.yaml
+          sudo sops --decrypt --age ${{ secrets.PUBLIC_AGE_KEY }} -i $HOME/work/pucar-DevOps/pucar-DevOps/deploy-as-code/charts/environments/${{ vars.ENV_FILE }}-secrets.yaml
 
       - name: Install Helmfile
         uses: helmfile/helmfile-action@v1.9.0
