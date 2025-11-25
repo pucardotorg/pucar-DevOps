@@ -180,3 +180,7 @@ env: |
       configMapKeyRef:
         key: domain-url
         name: egov-config
+  - name: EGOV_BULK_INDEX
+    value: open-hearing-index
+  - name: EGOV_BULK_INDEX_PATH
+    value: "_bulk"
