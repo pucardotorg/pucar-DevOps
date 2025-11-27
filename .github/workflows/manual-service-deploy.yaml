@@ -1,0 +1,48 @@
+name: Manual Service Deployment
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Environment to deploy to'
+        required: true
+        default: 'dev'
+        type: choice
+        options:
+          - dev
+          - qa
+      service_group:
+        description: 'Service Group'
+        required: true
+        default: 'core-services'
+        type: choice
+        options:
+          - core-services
+          - cronjobs
+      service_name:
+        description: 'Service Name'
+        required: true
+        type: string
+      image_tag:
+        description: 'Image Tag'
+        required: true
+        type: string
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: 
+      name: ${{ inputs.environment }}
+    steps:
+      - name: Deploy Service
+        uses: ./.github/actions/deploy-service
+        with:
+          environment: ${{ inputs.environment }}
+          service_group: ${{ inputs.service_group }}
+          service_name: ${{ inputs.service_name }}
+          image_tag: ${{ inputs.image_tag }}
+          kubeconfig: ${{ vars.KUBECONFIG }}
+          public_age_key: ${{ secrets.PUBLIC_AGE_KEY }}
+          private_age_key: ${{ secrets.PRIVATE_AGE_KEY }}
+          env_file: ${{ vars.ENV_FILE }}
+          checkout_ref: ${{ vars.DEVOPS_BRANCH }}

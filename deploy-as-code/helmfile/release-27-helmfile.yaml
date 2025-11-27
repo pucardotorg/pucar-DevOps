@@ -42,9 +42,9 @@ releases:
   #   installed: true
   #   <<: *default
 
-  - name: case
-    installed: true
-    <<: *default
+  # - name: case
+  #   installed: true
+  #   <<: *default
 
   # - name: casemanagement
   #   installed: true

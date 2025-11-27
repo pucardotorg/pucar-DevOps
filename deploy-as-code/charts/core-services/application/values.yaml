@@ -9,7 +9,6 @@ ingress:
   enabled: true
   context: "application"
 
-
 # Init Containers Configs
 initContainers:
   dbMigration:

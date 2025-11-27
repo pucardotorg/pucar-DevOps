@@ -1,0 +1,91 @@
+name: 'Deploy Service'
+description: 'Deploy a service using Helmfile Sync'
+inputs:
+  environment:
+    description: 'Environment to deploy to'
+    required: true
+  service_group:
+    description: 'Service Group'
+    required: true
+  service_name:
+    description: 'Service Name'
+    required: true
+  image_tag:
+    description: 'Image Tag'
+    required: true
+  kubeconfig:
+    description: 'Kubeconfig content'
+    required: true
+  public_age_key:
+    description: 'Public Age Key for SOPS'
+    required: true
+  private_age_key:
+    description: 'Private Age Key for SOPS'
+    required: true
+  env_file:
+    description: 'Environment file name (e.g. dev, qa)'
+    required: true
+  checkout_ref:
+    description: 'Branch, tag or SHA to checkout'
+    required: false
+    default: ''
+
+runs:
+  using: "composite"
+  steps:
+    - name: Checkout repository
+      uses: actions/checkout@v6
+      with:
+        ref: ${{ inputs.checkout_ref }}
+
+    - name: Kubectl setup
+      uses: azure/setup-kubectl@v3
+      with:
+        version: 'latest'
+
+    - name: Set up kubeconfig from secret
+      shell: bash
+      run: |
+        echo "${{ inputs.kubeconfig }}" > $HOME/kubeconfig
+        echo "KUBECONFIG=$HOME/kubeconfig" >> $GITHUB_ENV
+        export KUBECONFIG=$HOME/kubeconfig
+        kubectl get namespaces
+
+    - name: Install sops
+      shell: bash
+      run: |
+        sudo apt update
+        sudo apt install -y age
+        mkdir -p $HOME/.config/sops/age/
+        echo "${{ inputs.public_age_key }}" > $HOME/.config/sops/age/keys.txt
+        echo "${{ inputs.private_age_key }}" >> $HOME/.config/sops/age/keys.txt
+        wget https://github.com/mozilla/sops/releases/download/v3.7.1/sops-v3.7.1.linux
+        chmod +x sops-v3.7.1.linux
+        sudo mv sops-v3.7.1.linux /usr/local/bin/sops
+
+    - name: sops decryption
+      shell: bash
+      run: |
+        sudo sops --decrypt --age ${{ inputs.public_age_key }} -i ${{ github.workspace }}/deploy-as-code/charts/environments/${{ inputs.env_file }}-secrets.yaml
+
+    - name: Install Helmfile
+      uses: helmfile/helmfile-action@v1.9.0
+      with:
+        helmfile-version: 'v0.150.0'
+        helm-version: 'v3.19.0'
+        helm-plugins: >
+          https://github.com/databus23/helm-diff
+
+    - name: Deploy Service
+      shell: bash
+      env:
+        HELMFILE_ENV: ${{ inputs.env_file }}
+        SERVICE_GROUP: ${{ inputs.service_group }}
+        SERVICE_NAME: ${{ inputs.service_name }}
+      run: |
+        cd deploy-as-code/helmfile
+        
+        echo "Deploying service: ${{ inputs.service_name }} with tag: ${{ inputs.image_tag }}"
+        
+        helmfile sync -f auto-deploy-helmfile.yaml \
+          --set ${{ inputs.service_name }}.image.tag=${{ inputs.image_tag }}

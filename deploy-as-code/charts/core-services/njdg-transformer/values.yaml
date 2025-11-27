@@ -48,3 +48,18 @@ env: |
       configMapKeyRef:
         name: egov-service-host
         key: order
+  - name: EGOV_MDMS_HOST
+    valueFrom:
+      configMapKeyRef:
+        key: egov-mdms-service
+        name: egov-service-host
+  - name: EGOV_HEARING_HOST
+    valueFrom:
+      configMapKeyRef:
+        key: hearing
+        name: egov-service-host
+  - name: EGOV_CASE_HOST
+    valueFrom:
+      configMapKeyRef:
+        key: case
+        name: egov-service-host
