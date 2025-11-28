@@ -9,6 +9,8 @@ ingress:
   enabled: true
   context: "task-management"
 
+lokiEnabled: true
+
 # Init Containers Configs
 initContainers:
   dbMigration:

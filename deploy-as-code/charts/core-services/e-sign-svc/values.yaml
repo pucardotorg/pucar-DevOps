@@ -9,6 +9,7 @@ ingress:
   enabled: true
   context: "e-sign-svc"
 
+lokiEnabled: true
 
 # Init Containers Configs
 e-sign-svc:

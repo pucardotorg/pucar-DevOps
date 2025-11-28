@@ -9,6 +9,7 @@ ingress:
   enabled: true
   context: "case"
 
+lokiEnabled: true
 
 # Init Containers Configs
 initContainers:

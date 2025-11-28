@@ -9,6 +9,8 @@ ingress:
   zuul: true
   context: "summons"
 
+lokiEnabled: true
+
 # Init Containers Configs
 initContainers:
   dbMigration:

@@ -9,6 +9,8 @@ ingress:
   zuul: true
   context: "etreasury"
 
+lokiEnabled: true
+
 # Init Containers Configs
 initContainers:
   dbMigration:

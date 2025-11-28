@@ -9,6 +9,7 @@ ingress:
   enabled: true
   context: "hearing-management"
 
+lokiEnabled: true
 
 healthChecks:
   enabled: true

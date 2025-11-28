@@ -18,6 +18,7 @@ initContainers:
       repository: "docker.io/venkatramireddyb/payment-calculator-svc_db"
       tag: v1.0.0-cd4732437b8cb6f303b646d67a24d374ef44d4e3
 
+lokiEnabled: true
 
 # Container Configs
 image:

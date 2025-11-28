@@ -8,6 +8,7 @@ ingress:
   enabled: true
   context: "openapi"
 
+lokiEnabled: true
 
 
 healthChecks:
