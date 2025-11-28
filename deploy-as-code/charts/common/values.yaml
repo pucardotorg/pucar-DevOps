@@ -25,6 +25,7 @@ ingress:
       nginx.ingress.kubernetes.io/lua-resty-waf-process-multipart-body: "false"              
 
 disableAnnotationTimestamp: "true"
+lokiEnabled: false
 
 image:
   pullPolicy: IfNotPresent   
@@ -259,8 +260,21 @@ extraEnv:
         value: {{ index .Values "kafka.topic.audit" | quote }}
       {{- else }}
         value: "enc-user-audit-data"
-      {{- end }}           
-        
+      {{- end }}  
+      {{- if and .Values.lokiEnabled (or (index .Values "loki-url") (and .Values.loki .Values.loki.url)) }}
+      - name: LOGGING_LOKI_ENABLED
+        value: "true"
+      - name: LOGGING_LOKI_URL
+        value: {{ if index .Values "loki-url" }}{{ index .Values "loki-url" }}{{ else }}{{ .Values.loki.url }}{{ end }}
+      - name: LOGGING_LOKI_APP
+        valueFrom:
+          fieldRef:
+            fieldPath: metadata.name
+      - name: LOGGING_LOKI_ENVIRONMENT
+        value: {{ .Values.global.domain }}
+      - name: LOGGING_LEVEL_ROOT
+        value: INFO
+      {{- end }}
             
             
             
