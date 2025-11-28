@@ -28,6 +28,7 @@ configmaps:
       db-url: jdbc:postgresql://178.236.185.12/pucar-solutions-qa-db
       domain: digit-lts.digit.org
       domain-url: https://dristi-kerala-qa.pucar.org
+      digitalized-documents-host: http://digitalized-documents.egov:8080/
       dristi-e-sign: https://dristi-kerala-qa.pucar.org/ui/
       dristi-url: https://dristi-kerala-qa.pucar.org/user/oauth/token?_=1713357247536
       egov-bnd-freedownload-tenants: pg.testing

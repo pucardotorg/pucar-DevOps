@@ -1,0 +1,89 @@
+# Common Labels
+labels:
+  app: "digitalized-documents"
+  group: "backend"
+
+# Ingress Configs
+ingress:
+  zuul: true
+  enabled: true
+  context: "digitalized-documents"
+
+lokiEnabled: true
+
+# Init Containers Configs
+initContainers:
+  dbMigration:
+    enabled: true
+    schemaTable: "digitalized_documents_schema"
+    image:
+      repository: "docker.io/venkatramireddyb/digitalized-documents-db"
+      tag: feature-digitalization-4964-4965-4966-d1cd2b1327913ac253d1d8c3891fcaf79df18021
+
+# Init Containers Configs
+healthChecks:
+  enabled: true
+  livenessProbePath: "/digitalized-documents/health"
+  readinessProbePath: "/digitalized-documents/health"
+
+# Container Configs
+image:
+  repository: "docker.io/venkatramireddyb/digitalized-documents"
+  tag: feature-digitalization-4964-4965-4966-d1cd2b1327913ac253d1d8c3891fcaf79df18021
+  imagePullPolicy: Always
+replicas: "1"
+httpPort: 8080
+appType: "java-spring"
+java-args: "-Dspring.profiles.active=monitoring"
+heap: "-Xmx256m -Xms256m"
+debugPort: 5005
+memory_limits: 512Mi
+env: |
+  - name: JAVA_OPTS
+    value: {{ index .Values "heap" | quote }}
+  - name: JAVA_ARGS
+    value: -Dspring.profiles.active=monitoring
+  - name: SERVER_PORT
+    value: "8080"
+  - name: SERVER_CONTEXT_PATH
+    value: /digitalized-documents
+  - name: EGOV_MDMS_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: egov-mdms-service
+  - name: EGOV_LOCALIZATION_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: egov-localization
+  - name: EGOV_HRMS_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: egov-hrms
+  - name: EGOV_USER_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: egov-user
+  - name: EGOV_IDGEN_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: egov-idgen
+  - name: EGOV_WORKFLOW_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: egov-workflow-v2
+  - name: EGOV_URL_SHORTNER_HOST
+    valueFrom:
+      configMapKeyRef:
+        key: eus-host
+        name: egov-service-host
+  - name: EGOV_FILESTORE_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: egov-filestore

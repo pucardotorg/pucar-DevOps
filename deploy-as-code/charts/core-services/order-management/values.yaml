@@ -181,3 +181,8 @@ env: |
       configMapKeyRef:
         key: domain-url
         name: egov-config
+  - name: DRISTI_DIGITALIZED_DOCUMENTS_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: digitalized-documents-host
