@@ -6,27 +6,123 @@ root-ingress:
 configmaps:
   egov-config:
     data:
-      db-host: "pucar-solutions-qa-server.postgres.database.azure.com"
-      db-name: "pucar-solutions-qa-db" ## Add db-name
-      db-url: "jdbc:postgresql://pucar-solutions-qa-server.postgres.database.azure.com/pucar-solutions-qa-db"
-      es-host: "elasticsearch-data.backbone"
-      es-indexer-host: "http://elasticsearch-data.backbone:9200/"
-      kafka-brokers: "kafka-kraft-controller-headless.backbone:9092"
-      egov-state-level-tenant-id: "kl"
-      egov-services-fqdn-name: https://dristi-kerala-qa.pucar.org/
-      egov-services: https://dristi-kerala-qa.pucar.org
-      dristi-e-sign: https://dristi-kerala-qa.pucar.org/digit-ui/
-      esign-interceptor: "https://dristi-kerala-qa.pucar.org/esign-interceptor/v1/_intercept"
-      dristi-url: "https://dristi-kerala-qa.pucar.org/user/oauth/token?_=1713357247536"
-      service-dept-code: 01BUAT
-      esign-filestore-id: "0cdd01bf-5c6c-43de-86df-48406ce4f5a8"
-      sbi-tranction-url: https://test.sbiepay.sbi/secure/AggregatorHostedListener
-      sbi-tranction-success-url: https://dristi-kerala-uat.pucar.org/sbi-payment/success.jsp
-      sbi-tranction-fail-url: https://dristi-kerala-uat.pucar.org/sbi-payment/fail.jsp
-      sbi-redirect-url: https://dristi-kerala-uat.pucar.org/digit-ui/citizen/home/sbi-payment-screen
-      service-name: icops
-      service-ky: IC0001
+      COURT_ADDRESS: |
+        Special Court of Judicial Magistrate of the First Class, for the
+        trial of cases under section 138 of Negotiable Instruments Act, 1881 ('24x7 ON
+        COURT'), Kollam, Kerala, 691013
+      COURT_NAME: |
+        Special Court Of Judicial Magistrate of the First Class , for the trial
+        of cases under section 138 of NI Act , 1881 at Kollam ( "24X7 ON Court" )
+      JUDGE_DESIGNATION_HEADER: |
+        Special Court Of Judicial Magistrate of the First Class
+        , for the trial of cases under section 138 of NI Act , 1881 at Kollam ( "24X7
+        ON Court" )
+      ORDER_HEADING: |
+        In The Special Court Of Judicial Magistrate of the First Class ,
+        for the trial of cases under section 138 of NI Act , 1881 at Kollam ( "24X7 ON
+        Court" )
       auth-type: get_auth_token
+      db-host: 178.236.185.12
+      db-name: pucar-solutions-qa-db
+      db-url: jdbc:postgresql://178.236.185.12/pucar-solutions-qa-db
+      domain: digit-lts.digit.org
+      domain-url: https://dristi-kerala-qa.pucar.org
+      dristi-e-sign: https://dristi-kerala-qa.pucar.org/ui/
+      dristi-url: https://dristi-kerala-qa.pucar.org/user/oauth/token?_=1713357247536
+      egov-bnd-freedownload-tenants: pg.testing
+      egov-bnd-live-citizen-tenants: pg.testing
+      egov-services: https://dristi-kerala-qa.pucar.org
+      egov-services-fqdn-name: https://dristi-kerala-qa.pucar.org/
+      egov-state-level-tenant-id: kl
+      es-host: elasticsearch-data.backbone
+      es-indexer-host: http://elasticsearch-data.backbone:9200/
+      esign-filestore-id: 0cdd01bf-5c6c-43de-86df-48406ce4f5a8
+      esign-id: ESGN-900
+      esign-interceptor: https://dristi-kerala-qa.pucar.org/esign-interceptor/v1/_intercept
+      etreasury: http://etreasury.egov:8080
+      flyway-locations: filesystem:/flyway/sql,filesystem:/flyway/seed,filesystem:/flyway/qa
+      judge-designation: Judicial First Class Magistrate III
+      judge-name: Smt. Soorya S Sukumaran
+      kafka-brokers: kafka-kraft-controller-headless.backbone:9092
+      kafka-infra-brokers: kafka-v2-infra.kafka-cluster:9092
+      logging-level-jdbc: DEBUG
+      mobile-validation-workaround: "true"
+      pucar-domain: dristi-kerala-qa.pucar.org
+      s3-assets-bucket: (pg-egov-assets|egov-playground-assets)
+      sbi-redirect-url: https://dristi-kerala-qa.pucar.org/digit-ui/citizen/home/sbi-payment-screen
+      sbi-tranction-fail-url: https://dristi-kerala-qa.pucar.org/sbi-payments/fail.jsp
+      sbi-tranction-success-url: https://dristi-kerala-qa.pucar.org/sbi-payments/success.jsp
+      sbi-tranction-url: https://test.sbiepay.sbi/secure/AggregatorHostedListener
+      serializers-timezone-in-ist: "true"
+      server-tomcat-max-connections: "500"
+      server-tomcat-max-threads: "10"
+      service-dept-code: 01BOC
+      service-ky: IC0001
+      service-name: icops
+      sms-enabled: "true"
+      spring-datasource-tomcat-initialSize: "1"
+      spring-datasource-tomcat-max-active: "2"
+      spring-jpa-show-sql: "true"
+      timezone: Asia/Kolkata
+      tracer-errors-provideexceptionindetails: "true"
+
+  egov-service-host:
+    data:
+      ab-diary: http://ab-diary.egov:8080/
+      advocate: http://advocate.egov:8080/
+      analytics: http://analytics.egov:8080/
+      application: http://application.egov:8080/
+      bail-bond: http://bail-bond.egov:8080/
+      billing-service: http://billing-service.egov:8080/
+      case: http://case.egov:8080/
+      casemanagement: http://casemanagement.egov:8080/
+      collection-services: http://collection-services.egov:8080/
+      dristi-case-pdf: http://dristi-case-pdf.egov:8080/
+      dristi-pdf: http://dristi-pdf.egov:8080/
+      e-sign-svc: http://e-sign-svc.egov:8080/
+      egov-accesscontrol: http://egov-accesscontrol.egov:8080/
+      egov-apportion-service: http://egov-apportion-service:8080/
+      egov-enc-service: http://egov-enc-service.egov:8080/
+      egov-filestore: http://egov-filestore.egov:8080/
+      egov-hrms: http://egov-hrms.egov:8080/
+      egov-idgen: http://egov-idgen.egov:8080/
+      egov-indexer: http://egov-indexer.egov:8080/
+      egov-localization: http://egov-localization.egov:8080/
+      egov-location: http://egov-location.egov:8080/
+      egov-mdms-service: http://egov-mdms-service.egov:8080/
+      egov-oauth-url: https://dristi-kerala-dev.pucar.org/user/oauth/token?_=1730963461827
+      egov-otp: http://egov-otp.egov:8080/
+      egov-url-shortening: http://egov-url-shortening.egov:8080/
+      egov-user: http://egov-user.egov:8080/
+      egov-user-egov: http://egov-user.egov:8080/
+      egov-user-event: http://egov-user-event.egov:8080/
+      egov-workflow-v2: http://egov-workflow-v2.egov:8080/
+      epost: http://epost-tracker.egov:8080/
+      es-client: http://elasticsearch-data-v1.es-cluster:9200
+      etreasury: http://etreasury.egov:8080/
+      etreasury-case: http://case.egov:8080
+      eus-host: http://egov-url-shortening.egov:8080/
+      evidence: http://evidence:8080/
+      hearing: http://hearing:8080/
+      icops-integration: http://icops-integration.egov:8080
+      inbox: http://inbox.egov:8080/
+      individual: http://individual.egov:8080/
+      lock-service: http://lock-svc:8080/
+      minio-url: http://178.236.185.122:9000/
+      order: http://order:8080/
+      payment-calculator: http://payment-calculator.egov:8080/
+      pgr-services: http://pgr-services.egov:8080/
+      redis: redis.backbone
+      sbi-url: http://sbi-svc.egov:8080/sbi-backend//v1/_decryptBrowserResponse
+      scheduler: http://scheduler.egov:8080/
+      summons: http://summons-svc.egov:8080/
+      sunbird-credential-schema: http://sunbird-rc-credential-schema-service.egov:3333/
+      sunbird-credential-service: http://sunbird-rc-credentials-service.egov:3000/
+      sunbirdrc-credential-service: http://sunbirdrc-credential-service.egov:8080/
+      task: http://task.egov:8080/
+      task-management: http://task-management.egov:8080/
+      user-otp: http://user-otp.egov:8080/
+
 egov-user:
   heap: "-Xmx256m -Xms256m"
   memory_limits: 512Mi
