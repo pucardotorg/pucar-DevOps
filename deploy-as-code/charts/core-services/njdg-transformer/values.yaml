@@ -63,3 +63,8 @@ env: |
       configMapKeyRef:
         key: case
         name: egov-service-host
+  - name: EGOV_INDIVIDUAL_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key:  individual
