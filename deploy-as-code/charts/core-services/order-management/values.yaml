@@ -185,4 +185,4 @@ env: |
     valueFrom:
       configMapKeyRef:
         name: egov-service-host
-        key: digitalized-documents-host
+        key: digitalized-documents
