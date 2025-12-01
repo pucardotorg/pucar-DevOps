@@ -1,0 +1,15 @@
+# Common Labels
+labels:
+  app: "bulk-case-py"
+  group: "cronjobs"
+
+# Cron schedule
+cron:
+  schedule: "0 18 * * *"
+  timezone: "Asia/Kolkata"
+
+# Container Configs
+namespace: pucar-prod
+image:
+  repository: "registry-backbone-prod.apps.ocp2.ksdc.in/bulk-case-info-py"
+  tag: "njdg-v2-nov-30-8"

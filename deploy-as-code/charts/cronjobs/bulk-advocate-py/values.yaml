@@ -1,0 +1,15 @@
+# Common Labels
+labels:
+  app: "bulk-advocate-py"
+  group: "cronjobs"
+
+# Cron schedule
+cron:
+  schedule: "0 18 * * *"
+  timezone: "Asia/Kolkata"
+
+# Container Configs
+namespace: pucar-prod
+image:
+  repository: "docker.io/venkatramireddyb/bulk-advocate-cron"
+  tag: "nov-28"
