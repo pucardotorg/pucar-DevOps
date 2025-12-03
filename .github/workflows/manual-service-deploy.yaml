@@ -38,6 +38,7 @@ jobs:
         uses: actions/checkout@v6
         with:
           ref: ${{ vars.DEVOPS_BRANCH }}
+          repository: pucardotorg/pucar-DevOps
 
       - name: Kubectl setup
         uses: azure/setup-kubectl@v3
