@@ -242,9 +242,9 @@ releases:
   #   installed: true
   #   <<: *default
 
-  # - name: order-management
-  #   installed: true
-  #   <<: *default
+  - name: order-management
+    installed: true
+    <<: *default
 
   # - name: payment-calculator
   #   installed: true
