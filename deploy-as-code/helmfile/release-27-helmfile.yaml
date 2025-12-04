@@ -14,41 +14,41 @@ commonLabels:
   deployment: "pucar"
 
 releases:
-  # - name: ab-diary
-  #   installed: true
-  #   <<: *default
+  - name: ab-diary
+    installed: true
+    <<: *default
 
-  # - name: advocate
-  #   installed: true
-  #   <<: *default
+  - name: advocate
+    installed: true
+    <<: *default
 
   - name: analytics
     installed: true
     <<: *default
 
-  # - name: application
-  #   installed: true
-  #   <<: *default
+  - name: application
+    installed: true
+    <<: *default
 
   # - name: audit-service
   #   installed: true
   #   <<: *default
 
-  # - name: bail-bond
-  #   installed: true
-  #   <<: *default
+  - name: bail-bond
+    installed: true
+    <<: *default
 
   # - name: billing-service
   #   installed: true
   #   <<: *default
 
-  # - name: case
-  #   installed: true
-  #   <<: *default
+  - name: case
+    installed: true
+    <<: *default
 
-  # - name: casemanagement
-  #   installed: true
-  #   <<: *default
+  - name: casemanagement
+    installed: true
+    <<: *default
 
   # - name: citizen
   #   installed: true
@@ -154,17 +154,17 @@ releases:
   #   installed: true
   #   <<: *default
 
-  # - name: epost-tracker
-  #   installed: true
-  #   <<: *default
+  - name: epost-tracker
+    installed: true
+    <<: *default
 
-  # - name: e-sign
-  #   installed: true
-  #   <<: *default
+  - name: e-sign
+    installed: true
+    <<: *default
 
-  # - name: esign-interceptor
-  #   installed: true
-  #   <<: *default
+  - name: esign-interceptor
+    installed: true
+    <<: *default
 
   # - name: e-sign-svc
   #   installed: true
@@ -174,25 +174,25 @@ releases:
     installed: true
     <<: *default
 
-  # - name: evidence
-  #   installed: true
-  #   <<: *default
+  - name: evidence
+    installed: true
+    <<: *default
 
   # - name: gateway
   #   installed: true
   #   <<: *default
 
-  # - name: hearing
-  #   installed: true
-  #   <<: *default
+  - name: hearing
+    installed: true
+    <<: *default
 
-  # - name: hearing-management
-  #   installed: true
-  #   <<: *default
+  - name: hearing-management
+    installed: true
+    <<: *default
 
-  # - name: icops-integration
-  #   installed: true
-  #   <<: *default
+  - name: icops-integration
+    installed: true
+    <<: *default
 
   - name: inbox
     installed: true
@@ -210,25 +210,25 @@ releases:
   #   installed: true
   #   <<: *default
 
-  # - name: kerala-sms
-  #   installed: true
-  #   <<: *default
+  - name: kerala-sms
+    installed: true
+    <<: *default
 
   - name: landing-page
     installed: true
     <<: *default
 
-  # - name: lock-svc
-  #   installed: true
-  #   <<: *default
+  - name: lock-svc
+    installed: true
+    <<: *default
 
   # - name: mdms-v2
   #   installed: true
   #   <<: *default
 
-  # - name: notification
-  #   installed: true
-  #   <<: *default
+  - name: notification
+    installed: true
+    <<: *default
 
   # - name: ocr-service
   #   installed: true
@@ -238,21 +238,21 @@ releases:
   #   installed: true
   #   <<: *default
 
-  # - name: openapi
-  #   installed: true
-  #   <<: *default
+  - name: openapi
+    installed: true
+    <<: *default
 
-  # - name: order
-  #   installed: true
-  #   <<: *default
+  - name: order
+    installed: true
+    <<: *default
 
   - name: order-management
     installed: true
     <<: *default
 
-  # - name: payment-calculator
-  #   installed: true
-  #   <<: *default
+  - name: payment-calculator
+    installed: true
+    <<: *default
 
   # - name: pdf-service
   #   installed: true
@@ -274,37 +274,37 @@ releases:
   #   installed: true
   #   <<: *default
 
-  # - name: scheduler
-  #   installed: true
-  #   <<: *default
+  - name: scheduler
+    installed: true
+    <<: *default
 
   # - name: service-request
   #   installed: true
   #   <<: *default
 
-  # - name: summons-svc
-  #   installed: true
-  #   <<: *default
+  - name: summons-svc
+    installed: true
+    <<: *default
 
   # - name: sunbirdrc-credential-service
   #   installed: true
   #   <<: *default
 
-  # - name: task
-  #   installed: true
-  #   <<: *default
+  - name: task
+    installed: true
+    <<: *default
 
-  # - name: task-management
-  #   installed: true
-  #   <<: *default
+  - name: task-management
+    installed: true
+    <<: *default
 
   # - name: transcription
   #   installed: true
   #   <<: *default
 
-  # - name: transformer
-  #   installed: true
-  #   <<: *default
+  - name: transformer
+    installed: true
+    <<: *default
 
   # - name: user-onboard
   #   installed: true
