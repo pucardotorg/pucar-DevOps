@@ -42,9 +42,9 @@ releases:
   #   installed: true
   #   <<: *default
 
-  - name: case
-    installed: true
-    <<: *default
+  # - name: case
+  #   installed: true
+  #   <<: *default
 
   # - name: casemanagement
   #   installed: true
@@ -63,6 +63,10 @@ releases:
   #   <<: *default
 
   - name: digit-ui
+    installed: true
+    <<: *default
+
+  - name: digitalized-documents
     installed: true
     <<: *default
 
@@ -182,9 +186,9 @@ releases:
   #   installed: true
   #   <<: *default
 
-  - name: hearing
-    installed: true
-    <<: *default
+  # - name: hearing
+  #   installed: true
+  #   <<: *default
 
   # - name: hearing-management
   #   installed: true
@@ -238,13 +242,13 @@ releases:
   #   installed: true
   #   <<: *default
 
-  # - name: openapi
-  #   installed: true
-  #   <<: *default
-
-  - name: order
+  - name: openapi
     installed: true
     <<: *default
+
+  # - name: order
+  #   installed: true
+  #   <<: *default
 
   - name: order-management
     installed: true
@@ -274,9 +278,9 @@ releases:
   #   installed: true
   #   <<: *default
 
-  - name: scheduler
-    installed: true
-    <<: *default
+  # - name: scheduler
+  #   installed: true
+  #   <<: *default
 
   # - name: service-request
   #   installed: true
