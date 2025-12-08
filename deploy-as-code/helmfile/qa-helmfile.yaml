@@ -74,9 +74,9 @@ releases:
   #   installed: true
   #   <<: *default
 
-  # - name: dristi-pdf
-  #   installed: true
-  #   <<: *default
+  - name: dristi-pdf
+    installed: true
+    <<: *default
 
   # - name: egov-accesscontrol
   #   installed: true
