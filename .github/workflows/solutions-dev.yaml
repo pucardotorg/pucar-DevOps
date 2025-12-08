@@ -241,6 +241,8 @@ jobs:
           echo "landing_page_commit=$landing_page_commit" >> $GITHUB_ENV
           task_management_commit=$(git log -1 --pretty=format:%H -- backend/task-management)
           echo "task_management_commit=$task_management_commit" >> $GITHUB_ENV
+          digitalized_documents_commit=$(git log -1 --pretty=format:%H -- backend/digitalized-documents)
+          echo "digitalized_documents_commit=$digitalized_documents_commit" >> $GITHUB_ENV
       - name: digit deployment
         env:
           BACKEND_BRANCH: ${{ vars.IMAGE_TAG_PREFIX }}
@@ -254,6 +256,7 @@ jobs:
             --set digit-ui.image.tag=${{ env.BACKEND_BRANCH }}-${{ env.digit_ui_commit }} \
             --set dristi-case-pdf.image.tag=${{ env.BACKEND_BRANCH }}-${{ env.dristi_case_pdf_commit }} \
             --set dristi-pdf.image.tag=${{ env.BACKEND_BRANCH }}-${{ env.dristi_pdf_commit }} \
+            --set digitalized-documents.image.tag=${{ env.BACKEND_BRANCH }}-${{ env.digitalized_documents_commit }} \
             --set advocate.image.tag=${{ env.BACKEND_BRANCH }}-${{ env.advocate_commit }} \
             --set advocate.initContainers.dbMigration.image.tag=${{ env.BACKEND_BRANCH }}-${{ env.advocate_commit }} \
             --set case.image.tag=${{ env.BACKEND_BRANCH }}-${{ env.case_commit }} \
