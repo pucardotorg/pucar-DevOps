@@ -154,3 +154,8 @@ env: |
       configMapKeyRef:
         key: task-management
         name: egov-service-host
+  - name: DRISTI_DIGITALIZED_DOCUMENTS_HOST
+    valueFrom:
+      configMapKeyRef:
+        key: digitalized-documents
+        name: egov-service-host
