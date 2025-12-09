@@ -198,9 +198,9 @@ releases:
   #   installed: true
   #   <<: *default
 
-  # - name: inbox
-  #   installed: true
-  #   <<: *default
+  - name: inbox
+    installed: true
+    <<: *default
 
   # - name: inportal-survey
   #   installed: true
