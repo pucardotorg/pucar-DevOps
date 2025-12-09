@@ -36,7 +36,7 @@ inputs:
 
 runs:
   using: "composite"
-
+  working-directory: ${{ inputs.working_directory }}
   steps:
 
     - name: Checkout DevOps Repo

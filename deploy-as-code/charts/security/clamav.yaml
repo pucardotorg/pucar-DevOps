@@ -1,0 +1,79 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: clamav
+  namespace: egov
+  labels:
+    app: clamav
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: clamav
+  template:
+    metadata:
+      labels:
+        app: clamav
+    spec:
+      containers:
+      - name: clamav
+        image: docker.io/venkatramireddyb/clamav:latest
+        resources:
+          limits:
+            cpu: 1
+            memory: 4Gi
+          requests:
+            cpu: 250m
+            memory: 256Mi
+        ports:
+        - containerPort: 3310
+          name: clamd-port
+        - containerPort: 7357
+          name: freshclam-port
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: clamav
+  namespace: egov
+  labels:
+    app: clamav
+spec:
+  type: ClusterIP
+  selector:
+    app: clamav
+  ports:
+    - name: clamd
+      protocol: TCP
+      port: 3310
+      targetPort: 3310
+    - name: freshclam
+      protocol: TCP
+      port: 7357
+      targetPort: 7357
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: clamav-hpa
+  namespace: egov
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: clamav
+  minReplicas: 1
+  maxReplicas: 2
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 90
+  - type: Resource
+    resource:
+      name: memory
+      target:
+        type: Utilization
+        averageUtilization: 80
