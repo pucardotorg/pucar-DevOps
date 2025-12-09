@@ -151,3 +151,12 @@ env: |
   - name: PRESIGNED_URL_EXPIRY_TIME_IN_SECS     
     value: {{ index .Values "filestore-url-validity" | quote }}   
   {{- end }}
+  {{- if index .Values "clamav-enabled" }}
+  - name: CLAMAV_ENABLED
+    value: {{ index .Values "clamav-enabled" | quote }}
+  - name: CLAMAV_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: clamav
+  {{- end }}

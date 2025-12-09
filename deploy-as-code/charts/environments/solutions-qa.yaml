@@ -78,6 +78,7 @@ configmaps:
       case: http://case.egov:8080/
       casemanagement: http://casemanagement.egov:8080/
       collection-services: http://collection-services.egov:8080/
+      clamav: clamav.egov
       digitalized-documents: http://digitalized-documents.egov:8080/
       dristi-case-pdf: http://dristi-case-pdf.egov:8080/
       dristi-pdf: http://dristi-pdf.egov:8080/
@@ -269,6 +270,7 @@ egov-filestore:
   filestore-url-validity: 3600
   fixed-bucketname: pucar-solutions-filestore-qa
   fixed-container-name: pucar-solutions-filestore-qa
+  clamav-enabled: true
 
 egov-enc-service:
   heap: "-Xmx256m -Xms256m"
