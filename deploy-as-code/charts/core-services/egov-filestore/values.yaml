@@ -159,4 +159,6 @@ env: |
       configMapKeyRef:
         name: egov-service-host
         key: clamav
+  - name: CLAMAV_PORT
+    value: "3310"
   {{- end }}
