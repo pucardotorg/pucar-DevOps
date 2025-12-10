@@ -1,13 +1,13 @@
 # Common Labels
 labels:
-  app: "task-management"
+  app: "digitalized-documents"
   group: "backend"
 
 # Ingress Configs
 ingress:
   zuul: true
   enabled: true
-  context: "task-management"
+  context: "digitalized-documents"
 
 lokiEnabled: true
 
@@ -15,27 +15,27 @@ lokiEnabled: true
 initContainers:
   dbMigration:
     enabled: true
-    schemaTable: "task_management_schema"
+    schemaTable: "digitalized_documents_schema"
     image:
-      repository: "docker.io/venkatramireddyb/task-management-db"
-      tag: feature-payment-redesign-local-changes-b8af2df2ea35b860552f388065fe8c5e04afc75e
+      repository: "docker.io/venkatramireddyb/digitalized-documents-db"
+      tag: feature-digitalization-4964-4965-4966-d1cd2b1327913ac253d1d8c3891fcaf79df18021
 
 # Init Containers Configs
 healthChecks:
   enabled: true
-  livenessProbePath: "/task-management/health"
-  readinessProbePath: "/task-management/health"
+  livenessProbePath: "/digitalized-documents/health"
+  readinessProbePath: "/digitalized-documents/health"
 
 # Container Configs
 image:
-  repository: "docker.io/venkatramireddyb/task-management"
-  tag: feature-payment-redesign-local-changes-b8af2df2ea35b860552f388065fe8c5e04afc75e
+  repository: "docker.io/venkatramireddyb/digitalized-documents"
+  tag: feature-digitalization-4964-4965-4966-d1cd2b1327913ac253d1d8c3891fcaf79df18021
   imagePullPolicy: Always
 replicas: "1"
 httpPort: 8080
 appType: "java-spring"
 java-args: "-Dspring.profiles.active=monitoring"
-heap: "-Xmx256m -Xms192m"
+heap: "-Xmx256m -Xms256m"
 debugPort: 5005
 memory_limits: 512Mi
 env: |
@@ -46,7 +46,7 @@ env: |
   - name: SERVER_PORT
     value: "8080"
   - name: SERVER_CONTEXT_PATH
-    value: /task-management
+    value: /digitalized-documents
   - name: EGOV_MDMS_HOST
     valueFrom:
       configMapKeyRef:
@@ -77,17 +77,17 @@ env: |
       configMapKeyRef:
         name: egov-service-host
         key: egov-workflow-v2
-  - name: DRISTI_ORDER_HOST
+  - name: EGOV_URL_SHORTNER_HOST
+    valueFrom:
+      configMapKeyRef:
+        key: eus-host
+        name: egov-service-host
+  - name: EGOV_FILESTORE_HOST
     valueFrom:
       configMapKeyRef:
         name: egov-service-host
-        key: order
-  - name: DRISTI_TASK_HOST
-    valueFrom:
-      configMapKeyRef:
-        name: egov-service-host
-        key: task
-  - name: DRISTI_CASE_HOST
+        key: egov-filestore
+  - name: EGOV_CASE_HOST
     valueFrom:
       configMapKeyRef:
         name: egov-service-host
@@ -97,45 +97,18 @@ env: |
       configMapKeyRef:
         name: egov-service-host
         key: egov-url-shortening
-  - name: EGOV_BILLING_SERVICE_HOST
+  - name: DOMAIN_URL
     valueFrom:
       configMapKeyRef:
-        name: egov-service-host
-        key: billing-service
-  - name: PAYMENT_CALCULATOR_HOST
-    valueFrom:
-      configMapKeyRef:
-        name: egov-service-host
-        key: payment-calculator
-  - name: EGOV_ETREASURY_HOST
-    valueFrom:
-      configMapKeyRef:
-        name: egov-service-host
-        key: etreasury
-  - name: KAFKA_TOPICS_RECEIPT_CREATE
-    value: egov.collection.payment-create
-  - name: DRISTI_ANALYTICS_HOST
-    valueFrom:
-      configMapKeyRef:
-        name: egov-service-host
-        key: analytics
-  - name: EGOV_INFRA_INDEXER_HOST
-    valueFrom:
-      configMapKeyRef:
-        key: es-indexer-host
         name: egov-config
-  - name: EGOV_INDEXER_ES_USERNAME
-    valueFrom:
-      secretKeyRef:
-        name: elasticsearch-credentials
-        key: username
-  - name: EGOV_INDEXER_ES_PASSWORD
-    valueFrom:
-      secretKeyRef:
-        name: elasticsearch-credentials
-        key: password
-  - name: DRISTI_ADVOCATE_HOST
+        key: domain-url
+  - name: EGOV_ESIGN_HOST
     valueFrom:
       configMapKeyRef:
-        key: advocate
         name: egov-service-host
+        key: e-sign-svc
+  - name: EGOV_FILESTORE_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: egov-filestore

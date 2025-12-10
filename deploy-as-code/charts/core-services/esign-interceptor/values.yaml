@@ -8,6 +8,7 @@ ingress:
   enabled: true
   context: "esign-interceptor"
 
+lokiEnabled: true
 
 # Init Containers Configs
 

@@ -13,6 +13,8 @@ ingress:
 #  livenessProbePath: "/kerala-icops/health"
 #  readinessProbePath: "/kerala-icops/health"
 
+lokiEnabled: true
+
 initContainers:
   dbMigration:
     enabled: true

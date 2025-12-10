@@ -9,6 +9,8 @@ ingress:
   enabled: true
   context: "inportal-survey"
 
+lokiEnabled: true
+
 # Init Containers Configs
 initContainers:
   dbMigration:

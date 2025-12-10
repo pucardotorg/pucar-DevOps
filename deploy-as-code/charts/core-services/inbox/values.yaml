@@ -9,6 +9,8 @@ ingress:
   zuul: true
   context: "inbox"
 
+lokiEnabled: true
+
 # Container Configs
 image:
   repository: "docker.io/venkatramireddyb/inbox"

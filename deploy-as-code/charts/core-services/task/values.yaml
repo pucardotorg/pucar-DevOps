@@ -11,6 +11,7 @@ ingress:
   additionalAnnotations: |
     nginx.ingress.kubernetes.io/proxy-body-size: "10m"
 
+lokiEnabled: true
 
 # Init Containers Configs
 initContainers:

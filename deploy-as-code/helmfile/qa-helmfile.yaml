@@ -66,6 +66,10 @@ releases:
     installed: true
     <<: *default
 
+  - name: digitalized-documents
+    installed: true
+    <<: *default
+
   # - name: dristi-case-pdf
   #   installed: true
   #   <<: *default
@@ -238,9 +242,9 @@ releases:
   #   installed: true
   #   <<: *default
 
-  # - name: openapi
-  #   installed: true
-  #   <<: *default
+  - name: openapi
+    installed: true
+    <<: *default
 
   - name: order
     installed: true

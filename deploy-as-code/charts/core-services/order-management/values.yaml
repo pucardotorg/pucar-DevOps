@@ -14,6 +14,7 @@ healthChecks:
   livenessProbePath: "/order-management/health"
   readinessProbePath: "/order-management/health"
 
+lokiEnabled: true
 
 # Container Configs
 image:
@@ -180,3 +181,18 @@ env: |
       configMapKeyRef:
         key: domain-url
         name: egov-config
+  - name: DRISTI_DIGITALIZED_DOCUMENTS_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: digitalized-documents
+  - name: EGOV_PDF_SERVICE_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: pdf-service
+  - name: EGOV_MDMS_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: egov-mdms-service

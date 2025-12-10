@@ -9,6 +9,7 @@ ingress:
   enabled: true
   context: "lock-svc"
 
+lokiEnabled: true
 
 # Init Containers Configs
 initContainers:

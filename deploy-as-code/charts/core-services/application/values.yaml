@@ -9,6 +9,8 @@ ingress:
   enabled: true
   context: "application"
 
+lokiEnabled: true
+
 # Init Containers Configs
 initContainers:
   dbMigration:

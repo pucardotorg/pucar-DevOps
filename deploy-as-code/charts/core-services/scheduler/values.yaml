@@ -9,6 +9,8 @@ ingress:
   zuul: true
   context: "scheduler"
 
+lokiEnabled: true
+
 # Init Containers Configs
 initContainers:
   dbMigration:
