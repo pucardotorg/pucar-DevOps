@@ -42,9 +42,9 @@ releases:
   #   installed: true
   #   <<: *default
 
-  # - name: case
-  #   installed: true
-  #   <<: *default
+  - name: case
+    installed: true
+    <<: *default
 
   - name: casemanagement
     installed: true
@@ -63,6 +63,10 @@ releases:
   #   <<: *default
 
   - name: digit-ui
+    installed: true
+    <<: *default
+
+  - name: digitalized-documents
     installed: true
     <<: *default
 
@@ -158,17 +162,13 @@ releases:
     installed: true
     <<: *default
 
-  - name: e-sign
-    installed: true
-    <<: *default
-
   - name: esign-interceptor
     installed: true
     <<: *default
 
-  # - name: e-sign-svc
-  #   installed: true
-  #   <<: *default
+  - name: e-sign-svc
+    installed: true
+    <<: *default
 
   - name: etreasury
     installed: true
@@ -230,9 +230,9 @@ releases:
     installed: true
     <<: *default
 
-  # - name: ocr-service
-  #   installed: true
-  #   <<: *default
+  - name: ocr-service
+    installed: true
+    <<: *default
 
   # - name: ocr-svc
   #   installed: true
@@ -246,9 +246,9 @@ releases:
     installed: true
     <<: *default
 
-  # - name: order-management
-  #   installed: true
-  #   <<: *default
+  - name: order-management
+    installed: true
+    <<: *default
 
   - name: payment-calculator
     installed: true
