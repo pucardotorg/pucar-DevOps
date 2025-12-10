@@ -1,5 +1,6 @@
 global:
   domain: demo.pucar.org
+loki-url: "http://178.236.185.12:3100/loki/api/v1/push"
 root-ingress:
   cert-issuer: "letsencrypt-prod"
 configmaps:
@@ -144,7 +145,7 @@ digit-ui:
             };
         })();
         </script>';
-
+egov-url-shortening:
   heap: "-Xmx256m -Xms256m"
   memory_limits: 512Mi
   egov-url-shortner-endpoint: "/eus/shortener"
@@ -246,62 +247,61 @@ audit-service:
 
 workbench-ui:
   custom-js-injection: |
-      sub_filter.conf: |
-        sub_filter '<head>' '<head><script type="text/javascript">
-        var globalConfigs = (function () {
-            var stateTenantId = "kl";
-            var contextPath = "workbench-ui";
-            var configModuleName = "commonMuktaUiConfig";
-            var centralInstanceEnabled = false;
-            var mdms = {
-              schemaCodeInAction: false,
-              v1ContextPath: "egov-mdms-service",
-              v2ContextPath: "egov-mdms-service",
-            };
-            var footerBWLogoURL = "https://pucarfilestoreuat.blob.core.windows.net/pucar-filestore/pucar-assets/digit-footer-bw.png";
-            var footerLogoURL = "https://pucarfilestoreuat.blob.core.windows.net/pucar-filestore/pucar-assets/digit-footer.png";
-            var digitHomeURL = "https://www.digit.org/";
-            var xstateWebchatServices = "wss://dev.digit.org/xstate-webchat/";
-            var assetS3Bucket = "pucar-assets";
-            var invalidEmployeeRoles = ["CBO_ADMIN", "ORG_ADMIN", "ORG_STAFF", "SYSTEM"];
+    sub_filter.conf: |
+      sub_filter '<head>' '<head><script type="text/javascript">
+      var globalConfigs = (function () {
+          var stateTenantId = "kl";
+          var contextPath = "workbench-ui";
+          var configModuleName = "commonMuktaUiConfig";
+          var centralInstanceEnabled = false;
+          var mdms = {
+            schemaCodeInAction: false,
+            v1ContextPath: "egov-mdms-service",
+            v2ContextPath: "egov-mdms-service",
+          };
+          var footerBWLogoURL = "https://pucarfilestoreuat.blob.core.windows.net/pucar-filestore/pucar-assets/digit-footer-bw.png";
+          var footerLogoURL = "https://pucarfilestoreuat.blob.core.windows.net/pucar-filestore/pucar-assets/digit-footer.png";
+          var digitHomeURL = "https://www.digit.org/";
+          var xstateWebchatServices = "wss://dev.digit.org/xstate-webchat/";
+          var assetS3Bucket = "pucar-assets";
+          var invalidEmployeeRoles = ["CBO_ADMIN", "ORG_ADMIN", "ORG_STAFF", "SYSTEM"];
 
-            var getConfig = function (key) {
-              if (key === "STATE_LEVEL_TENANT_ID") {
-                return stateTenantId;
-              } else if (key === "ENABLE_SINGLEINSTANCE") {
-                return centralInstanceEnabled;
-              } else if (key === "DIGIT_FOOTER_BW") {
-                return footerBWLogoURL;
-              } else if (key === "DIGIT_FOOTER") {
-                return footerLogoURL;
-              } else if (key === "DIGIT_HOME_URL") {
-                return digitHomeURL;
-              } else if (key === "xstate-webchat-services") {
-                return xstateWebchatServices;
-              } else if (key === "S3BUCKET") {
-                return assetS3Bucket;
-              } else if (key === "CONTEXT_PATH") {
-                return contextPath;
-              } else if (key === "MDMS_CONTEXT_PATH") {
-                return mdms.v2ContextPath;
-              } else if (key === "MDMS_SCHEMACODE_INACTION") {
-                return mdms.schemaCodeInAction;
-              } else if (key === "MDMS_V2_CONTEXT_PATH") {
-                return mdms.v2ContextPath;
-              } else if (key === "MDMS_V1_CONTEXT_PATH") {
-                return mdms.v1ContextPath;
-              } else if (key === "UICONFIG_MODULENAME") {
-                return configModuleName;
-              } else if (key === "INVALIDROLES") {
-                return invalidEmployeeRoles;
-              }
-            };
-            return {
-              getConfig,
-            };
-        })();
-        </script>';
-
+          var getConfig = function (key) {
+            if (key === "STATE_LEVEL_TENANT_ID") {
+              return stateTenantId;
+            } else if (key === "ENABLE_SINGLEINSTANCE") {
+              return centralInstanceEnabled;
+            } else if (key === "DIGIT_FOOTER_BW") {
+              return footerBWLogoURL;
+            } else if (key === "DIGIT_FOOTER") {
+              return footerLogoURL;
+            } else if (key === "DIGIT_HOME_URL") {
+              return digitHomeURL;
+            } else if (key === "xstate-webchat-services") {
+              return xstateWebchatServices;
+            } else if (key === "S3BUCKET") {
+              return assetS3Bucket;
+            } else if (key === "CONTEXT_PATH") {
+              return contextPath;
+            } else if (key === "MDMS_CONTEXT_PATH") {
+              return mdms.v2ContextPath;
+            } else if (key === "MDMS_SCHEMACODE_INACTION") {
+              return mdms.schemaCodeInAction;
+            } else if (key === "MDMS_V2_CONTEXT_PATH") {
+              return mdms.v2ContextPath;
+            } else if (key === "MDMS_V1_CONTEXT_PATH") {
+              return mdms.v1ContextPath;
+            } else if (key === "UICONFIG_MODULENAME") {
+              return configModuleName;
+            } else if (key === "INVALIDROLES") {
+              return invalidEmployeeRoles;
+            }
+          };
+          return {
+            getConfig,
+          };
+      })();
+      </script>';
 
 pdf-service:
   initContainers:
