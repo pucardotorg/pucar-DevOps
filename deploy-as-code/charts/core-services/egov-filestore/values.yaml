@@ -18,6 +18,8 @@ ingress:
   zuul: true
   context: "filestore"
 
+debugPort: 5005
+
 # Container Configs
 image:
   repository: "docker.io/venkatramireddyb/egov-filestore"

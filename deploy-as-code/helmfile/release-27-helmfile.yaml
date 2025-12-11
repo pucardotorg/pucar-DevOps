@@ -90,9 +90,9 @@ releases:
   #   installed: true
   #   <<: *default
 
-  # - name: egov-filestore
-  #   installed: true
-  #   <<: *default
+  - name: egov-filestore
+    installed: true
+    <<: *default
 
   # - name: egov-hrms
   #   installed: true
