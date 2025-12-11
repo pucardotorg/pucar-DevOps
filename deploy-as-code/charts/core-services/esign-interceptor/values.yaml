@@ -12,6 +12,7 @@ lokiEnabled: true
 
 # Init Containers Configs
 
+debugPort: 5005
 
 # Container Configs
 image:
