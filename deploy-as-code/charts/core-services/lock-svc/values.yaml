@@ -60,21 +60,6 @@ env: |
       secretKeyRef:
         name: db
         key: password
-  - name: SPRING_DATASOURCE_URL
-    valueFrom:
-      configMapKeyRef:
-        key: db-url
-        name: egov-config
-  - name: SPRING_DATASOURCE_USERNAME
-    valueFrom:
-      secretKeyRef:
-        name: db
-        key: username
-  - name: SPRING_DATASOURCE_PASSWORD
-    valueFrom:
-      secretKeyRef:
-        name: db
-        key: password
   - name: "SCHEMA_TABLE"
     value: "lock_svc_service_schema"
   - name: EGOV_MDMS_HOST
@@ -87,11 +72,6 @@ env: |
       configMapKeyRef:
         name: egov-service-host
         key: egov-user
-  - name: KAFKA_CONFIG_BOOTSTRAP_SERVER_CONFIG
-    valueFrom:
-      configMapKeyRef:
-        key: kafka-brokers
-        name: egov-config
   - name: EGOV_MDMS_SEARCH_ENDPOINT
     value: /egov-mdms-service/v1/_search
   - name: EGOV_INDIVIDUAL_HOST
