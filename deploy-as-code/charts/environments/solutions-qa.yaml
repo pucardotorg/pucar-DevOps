@@ -173,7 +173,7 @@ digit-ui:
             var judgeId = "JUDGE_ID";
             var courtId = "KLKM52";
             var judgeName = "Michael George";
-            var mockEnabled = "false";
+            var mockEnabled = "true";
             var mockESignEnabled = "false";
             var pucarFileStoreBlob = "https://pucarfilestoreuat.blob.core.windows.net"
             var esignUrl = "https://es-staging.cdac.in/esignlevel2/2.1/form/signdoc"
