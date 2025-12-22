@@ -53,21 +53,6 @@ env: |
       secretKeyRef:
         name: db
         key: password
-  - name: SPRING_DATASOURCE_URL
-    valueFrom:
-      configMapKeyRef:
-        name: egov-config
-        key: db-url
-  - name: SPRING_DATASOURCE_USERNAME
-    valueFrom:
-      secretKeyRef:
-        name: db
-        key: username
-  - name: SPRING_DATASOURCE_PASSWORD
-    valueFrom:
-      secretKeyRef:
-        name: db
-        key: password
   - name: "SCHEMA_TABLE"
     value: "collection_services_schema"
   - name: EGOV_IDGEN_HOSTNAME
@@ -99,8 +84,6 @@ env: |
     value: /localization/messages/v1/_search
   - name: EGOV_MDMS_SEARCH_ENDPOINT
     value: /egov-mdms-service/v1/_search
-  - name: SERVER_PORT
-    value: "8080"
   - name: SERVER_CONTEXT_PATH
     value: /collection-services
   - name: EGOV_IDGEN_PATH
@@ -115,11 +98,6 @@ env: |
       configMapKeyRef:
         name: egov-service-host
         key: egov-workflow-v2
-  - name: KAFKA_CONFIG_BOOTSTRAP_SERVER_CONFIG
-    valueFrom:
-      configMapKeyRef:
-        key: kafka-brokers
-        name: egov-config
   - name: EGOV_SERVICES_BILLING_SERVICE_HOSTNAME
     valueFrom:
       configMapKeyRef:

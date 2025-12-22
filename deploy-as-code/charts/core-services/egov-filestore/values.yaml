@@ -138,8 +138,6 @@ env: |
   - name: FIXED_CONTAINER_NAME
     value: {{ index .Values "fixed-container-name" | quote }}
   {{- end }}
-  - name: JAVA_OPTS
-    value: {{ index .Values "heap" | quote }}
   - name: ALLOWED_FORMATS_MAP
     value: {{ index .Values "allowed-file-formats-map" | quote }}
   {{- if index .Values "minio-enabled" }}  

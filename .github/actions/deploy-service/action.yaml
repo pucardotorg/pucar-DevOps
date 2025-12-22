@@ -37,6 +37,7 @@ runs:
       uses: actions/checkout@v6
       with:
         ref: ${{ inputs.checkout_ref }}
+        repository: pucardotorg/pucar-DevOps
 
     - name: Kubectl setup
       uses: azure/setup-kubectl@v3
