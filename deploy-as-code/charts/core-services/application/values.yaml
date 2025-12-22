@@ -147,3 +147,5 @@ env: |
     value: egov.collection.payment-create
   - name: SPRING_KAFKA_CONSUMER_GROUP_ID
     value: application
+  - name: EGOV_IDGEN_CMP_TENANT_OVERRIDE_YEAR
+    value: "2025"
