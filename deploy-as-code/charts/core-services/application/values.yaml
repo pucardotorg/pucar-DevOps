@@ -149,3 +149,8 @@ env: |
     value: application
   - name: EGOV_IDGEN_CMP_TENANT_OVERRIDE_YEAR
     value: "2025"
+  - name: EGOV_EVIDENCE_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: evidence
