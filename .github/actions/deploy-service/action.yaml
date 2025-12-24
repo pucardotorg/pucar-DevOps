@@ -67,6 +67,10 @@ runs:
     - name: sops decryption
       shell: bash
       run: |
+        ls -1
+        echo ""
+        pwd
+        echo ""
         sudo sops --decrypt --age ${{ inputs.public_age_key }} -i ${{ github.workspace }}/deploy-as-code/charts/environments/${{ inputs.env_file }}-secrets.yaml
 
     - name: Install Helmfile
