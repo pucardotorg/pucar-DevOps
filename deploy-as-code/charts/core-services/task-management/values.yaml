@@ -9,7 +9,9 @@ ingress:
   enabled: true
   context: "task-management"
 
-lokiEnabled: true
+lokiEnabled: false
+
+
 
 # Init Containers Configs
 initContainers:
@@ -18,7 +20,7 @@ initContainers:
     schemaTable: "task_management_schema"
     image:
       repository: "docker.io/venkatramireddyb/task-management-db"
-      tag: feature-payment-redesign-local-changes-b8af2df2ea35b860552f388065fe8c5e04afc75e
+      tag: main-184707da29a165342a030b37126f1ae1ee42279f
 
 # Init Containers Configs
 healthChecks:
@@ -29,7 +31,7 @@ healthChecks:
 # Container Configs
 image:
   repository: "docker.io/venkatramireddyb/task-management"
-  tag: feature-payment-redesign-local-changes-b8af2df2ea35b860552f388065fe8c5e04afc75e
+  tag: main-184707da29a165342a030b37126f1ae1ee42279f
   imagePullPolicy: Always
 replicas: "1"
 httpPort: 8080

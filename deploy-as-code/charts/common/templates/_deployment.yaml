@@ -67,7 +67,8 @@ spec:
                 {{- include "common.labels" . | nindent 18 }}     
     {{- end }}  
     {{- if .Values.serviceAccount }}
-      serviceAccountName: {{ .Values.serviceAccount }}    
+      serviceAccountName: {{ .Values.serviceAccount }}  
+      serviceAccount: {{ .Values.serviceAccount }}  
     {{- end }}     
       initContainers:
       {{- with .Values.initContainers.extraInitContainers }}

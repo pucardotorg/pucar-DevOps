@@ -3,7 +3,8 @@
 # Declare name/value pairs to be passed into your templates.
 global:
     containerRegistry: docker.io/venkarramireddyb
-
+serviceAccount: pucar-sa
+namespace: pucar-stg
 replicas: 1
 httpPort: 8080
 appType: ""
@@ -14,6 +15,7 @@ ingress:
   annotations:
     kubernetes.io/ingress.class: "nginx"
     nginx.ingress.kubernetes.io/use-regex: "true" 
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
    # nginx.ingress.kubernetes.io/limit-rpm: "300"
   waf: 
     enabled: true

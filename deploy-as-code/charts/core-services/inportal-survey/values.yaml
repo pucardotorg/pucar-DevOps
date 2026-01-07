@@ -18,7 +18,7 @@ initContainers:
     schemaTable: "inportal_survey_schema"
     image:
       repository: "docker.io/venkatramireddyb/inportal-survey-db"
-      tag: feature-3939-inportal-survey-service-7a9bff733dc31bcd7edf241673ebcac6749d571f
+      tag: v1.14.4-5cd4e9ba9818cbeca4441c647b7b1aa05cb82a15
 
 # Init Containers Configs
 healthChecks:
@@ -29,7 +29,7 @@ healthChecks:
 # Container Configs
 image:
   repository: "docker.io/venkatramireddyb/inportal-survey"
-  tag: feature-3939-inportal-survey-service-7a9bff733dc31bcd7edf241673ebcac6749d571f
+  tag: v1.14.4-5cd4e9ba9818cbeca4441c647b7b1aa05cb82a15
   imagePullPolicy: Always
 replicas: "1"
 httpPort: 8080

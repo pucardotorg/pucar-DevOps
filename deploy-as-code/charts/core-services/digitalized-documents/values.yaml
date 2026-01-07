@@ -18,7 +18,7 @@ initContainers:
     schemaTable: "digitalized_documents_schema"
     image:
       repository: "docker.io/venkatramireddyb/digitalized-documents-db"
-      tag: feature-digitalization-4964-4965-4966-d1cd2b1327913ac253d1d8c3891fcaf79df18021
+      tag: main-1b777515cb97ddc468a8c451cbe77aba807ec664
 
 # Init Containers Configs
 healthChecks:
@@ -29,7 +29,7 @@ healthChecks:
 # Container Configs
 image:
   repository: "docker.io/venkatramireddyb/digitalized-documents"
-  tag: feature-digitalization-4964-4965-4966-d1cd2b1327913ac253d1d8c3891fcaf79df18021
+  tag: main-1b777515cb97ddc468a8c451cbe77aba807ec664
   imagePullPolicy: Always
 replicas: "1"
 httpPort: 8080
