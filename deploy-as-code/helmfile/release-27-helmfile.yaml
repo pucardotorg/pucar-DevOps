@@ -226,9 +226,9 @@ releases:
   #   installed: true
   #   <<: *default
 
-  # - name: notification
-  #   installed: true
-  #   <<: *default
+  - name: notification
+    installed: true
+    <<: *default
 
   - name: ocr-service
     installed: true
