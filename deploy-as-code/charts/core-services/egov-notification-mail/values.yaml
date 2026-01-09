@@ -9,7 +9,7 @@ initContainers: {}
 # Container Configs
 image:
   repository: "egov-notification-mail"
-  tag: core-2.9-lts-mvn-check-c33cfe45ab-4
+  tag: develop-2b1e7f01cad463fed4459d4b9af0b10966263439
 replicas: "1"
 appType: "java-spring"
 tracing-enabled: true

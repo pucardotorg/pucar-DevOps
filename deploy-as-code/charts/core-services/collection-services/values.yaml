@@ -17,12 +17,12 @@ initContainers:
     schemaTable: "collection_services_schema"
     image:
       repository: "docker.io/venkatramireddyb/pucar_collection_db"
-      tag: v1.0.0-3345f6bb9536054a0050db6a05e88de50a1f6647
+      tag: develop-026e2594c17944fc069afd6d762b36fd70cde5ed
 
 # Container Configs
 image:
   repository: "docker.io/venkatramireddyb/pucar_collection"
-  tag: v1.0.0-3345f6bb9536054a0050db6a05e88de50a1f6647
+  tag: develop-026e2594c17944fc069afd6d762b36fd70cde5ed
   imagePullPolicy: Always
 replicas: "1"
 httpPort: 8080

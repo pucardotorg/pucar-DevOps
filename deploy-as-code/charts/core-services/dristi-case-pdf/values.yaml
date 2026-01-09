@@ -13,7 +13,7 @@ ingress:
 # Container Configs
 image:
   repository: "docker.io/venkatramireddyb/pucar_dristi_case_pdf"
-  tag: v1.0.0-1ea0074cb9041fa0837eb8193c66673cb8c4e2c4
+  tag: develop-4915d1cef06be7a2e622380fce50d863e473b23c
 replicas: "1"
 
 

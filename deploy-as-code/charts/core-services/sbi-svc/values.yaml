@@ -16,12 +16,12 @@ initContainers:
     schemaTable: "sbi_svc_schema"
     image:
       repository: "docker.io/venkatramireddyb/sbi-svc-db"
-      tag: v1.0.0-a59f8a91d4f77728a9076fa72d39975ba294c526
+      tag: develop-026e2594c17944fc069afd6d762b36fd70cde5ed
 
 # Container Configs
 image:
   repository: "docker.io/venkatramireddyb/sbi-svc"
-  tag: v1.0.0-a59f8a91d4f77728a9076fa72d39975ba294c526
+  tag: develop-026e2594c17944fc069afd6d762b36fd70cde5ed
 
 
 replicas: "1"

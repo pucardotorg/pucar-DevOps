@@ -1,0 +1,21 @@
+nginx-ingress:
+  namespaceOverride: "backbone"
+  fullnameOverride: "nginx-ingress"
+  controller:
+    service:
+      type: NodePort
+      nodePorts:
+        http: 32001
+        https: 32000
+
+cert-manager:
+  namespaceOverride: "backbone"
+
+redis:
+  namespace: "backbone"
+
+kafka-kraft:
+  fullnameOverride: "kafka-kraft"
+  namespace: "backbone"
+  image:
+    repository: "venkatramireddyb/kafka-kraft"

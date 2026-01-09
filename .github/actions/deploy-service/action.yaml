@@ -96,4 +96,7 @@ runs:
         echo "Deploying service: ${{ inputs.service_name }} with tag: ${{ inputs.image_tag }}"
         
         helmfile sync -f auto-deploy-helmfile.yaml \
-          --set ${{ inputs.service_name }}.image.tag=${{ inputs.image_tag }}
+          --set ${{ inputs.service_name }}.image.repository=${{ inputs.service_name }} \
+          --set ${{ inputs.service_name }}.image.tag=${{ inputs.image_tag }} \
+          --set ${{ inputs.service_name }}.initContainers.dbMigration.image.repository=${{ inputs.service_name }}-db \
+          --set ${{ inputs.service_name }}.initContainers.dbMigration.image.tag=${{ inputs.image_tag }}
