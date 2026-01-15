@@ -160,3 +160,5 @@ env: |
   - name: CLAMAV_PORT
     value: "3310"
   {{- end }}
+  - name: PDF_DISALLOW_EMBEDDED_FILES
+    value: "true"
