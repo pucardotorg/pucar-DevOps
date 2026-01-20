@@ -42,6 +42,21 @@ env: |
       secretKeyRef:
         key: username
         name: db
+  - name: SPRING_DATASOURCE_USERNAME
+    valueFrom:
+      secretKeyRef:
+        key: username
+        name: db
+  - name: SPRING_DATASOURCE_URL
+    valueFrom:
+      configMapKeyRef:
+        key: db-url
+        name: egov-config
+  - name: SPRING_DATASOURCE_PASSWORD
+    valueFrom:
+      secretKeyRef:
+        name: db
+        key: password
   - name: SPRING_FLYWAY_PASSWORD
     valueFrom:
       secretKeyRef:

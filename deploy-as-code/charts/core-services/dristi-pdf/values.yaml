@@ -11,6 +11,8 @@ ingress:
   enabled: true
   zuul: true
   context: "egov-pdf"
+  additionalAnnotations: |
+    nginx.ingress.kubernetes.io/proxy-body-size: "0"
 
 # Container Configs
 image:
