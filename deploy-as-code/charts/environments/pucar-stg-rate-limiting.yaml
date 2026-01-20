@@ -1,0 +1,12 @@
+digitalized-documents:
+  rateLimit:
+    enabled: "true"
+    gatewayBurstCapacity: "20"
+    gatewayKeyResolver: "userKeyResolver"
+    gatewayReplenishRate: "20"
+  ingress:
+    nginxRateLimit:
+      enabled: "true"
+      rpm: "500"
+      burstMultiplier: "1"
+      connections: "10"

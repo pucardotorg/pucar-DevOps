@@ -17,6 +17,18 @@ metadata:
 {{- if .Values.ingress.waf.enabled }}      
 {{- toYaml .Values.ingress.waf.annotations | nindent 4 }} 
 {{- end  }}
+{{- if .Values.ingress.nginxRateLimit.enabled }}
+    nginx.ingress.kubernetes.io/limit-rpm: "{{ .Values.ingress.nginxRateLimit.rpm }}"
+    nginx.ingress.kubernetes.io/limit-burst-multiplier: "{{ .Values.ingress.nginxRateLimit.burstMultiplier }}"
+    nginx.ingress.kubernetes.io/limit-connections: "{{ .Values.ingress.nginxRateLimit.connections }}"
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      more_set_headers "X-Content-Type-Options: nosniff";
+      more_set_headers "X-Frame-Options: DENY";
+      more_set_headers "X-Xss-Protection: 1; mode=block";
+      limit_req_status 429;
+      more_set_headers "Strict-Transport-Security: max-age=31536000; includeSubDomains; preload";
+      more_set_headers "Content-Security-Policy: object-src "self"; media-src "self"; frame-ancestors "none"; base-uri "self"; frame-src "self"; worker-src "self"; manifest-src "self";" always;
+{{- end }}
 {{- if .Values.ingress.additionalAnnotations }}                                   
   {{- tpl  .Values.ingress.additionalAnnotations . | nindent 4 }}
 {{- end }} 
