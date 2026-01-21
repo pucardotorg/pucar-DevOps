@@ -5,7 +5,7 @@ labels:
 
 # Init Containers Configs
 initContainers: {}
-lokiEnabled: true
+lokiEnabled: false
 
 # Container Configs
 image:
