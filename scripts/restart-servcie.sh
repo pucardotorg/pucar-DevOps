@@ -1,8 +1,37 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+###############################################################################
+# Script Name: restart-service.sh
+#
+# Purpose:
+#   Safely restart Kubernetes services in a dependency-aware order.
+#
+# How it works:
+#   1. Restarts core dependency services FIRST:
+#        - egov-user
+#        - egov-mdms-service
+#   2. Waits until each rollout is fully complete (blocking)
+#   3. Restarts dependent services ONLY after core services are ready
+#   4. Uses "restartedAt" annotation as a fallback to avoid unnecessary restarts
+#
+# Why this is needed:
+#   Many services depend on egov-user and egov-mdms-service.
+#   Restarting services out of order can lead to failures or bad state.
+#
+# Safety guarantees:
+#   - No rollout timeouts (waits indefinitely until ready or failed)
+#   - Safe to re-run (idempotent)
+#   - Exits immediately on any error
+#
+# Usage:
+#   chmod +x restart-service.sh
+#   ./restart-service.sh
+#
+###############################################################################
+
 NAMESPACE="egov"
-RESTART_WINDOW_SECONDS=600
+RESTART_WINDOW_SECONDS=900  # 15 minutes
 
 #######################################
 # Phase 1: Core dependency services
