@@ -246,7 +246,43 @@ extraEnv:
           configMapKeyRef:
             name: egov-config
             key: spring-datasource-tomcat-max-active 
-      {{- end }}           
+      {{- end }}
+      - name: SPRING_DATASOURCE_HIKARI_MINIMUM_IDLE
+      {{- if index .Values "spring-datasource-hikari-minimum-idle" }}
+          value: {{ index .Values "spring-datasource-hikari-minimum-idle" | quote }}
+      {{- else }}
+        valueFrom:
+          configMapKeyRef:
+            name: egov-config
+            key: spring-datasource-hikari-minimum-idle
+      {{- end }}
+      - name: SPRING_DATASOURCE_HIKARI_IDLE_TIMEOUT
+      {{- if index .Values "spring-datasource-hikari-idle-timeout" }}
+          value: {{ index .Values "spring-datasource-hikari-idle-timeout" | quote }}
+      {{- else }}
+        valueFrom:
+          configMapKeyRef:
+            name: egov-config
+            key: spring-datasource-hikari-idle-timeout
+      {{- end }}
+      - name: SPRING_DATASOURCE_HIKARI_MAX_LIFETIME
+      {{- if index .Values "spring-datasource-hikari-max-lifetime" }}
+          value: {{ index .Values "spring-datasource-hikari-max-lifetime" | quote }}
+      {{- else }}
+        valueFrom:
+          configMapKeyRef:
+            name: egov-config
+            key: spring-datasource-hikari-max-lifetime
+      {{- end }}
+      - name: SPRING_DATASOURCE_HIKARI_CONNECTION_TIMEOUT
+      {{- if index .Values "spring-datasource-hikari-connection-timeout" }}
+          value: {{ index .Values "spring-datasource-hikari-connection-timeout" | quote }}
+      {{- else }}
+        valueFrom:
+          configMapKeyRef:
+            name: egov-config
+            key: spring-datasource-hikari-connection-timeout
+      {{- end }}         
       - name: KAFKA_CONFIG_BOOTSTRAP_SERVER_CONFIG
         valueFrom:
           configMapKeyRef:
