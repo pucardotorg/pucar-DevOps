@@ -63,6 +63,10 @@ configmaps:
       sms-enabled: "true"
       spring-datasource-tomcat-initialSize: "1"
       spring-datasource-tomcat-max-active: "2"
+      spring-datasource-hikari-minimum-idle: "0"
+      spring-datasource-hikari-idle-timeout: "30000"
+      spring-datasource-hikari-max-lifetime: "1800000"
+      spring-datasource-hikari-connection-timeout: "30000"
       spring-jpa-show-sql: "true"
       timezone: Asia/Kolkata
       tracer-errors-provideexceptionindetails: "true"
