@@ -168,7 +168,7 @@ env: |
       configMapKeyRef:
         key: evidence
         name: egov-service-host
-  - name: EGOV_DRISTI_PDF_SERVICE_HOST
+  - name: EGOV_DRISTI_PDF_HOST
     valueFrom:
       configMapKeyRef:
         key: dristi-pdf
