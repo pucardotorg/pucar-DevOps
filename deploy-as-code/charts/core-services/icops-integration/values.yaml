@@ -8,10 +8,10 @@ ingress:
   enabled: true
 #  zuul: true
   context: "kerala-icops"
-#healthChecks:
-#  enabled: true
-#  livenessProbePath: "/kerala-icops/health"
-#  readinessProbePath: "/kerala-icops/health"
+healthChecks:
+ enabled: true
+ livenessProbePath: "/kerala-icops/health"
+ readinessProbePath: "/kerala-icops/health"
 
 lokiEnabled: true
 

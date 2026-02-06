@@ -11,6 +11,11 @@ ingress:
 
 lokiEnabled: true
 
+healthChecks:
+ enabled: true
+ livenessProbePath: "/scheduler/health"
+ readinessProbePath: "/scheduler/health"
+
 # Init Containers Configs
 initContainers:
   dbMigration:
