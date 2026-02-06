@@ -5,7 +5,12 @@ labels:
 
 # Init Containers Configs
 initContainers: {}
-lokiEnabled: false
+lokiEnabled: true
+
+healthChecks:
+ enabled: true
+ livenessProbePath: "/kerala-sms/health"
+ readinessProbePath: "/kerala-sms/health"
 
 # Container Configs
 image:
