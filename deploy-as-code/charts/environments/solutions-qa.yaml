@@ -1,7 +1,7 @@
 global:
   domain: dristi-kerala-qa.pucar.org
 loki-url: "http://178.236.185.12:3100/loki/api/v1/push"
-kerala-configs-branch: &kerala_configs_branch "develop"
+kerala-configs-branch: &kerala_configs_branch "release/30"
 root-ingress:
   cert-issuer: "letsencrypt-prod"
 configmaps:
