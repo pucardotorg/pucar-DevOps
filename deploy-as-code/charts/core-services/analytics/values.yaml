@@ -162,3 +162,7 @@ env: |
       configMapKeyRef:
         key: task-management
         name: egov-service-host
+  - name: SPRING_REDIS_HOST
+    value: "redis.backbone"
+  - name: SPRING_REDIS_PORT
+    value: "6379"
