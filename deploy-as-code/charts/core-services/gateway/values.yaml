@@ -45,7 +45,7 @@ tracing-enabled: true
 server-tomcat-max-threads: "350"
 server-tomcat-max-connections: "1500"
 java-args: ""
-egov-open-endpoints-whitelist: "/user/oauth/token,/user-otp/v1/_send,/user-otp/v1/_validate,/user/citizen/_create,/localization/messages/v1/_search,/tenant/v1/tenant/_search,/egov-mdms-service/v1/_search,/filestore/v1/files/url,/epayments,/case/v1/search/_summary,/scheduler/causelist/v1/_download,/sbi-payments/success.jsp,/sbi-payments/fail.jsp,/kerala-icops/v1/integrations/iCops/_getAuthToken,/scheduler/causelist/v1/_recentCauseList"
+egov-open-endpoints-whitelist: "/bank-details/v1/_search,/user/oauth/token,/user-otp/v1/_send,/user-otp/v1/_validate,/user/citizen/_create,/localization/messages/v1/_search,/tenant/v1/tenant/_search,/egov-mdms-service/v1/_search,/filestore/v1/files/url,/epayments,/case/v1/search/_summary,/scheduler/causelist/v1/_download,/sbi-payments/success.jsp,/sbi-payments/fail.jsp,/kerala-icops/v1/integrations/iCops/_getAuthToken,/scheduler/causelist/v1/_recentCauseList"
 egov-mixed-mode-endpoints-whitelist: "/user/_search,/access/v1/actions/mdms/_get,/tl-services/v1/_search,/tl-services/v1/BPAREG/_search,/tl-services/v1/BPAREG/_create,/tl-services/v1/BPAREG/_update,/tl-calculator/v1/BPAREG/_getbill,/bpa-services/bpa/appl/_search,/edcr/rest/dcr/scrutinize,/edcr/rest/dcr/scrutinydetails,/filestore/v1/files"
 eventlog-enabled: "false"
 eventlog-topic: "springGateway-event-log"
