@@ -7,6 +7,11 @@ labels:
 initContainers: {}
 lokiEnabled: true
 
+healthChecks:
+ enabled: true
+ livenessProbePath: "/kerala-sms/health"
+ readinessProbePath: "/kerala-sms/health"
+
 # Container Configs
 image:
   repository: "docker.io/venkatramireddyb/kerala-sms"

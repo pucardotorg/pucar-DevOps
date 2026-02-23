@@ -223,3 +223,8 @@ env: |
       configMapKeyRef:
         name: egov-service-host
         key: inbox
+  - name: DRISTI_ADVOCATE_OFFICE_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: advocate-office-management
