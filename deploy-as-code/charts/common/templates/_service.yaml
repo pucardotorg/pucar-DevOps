@@ -36,5 +36,4 @@ spec:
     port: {{ .Values.debugPort }}
     targetPort: {{ .Values.debugPort }}
   {{- end }}
-readinessProbe:
 {{- end -}}

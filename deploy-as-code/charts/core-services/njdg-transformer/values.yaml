@@ -8,7 +8,7 @@ healthChecks:
   enabled: true
   livenessProbePath: "/njdg-transformer/actuator/health"
   readinessProbePath: "/njdg-transformer/actuator/health"
-namespace: pucar-stg
+namespace: pucar-prod
 
 # Init Containers Configs
 initContainers:
