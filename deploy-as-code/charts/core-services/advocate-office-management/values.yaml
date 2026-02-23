@@ -91,3 +91,12 @@ env: |
       configMapKeyRef:
         name: egov-service-host
         key: advocate
+  - name: DRISTI_CASE_HOST
+    valueFrom:
+      configMapKeyRef:
+        key: case
+        name: egov-service-host
+  - name: SPRING_REDIS_HOST
+    value: "redis.backbone"
+  - name: SPRING_REDIS_PORT
+    value: "6379"
