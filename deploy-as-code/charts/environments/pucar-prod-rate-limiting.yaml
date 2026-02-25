@@ -1,0 +1,34 @@
+digitalized-documents:
+  rateLimit:
+    enabled: "true"
+    gatewayBurstCapacity: "20"
+    gatewayKeyResolver: "userKeyResolver"
+    gatewayReplenishRate: "20"
+  ingress:
+    nginxRateLimit:
+      enabled: "true"
+      rpm: "500"
+      burstMultiplier: "1"
+      connections: "10"
+
+advocate-office-management:
+  rateLimit:
+    enabled: "true"
+    gatewayBurstCapacity: "20"
+    gatewayKeyResolver: "userKeyResolver"
+    gatewayReplenishRate: "20"
+  hparam:
+    enabled: "true"
+  hpacpu:
+    enabled: "false"
+
+template-configuration:
+  rateLimit:
+    enabled: "true"
+    gatewayBurstCapacity: "20"
+    gatewayKeyResolver: "userKeyResolver"
+    gatewayReplenishRate: "20"
+  hparam:
+    enabled: "true"
+  hpacpu:
+    enabled: "false"

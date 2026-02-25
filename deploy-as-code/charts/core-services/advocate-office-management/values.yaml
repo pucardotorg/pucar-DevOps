@@ -8,6 +8,7 @@ ingress:
   zuul: true
   enabled: true
   context: "advocate-office-management"
+  className: "nginx-prod"
 
 lokiEnabled: true
 
@@ -17,13 +18,13 @@ initContainers:
     enabled: true
     schemaTable: "advocate_office_management_service_schema"
     image:
-      repository: "docker.io/venkatramireddyb/advocate-office-management-db"
-      tag: v1.0.0-08ab38363f9c4b0b70d0763331c9773f8bbf9820
+      repository: "registry-backbone-prod.apps.ocp2.ksdc.in/advocate-office-management-db"
+      tag: v1.16.0
 
 # Container Configs
 image:
-  repository: "docker.io/venkatramireddyb/advocate-office-management"
-  tag: v1.0.0-08ab38363f9c4b0b70d0763331c9773f8bbf9820
+  repository: "registry-backbone-prod.apps.ocp2.ksdc.in/advocate-office-management"
+  tag: v1.16.0
   imagePullPolicy: Always
 replicas: "1"
 httpPort: 8080
