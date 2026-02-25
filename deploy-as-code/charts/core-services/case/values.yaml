@@ -228,7 +228,7 @@ env: |
       configMapKeyRef:
         name: egov-service-host
         key: advocate-office-management
-  - name: SPRING_REDIS_HOST
+  - name: SPRING_DATA_REDIS_HOST
     value: "redis.backbone"
-  - name: SPRING_REDIS_PORT
+  - name: SPRING_DATA_REDIS_PORT
     value: "6379"
