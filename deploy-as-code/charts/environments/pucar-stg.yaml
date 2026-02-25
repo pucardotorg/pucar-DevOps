@@ -1,5 +1,7 @@
 global:
   domain: oncourts-staging.kerala.gov.in
+  ingress:
+    className: "nginx"
 root-ingress:
   cert-issuer: "letsencrypt-prod"
 configmaps:
