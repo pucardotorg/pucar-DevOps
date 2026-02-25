@@ -18,12 +18,12 @@ initContainers:
     schemaTable: "template_configuration_service_schema"
     image:
       repository: "docker.io/venkatramireddyb/template-configuration-db"
-      tag: v1.0.0-08ab38363f9c4b0b70d0763331c9773f8bbf9820
+      tag: main-eac2161dde59072e91b142be82e47dc9df110c4f
 
 # Container Configs
 image:
   repository: "docker.io/venkatramireddyb/template-configuration"
-  tag: v1.0.0-08ab38363f9c4b0b70d0763331c9773f8bbf9820
+  tag: main-eac2161dde59072e91b142be82e47dc9df110c4f
   imagePullPolicy: Always
 replicas: "1"
 httpPort: 8080

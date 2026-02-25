@@ -35,7 +35,7 @@ metadata:
   labels:
 {{- include "common.labels" . | nindent 4 }}                            
 spec:
-  ingressClassName: {{ .Values.ingress.className }}
+  ingressClassName: {{ .Values.ingress.className | default .Values.global.ingress.className }}
   rules:
 {{- if .Values.ingress.host }}   
   {{- tpl  .Values.ingress.host . | nindent 2 }}

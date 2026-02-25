@@ -2,9 +2,9 @@
 # This is a YAML-formatted file.
 # Declare name/value pairs to be passed into your templates.
 global:
-    containerRegistry: registry-backbone-prod.apps.ocp2.ksdc.in
+    containerRegistry: docker.io/venkatramireddyb
 serviceAccount: pucar-sa
-namespace: pucar-prod
+namespace: pucar-stg
 replicas: 1
 httpPort: 8080
 appType: ""
@@ -30,11 +30,16 @@ ingress:
     connections: "10"
     annotations:
 
-rate-limit:
+hpacpu:
+  enabled: false
+hparam:
   enabled: true
-  gateway-burstCapacity: "30"
-  gateway-keyResolver: "userKeyResolver"
-  gateway-replenishRate: "30"
+
+rateLimit:
+  enabled: true
+  gatewayBurstCapacity: "30"
+  gatewayKeyResolver: "userKeyResolver"
+  gatewayReplenishRate: "30"
 
 disableAnnotationTimestamp: "true"
 lokiEnabled: false

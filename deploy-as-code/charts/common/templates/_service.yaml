@@ -11,7 +11,7 @@ metadata:
     prometheus.io/port: {{ .Values.metrics.port | quote }}
     prometheus.io/scrape: "true"  
 {{- end }}
-{{ if .Values.rateLimit.enabled }}  
+{{- if .Values.rateLimit.enabled }}  
     gateway-burstCapacity: {{ .Values.rateLimit.gatewayBurstCapacity | quote }}
     gateway-keyResolver: {{ .Values.rateLimit.gatewayKeyResolver | quote }}
     gateway-replenishRate: {{ .Values.rateLimit.gatewayReplenishRate | quote }}
