@@ -9,7 +9,7 @@ cron:
   timezone: "Asia/Kolkata"
 
 # Container Configs
-namespace: pucar-prod
+namespace: pucar-stg
 image:
   repository: "docker.io/venkatramireddyb/bulk-advocate-cron"
   tag: "nov-28"
