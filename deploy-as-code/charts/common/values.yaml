@@ -43,7 +43,7 @@ rateLimit:
 
 disableAnnotationTimestamp: "true"
 lokiEnabled: false
-
+redisEnabled: false
 image:
   pullPolicy: IfNotPresent   
 
