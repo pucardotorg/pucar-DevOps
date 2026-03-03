@@ -311,6 +311,12 @@ extraEnv:
       - name: LOGGING_LEVEL_ROOT
         value: INFO
       {{- end }}
+      {{- if .Values.redisEnabled }}
+      - name: REDIS_HOST
+        value: {{ .Values.global.redis.host }}
+      - name: REDIS_PORT
+        value: {{ .Values.global.redis.port }}
+      {{- end }}
             
             
             
