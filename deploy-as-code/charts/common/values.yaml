@@ -312,9 +312,9 @@ extraEnv:
         value: INFO
       {{- end }}
       {{- if .Values.redisEnabled }}
-      - name: REDIS_HOST
+      - name: SPRING_REDIS_HOST
         value: {{ .Values.global.redis.host }}
-      - name: REDIS_PORT
+      - name: SPRING_REDIS_PORT
         value: {{ .Values.global.redis.port }}
       {{- end }}
             
