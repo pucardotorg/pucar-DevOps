@@ -313,9 +313,9 @@ extraEnv:
       {{- end }}
       {{- if .Values.redisEnabled }}
       - name: SPRING_REDIS_HOST
-        value: {{ .Values.global.redis.host }}
+        value: {{ .Values.global.redis.host | quote }}
       - name: SPRING_REDIS_PORT
-        value: {{ .Values.global.redis.port }}
+        value: {{ .Values.global.redis.port | quote }}
       {{- end }}
             
             
