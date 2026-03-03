@@ -10,6 +10,7 @@ ingress:
   context: "inbox"
 
 lokiEnabled: true
+redisEnabled: true
 
 # Container Configs
 image:

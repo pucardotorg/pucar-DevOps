@@ -10,6 +10,7 @@ ingress:
   context: "scheduler"
 
 lokiEnabled: true
+redisEnabled: true
 
 healthChecks:
  enabled: true
