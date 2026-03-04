@@ -321,20 +321,14 @@ extraEnv:
             
             
   jaeger: |             
-      - name: JAEGER_SERVICE_NAME
+      - name: OTEL_SERVICE_NAME
         value: {{ template "common.name" . }}
-      - name: JAEGER_SAMPLER_TYPE
-        value: remote
-      - name: JAEGER_AGENT_HOST
+      - name: OTEL_EXPORTER_OTLP_ENDPOINT
         valueFrom:
-          fieldRef:
-            fieldPath: status.hostIP
-      - name: JAEGER_AGENT_PORT
-        value: "6831"
-      - name: JAEGER_SAMPLER_MANAGER_HOST_PORT
-        value: "$(JAEGER_AGENT_HOST):5778"
-      - name: TRACER_OPENTRACING_ENABLED
-        value: "true"         
+          configMapKeyRef:
+            name: egov-service-host
+            key: otel-exporter-otlp-endpoint
+
 ## Additional init containers
 extraInitContainers: |
 
