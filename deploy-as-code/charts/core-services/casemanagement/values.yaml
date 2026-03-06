@@ -165,17 +165,17 @@ env: |
       configMapKeyRef:
         key: pdf-service
         name: egov-service-host
-  - name: DRISTI_DEV_TASK_SEARCH_HOST
+  - name: DRISTI_TASK_HOST
     valueFrom:
       configMapKeyRef:
         key: task
         name: egov-service-host
-  - name: DRISTI_DEV_ORDER_SEARCH_HOST
+  - name: DRISTI_ORDER_HOST
     valueFrom:
       configMapKeyRef:
         key: order
         name: egov-service-host
-  - name: DRISTI_DEV_FILE_SEARCH_HOST
+  - name: EGOV_FILESTORE_HOST
     valueFrom:
       configMapKeyRef:
         key: egov-filestore
@@ -235,5 +235,28 @@ env: |
       secretKeyRef:
         key: readpassword
         name: db
-
-  
+  - name: DRISTI_APPLICATION_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: application
+  - name: DRISTI_DIGITALIZED_DOCUMENTS_HOST
+    valueFrom:
+      configMapKeyRef:
+        key: digitalized-documents
+        name: egov-service-host  
+  - name: DRISTI_TASKMANAGEMENT_HOST
+    valueFrom:
+      configMapKeyRef:
+        key: task-management
+        name: egov-service-host
+  - name: DRISTI_EVIDENCE_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: evidence
+  - name: DRISTI_CTC_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: ctc
