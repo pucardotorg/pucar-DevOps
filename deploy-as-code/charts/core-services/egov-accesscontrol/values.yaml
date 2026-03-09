@@ -9,6 +9,9 @@ ingress:
   zuul: true
   context: "access"
 
+lokiEnabled: true
+tracing-enabled: true
+
 # Init Containers Configs
 initContainers: {}
 

@@ -9,6 +9,9 @@ ingress:
   zuul: true
   context: "egov-user-event"
 
+lokiEnabled: true
+tracing-enabled: true
+
 # Init Containers Configs
 initContainers:
   dbMigration:

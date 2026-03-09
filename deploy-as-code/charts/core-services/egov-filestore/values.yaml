@@ -12,6 +12,9 @@ initContainers:
       repository: "docker.io/venkatramireddyb/egov-filestore-db"
       tag: main-98ec8dc97569afa6e1e52c0b43a95d596c9dd1d3
 
+lokiEnabled: true
+tracing-enabled: true
+
 # Ingress Configs
 ingress:
   enabled: true

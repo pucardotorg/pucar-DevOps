@@ -3,6 +3,9 @@ labels:
   app: "egov-persister"
   group: "core"
 
+lokiEnabled: true
+tracing-enabled: true
+
 # Init Containers Configs
 initContainers:
   gitSync:

@@ -5,6 +5,9 @@ labels:
 
 serviceAccount: gateway
 
+lokiEnabled: true
+tracing-enabled: true
+
 # Init Containers Configs
 initContainers:
   extraInitContainers: |

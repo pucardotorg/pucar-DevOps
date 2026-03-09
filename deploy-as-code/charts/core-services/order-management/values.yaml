@@ -15,6 +15,7 @@ healthChecks:
   readinessProbePath: "/order-management/health"
 
 lokiEnabled: true
+tracing-enabled: true
 
 # Container Configs
 image:

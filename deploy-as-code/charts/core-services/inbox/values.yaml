@@ -10,6 +10,7 @@ ingress:
   context: "inbox"
 
 lokiEnabled: true
+tracing-enabled: true
 redisEnabled: true
 
 # Container Configs

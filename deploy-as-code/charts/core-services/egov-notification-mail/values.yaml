@@ -6,6 +6,8 @@ labels:
 # Init Containers Configs
 initContainers: {}
 
+lokiEnabled: true
+tracing-enabled: true
 # Container Configs
 image:
   repository: "egov-notification-mail"

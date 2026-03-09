@@ -10,6 +10,9 @@ ingress:
   zuul: true
   context: "sunbirdrc-credential-service"
 
+lokiEnabled: true
+tracing-enabled: true
+
 initContainers:
   dbMigration:
     enabled: true

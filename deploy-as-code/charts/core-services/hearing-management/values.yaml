@@ -10,6 +10,7 @@ ingress:
   context: "hearing-management"
 
 lokiEnabled: true
+tracing-enabled: true
 
 healthChecks:
   enabled: true
