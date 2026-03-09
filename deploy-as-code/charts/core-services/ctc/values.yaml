@@ -129,7 +129,8 @@ env: |
         name: elasticsearch-credentials
         key: password
 
-
+  - name: KAFKA_TOPICS_RECEIPT_CREATE
+    value: egov.collection.payment-create
 
 
 
