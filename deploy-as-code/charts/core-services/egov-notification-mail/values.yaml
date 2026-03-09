@@ -14,7 +14,6 @@ image:
   tag: core-2.9-lts-mvn-check-c33cfe45ab-4
 replicas: "1"
 appType: "java-spring"
-tracing-enabled: true
 mail-port: 587
 username: "egov-testing@egovernments.org"
 heap: "-Xmx192m -Xms192m"

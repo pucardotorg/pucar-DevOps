@@ -31,7 +31,6 @@ healthChecks:
   livenessProbePath: "/pgr-services/health"
   readinessProbePath: "/pgr-services/health"
 appType: "java-spring"
-tracing-enabled: true
 notification-sms-enabled: "true"
 notification-email-enabled: "false"
 new-complaint-enabled: "true"

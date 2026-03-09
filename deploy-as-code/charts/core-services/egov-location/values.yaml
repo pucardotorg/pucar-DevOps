@@ -31,7 +31,6 @@ healthChecks:
   livenessProbePath: "/egov-location/health"
   readinessProbePath: "/egov-location/health"
 appType: "java-spring"
-tracing-enabled: true
 heap: "-Xmx192m -Xms192m"
 java-args: "-Dspring.profiles.active=monitoring"
 gmaps: true

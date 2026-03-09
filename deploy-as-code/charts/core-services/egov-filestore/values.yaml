@@ -31,7 +31,6 @@ healthChecks:
   livenessProbePath: "/filestore/health"
   readinessProbePath: "/filestore/health"
 appType: "java-spring"
-tracing-enabled: true
 is-bucket-fixed: "true"
 #fixed-bucketname: "unified-dev-bucket-s3"
 heap: "-Xmx1g -Xms1g"

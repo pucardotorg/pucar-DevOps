@@ -25,7 +25,6 @@ healthChecks:
   readinessProbePath: "/user-otp/health"
 replicas: "1"
 appType: "java-spring"
-tracing-enabled: true
 heap: "-Xmx192m -Xms192m"
 java-args: ""
 

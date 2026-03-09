@@ -31,7 +31,6 @@ healthChecks:
   livenessProbePath: "/pg-service/health"
   readinessProbePath: "/pg-service/health"
 appType: "java-spring"
-tracing-enabled: true
 axis: true
 payu-url: ""
 payu-url-status: ""

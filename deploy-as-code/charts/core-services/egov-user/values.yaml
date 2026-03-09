@@ -31,7 +31,6 @@ healthChecks:
   livenessProbePath: "/user/health"
   readinessProbePath: "/user/health"
 appType: "java-spring"
-tracing-enabled: true
 egov-state-level-tenant-id: "pb"
 decryption-abac-enabled: "false"
 account-unlock-cool-down-period-minutes: "30"

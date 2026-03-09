@@ -23,7 +23,6 @@ healthChecks:
   livenessProbePath: "/common-persist/health"
   readinessProbePath: "/common-persist/health"
 appType: "java-spring"
-tracing-enabled: true
 persist-yml-path: "file:///work-dir/kerala-configs/egov-persister/advocate-clerk-persister.yml,file:///work-dir/kerala-configs/egov-persister/advocate-persister.yml,file:///work-dir/kerala-configs/egov-persister/case-persister.yml"
 heap: "-Xmx192m -Xms192m"
 memory_limits: 512Mi

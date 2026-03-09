@@ -32,7 +32,6 @@ healthChecks:
    livenessProbePath: "/summons-svc/health"
    readinessProbePath: "/summons-svc/health"
 appType: "java-spring"
-tracing-enabled: true
 heap: "-Xmx64m -Xms64m"
 java-args: "-Dspring.profiles.active=monitoring"
 debugPort: 5005
