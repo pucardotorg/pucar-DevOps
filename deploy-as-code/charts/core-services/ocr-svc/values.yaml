@@ -15,7 +15,7 @@ ingress:
 
 # Container Configs
 image:
-  repository: "pucarsolutionsdev.azurecr.io/pucar_ocr"
+  repository: "docker.io/venkatramireddyb/pucar_ocr"
   tag: v1.0.0-dristi-experiment-OCR-1
   
 replicas: "1"

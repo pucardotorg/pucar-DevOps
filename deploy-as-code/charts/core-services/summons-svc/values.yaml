@@ -9,32 +9,45 @@ ingress:
   zuul: true
   context: "summons"
 
+lokiEnabled: true
+tracing-enabled: true
+
 # Init Containers Configs
 initContainers:
   dbMigration:
     enabled: true
     schemaTable: "summons_schema"
     image:
-      repository: "pucarsolutionsdev.azurecr.io/summons-svc_db"
+      repository: "docker.io/venkatramireddyb/summons-svc_db"
       tag: v1.0.0-5e9855abb0899c26d1a04284a94f35e4bd9c5d98
 
 
 # Container Configs
 image:
-  repository: "pucarsolutionsdev.azurecr.io/summons-svc"
+  repository: "docker.io/venkatramireddyb/summons-svc"
   tag: v1.0.0-5e9855abb0899c26d1a04284a94f35e4bd9c5d98
 replicas: "1"
-# healthChecks:
-#   enabled: true
-#   livenessProbePath: "/summons/health"
-#   readinessProbePath: "/summons/health"
+healthChecks:
+   enabled: true
+   livenessProbePath: "/summons-svc/health"
+   readinessProbePath: "/summons-svc/health"
 appType: "java-spring"
-tracing-enabled: true
 heap: "-Xmx64m -Xms64m"
 java-args: "-Dspring.profiles.active=monitoring"
+debugPort: 5005
 
 # Additional Container Envs
-env: |
+env: |          
+  - name: DRISTI_COURT_NAME
+    valueFrom:
+      configMapKeyRef:
+        key: COURT_NAME
+        name: egov-config
+  - name: DRISTI_COURT_ADDRESS
+    valueFrom:
+      configMapKeyRef:
+        key: COURT_ADDRESS
+        name: egov-config
   - name: SPRING_DATASOURCE_URL
     valueFrom:
       configMapKeyRef:
@@ -114,20 +127,17 @@ env: |
     valueFrom:
       configMapKeyRef:
         key: icops-integration
-        name: egov-service-host
-       
+        name: egov-service-host      
   - name: PAYMENT_CALCULATOR_HOST
     valueFrom:
       configMapKeyRef:
         key: payment-calculator
-        name: egov-service-host
-       
+        name: egov-service-host       
   - name: EGOV_BILLINGSERVICE_HOST
     valueFrom:
       configMapKeyRef:
         key: billing-service
-        name: egov-service-host
-  
+        name: egov-service-host 
   - name: EGOV_TASK_SERVICE_HOST
     valueFrom:
       configMapKeyRef:
@@ -147,4 +157,19 @@ env: |
     valueFrom:
       configMapKeyRef:
         key: case
+        name: egov-service-host
+  - name: TREASURY_DEMAND_HOST
+    valueFrom:
+      configMapKeyRef:
+        key: etreasury
+        name: egov-service-host
+  - name: DRISTI_EVIDENCE_HOST
+    valueFrom:
+      configMapKeyRef:
+        key: evidence
+        name: egov-service-host
+  - name: EGOV_DRISTI_PDF_HOST
+    valueFrom:
+      configMapKeyRef:
+        key: dristi-pdf
         name: egov-service-host

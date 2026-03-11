@@ -1,0 +1,104 @@
+# Common Labels
+labels:
+  app: "advocate-office-management"
+  group: "backend"
+
+# Ingress Configs
+ingress:
+  zuul: true
+  enabled: true
+  context: "advocate-office-management"
+
+tracing-enabled: true
+lokiEnabled: true
+
+# Init Containers Configs
+initContainers:
+  dbMigration:
+    enabled: true
+    schemaTable: "advocate_office_management_service_schema"
+    image:
+      repository: "docker.io/venkatramireddyb/advocate-office-management-db"
+      tag: v1.0.0-08ab38363f9c4b0b70d0763331c9773f8bbf9820
+
+# Container Configs
+image:
+  repository: "docker.io/venkatramireddyb/advocate-office-management"
+  tag: v1.0.0-08ab38363f9c4b0b70d0763331c9773f8bbf9820
+  imagePullPolicy: Always
+replicas: "1"
+debugPort: 5005
+httpPort: 8080
+appType: "java-spring"
+heap: "-Xmx256m -Xms256m"
+java-args: "-Dspring.profiles.active=monitoring"
+memory_limits: 768Mi
+
+
+healthChecks:
+  enabled: true
+  livenessProbePath: "/advocate-office-management/health"
+  readinessProbePath: "/advocate-office-management/health"
+
+env: |
+  - name: JAVA_OPTS
+    value: {{ index .Values "heap" | quote }}
+  - name: SERVER_PORT
+    value: "8080"
+  - name: JAVA_ARGS
+    value: {{ index .Values "java-args" | quote }}
+
+  - name: EGOV_LOCALIZATION_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: egov-localization
+  - name: EGOV_MDMS_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: egov-mdms-service
+  - name: EGOV_HRMS_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: egov-hrms
+  - name: EGOV_USER_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: egov-user
+  - name: EGOV_IDGEN_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: egov-idgen
+  - name: EGOV_WORKFLOW_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: egov-workflow-v2
+  - name: EGOV_URL_SHORTNER_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: egov-url-shortening
+  - name: DRISTI_INDIVIDUAL_HOST
+    valueFrom:
+      configMapKeyRef:
+        key: individual
+        name: egov-service-host
+  - name:  DRISTI_ADVOCATE_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: advocate
+  - name: DRISTI_CASE_HOST
+    valueFrom:
+      configMapKeyRef:
+        key: case
+        name: egov-service-host
+  - name: SPRING_REDIS_HOST
+    value: "redis.backbone"
+  - name: SPRING_REDIS_PORT
+    value: "6379"

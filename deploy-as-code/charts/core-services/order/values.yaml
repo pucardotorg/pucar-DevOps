@@ -8,7 +8,11 @@ ingress:
   zuul: true
   enabled: true
   context: "order"
+  additionalAnnotations: |
+    nginx.ingress.kubernetes.io/proxy-body-size: 2000m
 
+lokiEnabled: true
+tracing-enabled: true
 
 # Init Containers Configs
 initContainers:
@@ -16,12 +20,12 @@ initContainers:
     enabled: true
     schemaTable: "order_service_schema"
     image:
-      repository: "pucarsolutionsdev.azurecr.io/pucar_order_db"
+      repository: "docker.io/venkatramireddyb/pucar_order_db"
       tag: v1.0.0-08ab38363f9c4b0b70d0763331c9773f8bbf9820
 
 # Container Configs
 image:
-  repository: "pucarsolutionsdev.azurecr.io/pucar_order"
+  repository: "docker.io/venkatramireddyb/pucar_order"
   tag: v1.0.0-08ab38363f9c4b0b70d0763331c9773f8bbf9820
   imagePullPolicy: Always
 replicas: "1"
@@ -33,10 +37,10 @@ memory_limits: 768Mi
 
 
 
-#healthChecks:
-#  enabled: true
-#  livenessProbePath: "/order/"
-#  readinessProbePath: "/order/"
+healthChecks:
+  enabled: true
+  livenessProbePath: "/order/health"
+  readinessProbePath: "/order/health"
 
 env: |
   - name: JAVA_OPTS
@@ -149,3 +153,12 @@ env: |
         key: case
   - name: EGOV_CASE_PATH
     value: case/v1/_exists
+  - name: EGOV_SMS_NOTIFICATION_EVIDENCE_REQUESTED_TEMPLATE_ID
+    value: "1107174288673936495"
+  - name: EGOV_SMS_NOTIFICATION_ADDITIONAL_INFORMATION_TEMPLATE_ID
+    value: "1107174288681413433"
+  - name: EGOV_HEARING_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: hearing

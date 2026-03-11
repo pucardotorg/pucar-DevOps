@@ -6,23 +6,32 @@ labels:
 # Ingress Configs
 ingress:
   enabled: true
-  zuul: true
-  context: "egov-kerala-icops"
+#  zuul: true
+  context: "kerala-icops"
+healthChecks:
+ enabled: true
+ livenessProbePath: "/kerala-icops/health"
+ readinessProbePath: "/kerala-icops/health"
+
+lokiEnabled: true
+tracing-enabled: true
 
 initContainers:
   dbMigration:
     enabled: true
     schemaTable: "integration_service_schema"
     image:
-      repository: "pucarsolutionsdev.azurecr.io/integration_db"
+      repository: "docker.io/venkatramireddyb/integration_db"
       tag: v1.0.0-2ee8513e9dcefdb51c4eb7d38be4d6661c665167
 # Container Configs
 image:
-   repository: "pucarsolutionsdev.azurecr.io/integration"
+   repository: "docker.io/venkatramireddyb/integration"
    tag: v1.0.0-2ee8513e9dcefdb51c4eb7d38be4d6661c665167
 replicas: "1"
 
 env: |
+  - name: TOMCAT_MAX_HTTP_POST_SIZE
+    value: "104857600"
   - name: JAVA_OPTS
     value: -Xmx128m -Xms128m
   - name: SPRING_FLYWAY_URL
@@ -55,8 +64,6 @@ env: |
       secretKeyRef:
         name: db
         key: password
-  - name: "SCHEMA_TABLE"
-    value: "advocate_service_schema"
   - name: EGOV_IDGEN_HOST
     valueFrom:
       configMapKeyRef:
@@ -87,7 +94,26 @@ env: |
       configMapKeyRef:
         key: kafka-brokers
         name: egov-config
-
+  - name: SERVICE_NAME
+    valueFrom:
+      configMapKeyRef:
+        key: service-name
+        name: egov-config
+  - name: SERVICE_KY
+    valueFrom:
+      configMapKeyRef:
+        key: service-ky
+        name: egov-config
+  - name: AUTH_TYPE
+    valueFrom:
+      configMapKeyRef:
+        key: auth-type
+        name: egov-config
+  - name: EGOV_OAUTH_URL
+    valueFrom:
+      configMapKeyRef:
+        key: egov-oauth-url
+        name: egov-service-host
 
 
 

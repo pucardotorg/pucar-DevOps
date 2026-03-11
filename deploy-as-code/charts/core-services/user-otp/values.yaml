@@ -9,25 +9,31 @@ ingress:
   zuul: true
   context: "user-otp"
 
+lokiEnabled: true
+tracing-enabled: true
+
 # Init Containers Configs
 initContainers: {}
 
 # Container Configs
 image:
-  repository: "pucarsolutionsdev.azurecr.io/user-otp"
-  tag: v1.0.0-74196731f4b617ce06552e04a7a6eda9ffc40509
+  repository: "docker.io/venkatramireddyb/user-otp"
+  tag: main-98ec8dc97569afa6e1e52c0b43a95d596c9dd1d3
 healthChecks:
   enabled: true
   livenessProbePath: "/user-otp/health"
   readinessProbePath: "/user-otp/health"
 replicas: "1"
 appType: "java-spring"
-tracing-enabled: true
 heap: "-Xmx192m -Xms192m"
 java-args: ""
 
 # Additional Container Envs
 env: |
+  - name: EGOV_SMS_TEMPLATE_ID
+    value: "1107173141022956265"
+  - name: CONFIG_ISTEST
+    value: "false"
   - name: SERVER_PORT
     value: "8080"
   - name: OTP_HOST
@@ -52,11 +58,3 @@ env: |
     value: {{ index .Values "heap" | quote }}
   - name: JAVA_ARGS
     value: {{ index .Values "java-args" | quote }}
-  - name: SECURITY_BASIC_ENABLED
-    value: "false"  
-  - name: MANAGEMENT_SECURITY_ENABLED
-    value: "false"     
-  {{- if index .Values "tracing-enabled" }}
-  - name: TRACER_OPENTRACING_ENABLED
-    value: "true" 
-  {{- end }}

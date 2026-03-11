@@ -9,6 +9,8 @@ ingress:
   enabled: true
   context: "billing-service"
 
+lokiEnabled: true
+tracing-enabled: true
 
 # Init Containers Configs
 initContainers:
@@ -16,13 +18,13 @@ initContainers:
     enabled: true
     schemaTable: "billing_service_schema"
     image:
-      repository: "pucarsolutionsdev.azurecr.io/pucar_billing_db"
-      tag: v1.0.0-3345f6bb9536054a0050db6a05e88de50a1f6647
+      repository: "docker.io/venkatramireddyb/pucar_billing_db"
+      tag: v1.4.2-ebcbe18bff6b379072668fc7c6b8f1a9f420bb1f
 
 # Container Configs
 image:
-  repository: "pucarsolutionsdev.azurecr.io/pucar_billing"
-  tag: v1.0.0-3345f6bb9536054a0050db6a05e88de50a1f6647
+  repository: "docker.io/venkatramireddyb/pucar_billing"
+  tag: v1.4.2-ebcbe18bff6b379072668fc7c6b8f1a9f420bb1f
   imagePullPolicy: Always
 replicas: "1"
 httpPort: 8080
@@ -42,22 +44,22 @@ env: |
       secretKeyRef:
         key: username
         name: db
-  - name: SPRING_FLYWAY_PASSWORD
+  - name: SPRING_DATASOURCE_USERNAME
+    valueFrom:
+      secretKeyRef:
+        key: username
+        name: db
+  - name: SPRING_DATASOURCE_URL
+    valueFrom:
+      configMapKeyRef:
+        key: db-url
+        name: egov-config
+  - name: SPRING_DATASOURCE_PASSWORD
     valueFrom:
       secretKeyRef:
         name: db
         key: password
-  - name: SPRING_DATASOURCE_URL
-    valueFrom:
-      configMapKeyRef:
-        name: egov-config
-        key: db-url
-  - name: SPRING_DATASOURCE_USERNAME
-    valueFrom:
-      secretKeyRef:
-        name: db
-        key: username
-  - name: SPRING_DATASOURCE_PASSWORD
+  - name: SPRING_FLYWAY_PASSWORD
     valueFrom:
       secretKeyRef:
         name: db
@@ -109,11 +111,6 @@ env: |
       configMapKeyRef:
         name: egov-service-host
         key: egov-workflow-v2
-  - name: KAFKA_CONFIG_BOOTSTRAP_SERVER_CONFIG
-    valueFrom:
-      configMapKeyRef:
-        key: kafka-brokers
-        name: egov-config
   - name: EGOV_URL_SHORTNER
     valueFrom:
       configMapKeyRef:
@@ -125,4 +122,4 @@ env: |
         key: egov-apportion-service
         name: egov-service-host
   - name: STATELEVEL_ROLECODE_EXCLUDED_LIST
-    value: EMPLOYEE,BPAREG_DOC_VERIFIER,BPAREG_APPROVER
+    value: PAYMENT_COLLECTOR,BPAREG_DOC_VERIFIER,BPAREG_APPROVER

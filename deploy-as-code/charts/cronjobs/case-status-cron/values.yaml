@@ -1,0 +1,21 @@
+# Common Labels
+labels:
+  app: "case-status-cron"
+  group: "cronjobs"
+
+# Cron schedule
+cron:
+  schedule: "0 18 * * *"
+  timezone: "Asia/Kolkata"
+
+# Container Configs
+namespace: cronjobs
+image:
+  repository: "docker.io/venkatramireddyb/cronjob"
+  tag: "v1"
+
+command: 
+  - "bin/sh" 
+  - "-c"
+  - |
+    curl -X POST --location "http://case.egov:8080/case/v1/_runCronJob"

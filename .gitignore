@@ -32,4 +32,8 @@ Session.vim
 
 .history
 *.terraform
-*.tfstate
+*.tfstate*
+*plan.out*
+
+# Ignore all zip files
+*.tgz*

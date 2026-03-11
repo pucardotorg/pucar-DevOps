@@ -9,6 +9,8 @@ ingress:
   enabled: true
   context: "casemanagement"
 
+lokiEnabled: true
+tracing-enabled: true
 
 # Init Containers Configs
 initContainers:
@@ -16,20 +18,24 @@ initContainers:
     enabled: true
     schemaTable: "casemanagement_service_schema"
     image:
-      repository: "pucarsolutionsdev.azurecr.io/pucar_casemanagement_db"
+      repository: "docker.io/venkatramireddyb/pucar_casemanagement_db"
       tag: v1.0.0-00c8f29e6759c97f7ce10e3aae68843e35fe87c7
 # Container Configs
 image:
-  repository: "pucarsolutionsdev.azurecr.io/pucar_casemanagement"
+  repository: "docker.io/venkatramireddyb/pucar_casemanagement"
   tag: v1.0.0-00c8f29e6759c97f7ce10e3aae68843e35fe87c7
   imagePullPolicy: Always
 replicas: "1"
 httpPort: 8080
+debugPort: 5005
 appType: "java-spring"
 heap: "-Xmx64m -Xms64m"
 java-args: "-Dspring.profiles.active=monitoring"
 memory_limits: 640Mi
-
+healthChecks:
+  enabled: true
+  livenessProbePath: "/casemanagement/health"
+  readinessProbePath: "/casemanagement/health"
 
 
 
@@ -160,17 +166,17 @@ env: |
       configMapKeyRef:
         key: pdf-service
         name: egov-service-host
-  - name: DRISTI_DEV_TASK_SEARCH_HOST
+  - name: DRISTI_TASK_HOST
     valueFrom:
       configMapKeyRef:
         key: task
         name: egov-service-host
-  - name: DRISTI_DEV_ORDER_SEARCH_HOST
+  - name: DRISTI_ORDER_HOST
     valueFrom:
       configMapKeyRef:
         key: order
         name: egov-service-host
-  - name: DRISTI_DEV_FILE_SEARCH_HOST
+  - name: EGOV_FILESTORE_HOST
     valueFrom:
       configMapKeyRef:
         key: egov-filestore
@@ -196,7 +202,62 @@ env: |
         name: egov-service-host
   - name: CASEMANAGEMENT_KAFKA_WORKFLOW_TRANSITION_TOPIC
     value: save-wf-transitions
+  - name: EGOV_DRISTI_PDF_PROCESS_BUNDLE
+    value: egov-pdf/dristi-pdf/process-case-bundle
   - name: GENERATE_VC_CODE
     value: "Pucar.SummonOrder14"
-  
-  
+  - name: SPRING_DATASOURCE_WRITER_URL
+    valueFrom:
+      configMapKeyRef:
+        key: db-url
+        name: egov-config
+  - name: SPRING_DATASOURCE_READER_URL
+    valueFrom:
+      configMapKeyRef:
+        key: db-url
+        name: egov-config
+  - name: SPRING_DATASOURCE_WRITER_USERNAME
+    valueFrom:
+      secretKeyRef:
+        key: writeusername
+        name: db
+  - name: SPRING_DATASOURCE_READER_USERNAME
+    valueFrom:
+      secretKeyRef:
+        key: readusername
+        name: db
+  - name: SPRING_DATASOURCE_WRITER_PASSWORD
+    valueFrom:
+      secretKeyRef:
+        key: writepassword
+        name: db
+  - name: SPRING_DATASOURCE_READER_PASSWORD
+    valueFrom:
+      secretKeyRef:
+        key: readpassword
+        name: db
+  - name: DRISTI_APPLICATION_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: application
+  - name: DRISTI_DIGITALIZED_DOCUMENTS_HOST
+    valueFrom:
+      configMapKeyRef:
+        key: digitalized-documents
+        name: egov-service-host  
+  - name: DRISTI_TASKMANAGEMENT_HOST
+    valueFrom:
+      configMapKeyRef:
+        key: task-management
+        name: egov-service-host
+  - name: DRISTI_EVIDENCE_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: evidence
+  - name: DRISTI_CTC_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: ctc

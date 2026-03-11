@@ -5,6 +5,9 @@ labels:
 
 serviceAccount: gateway
 
+lokiEnabled: true
+tracing-enabled: true
+
 # Init Containers Configs
 initContainers:
   extraInitContainers: |
@@ -30,7 +33,7 @@ extraVolumeMounts: |
 # Container Configs
 image:
   repository: "gateway"
-  tag: gateway-2.9.2-a916a090e6-41
+  tag: gateway-2.9.3-56a8630218-44
 replicas: "1"
 healthChecks:
   enabled: true
@@ -41,12 +44,11 @@ posthook-config: ""
 prehook-config: ""
 heap: "-Xmx512m -Xms512m"
 appType: "java-spring"
-tracing-enabled: true
 server-tomcat-max-threads: "350"
 server-tomcat-max-connections: "1500"
 java-args: ""
-egov-open-endpoints-whitelist: "/v1/fetchCaseComplaintPdf,ocr-service/data,case/v1/_search,/collection-services/payments/_create,/etreasury/payment/v1/_refundStatus,/etreasury/payment/v1/_transactionDetails,/etreasury/payment/v1/_printPayInSlip,/etreasury/payment/v1/_doubleVerification,/etreasury/payment/v1/_verifyConnection,/payment/v1/_verifyConnection,/payment/v1/_processChallan,/payment/v1/_doubleVerification,/payment/v1/_printPayInSlip,/payment/v1/_transactionDetails,/payment/v1/_refundPayment,/payment/v1/_refundStatus,/payment/v1/_decryptTreasuryResponse,/summons-svc/summons/v1/_generateSummons,/summons-svc/summons/v1/_sendSummons,/summons-svc/summons/v1/_getSummons,/summons-svc/summons/v1/_updateSummons,/filestore/v1/files,/user/oauth/token,/user-otp/v1/_send,/otp/v1/_validate,/user/citizen/_create,/localization/messages,/localization/messages/v1/_search,/user/password/nologin/_update,/tenant/v1/tenant/_search,/egov-location/boundarys,/egov-location/boundarys/boundariesByBndryTypeNameAndHierarchyTypeName,/egov-location/boundarys/getLocationByLocationName,/egov-mdms-service/v1/_search,/egov-location/location/v11/geography/_search,/pt-calculator-v2/billing-slab/_search,/egov-searcher/property-services/propertyopensearch/_get,/edcr/rest/dcr/downloadfile,/egov-location/location/v11/boundarys/_search,/advocate/advocate/v1/status/_search,/payment-calculator/v1/case/fees/_calculate,/payment-calculator/v1/summons/_calculate,/etreasury/payment/v1/_processPayment,/egov-kerala-icops/v1/integrations/iCops/_getProcessReport,/payment-calculator/postal/v1/_create,/payment-calculator/postal/v1/_update,/payment-calculator/postal/v1/_search,/payment-calculator/hub/v1/_create,/payment-calculator/hub/v1/_update,/payment-calculator/hub/v1/_search,/e-sign-svc/v1/_esign,/payment/v1/_verifyConnection,/payment/v1/_processChallan,/payment/v1/_doubleVerification,/payment/v1/_printPayInSlip,/payment/v1/_transactionDetails,/payment/v1/_refundPayment,/payment/v1/_refundStatus,/payment/v1/_decryptTreasuryResponse"
-egov-mixed-mode-endpoints-whitelist: "/filestore/v1/files/id,/filestore/v1/files,/filestore/v1/files/tag,/user/_search,/access/v1/actions/mdms/_get,/tl-services/v1/_search,/tl-services/v1/BPAREG/_search,/tl-services/v1/BPAREG/_create,/tl-services/v1/BPAREG/_update,/tl-calculator/v1/BPAREG/_getbill,/bpa-services/bpa/appl/_search,/edcr/rest/dcr/scrutinize,/edcr/rest/dcr/scrutinydetails"
+egov-open-endpoints-whitelist: "/bank-details/v1/_search,/user/oauth/token,/user-otp/v1/_send,/user-otp/v1/_validate,/user/citizen/_create,/localization/messages/v1/_search,/tenant/v1/tenant/_search,/egov-mdms-service/v1/_search,/filestore/v1/files/url,/epayments,/case/v1/search/_summary,/scheduler/causelist/v1/_download,/sbi-payments/success.jsp,/sbi-payments/fail.jsp,/kerala-icops/v1/integrations/iCops/_getAuthToken,/scheduler/causelist/v1/_recentCauseList"
+egov-mixed-mode-endpoints-whitelist: "/user/_search,/access/v1/actions/mdms/_get,/tl-services/v1/_search,/tl-services/v1/BPAREG/_search,/tl-services/v1/BPAREG/_create,/tl-services/v1/BPAREG/_update,/tl-calculator/v1/BPAREG/_getbill,/bpa-services/bpa/appl/_search,/edcr/rest/dcr/scrutinize,/edcr/rest/dcr/scrutinydetails,/filestore/v1/files"
 eventlog-enabled: "false"
 eventlog-topic: "springGateway-event-log"
 eventlog-urls-whitelist: ""
@@ -112,10 +114,6 @@ env: |
     value: "20000"
   - name: GATEWAY_HOST_SOCKET_TIMEOUT_MILLIS
     value: "60000"
-  {{- if index .Values "tracing-enabled" }}
-  - name: TRACER_OPENTRACING_ENABLED
-    value: "true"
-  {{- end }}
   - name: SECURITY_BASIC_ENABLED
     value: "false"
   - name: MANAGEMENT_SECURITY_ENABLED

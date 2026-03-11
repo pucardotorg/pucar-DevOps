@@ -1,0 +1,32 @@
+name: "Get Deploy Environment"
+description: "Provides the deployment environment based on inputs."
+
+outputs:
+  deploy_env:
+    description: "Deployment environment"
+    value: ${{ steps.set-environment.outputs.deploy_env }}
+
+runs:
+  using: "composite"
+  steps:
+
+    - name: Set Branch to Checkout
+      shell: bash
+      id: set-environment
+      run: |
+        if [[ "$GITHUB_REF" == "refs/heads/develop" ]]; then
+          echo "deploy_env=dev" >> $GITHUB_OUTPUT
+          echo "Deployment Environment set to 'dev' for develop branch"
+        elif [[ "$GITHUB_REF" == refs/heads/release* ]]; then
+          echo "deploy_env=qa" >> $GITHUB_OUTPUT
+          echo "Deployment Environment set to 'qa' for release branch"
+        elif [[ "$GITHUB_REF" == "refs/heads/main" ]]; then
+          echo "deploy_env=demo" >> $GITHUB_OUTPUT
+          echo "Deployment Environment set to 'demo' for main branch"
+        else
+          echo "deploy_env=dev" >> $GITHUB_OUTPUT
+          echo "Deployment Environment set to 'dev' for other branches"
+        fi
+
+        echo "GITHUB_REF is $GITHUB_REF"
+        echo "Set deployment environment to $deploy_env"
