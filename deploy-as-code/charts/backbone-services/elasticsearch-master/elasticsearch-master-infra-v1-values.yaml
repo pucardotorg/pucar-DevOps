@@ -1,25 +1,25 @@
 
-name: elasticsearch-data
-replicas: 3
+name: elasticsearch-master-infra-v1
+replicas: 2
 
 image:
   pullPolicy: IfNotPresent  
   repository: docker.elastic.co/elasticsearch/elasticsearch
-  tag: 8.11.3
+  tag: 6.4.2
 
-clusterName: "elasticsearch"
-nodeGroup: "data"
+clusterName: "elasticsearch-infra-v1"
+nodeGroup: "master"
 
 # The service that non master groups will try to connect to when joining the cluster
 # This should be set to clusterName + "-" + nodeGroup for your master group
-masterService: "elasticsearch-master"
+masterService: "elasticsearch-master-infra-v1"
 
 # Elasticsearch roles that will be applied to this nodeGroup
 # These will be set as environment variables. E.g. node.master=true
 roles:
-  - ingest
-  - data
-  - remote_cluster_client
+  master: "true"
+  ingest: "false"
+  data: "false"
 
 minimumMasterNodes: 2
 
@@ -44,43 +44,16 @@ extraEnvs:
     value: "/usr/share/elasticsearch/data"
   - name: path.logs
     value: "/usr/share/elasticsearch/logs"
-#  - name: gateway.expected_master_nodes
-#    value: "2"
+  - name: gateway.expected_master_nodes
+    value: "2"    
   - name: gateway.expected_data_nodes
     value: "1"      
   - name: gateway.recover_after_time
     value: "5m"      
-#  - name: gateway.recover_after_master_nodes
-#    value: "2"
+  - name: gateway.recover_after_master_nodes
+    value: "2"      
   - name: gateway.recover_after_data_nodes
-    value: "1"
-  - name: ELASTIC_PASSWORD
-    valueFrom:
-      secretKeyRef:
-        name: elasticsearch-master-credentials
-        key: password
-  - name: xpack.security.enabled 
-    value: "true" 
-  - name: xpack.security.transport.ssl.enabled 
-    value: "true" 
-  - name: xpack.security.http.ssl.enabled 
-    value: "false" 
-  - name: xpack.security.transport.ssl.verification_mode 
-    value: "certificate" 
-  - name: xpack.security.transport.ssl.key 
-    value: "/usr/share/elasticsearch/config/certs/tls.key" 
-  - name: xpack.security.transport.ssl.certificate 
-    value: "/usr/share/elasticsearch/config/certs/tls.crt" 
-  - name: xpack.security.transport.ssl.certificate_authorities 
-    value: "/usr/share/elasticsearch/config/certs/ca.crt" 
-  - name: xpack.security.http.ssl.key 
-    value: "/usr/share/elasticsearch/config/certs/tls.key" 
-  - name: xpack.security.http.ssl.certificate 
-    value: "/usr/share/elasticsearch/config/certs/tls.crt" 
-  - name: xpack.security.http.ssl.certificate_authorities 
-    value: "/usr/share/elasticsearch/config/certs/ca.crt" 
-
-createCert: false
+    value: "1"           
 
 # Allows you to load environment variables from kubernetes secret or config map
 envFrom: []
@@ -92,10 +65,10 @@ envFrom: []
 # A list of secrets and their paths to mount inside the pod
 # This is useful for mounting certificates for security and for mounting
 # the X-Pack license
-secretMounts: 
-  - name: elastic-certificates
-    secretName: elasticsearch-master-certs
-    path: /usr/share/elasticsearch/config/certs
+secretMounts: []
+#  - name: elastic-certificates
+#    secretName: elastic-certificates
+#    path: /usr/share/elasticsearch/config/certs
 
 podAnnotations: {}
   # iam.amazonaws.com/role: es-cluster
@@ -103,15 +76,13 @@ podAnnotations: {}
 # additionals labels
 labels: {}
 
-esJavaOpts: "-Xmx1g -Xms1g"
+esJavaOpts: "-Xmx448m -Xms448m"
 
 resources:
   requests:
-    # cpu: "1000m"
-    memory: "2Gi"
+    memory: "896Mi"
   limits:
-    # cpu: "1000m"
-    memory: "2Gi"
+    memory: "896Mi"  
 
 initResources: {}
   # limits:
@@ -135,7 +106,7 @@ volumeClaimTemplate:
   accessModes: [ "ReadWriteOnce" ]
   resources:
     requests:
-      storage: 25Gi
+      storage: 2Gi
 
 rbac:
   create: false
@@ -161,7 +132,7 @@ podSecurityPolicy:
 
 persistence:
   enabled: true
-  dataDirSize: "25Gi"
+  dataDirSize: "2Gi"
   annotations: {}
 
 extraVolumes: []
@@ -206,9 +177,6 @@ podManagementPolicy: "Parallel"
 protocol: http
 httpPort: 9200
 transportPort: 9300
-
-secret:
-  enabled: false
 
 service:
   labels: {}
@@ -283,7 +251,7 @@ nameOverride: ""
 fullnameOverride: ""
 
 # https://github.com/elastic/helm-charts/issues/63
-masterTerminationFix: false
+masterTerminationFix: true
 
 lifecycle: {}
   # preStop:

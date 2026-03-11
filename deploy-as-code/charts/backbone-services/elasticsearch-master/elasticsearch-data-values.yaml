@@ -19,7 +19,6 @@ masterService: "elasticsearch-master"
 roles:
   - ingest
   - data
-  - remote_cluster_client
 
 minimumMasterNodes: 2
 
@@ -64,7 +63,7 @@ extraEnvs:
   - name: xpack.security.transport.ssl.enabled 
     value: "true" 
   - name: xpack.security.http.ssl.enabled 
-    value: "false" 
+    value: "true" 
   - name: xpack.security.transport.ssl.verification_mode 
     value: "certificate" 
   - name: xpack.security.transport.ssl.key 
@@ -203,7 +202,7 @@ nodeAffinity: {}
 # the same time when bootstrapping the cluster
 podManagementPolicy: "Parallel"
 
-protocol: http
+protocol: https
 httpPort: 9200
 transportPort: 9300
 

@@ -59,29 +59,37 @@ releases:
 #    - secret:
 #        password: {{ .Values.secrets.elasticsearch.password }}
 #
-#- name: elasticsearch-data
-#  chart: ./elasticsearch-data
-#  version: 8.11.3
-#  <<: *default
-#  values:
-#    - ./elasticsearch-data/values.yaml
+  # - name: elasticsearch-data
+  #   chart: ./elasticsearch-data
+  #   version: 8.11.3
+  #   <<: *default
+  #   values:
+  #     - ./elasticsearch-data/elasticsearch-data-values.yaml
+
+  # - name: elasticsearch-master
+  #   chart: ./elasticsearch-master
+  #   version: 8.11.3
+  #   <<: *default
+  #   values:
+  #     - ./elasticsearch-master/elasticsearch-master-values.yaml
 ##
-#- name: kibana
-#  chart: ./kibana
-#  version: 8.11.3
-#  force: true
-#  <<: *default
-#  values:
-#    - ./kibana/values.yaml
-#    - ingress:
-#        hosts:
-#          - host: {{ .Values.global.domain }}
-#            paths:
-#              - path: /kibana
-#        tls:
-#          - secretName: {{ .Values.global.domain }}-tls-certs
-#            hosts:
-#              - {{ .Values.global.domain }}
+  # - name: kibana
+  #   chart: ./kibana
+  #   installed: true
+  #   version: 8.11.3
+  #   force: true
+  #   <<: *default
+  #   values:
+  #     - ./kibana/values.yaml
+  #   - ingress:
+  #       hosts:
+  #         - host: {{ .Values.global.domain }}
+  #           paths:
+  #             - path: /kibana
+  #       tls:
+  #         - secretName: {{ .Values.global.domain }}-tls-certs
+  #           hosts:
+  #             - {{ .Values.global.domain }}
 
 #
 #
