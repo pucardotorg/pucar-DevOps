@@ -130,6 +130,16 @@ env: |
       secretKeyRef:
         name: elasticsearch-credentials
         key: password
+  - name: EGOV_ESIGN_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: e-sign-svc
+  - name: EGOV_DRISTI_PDF_HOST
+    valueFrom:
+      configMapKeyRef:
+        key: dristi-pdf
+        name: egov-service-host
 
   - name: KAFKA_TOPICS_RECEIPT_CREATE
     value: egov.collection.payment-create
