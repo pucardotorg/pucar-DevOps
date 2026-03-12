@@ -167,3 +167,8 @@ env: |
     value: "redis.backbone"
   - name: SPRING_REDIS_PORT
     value: "6379"
+  - name: DRISTI_CTC_HOST
+    valueFrom:
+      configMapKeyRef:
+        key: ctc
+        name: egov-service-host
