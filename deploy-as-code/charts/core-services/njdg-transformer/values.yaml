@@ -8,7 +8,9 @@ healthChecks:
   enabled: true
   livenessProbePath: "/njdg-transformer/actuator/health"
   readinessProbePath: "/njdg-transformer/actuator/health"
-namespace: pucar-stg
+
+lokiEnabled: true
+tracing-enabled: true
 
 # Init Containers Configs
 initContainers:

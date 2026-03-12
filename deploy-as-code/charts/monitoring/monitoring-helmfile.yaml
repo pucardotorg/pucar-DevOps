@@ -32,19 +32,19 @@ releases:
   values:
   - ./values/prometheus.yaml
 
-#- name: jaeger-tracing
-#  installed: true
-#  namespace: backbone
-#  chart: jaegertracing/jaeger
-#  version: 1.0.0
-#  values:
-#  - ./values/jaeger.yaml
-#  - storage:
-#      elasticsearch:
-#        password: {{ .Values.secrets.elasticsearch.password }}
-#  set:
-#    - name: query.ingress.hosts[0]
-#      value: "{{ .Values.global.domain }}"
+- name: jaeger
+  installed: true
+  namespace: monitoring
+  chart: jaegertracing/jaeger
+  version: 1.0.0
+  values:
+  - ./values/jaeger.yaml
+  - storage:
+      elasticsearch:
+        password: {{ .Values.secrets.elasticsearch.password }}
+  set:
+    - name: query.ingress.hosts[0]
+      value: "{{ .Values.global.domain }}"
 
 - name: grafana
   installed: true

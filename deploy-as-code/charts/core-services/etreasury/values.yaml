@@ -10,6 +10,7 @@ ingress:
   context: "etreasury"
 
 lokiEnabled: true
+tracing-enabled: true
 
 # Init Containers Configs
 initContainers:
@@ -31,7 +32,6 @@ healthChecks:
   readinessProbePath: "/etreasury/health"
 replicas: "1"
 appType: "java-spring"
-tracing-enabled: true
 java-args: ""
 heap: "-Xmx192m -Xms192m"
 debugPort: 5005
