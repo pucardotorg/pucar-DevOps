@@ -161,6 +161,11 @@ env: |
       configMapKeyRef:
         key: digitalized-documents
         name: egov-service-host
+  - name: DRISTI_CTC_APPLICATIONS_HOST
+    valueFrom:
+      configMapKeyRef:
+        key: ctc
+        name: egov-service-host  
   - name: DRISTI_OPENAPI_CASE_HOST
     valueFrom:
       configMapKeyRef:
