@@ -121,6 +121,7 @@ configmaps:
       individual: http://individual.egov:8080/
       lock-service: http://lock-svc:8080/
       minio-url: http://178.236.185.122:9000/
+      otel-exporter-otlp-endpoint: http://jaeger-collector.tracing:4318
       order: http://order:8080/
       payment-calculator: http://payment-calculator.egov:8080/
       pgr-services: http://pgr-services.egov:8080/
