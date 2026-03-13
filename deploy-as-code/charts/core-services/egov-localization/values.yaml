@@ -15,12 +15,12 @@ initContainers:
     enabled: true
     schemaTable: "egov_localization_schema"
     image:
-      repository: "docker.io/egovio/egov-localization-db"
+      repository: "docker.io/venkatramireddyb/egov-localization-db"
       tag: core-2.9-lts-mvn-check-59c2e5ea5b-9
 
 # Container Configs
 image:
-  repository: "docker.io/egovio/egov-localization"
+  repository: "docker.io/venkatramireddyb/egov-localization"
   tag: core-2.9-lts-mvn-check-59c2e5ea5b-9
 replicas: "1"
 appType: "java-spring"
