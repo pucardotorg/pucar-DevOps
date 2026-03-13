@@ -45,15 +45,12 @@ citizen-otp-fixed: "123456"
 citizen-otp-fixed-enabled: "true"
 heap: "-Xmx384m -Xms256m"
 java-args: ""
+redisEnabled: true
 
 # Additional Container Envs
 env: |
   - name: SERVER_PORT
     value: "8080"
-  - name: SPRING_REDIS_HOST
-    value: redis.backbone
-  - name: SPRING_REDIS_PORT
-    value: "6379"
   - name: EGOV_OTP_HOST
     valueFrom:
       configMapKeyRef:
