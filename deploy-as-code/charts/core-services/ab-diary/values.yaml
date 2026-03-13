@@ -59,21 +59,6 @@ env: |
       secretKeyRef:
         name: db
         key: password
-  - name: SPRING_DATASOURCE_URL
-    valueFrom:
-      configMapKeyRef:
-        key: db-url
-        name: egov-config
-  - name: SPRING_DATASOURCE_USERNAME
-    valueFrom:
-      secretKeyRef:
-        name: db
-        key: username
-  - name: SPRING_DATASOURCE_PASSWORD
-    valueFrom:
-      secretKeyRef:
-        name: db
-        key: password
   - name: EGOV_IDGEN_HOST
     valueFrom:
       configMapKeyRef:
@@ -104,11 +89,6 @@ env: |
       configMapKeyRef:
         name: egov-service-host
         key: egov-hrms
-  - name: KAFKA_CONFIG_BOOTSTRAP_SERVER_CONFIG
-    valueFrom:
-      configMapKeyRef:
-        key: kafka-brokers
-        name: egov-config
   - name: EGOV_LOCALIZATION_HOST
     valueFrom:
       configMapKeyRef:
@@ -118,15 +98,6 @@ env: |
     value: /localization/messages/v1/_search
   - name: EGOV_MDMS_SEARCH_ENDPOINT
     value: /egov-mdms-service/v1/_search
-  - name: SERVER_PORT
-    value: "8080"
-  - name: EGOV_IDGEN_PATH
-    value: "egov-idgen/id/_generate"
-  - name: EGOV_IDGEN_HOST
-    valueFrom:
-      configMapKeyRef:
-        name: egov-service-host
-        key: egov-idgen
   - name: EGOV_INDIVIDUAL_HOST
     valueFrom:
       configMapKeyRef:
