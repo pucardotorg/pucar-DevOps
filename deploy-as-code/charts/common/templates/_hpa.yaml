@@ -11,8 +11,8 @@ spec:
     apiVersion: "apps/v1"
     kind: Deployment
     name: {{ template "common.name" . }}
-  minReplicas: 2
-  maxReplicas: 5
+  minReplicas: {{ .Values.hpa.minReplicas | default 1 }}
+  maxReplicas: {{ .Values.hpa.maxReplicas | default 5 }}
   metrics:
     {{- if .Values.hpacpu.enabled }}
     - type: Resource
