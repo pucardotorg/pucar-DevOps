@@ -230,7 +230,7 @@ digit-ui:
   ingress:
     nginxRateLimit:
       enabled: true
-      rpm: "500"
+      rpm: "10000"
       burstMultiplier: "1"
       conections: "10"
   rateLimit:
