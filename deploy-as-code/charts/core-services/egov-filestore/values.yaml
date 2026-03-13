@@ -24,7 +24,7 @@ debugPort: 5005
 image:
   repository: "docker.io/venkatramireddyb/egov-filestore"
   tag: develop-7a3a056f321a36c205fc30a5371370945d29ccbd
-replicas: "2"
+replicas: "1"
 healthChecks:
   enabled: true
   livenessProbePath: "/filestore/health"
@@ -63,9 +63,9 @@ env: |
   - name: TEMP_FOLDER_PATH
     value: "/tmp"
   - name: SPRING_SERVLET_MULTIPART_MAX_FILE_SIZE
-    value: "200MB"
+    value: {{ index .Values "spring-servlet-multipart-max-file-size" | quote }}
   - name: SPRING_SERVLET_MULTIPART_MAX_REQUEST_SIZE
-    value: 1000MB
+    value: {{ index .Values "spring-servlet-multipart-max-request-size" | quote }}
   - name: MAX_FILE_SIZE
     value: "500000000"
   - name: ISNFSSTORAGEENABLED
