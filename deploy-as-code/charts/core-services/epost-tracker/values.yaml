@@ -31,8 +31,8 @@ httpPort: 8080
 
 healthChecks:
  enabled: true
- livenessProbePath: "/advocate/"
- readinessProbePath: "/advocate/"
+ livenessProbePath: "/epost-tracker/actuator/health"
+ readinessProbePath: "/epost-tracker/actuator/health"
 
 env: |
   - name: EGOV_MDMS_HOST
