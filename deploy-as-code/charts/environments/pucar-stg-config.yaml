@@ -103,6 +103,21 @@ auth-proxy:
     gatewayBurstCapacity: "30"
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
+bank-details:
+  image:
+    repository: docker.io/venkatramireddyb/bank-details
+    tag: release-31-4ecb50ad25240733100bad50c03af2d8a22252c6
+  ingress:
+    nginxRateLimit:
+      enabled: true
+      rpm: "500"
+      burstMultiplier: "1"
+      conections: "10"
+  rateLimit:
+    enabled: true
+    gatewayBurstCapacity: "30"
+    gatewayKeyResolver: "userKeyResolver"
+    gatewayReplenishRate: "30"
 bail-bond:
   image:
     repository: docker.io/venkatramireddyb/bail-bond
