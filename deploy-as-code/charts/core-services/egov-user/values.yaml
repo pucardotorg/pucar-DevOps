@@ -97,9 +97,7 @@ env: |
         name: egov-config
         key: egov-state-level-tenant-id
   - name: DECRYPTION_ABAC_ENABLED
-    value: {{ index .Values "decryption-abac-enabled" | quote }}
-  - name: KAFKA_TOPIC_AUDIT
-    value: "enc-user-audit-data"         
+    value: {{ index .Values "decryption-abac-enabled" | quote }}      
   - name: SPRING_KAFKA_CONSUMER_GROUP_ID
     value: "egov-user"
   - name: ACCOUNT_UNLOCK_COOL_DOWN_PERIOD_MINUTES
