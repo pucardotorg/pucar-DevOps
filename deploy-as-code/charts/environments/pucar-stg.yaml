@@ -1,5 +1,8 @@
 global:
   domain: oncourts-staging.kerala.gov.in
+  redis: 
+    host: redis.backbone-stg
+    port: 6379 
   ingress:
     className: "nginx"
 root-ingress:
