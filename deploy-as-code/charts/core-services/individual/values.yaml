@@ -15,7 +15,7 @@ initContainers:
     enabled: true
     schemaTable: "individual_schema"
     image:
-      repository: "docker.io/venkatramireddyb/individual_db"
+      repository: "docker.io/venkatramireddyb/individual-db"
       tag: v1.3.1-3cd967542ec02916a460cff31440bcc1344608f0
 
 # Container Configs
