@@ -11,9 +11,7 @@ spec:
     apiVersion: "apps/v1"
     kind: Deployment
     name: {{ template "common.name" . }}
-  {{- /* Fallback to 1 if minReplicas is missing */ }}
-  minReplicas: {{ .Values.hpa.minReplicas | default 1 }}
-  {{- /* Fixed the typo '.Vaules' to '.Values' and added fallback to 5 */ }}
+  minReplicas: {{ .Values.hpa.minReplicas | default 2 }}
   maxReplicas: {{ .Values.hpa.maxReplicas | default 5 }}
   metrics:
     {{- if .Values.hpacpu.enabled }}
