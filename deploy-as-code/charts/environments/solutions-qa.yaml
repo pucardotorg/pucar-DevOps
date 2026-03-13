@@ -417,8 +417,8 @@ workbench-ui:
 
 oncourts-website:
   custom-js-injection: |
-    sub_filter.conf: |
-      sub_filter '<head>' '<head><script type="text/javascript">
+    global.js: |
+      <script type="text/javascript">
         console.log("=== testglobalconfig.js LOADED ===");
         console.log("Source: Loaded from local path /globalconfig/testglobalconfig.js");
         console.log("Timestamp:", new Date().toISOString());

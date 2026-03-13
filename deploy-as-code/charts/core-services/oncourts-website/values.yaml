@@ -25,12 +25,15 @@ env: |
   - name: ONCOURTS_EMPLOYEE_APP_ENDPOINT
     value: https://dristi-kerala-uat.pucar.org/digit-ui/employee/login
 
+  - name: NEXT_TEST_GLOBAL
+    value: /etc/global.js
+
 extraVolumes: |
   - name: js-injection
     configMap:
       name: oncourts-website
 
 extraVolumeMounts: |
-  - mountPath: /etc/nginx/conf.d/sub_filter.conf
+  - mountPath: /etc/global.js
     name: js-injection
-    subPath: sub_filter.conf
+    subPath: global.js
