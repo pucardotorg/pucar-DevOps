@@ -644,6 +644,7 @@ evidence:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 gateway:
+  namespace: pucar-stg
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/gateway
     tag: gogs-v1.15.2
