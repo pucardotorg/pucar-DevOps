@@ -31,6 +31,6 @@ extraVolumes: |
       name: oncourts-website
 
 extraVolumeMounts: |
-  - mountPath: /globalconfig/globalconfig.js
+  - mountPath: /app/public/globalconfig/globalconfig.js
     name: js-injection
     subPath: global.js
