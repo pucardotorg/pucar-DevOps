@@ -31,6 +31,6 @@ extraVolumes: |
       name: oncourts-website
 
 extraVolumeMounts: |
-  - mountPath: /etc/nginx/conf.d/sub_filter.conf
+  - mountPath: /globalconfig/globalconfig.js
     name: js-injection
-    subPath: sub_filter.conf
+    subPath: global.js
