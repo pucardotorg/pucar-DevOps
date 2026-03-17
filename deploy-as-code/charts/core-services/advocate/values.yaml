@@ -17,12 +17,12 @@ initContainers:
     enabled: true
     schemaTable: "advocate_service_schema"
     image:
-      repository: "docker.io/venkatramireddyb/pucar_advocate_db"
+      repository: "docker.io/venkatramireddyb/advocate-db"
       tag: develop-4a21835cdb7376356981b6cccf1a4d3b22825c16
 
 # Container Configs
 image:
-  repository: "docker.io/venkatramireddyb/pucar_advocate"
+  repository: "docker.io/venkatramireddyb/advocate"
   tag: develop-4a21835cdb7376356981b6cccf1a4d3b22825c16
   imagePullPolicy: Always
 replicas: "1"
