@@ -13,7 +13,7 @@ healthChecks:
   enabled: true
   livenessProbePath: "/order-management/health"
   readinessProbePath: "/order-management/health"
-
+redisEnabled: true
 lokiEnabled: true
 
 # Container Configs
@@ -142,10 +142,6 @@ env: |
         configMapKeyRef:
           key: scheduler
           name: egov-service-host
-  - name: SPRING_REDIS_HOST
-    value: redis.backbone
-  - name: SPRING_REDIS_PORT
-    value: "6379"
   - name: DRISTI_MDMS_HOST
     valueFrom:
       configMapKeyRef:
