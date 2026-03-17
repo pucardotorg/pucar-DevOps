@@ -898,25 +898,10 @@ notification:
     gatewayBurstCapacity: "30"
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
-ocr:
-  image:
-    repository: docker.io/venkatramireddyb/pucar_ocr
-    tag: v1.0.0-dristi-experiment-OCR-6
-  ingress:
-    nginxRateLimit:
-      enabled: true
-      rpm: "500"
-      burstMultiplier: "1"
-      conections: "10"
-  rateLimit:
-    enabled: true
-    gatewayBurstCapacity: "30"
-    gatewayKeyResolver: "userKeyResolver"
-    gatewayReplenishRate: "30"
 ocr-service:
   image:
-    repository: docker.io/venkatramireddyb/pucar_ocr_svc
-    tag: main-90476290750a980a7fd5bfea791b6355061eba5d
+    repository: docker.io/venkatramireddyb/ocr-service
+    tag: main-1e2e71865b38afacec3ffdcc39a67978e4746612
   ingress:
     nginxRateLimit:
       enabled: true
