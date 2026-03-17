@@ -130,3 +130,5 @@ env: |
         key: judge-designation
   - name: JUDGE_ID
     value: JUDGE_ID
+  - name: EGOV_USER_SEARCH_PATH
+    value: /user/v1/_search
