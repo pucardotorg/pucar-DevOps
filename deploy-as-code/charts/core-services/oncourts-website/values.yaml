@@ -33,4 +33,4 @@ extraVolumes: |
 extraVolumeMounts: |
   - mountPath: /app/public/globalconfig/globalconfig.js
     name: js-injection
-    subPath: global.js
+    subPath: globalconfig.js
