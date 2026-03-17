@@ -646,7 +646,7 @@ evidence:
 gateway:
   image:
     repository: venkatramireddyb/gateway
-    tag: sdc-uat-0657159be3406e649f60dacc4a73dedf1efa7c2e
+    tag: main-5920988f7fef6806ba2a037de9e7c0ae0f9ae0e3
   ingress:
     nginxRateLimit:
       enabled: true
