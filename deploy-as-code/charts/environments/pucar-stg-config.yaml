@@ -450,7 +450,7 @@ egov-notification-mail:
     gatewayReplenishRate: "30"
 egov-otp:
   image:
-    repository: egovio/egov-otp
+    repository: docker.io/egovio/egov-otp
     tag: core-2.9-lts-mvn-check-72333e5530-5
   ingress:
     nginxRateLimit:
