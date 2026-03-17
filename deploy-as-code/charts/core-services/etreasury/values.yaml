@@ -17,7 +17,7 @@ initContainers:
     enabled: true
     schemaTable: "public_treasury_schema"
     image:
-      repository: "docker.io/venkatramireddyb/etreasury_db"
+      repository: "docker.io/venkatramireddyb/etreasury-db"
       tag: feature-4334-order84-85-da24312969868f67f361a5c6a5b5f0cd274ffd15
 
 # Container Configs

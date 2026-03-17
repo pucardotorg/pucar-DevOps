@@ -17,7 +17,7 @@ initContainers:
     enabled: true
     schemaTable: "summons_schema"
     image:
-      repository: "docker.io/venkatramireddyb/summons-svc_db"
+      repository: "docker.io/venkatramireddyb/summons-svc-db"
       tag: feature-4334-order84-85-0c4f91fe30c11a769fc5994f0285a4999db16c1b
 
 

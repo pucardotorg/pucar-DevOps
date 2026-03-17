@@ -19,7 +19,7 @@ healthChecks:
 
 # Container Configs
 image:
-  repository: "docker.io/venkatramireddyb/pucar_transformer"
+  repository: "docker.io/venkatramireddyb/transformer"
   tag: develop-f85e081b58c28237912a70d6134c571c14f1389a
   imagePullPolicy: Always
 replicas: "1"

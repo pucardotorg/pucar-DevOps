@@ -15,7 +15,7 @@ initContainers:
     enabled: true
     schemaTable: "payment-calculator_schema"
     image:
-      repository: "docker.io/venkatramireddyb/payment-calculator-svc_db"
+      repository: "docker.io/venkatramireddyb/payment-calculator-svc-db"
       tag: develop-9165469f8678d42e087fbb3b0a07b38f64432df1
 
 lokiEnabled: true

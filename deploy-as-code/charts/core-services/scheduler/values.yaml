@@ -23,7 +23,7 @@ initContainers:
     enabled: true
     schemaTable: "scheduler_schema"
     image:
-      repository: "docker.io/venkatramireddyb/scheduler-svc_db"
+      repository: "docker.io/venkatramireddyb/scheduler-svc-db"
       tag: develop-1ef5249f78d024468da5e970a60c9ea61f0b2ad1
 
 

@@ -24,7 +24,7 @@ initContainers:
       tag: develop-98c1ddfc97d51013937d7f324353ac0a564d6135
 # Container Configs
 image:
-  repository: "docker.io/venkatramireddyb/pucar_openapi"
+  repository: "docker.io/venkatramireddyb/openapi"
   tag: develop-98c1ddfc97d51013937d7f324353ac0a564d6135
   imagePullPolicy: Always
 replicas: "1"
