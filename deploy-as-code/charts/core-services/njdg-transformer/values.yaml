@@ -12,7 +12,7 @@ healthChecks:
 # Init Containers Configs
 initContainers:
   dbMigration:
-    enabled: true
+    enabled: false
     schemaTable: "njdg-transformer_service_schema"
     image:
       repository: "docker.io/venkatramireddyb/njdg-transformer-db"
