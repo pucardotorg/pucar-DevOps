@@ -68,11 +68,6 @@ env: |
         key: password
   - name: "SCHEMA_TABLE"
     value: "ocr-service_schema"
-  - name: EGOV_IDGEN_HOST
-    valueFrom:
-      configMapKeyRef:
-        name: egov-service-host
-        key: egov-idgen
   - name: EGOV_MDMS_HOST
     valueFrom:
       configMapKeyRef:

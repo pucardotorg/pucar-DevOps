@@ -64,11 +64,6 @@ env: |
       configMapKeyRef:
         key: individual
         name: egov-service-host
-  - name: KAFKA_CONFIG_BOOTSTRAP_SERVER_CONFIG
-    valueFrom:
-      configMapKeyRef:
-        key: kafka-brokers
-        name: egov-config
   - name: HEARING_SERVICE_HOST
     valueFrom:
       configMapKeyRef:
