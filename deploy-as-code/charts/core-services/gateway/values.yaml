@@ -52,7 +52,6 @@ eventlog-topic: "springGateway-event-log"
 eventlog-urls-whitelist: ""
 home-isolation-chatbot-router-enabled: false
 memory_limits: "768Mi"
-redisEnabled: true
 # Additional Container Envs
 env: |
   - name: URL_LISTS
@@ -145,3 +144,7 @@ env: |
         name: egov-service-host
         key: home-isolation-chatbot
   {{- end }}
+  - name: SPRING_DATA_REDIS_HOST
+    value: {{ .Values.global.redis.host | quote }}
+  - name: SPRING_DATA_REDIS_PORT
+    value: {{ .Values.global.redis.port | quote }}

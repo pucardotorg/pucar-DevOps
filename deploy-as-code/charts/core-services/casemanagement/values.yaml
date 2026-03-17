@@ -159,9 +159,9 @@ env: |
         key: egov-filestore
         name: egov-service-host
   - name: SPRING_DATA_REDIS_HOST
-    value: "redis.backbone"
+    value: {{ .Values.global.redis.host | quote }}
   - name: SPRING_DATA_REDIS_PORT
-    value: "6379"
+    value: {{ .Values.global.redis.port | quote }}
   - name: EGOV_CREDENTIAL_HOST
     valueFrom:
       configMapKeyRef:
