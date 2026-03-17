@@ -45,11 +45,6 @@ env: |
     value: /egov-mdms-service/v1/_search
   - name: SERVER_PORT
     value: "8080"
-  - name: KAFKA_CONFIG_BOOTSTRAP_SERVER_CONFIG
-    valueFrom:
-      configMapKeyRef:
-        key: kafka-brokers
-        name: egov-config
   - name: EGOV_FILESTORE_HOST
     valueFrom:
       configMapKeyRef:

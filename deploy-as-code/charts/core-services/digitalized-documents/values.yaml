@@ -92,11 +92,6 @@ env: |
       configMapKeyRef:
         name: egov-service-host
         key: case
-  - name: EGOV_URL_SHORTNER_HOST
-    valueFrom:
-      configMapKeyRef:
-        name: egov-service-host
-        key: egov-url-shortening
   - name: DOMAIN_URL
     valueFrom:
       configMapKeyRef:
@@ -107,8 +102,4 @@ env: |
       configMapKeyRef:
         name: egov-service-host
         key: e-sign-svc
-  - name: EGOV_FILESTORE_HOST
-    valueFrom:
-      configMapKeyRef:
-        name: egov-service-host
-        key: egov-filestore
+

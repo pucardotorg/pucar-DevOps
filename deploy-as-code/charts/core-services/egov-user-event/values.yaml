@@ -81,11 +81,3 @@ env: |
         key: egov-localization
   - name: EGOV_LOCALISATION_IS_STATELEVEL
     value: "false"
-  - name: MSEVA_NOTIF_SEARCH_OFFSET
-    value: "0"
-  - name: MSEVA_NOTIF_SEARCH_LIMIT
-    value: "200"                     
-  {{- if index .Values "tracing-enabled" }}
-  - name: TRACER_OPENTRACING_ENABLED
-    value: "true" 
-  {{- end }}
