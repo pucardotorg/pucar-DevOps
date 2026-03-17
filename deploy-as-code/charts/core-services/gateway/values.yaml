@@ -14,7 +14,7 @@ initContainers:
       - name: "OUTPUT_FILE_PATH"
         value: "/etc/zuul/routes.properties" 
       - name: "NAMESPACE"
-        value: {{ .Values.namespace }}
+        value: {{ .Values.namespace | quote }}
       volumeMounts:
       - name: zuul-routes
         mountPath: /etc/zuul
