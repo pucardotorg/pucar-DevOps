@@ -1,5 +1,8 @@
 global:
   domain: demo.pucar.org
+  redis: 
+    host: redis.backbone
+    port: 6379  
 loki-url: "http://178.236.185.12:3100/loki/api/v1/push"
 kerala-configs-branch: &kerala_configs_branch "master-demo"
 root-ingress:
