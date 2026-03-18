@@ -10,6 +10,7 @@ ingress:
   context: "application"
 
 lokiEnabled: true
+tracing-enabled: true
 
 # Init Containers Configs
 initContainers:
@@ -154,3 +155,8 @@ env: |
       configMapKeyRef:
         name: egov-service-host
         key: evidence
+  - name:  DRISTI_ADVOCATE_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: advocate

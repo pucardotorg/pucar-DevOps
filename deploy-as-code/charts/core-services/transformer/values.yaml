@@ -10,6 +10,7 @@ ingress:
   context: "transformer"
 
 lokiEnabled: true
+tracing-enabled: true
 
 # Init Containers Configs
 healthChecks:
