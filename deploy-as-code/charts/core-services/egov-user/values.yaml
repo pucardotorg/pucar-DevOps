@@ -47,15 +47,12 @@ citizen-otp-fixed: "123456"
 citizen-otp-fixed-enabled: "true"
 heap: "-Xmx384m -Xms256m"
 java-args: ""
+redisEnabled: true
 
 # Additional Container Envs
 env: |
   - name: SERVER_PORT
     value: "8080"
-  - name: SPRING_REDIS_HOST
-    value: redis.backbone
-  - name: SPRING_REDIS_PORT
-    value: "6379"
   - name: EGOV_OTP_HOST
     valueFrom:
       configMapKeyRef:
@@ -99,9 +96,7 @@ env: |
         name: egov-config
         key: egov-state-level-tenant-id
   - name: DECRYPTION_ABAC_ENABLED
-    value: {{ index .Values "decryption-abac-enabled" | quote }}
-  - name: KAFKA_TOPIC_AUDIT
-    value: "enc-user-audit-data"         
+    value: {{ index .Values "decryption-abac-enabled" | quote }}      
   - name: SPRING_KAFKA_CONSUMER_GROUP_ID
     value: "egov-user"
   - name: ACCOUNT_UNLOCK_COOL_DOWN_PERIOD_MINUTES

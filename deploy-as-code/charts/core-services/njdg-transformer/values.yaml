@@ -15,16 +15,16 @@ tracing-enabled: true
 # Init Containers Configs
 initContainers:
   dbMigration:
-    enabled: true
+    enabled: false
     schemaTable: "njdg-transformer_service_schema"
     image:
       repository: "docker.io/venkatramireddyb/njdg-transformer-db"
-      tag: feature-4625-njdg-6f2e02fea6ef8c6ecf187775c80ccc91e68d48a0
+      tag: main-4a2f7932caa0c010485bfec26fc831e22dc38452
 
 # Container Configs
 image:
   repository: "docker.io/venkatramireddyb/njdg-transformer"
-  tag: feature-4625-njdg-7ce194cc4203df1cd3d3388fc140bea4ad8c0979
+  tag: main-4a2f7932caa0c010485bfec26fc831e22dc38452
   imagePullPolicy: Always
 replicas: "1"
 httpPort: 8080

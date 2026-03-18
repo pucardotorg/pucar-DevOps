@@ -14,21 +14,21 @@ commonLabels:
   deployment: "pucar"
 
 releases:
-  - name: ab-diary
-    installed: true
-    <<: *default
+  # - name: ab-diary
+  #   installed: true
+  #   <<: *default
 
-  - name: advocate
-    installed: true
-    <<: *default
+  # - name: advocate
+  #   installed: true
+  #   <<: *default
 
-  - name: analytics
-    installed: true
-    <<: *default
+  # - name: analytics
+  #   installed: true
+  #   <<: *default
 
-  - name: application
-    installed: true
-    <<: *default
+  # - name: application
+  #   installed: true
+  #   <<: *default
 
   # - name: audit-service
   #   installed: true
@@ -42,13 +42,13 @@ releases:
   #   installed: true
   #   <<: *default
 
-  - name: case
-    installed: true
-    <<: *default
+  # - name: case
+  #   installed: true
+  #   <<: *default
 
-  - name: casemanagement
-    installed: true
-    <<: *default
+  # - name: casemanagement
+  #   installed: true
+  #   <<: *default
 
   # - name: citizen
   #   installed: true
@@ -66,13 +66,17 @@ releases:
     installed: true
     <<: *default
 
+  - name: digitalized-documents
+    installed: true
+    <<: *default
+
   # - name: dristi-case-pdf
   #   installed: true
   #   <<: *default
 
-  - name: dristi-pdf
-    installed: true
-    <<: *default
+  # - name: dristi-pdf
+  #   installed: true
+  #   <<: *default
 
   # - name: egov-accesscontrol
   #   installed: true
@@ -86,9 +90,9 @@ releases:
   #   installed: true
   #   <<: *default
 
-  # - name: egov-filestore
-  #   installed: true
-  #   <<: *default
+  - name: egov-filestore
+    installed: true
+    <<: *default
 
   # - name: egov-hrms
   #   installed: true
@@ -154,25 +158,21 @@ releases:
   #   installed: true
   #   <<: *default
 
-  - name: epost-tracker
-    installed: true
-    <<: *default
+  # - name: epost-tracker
+  #   installed: true
+  #   <<: *default
 
-  - name: e-sign
-    installed: true
-    <<: *default
-
-  - name: esign-interceptor
-    installed: true
-    <<: *default
+  # - name: esign-interceptor
+  #   installed: true
+  #   <<: *default
 
   # - name: e-sign-svc
   #   installed: true
   #   <<: *default
 
-  - name: etreasury
-    installed: true
-    <<: *default
+  # - name: etreasury
+  #   installed: true
+  #   <<: *default
 
   - name: evidence
     installed: true
@@ -182,17 +182,17 @@ releases:
   #   installed: true
   #   <<: *default
 
-  - name: hearing
-    installed: true
-    <<: *default
+  # - name: hearing
+  #   installed: true
+  #   <<: *default
 
-  - name: hearing-management
-    installed: true
-    <<: *default
+  # - name: hearing-management
+  #   installed: true
+  #   <<: *default
 
-  - name: icops-integration
-    installed: true
-    <<: *default
+  # - name: icops-integration
+  #   installed: true
+  #   <<: *default
 
   # - name: inbox
   #   installed: true
@@ -202,25 +202,25 @@ releases:
   #   installed: true
   #   <<: *default
 
-  - name: inportal-survey
-    installed: true
-    <<: *default
+  # - name: inportal-survey
+  #   installed: true
+  #   <<: *default
 
   # - name: kenlm
   #   installed: true
   #   <<: *default
 
-  - name: kerala-sms
-    installed: true
-    <<: *default
+  # - name: kerala-sms
+  #   installed: true
+  #   <<: *default
 
-  - name: landing-page
-    installed: true
-    <<: *default
+  # - name: landing-page
+  #   installed: true
+  #   <<: *default
 
-  - name: lock-svc
-    installed: true
-    <<: *default
+  # - name: lock-svc
+  #   installed: true
+  #   <<: *default
 
   # - name: mdms-v2
   #   installed: true
@@ -230,29 +230,29 @@ releases:
     installed: true
     <<: *default
 
-  # - name: ocr-service
-  #   installed: true
-  #   <<: *default
+  - name: ocr-service
+    installed: true
+    <<: *default
 
   # - name: ocr-svc
   #   installed: true
   #   <<: *default
 
-  - name: openapi
-    installed: true
-    <<: *default
-
-  - name: order
-    installed: true
-    <<: *default
-
-  # - name: order-management
+  # - name: openapi
   #   installed: true
   #   <<: *default
 
-  - name: payment-calculator
+  # - name: order
+  #   installed: true
+  #   <<: *default
+
+  - name: order-management
     installed: true
     <<: *default
+
+  # - name: payment-calculator
+  #   installed: true
+  #   <<: *default
 
   # - name: pdf-service
   #   installed: true
@@ -274,17 +274,17 @@ releases:
   #   installed: true
   #   <<: *default
 
-  - name: scheduler
-    installed: true
-    <<: *default
+  # - name: scheduler
+  #   installed: true
+  #   <<: *default
 
   # - name: service-request
   #   installed: true
   #   <<: *default
 
-  - name: summons-svc
-    installed: true
-    <<: *default
+  # - name: summons-svc
+  #   installed: true
+  #   <<: *default
 
   # - name: sunbirdrc-credential-service
   #   installed: true
@@ -294,17 +294,17 @@ releases:
     installed: true
     <<: *default
 
-  - name: task-management
-    installed: true
-    <<: *default
+  # - name: task-management
+  #   installed: true
+  #   <<: *default
 
   # - name: transcription
   #   installed: true
   #   <<: *default
 
-  - name: transformer
-    installed: true
-    <<: *default
+  # - name: transformer
+  #   installed: true
+  #   <<: *default
 
   # - name: user-onboard
   #   installed: true
@@ -314,25 +314,25 @@ releases:
   #   installed: true
   #   <<: *default
 
-  - name: transcription
-    installed: false
-    <<: *default
+  # - name: transcription
+  #   installed: false
+  #   <<: *default
 
   # - name: transformer
   #   installed: true
   #   <<: *default
 
-  - name: user-onboard
-    installed: false
-    <<: *default
+  # - name: user-onboard
+  #   installed: false
+  #   <<: *default
 
   # - name: user-otp
   #   installed: true
   #   <<: *default
 
-  - name: verifyapp
-    installed: false
-    <<: *default
+  # - name: verifyapp
+  #   installed: false
+  #   <<: *default
 
   # - name: workbench-ui
   #   installed: true

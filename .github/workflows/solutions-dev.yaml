@@ -91,7 +91,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        environment: [dev, qa]
+        environment: [demo]
     concurrency:
       group: ${{ matrix.environment }}
       cancel-in-progress: true

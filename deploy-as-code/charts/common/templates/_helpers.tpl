@@ -24,3 +24,11 @@ group: {{ .Values.labels.group }}
 {{- printf "%s/%s:%s" $.Values.global.containerRegistry .repository ( required "Tag is mandatory" .tag ) -}}
 {{- end -}}
 {{- end -}}
+
+{{- define "dbMigration.image" -}}
+{{- if contains "/" .repository -}}      
+{{- printf "%s-db:%s" .repository  ( required "Tag is mandatory" .tag ) -}}
+{{- else -}}
+{{- printf "%s/%s-db:%s" $.Values.global.containerRegistry .repository ( required "Tag is mandatory" .tag ) -}}
+{{- end -}}
+{{- end -}}

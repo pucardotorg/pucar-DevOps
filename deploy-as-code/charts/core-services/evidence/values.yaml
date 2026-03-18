@@ -18,13 +18,13 @@ initContainers:
     enabled: true
     schemaTable: "evidence_service_schema"
     image:
-      repository: "docker.io/venkatramireddyb/pucar_evidence_db"
-      tag: v1.0.0-08ab38363f9c4b0b70d0763331c9773f8bbf9820
+      repository: "docker.io/venkatramireddyb/evidence-db"
+      tag: develop-8220ea6b41b44305139c2facb61585d1ba5e35b8
 
 # Container Configs
 image:
-  repository: "docker.io/venkatramireddyb/pucar_evidence"
-  tag: v1.0.0-08ab38363f9c4b0b70d0763331c9773f8bbf9820
+  repository: "docker.io/venkatramireddyb/evidence"
+  tag: develop-8220ea6b41b44305139c2facb61585d1ba5e35b8
   imagePullPolicy: Always
 replicas: "1"
 httpPort: 8080
@@ -62,21 +62,6 @@ env: |
       secretKeyRef:
         name: db
         key: password
-  - name: SPRING_DATASOURCE_URL
-    valueFrom:
-      configMapKeyRef:
-        name: egov-config
-        key: db-url
-  - name: SPRING_DATASOURCE_USERNAME
-    valueFrom:
-      secretKeyRef:
-        name: db
-        key: username
-  - name: SPRING_DATASOURCE_PASSWORD
-    valueFrom:
-      secretKeyRef:
-        name: db
-        key: password
   - name: "SCHEMA_TABLE"
     value: "evidence_service_schema"
   - name: EGOV_IDGEN_HOST
@@ -108,8 +93,6 @@ env: |
         key: egov-localization
   - name: EGOV_LOCALIZATION_SEARCH_ENDPOINT
     value: /localization/messages/v1/_search
-  - name: SERVER_PORT
-    value: "8080"
   - name: SERVER_CONTEXT_PATH
     value: /evidence
   - name: EGOV_INDIVIDUAL_HOST
@@ -122,11 +105,6 @@ env: |
       configMapKeyRef:
         name: egov-service-host
         key: egov-workflow-v2
-  - name: KAFKA_CONFIG_BOOTSTRAP_SERVER_CONFIG
-    valueFrom:
-      configMapKeyRef:
-        key: kafka-brokers
-        name: egov-config
   - name: EGOV_URL_SHORTNER
     valueFrom:
       configMapKeyRef:

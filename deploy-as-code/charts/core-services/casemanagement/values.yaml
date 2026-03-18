@@ -18,12 +18,12 @@ initContainers:
     enabled: true
     schemaTable: "casemanagement_service_schema"
     image:
-      repository: "docker.io/venkatramireddyb/pucar_casemanagement_db"
-      tag: v1.0.0-00c8f29e6759c97f7ce10e3aae68843e35fe87c7
+      repository: "docker.io/venkatramireddyb/casemanagement-db"
+      tag: develop-12a6777df80150083198f97ee14e57a0cacecd3f
 # Container Configs
 image:
-  repository: "docker.io/venkatramireddyb/pucar_casemanagement"
-  tag: v1.0.0-00c8f29e6759c97f7ce10e3aae68843e35fe87c7
+  repository: "docker.io/venkatramireddyb/casemanagement"
+  tag: develop-12a6777df80150083198f97ee14e57a0cacecd3f
   imagePullPolicy: Always
 replicas: "1"
 httpPort: 8080
@@ -61,21 +61,6 @@ env: |
       secretKeyRef:
         name: db
         key: password
-  - name: SPRING_DATASOURCE_URL
-    valueFrom:
-      configMapKeyRef:
-        name: egov-config
-        key: db-url
-  - name: SPRING_DATASOURCE_USERNAME
-    valueFrom:
-      secretKeyRef:
-        name: db
-        key: username
-  - name: SPRING_DATASOURCE_PASSWORD
-    valueFrom:
-      secretKeyRef:
-        name: db
-        key: password
   - name: "SCHEMA_TABLE"
     value: "casemanagement_service_schema"
   - name: EGOV_IDGEN_HOST
@@ -105,8 +90,6 @@ env: |
         key: egov-localization
   - name: EGOV_LOCALIZATION_SEARCH_ENDPOINT
     value: /localization/messages/v1/_search
-  - name: SERVER_PORT
-    value: "8080"
   - name: SERVER_CONTEXT_PATH
     value: /casemanagement
   - name: EGOV_IDGEN_PATH
@@ -121,11 +104,6 @@ env: |
       configMapKeyRef:
         name: egov-service-host
         key: egov-workflow-v2
-  - name: KAFKA_CONFIG_BOOTSTRAP_SERVER_CONFIG
-    valueFrom:
-      configMapKeyRef:
-        key: kafka-brokers
-        name: egov-config
   - name: EGOV_URL_SHORTNER
     valueFrom:
       configMapKeyRef:
@@ -182,9 +160,9 @@ env: |
         key: egov-filestore
         name: egov-service-host
   - name: SPRING_DATA_REDIS_HOST
-    value: "redis.backbone"
+    value: {{ .Values.global.redis.host | quote }}
   - name: SPRING_DATA_REDIS_PORT
-    value: "6379"
+    value: {{ .Values.global.redis.port | quote }}
   - name: EGOV_CREDENTIAL_HOST
     valueFrom:
       configMapKeyRef:
