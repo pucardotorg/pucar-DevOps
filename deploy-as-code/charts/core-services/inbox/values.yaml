@@ -11,7 +11,7 @@ ingress:
 
 lokiEnabled: true
 tracing-enabled: true
-redisEnabled: false
+redisEnabled: true
 
 # Container Configs
 image:
