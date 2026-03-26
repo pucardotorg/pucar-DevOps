@@ -1,0 +1,189 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  annotations:
+  generation: 1
+  name: pucar-prod-alerts
+  namespace: pucar-prod
+spec:
+  groups:
+  - name: hpa-alerts
+    rules:
+    - alert: HPAHittingMaxReplicas
+      expr: |
+        kube_horizontalpodautoscaler_status_current_replicas
+        ==
+        kube_horizontalpodautoscaler_spec_max_replicas
+      for: 5m
+      labels:
+        severity: warning
+        namespace: pucar-prod
+      annotations:
+        summary: "HPA {{ $labels.horizontalpodautoscaler }} hitting max replicas"
+        description: |
+          HPA {{ $labels.horizontalpodautoscaler }} in namespace {{ $labels.namespace }}
+          has reached its maximum replica limit and cannot scale further.
+    # - alert: HPA_AtMinReplicas
+    #   expr: |
+    #     kube_horizontalpodautoscaler_status_current_replicas
+    #     ==
+    #     kube_horizontalpodautoscaler_spec_min_replicas
+    #     and on (namespace, horizontalpodautoscaler)
+    #     kube_horizontalpodautoscaler_status_condition{condition="AbleToScale",status="true"}
+    #     and on (namespace, horizontalpodautoscaler)
+    #     kube_horizontalpodautoscaler_status_condition{condition="ScalingActive",status="true"}
+    #   for: 10m
+    #   labels:
+    #     severity: info
+    #     namespace: pucar-prod
+    #   annotations:
+    #     summary: "HPA {{ $labels.horizontalpodautoscaler }} at min replicas"
+    #     description: |
+    #       HPA {{ $labels.horizontalpodautoscaler }} in namespace {{ $labels.namespace }}
+    #       is running at minimum replicas while scaling is active.
+    #       This alert is informational and does not require action.
+
+  - name: pod-alerts
+    rules:
+    - alert: PodCrashLoopBackOff
+      expr: |
+        kube_pod_container_status_waiting_reason{
+          reason="CrashLoopBackOff"
+        } == 1
+      for: 5m
+      labels:
+        severity: critical
+        namespace: pucar-prod
+      annotations:
+        summary: "Pod {{ $labels.pod }} in CrashLoopBackOff"
+        description: |
+          Pod {{ $labels.pod }} in namespace {{ $labels.namespace }}
+          has been in CrashLoopBackOff state for more than 5 minutes.
+          This usually indicates application startup failure, configuration issues,
+          missing dependencies, or repeated crashes.
+    - alert: PodImagePullBackOff
+      expr: |
+        kube_pod_container_status_waiting_reason{reason="ImagePullBackOff"} == 1
+      for: 5m
+      labels:
+        severity: critical
+        namespace: pucar-prod
+      annotations:
+        summary: "Pod {{ $labels.pod }} in ImagePullBackOff"
+        description: |
+          Pod {{ $labels.pod }} in namespace {{ $labels.namespace }}
+          is unable to pull its container image.
+          This may be due to image not found, registry issues, or authentication failures.
+    - alert: PodNotReady
+      expr: |
+        kube_pod_status_ready{condition="false"} == 1 unless on(pod, namespace) kube_pod_labels{label_group="cronjobs"}
+      for: 10m
+      labels:
+        severity: critical
+        namespace: pucar-prod
+      annotations:
+        summary: "Pod {{ $labels.pod }} not Ready"
+        description: |
+          Pod {{ $labels.pod }} in namespace {{ $labels.namespace }}
+          has been in NotReady state for more than 10 minutes.
+          This may impact service availability.
+    - alert: PodHighRestartCount
+      expr: |
+        increase(kube_pod_container_status_restarts_total[10m]) > 3
+      for: 5m
+      labels:
+        severity: warning
+        namespace: pucar-prod
+      annotations:
+        summary: "Pod {{ $labels.pod }} restarting frequently"
+        description: |
+          Pod {{ $labels.pod }} in namespace {{ $labels.namespace }}
+          has restarted multiple times within a short period.
+          This may indicate application instability.
+    - alert: PodContainerNonZeroExit
+      expr: |
+        kube_pod_container_status_terminated_reason{reason="Error"} == 1
+      for: 2m
+      labels:
+        severity: critical
+        namespace: pucar-prod
+      annotations:
+        summary: "Pod {{ $labels.pod }} terminated with error"
+        description: |
+          Pod {{ $labels.pod }} in namespace {{ $labels.namespace }}
+          has a container that terminated with a non-zero exit code.
+          This indicates application failure.
+    - alert: PodOOMKilled
+      expr: |
+        kube_pod_container_status_terminated_reason{reason="OOMKilled"} == 1
+      for: 2m
+      labels:
+        severity: critical
+        namespace: pucar-prod
+      annotations:
+        summary: "Pod {{ $labels.pod }} OOMKilled"
+        description: |
+          Pod {{ $labels.pod }} in namespace {{ $labels.namespace }}
+          was killed due to out-of-memory condition.
+          Consider increasing memory limits or fixing memory leaks.
+    - alert: PodEvicted
+      expr: |
+        kube_pod_status_reason{reason="Evicted"} == 1
+      for: 1m
+      labels:
+        severity: warning
+        namespace: pucar-prod
+      annotations:
+        summary: "Pod {{ $labels.pod }} evicted"
+        description: |
+          Pod {{ $labels.pod }} in namespace {{ $labels.namespace }}
+          was evicted due to node resource pressure such as memory or disk.
+
+  - name: volume-alerts
+    rules:
+    - alert: PVUsageWarning
+      expr: |
+        (kubelet_volume_stats_used_bytes{namespace="pucar-prod"} 
+        / kubelet_volume_stats_capacity_bytes{namespace="pucar-prod"})
+        * 100
+        >= 60
+      for: 5m
+      labels:
+        severity: warning
+        namespace: pucar-prod
+      annotations:
+        summary: "PersistentVolume {{ $labels.persistentvolume }} usage warning"
+        description: |
+          PersistentVolume {{ $labels.persistentvolume }} in namespace {{ $labels.namespace }}
+          is above 60% usage.
+          Consider cleaning up unused data or increasing storage capacity.
+    - alert: PVUsageCritical
+      expr: |
+        (kubelet_volume_stats_used_bytes{namespace="pucar-prod"} 
+        / kubelet_volume_stats_capacity_bytes{namespace="pucar-prod"})
+        * 100
+        >= 70
+      for: 5m
+      labels:
+        severity: critical
+        namespace: pucar-prod
+      annotations:
+        summary: "PersistentVolume {{ $labels.persistentvolume }} usage critical"
+        description: |
+          PersistentVolume {{ $labels.persistentvolume }} in namespace {{ $labels.namespace }}
+          is above 70% usage.
+          Immediate action required to prevent out-of-space errors.
+    - alert: PVCNotBound
+      expr: |
+        kube_persistentvolumeclaim_status_phase{phase="Pending",namespace="pucar-prod"} == 1
+      for: 5m
+      labels:
+        severity: warning
+        namespace: pucar-prod
+      annotations:
+        summary: "PersistentVolumeClaim {{ $labels.persistentvolumeclaim }} not bound"
+        description: |
+          PersistentVolumeClaim {{ $labels.persistentvolumeclaim }} in namespace {{ $labels.namespace }}
+          has been in Pending state for more than 5 minutes.
+          This usually indicates insufficient PVs available, storage class issues,
+          or misconfigured PVC requests.

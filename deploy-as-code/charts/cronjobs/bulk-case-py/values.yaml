@@ -9,7 +9,7 @@ cron:
   timezone: "Asia/Kolkata"
 
 # Container Configs
-namespace: pucar-prod
+namespace: pucar-stg
 image:
   repository: "registry-backbone-prod.apps.ocp2.ksdc.in/bulk-case-info-py"
   tag: "njdg-v2-nov-30-8"

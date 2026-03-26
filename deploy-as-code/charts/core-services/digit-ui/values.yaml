@@ -14,7 +14,7 @@ initContainers: {}
 # Container Configs
 image:
   repository: "docker.io/venkatramireddyb/digit-ui"
-  tag: v1.0.0-d6576c3d536fa779c0ec2e0341d788821550841f
+  tag: develop-6ea29541a4eb381b189d32716dadac9c0991d41a
 replicas: "1"
 httpPort: 80
 healthChecks:

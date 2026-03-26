@@ -18,13 +18,13 @@ initContainers:
     enabled: true
     schemaTable: "public_treasury_schema"
     image:
-      repository: "docker.io/venkatramireddyb/etreasury_db"
-      tag: v1.0.0-99889cae2385df27aedce8b7d8a1d28d8ee14715
+      repository: "docker.io/venkatramireddyb/etreasury-db"
+      tag: feature-4334-order84-85-da24312969868f67f361a5c6a5b5f0cd274ffd15
 
 # Container Configs
 image:
   repository: "docker.io/venkatramireddyb/etreasury"
-  tag: v1.0.0-99889cae2385df27aedce8b7d8a1d28d8ee14715
+  tag: feature-4334-order84-85-da24312969868f67f361a5c6a5b5f0cd274ffd15
 
 healthChecks:
   enabled: true
@@ -75,30 +75,10 @@ env: |
       secretKeyRef:
         name: db
         key: password
-  - name: SPRING_DATASOURCE_URL
-    valueFrom:
-      configMapKeyRef:
-        name: egov-config
-        key: db-url
-  - name: SPRING_DATASOURCE_USERNAME
-    valueFrom:
-      secretKeyRef:
-        name: db
-        key: username
-  - name: SPRING_DATASOURCE_PASSWORD
-    valueFrom:
-      secretKeyRef:
-        name: db
-        key: password
   - name: "SCHEMA_TABLE"
     value: "public_treasury_schema"
   - name: "SPRING_FLYWAY_TABLE"
     value: "public_treasury_schema"
-  - name: KAFKA_CONFIG_BOOTSTRAP_SERVER_CONFIG
-    valueFrom:
-      configMapKeyRef:
-        key: kafka-brokers
-        name: egov-config
   - name: EGOV_COLLECTIONSERVICE_HOST
     valueFrom:
       configMapKeyRef:

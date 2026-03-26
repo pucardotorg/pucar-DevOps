@@ -13,14 +13,14 @@ healthChecks:
   enabled: true
   livenessProbePath: "/order-management/health"
   readinessProbePath: "/order-management/health"
-
+redisEnabled: true
 lokiEnabled: true
 tracing-enabled: true
 
 # Container Configs
 image:
   repository: "docker.io/venkatramireddyb/order-management"
-  tag: v1.0.0-78a6b1093a50e53a427de8e49b404f220d905739
+  tag: develop-aa9bfbc2f6f622c142f48b8022ba73479ceb3b70
   imagePullPolicy: Always
 replicas: "1"
 httpPort: 8080
@@ -62,11 +62,6 @@ env: |
         key: egov-localization
   - name: EGOV_LOCALIZATION_SEARCH_ENDPOINT
     value: /localization/messages/v1/_search
-  - name: KAFKA_CONFIG_BOOTSTRAP_SERVER_CONFIG
-    valueFrom:
-      configMapKeyRef:
-        key: kafka-brokers
-        name: egov-config
   - name: EGOV_INDEXER_ES_HOST_NAME
     valueFrom:
       configMapKeyRef:
@@ -148,10 +143,6 @@ env: |
         configMapKeyRef:
           key: scheduler
           name: egov-service-host
-  - name: SPRING_REDIS_HOST
-    value: redis.backbone
-  - name: SPRING_REDIS_PORT
-    value: "6379"
   - name: DRISTI_MDMS_HOST
     valueFrom:
       configMapKeyRef:

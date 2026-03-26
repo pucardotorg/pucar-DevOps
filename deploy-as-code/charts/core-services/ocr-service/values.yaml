@@ -18,12 +18,12 @@ initContainers:
     enabled: true
     schemaTable: "ocr-service_schema"
     image:
-      repository: "docker.io/venkatramireddyb/pucar_ocr_svc_db"
+      repository: "docker.io/venkatramireddyb/ocr-service-db"
       tag: v1.0.0-43fda1f5471717f3898bc96188ea068a4617ddd7
 
 # Container Configs
 image:
-  repository: "docker.io/venkatramireddyb/pucar_ocr_svc"
+  repository: "docker.io/venkatramireddyb/ocr-service"
   tag: v1.0.0-43fda1f5471717f3898bc96188ea068a4617ddd7
   imagePullPolicy: Always
 replicas: "1"
@@ -70,11 +70,6 @@ env: |
         key: password
   - name: "SCHEMA_TABLE"
     value: "ocr-service_schema"
-  - name: EGOV_IDGEN_HOST
-    valueFrom:
-      configMapKeyRef:
-        name: egov-service-host
-        key: egov-idgen
   - name: EGOV_MDMS_HOST
     valueFrom:
       configMapKeyRef:

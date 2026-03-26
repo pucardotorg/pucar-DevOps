@@ -18,13 +18,13 @@ initContainers:
     enabled: true
     schemaTable: "case_service_schema"
     image:
-      repository: "docker.io/venkatramireddyb/case_db"
-      tag: v1.0.0-66cf9764c39721c25d36ee62799cec6953427d9e
+      repository: "docker.io/venkatramireddyb/case-db"
+      tag: develop-fdfb4f4029c9a25da8c44f391c0885dd79a6ac4f
 
 # Container Configs
 image:
-  repository: "docker.io/venkatramireddyb/pucar_case"
-  tag: v1.0.0-66cf9764c39721c25d36ee62799cec6953427d9e
+  repository: "docker.io/venkatramireddyb/case"
+  tag: develop-fdfb4f4029c9a25da8c44f391c0885dd79a6ac4f
   imagePullPolicy: Always
 replicas: "1"
 httpPort: 8080
@@ -34,7 +34,7 @@ debugPort: 5005
 java-args: "-Dspring.profiles.active=monitoring"
 memory_requests: 2Gi
 memory_limits: 2Gi
-
+redisEnabled: true
 healthChecks:
   enabled: true
   livenessProbePath: "/case/health"
@@ -65,21 +65,6 @@ env: |
         key: username
         name: db
   - name: SPRING_FLYWAY_PASSWORD
-    valueFrom:
-      secretKeyRef:
-        name: db
-        key: password
-  - name: SPRING_DATASOURCE_URL
-    valueFrom:
-      configMapKeyRef:
-        name: egov-config
-        key: db-url
-  - name: SPRING_DATASOURCE_USERNAME
-    valueFrom:
-      secretKeyRef:
-        name: db
-        key: username
-  - name: SPRING_DATASOURCE_PASSWORD
     valueFrom:
       secretKeyRef:
         name: db
@@ -115,8 +100,6 @@ env: |
         key: egov-localization
   - name: EGOV_LOCALIZATION_SEARCH_ENDPOINT
     value: /localization/messages/v1/_search
-  - name: SERVER_PORT
-    value: "8080"
   - name: SERVER_CONTEXT_PATH
     value: /case
   - name: EGOV_IDGEN_PATH
@@ -131,11 +114,6 @@ env: |
       configMapKeyRef:
         name: egov-service-host
         key: egov-workflow-v2
-  - name: KAFKA_CONFIG_BOOTSTRAP_SERVER_CONFIG
-    valueFrom:
-      configMapKeyRef:
-        key: kafka-brokers
-        name: egov-config
   - name: STATE_LEVEL_TENANT_ID
     valueFrom:
       configMapKeyRef:
@@ -175,10 +153,6 @@ env: |
         key: egov-enc-service
   - name: SPRING_KAFKA_CONSUMER_GROUP_ID
     value: case
-  - name: SPRING_REDIS_HOST
-    value: "redis.backbone"
-  - name: SPRING_REDIS_PORT
-    value: "6379"
   - name: EGOV_ENC_MDMS_SECURITY_POLICY_CASE_DECRYPT_SELF
     value: CaseDecryptSelfNew
   - name: EGOV_ENC_MDMS_SECURITY_POLICY_COURT_CASE
@@ -229,6 +203,9 @@ env: |
       configMapKeyRef:
         name: egov-service-host
         key: advocate-office-management
+  - name: EGOV_USER_SEARCH_PATH
+    value: /user/v1/_search
+
   - name: SPRING_DATA_REDIS_HOST
     value: "redis.backbone"
   - name: SPRING_DATA_REDIS_PORT

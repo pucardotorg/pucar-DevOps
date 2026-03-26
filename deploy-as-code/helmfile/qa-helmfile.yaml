@@ -42,9 +42,9 @@ releases:
   #   installed: true
   #   <<: *default
 
-  # - name: case
-  #   installed: true
-  #   <<: *default
+  - name: case
+    installed: true
+    <<: *default
 
   # - name: casemanagement
   #   installed: true
@@ -74,9 +74,9 @@ releases:
   #   installed: true
   #   <<: *default
 
-  - name: dristi-pdf
-    installed: true
-    <<: *default
+  # - name: dristi-pdf
+  #   installed: true
+  #   <<: *default
 
   # - name: egov-accesscontrol
   #   installed: true
@@ -186,9 +186,9 @@ releases:
   #   installed: true
   #   <<: *default
 
-  # - name: hearing
-  #   installed: true
-  #   <<: *default
+  - name: hearing
+    installed: true
+    <<: *default
 
   # - name: hearing-management
   #   installed: true
@@ -198,9 +198,9 @@ releases:
   #   installed: true
   #   <<: *default
 
-  - name: inbox
-    installed: true
-    <<: *default
+  # - name: inbox
+  #   installed: true
+  #   <<: *default
 
   # - name: inportal-survey
   #   installed: true
@@ -246,9 +246,9 @@ releases:
     installed: true
     <<: *default
 
-  # - name: order
-  #   installed: true
-  #   <<: *default
+  - name: order
+    installed: true
+    <<: *default
 
   - name: order-management
     installed: true
@@ -278,9 +278,9 @@ releases:
   #   installed: true
   #   <<: *default
 
-  # - name: scheduler
-  #   installed: true
-  #   <<: *default
+  - name: scheduler
+    installed: true
+    <<: *default
 
   # - name: service-request
   #   installed: true
