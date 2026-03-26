@@ -1,6 +1,6 @@
 resource_group = "pucar-solutions-dev"
 environment    = "solutions-dev"
-location       = "South India"
+location       = "Central India"
 # networking
 address_space = ["10.7.0.0/16"]
 
@@ -13,10 +13,10 @@ zone                      = null
 # kubernetes variables
 private_cluster_enabled  = false
 vm_size                  = "Standard_E2as_v5"
-node_count               = "6"
+node_count               = "5"
 min_count                = "4"
 max_count                = "5"
-max_pod                  = "30"
+max_pod                  = "45"
 address_prefixes_aks     = ["10.7.1.0/24"]
 aks_dns_service_ip       = "10.7.4.10"
 aks_service_cidr         = "10.7.4.0/24"

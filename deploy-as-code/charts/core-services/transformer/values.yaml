@@ -9,13 +9,18 @@ ingress:
   enabled: true
   context: "transformer"
 
+lokiEnabled: true
+tracing-enabled: true
 
 # Init Containers Configs
-
+healthChecks:
+  enabled: true
+  livenessProbePath: "/transformer/health"
+  readinessProbePath: "/transformer/health"
 
 # Container Configs
 image:
-  repository: "pucarsolutionsdev.azurecr.io/pucar_transformer"
+  repository: "docker.io/venkatramireddyb/pucar_transformer"
   tag: v1.0.0-7471513f26785fb63b13c6d7ad1f47e1fb65ce77
   imagePullPolicy: Always
 replicas: "1"
@@ -24,9 +29,13 @@ appType: "java-spring"
 heap: "-Xmx64m -Xms64m"
 java-args: "-Dspring.profiles.active=monitoring"
 memory_requests: 256Mi
-
+debugPort: 5005
 
 env: |
+  - name: MANAGEMENT_HEALTH_ELASTICSEARCH_ENABLED
+    value: "false"
+  - name: MANAGEMENT_HEALTH_REDIS_ENABLED
+    value: "false"
   - name: SERVER_PORT
     value: "8080"
   - name: SERVER_CONTEXT_PATH
@@ -103,3 +112,47 @@ env: |
         key: password
   - name: ELASTICSEARCH_CONNECTION_TYPE
     value: http
+  - name: egov.user.search.path
+    value: /user/v1/_search
+  - name: EGOV_MDMS_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: egov-mdms-service
+  - name: DRISTI_HEARING_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: hearing
+  - name: EGOV_ADVOCATE_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: advocate
+  - name: EGOV_INBOX_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: inbox
+  - name: EGOV_INFRA_INDEXER_HOST
+    valueFrom:
+      configMapKeyRef:
+        key: es-indexer-host
+        name: egov-config
+  - name: EGOV_BULK_INDEX_PATH
+    value: "_bulk"
+  - name: EGOV_INDEXER_ES_USERNAME
+    valueFrom:
+      secretKeyRef:
+        name: elasticsearch-credentials
+        key: username
+  - name: EGOV_INDEXER_ES_PASSWORD
+    valueFrom:
+      secretKeyRef:
+        name: elasticsearch-credentials
+        key: password
+  - name: EGOV_LOCALIZATION_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: egov-localization

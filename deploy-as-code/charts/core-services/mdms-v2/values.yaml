@@ -14,12 +14,12 @@ initContainers:
     enabled: true
     schemaTable: "mdms_v2_schema"
     image:
-      repository: "pucarsolutionsdev.azurecr.io/egov-mdms-service-db"
+      repository: "docker.io/venkatramireddyb/egov-mdms-service-db"
       tag: v1.0.0-MDMS-v2-2.9LTS-1
 
 # Container Configs
 image:
-  repository: "pucarsolutionsdev.azurecr.io/egov-mdms-service"
+  repository: "docker.io/venkatramireddyb/egov-mdms-service"
   tag: v1.0.0-MDMS-v2-2.9LTS-1
 replicas: "1"
 healthChecks:
@@ -64,3 +64,7 @@ env: |
     value: {{ index .Values "egov-mdms-schema-definition-save-topic" | quote }}
   - name: EGOV_MDMS_DATA_SAVE_TOPIC
     value: {{ index .Values "egov-mdms-data-save-topic" | quote }}  
+  - name: MDMS_DEFAULT_OFFSET
+    value: "0"
+  - name: MDMS_DEFAULT_LIMIT
+    value: "100"

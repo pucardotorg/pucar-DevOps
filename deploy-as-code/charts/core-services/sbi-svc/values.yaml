@@ -9,24 +9,26 @@ ingress:
   zuul: true
   context: "sbi-backend"
 
+lokiEnabled: true
+tracing-enabled: true
+
 # Init Containers Configs
 initContainers:
   dbMigration:
     enabled: true
-    schemaTable: "public_treasury_schema"
+    schemaTable: "sbi_svc_schema"
     image:
-      repository: "pucarsolutionsdev.azurecr.io/sbi-svc-db"
+      repository: "docker.io/venkatramireddyb/sbi-svc-db"
       tag: v1.0.0-a59f8a91d4f77728a9076fa72d39975ba294c526
 
 # Container Configs
 image:
-  repository: "pucarsolutionsdev.azurecr.io/sbi-svc"
+  repository: "docker.io/venkatramireddyb/sbi-svc"
   tag: v1.0.0-a59f8a91d4f77728a9076fa72d39975ba294c526
 
 
 replicas: "1"
 appType: "java-spring"
-tracing-enabled: true
 heap: "-Xmx192m -Xms192m"
 java-args: ""
 

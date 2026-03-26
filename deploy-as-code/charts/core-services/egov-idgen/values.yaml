@@ -9,26 +9,28 @@ ingress:
   zuul: true
   context: "egov-idgen"
 
+lokiEnabled: true
+tracing-enabled: true
+
 # Init Containers Configs
 initContainers:
   dbMigration:
     enabled: true
     schemaTable: "egov_idgen_schema"
     image:
-      repository: "pucarsolutionsdev.azurecr.io/egov-idgen-db"
-      tag: v1.0.0-cb22847c89d65c2a3eae05117108bb28c6eea290
+      repository: "docker.io/venkatramireddyb/egov-idgen-db"
+      tag: v1.1.3-cca7ee351c8607607a6d73b2adfb2bba2a34cac7
 
 # Container Configs
 image:
-  repository: "pucarsolutionsdev.azurecr.io/egov-idgen"
-  tag: v1.0.0-cb22847c89d65c2a3eae05117108bb28c6eea290
+  repository: "docker.io/venkatramireddyb/egov-idgen"
+  tag: v1.1.3-cca7ee351c8607607a6d73b2adfb2bba2a34cac7
 replicas: "1"
 healthChecks:
   enabled: true
   livenessProbePath: "/egov-idgen/health"
   readinessProbePath: "/egov-idgen/health"
 appType: "java-spring"
-tracing-enabled: true
 heap: "-Xmx192m -Xms192m"
 java-args: "-Dspring.profiles.active=monitoring"
 idformat-from-mdms: "false"
@@ -55,3 +57,5 @@ env: |
     value: "false"  
   - name: MANAGEMENT_SECURITY_ENABLED
     value: "false" 
+  - name: SEQUENCE_LIST_REQUIRE_COURT_ID
+    value: SEQ_CNR_,SEQ_CMP_

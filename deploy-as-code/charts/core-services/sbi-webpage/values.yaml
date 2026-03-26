@@ -12,7 +12,7 @@ ingress:
 
 # Container Configs
 image:
-   repository: "pucarsolutionsdev.azurecr.io/sbi-ui"
+   repository: "docker.io/venkatramireddyb/sbi-ui"
    tag: v1.0.0-9b32798dc18d9fdbe1ab887e577c70a4caa4d6dd
 replicas: "1"
 

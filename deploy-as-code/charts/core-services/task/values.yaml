@@ -8,7 +8,11 @@ ingress:
   zuul: true
   enabled: true
   context: "task"
+  additionalAnnotations: |
+    nginx.ingress.kubernetes.io/proxy-body-size: "10m"
 
+lokiEnabled: true
+tracing-enabled: true
 
 # Init Containers Configs
 initContainers:
@@ -16,12 +20,12 @@ initContainers:
     enabled: true
     schemaTable: "task_service_schema"
     image:
-      repository: "pucarsolutionsdev.azurecr.io/pucar_task_db"
+      repository: "docker.io/venkatramireddyb/pucar_task_db"
       tag: v1.0.0-4804b32bb9433d663957b381692e2bc68033c198
 
 # Container Configs
 image:
-  repository: "pucarsolutionsdev.azurecr.io/pucar_task"
+  repository: "docker.io/venkatramireddyb/pucar_task"
   tag: v1.0.0-4804b32bb9433d663957b381692e2bc68033c198
   imagePullPolicy: Always
 replicas: "1"
@@ -32,10 +36,10 @@ heap: "-Xmx256m -Xms256m"
 java-args: "-Dspring.profiles.active=monitoring"
 memory_limits: 768Mi
 
-#healthChecks:
-#  enabled: true
-#  livenessProbePath: "/task/"
-#  readinessProbePath: "/task/"
+healthChecks:
+  enabled: true
+  livenessProbePath: "/task/health"
+  readinessProbePath: "/task/health"
 
 env: |
   - name: JAVA_ENABLE_DEBUG
@@ -105,6 +109,8 @@ env: |
         key: egov-localization
   - name: EGOV_LOCALIZATION_SEARCH_ENDPOINT
     value: /localization/messages/v1/_search
+  - name: EGOV_LOCALIZATION_CONTEXT_PATH
+    value: ""
   - name: EGOV_MDMS_SEARCH_ENDPOINT
     value: /egov-mdms-service/v1/_search
   - name: SERVER_PORT
@@ -154,6 +160,35 @@ env: |
     value: egov.collection.payment-create
   - name: ROLE_SYSTEM_ADMIN
     value: SYSTEM_ADMIN
-
-
-    
+  - name: DRISTI_SUMMON_HOST
+    valueFrom:
+        configMapKeyRef:
+          key: summons
+          name: egov-service-host
+  - name: EGOV_FILESTORE_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: egov-filestore
+  - name: ETREASURY_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: etreasury
+  - name: DRISTI_ANALYTICS_HOST
+    valueFrom:
+        configMapKeyRef:
+          key: analytics
+          name: egov-service-host
+  - name: DRISTI_ADVOCATE_HOST
+    valueFrom:
+        configMapKeyRef:
+          key: advocate
+          name: egov-service-host
+  - name: EGOV_USER_SEARCH_PATH
+    value: /user/v1/_search
+  - name: DRISTI_ESIGN_HOST
+    valueFrom:
+      configMapKeyRef:
+        key: e-sign-svc
+        name: egov-service-host

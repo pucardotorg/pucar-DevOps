@@ -15,13 +15,15 @@ initContainers:
     enabled: true
     schemaTable: "payment-calculator_schema"
     image:
-      repository: "pucarsolutionsdev.azurecr.io/payment-calculator-svc_db"
+      repository: "docker.io/venkatramireddyb/payment-calculator-svc_db"
       tag: v1.0.0-cd4732437b8cb6f303b646d67a24d374ef44d4e3
 
+lokiEnabled: true
+tracing-enabled: true
 
 # Container Configs
 image:
-  repository: "pucarsolutionsdev.azurecr.io/payment-calculator-svc"
+  repository: "docker.io/venkatramireddyb/payment-calculator-svc"
   tag: v1.0.0-cd4732437b8cb6f303b646d67a24d374ef44d4e3
 replicas: "1"
 healthChecks:
@@ -29,7 +31,6 @@ healthChecks:
   livenessProbePath: "/payment-calculator/health"
   readinessProbePath: "/payment-calculator/health"
 appType: "java-spring"
-tracing-enabled: true
 heap: "-Xmx64m -Xms64m"
 java-args: "-Dspring.profiles.active=monitoring"
 
@@ -111,6 +112,11 @@ env: |
       configMapKeyRef:
         key: kafka-brokers
         name: egov-config
+  - name: EGOV_CASE_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: case
 
   
   

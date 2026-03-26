@@ -1,7 +1,7 @@
 # Replace with the name which you want to give to your environment
 # Cluster name can have only lowercase alphanumeric characters and hyphens
 # For example: "digit-demo"
-environment: "dev"
+environment: "solutions-dev"
 
 # Name you want to give to your Database
 # DB name must contain only alphanumeric characters
@@ -9,13 +9,13 @@ db_username: "pucar_dev"
 
 
 # Replace with Domain name you want for your web applications
-domain_name: "dristi-dev.pucar.org"
+domain_name: "dristi-kerala-dev.pucar.org"
 
 # Replace with the name you want to give to your storage container name  which is used to store the terraform state
-storage_container_name: "pucar-dev-tfstate"
+storage_container_name: "pucar-solutions-dev-tfstate"
 
 # Resource group name which groups and isolates our resources from the rest
-resource_group: "pucar-dev"
+resource_group: "pucar-solutions-dev"
 
 
 

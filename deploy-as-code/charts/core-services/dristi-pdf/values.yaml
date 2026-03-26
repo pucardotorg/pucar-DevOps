@@ -11,13 +11,18 @@ ingress:
   enabled: true
   zuul: true
   context: "egov-pdf"
+  additionalAnnotations: |
+    nginx.ingress.kubernetes.io/proxy-body-size: "0"
 
 # Container Configs
 image:
-  repository: "pucarsolutionsdev.azurecr.io/dristi-pdf"
+  repository: "docker.io/venkatramireddyb/dristi-pdf"
   tag: v1.0.0-64e9183c360d73936861b5772ecdf15b5c733e04
 replicas: "1"
-
+#healthChecks:
+#  enabled: true
+#  livenessProbePath: "/egov-pdf/health"
+#  readinessProbePath: "/egov-pdf/health"
 # Additional Container Envs
 env: |
   - name: DB_HOST
@@ -111,3 +116,48 @@ env: |
         key: egov-localization
   - name:  EGOV_FILESTORE_SERVICE_HOST
     value: "http://egov-filestore.egov:8080"
+  - name: JUDGE_NAME
+    valueFrom:
+      configMapKeyRef:
+        key: judge-name
+        name: egov-config
+  - name: JUDGE_DESIGNATION
+    valueFrom:
+      configMapKeyRef:
+        key: judge-designation
+        name: egov-config
+  - name: ORDER_HEADING
+    valueFrom:
+      configMapKeyRef:
+        key: ORDER_HEADING
+        name: egov-config
+  - name: JUDGE_DESIGNATION_HEADER
+    valueFrom:
+      configMapKeyRef:
+        key: JUDGE_DESIGNATION_HEADER
+        name: egov-config
+  - name: DRISTI_TASK_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: task
+  - name: DRISTI_EVIDENCE_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: evidence
+  - name: DRISTI_BAIL_BOND_HOST
+    valueFrom:
+      configMapKeyRef:
+        key: bail-bond
+        name: egov-service-host
+  - name: DRISTI_TASK_MANAGEMENT_HOST
+    valueFrom:
+      configMapKeyRef:
+        key: task-management
+        name: egov-service-host
+  - name: DRISTI_DIGITALIZED_DOCUMENTS_HOST
+    valueFrom:
+      configMapKeyRef:
+        key: digitalized-documents
+        name: egov-service-host

@@ -9,6 +9,9 @@ ingress:
   zuul: true
   context: "otp"
 
+lokiEnabled: true
+tracing-enabled: true
+
 # Init Containers Configs
 initContainers:
   dbMigration:
@@ -28,7 +31,6 @@ healthChecks:
   livenessProbePath: "/otp/health"
   readinessProbePath: "/otp/health"
 appType: "java-spring"
-tracing-enabled: true
 heap: "-Xmx192m -Xms192m"
 
 # Additional Container Envs

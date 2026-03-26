@@ -9,18 +9,21 @@ ingress:
   zuul: true
   context: "user"
 
+lokiEnabled: true
+tracing-enabled: true
+
 # Init Containers Configs
 initContainers:
   dbMigration:
     enabled: true
     schemaTable: "egov_user_schema"
     image:
-      repository: "pucarsolutionsdev.azurecr.io/egov-user-db"
+      repository: "docker.io/venkatramireddyb/egov-user-db"
       tag: v1.0.0-core-2.9-lts-egov-user-deployement-1
 
 # Container Configs
 image:
-  repository: "pucarsolutionsdev.azurecr.io/egov-user"
+  repository: "docker.io/venkatramireddyb/egov-user"
   tag: v1.0.0-core-2.9-lts-egov-user-deployement-1
 replicas: "1"
 healthChecks:
@@ -28,7 +31,6 @@ healthChecks:
   livenessProbePath: "/user/health"
   readinessProbePath: "/user/health"
 appType: "java-spring"
-tracing-enabled: true
 egov-state-level-tenant-id: "pb"
 decryption-abac-enabled: "false"
 account-unlock-cool-down-period-minutes: "30"
@@ -163,8 +165,4 @@ env: |
   - name: SECURITY_BASIC_ENABLED
     value: "false"  
   - name: MANAGEMENT_SECURITY_ENABLED
-    value: "false" 
-  {{- if index .Values "tracing-enabled" }}
-  - name: TRACER_OPENTRACING_ENABLED
-    value: "true" 
-  {{- end }}
+    value: "false"
