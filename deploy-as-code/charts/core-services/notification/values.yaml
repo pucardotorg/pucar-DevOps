@@ -19,12 +19,12 @@ initContainers:
     schemaTable: "anotification_service_schema"
     image:
       repository: "docker.io/venkatramireddyb/notification-db"
-      tag: develop-dd7117089ef3260f958da3433ec9424919e35246
+      tag: develop-f03f1a9d94bfa904797b0987e0d4d5c5935f903c
 
 # Container Configs
 image:
   repository: "docker.io/venkatramireddyb/notification"
-  tag: develop-dd7117089ef3260f958da3433ec9424919e35246
+  tag: develop-f03f1a9d94bfa904797b0987e0d4d5c5935f903c
   imagePullPolicy: Always
 replicas: "1"
 httpPort: 8080
@@ -59,28 +59,8 @@ env: |
       secretKeyRef:
         name: db
         key: password
-  - name: SPRING_DATASOURCE_URL
-    valueFrom:
-      configMapKeyRef:
-        key: db-url
-        name: egov-config
-  - name: SPRING_DATASOURCE_USERNAME
-    valueFrom:
-      secretKeyRef:
-        name: db
-        key: username
-  - name: SPRING_DATASOURCE_PASSWORD
-    valueFrom:
-      secretKeyRef:
-        name: db
-        key: password
   - name: "SCHEMA_TABLE"
     value: "notification_service_schema"
-  - name: EGOV_IDGEN_HOST
-    valueFrom:
-      configMapKeyRef:
-        name: egov-service-host
-        key: egov-idgen
   - name: EGOV_MDMS_HOST
     valueFrom:
       configMapKeyRef:
@@ -96,11 +76,6 @@ env: |
       configMapKeyRef:
         name: egov-service-host
         key: egov-hrms
-  - name: KAFKA_CONFIG_BOOTSTRAP_SERVER_CONFIG
-    valueFrom:
-      configMapKeyRef:
-        key: kafka-brokers
-        name: egov-config
   - name: EGOV_LOCALIZATION_HOST
     valueFrom:
       configMapKeyRef:

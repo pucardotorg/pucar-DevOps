@@ -10,7 +10,7 @@ initContainers:
     schemaTable: "egov_filestore_schema"
     image:
       repository: "docker.io/venkatramireddyb/egov-filestore-db"
-      tag: main-98ec8dc97569afa6e1e52c0b43a95d596c9dd1d3
+      tag: develop-7a3a056f321a36c205fc30a5371370945d29ccbd
 
 lokiEnabled: true
 tracing-enabled: true
@@ -21,11 +21,13 @@ ingress:
   zuul: true
   context: "filestore"
 
+debugPort: 5005
+
 # Container Configs
 image:
   repository: "docker.io/venkatramireddyb/egov-filestore"
-  tag: main-98ec8dc97569afa6e1e52c0b43a95d596c9dd1d3
-replicas: "2"
+  tag: develop-7a3a056f321a36c205fc30a5371370945d29ccbd
+replicas: "1"
 healthChecks:
   enabled: true
   livenessProbePath: "/filestore/health"
@@ -63,9 +65,9 @@ env: |
   - name: TEMP_FOLDER_PATH
     value: "/tmp"
   - name: SPRING_SERVLET_MULTIPART_MAX_FILE_SIZE
-    value: "200MB"
+    value: {{ index .Values "spring-servlet-multipart-max-file-size" | quote }}
   - name: SPRING_SERVLET_MULTIPART_MAX_REQUEST_SIZE
-    value: 1000MB
+    value: {{ index .Values "spring-servlet-multipart-max-request-size" | quote }}
   - name: MAX_FILE_SIZE
     value: "500000000"
   - name: ISNFSSTORAGEENABLED

@@ -67,7 +67,8 @@ spec:
                 {{- include "common.labels" . | nindent 18 }}     
     {{- end }}  
     {{- if .Values.serviceAccount }}
-      serviceAccountName: {{ .Values.serviceAccount }}    
+      serviceAccountName: {{ .Values.serviceAccount }}  
+      serviceAccount: {{ .Values.serviceAccount }}  
     {{- end }}     
       initContainers:
       {{- with .Values.initContainers.extraInitContainers }}
@@ -76,7 +77,7 @@ spec:
       {{- if .Values.initContainers.dbMigration.enabled }}
       {{ with .Values.initContainers.dbMigration}}
       - name: "db-migration"
-        image: {{ template "common.image" (dict "Values" $.Values "repository" .image.repository "tag" $.Values.image.tag) }}
+        image: {{ template "dbMigration.image" (dict "Values" $.Values "repository" $.Values.image.repository "tag" $.Values.image.tag) }}
         imagePullPolicy: {{ .image.pullPolicy }} 
       {{- end }}    
         {{- if .Values.initContainers.dbMigration.env }}               

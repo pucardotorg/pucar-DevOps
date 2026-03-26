@@ -18,14 +18,14 @@ initContainers:
     enabled: true
     schemaTable: "summons_schema"
     image:
-      repository: "docker.io/venkatramireddyb/summons-svc_db"
-      tag: v1.0.0-5e9855abb0899c26d1a04284a94f35e4bd9c5d98
+      repository: "docker.io/venkatramireddyb/summons-svc-db"
+      tag: feature-4334-order84-85-0c4f91fe30c11a769fc5994f0285a4999db16c1b
 
 
 # Container Configs
 image:
   repository: "docker.io/venkatramireddyb/summons-svc"
-  tag: v1.0.0-5e9855abb0899c26d1a04284a94f35e4bd9c5d98
+  tag: feature-4334-order84-85-0c4f91fe30c11a769fc5994f0285a4999db16c1b
 replicas: "1"
 healthChecks:
    enabled: true
@@ -48,21 +48,6 @@ env: |
       configMapKeyRef:
         key: COURT_ADDRESS
         name: egov-config
-  - name: SPRING_DATASOURCE_URL
-    valueFrom:
-      configMapKeyRef:
-        name: egov-config
-        key: db-url
-  - name: SPRING_DATASOURCE_USERNAME
-    valueFrom:
-      secretKeyRef:
-        name: db
-        key: username
-  - name: SPRING_DATASOURCE_PASSWORD
-    valueFrom:
-      secretKeyRef:
-        name: db
-        key: password
   - name: SPRING_FLYWAY_URL
     valueFrom:
       configMapKeyRef:
@@ -113,11 +98,6 @@ env: |
       configMapKeyRef:
         name: egov-service-host
         key: egov-filestore
-  - name: KAFKA_CONFIG_BOOTSTRAP_SERVER_CONFIG
-    valueFrom:
-      configMapKeyRef:
-        key: kafka-brokers
-        name: egov-config
   - name: EGOV_PDF_SERVICE_HOST
     valueFrom:
       configMapKeyRef:

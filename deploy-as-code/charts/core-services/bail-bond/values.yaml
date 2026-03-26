@@ -19,12 +19,12 @@ initContainers:
     schemaTable: "bail-bond_service_schema"
     image:
       repository: "docker.io/venkatramireddyb/bail-bond-db"
-      tag: v1.0.0-08ab38363f9c4b0b70d0763331c9773f8bbf9820
+      tag: develop-69975645639b951b4d2857b48d9ed89f3a91dd8a
 
 # Container Configs
 image:
   repository: "docker.io/venkatramireddyb/bail-bond"
-  tag: develop-9d53b7e69451a539a8b8607f74407bcfa4b15953
+  tag: develop-69975645639b951b4d2857b48d9ed89f3a91dd8a
   imagePullPolicy: Always
 replicas: "1"
 httpPort: 8080
@@ -63,21 +63,6 @@ env: |
       secretKeyRef:
         name: db
         key: password
-  - name: SPRING_DATASOURCE_URL
-    valueFrom:
-      configMapKeyRef:
-        key: db-url
-        name: egov-config
-  - name: SPRING_DATASOURCE_USERNAME
-    valueFrom:
-      secretKeyRef:
-        name: db
-        key: username
-  - name: SPRING_DATASOURCE_PASSWORD
-    valueFrom:
-      secretKeyRef:
-        name: db
-        key: password
   - name: "SCHEMA_TABLE"
     value: "bail-bond_service_schema"
   - name: EGOV_IDGEN_HOST
@@ -100,11 +85,6 @@ env: |
       configMapKeyRef:
         name: egov-service-host
         key: egov-hrms
-  - name: KAFKA_CONFIG_BOOTSTRAP_SERVER_CONFIG
-    valueFrom:
-      configMapKeyRef:
-        key: kafka-brokers
-        name: egov-config
   - name: EGOV_LOCALIZATION_HOST
     valueFrom:
       configMapKeyRef:
@@ -112,19 +92,12 @@ env: |
         key: egov-localization
   - name: EGOV_MDMS_SEARCH_ENDPOINT
     value: /egov-mdms-service/v1/_search
-  - name: SERVER_PORT
-    value: "8080"
   - name: SERVER_CONTEXT_PATH
     value: /bail-bond
   - name: ADVCLERK_KAFKA_CREATE_TOPIC
     value: save-bail-bond-clerk
   - name: EGOV_IDGEN_PATH
     value: "egov-idgen/id/_generate"
-  - name: EGOV_IDGEN_HOST
-    valueFrom:
-      configMapKeyRef:
-        name: egov-service-host
-        key: egov-idgen
   - name: EGOV_INDIVIDUAL_HOST
     valueFrom:
       configMapKeyRef:
