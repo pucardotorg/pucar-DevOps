@@ -2,7 +2,9 @@ global:
   domain: dristi-kerala-dev.pucar.org
   redis: 
     host: redis.backbone
-    port: 6379  
+    port: 6379
+  ingress:
+    className: nginx
 loki-url: "http://178.236.185.12:3100/loki/api/v1/push"
 root-ingress:
   cert-issuer: "letsencrypt-prod"
