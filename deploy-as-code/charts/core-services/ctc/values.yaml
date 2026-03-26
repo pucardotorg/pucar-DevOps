@@ -8,6 +8,8 @@ ingress:
   zuul: true
   enabled: true
   context: "ctc"
+  additionalAnnotations: |
+    nginx.ingress.kubernetes.io/proxy-body-size: 150m
 
 lokiEnabled: true
 tracing-enabled: true
