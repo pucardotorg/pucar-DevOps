@@ -17,7 +17,7 @@ debugPort: 5005
 
 # Container Configs
 image:
-  repository: "docker.io/venkatramireddyb/pucar_esign-interceptor"
+  repository: "docker.io/venkatramireddyb/esign-interceptor"
   tag: develop-026e2594c17944fc069afd6d762b36fd70cde5ed
   imagePullPolicy: Always
 replicas: "1"

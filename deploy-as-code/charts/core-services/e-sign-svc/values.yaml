@@ -19,11 +19,11 @@ e-sign-svc:
       enabled: true
       schemaTable: "e_sign_svc_schema"
       image:
-        repository: "docker.io/venkatramireddyb/pucar_e-sign-svc-db"
+        repository: "docker.io/venkatramireddyb/e-sign-svc-db"
         tag: develop-e64b5dc7d9b818e381b4f0a858692fc44edc11be
 # Container Configs
 image:
-  repository: "docker.io/venkatramireddyb/pucar_e-sign-svc"
+  repository: "docker.io/venkatramireddyb/e-sign-svc"
   tag: develop-e64b5dc7d9b818e381b4f0a858692fc44edc11be
   imagePullPolicy: Always
 replicas: "1"
@@ -46,11 +46,6 @@ env: |
     value: /egov-mdms-service/v1/_search
   - name: SERVER_PORT
     value: "8080"
-  - name: KAFKA_CONFIG_BOOTSTRAP_SERVER_CONFIG
-    valueFrom:
-      configMapKeyRef:
-        key: kafka-brokers
-        name: egov-config
   - name: EGOV_FILESTORE_HOST
     valueFrom:
       configMapKeyRef:

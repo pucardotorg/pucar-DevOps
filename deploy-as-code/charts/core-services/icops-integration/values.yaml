@@ -21,11 +21,11 @@ initContainers:
     enabled: true
     schemaTable: "integration_service_schema"
     image:
-      repository: "docker.io/venkatramireddyb/integration_db"
+      repository: "docker.io/venkatramireddyb/icops-integration-db"
       tag: develop-c30a1e01430d3d8feba233705ff41272e91e61fa
 # Container Configs
 image:
-   repository: "docker.io/venkatramireddyb/integration"
+   repository: "docker.io/venkatramireddyb/icops-integration"
    tag: develop-c30a1e01430d3d8feba233705ff41272e91e61fa
 replicas: "1"
 debugPort: 5005

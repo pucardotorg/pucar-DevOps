@@ -17,7 +17,7 @@ initContainers:
       - name: "OUTPUT_FILE_PATH"
         value: "/etc/zuul/routes.properties" 
       - name: "NAMESPACE"
-        value: "egov"         
+        value: {{ .Values.namespace | quote }}
       volumeMounts:
       - name: zuul-routes
         mountPath: /etc/zuul
@@ -54,7 +54,6 @@ eventlog-topic: "springGateway-event-log"
 eventlog-urls-whitelist: ""
 home-isolation-chatbot-router-enabled: false
 memory_limits: "768Mi"
-
 # Additional Container Envs
 env: |
   - name: URL_LISTS
@@ -147,5 +146,7 @@ env: |
         name: egov-service-host
         key: home-isolation-chatbot
   {{- end }}
-  - name: SPRING_REDIS_HOST     
-    value: "redis.backbone"
+  - name: SPRING_DATA_REDIS_HOST
+    value: {{ .Values.global.redis.host | quote }}
+  - name: SPRING_DATA_REDIS_PORT
+    value: {{ .Values.global.redis.port | quote }}

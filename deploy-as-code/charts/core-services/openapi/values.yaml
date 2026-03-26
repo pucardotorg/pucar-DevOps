@@ -24,7 +24,7 @@ initContainers:
       tag: develop-98c1ddfc97d51013937d7f324353ac0a564d6135
 # Container Configs
 image:
-  repository: "docker.io/venkatramireddyb/pucar_openapi"
+  repository: "docker.io/venkatramireddyb/openapi"
   tag: develop-98c1ddfc97d51013937d7f324353ac0a564d6135
   imagePullPolicy: Always
 replicas: "1"
@@ -64,11 +64,6 @@ env: |
       configMapKeyRef:
         key: individual
         name: egov-service-host
-  - name: KAFKA_CONFIG_BOOTSTRAP_SERVER_CONFIG
-    valueFrom:
-      configMapKeyRef:
-        key: kafka-brokers
-        name: egov-config
   - name: HEARING_SERVICE_HOST
     valueFrom:
       configMapKeyRef:

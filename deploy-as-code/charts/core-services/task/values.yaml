@@ -20,12 +20,12 @@ initContainers:
     enabled: true
     schemaTable: "task_service_schema"
     image:
-      repository: "docker.io/venkatramireddyb/pucar_task_db"
+      repository: "docker.io/venkatramireddyb/task-db"
       tag: develop-343e941fbddf13808cbb702a906ae96266613322
 
 # Container Configs
 image:
-  repository: "docker.io/venkatramireddyb/pucar_task"
+  repository: "docker.io/venkatramireddyb/task"
   tag: develop-343e941fbddf13808cbb702a906ae96266613322
   imagePullPolicy: Always
 replicas: "1"
@@ -65,21 +65,6 @@ env: |
       secretKeyRef:
         name: db
         key: password
-  - name: SPRING_DATASOURCE_URL
-    valueFrom:
-      configMapKeyRef:
-        name: egov-config
-        key: db-url
-  - name: SPRING_DATASOURCE_USERNAME
-    valueFrom:
-      secretKeyRef:
-        name: db
-        key: username
-  - name: SPRING_DATASOURCE_PASSWORD
-    valueFrom:
-      secretKeyRef:
-        name: db
-        key: password
   - name: "SCHEMA_TABLE"
     value: "task_service_schema"
   - name: EGOV_IDGEN_HOST
@@ -113,8 +98,6 @@ env: |
     value: ""
   - name: EGOV_MDMS_SEARCH_ENDPOINT
     value: /egov-mdms-service/v1/_search
-  - name: SERVER_PORT
-    value: "8080"
   - name: SERVER_CONTEXT_PATH
     value: /task
   - name: EGOV_IDGEN_PATH
@@ -129,11 +112,6 @@ env: |
       configMapKeyRef:
         name: egov-service-host
         key: egov-workflow-v2
-  - name: KAFKA_CONFIG_BOOTSTRAP_SERVER_CONFIG
-    valueFrom:
-      configMapKeyRef:
-        key: kafka-brokers
-        name: egov-config
   - name: EGOV_URL_SHORTNER
     valueFrom:
       configMapKeyRef:

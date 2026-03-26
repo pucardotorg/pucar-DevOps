@@ -23,6 +23,26 @@ ingress:
       nginx.ingress.kubernetes.io/lua-resty-waf-score-threshold: "10"
       nginx.ingress.kubernetes.io/lua-resty-waf-allow-unknown-content-types: "true"
       nginx.ingress.kubernetes.io/lua-resty-waf-process-multipart-body: "false"              
+  nginxRateLimit:
+    enabled: false
+    rpm: "10000"
+    burstMultiplier: "1"
+    connections: "10"
+    annotations:
+
+hpacpu:
+  enabled: false
+hparam:
+  enabled: true
+hpa:
+  minReplicas: 1
+  maxReplicas: 5
+
+rateLimit:
+  enabled: true
+  gatewayBurstCapacity: "30"
+  gatewayKeyResolver: "userKeyResolver"
+  gatewayReplenishRate: "30"
 
 disableAnnotationTimestamp: "true"
 lokiEnabled: false
