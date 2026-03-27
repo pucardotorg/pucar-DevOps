@@ -1,0 +1,42 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: pucar-stg-core-services
+  namespace: openshift-gitops
+spec:
+  generators:
+    - git:
+        repoURL: https://github.com/pucardotorg/pucar-DevOps.git
+        revision: pucar-stg
+        directories:
+          - path: deploy-as-code/charts/core-services/*
+  template:
+    metadata:
+      name: 'staging-{{path.basename}}'
+    spec:
+      project: oncourts-project
+      source:
+        repoURL: https://github.com/pucardotorg/pucar-DevOps.git
+        targetRevision: pucar-stg
+        path: '{{path}}'
+        helm:
+          valueFiles:
+            - values.yaml
+            - ../../environments/pucar-stg.yaml
+            - ../../environments/pucar-stg-config.yaml
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: pucar-stg
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - ApplyOutOfSyncOnly=true
+          - ServerSideApply=true
+        retry:
+          limit: 100
+          backoff:
+            duration: 5s
+            factor: 2
+            maxDuration: 3m0s
