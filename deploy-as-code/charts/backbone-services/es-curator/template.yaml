@@ -1,0 +1,132 @@
+---
+# Source: es-curator/templates/configmap.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: es-curator-config
+  namespace: es-cluster-infra
+data:
+  action_file.yml: |-
+    ---
+    # Remember, leave a key empty if there is no value.  None will be a string,
+    # not a Python "NoneType"
+    #
+    # Also remember that all examples have 'disable_action' set to True.  If you
+    # want to use this action as a template, be sure to set this to False after
+    # copying it.
+    actions:
+      1:
+        action: delete_indices
+        description: "Clean up ES by deleting old jaeger data"
+        options:
+          timeout_override: 300
+          continue_if_exception: False
+          disable_action: ${JAEGER_CLEANUP_DISABLED:True}
+          ignore_empty_list: True
+        filters:
+        - filtertype: pattern
+          kind: regex
+          value: '^(jaeger-service-|jaeger-span-|jaeger-dependencies-).*$'   
+        - filtertype: age
+          source: creation_date
+          direction: older
+          unit: days
+          unit_count: ${RETAIN_JAEGER_DATA_IN_DAYS}           
+  config.yml: |-
+    ---
+    # Remember, leave a key empty if there is no value.  None will be a string,
+    # not a Python "NoneType"
+    client:
+      hosts:
+        - ${ES_CLIENT_HOST}
+      port: ${ES_CLIENT_PORT}
+      url_prefix:
+      use_ssl: False
+      certificate:
+      client_cert:
+      client_key:
+      ssl_no_validate: False
+      http_auth:
+      timeout: 30
+      master_only: False
+    logging:
+      loglevel: ${LOG_LEVEL:INFO}
+      logfile:
+      logformat: default
+      blacklist: ['elasticsearch', 'urllib3']
+---
+# Source: es-curator/templates/cronjob.yaml
+# cronjob.yaml
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: es-curator
+  namespace: es-cluster-infra
+  labels:
+    app: es-curator      
+    group: es-curator-infra 
+spec:
+  concurrencyPolicy: Forbid
+  schedule: "45 18 * * *"
+  timeZone: "Asia/Kolkata"
+  jobTemplate:
+    spec: 
+      template:
+        metadata:  
+          annotations:
+            deployment-timestamp: "20260327124808"    
+          labels:
+            app: es-curator      
+            group: es-curator-infra              
+        spec:     
+          volumes:
+            - name: config-volume
+              configMap:
+                name: es-curator-config
+                         
+          containers:            
+          - name: es-curator
+            image: bobrik/curator:5.6.0
+            imagePullPolicy: IfNotPresent            
+            args:
+            - --config
+            - /etc/config/config.yml
+            - /etc/config/action_file.yml
+            ports:
+              - name: http
+                containerPort: 8080
+                protocol: TCP
+            volumeMounts:
+              - mountPath: /etc/config
+                name: config-volume         
+                                       
+            env:
+              - name: SERVER_PORT
+                value: "8080"
+              - name: JAVA_OPTS
+                value: "-Xmx256m -Xms256m"
+              - name: ES_CLIENT_HOST
+                valueFrom:
+                  configMapKeyRef:
+                    name: egov-config
+                    key: es-infra-host    
+              - name: ES_CLIENT_PORT
+                value: "9200"
+              - name: LOG_LEVEL
+                value: "DEBUG"                  
+              - name: LOGS_CLEANUP_DISABLED
+                value: "False"
+              - name: RETAIN_LOGS_IN_DAYS
+                value: "7"     
+              - name: JAEGER_CLEANUP_DISABLED
+                value: "False"
+              - name: RETAIN_JAEGER_DATA_IN_DAYS
+                value: "30"       
+                                                   
+            resources:
+              requests:
+                memory: "384Mi"
+              limits:
+                memory: "384Mi"
+                           
+          restartPolicy: OnFailure
