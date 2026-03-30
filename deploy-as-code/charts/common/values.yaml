@@ -383,6 +383,7 @@ cron:
   namespace: egov
   concurrencyPolicy: Forbid
   restartPolicy: OnFailure
+  timezone: "Asia/Kolkata"
   httpPort: 8080
   ## Additional sidecar containers
   extraContainers: |
