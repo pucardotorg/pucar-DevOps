@@ -931,8 +931,8 @@ ocr-service:
     gatewayReplenishRate: "30"
 oncourts-website:
   image:
-    repository: docker.io/venkatramireddyb/oncourts-landing-page
-    tag: sdc-uat-d3dfcd8ddd6a9e618208704404a675af1590b8bc
+    repository: docker.io/venkatramireddyb/oncourts-website
+    tag: sdc-uat-82e2b125e90bd61b30181d4a1adf5c949f8dfc54
   ingress:
     nginxRateLimit:
       enabled: true
