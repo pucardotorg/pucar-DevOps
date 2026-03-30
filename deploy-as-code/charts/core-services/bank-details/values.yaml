@@ -10,6 +10,7 @@ ingress:
   context: "bank-details"
 
 lokiEnabled: true
+tracing-enabled: true
 
 healthChecks:
   enabled: true

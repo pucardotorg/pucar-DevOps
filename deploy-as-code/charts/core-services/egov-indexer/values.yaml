@@ -9,6 +9,9 @@ ingress:
   zuul: true
   context: "egov-indexer"
 
+lokiEnabled: true
+tracing-enabled: true
+
 # Init Containers Configs
 initContainers:
   dbMigration:
@@ -32,7 +35,6 @@ healthChecks:
   livenessProbePath: "/egov-indexer/health"
   readinessProbePath: "/egov-indexer/health"
 appType: "java-spring"
-tracing-enabled: true
 egov-indexer-yaml-repo-path: "file:///work-dir/kerala-configs/egov-indexer/advocate-clerk-indexer.yml,file:///work-dir/kerala-configs/egov-indexer/advocate-indexer.yml,file:///work-dir/kerala-configs/egov-indexer/case-indexer.yml"
 heap: "-Xmx192m -Xms192m"
 indexer-host: "egov-indexer"

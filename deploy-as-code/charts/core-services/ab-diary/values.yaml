@@ -9,6 +9,7 @@ ingress:
   enabled: true
   context: "ab-diary"
 
+tracing-enabled: true
 lokiEnabled: true
 
 # Init Containers Configs

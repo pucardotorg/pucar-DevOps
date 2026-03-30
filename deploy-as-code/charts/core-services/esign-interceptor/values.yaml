@@ -9,6 +9,7 @@ ingress:
   context: "esign-interceptor"
 
 lokiEnabled: true
+tracing-enabled: true
 
 # Init Containers Configs
 
@@ -49,5 +50,5 @@ env: |
   - name: DRISHTI_ESIGN_REDIRECT_URL
     valueFrom:
       configMapKeyRef:
-        key: dristi-e-sign
+        key: domain-url
         name: egov-config

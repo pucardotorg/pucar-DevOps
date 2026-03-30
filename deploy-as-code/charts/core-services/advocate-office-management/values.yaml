@@ -9,6 +9,7 @@ ingress:
   enabled: true
   context: "advocate-office-management"
 
+tracing-enabled: true
 lokiEnabled: true
 
 # Init Containers Configs
@@ -26,6 +27,7 @@ image:
   tag: main-eac2161dde59072e91b142be82e47dc9df110c4f
   imagePullPolicy: Always
 replicas: "1"
+debugPort: 5005
 httpPort: 8080
 appType: "java-spring"
 heap: "-Xmx256m -Xms256m"

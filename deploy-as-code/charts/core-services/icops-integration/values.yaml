@@ -14,6 +14,7 @@ healthChecks:
  readinessProbePath: "/kerala-icops/health"
 
 lokiEnabled: true
+tracing-enabled: true
 
 initContainers:
   dbMigration:
@@ -27,6 +28,7 @@ image:
    repository: "docker.io/venkatramireddyb/icops-integration"
    tag: develop-c30a1e01430d3d8feba233705ff41272e91e61fa
 replicas: "1"
+debugPort: 5005
 
 env: |
   - name: TOMCAT_MAX_HTTP_POST_SIZE

@@ -9,7 +9,7 @@ ingress:
   context: "openapi"
 
 lokiEnabled: true
-
+tracing-enabled: true
 
 healthChecks:
   enabled: true

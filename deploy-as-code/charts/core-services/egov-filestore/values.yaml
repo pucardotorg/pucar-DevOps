@@ -10,15 +10,16 @@ initContainers:
     schemaTable: "egov_filestore_schema"
     image:
       repository: "docker.io/venkatramireddyb/egov-filestore-db"
-      tag: develop-7a3a056f321a36c205fc30a5371370945d29ccbd
+      tag: main-98ec8dc97569afa6e1e52c0b43a95d596c9dd1d3
+
+lokiEnabled: true
+tracing-enabled: true
 
 # Ingress Configs
 ingress:
   enabled: true
   zuul: true
   context: "filestore"
-
-debugPort: 5005
 
 # Container Configs
 image:
@@ -30,7 +31,6 @@ healthChecks:
   livenessProbePath: "/filestore/health"
   readinessProbePath: "/filestore/health"
 appType: "java-spring"
-tracing-enabled: true
 is-bucket-fixed: "true"
 #fixed-bucketname: "unified-dev-bucket-s3"
 heap: "-Xmx1g -Xms1g"
