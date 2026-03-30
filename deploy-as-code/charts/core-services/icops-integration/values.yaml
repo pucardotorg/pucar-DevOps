@@ -115,6 +115,7 @@ env: |
       configMapKeyRef:
         key: egov-oauth-url
         name: egov-service-host
-
+  - name: SPRING_FLYWAY_ENABLED
+    value: "false"
 
 
