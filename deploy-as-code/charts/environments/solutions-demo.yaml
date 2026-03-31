@@ -269,6 +269,7 @@ oncourts-website:
          var benchId = "BENCH_ID";
          var judgeId = "JUDGE_ID";
          var courtId = "KLKM52";
+         var esignUrl = "https://es-staging.cdac.in/esignlevel2/2.1/form/signdoc"
          var judgeName = "Smt. Soorya S Sukumaran";
          var WEBSOCKET_ADDRESS = "wss://dristi-kerala-qa.pucar.org/transcription"
          var invalidEmployeeRoles = ["CBO_ADMIN", "ORG_ADMIN", "ORG_STAFF", "SYSTEM"];
@@ -278,6 +279,8 @@ oncourts-website:
          var getConfig = function (key) {
              if (key === "STATE_LEVEL_TENANT_ID") {
                return stateTenantId;
+             } else if (key === "ESIGN_URL") {
+               return esignUrl;
              } else if (key === "GMAPS_API_KEY") {
                return gmaps_api_key;
              } else if (key === "ENABLE_SINGLEINSTANCE") {
