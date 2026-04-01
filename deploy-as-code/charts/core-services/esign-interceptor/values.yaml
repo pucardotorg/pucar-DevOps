@@ -52,3 +52,8 @@ env: |
       configMapKeyRef:
         key: domain-url
         name: egov-config
+  - name: DRISHTI_OATH_HOST
+    valueFrom:
+      configMapKeyRef:
+        key: egov-user
+        name: egov-service-host
