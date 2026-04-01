@@ -56,7 +56,7 @@ env: |
       configMapKeyRef:
         key: esign-interceptor
         name: egov-config
-  - name: ESIGN_ASP_ID
+  - name: ESING_ASP_ID
     valueFrom:
       configMapKeyRef:
         key: esign-id
