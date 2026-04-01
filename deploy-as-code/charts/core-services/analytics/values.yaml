@@ -68,11 +68,6 @@ env: |
         key: egov-localization
   - name: EGOV_LOCALIZATION_SEARCH_ENDPOINT
     value: /_search
-  - name: KAFKA_CONFIG_BOOTSTRAP_SERVER_CONFIG
-    valueFrom:
-      configMapKeyRef:
-        key: kafka-brokers
-        name: egov-config
   - name: EGOV_INDEXER_ES_HOST_NAME
     valueFrom:
       configMapKeyRef:
