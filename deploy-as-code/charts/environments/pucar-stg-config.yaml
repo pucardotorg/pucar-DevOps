@@ -931,8 +931,8 @@ ocr-service:
     gatewayReplenishRate: "30"
 oncourts-website:
   image:
-    repository: docker.io/venkatramireddyb/oncourts-website
-    tag: sdc-uat-82e2b125e90bd61b30181d4a1adf5c949f8dfc54
+    repository: registry-backbone-prod.apps.ocp2.ksdc.in/oncourts-website
+    tag: gogs-v1.17.1
   ingress:
     nginxRateLimit:
       enabled: true
