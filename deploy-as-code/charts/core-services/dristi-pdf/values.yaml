@@ -113,7 +113,7 @@ env: |
         name: egov-service-host
         key: egov-localization
   - name:  EGOV_FILESTORE_SERVICE_HOST
-    value: "http://egov-filestore.egov:8080"
+    value: "http://egov-filestore.pucar-stg:8080"
   - name: JUDGE_NAME
     valueFrom:
       configMapKeyRef:
