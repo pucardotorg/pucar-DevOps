@@ -429,3 +429,9 @@ pdf-service:
 prometheus-kafka-exporter:
   namespace: backbone-stg
   serviceAccount: backbone-sa
+
+icops-integration:
+  hostAliases: |
+    - ip: "10.2.95.242"
+      hostnames:
+      - "staging-icops.keralapolice.gov.in"

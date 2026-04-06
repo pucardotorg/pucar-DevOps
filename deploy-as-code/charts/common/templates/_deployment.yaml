@@ -53,6 +53,10 @@ spec:
         {{- tpl . $ | nindent 6 }}
       {{- end }}     
     {{- end }}
+    {{- if .Values.hostAliases }}
+      hostAliases:
+      {{- tpl .Values.hostAliases . | nindent 8 }}
+    {{- end }}
       imagePullSecrets:
       - name: acr-secret
     {{- if .Values.affinity.preferSpreadAcrossAZ }}
