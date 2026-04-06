@@ -30,7 +30,7 @@ image:
   imagePullPolicy: Always
 replicas: "1"
 httpPort: 8080
-debug: 5005
+debugPort: 5005
 appType: "java-spring"
 heap: "-Xmx256m -Xms256m"
 java-args: "-Dspring.profiles.active=monitoring"
