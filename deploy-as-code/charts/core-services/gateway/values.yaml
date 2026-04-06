@@ -42,7 +42,7 @@ healthChecks:
 custom-filter-property: "false"
 posthook-config: ""
 prehook-config: ""
-heap: "-Xmx512m -Xms512m"
+heap: "-Xmx1024m -Xms1024m"
 appType: "java-spring"
 server-tomcat-max-threads: "350"
 server-tomcat-max-connections: "1500"
@@ -53,7 +53,7 @@ eventlog-enabled: "false"
 eventlog-topic: "springGateway-event-log"
 eventlog-urls-whitelist: ""
 home-isolation-chatbot-router-enabled: false
-memory_limits: "768Mi"
+memory_limits: "1536Mi"
 # Additional Container Envs
 env: |
   - name: URL_LISTS
