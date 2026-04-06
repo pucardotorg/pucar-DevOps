@@ -116,7 +116,7 @@ env: |
   - name: DOMAIN_URL
     valueFrom:
       configMapKeyRef:
-        key: egov-services
+        key: domain-url
         name: egov-config
   - name: EGOV_FILESTORE_HOST
     valueFrom:
