@@ -6,29 +6,22 @@ labels:
 # Ingress Configs
 ingress:
   enabled: true
-  context: "digit-ui"
+  context: "ui"
 
 # Init Containers Configs
 initContainers: {}
 
 # Container Configs
 image:
-  repository: "pucarsolutionsdev.azurecr.io/digit-ui"
+  repository: "docker.io/venkatramireddyb/digit-ui"
   tag: v1.0.0-d6576c3d536fa779c0ec2e0341d788821550841f
 replicas: "1"
 httpPort: 80
 healthChecks:
   enabled: true
-  livenessProbePath: "/digit-ui/"
-  readinessProbePath: "/digit-ui/"
+  livenessProbePath: "/ui/"
+  readinessProbePath: "/ui/"
 
-env: |
-  - name: REACT_APP_ESIGN_FILESTORE_ID
-    valueFrom:
-      configMapKeyRef:
-        key: esign-filestore-id
-        name: egov-config
-    
 extraVolumes: |
   - name: js-injection
     configMap:

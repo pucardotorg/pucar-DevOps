@@ -2,7 +2,7 @@
 # This is a YAML-formatted file.
 # Declare name/value pairs to be passed into your templates.
 global:
-    containerRegistry: egovio
+    containerRegistry: docker.io/venkatramireddyb
 
 replicas: 1
 httpPort: 8080
@@ -27,6 +27,9 @@ ingress:
       nginx.ingress.kubernetes.io/lua-resty-waf-allow-unknown-content-types: "true"
       nginx.ingress.kubernetes.io/lua-resty-waf-process-multipart-body: "false"              
 
+disableAnnotationTimestamp: "true"
+lokiEnabled: false
+redisEnabled: false
 image:
   pullPolicy: IfNotPresent   
 
@@ -44,19 +47,31 @@ initContainers:
           valueFrom: 
             configMapKeyRef: 
               name: egov-config
+          {{- if eq .Values.db "njdg" }}
+              key: njdg-db-url
+          {{- else }}
               key: db-url
+          {{- end }}
         - name: "SCHEMA_TABLE"
           value: {{ .Values.initContainers.dbMigration.schemaTable | quote }}              
         - name: "FLYWAY_USER"
           valueFrom: 
             secretKeyRef: 
                 name: db
+          {{- if eq .Values.db "njdg" }}
+                key: njdg-username
+          {{- else }}
                 key: flyway-username
+          {{- end }}
         - name: "FLYWAY_PASSWORD"
           valueFrom:
             secretKeyRef: 
                 name: db
+          {{- if eq .Values.db "njdg" }}
+                key: njdg-password
+          {{- else }}
                 key: flyway-password
+          {{- end }}
         - name: "FLYWAY_LOCATIONS"
           valueFrom: 
             configMapKeyRef: 
@@ -114,20 +129,26 @@ lifecycle:
 
 memory_limits: "512Mi"
 resources: |
-  {{- if eq .Values.appType "java-spring" -}}
+  {{- if .Values.memory_limits -}}
   requests:
+    {{- if .Values.memory_requests }}
+    memory: {{ .Values.memory_requests | quote }}
+    {{- else if .Values.memory_limits }}
     memory: {{ .Values.memory_limits | quote }}
+    {{- end }}
   limits:
+    {{- if .Values.cpu_limits }}
+    cpu: {{ .Values.cpu_limits | quote }}
+    {{- end }}  
+    {{- if .Values.memory_limits }}
     memory: {{ .Values.memory_limits | quote }}
+    {{- else if .Values.memory_requests }}
+    memory: {{ .Values.memory_requests | quote }}
+    {{- end }}
   {{- end -}}
 ## Allows specification of additional environment variables
 extraEnv:
   java: |
-      - name: SPRING_DATASOURCE_URL
-        valueFrom:
-          configMapKeyRef:
-            name: egov-config
-            key: db-url
       - name: FLYWAY_ENABLED
         value: "false"      
       - name: SPRING_FLYWAY_ENABLED
@@ -143,17 +164,38 @@ extraEnv:
         valueFrom:
           configMapKeyRef:
             name: egov-config
+      {{- if eq .Values.db "njdg" }}
+            key: njdg-db-url
+      {{- else }}
             key: db-url
+      {{- end }}
+      - name: SPRING_DATASOURCE_URL
+        valueFrom:
+          configMapKeyRef:
+            name: egov-config
+      {{- if eq .Values.db "njdg" }}
+            key: njdg-db-url
+      {{- else }}
+            key: db-url
+      {{- end }}
       - name: SPRING_DATASOURCE_USERNAME
         valueFrom:
           secretKeyRef:
             name: db
+      {{- if eq .Values.db "njdg" }}
+            key: njdg-username
+      {{- else }}
             key: username
+      {{- end }}
       - name: SPRING_DATASOURCE_PASSWORD
         valueFrom:
           secretKeyRef:
             name: db
+      {{- if eq .Values.db "njdg" }}
+            key: njdg-password
+      {{- else }}
             key: password
+      {{- end }}
       - name: SPRING_DATASOURCE_TOMCAT_INITIAL_SIZE
         valueFrom:
           configMapKeyRef:
@@ -194,7 +236,43 @@ extraEnv:
           configMapKeyRef:
             name: egov-config
             key: spring-datasource-tomcat-max-active 
-      {{- end }}           
+      {{- end }}
+      - name: SPRING_DATASOURCE_HIKARI_MINIMUM_IDLE
+      {{- if index .Values "spring-datasource-hikari-minimum-idle" }}
+          value: {{ index .Values "spring-datasource-hikari-minimum-idle" | quote }}
+      {{- else }}
+        valueFrom:
+          configMapKeyRef:
+            name: egov-config
+            key: spring-datasource-hikari-minimum-idle
+      {{- end }}
+      - name: SPRING_DATASOURCE_HIKARI_IDLE_TIMEOUT
+      {{- if index .Values "spring-datasource-hikari-idle-timeout" }}
+          value: {{ index .Values "spring-datasource-hikari-idle-timeout" | quote }}
+      {{- else }}
+        valueFrom:
+          configMapKeyRef:
+            name: egov-config
+            key: spring-datasource-hikari-idle-timeout
+      {{- end }}
+      - name: SPRING_DATASOURCE_HIKARI_MAX_LIFETIME
+      {{- if index .Values "spring-datasource-hikari-max-lifetime" }}
+          value: {{ index .Values "spring-datasource-hikari-max-lifetime" | quote }}
+      {{- else }}
+        valueFrom:
+          configMapKeyRef:
+            name: egov-config
+            key: spring-datasource-hikari-max-lifetime
+      {{- end }}
+      - name: SPRING_DATASOURCE_HIKARI_CONNECTION_TIMEOUT
+      {{- if index .Values "spring-datasource-hikari-connection-timeout" }}
+          value: {{ index .Values "spring-datasource-hikari-connection-timeout" | quote }}
+      {{- else }}
+        valueFrom:
+          configMapKeyRef:
+            name: egov-config
+            key: spring-datasource-hikari-connection-timeout
+      {{- end }}         
       - name: KAFKA_CONFIG_BOOTSTRAP_SERVER_CONFIG
         valueFrom:
           configMapKeyRef:
@@ -221,26 +299,39 @@ extraEnv:
         value: {{ index .Values "kafka.topic.audit" | quote }}
       {{- else }}
         value: "enc-user-audit-data"
-      {{- end }}           
-        
+      {{- end }}  
+      {{- if and .Values.lokiEnabled (or (index .Values "loki-url") (and .Values.loki .Values.loki.url)) }}
+      - name: LOGGING_LOKI_ENABLED
+        value: "true"
+      - name: LOGGING_LOKI_URL
+        value: {{ if index .Values "loki-url" }}{{ index .Values "loki-url" }}{{ else }}{{ .Values.loki.url }}{{ end }}
+      - name: LOGGING_LOKI_APP
+        valueFrom:
+          fieldRef:
+            fieldPath: metadata.name
+      - name: LOGGING_LOKI_ENVIRONMENT
+        value: {{ .Values.global.domain }}
+      - name: LOGGING_LEVEL_ROOT
+        value: INFO
+      {{- end }}
+      {{- if .Values.redisEnabled }}
+      - name: SPRING_REDIS_HOST
+        value: {{ .Values.global.redis.host | quote }}
+      - name: SPRING_REDIS_PORT
+        value: {{ .Values.global.redis.port | quote }}
+      {{- end }}
             
             
             
   jaeger: |             
-      - name: JAEGER_SERVICE_NAME
+      - name: OTEL_SERVICE_NAME
         value: {{ template "common.name" . }}
-      - name: JAEGER_SAMPLER_TYPE
-        value: remote
-      - name: JAEGER_AGENT_HOST
+      - name: OTEL_EXPORTER_OTLP_ENDPOINT
         valueFrom:
-          fieldRef:
-            fieldPath: status.hostIP
-      - name: JAEGER_AGENT_PORT
-        value: "6831"
-      - name: JAEGER_SAMPLER_MANAGER_HOST_PORT
-        value: "$(JAEGER_AGENT_HOST):5778"
-      - name: TRACER_OPENTRACING_ENABLED
-        value: "true"         
+          configMapKeyRef:
+            name: egov-service-host
+            key: otel-exporter-otlp-endpoint
+
 ## Additional init containers
 extraInitContainers: |
 

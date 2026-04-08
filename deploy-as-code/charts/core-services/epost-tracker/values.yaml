@@ -9,6 +9,8 @@ ingress:
   enabled: true
   context: "epost-tracker"
 
+lokiEnabled: true
+tracing-enabled: true
 
 # Init Containers Configs
 initContainers:
@@ -16,12 +18,12 @@ initContainers:
     enabled: true
     schemaTable: "epost_tracker_service_schema"
     image:
-      repository: "pucarsolutionsdev.azurecr.io/epost-tracker-db"
+      repository: "docker.io/venkatramireddyb/epost-tracker-db"
       tag: v1.0.0-b5c52aefbf9b7ccf296854f1b0393a598b757e78
 
 # Container Configs
 image:
-  repository: "pucarsolutionsdev.azurecr.io/epost-tracker"
+  repository: "docker.io/venkatramireddyb/epost-tracker"
   tag: v1.0.0-b5c52aefbf9b7ccf296854f1b0393a598b757e78
   imagePullPolicy: Always
 replicas: "1"
@@ -34,6 +36,11 @@ httpPort: 8080
 #  readinessProbePath: "/advocate/"
 
 env: |
+  - name: EGOV_MDMS_HOST
+    valueFrom:
+      configMapKeyRef:
+        key: egov-mdms-service
+        name: egov-service-host
   - name: SPRING_FLYWAY_URL
     valueFrom:
       configMapKeyRef:
@@ -92,4 +99,20 @@ env: |
       configMapKeyRef:
         name: egov-service-host
         key: summons
-
+  - name: GET_DATA_BASED_USER_LOGGED_IN
+    value: "true"
+  - name: EGOV_USER_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: egov-user
+  - name: EGOV_PDF_SERVICE_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: pdf-service
+  - name: EGOV_FILESTORE_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: egov-filestore

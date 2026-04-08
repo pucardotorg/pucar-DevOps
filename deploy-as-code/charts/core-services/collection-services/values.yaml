@@ -9,6 +9,8 @@ ingress:
   enabled: true
   context: "collection-services"
 
+lokiEnabled: true
+tracing-enabled: true
 
 # Init Containers Configs
 initContainers:
@@ -16,12 +18,12 @@ initContainers:
     enabled: true
     schemaTable: "collection_services_schema"
     image:
-      repository: "pucarsolutionsdev.azurecr.io/pucar_collection_db"
+      repository: "docker.io/venkatramireddyb/pucar_collection_db"
       tag: v1.0.0-3345f6bb9536054a0050db6a05e88de50a1f6647
 
 # Container Configs
 image:
-  repository: "pucarsolutionsdev.azurecr.io/pucar_collection"
+  repository: "docker.io/venkatramireddyb/pucar_collection"
   tag: v1.0.0-3345f6bb9536054a0050db6a05e88de50a1f6647
   imagePullPolicy: Always
 replicas: "1"
@@ -38,26 +40,11 @@ env: |
     value: "8080"
   - name: JAVA_ARGS
     value: {{ index .Values "java-args" | quote }}
-  - name: SPRING_FLYWAY_URL
-    valueFrom:
-      configMapKeyRef:
-        key: db-url
-        name: egov-config
-  - name: SPRING_FLYWAY_USER
-    valueFrom:
-      secretKeyRef:
-        key: username
-        name: db
-  - name: SPRING_FLYWAY_PASSWORD
-    valueFrom:
-      secretKeyRef:
-        name: db
-        key: password
   - name: SPRING_DATASOURCE_URL
     valueFrom:
       configMapKeyRef:
-        name: egov-config
         key: db-url
+        name: egov-config
   - name: SPRING_DATASOURCE_USERNAME
     valueFrom:
       secretKeyRef:
@@ -99,8 +86,6 @@ env: |
     value: /localization/messages/v1/_search
   - name: EGOV_MDMS_SEARCH_ENDPOINT
     value: /egov-mdms-service/v1/_search
-  - name: SERVER_PORT
-    value: "8080"
   - name: SERVER_CONTEXT_PATH
     value: /collection-services
   - name: EGOV_IDGEN_PATH
@@ -115,11 +100,6 @@ env: |
       configMapKeyRef:
         name: egov-service-host
         key: egov-workflow-v2
-  - name: KAFKA_CONFIG_BOOTSTRAP_SERVER_CONFIG
-    valueFrom:
-      configMapKeyRef:
-        key: kafka-brokers
-        name: egov-config
   - name: EGOV_SERVICES_BILLING_SERVICE_HOSTNAME
     valueFrom:
       configMapKeyRef:

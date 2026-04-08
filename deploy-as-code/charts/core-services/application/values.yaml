@@ -9,6 +9,8 @@ ingress:
   enabled: true
   context: "application"
 
+lokiEnabled: true
+tracing-enabled: true
 
 # Init Containers Configs
 initContainers:
@@ -16,12 +18,12 @@ initContainers:
     enabled: true
     schemaTable: "application_service_schema"
     image:
-      repository: "pucarsolutionsdev.azurecr.io/pucar_application_db"
+      repository: "docker.io/venkatramireddyb/pucar_application_db"
       tag: v1.0.0-4ed1615e626ac769c5fde46cda23b079e755ce67
 
 # Container Configs
 image:
-  repository: "pucarsolutionsdev.azurecr.io/pucar_application"
+  repository: "docker.io/venkatramireddyb/pucar_application"
   tag: v1.0.0-4ed1615e626ac769c5fde46cda23b079e755ce67
   imagePullPolicy: Always
 replicas: "1"
@@ -30,12 +32,12 @@ appType: "java-spring"
 heap: "-Xmx192m -Xms192m"
 java-args: "-Dspring.profiles.active=monitoring"
 memory_requests: 384Mi
+debugPort: 5005
 
-
-#healthChecks:
-#  enabled: true
-#  livenessProbePath: "/application/"
-#  readinessProbePath: "/application/"
+healthChecks:
+  enabled: true
+  livenessProbePath: "/application/health"
+  readinessProbePath: "/application/health"
 
 env: |
   - name: JAVA_OPTS
@@ -146,3 +148,15 @@ env: |
     value: egov.collection.payment-create
   - name: SPRING_KAFKA_CONSUMER_GROUP_ID
     value: application
+  - name: EGOV_IDGEN_CMP_TENANT_OVERRIDE_YEAR
+    value: "2025"
+  - name: EGOV_EVIDENCE_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: evidence
+  - name:  DRISTI_ADVOCATE_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: advocate

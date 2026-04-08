@@ -9,23 +9,26 @@ ingress:
   enabled: true
   context: "analytics"
 
+tracing-enabled: true
+lokiEnabled: true
 
 # Init Containers Configs
-
+healthChecks:
+  enabled: true
+  livenessProbePath: "/analytics/health"
+  readinessProbePath: "/analytics/health"
 
 # Container Configs
 image:
-  repository: "pucarsolutionsdev.azurecr.io/pucar_analytics"
+  repository: "docker.io/venkatramireddyb/analytics"
   tag: v1.0.0-78a6b1093a50e53a427de8e49b404f220d905739
   imagePullPolicy: Always
 replicas: "1"
 httpPort: 8080
 appType: "java-spring"
 java-args: "-Dspring.profiles.active=monitoring"
-heap: "-Xmx256m -Xms256m -agentlib:jdwp=transport=dt_socket,address=*:8000,server=y,suspend=n"
-debugPort: 8000
-remote_debug:
-  enabled: true
+heap: "-Xmx256m -Xms256m"
+debugPort: 5005
 memory_limits: 640Mi
 env: |
   - name: JAVA_OPTS
@@ -138,6 +141,29 @@ env: |
         name: egov-service-host
         key: billing-service
   - name: EGOV_TASK_BUSINESS_SERVICES
-    value: "task-default,task-bail,task-summons,task-warrant,task-notice"
+    value: "task-default,task-bail,task-summons,task-warrant,task-notice,task-join-case,task-payment,task-generic,task-proclamation,task-attachment"
   - name: EGOV_APPLICATION_BUSINESS_SERVICES
-    value: "application-order-submission-default,application-order-submission-feedback,application-voluntary-submission"
+    value: "application-order-submission-default,application-order-submission-feedback,application-voluntary-submission,delay-condonation-submission,voluntary-application-submission-bail,voluntary-application-submission-bail-documents"
+  - name: EGOV_HRMS_SEARCH_ENDPOINT
+    value: /egov-hrms/employees/_search
+  - name: EGOV_HRMS_HOST
+    valueFrom:
+      configMapKeyRef:
+        key: egov-hrms
+        name: egov-service-host
+  - name: EGOV_USER_HOST
+    valueFrom:
+      configMapKeyRef:
+        key: egov-user
+        name: egov-service-host
+  - name: EGOV_EVIDENCE_SEARCH_ENDPOINT
+    value: /evidence/v1/_search
+  - name: DRISTI_TASK-MANAGEMENT_HOST
+    valueFrom:
+      configMapKeyRef:
+        key: task-management
+        name: egov-service-host
+  - name: SPRING_REDIS_HOST
+    value: "redis.backbone"
+  - name: SPRING_REDIS_PORT
+    value: "6379"

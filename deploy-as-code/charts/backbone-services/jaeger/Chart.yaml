@@ -1,0 +1,10 @@
+apiVersion: v2
+appVersion: 1.18.0
+dependencies:
+- name: common
+  repository: file://../../common
+  version: 0.0.5
+description: A Jaeger Helm chart for Kubernetes
+name: jaeger
+type: application
+version: 0.34.0

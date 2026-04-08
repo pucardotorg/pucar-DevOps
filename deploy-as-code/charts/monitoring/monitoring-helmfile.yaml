@@ -32,11 +32,11 @@ releases:
   values:
   - ./values/prometheus.yaml
 
-- name: jaeger-tracing
+- name: jaeger
   installed: true
-  namespace: backbone
+  namespace: monitoring
   chart: jaegertracing/jaeger
-  version: 1.0.0 
+  version: 1.0.0
   values:
   - ./values/jaeger.yaml
   - storage:

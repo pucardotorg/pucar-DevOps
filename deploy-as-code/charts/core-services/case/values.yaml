@@ -9,6 +9,8 @@ ingress:
   enabled: true
   context: "case"
 
+lokiEnabled: true
+tracing-enabled: true
 
 # Init Containers Configs
 initContainers:
@@ -16,32 +18,27 @@ initContainers:
     enabled: true
     schemaTable: "case_service_schema"
     image:
-      repository: "pucarsolutionsdev.azurecr.io/case_db"
+      repository: "docker.io/venkatramireddyb/case_db"
       tag: v1.0.0-66cf9764c39721c25d36ee62799cec6953427d9e
 
 # Container Configs
 image:
-  repository: "pucarsolutionsdev.azurecr.io/pucar_case"
+  repository: "docker.io/venkatramireddyb/pucar_case"
   tag: v1.0.0-66cf9764c39721c25d36ee62799cec6953427d9e
   imagePullPolicy: Always
 replicas: "1"
 httpPort: 8080
 appType: "java-spring"
-heap: "-Xmx1g -Xms1g -agentlib:jdwp=transport=dt_socket,address=*:8000,server=y,suspend=n"
-debugPort: 8000
-remote_debug:
-  enabled: true
+heap: "-Xmx1536m -Xms1536m"
+debugPort: 5005
 java-args: "-Dspring.profiles.active=monitoring"
 memory_requests: 2Gi
 memory_limits: 2Gi
 
-
-
-
-#healthChecks:
-#  enabled: true
-#  livenessProbePath: "/case/"
-#  readinessProbePath: "/case/"
+healthChecks:
+  enabled: true
+  livenessProbePath: "/case/health"
+  readinessProbePath: "/case/health"
 
 env: |
   - name: NOTIFICATION_SMS_ENABLED
@@ -166,6 +163,11 @@ env: |
         key: billing-service
   - name: KAFKA_TOPICS_RECEIPT_CREATE
     value: egov.collection.payment-create
+  - name: PUCAR_LOCK_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: lock-service
   - name: EGOV_ENC_HOST
     valueFrom:
       configMapKeyRef:
@@ -176,4 +178,58 @@ env: |
   - name: SPRING_REDIS_HOST
     value: "redis.backbone"
   - name: SPRING_REDIS_PORT
+    value: "6379"
+  - name: EGOV_ENC_MDMS_SECURITY_POLICY_CASE_DECRYPT_SELF
+    value: CaseDecryptSelfNew
+  - name: EGOV_ENC_MDMS_SECURITY_POLICY_COURT_CASE
+    value: CourtCaseNew
+  - name: EGOV_ENC_MDMS_SECURITY_POLICY_CASE_DECRYPT_SELF_NEW
+    value: CaseDecryptSelfNew
+  - name: EGOV_ENC_MDMS_SECURITY_POLICY_COURT_CASE_NEW
+    value: CourtCaseNew
+  - name: EGOV_TASK_SERVICE_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: task
+  - name: EGOV_HEARING_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: hearing
+  - name: EGOV_EVIDENCE_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: evidence
+  - name: EGOV_PAYMENT_CALCULATOR_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: payment-calculator
+  - name: EGOV_ETREASURY_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: etreasury
+  - name: EGOV_SMS_NOTIFICATION_CASE_JUDGE_REGISTER_TEMPLATE_ID
+    value: "1107174288665718004"
+  - name: EGOV_ORDER_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: order
+  - name: EGOV_INBOX_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: inbox
+  - name: DRISTI_ADVOCATE_OFFICE_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: advocate-office-management
+  - name: SPRING_DATA_REDIS_HOST
+    value: "redis.backbone"
+  - name: SPRING_DATA_REDIS_PORT
     value: "6379"

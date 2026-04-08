@@ -6,13 +6,14 @@ labels:
 # Init Containers Configs
 initContainers: {}
 
+lokiEnabled: true
+tracing-enabled: true
 # Container Configs
 image:
   repository: "egov-notification-mail"
   tag: core-2.9-lts-mvn-check-c33cfe45ab-4
 replicas: "1"
 appType: "java-spring"
-tracing-enabled: true
 mail-port: 587
 username: "egov-testing@egovernments.org"
 heap: "-Xmx192m -Xms192m"
@@ -61,3 +62,8 @@ env: |
       configMapKeyRef:
         name: egov-config
         key: egov-state-level-tenant-id        
+  - name: EGOV_MDMS_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: egov-mdms-service

@@ -10,6 +10,9 @@ ingress:
   zuul: true
   context: "sunbirdrc-credential-service"
 
+lokiEnabled: true
+tracing-enabled: true
+
 initContainers:
   dbMigration:
     enabled: true
@@ -27,7 +30,6 @@ healthChecks:
   livenessProbePath: "/sunbirdrc-credential-service/health"
   readinessProbePath: "/sunbirdrc-credential-service/health"
 appType: "java-spring"
-tracing-enabled: true
 heap: "-Xmx512m -Xms512m"
 java-args: "-Dspring.profiles.active=monitoring"
 

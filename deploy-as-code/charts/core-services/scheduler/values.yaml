@@ -9,32 +9,50 @@ ingress:
   zuul: true
   context: "scheduler"
 
+lokiEnabled: true
+tracing-enabled: true
+redisEnabled: true
+
+healthChecks:
+ enabled: true
+ livenessProbePath: "/scheduler/health"
+ readinessProbePath: "/scheduler/health"
+
 # Init Containers Configs
 initContainers:
   dbMigration:
     enabled: true
     schemaTable: "scheduler_schema"
     image:
-      repository: "pucarsolutionsdev.azurecr.io/scheduler-svc_db"
+      repository: "docker.io/venkatramireddyb/scheduler-svc_db"
       tag: v1.0.0-471b0d2c2f192d122797c17ef344943f7960fb72
 
 
 # Container Configs
 image:
-  repository: "pucarsolutionsdev.azurecr.io/scheduler-svc"
+  repository: "docker.io/venkatramireddyb/scheduler-svc"
   tag: v1.0.0-471b0d2c2f192d122797c17ef344943f7960fb72
 replicas: "1"
+
+appType: "java-spring"
+heap: "-Xmx64m -Xms64m"
+java-args: "-Dspring.profiles.active=monitoring"
 healthChecks:
   enabled: true
   livenessProbePath: "/scheduler/health"
   readinessProbePath: "/scheduler/health"
-appType: "java-spring"
-tracing-enabled: true
-heap: "-Xmx64m -Xms64m"
-java-args: "-Dspring.profiles.active=monitoring"
-
+debugPort: 5005
 # Additional Container Envs
 env: |
+  - name: email.cause.list.recipients
+    value: yoyogogeta@gmail.com
+  - name: MANAGEMENT_HEALTH_REDIS_ENABLED
+    value: "false"
+  - name: JUDGE_NAME
+    valueFrom:
+      configMapKeyRef:
+        key: judge-name
+        name: egov-config
   - name: SERVER_PORT
     value: "8080"
   - name: COURT_ENABLED
@@ -131,9 +149,33 @@ env: |
       configMapKeyRef:
         name: egov-service-host
         key: egov-filestore
-  
-  
-  
-  
-  
-
+  - name: EGOV_INDIVIDUAL_HOST
+    valueFrom:
+      configMapKeyRef:
+        key: individual
+        name: egov-service-host
+  - name: EGOV_LOCALIZATION_HOST
+    valueFrom:
+      configMapKeyRef:
+        key: egov-localization
+        name: egov-service-host
+  - name: EGOV_INBOX_HOST
+    valueFrom:
+      configMapKeyRef:
+        key: inbox
+        name: egov-service-host  
+  - name: EGOV_INFRA_INDEXER_HOST
+    valueFrom:
+      configMapKeyRef:
+        key: es-indexer-host
+        name: egov-config
+  - name: EGOV_INDEXER_ES_USERNAME
+    valueFrom:
+      secretKeyRef:
+        name: elasticsearch-credentials
+        key: username
+  - name: EGOV_INDEXER_ES_PASSWORD
+    valueFrom:
+      secretKeyRef:
+        name: elasticsearch-credentials
+        key: password

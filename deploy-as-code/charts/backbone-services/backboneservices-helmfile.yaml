@@ -10,7 +10,6 @@ templates:
 values:
   - ../environments/{{ requiredEnv "HELMFILE_ENV" }}-secrets.yaml
   - ../environments/{{ requiredEnv "HELMFILE_ENV" }}.yaml
-
 commonLabels:
   deployment: "pucar"
 
@@ -23,93 +22,120 @@ releases:
   disableValidation: true
   values:
     - ./cert-manager/values.yaml
+##
+#- name: minio
+#  installed: true
+#  chart: ./minio
+#  version: 13.3.1
+#  <<: *default
+#  values:
+#    - ./minio/values.yaml
+#
+#- name: postgresql
+#  installed: true
+#  chart: ./postgresql
+#  version: 11.9.13
+#  <<: *default
+#  values:
+#    - ./postgresql/values.yaml
+#    - global:
+#        postgresql:
+#          auth:
+#            postgresPassword: {{ .Values.secrets.db.password | quote }}
+#- name: redis
+#  installed: true
+#  chart: ./redis
+#  version: 7.2.4
+#  <<: *default
+#  values:
+#    - ./redis/values.yaml
+##
+#- name: elasticsearch
+#  chart: ./elasticsearch
+#  version: 8.11.3
+#  <<: *default
+#  values:
+#    - ./elasticsearch/values.yaml
+#    - secret:
+#        password: {{ .Values.secrets.elasticsearch.password }}
+#
+  # - name: elasticsearch-data
+  #   chart: ./elasticsearch-data
+  #   version: 8.11.3
+  #   <<: *default
+  #   values:
+  #     - ./elasticsearch-data/elasticsearch-data-values.yaml
 
-- name: minio
-  installed: true
-  chart: ./minio
-  version: 13.3.1
-  <<: *default
-  values:
-    - ./minio/values.yaml
+  # - name: elasticsearch-master
+  #   chart: ./elasticsearch-master
+  #   version: 8.11.3
+  #   <<: *default
+  #   values:
+  #     - ./elasticsearch-master/elasticsearch-master-values.yaml
+##
+  # - name: kibana
+  #   chart: ./kibana
+  #   installed: true
+  #   version: 8.11.3
+  #   force: true
+  #   <<: *default
+  #   values:
+  #     - ./kibana/values.yaml
+  #   - ingress:
+  #       hosts:
+  #         - host: {{ .Values.global.domain }}
+  #           paths:
+  #             - path: /kibana
+  #       tls:
+  #         - secretName: {{ .Values.global.domain }}-tls-certs
+  #           hosts:
+  #             - {{ .Values.global.domain }}
 
-- name: postgresql
-  installed: true
-  chart: ./postgresql
-  version: 11.9.13
-  <<: *default
-  values:
-    - ./postgresql/values.yaml
-    - global:
-        postgresql:
-          auth:
-            postgresPassword: {{ .Values.secrets.db.password | quote }}
-- name: redis
-  installed: true
-  chart: ./redis
-  version: 7.2.4
-  <<: *default
-  values:
-    - ./redis/values.yaml
+#
+#
+#- name: kafka-kraft
+#  installed: true
+#  chart: ./kafka-kraft
+#  version: 26.2.0
+#  <<: *default
+#  values:
+#    - ./kafka-kraft/values.yaml
+#  set:
+#    - name: kraft.clusterId
+#      value: {{ .Values.secrets.kafka.clusterID }}
+#
+#- name: ingress-nginx
+#  installed: true
+#  chart: ./ingress-nginx
+#  version: 4.10.0
+#  <<: *default
+#  values:
+#    - ./ingress-nginx/values.yaml
+#    - domain: {{ .Values.global.domain }}
+#
+##- name: playground
+##  installed: true
+##  chart: ./playground
+##  version: 0.1.0
+##  <<: *default
+##  values:
+##    - ./playground/values.yaml
 
-- name: elasticsearch
-  chart: ./elasticsearch
-  version: 8.11.3
-  <<: *default
-  values:
-    - ./elasticsearch/values.yaml
-    - secret:
-        password: {{ .Values.secrets.elasticsearch.password }}
+#- name: kibana
+#  chart: kibana
+#  version: 8.11.3
+#  force: true
+#  <<: *default
+#  values:
+#    - ./kibana/values.yaml
 
-- name: elasticsearch-data
-  chart: ./elasticsearch-data
-  version: 8.11.3
-  <<: *default
-  values:
-    - ./elasticsearch-data/values.yaml
-
-- name: kibana
-  chart: ./kibana
-  version: 8.11.3
-  force: true
-  <<: *default
-  values:
-    - ./kibana/values.yaml
-    - ingress:
-        hosts:
-          - host: {{ .Values.global.domain }}
-            paths:
-              - path: /kibana
-        tls: 
-          - secretName: {{ .Values.global.domain }}-tls-certs
-            hosts:
-              - {{ .Values.global.domain }}
-
-
-
-- name: kafka-kraft
-  installed: true
-  chart: ./kafka-kraft
-  version: 26.2.0
-  <<: *default
-  values:
-    - ./kafka-kraft/values.yaml
-  set:
-    - name: kraft.clusterId
-      value: {{ .Values.secrets.kafka.clusterID }}
-
-- name: ingress-nginx
-  installed: true
-  chart: ./ingress-nginx
-  version: 4.10.0
-  <<: *default
-  values:
-    - ./ingress-nginx/values.yaml
-    - domain: {{ .Values.global.domain }}
-
-- name: playground
-  installed: true
-  chart: ./playground
-  version: 0.1.0
-  <<: *default
-  values:
-    - ./playground/values.yaml
+#- name: jaeger
+#  chart: jaeger
+#  installed: true
+#  version: 0.34.0
+#  values:
+#    - ./jaeger/value.yaml
+#  <<: *default
+#  set:
+#    - name: query.ingress.hosts[0]
+#      value: "{{ .Values.global.domain }}"

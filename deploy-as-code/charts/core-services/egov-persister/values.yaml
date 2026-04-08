@@ -3,6 +3,9 @@ labels:
   app: "egov-persister"
   group: "core"
 
+lokiEnabled: true
+tracing-enabled: true
+
 # Init Containers Configs
 initContainers:
   gitSync:
@@ -12,7 +15,7 @@ initContainers:
 
 # Container Configs
 image:
-  repository: "egov-persister"
+  repository: "docker.io/egovio/egov-persister"
   tag: core-2.9-lts-mvn-check-c33cfe45ab-7
 replicas: "1"
 healthChecks:
@@ -20,7 +23,6 @@ healthChecks:
   livenessProbePath: "/common-persist/health"
   readinessProbePath: "/common-persist/health"
 appType: "java-spring"
-tracing-enabled: true
 persist-yml-path: "file:///work-dir/kerala-configs/egov-persister/advocate-clerk-persister.yml,file:///work-dir/kerala-configs/egov-persister/advocate-persister.yml,file:///work-dir/kerala-configs/egov-persister/case-persister.yml"
 heap: "-Xmx192m -Xms192m"
 memory_limits: 512Mi

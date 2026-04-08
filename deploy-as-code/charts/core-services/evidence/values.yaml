@@ -9,6 +9,8 @@ ingress:
   enabled: true
   context: "evidence"
 
+lokiEnabled: true
+tracing-enabled: true
 
 # Init Containers Configs
 initContainers:
@@ -16,12 +18,12 @@ initContainers:
     enabled: true
     schemaTable: "evidence_service_schema"
     image:
-      repository: "pucarsolutionsdev.azurecr.io/pucar_evidence_db"
+      repository: "docker.io/venkatramireddyb/pucar_evidence_db"
       tag: v1.0.0-08ab38363f9c4b0b70d0763331c9773f8bbf9820
 
 # Container Configs
 image:
-  repository: "pucarsolutionsdev.azurecr.io/pucar_evidence"
+  repository: "docker.io/venkatramireddyb/pucar_evidence"
   tag: v1.0.0-08ab38363f9c4b0b70d0763331c9773f8bbf9820
   imagePullPolicy: Always
 replicas: "1"
@@ -33,10 +35,10 @@ memory_limits: 768Mi
 
 
 
-#healthChecks:
-#  enabled: true
-#  livenessProbePath: "/evidence/"
-#  readinessProbePath: "/evidence/"
+healthChecks:
+  enabled: true
+  livenessProbePath: "/evidence/health"
+  readinessProbePath: "/evidence/health"
 
 env: |
   - name: JAVA_OPTS
@@ -149,4 +151,58 @@ env: |
     valueFrom:
       configMapKeyRef:
         key: hearing
+        name: egov-service-host
+  - name: EGOV_URL_SHORTNER_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: egov-url-shortening
+  - name: EGOV_ESIGN_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: e-sign-svc
+  - name: EGOV_FILESTORE_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: egov-filestore
+  - name: EGOV_ADIARY_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: ab-diary
+  - name: SPRING_REDIS_HOST
+    value: "redis.backbone"
+  - name: SPRING_REDIS_PORT
+    value: "6379"
+  - name: DOMAIN_URL
+    valueFrom:
+      configMapKeyRef:
+        key: domain-url
+        name: egov-config
+  - name: EGOV_INFRA_INDEXER_HOST
+    valueFrom:
+      configMapKeyRef:
+        key: es-indexer-host
+        name: egov-config
+  - name: EGOV_INDEXER_ES_USERNAME
+    valueFrom:
+      secretKeyRef:
+        name: elasticsearch-credentials
+        key: username
+  - name: EGOV_INDEXER_ES_PASSWORD
+    valueFrom:
+      secretKeyRef:
+        name: elasticsearch-credentials
+        key: password
+  - name: EGOV_INBOX_HOST
+    valueFrom:
+      configMapKeyRef:
+        key: inbox
+        name: egov-service-host
+  - name: EGOV_ADVOCATE_HOST
+    valueFrom:
+      configMapKeyRef:
+        key: advocate
         name: egov-service-host

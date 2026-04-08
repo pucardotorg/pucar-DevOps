@@ -15,7 +15,7 @@ ingress:
 
 # Container Configs
 image:
-  repository: "pucarsolutionsdev.azurecr.io/kenlm"
+  repository: "docker.io/venkatramireddyb/kenlm"
   tag: v1.0.0-dristi-experiment-1
 
 replicas: "1"

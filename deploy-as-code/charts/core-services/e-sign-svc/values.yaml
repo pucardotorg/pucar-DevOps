@@ -9,30 +9,30 @@ ingress:
   enabled: true
   context: "e-sign-svc"
 
+lokiEnabled: true
+tracing-enabled: true
 
 # Init Containers Configs
-initContainers:
-  dbMigration:
-    enabled: true
-    schemaTable: "e_sign_svc_schema"
-    image:
-      repository: "pucarsolutionsdev.azurecr.io/pucar_e-sign-svc-db"
-      tag: v1.0.0-36e4cd719e16aedec416b518f48bf84b56e60389
-
+e-sign-svc:
+  initContainers:
+    dbMigration:
+      enabled: true
+      schemaTable: "e_sign_svc_schema"
+      image:
+        repository: "docker.io/venkatramireddyb/pucar_e-sign-svc-db"
+        tag: v1.0.0-36e4cd719e16aedec416b518f48bf84b56e60389
 # Container Configs
 image:
-  repository: "pucarsolutionsdev.azurecr.io/pucar_e-sign-svc"
+  repository: "docker.io/venkatramireddyb/pucar_e-sign-svc"
   tag: v1.0.0-36e4cd719e16aedec416b518f48bf84b56e60389
-  imagePullPolicy: Always
+  pullPolicy: Always
 replicas: "1"
 httpPort: 8080
 appType: "java-spring"
 heap: "-Xmx256m -Xms256m"
 java-args: "-Dspring.profiles.active=monitoring"
 memory_limit: 512Mi
-
-
-
+debugPort: 5005
 
 env: |
   - name: JAVA_OPTS
@@ -61,6 +61,14 @@ env: |
       configMapKeyRef:
         key: esign-interceptor
         name: egov-config
-
+  - name: ESIGN_ASP_ID
+    valueFrom:
+      configMapKeyRef:
+        key: esign-id
+        name: egov-config
+  - name: SPRING_REDIS_HOST
+    value: redis.backbone
+  - name: SPRING_REDIS_PORT
+    value: "6379"
 
     

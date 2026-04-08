@@ -12,17 +12,22 @@ ingress:
 
 # Container Configs
 image:
-  repository: "pucarsolutionsdev.azurecr.io/pucar_dristi_case_pdf"
+  repository: "docker.io/venkatramireddyb/pucar_dristi_case_pdf"
   tag: v1.0.0-1ea0074cb9041fa0837eb8193c66673cb8c4e2c4
 replicas: "1"
 
 
-healthChecks:
-  enabled: false
-  livenessProbePath: "/dristi-case-pdf/"
-  readinessProbePath: "/dristi-case-pdf/"
+#healthChecks:
+#  enabled: true
+#  livenessProbePath: "/dristi-case-pdf/health"
+#  readinessProbePath: "/dristi-case-pdf/health"
     
 env: |
+  - name: COURT_NAME
+    valueFrom:
+      configMapKeyRef:
+        key: ORDER_HEADING
+        name: egov-config
   - name: NODE_OPTIONS
     value: "--max-old-space-size=2048"
   - name: SERVER_PORT
@@ -31,6 +36,8 @@ env: |
     value: "http://pdf-service:8080"
   - name: FILE_STORE_HOST 
     value: "http://egov-filestore:8080"
+  - name: PAYLOADSIZE 
+    value: "5mb"
   - name: DRISTI_CASE_HOST
     valueFrom:
       configMapKeyRef:

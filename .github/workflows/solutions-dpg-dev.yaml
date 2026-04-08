@@ -24,7 +24,7 @@ jobs:
 
       - name: Check for changes in deploy-as-code
         id: check_files
-        uses: tj-actions/changed-files@v46
+        uses: tj-actions/changed-files@v42
         with:
           files: |
             deploy-as-code/**
@@ -165,11 +165,7 @@ jobs:
           hearing_commit=$(git log -1 --pretty=format:%H -- backend/hearing)
           echo "hearing_commit=$hearing_commit" >> $GITHUB_ENV
           dristi_case_pdf_commit=$(git log -1 --pretty=format:%H -- backend/dristi-case-pdf)
-          echo "dristi_case_pdf_commit=$dristi_case_pdf_commit" >> $GITHUB_ENV
-          esign_interceptor_commit=$(git log -1 --pretty=format:%H -- backend/esign-interceptor)
-          echo "esign_interceptor_commit=$esign_interceptor_commit" >> $GITHUB_ENV
-          esign_svc_commit=$(git log -1 --pretty=format:%H -- backend/e-sign-svc)
-          echo "esign_svc_commit=$esign_svc_commit" >> $GITHUB_ENV     
+          echo "dristi_case_pdf_commit=$dristi_case_pdf_commit" >> $GITHUB_ENV  
           epost_tracker_commit=$(git log -1 --pretty=format:%H -- backend/epost-tracker)
           echo "epost_tracker_commit=$epost_tracker_commit" >> $GITHUB_ENV 
           transformer_commit=$(git log -1 --pretty=format:%H -- backend/transformer)
@@ -216,60 +212,69 @@ jobs:
           echo "dristi_pdf_commit=$dristi_pdf_commit" >> $GITHUB_ENV
           pdf_service=$(git log -1 --pretty=format:%H -- common/pdf-service)
           echo "pdf_service=$pdf_service" >> $GITHUB_ENV
+          esign_svc_commit=$(git log -1 --pretty=format:%H -- backend/e-sign-svc)
+          echo "esign_svc_commit=$esign_svc_commit" >> $GITHUB_ENV 
+          esign_interceptor_commit=$(git log -1 --pretty=format:%H -- backend/esign-interceptor)
+          echo "esign_interceptor_commit=$esign_interceptor_commit" >> $GITHUB_ENV  
+          git checkout hotfix/1.0-esign
+          digit_ui_commit=$(git log -1 --pretty=format:%H -- frontend/micro-ui)
+          echo "digit_ui_commit=$digit_ui_commit" >> $GITHUB_ENV
+
 
       - name: digit deployment
         run: |
           helmfile -l deployment=pucar -f digit-helmfile.yaml apply --include-needs=true \
-           --set scheduler.image.tag=v0.6.0-uat-${{ env.scheduler_commit }} \
-           --set scheduler.initContainers.dbMigration.image.tag=v0.6.0-uat-${{ env.scheduler_commit }} \
-           --set payment-calculator.image.tag=v0.6.0-uat-${{ env.payment_calculator_commit }} \
-           --set payment-calculator.initContainers.dbMigration.image.tag=v0.6.0-uat-${{ env.payment_calculator_commit }} \
-           --set digit-ui.image.tag=v0.6.0-uat-${{ env.digit_ui_commit }} \
-           --set dristi-case-pdf.image.tag=v0.6.0-uat-${{ env.dristi_case_pdf_commit }} \
-           --set dristi-pdf.image.tag=v0.6.0-uat-${{ env.dristi_pdf_commit }} \
-           --set advocate.image.tag=v0.6.0-uat-${{ env.advocate_commit }} \
-           --set advocate.initContainers.dbMigration.image.tag=v0.6.0-uat-${{ env.advocate_commit }} \
-           --set case.image.tag=v0.6.0-uat-${{ env.case_commit }} \
-           --set case.initContainers.dbMigration.image.tag=v0.6.0-uat-${{ env.case_commit }} \
-           --set ocr-service.image.tag=v0.6.0-uat-${{ env.ocr_service_commit }} \
-           --set ocr-service.initContainers.dbMigration.image.tag=v0.6.0-uat-${{ env.ocr_service_commit }} \
-           --set casemanagement.image.tag=v0.6.0-uat-${{ env.casemanagement_commit }} \
-           --set casemanagement.initContainers.dbMigration.image.tag=v0.6.0-uat-${{ env.casemanagement_commit }} \
-           --set evidence.image.tag=v0.6.0-uat-${{ env.evidence_commit }} \
-           --set evidence.initContainers.dbMigration.image.tag=v0.6.0-uat-${{ env.evidence_commit }} \
-           --set hearing.image.tag=v0.6.0-uat-${{ env.hearing_commit }} \
-           --set hearing.initContainers.dbMigration.image.tag=v0.6.0-uat-${{ env.hearing_commit }} \
-           --set order.image.tag=v0.6.0-uat-${{ env.order_commit }} \
-           --set order.initContainers.dbMigration.image.tag=v0.6.0-uat-${{ env.order_commit }} \
-           --set task.image.tag=v0.6.0-uat-${{ env.task_commit }} \
-           --set task.initContainers.dbMigration.image.tag=v0.6.0-uat-${{ env.task_commit }} \
-           --set billing-service.image.tag=v0.6.0-uat-${{ env.billing_service_commit }} \
-           --set billing-service.initContainers.dbMigration.image.tag=v0.6.0-uat-${{ env.billing_service_commit }} \
-           --set collection-services.image.tag=v0.6.0-uat-${{ env.collection_service_commit }} \
-           --set collection-services.initContainers.dbMigration.image.tag=v0.6.0-uat-${{ env.collection_service_commit }} \
-           --set individual.image.tag=v0.6.0-uat-${{ env.individual_commit }} \
-           --set individual.initContainers.dbMigration.image.tag=v0.6.0-uat-${{ env.individual_commit }} \
-           --set inbox.image.tag=v0.6.0-uat-${{ env.inbox_commit }} \
-           --set e-sign-svc.image.tag=v0.6.0-uat-${{ env.esign_svc_commit }} \
-           --set esign-interceptor.image.tag=v0.6.0-uat-${{ env.esign_interceptor_commit }} \
-           --set application.image.tag=v0.6.0-uat-${{ env.application_commit }} \
-           --set application.initContainers.dbMigration.image.tag=v0.6.0-uat-${{ env.application_commit }} \
-           --set analytics.image.tag=v0.6.0-uat-${{ env.analytics_commit }} \
-           --set epayments.image.tag=v0.6.0-uat-${{ env.epayment_commit }} \
-           --set etreasury.image.tag=v0.6.0-uat-${{ env.etreasury_commit }} \
-           --set etreasury.initContainers.dbMigration.image.tag=v0.6.0-uat-${{ env.etreasury_commit }} \
-           --set pdf-service.image.tag=v0.6.0-uat-${{ env.pdf_service }} \
-           --set pdf-service.initContainers.dbMigration.image.tag=v0.6.0-uat-${{ env.pdf_service }} \
-           --set sbi-webpage.image.tag=v0.6.0-uat-${{ env.sbi_ui_commit }} \
-           --set sbi-svc.image.tag=v0.6.0-uat-${{ env.sbi_svc_commit }} \
-           --set sbi-svc.initContainers.dbMigration.image.tag=v0.6.0-uat-${{ env.sbi_svc_commit }} \
-           --set epost-tracker.image.tag=v0.6.0-uat-${{ env.epost_tracker_commit }} \
-           --set epost-tracker.initContainers.dbMigration.image.tag=v0.6.0-uat-${{ env.epost_tracker_commit }} \
-           --set summons-svc.image.tag=v0.6.0-uat-${{ env.summons_svc_commit }} \
-           --set summons-svc.initContainers.dbMigration.image.tag=v0.6.0-uat-${{ env.summons_svc_commit }} \
-           --set transformer.image.tag=v0.6.0-uat-${{ env.transformer_commit }} \
-           --set icops-integration.image.tag=v0.6.0-uat-${{ env.integration_commit }} \
-           --set icops-integration.initContainers.dbMigration.image.tag=v0.6.0-uat-${{ env.integration_commit }}
+           --set scheduler.image.tag=hotfix-1.0-${{ env.scheduler_commit }} \
+           --set scheduler.initContainers.dbMigration.image.tag=hotfix-1.0-${{ env.scheduler_commit }} \
+           --set payment-calculator.image.tag=hotfix-1.0-${{ env.payment_calculator_commit }} \
+           --set payment-calculator.initContainers.dbMigration.image.tag=hotfix-1.0-${{ env.payment_calculator_commit }} \
+           --set digit-ui.image.tag=hotfix-1.0-${{ env.digit_ui_commit }} \
+           --set dristi-case-pdf.image.tag=hotfix-1.0-${{ env.dristi_case_pdf_commit }} \
+           --set dristi-pdf.image.tag=hotfix-1.0-${{ env.dristi_pdf_commit }} \
+           --set advocate.image.tag=hotfix-1.0-${{ env.advocate_commit }} \
+           --set advocate.initContainers.dbMigration.image.tag=hotfix-1.0-${{ env.advocate_commit }} \
+           --set case.image.tag=hotfix-1.0-${{ env.case_commit }} \
+           --set case.initContainers.dbMigration.image.tag=hotfix-1.0-${{ env.case_commit }} \
+           --set ocr-service.image.tag=hotfix-1.0-${{ env.ocr_service_commit }} \
+           --set ocr-service.initContainers.dbMigration.image.tag=hotfix-1.0-${{ env.ocr_service_commit }} \
+           --set casemanagement.image.tag=hotfix-1.0-${{ env.casemanagement_commit }} \
+           --set casemanagement.initContainers.dbMigration.image.tag=hotfix-1.0-${{ env.casemanagement_commit }} \
+           --set evidence.image.tag=hotfix-1.0-${{ env.evidence_commit }} \
+           --set evidence.initContainers.dbMigration.image.tag=hotfix-1.0-${{ env.evidence_commit }} \
+           --set hearing.image.tag=hotfix-1.0-${{ env.hearing_commit }} \
+           --set hearing.initContainers.dbMigration.image.tag=hotfix-1.0-${{ env.hearing_commit }} \
+           --set order.image.tag=hotfix-1.0-${{ env.order_commit }} \
+           --set order.initContainers.dbMigration.image.tag=hotfix-1.0-${{ env.order_commit }} \
+           --set task.image.tag=hotfix-1.0-${{ env.task_commit }} \
+           --set task.initContainers.dbMigration.image.tag=hotfix-1.0-${{ env.task_commit }} \
+           --set billing-service.image.tag=hotfix-1.0-${{ env.billing_service_commit }} \
+           --set billing-service.initContainers.dbMigration.image.tag=hotfix-1.0-${{ env.billing_service_commit }} \
+           --set collection-services.image.tag=hotfix-1.0-${{ env.collection_service_commit }} \
+           --set collection-services.initContainers.dbMigration.image.tag=hotfix-1.0-${{ env.collection_service_commit }} \
+           --set individual.image.tag=hotfix-1.0-${{ env.individual_commit }} \
+           --set individual.initContainers.dbMigration.image.tag=hotfix-1.0-${{ env.individual_commit }} \
+           --set inbox.image.tag=hotfix-1.0-${{ env.inbox_commit }} \
+           --set e-sign-svc.image.tag=hotfix-1.0-${{ env.esign_svc_commit }} \
+           --set e-sign-svc.initContainers.dbMigration.image.tag=hotfix-1.0-${{ env.esign_svc_commit }} \
+           --set esign-interceptor.image.tag=hotfix-1.0-${{ env.esign_interceptor_commit }} \
+           --set application.image.tag=hotfix-1.0-${{ env.application_commit }} \
+           --set application.initContainers.dbMigration.image.tag=hotfix-1.0-${{ env.application_commit }} \
+           --set analytics.image.tag=hotfix-1.0-${{ env.analytics_commit }} \
+           --set epayments.image.tag=hotfix-1.0-${{ env.epayment_commit }} \
+           --set etreasury.image.tag=hotfix-1.0-${{ env.etreasury_commit }} \
+           --set etreasury.initContainers.dbMigration.image.tag=hotfix-1.0-${{ env.etreasury_commit }} \
+           --set pdf-service.image.tag=hotfix-1.0-${{ env.pdf_service }} \
+           --set pdf-service.initContainers.dbMigration.image.tag=hotfix-1.0-${{ env.pdf_service }} \
+           --set sbi-webpage.image.tag=hotfix-1.0-${{ env.sbi_ui_commit }} \
+           --set sbi-svc.image.tag=hotfix-1.0-${{ env.sbi_svc_commit }} \
+           --set sbi-svc.initContainers.dbMigration.image.tag=hotfix-1.0-${{ env.sbi_svc_commit }} \
+           --set epost-tracker.image.tag=hotfix-1.0-${{ env.epost_tracker_commit }} \
+           --set epost-tracker.initContainers.dbMigration.image.tag=hotfix-1.0-${{ env.epost_tracker_commit }} \
+           --set summons-svc.image.tag=hotfix-1.0-${{ env.summons_svc_commit }} \
+           --set summons-svc.initContainers.dbMigration.image.tag=hotfix-1.0-${{ env.summons_svc_commit }} \
+           --set transformer.image.tag=hotfix-1.0-${{ env.transformer_commit }} \
+           --set icops-integration.image.tag=hotfix-1.0-${{ env.integration_commit }} \
+           --set icops-integration.initContainers.dbMigration.image.tag=hotfix-1.0-${{ env.integration_commit }}
         working-directory: deploy-as-code
         env:
           HELMFILE_ENV: "solutions-dev-to-dev"
