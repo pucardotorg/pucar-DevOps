@@ -1142,7 +1142,7 @@ sunbird-rc-identity-service:
 sunbirdrc-credential-service:
   image:
     repository: egovio/sunbirdrc-credential-service
-    tag: sunbirdrc-mithun-f0d17a4438-103
+    tag: sdc-uat-fb7493994c08b593759448d6d3be1bd309d6ce02
   ingress:
     nginxRateLimit:
       enabled: true
