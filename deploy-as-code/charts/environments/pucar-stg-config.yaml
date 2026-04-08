@@ -601,7 +601,7 @@ esign-interceptor:
 etreasury:
   image:
     repository: docker.io/venkatramireddyb/etreasury
-    tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
+    tag: sdc-uat-fb7493994c08b593759448d6d3be1bd309d6ce02
   ingress:
     nginxRateLimit:
       enabled: true
