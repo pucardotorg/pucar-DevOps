@@ -120,5 +120,5 @@ jobs:
             exit 0
           fi
           
-          git commit -m "chore: update image tag for ${SERVICE_NAME} to ${SERVICE_TAG} in ${ENVIRONMENT}"
+          git commit -m "Update image tag for ${SERVICE_NAME} to ${SERVICE_TAG} in ${ENVIRONMENT}"
           git push
