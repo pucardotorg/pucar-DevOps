@@ -138,3 +138,13 @@ env: |
       configMapKeyRef:
         name: egov-service-host
         key: advocate
+  - name: EGOV_BILLING_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: billing-service
+  - name: EGOV_ETREASURY_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: etreasury
