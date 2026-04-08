@@ -23,7 +23,7 @@ on:
         description: 'Service Name'
         required: true
         type: string
-      image_tag:
+      service_tag:
         description: 'Image Tag'
         required: true
         type: string
@@ -40,7 +40,7 @@ jobs:
           environment: ${{ inputs.environment }}
           service_group: ${{ inputs.service_group }}
           service_name: ${{ inputs.service_name }}
-          image_tag: ${{ inputs.image_tag }}
+          image_tag: ${{ inputs.service_tag }}
           kubeconfig: ${{ vars.KUBECONFIG }}
           public_age_key: ${{ secrets.PUBLIC_AGE_KEY }}
           private_age_key: ${{ secrets.PRIVATE_AGE_KEY }}
