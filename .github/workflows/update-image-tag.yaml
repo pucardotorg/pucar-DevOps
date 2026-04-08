@@ -12,10 +12,10 @@ on:
         required: true
         type: string
       environment:
-        description: 'GitHub Environment to use (e.g. pucar-stg)'
+        description: 'GitHub Environment to use (e.g. sdc-uat)'
         required: true
         type: string
-        default: 'pucar-stg'
+        default: 'sdc-uat'
       git_branch:
         description: 'Git branch to checkout (leave empty for current/default branch)'
         required: false
