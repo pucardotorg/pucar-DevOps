@@ -1172,7 +1172,7 @@ task:
 task-management:
   image:
     repository: docker.io/venkatramireddyb/task-management
-    tag: main-6e3e68ae98f0fc7d721f9fb378ea86937a2f0bc7
+    tag: sdc-uat-fb7493994c08b593759448d6d3be1bd309d6ce02
   ingress:
     nginxRateLimit:
       enabled: true
