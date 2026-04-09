@@ -1,0 +1,47 @@
+configmaps:
+  egov-config:
+    name: egov-config
+    namespace: egov
+
+  egov-service-host:
+    name: egov-service-host
+    namespace: egov
+
+rootingress:
+  name: root-ingress
+  namespace: egov
+  cert-issuer: "letsencrypt-prod"
+  serviceName: oncourts-website
+  servicePort: 3000
+
+secrets:
+  db:
+    name: db
+    namespace: egov
+  git-sync:
+    name: git-creds
+    namespace: egov
+  egov-filestore:
+    name: egov-filestore
+    namespace: egov
+  egov-location:
+    name: egov-location
+    namespace: egov
+  egov-enc-service:
+    name: egov-enc-service
+    namespace: egov
+  egov-notification-sms:
+    name: egov-notification-sms
+    namespace: egov
+  egov-notification-mail:
+    name: egov-notification-mail
+    namespace: egov
+  oauth2-proxy:
+    name: oauth2-proxy
+    namespace: egov
+  elasticsearch:
+    name: elasticsearch-credentials
+    namespace: egov
+  egov-pg-service:
+    name: egov-pg-service
+    namespace: egov
