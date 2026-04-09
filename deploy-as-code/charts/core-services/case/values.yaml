@@ -205,7 +205,6 @@ env: |
         key: advocate-office-management
   - name: EGOV_USER_SEARCH_PATH
     value: /user/v1/_search
-
   - name: SPRING_DATA_REDIS_HOST
     value: "redis.backbone"
   - name: SPRING_DATA_REDIS_PORT
