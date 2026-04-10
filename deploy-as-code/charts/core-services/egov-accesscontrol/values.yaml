@@ -9,6 +9,9 @@ ingress:
   zuul: true
   context: "access"
 
+lokiEnabled: true
+tracing-enabled: true
+
 # Init Containers Configs
 initContainers: {}
 
@@ -22,7 +25,6 @@ healthChecks:
   livenessProbePath: "/access/health"
   readinessProbePath: "/access/health"
 appType: "java-spring"
-tracing-enabled: true
 heap: "-Xmx192m -Xms192m"
 java-args: ""
 

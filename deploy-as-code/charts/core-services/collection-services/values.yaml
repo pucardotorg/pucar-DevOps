@@ -9,6 +9,8 @@ ingress:
   enabled: true
   context: "collection-services"
 
+lokiEnabled: true
+tracing-enabled: true
 
 # Init Containers Configs
 initContainers:
@@ -38,17 +40,17 @@ env: |
     value: "8080"
   - name: JAVA_ARGS
     value: {{ index .Values "java-args" | quote }}
-  - name: SPRING_FLYWAY_URL
+  - name: SPRING_DATASOURCE_URL
     valueFrom:
       configMapKeyRef:
         key: db-url
         name: egov-config
-  - name: SPRING_FLYWAY_USER
+  - name: SPRING_DATASOURCE_USERNAME
     valueFrom:
       secretKeyRef:
-        key: username
         name: db
-  - name: SPRING_FLYWAY_PASSWORD
+        key: username
+  - name: SPRING_DATASOURCE_PASSWORD
     valueFrom:
       secretKeyRef:
         name: db

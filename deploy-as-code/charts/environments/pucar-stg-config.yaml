@@ -1,7 +1,7 @@
 ab-diary:
   image:
     repository: docker.io/venkatramireddyb/ab-diary
-    tag: sdc-uat-0657159be3406e649f60dacc4a73dedf1efa7c2e
+    tag: sdc-uat-fb7493994c08b593759448d6d3be1bd309d6ce02
   ingress:
     nginxRateLimit:
       enabled: true
@@ -16,7 +16,7 @@ ab-diary:
 advocate:
   image:
     repository: docker.io/venkatramireddyb/advocate
-    tag: sdc-uat-0657159be3406e649f60dacc4a73dedf1efa7c2e
+    tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
   ingress:
     nginxRateLimit:
       enabled: true
@@ -31,7 +31,7 @@ advocate:
 advocate-office-management:
   image:
     repository: docker.io/venkatramireddyb/advocate-office-management
-    tag: main-eac2161dde59072e91b142be82e47dc9df110c4f
+    tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
   ingress:
     nginxRateLimit:
       enabled: true
@@ -46,7 +46,7 @@ advocate-office-management:
 analytics:
   image:
     repository: docker.io/venkatramireddyb/analytics
-    tag: sdc-uat-0657159be3406e649f60dacc4a73dedf1efa7c2e
+    tag: sdc-uat-fb7493994c08b593759448d6d3be1bd309d6ce02
   ingress:
     nginxRateLimit:
       enabled: true
@@ -61,7 +61,7 @@ analytics:
 application:
   image:
     repository: docker.io/venkatramireddyb/application
-    tag: sdc-uat-0657159be3406e649f60dacc4a73dedf1efa7c2e
+    tag: sdc-uat-fb7493994c08b593759448d6d3be1bd309d6ce02
   ingress:
     nginxRateLimit:
       enabled: true
@@ -75,8 +75,8 @@ application:
     gatewayReplenishRate: "30"
 audit-service:
   image:
-    repository: egovio/audit-service
-    tag: audit-details-extractSanitizedFieldNameFromJsonPath-d99f6c4a5b-14
+    repository: docker.io/venkatramireddyb/audit-service
+    tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
   ingress:
     nginxRateLimit:
       enabled: true
@@ -103,10 +103,10 @@ auth-proxy:
     gatewayBurstCapacity: "30"
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
-bank-details:
+bail-bond:
   image:
-    repository: docker.io/venkatramireddyb/bank-details
-    tag: release-31-4ecb50ad25240733100bad50c03af2d8a22252c6
+    repository: docker.io/venkatramireddyb/bail-bond
+    tag: sdc-uat-fb7493994c08b593759448d6d3be1bd309d6ce02
   ingress:
     nginxRateLimit:
       enabled: true
@@ -118,10 +118,10 @@ bank-details:
     gatewayBurstCapacity: "30"
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
-bail-bond:
+bank-details:
   image:
-    repository: docker.io/venkatramireddyb/bail-bond
-    tag: sdc-uat-0657159be3406e649f60dacc4a73dedf1efa7c2e
+    repository: docker.io/venkatramireddyb/bank-details
+    tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
   ingress:
     nginxRateLimit:
       enabled: true
@@ -136,7 +136,7 @@ bail-bond:
 billing-service:
   image:
     repository: docker.io/venkatramireddyb/billing-service
-    tag: sdc-uat-0657159be3406e649f60dacc4a73dedf1efa7c2e
+    tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
   ingress:
     nginxRateLimit:
       enabled: true
@@ -145,32 +145,32 @@ billing-service:
       conections: "10"
   rateLimit:
     enabled: true
-    gatewayBurstCapacity: "30"
+    gatewayBurstCapacity: "40"
     gatewayKeyResolver: "userKeyResolver"
-    gatewayReplenishRate: "30"
+    gatewayReplenishRate: "40"
 case:
   image:
     repository: docker.io/venkatramireddyb/case
-    tag: additionaldetails-10ca72605227c89f1a9e2a01dc344e6abf5d435b
+    tag: sdc-uat-fb7493994c08b593759448d6d3be1bd309d6ce02
   ingress:
     nginxRateLimit:
       enabled: true
-      rpm: "500"
+      rpm: "1000"
       burstMultiplier: "1"
       conections: "10"
   rateLimit:
     enabled: true
-    gatewayBurstCapacity: "30"
+    gatewayBurstCapacity: "70"
     gatewayKeyResolver: "userKeyResolver"
-    gatewayReplenishRate: "30"
+    gatewayReplenishRate: "70"
 casemanagement:
   image:
     repository: docker.io/venkatramireddyb/casemanagement
-    tag: sdc-uat-0657159be3406e649f60dacc4a73dedf1efa7c2e
+    tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
   ingress:
     nginxRateLimit:
       enabled: true
-      rpm: "500"
+      rpm: "1000"
       burstMultiplier: "1"
       conections: "10"
   rateLimit:
@@ -211,7 +211,22 @@ clamav:
 collection-services:
   image:
     repository: docker.io/venkatramireddyb/collection-services
-    tag: sdc-uat-0657159be3406e649f60dacc4a73dedf1efa7c2e
+    tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
+  ingress:
+    nginxRateLimit:
+      enabled: true
+      rpm: "500"
+      burstMultiplier: "1"
+      conections: "10"
+  rateLimit:
+    enabled: true
+    gatewayBurstCapacity: "30"
+    gatewayKeyResolver: "userKeyResolver"
+    gatewayReplenishRate: "30"
+ctc:
+  image:
+    repository: docker.io/venkatramireddyb/ctc
+    tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
   ingress:
     nginxRateLimit:
       enabled: true
@@ -226,7 +241,7 @@ collection-services:
 digit-ui:
   image:
     repository: docker.io/venkatramireddyb/digit-ui
-    tag: enhancement-5218-fe-c21a479a6724b1a2ffc4412d22c3674f9de11fd6
+    tag: main-fda605c01e935db8152e001f7173df22f00a0ffc
   ingress:
     nginxRateLimit:
       enabled: true
@@ -241,11 +256,11 @@ digit-ui:
 digitalized-documents:
   image:
     repository: docker.io/venkatramireddyb/digitalized-documents
-    tag: sdc-uat-0657159be3406e649f60dacc4a73dedf1efa7c2e
+    tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
   ingress:
     nginxRateLimit:
       enabled: true
-      rpm: "500"
+      rpm: "1000"
       burstMultiplier: "1"
       conections: "10"
   rateLimit:
@@ -256,7 +271,7 @@ digitalized-documents:
 dristi-case-pdf:
   image:
     repository: docker.io/venkatramireddyb/dristi-case-pdf
-    tag: sdc-uat-0657159be3406e649f60dacc4a73dedf1efa7c2e
+    tag: sdc-uat-fb7493994c08b593759448d6d3be1bd309d6ce02
   ingress:
     nginxRateLimit:
       enabled: true
@@ -271,7 +286,7 @@ dristi-case-pdf:
 dristi-pdf:
   image:
     repository: docker.io/venkatramireddyb/dristi-pdf
-    tag: sdc-uat-0657159be3406e649f60dacc4a73dedf1efa7c2e
+    tag: sdc-uat-fb7493994c08b593759448d6d3be1bd309d6ce02
   ingress:
     nginxRateLimit:
       enabled: true
@@ -286,7 +301,7 @@ dristi-pdf:
 e-sign-svc:
   image:
     repository: docker.io/venkatramireddyb/e-sign-svc
-    tag: sdc-uat-0657159be3406e649f60dacc4a73dedf1efa7c2e
+    tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
   ingress:
     nginxRateLimit:
       enabled: true
@@ -300,8 +315,8 @@ e-sign-svc:
     gatewayReplenishRate: "30"
 egov-accesscontrol:
   image:
-    repository: docker.io/egovio/egov-accesscontrol
-    tag: core-2.9-lts-mvn-check-34362a8b87-9
+    repository: docker.io/venkatramireddyb/egov-accesscontrol
+    tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
   ingress:
     nginxRateLimit:
       enabled: true
@@ -316,7 +331,7 @@ egov-accesscontrol:
 egov-apportion-service:
   image:
     repository: docker.io/venkatramireddyb/egov-apportion-service
-    tag: sdc-uat-0657159be3406e649f60dacc4a73dedf1efa7c2e
+    tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
   ingress:
     nginxRateLimit:
       enabled: true
@@ -330,8 +345,8 @@ egov-apportion-service:
     gatewayReplenishRate: "30"
 egov-enc-service:
   image:
-    repository: egovio/egov-enc-service
-    tag: core-2.9-lts-mvn-check-c607f2d4de-20
+    repository: docker.io/venkatramireddyb/egov-enc-service
+    tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
   ingress:
     nginxRateLimit:
       enabled: true
@@ -346,22 +361,22 @@ egov-enc-service:
 egov-filestore:
   image:
     repository: venkatramireddyb/egov-filestore
-    tag: sdc-uat-0657159be3406e649f60dacc4a73dedf1efa7c2e
+    tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
   ingress:
     nginxRateLimit:
       enabled: true
-      rpm: "500"
+      rpm: "1000"
       burstMultiplier: "1"
       conections: "10"
   rateLimit:
     enabled: true
-    gatewayBurstCapacity: "30"
+    gatewayBurstCapacity: "40"
     gatewayKeyResolver: "userKeyResolver"
-    gatewayReplenishRate: "30"
+    gatewayReplenishRate: "40"
 egov-hrms:
   image:
     repository: docker.io/venkatramireddyb/egov-hrms
-    tag: sdc-uat-0657159be3406e649f60dacc4a73dedf1efa7c2e
+    tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
   ingress:
     nginxRateLimit:
       enabled: true
@@ -376,7 +391,7 @@ egov-hrms:
 egov-idgen:
   image:
     repository: docker.io/venkatramireddyb/egov-idgen
-    tag: sdc-uat-0657159be3406e649f60dacc4a73dedf1efa7c2e
+    tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
   ingress:
     nginxRateLimit:
       enabled: true
@@ -391,7 +406,7 @@ egov-idgen:
 egov-indexer:
   image:
     repository: docker.io/venkatramireddyb/egov-indexer
-    tag: sdc-uat-0657159be3406e649f60dacc4a73dedf1efa7c2e
+    tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
   ingress:
     nginxRateLimit:
       enabled: true
@@ -406,7 +421,7 @@ egov-indexer:
 egov-localization:
   image:
     repository: docker.io/venkatramireddyb/egov-localization
-    tag: sdc-uat-0657159be3406e649f60dacc4a73dedf1efa7c2e
+    tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
   ingress:
     nginxRateLimit:
       enabled: true
@@ -421,7 +436,7 @@ egov-localization:
 egov-mdms-service:
   image:
     repository: docker.io/venkatramireddyb/egov-mdms-service
-    tag: sdc-uat-0657159be3406e649f60dacc4a73dedf1efa7c2e
+    tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
   ingress:
     nginxRateLimit:
       enabled: true
@@ -436,7 +451,7 @@ egov-mdms-service:
 egov-notification-mail:
   image:
     repository: docker.io/venkatramireddyb/egov-notification-mail
-    tag: sdc-uat-0657159be3406e649f60dacc4a73dedf1efa7c2e
+    tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
   ingress:
     nginxRateLimit:
       enabled: true
@@ -450,8 +465,8 @@ egov-notification-mail:
     gatewayReplenishRate: "30"
 egov-otp:
   image:
-    repository: docker.io/egovio/egov-otp
-    tag: core-2.9-lts-mvn-check-72333e5530-5
+    repository: docker.io/venkatramireddyb/egov-otp
+    tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
   ingress:
     nginxRateLimit:
       enabled: true
@@ -465,8 +480,8 @@ egov-otp:
     gatewayReplenishRate: "30"
 egov-persister:
   image:
-    repository: docker.io/egovio/egov-persister
-    tag: core-2.9-lts-mvn-check-c33cfe45ab-7
+    repository: docker.io/venkatramireddyb/egov-persister
+    tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
   ingress:
     nginxRateLimit:
       enabled: true
@@ -480,8 +495,8 @@ egov-persister:
     gatewayReplenishRate: "30"
 egov-pg-service:
   image:
-    repository: egovio/egov-pg-service
-    tag: core-2.9-lts-mvn-check-421601fcdf-10
+    repository: docker.io/venkatramireddyb/egov-pg-service
+    tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
   ingress:
     nginxRateLimit:
       enabled: true
@@ -496,7 +511,7 @@ egov-pg-service:
 egov-url-shortening:
   image:
     repository: docker.io/venkatramireddyb/egov-url-shortening
-    tag: sdc-uat-0657159be3406e649f60dacc4a73dedf1efa7c2e
+    tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
   ingress:
     nginxRateLimit:
       enabled: true
@@ -511,7 +526,7 @@ egov-url-shortening:
 egov-user:
   image:
     repository: docker.io/venkatramireddyb/egov-user
-    tag: v1.0.0-core-2.9-lts-egov-user-deployement-1
+    tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
   ingress:
     nginxRateLimit:
       enabled: true
@@ -525,8 +540,8 @@ egov-user:
     gatewayReplenishRate: "30"
 egov-user-event:
   image:
-    repository: egovio/egov-user-event
-    tag: core-2.9-lts-mvn-check-57ef3ac8dd-4
+    repository: docker.io/venkatramireddyb/egov-user-event
+    tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
   ingress:
     nginxRateLimit:
       enabled: true
@@ -541,7 +556,67 @@ egov-user-event:
 egov-workflow-v2:
   image:
     repository: docker.io/venkatramireddyb/egov-workflow-v2
-    tag: sdc-uat-0657159be3406e649f60dacc4a73dedf1efa7c2e
+    tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
+  ingress:
+    nginxRateLimit:
+      enabled: true
+      rpm: "500"
+      burstMultiplier: "1"
+      conections: "10"
+  rateLimit:
+    enabled: true
+    gatewayBurstCapacity: "30"
+    gatewayKeyResolver: "userKeyResolver"
+    gatewayReplenishRate: "30"
+epost-tracker:
+  image:
+    repository: docker.io/venkatramireddyb/epost-tracker
+    tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
+  ingress:
+    nginxRateLimit:
+      enabled: true
+      rpm: "500"
+      burstMultiplier: "1"
+      conections: "10"
+  rateLimit:
+    enabled: true
+    gatewayBurstCapacity: "30"
+    gatewayKeyResolver: "userKeyResolver"
+    gatewayReplenishRate: "30"
+esign-interceptor:
+  image:
+    repository: docker.io/venkatramireddyb/esign-interceptor
+    tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
+  ingress:
+    nginxRateLimit:
+      enabled: true
+      rpm: "500"
+      burstMultiplier: "1"
+      conections: "10"
+  rateLimit:
+    enabled: true
+    gatewayBurstCapacity: "30"
+    gatewayKeyResolver: "userKeyResolver"
+    gatewayReplenishRate: "30"
+etreasury:
+  image:
+    repository: docker.io/venkatramireddyb/etreasury
+    tag: sdc-uat-fb7493994c08b593759448d6d3be1bd309d6ce02
+  ingress:
+    nginxRateLimit:
+      enabled: true
+      rpm: "500"
+      burstMultiplier: "1"
+      conections: "10"
+  rateLimit:
+    enabled: true
+    gatewayBurstCapacity: "30"
+    gatewayKeyResolver: "userKeyResolver"
+    gatewayReplenishRate: "30"
+evidence:
+  image:
+    repository: venkatramireddyb/evidence
+    tag: sdc-uat-fb7493994c08b593759448d6d3be1bd309d6ce02
   ingress:
     nginxRateLimit:
       enabled: true
@@ -583,71 +658,11 @@ epayments:
     gatewayBurstCapacity: "30"
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
-epost-tracker:
-  image:
-    repository: docker.io/venkatramireddyb/epost-tracker
-    tag: sdc-uat-0657159be3406e649f60dacc4a73dedf1efa7c2e
-  ingress:
-    nginxRateLimit:
-      enabled: true
-      rpm: "500"
-      burstMultiplier: "1"
-      conections: "10"
-  rateLimit:
-    enabled: true
-    gatewayBurstCapacity: "30"
-    gatewayKeyResolver: "userKeyResolver"
-    gatewayReplenishRate: "30"
-esign-interceptor:
-  image:
-    repository: docker.io/venkatramireddyb/esign-interceptor
-    tag: sdc-uat-0657159be3406e649f60dacc4a73dedf1efa7c2e
-  ingress:
-    nginxRateLimit:
-      enabled: true
-      rpm: "500"
-      burstMultiplier: "1"
-      conections: "10"
-  rateLimit:
-    enabled: true
-    gatewayBurstCapacity: "30"
-    gatewayKeyResolver: "userKeyResolver"
-    gatewayReplenishRate: "30"
-etreasury:
-  image:
-    repository: docker.io/venkatramireddyb/etreasury
-    tag: sdc-uat-0657159be3406e649f60dacc4a73dedf1efa7c2e
-  ingress:
-    nginxRateLimit:
-      enabled: true
-      rpm: "500"
-      burstMultiplier: "1"
-      conections: "10"
-  rateLimit:
-    enabled: true
-    gatewayBurstCapacity: "30"
-    gatewayKeyResolver: "userKeyResolver"
-    gatewayReplenishRate: "30"
-evidence:
-  image:
-    repository: venkatramireddyb/evidence
-    tag: sdc-uat-0657159be3406e649f60dacc4a73dedf1efa7c2e
-  ingress:
-    nginxRateLimit:
-      enabled: true
-      rpm: "500"
-      burstMultiplier: "1"
-      conections: "10"
-  rateLimit:
-    enabled: true
-    gatewayBurstCapacity: "30"
-    gatewayKeyResolver: "userKeyResolver"
-    gatewayReplenishRate: "30"
 gateway:
   namespace: pucar-stg
   image:
-    repository: registry-backbone-prod.apps.ocp2.ksdc.in/gateway
-    tag: gogs-v1.15.2
+    repository: docker.io/venkatramireddyb/gateway
+    tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
   ingress:
     nginxRateLimit:
       enabled: true
@@ -662,7 +677,7 @@ gateway:
 hearing:
   image:
     repository: venkatramireddyb/hearing
-    tag: sdc-uat-0657159be3406e649f60dacc4a73dedf1efa7c2e
+    tag: sdc-uat-fb7493994c08b593759448d6d3be1bd309d6ce02
   ingress:
     nginxRateLimit:
       enabled: true
@@ -671,13 +686,13 @@ hearing:
       conections: "10"
   rateLimit:
     enabled: true
-    gatewayBurstCapacity: "30"
+    gatewayBurstCapacity: "40"
     gatewayKeyResolver: "userKeyResolver"
-    gatewayReplenishRate: "30"
+    gatewayReplenishRate: "40"
 hearing-management:
   image:
     repository: docker.io/venkatramireddyb/hearing-management
-    tag: sdc-uat-0657159be3406e649f60dacc4a73dedf1efa7c2e
+    tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
   ingress:
     nginxRateLimit:
       enabled: true
@@ -692,7 +707,7 @@ hearing-management:
 icops-integration:
   image:
     repository: venkatramireddyb/icops-integration
-    tag: sdc-uat-0657159be3406e649f60dacc4a73dedf1efa7c2e
+    tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
   ingress:
     nginxRateLimit:
       enabled: true
@@ -707,22 +722,22 @@ icops-integration:
 inbox:
   image:
     repository: docker.io/venkatramireddyb/inbox
-    tag: sdc-uat-0657159be3406e649f60dacc4a73dedf1efa7c2e
+    tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
   ingress:
     nginxRateLimit:
       enabled: true
-      rpm: "500"
+      rpm: "3000"
       burstMultiplier: "1"
       conections: "10"
   rateLimit:
     enabled: true
-    gatewayBurstCapacity: "30"
+    gatewayBurstCapacity: "100"
     gatewayKeyResolver: "userKeyResolver"
-    gatewayReplenishRate: "30"
+    gatewayReplenishRate: "100"
 individual:
   image:
     repository: docker.io/venkatramireddyb/individual
-    tag: sdc-uat-0657159be3406e649f60dacc4a73dedf1efa7c2e
+    tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
   ingress:
     nginxRateLimit:
       enabled: true
@@ -737,7 +752,7 @@ individual:
 inportal-survey:
   image:
     repository: docker.io/venkatramireddyb/inportal-survey
-    tag: sdc-uat-0657159be3406e649f60dacc4a73dedf1efa7c2e
+    tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
   ingress:
     nginxRateLimit:
       enabled: true
@@ -782,7 +797,7 @@ jaeger-query:
 kerala-sms:
   image:
     repository: docker.io/venkatramireddyb/kerala-sms
-    tag: sdc-uat-0657159be3406e649f60dacc4a73dedf1efa7c2e
+    tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
   ingress:
     nginxRateLimit:
       enabled: true
@@ -797,7 +812,7 @@ kerala-sms:
 lock-svc:
   image:
     repository: docker.io/venkatramireddyb/lock-svc
-    tag: sdc-uat-0657159be3406e649f60dacc4a73dedf1efa7c2e
+    tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
   ingress:
     nginxRateLimit:
       enabled: true
@@ -827,7 +842,7 @@ metabase:
 minio-filestore:
   image:
     repository: docker.io/venkatramireddyb/egov-filestore
-    tag: sdc-uat-0657159be3406e649f60dacc4a73dedf1efa7c2e
+    tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
   ingress:
     nginxRateLimit:
       enabled: true
@@ -872,7 +887,7 @@ nginx-deployment:
 njdg-transformer:
   image:
     repository: docker.io/venkatramireddyb/njdg-transformer
-    tag: main-efd7abb0a5b4e170e15f917390967a46c40ae62b
+    tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
   ingress:
     nginxRateLimit:
       enabled: true
@@ -887,7 +902,7 @@ njdg-transformer:
 notification:
   image:
     repository: venkatramireddyb/notification
-    tag: sdc-uat-0657159be3406e649f60dacc4a73dedf1efa7c2e
+    tag: sdc-uat-fb7493994c08b593759448d6d3be1bd309d6ce02
   ingress:
     nginxRateLimit:
       enabled: true
@@ -902,7 +917,7 @@ notification:
 ocr-service:
   image:
     repository: docker.io/venkatramireddyb/ocr-service
-    tag: main-1e2e71865b38afacec3ffdcc39a67978e4746612
+    tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
   ingress:
     nginxRateLimit:
       enabled: true
@@ -916,8 +931,8 @@ ocr-service:
     gatewayReplenishRate: "30"
 oncourts-website:
   image:
-    repository: docker.io/venkatramireddyb/oncourts-landing-page
-    tag: sdc-uat-d3dfcd8ddd6a9e618208704404a675af1590b8bc
+    repository: docker.io/venkatramireddyb/oncourts-website
+    tag: 'main-4f0da34d42062f07ba96821f18001886a6748fb1'
   ingress:
     nginxRateLimit:
       enabled: true
@@ -932,7 +947,7 @@ oncourts-website:
 openapi:
   image:
     repository: docker.io/venkatramireddyb/openapi
-    tag: sdc-uat-0657159be3406e649f60dacc4a73dedf1efa7c2e
+    tag: sdc-uat-fb7493994c08b593759448d6d3be1bd309d6ce02
   ingress:
     nginxRateLimit:
       enabled: true
@@ -947,7 +962,7 @@ openapi:
 order:
   image:
     repository: docker.io/venkatramireddyb/order
-    tag: sdc-uat-0657159be3406e649f60dacc4a73dedf1efa7c2e
+    tag: sdc-uat-fb7493994c08b593759448d6d3be1bd309d6ce02
   ingress:
     nginxRateLimit:
       enabled: true
@@ -962,7 +977,7 @@ order:
 order-management:
   image:
     repository: docker.io/venkatramireddyb/order-management
-    tag: sdc-uat-0657159be3406e649f60dacc4a73dedf1efa7c2e
+    tag: sdc-uat-fb7493994c08b593759448d6d3be1bd309d6ce02
   ingress:
     nginxRateLimit:
       enabled: true
@@ -977,7 +992,7 @@ order-management:
 payment-calculator:
   image:
     repository: docker.io/venkatramireddyb/payment-calculator
-    tag: main-e5b97b6768cd3fec4eebf9fdd2707ea8cb67bf89
+    tag: sdc-uat-fb7493994c08b593759448d6d3be1bd309d6ce02
   ingress:
     nginxRateLimit:
       enabled: true
@@ -1006,8 +1021,8 @@ pdf-service:
     gatewayReplenishRate: "30"
 pgr-services:
   image:
-    repository: egovio/pgr-services
-    tag: core-digit-2.9-lts-pgr-02df4964cb-3
+    repository: docker.io/venkatramireddyb/pgr-services
+    tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
   ingress:
     nginxRateLimit:
       enabled: true
@@ -1037,7 +1052,7 @@ qr-code-service:
 scheduler:
   image:
     repository: docker.io/venkatramireddyb/scheduler
-    tag: main-6e3e68ae98f0fc7d721f9fb378ea86937a2f0bc7
+    tag: sdc-uat-fb7493994c08b593759448d6d3be1bd309d6ce02
   ingress:
     nginxRateLimit:
       enabled: true
@@ -1082,7 +1097,7 @@ static-assets:
 summons-svc:
   image:
     repository: venkatramireddyb/summons-svc
-    tag: sdc-uat-0657159be3406e649f60dacc4a73dedf1efa7c2e
+    tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
   ingress:
     nginxRateLimit:
       enabled: true
@@ -1127,7 +1142,7 @@ sunbird-rc-identity-service:
 sunbirdrc-credential-service:
   image:
     repository: egovio/sunbirdrc-credential-service
-    tag: sunbirdrc-mithun-f0d17a4438-103
+    tag: sdc-uat-fb7493994c08b593759448d6d3be1bd309d6ce02
   ingress:
     nginxRateLimit:
       enabled: true
@@ -1142,7 +1157,7 @@ sunbirdrc-credential-service:
 task:
   image:
     repository: venkatramireddyb/task
-    tag: sdc-uat-0657159be3406e649f60dacc4a73dedf1efa7c2e
+    tag: main-da2cfeab916936dd5da61db9248e5fddd3facd33
   ingress:
     nginxRateLimit:
       enabled: true
@@ -1157,7 +1172,7 @@ task:
 task-management:
   image:
     repository: docker.io/venkatramireddyb/task-management
-    tag: main-6e3e68ae98f0fc7d721f9fb378ea86937a2f0bc7
+    tag: sdc-uat-fb7493994c08b593759448d6d3be1bd309d6ce02
   ingress:
     nginxRateLimit:
       enabled: true
@@ -1172,7 +1187,7 @@ task-management:
 template-configuration:
   image:
     repository: docker.io/venkatramireddyb/template-configuration
-    tag: main-eac2161dde59072e91b142be82e47dc9df110c4f
+    tag: sdc-uat-fb7493994c08b593759448d6d3be1bd309d6ce02
   ingress:
     nginxRateLimit:
       enabled: true
@@ -1202,7 +1217,7 @@ transcription:
 transformer:
   image:
     repository: docker.io/venkatramireddyb/transformer
-    tag: sdc-uat-0657159be3406e649f60dacc4a73dedf1efa7c2e
+    tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
   ingress:
     nginxRateLimit:
       enabled: true
@@ -1217,7 +1232,7 @@ transformer:
 user-otp:
   image:
     repository: docker.io/venkatramireddyb/user-otp
-    tag: sdc-uat-0657159be3406e649f60dacc4a73dedf1efa7c2e
+    tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
   ingress:
     nginxRateLimit:
       enabled: true

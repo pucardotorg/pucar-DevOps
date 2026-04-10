@@ -12,6 +12,7 @@ ingress:
     nginx.ingress.kubernetes.io/proxy-body-size: "10m"
 
 lokiEnabled: true
+tracing-enabled: true
 
 # Init Containers Configs
 initContainers:
@@ -29,7 +30,7 @@ image:
   imagePullPolicy: Always
 replicas: "1"
 httpPort: 8080
-debug: 5005
+debugPort: 5005
 appType: "java-spring"
 heap: "-Xmx256m -Xms256m"
 java-args: "-Dspring.profiles.active=monitoring"
@@ -41,8 +42,6 @@ healthChecks:
   readinessProbePath: "/task/health"
 
 env: |
-  - name: JAVA_ENABLE_DEBUG
-    value: "true"
   - name: JAVA_OPTS
     value: "-Xmx256m -Xms256m"
   - name: SERVER_PORT

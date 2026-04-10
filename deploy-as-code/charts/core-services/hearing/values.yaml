@@ -10,7 +10,8 @@ ingress:
   context: "hearing"
 
 lokiEnabled: true
-redisEnabled: true
+tracing-enabled: true
+redisEnabled: false
 
 # Init Containers Configs
 initContainers:

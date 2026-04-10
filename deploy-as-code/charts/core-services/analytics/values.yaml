@@ -9,7 +9,9 @@ ingress:
   enabled: true
   context: "analytics"
 
+tracing-enabled: true
 lokiEnabled: true
+redisEnabled: true
 
 # Init Containers Configs
 healthChecks:
@@ -152,7 +154,8 @@ env: |
       configMapKeyRef:
         key: task-management
         name: egov-service-host
-  - name: SPRING_REDIS_HOST
-    value: "redis.backbone"
-  - name: SPRING_REDIS_PORT
-    value: "6379"
+  - name: DRISTI_CTC_HOST
+    valueFrom:
+      configMapKeyRef:
+        key: ctc
+        name: egov-service-host

@@ -10,6 +10,7 @@ ingress:
   context: "bail-bond"
 
 lokiEnabled: true
+tracing-enabled: true
 
 # Init Containers Configs
 initContainers:
@@ -115,7 +116,7 @@ env: |
   - name: DOMAIN_URL
     valueFrom:
       configMapKeyRef:
-        key: egov-services
+        key: domain-url
         name: egov-config
   - name: EGOV_FILESTORE_HOST
     valueFrom:

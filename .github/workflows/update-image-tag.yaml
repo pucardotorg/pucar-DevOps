@@ -1,0 +1,124 @@
+name: Update Service Image Tag
+
+on:
+  workflow_dispatch:
+    inputs:
+      service_name:
+        description: 'Name of the service (e.g. ab-diary)'
+        required: true
+        type: string
+      service_tag:
+        description: 'New Docker image tag (e.g. sdc-uat-something)'
+        required: true
+        type: string
+      environment:
+        description: 'GitHub Environment to use (e.g. sdc-uat)'
+        required: true
+        type: string
+        default: 'sdc-uat'
+      git_branch:
+        description: 'Git branch to checkout (leave empty for current/default branch)'
+        required: false
+        type: string
+        default: 'pucar-stg'
+  repository_dispatch:
+    types: [update-image-tag]
+
+run-name: Update ${{ github.event.inputs.service_name || github.event.client_payload.service_name }} to ${{ github.event.inputs.service_tag || github.event.client_payload.service_tag }}
+
+jobs:
+  update-tag:
+    runs-on: ubuntu-latest
+    # Pick up the specified environment here, which enables access to repository environment variables (vars.*) for that specific environment.
+    environment: ${{ github.event.inputs.environment || github.event.client_payload.environment }}
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          # Use user-provided repo/branch input or default to current GitHub Context context
+          repository: 'pucardotorg/pucar-DevOps'
+          ref: ${{ github.event.inputs.git_branch || vars.GIT_BRANCH || '' }}
+
+      - name: Set Variables
+        id: vars
+        run: |
+          set -e
+          
+          # Extract variables from workflow_dispatch or repository_dispatch events
+          if [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
+            SERVICE_NAME="${{ github.event.inputs.service_name }}"
+            SERVICE_TAG="${{ github.event.inputs.service_tag }}"
+            ENVIRONMENT="${{ github.event.inputs.environment }}"
+          else
+            SERVICE_NAME="${{ github.event.client_payload.service_name }}"
+            SERVICE_TAG="${{ github.event.client_payload.service_tag }}"
+            ENVIRONMENT="${{ github.event.client_payload.environment }}"
+          fi
+          
+          if [ -z "$SERVICE_NAME" ] || [ -z "$SERVICE_TAG" ] || [ -z "$ENVIRONMENT" ]; then
+            echo "Error: Missing required input parameters (service_name, service_tag, environment)."
+            exit 1
+          fi
+          
+          echo "SERVICE_NAME=$SERVICE_NAME" >> $GITHUB_ENV
+          echo "SERVICE_TAG=$SERVICE_TAG" >> $GITHUB_ENV
+          echo "ENVIRONMENT=$ENVIRONMENT" >> $GITHUB_ENV
+          
+          # Use Environment variable picked from GitHub Action Environment variables context.
+          # We expect you to configure 'IMAGE_TAG_FILE_PATH' in the environment's variables.
+          # E.g., IMAGE_TAG_FILE_PATH = deploy-as-code/charts/environments/pucar-stg-config.yaml
+          FILE_PATH="${{ vars.IMAGE_TAG_FILE_PATH }}"
+          
+          if [ -z "$FILE_PATH" ]; then
+            echo "Error: IMAGE_TAG_FILE_PATH environment variable is not set for environment $ENVIRONMENT"
+            exit 1
+          fi
+          
+          echo "FILE_PATH=$FILE_PATH" >> $GITHUB_ENV
+
+      - name: Verify Configuration File Exists
+        run: |
+          if [ ! -f "$FILE_PATH" ]; then
+            echo "Error: Configuration file not found at $FILE_PATH"
+            exit 1
+          fi
+
+      - name: Update Image Tag
+        run: |
+          # Use yq to check if the service block exists
+          SERVICE_EXISTS=$(yq eval ". | has(\"${SERVICE_NAME}\")" "$FILE_PATH")
+          
+          if [ "$SERVICE_EXISTS" != "true" ]; then
+            echo "Error: Service '${SERVICE_NAME}' not found in $FILE_PATH"
+            exit 1
+          fi
+          
+          echo "Updating $SERVICE_NAME tag to $SERVICE_TAG in $FILE_PATH..."
+          
+          # Update the tag explicitly. Brackets are used since service names may contain hyphens
+          yq eval -i ".[\"${SERVICE_NAME}\"].image.tag = \"${SERVICE_TAG}\"" "$FILE_PATH"
+          
+          # Verify the tag is correct
+          UPDATED_TAG=$(yq eval ".[\"${SERVICE_NAME}\"].image.tag" "$FILE_PATH")
+          if [ "$UPDATED_TAG" != "$SERVICE_TAG" ]; then
+            echo "Error: Failed to verify tag update."
+            exit 1
+          fi
+
+      - name: Commit and Push Changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          
+          git add "$FILE_PATH"
+          
+          # Check if there's anything to commit (in case the tag was already set correctly)
+          if git diff-index --quiet HEAD; then
+            echo "No changes found. Tag might already be set to $SERVICE_TAG"
+            exit 0
+          fi
+          
+          git commit -m "Update image tag for ${SERVICE_NAME} to ${SERVICE_TAG} in ${ENVIRONMENT}"
+          git push

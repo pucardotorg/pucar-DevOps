@@ -85,7 +85,7 @@ storage:
   type: elasticsearch
   elasticsearch:
     scheme: http
-    host: elasticsearch-master
+    host: elasticsearch-data.backbone
     port: 9200
     anonymous: false
     user: elastic

@@ -146,23 +146,29 @@ lifecycle:
 
 memory_limits: "512Mi"
 resources: |
-  {{- if .Values.memory_limits -}}
+  {{- if or (eq .Values.appType "java-spring") .Values.applyResourceLimits -}}
   requests:
     {{- if .Values.memory_requests }}
     memory: {{ .Values.memory_requests | quote }}
     {{- else if .Values.memory_limits }}
     memory: {{ .Values.memory_limits | quote }}
     {{- end }}
-  limits:
-    {{- if .Values.cpu_limits }}
+    {{- if .Values.cpu_requests }}
+    cpu: {{ .Values.cpu_requests | quote }}
+    {{- else if .Values.cpu_limits }}
     cpu: {{ .Values.cpu_limits | quote }}
-    {{- end }}  
+    {{- end }}
+  limits:
     {{- if .Values.memory_limits }}
     memory: {{ .Values.memory_limits | quote }}
     {{- else if .Values.memory_requests }}
     memory: {{ .Values.memory_requests | quote }}
     {{- end }}
+    {{- if .Values.cpu_limits }}
+    cpu: {{ .Values.cpu_limits | quote }}
+    {{- end }}
   {{- end -}}
+
 ## Allows specification of additional environment variables
 extraEnv:
   java: |
@@ -341,20 +347,14 @@ extraEnv:
             
             
   jaeger: |             
-      - name: JAEGER_SERVICE_NAME
+      - name: OTEL_SERVICE_NAME
         value: {{ template "common.name" . }}
-      - name: JAEGER_SAMPLER_TYPE
-        value: remote
-      - name: JAEGER_AGENT_HOST
+      - name: OTEL_EXPORTER_OTLP_ENDPOINT
         valueFrom:
-          fieldRef:
-            fieldPath: status.hostIP
-      - name: JAEGER_AGENT_PORT
-        value: "6831"
-      - name: JAEGER_SAMPLER_MANAGER_HOST_PORT
-        value: "$(JAEGER_AGENT_HOST):5778"
-      - name: TRACER_OPENTRACING_ENABLED
-        value: "true"         
+          configMapKeyRef:
+            name: egov-service-host
+            key: otel-exporter-otlp-endpoint
+
 ## Additional init containers
 extraInitContainers: |
 
