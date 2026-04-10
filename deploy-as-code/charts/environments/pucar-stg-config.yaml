@@ -155,7 +155,7 @@ case:
   ingress:
     nginxRateLimit:
       enabled: true
-      rpm: "500"
+      rpm: "1000"
       burstMultiplier: "1"
       conections: "10"
   rateLimit:
@@ -170,7 +170,7 @@ casemanagement:
   ingress:
     nginxRateLimit:
       enabled: true
-      rpm: "500"
+      rpm: "1000"
       burstMultiplier: "1"
       conections: "10"
   rateLimit:
@@ -260,7 +260,7 @@ digitalized-documents:
   ingress:
     nginxRateLimit:
       enabled: true
-      rpm: "500"
+      rpm: "1000"
       burstMultiplier: "1"
       conections: "10"
   rateLimit:
@@ -365,7 +365,7 @@ egov-filestore:
   ingress:
     nginxRateLimit:
       enabled: true
-      rpm: "500"
+      rpm: "1000"
       burstMultiplier: "1"
       conections: "10"
   rateLimit:
@@ -726,7 +726,7 @@ inbox:
   ingress:
     nginxRateLimit:
       enabled: true
-      rpm: "500"
+      rpm: "3000"
       burstMultiplier: "1"
       conections: "10"
   rateLimit:
