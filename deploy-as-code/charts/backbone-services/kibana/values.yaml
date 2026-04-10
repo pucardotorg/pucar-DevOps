@@ -61,8 +61,8 @@ protocol: http
 
 serverHost: "0.0.0.0"
 
-healthCheckPath: "/kibana/app/kibana"
-serverBasePath: /kibana
+healthCheckPath: "/phc-kibana/app/kibana"
+serverBasePath: /phc-kibana
 
 # Allows you to add any config files in /usr/share/kibana/config/
 # such as kibana.yml
@@ -155,7 +155,7 @@ ingress:
   hosts:
     - host: demo.digit.org
       paths:
-        - path: /kibana
+        - path: /phc-kibana
   tls: 
    - secretName: demo.digit.org-tls-certs
      hosts:
