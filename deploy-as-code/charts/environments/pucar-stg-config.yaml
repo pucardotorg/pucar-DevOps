@@ -256,7 +256,7 @@ digit-ui:
 digitalized-documents:
   image:
     repository: docker.io/venkatramireddyb/digitalized-documents
-    tag: sdc-uat-fb7493994c08b593759448d6d3be1bd309d6ce02
+    tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
   ingress:
     nginxRateLimit:
       enabled: true
