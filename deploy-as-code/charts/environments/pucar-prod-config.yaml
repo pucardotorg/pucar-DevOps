@@ -1,0 +1,1346 @@
+ab-diary:
+  image:
+    repository: docker.io/venkatramireddyb/ab-diary
+    tag: sdc-uat-fb7493994c08b593759448d6d3be1bd309d6ce02
+  heap: "-Xmx512m -Xms256m"
+  memory_requests: "768Mi"
+  memory_limits: "1Gi"
+  cpu_requests: "50m"
+  ingress:
+    nginxRateLimit:
+      enabled: true
+      rpm: "500"
+      burstMultiplier: "1"
+      conections: "10"
+  rateLimit:
+    enabled: true
+    gatewayBurstCapacity: "30"
+    gatewayKeyResolver: "userKeyResolver"
+    gatewayReplenishRate: "30"
+advocate:
+  image:
+    repository: docker.io/venkatramireddyb/advocate
+    tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
+  heap: "-Xmx1024m -Xms192m"
+  memory_requests: "1200Mi"
+  memory_limits: "1500Mi"
+  cpu_requests: "50m"
+  ingress:
+    nginxRateLimit:
+      enabled: true
+      rpm: "500"
+      burstMultiplier: "1"
+      conections: "10"
+  rateLimit:
+    enabled: true
+    gatewayBurstCapacity: "30"
+    gatewayKeyResolver: "userKeyResolver"
+    gatewayReplenishRate: "30"
+advocate-office-management:
+  image:
+    repository: docker.io/venkatramireddyb/advocate-office-management
+    tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
+  heap: "-Xmx512m -Xms256m"
+  memory_requests: "768Mi"
+  memory_limits: "768Mi"
+  cpu_requests: "50m"
+  ingress:
+    nginxRateLimit:
+      enabled: true
+      rpm: "500"
+      burstMultiplier: "1"
+      conections: "10"
+  rateLimit:
+    enabled: true
+    gatewayBurstCapacity: "30"
+    gatewayKeyResolver: "userKeyResolver"
+    gatewayReplenishRate: "30"
+analytics:
+  image:
+    repository: docker.io/venkatramireddyb/analytics
+    tag: sdc-uat-fb7493994c08b593759448d6d3be1bd309d6ce02
+  heap: "-Xmx1024m -Xms256m"
+  memory_requests: "1200Mi"
+  memory_limits: "1500Mi"
+  cpu_requests: "50m"
+  ingress:
+    nginxRateLimit:
+      enabled: true
+      rpm: "500"
+      burstMultiplier: "1"
+      conections: "10"
+  rateLimit:
+    enabled: true
+    gatewayBurstCapacity: "30"
+    gatewayKeyResolver: "userKeyResolver"
+    gatewayReplenishRate: "30"
+application:
+  image:
+    repository: docker.io/venkatramireddyb/application
+    tag: sdc-uat-fb7493994c08b593759448d6d3be1bd309d6ce02
+  heap: "-Xmx1024m -Xms192m"
+  memory_requests: "1200Mi"
+  memory_limits: "1500Mi"
+  cpu_requests: "50m"
+  ingress:
+    nginxRateLimit:
+      enabled: true
+      rpm: "500"
+      burstMultiplier: "1"
+      conections: "10"
+  rateLimit:
+    enabled: true
+    gatewayBurstCapacity: "30"
+    gatewayKeyResolver: "userKeyResolver"
+    gatewayReplenishRate: "30"
+audit-service:
+  image:
+    repository: docker.io/venkatramireddyb/audit-service
+    tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
+  heap: "-Xmx128m -Xms128m"
+  memory_requests: "256Mi"
+  memory_limits: "384Mi"
+  cpu_requests: "50m"
+  cpu_limits: "150m"
+  ingress:
+    nginxRateLimit:
+      enabled: true
+      rpm: "500"
+      burstMultiplier: "1"
+      conections: "10"
+  rateLimit:
+    enabled: true
+    gatewayBurstCapacity: "30"
+    gatewayKeyResolver: "userKeyResolver"
+    gatewayReplenishRate: "30"
+bail-bond:
+  image:
+    repository: docker.io/venkatramireddyb/bail-bond
+    tag: sdc-uat-fb7493994c08b593759448d6d3be1bd309d6ce02
+  heap: "-Xmx1024m -Xms256m"
+  memory_requests: "1200Mi"
+  memory_limits: "1500Mi"
+  cpu_requests: "50m"
+  ingress:
+    nginxRateLimit:
+      enabled: true
+      rpm: "500"
+      burstMultiplier: "1"
+      conections: "10"
+  rateLimit:
+    enabled: true
+    gatewayBurstCapacity: "30"
+    gatewayKeyResolver: "userKeyResolver"
+    gatewayReplenishRate: "30"
+bank-details:
+  image:
+    repository: docker.io/venkatramireddyb/bank-details
+    tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
+  heap: "-Xmx512m -Xms256m"
+  memory_requests: "768Mi"
+  memory_limits: "768Mi"
+  cpu_requests: "50m"
+  ingress:
+    nginxRateLimit:
+      enabled: true
+      rpm: "500"
+      burstMultiplier: "1"
+      conections: "10"
+  rateLimit:
+    enabled: true
+    gatewayBurstCapacity: "30"
+    gatewayKeyResolver: "userKeyResolver"
+    gatewayReplenishRate: "30"
+billing-service:
+  image:
+    repository: docker.io/venkatramireddyb/billing-service
+    tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
+  heap: "-Xmx1024m -Xms256m"
+  memory_requests: "1200Mi"
+  memory_limits: "1500Mi"
+  cpu_requests: "50m"
+  ingress:
+    nginxRateLimit:
+      enabled: true
+      rpm: "500"
+      burstMultiplier: "1"
+      conections: "10"
+  rateLimit:
+    enabled: true
+    gatewayBurstCapacity: "40"
+    gatewayKeyResolver: "userKeyResolver"
+    gatewayReplenishRate: "40"
+case:
+  image:
+    repository: docker.io/venkatramireddyb/case
+    tag: sdc-uat-fb7493994c08b593759448d6d3be1bd309d6ce02
+  heap: "-Xmx2g -Xms1g"
+  memory_requests: "2.5Gi"
+  memory_limits: "3Gi"
+  cpu_requests: "50m"
+  ingress:
+    nginxRateLimit:
+      enabled: true
+      rpm: "1000"
+      burstMultiplier: "1"
+      conections: "10"
+  rateLimit:
+    enabled: true
+    gatewayBurstCapacity: "70"
+    gatewayKeyResolver: "userKeyResolver"
+    gatewayReplenishRate: "70"
+casemanagement:
+  image:
+    repository: docker.io/venkatramireddyb/casemanagement
+    tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
+  heap: "-Xmx1024m -Xms256m"
+  memory_requests: "1200Mi"
+  memory_limits: "1500Mi"
+  cpu_requests: "50m"
+  ingress:
+    nginxRateLimit:
+      enabled: true
+      rpm: "1000"
+      burstMultiplier: "1"
+      conections: "10"
+  rateLimit:
+    enabled: true
+    gatewayBurstCapacity: "30"
+    gatewayKeyResolver: "userKeyResolver"
+    gatewayReplenishRate: "30"
+clamav:
+  image:
+    repository: docker.io/venkatramireddyb/clamav
+    tag: latest
+  ingress:
+    nginxRateLimit:
+      enabled: true
+      rpm: "500"
+      burstMultiplier: "1"
+      conections: "10"
+  rateLimit:
+    enabled: true
+    gatewayBurstCapacity: "30"
+    gatewayKeyResolver: "userKeyResolver"
+    gatewayReplenishRate: "30"
+collection-services:
+  image:
+    repository: docker.io/venkatramireddyb/collection-services
+    tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
+  heap: "-Xmx1024m -Xms256m"
+  memory_requests: "1200Mi"
+  memory_limits: "1500Mi"
+  cpu_requests: "50m"
+  ingress:
+    nginxRateLimit:
+      enabled: true
+      rpm: "500"
+      burstMultiplier: "1"
+      conections: "10"
+  rateLimit:
+    enabled: true
+    gatewayBurstCapacity: "30"
+    gatewayKeyResolver: "userKeyResolver"
+    gatewayReplenishRate: "30"
+ctc:
+  image:
+    repository: docker.io/venkatramireddyb/ctc
+    tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
+  heap: "-Xmx384m -Xms256m"
+  memory_requests: "512Mi"
+  memory_limits: "768Mi"
+  cpu_requests: "50m"
+  ingress:
+    nginxRateLimit:
+      enabled: true
+      rpm: "500"
+      burstMultiplier: "1"
+      conections: "10"
+  rateLimit:
+    enabled: true
+    gatewayBurstCapacity: "30"
+    gatewayKeyResolver: "userKeyResolver"
+    gatewayReplenishRate: "30"
+digit-ui:
+  image:
+    repository: docker.io/venkatramireddyb/digit-ui
+    tag: main-fda605c01e935db8152e001f7173df22f00a0ffc
+  memory_requests: "1Gi"
+  ingress:
+    nginxRateLimit:
+      enabled: true
+      rpm: "10000"
+      burstMultiplier: "1"
+      conections: "10"
+  rateLimit:
+    enabled: true
+    gatewayBurstCapacity: "30"
+    gatewayKeyResolver: "userKeyResolver"
+    gatewayReplenishRate: "30"
+digitalized-documents:
+  image:
+    repository: docker.io/venkatramireddyb/digitalized-documents
+    tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
+  heap: "-Xmx768m -Xms768m"
+  memory_requests: "1Gi"
+  memory_limits: "1Gi"
+  cpu_requests: "50m"
+  ingress:
+    nginxRateLimit:
+      enabled: true
+      rpm: "1000"
+      burstMultiplier: "1"
+      conections: "10"
+  rateLimit:
+    enabled: true
+    gatewayBurstCapacity: "30"
+    gatewayKeyResolver: "userKeyResolver"
+    gatewayReplenishRate: "30"
+dristi-case-pdf:
+  image:
+    repository: docker.io/venkatramireddyb/dristi-case-pdf
+    tag: sdc-uat-fb7493994c08b593759448d6d3be1bd309d6ce02
+  memory_requests: "1200Mi"
+  memory_limits: "1500Mi"
+  cpu_requests: "50m"
+  ingress:
+    nginxRateLimit:
+      enabled: true
+      rpm: "500"
+      burstMultiplier: "1"
+      conections: "10"
+  rateLimit:
+    enabled: true
+    gatewayBurstCapacity: "30"
+    gatewayKeyResolver: "userKeyResolver"
+    gatewayReplenishRate: "30"
+dristi-pdf:
+  image:
+    repository: docker.io/venkatramireddyb/dristi-pdf
+    tag: sdc-uat-fb7493994c08b593759448d6d3be1bd309d6ce02
+  memory_requests: "1200Mi"
+  memory_limits: "2560Mi"
+  cpu_requests: "50m"
+  cpu_limits: "250m"
+  ingress:
+    nginxRateLimit:
+      enabled: true
+      rpm: "500"
+      burstMultiplier: "1"
+      conections: "10"
+  rateLimit:
+    enabled: true
+    gatewayBurstCapacity: "30"
+    gatewayKeyResolver: "userKeyResolver"
+    gatewayReplenishRate: "30"
+e-sign-svc:
+  image:
+    repository: docker.io/venkatramireddyb/e-sign-svc
+    tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
+  heap: "-Xmx256m -Xms256m"
+  memory_requests: "384Mi"
+  memory_limits: "512Mi"
+  cpu_requests: "50m"
+  ingress:
+    nginxRateLimit:
+      enabled: true
+      rpm: "500"
+      burstMultiplier: "1"
+      conections: "10"
+  rateLimit:
+    enabled: true
+    gatewayBurstCapacity: "30"
+    gatewayKeyResolver: "userKeyResolver"
+    gatewayReplenishRate: "30"
+egov-accesscontrol:
+  image:
+    repository: docker.io/venkatramireddyb/egov-accesscontrol
+    tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
+  heap: "-Xmx768m -Xms256m"
+  memory_requests: "1Gi"
+  memory_limits: "1Gi"
+  cpu_requests: "100m"
+  ingress:
+    nginxRateLimit:
+      enabled: true
+      rpm: "500"
+      burstMultiplier: "1"
+      conections: "10"
+  rateLimit:
+    enabled: true
+    gatewayBurstCapacity: "30"
+    gatewayKeyResolver: "userKeyResolver"
+    gatewayReplenishRate: "30"
+egov-apportion-service:
+  image:
+    repository: docker.io/venkatramireddyb/egov-apportion-service
+    tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
+  heap: "-Xmx256m -Xms256m"
+  memory_requests: "384Mi"
+  memory_limits: "512Mi"
+  cpu_requests: "50m"
+  ingress:
+    nginxRateLimit:
+      enabled: true
+      rpm: "500"
+      burstMultiplier: "1"
+      conections: "10"
+  rateLimit:
+    enabled: true
+    gatewayBurstCapacity: "30"
+    gatewayKeyResolver: "userKeyResolver"
+    gatewayReplenishRate: "30"
+egov-enc-service:
+  image:
+    repository: docker.io/venkatramireddyb/egov-enc-service
+    tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
+  heap: "-Xmx512m -Xms256m"
+  memory_requests: "768Mi"
+  memory_limits: "1Gi"
+  cpu_requests: "100m"
+  cpu_limits: "250m"
+  ingress:
+    nginxRateLimit:
+      enabled: true
+      rpm: "500"
+      burstMultiplier: "1"
+      conections: "10"
+  rateLimit:
+    enabled: true
+    gatewayBurstCapacity: "30"
+    gatewayKeyResolver: "userKeyResolver"
+    gatewayReplenishRate: "30"
+egov-filestore:
+  image:
+    repository: venkatramireddyb/egov-filestore
+    tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
+  heap: "-Xmx2816m -Xms1024m"
+  memory_requests: "3Gi"
+  memory_limits: "3.5Gi"
+  cpu_requests: "100m"
+  cpu_limits: "2500m"
+  ingress:
+    nginxRateLimit:
+      enabled: true
+      rpm: "1000"
+      burstMultiplier: "1"
+      conections: "10"
+  rateLimit:
+    enabled: true
+    gatewayBurstCapacity: "40"
+    gatewayKeyResolver: "userKeyResolver"
+    gatewayReplenishRate: "40"
+egov-hrms:
+  image:
+    repository: docker.io/venkatramireddyb/egov-hrms
+    tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
+  heap: "-Xmx856m -Xms256m"
+  memory_requests: "1000Mi"
+  memory_limits: "1500Mi"
+  cpu_requests: "100m"
+  ingress:
+    nginxRateLimit:
+      enabled: true
+      rpm: "500"
+      burstMultiplier: "1"
+      conections: "10"
+  rateLimit:
+    enabled: true
+    gatewayBurstCapacity: "30"
+    gatewayKeyResolver: "userKeyResolver"
+    gatewayReplenishRate: "30"
+egov-idgen:
+  image:
+    repository: docker.io/venkatramireddyb/egov-idgen
+    tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
+  heap: "-Xmx768m -Xms192m"
+  memory_requests: "1000Mi"
+  memory_limits: "1500Mi"
+  cpu_requests: "100m"
+  ingress:
+    nginxRateLimit:
+      enabled: true
+      rpm: "500"
+      burstMultiplier: "1"
+      conections: "10"
+  rateLimit:
+    enabled: true
+    gatewayBurstCapacity: "30"
+    gatewayKeyResolver: "userKeyResolver"
+    gatewayReplenishRate: "30"
+egov-indexer:
+  image:
+    repository: docker.io/venkatramireddyb/egov-indexer
+    tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
+  heap: "-Xmx918m -Xms512m"
+  memory_requests: "1100Mi"
+  memory_limits: "1500Mi"
+  cpu_requests: "100m"
+  ingress:
+    nginxRateLimit:
+      enabled: true
+      rpm: "500"
+      burstMultiplier: "1"
+      conections: "10"
+  rateLimit:
+    enabled: true
+    gatewayBurstCapacity: "30"
+    gatewayKeyResolver: "userKeyResolver"
+    gatewayReplenishRate: "30"
+egov-localization:
+  image:
+    repository: docker.io/venkatramireddyb/egov-localization
+    tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
+  heap: "-Xmx768m -Xms256m"
+  memory_requests: "1000Mi"
+  memory_limits: "1500Mi"
+  cpu_requests: "50m"
+  ingress:
+    nginxRateLimit:
+      enabled: true
+      rpm: "500"
+      burstMultiplier: "1"
+      conections: "10"
+  rateLimit:
+    enabled: true
+    gatewayBurstCapacity: "30"
+    gatewayKeyResolver: "userKeyResolver"
+    gatewayReplenishRate: "30"
+egov-mdms-service:
+  image:
+    repository: docker.io/venkatramireddyb/egov-mdms-service
+    tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
+  heap: "-Xmx512m -Xms512m"
+  memory_requests: "768Mi"
+  memory_limits: "1Gi"
+  cpu_requests: "50m"
+  ingress:
+    nginxRateLimit:
+      enabled: true
+      rpm: "500"
+      burstMultiplier: "1"
+      conections: "10"
+  rateLimit:
+    enabled: true
+    gatewayBurstCapacity: "30"
+    gatewayKeyResolver: "userKeyResolver"
+    gatewayReplenishRate: "30"
+egov-notification-mail:
+  image:
+    repository: docker.io/venkatramireddyb/egov-notification-mail
+    tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
+  heap: "-Xmx1024m -Xms256m"
+  memory_requests: "1200Mi"
+  memory_limits: "1500Mi"
+  cpu_requests: "50m"
+  ingress:
+    nginxRateLimit:
+      enabled: true
+      rpm: "500"
+      burstMultiplier: "1"
+      conections: "10"
+  rateLimit:
+    enabled: true
+    gatewayBurstCapacity: "30"
+    gatewayKeyResolver: "userKeyResolver"
+    gatewayReplenishRate: "30"
+egov-otp:
+  image:
+    repository: docker.io/venkatramireddyb/egov-otp
+    tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
+  heap: "-Xmx1024m -Xms256m"
+  memory_requests: "1200Mi"
+  memory_limits: "1500Mi"
+  cpu_requests: "50m"
+  ingress:
+    nginxRateLimit:
+      enabled: true
+      rpm: "500"
+      burstMultiplier: "1"
+      conections: "10"
+  rateLimit:
+    enabled: true
+    gatewayBurstCapacity: "30"
+    gatewayKeyResolver: "userKeyResolver"
+    gatewayReplenishRate: "30"
+egov-persister:
+  image:
+    repository: docker.io/venkatramireddyb/egov-persister
+    tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
+  heap: "-Xmx768m -Xms256m"
+  memory_requests: "1000Mi"
+  memory_limits: "1500Mi"
+  cpu_requests: "50m"
+  ingress:
+    nginxRateLimit:
+      enabled: true
+      rpm: "500"
+      burstMultiplier: "1"
+      conections: "10"
+  rateLimit:
+    enabled: true
+    gatewayBurstCapacity: "30"
+    gatewayKeyResolver: "userKeyResolver"
+    gatewayReplenishRate: "30"
+egov-pg-service:
+  image:
+    repository: docker.io/venkatramireddyb/egov-pg-service
+    tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
+  heap: "-Xmx1024m -Xms256m"
+  memory_requests: "1200Mi"
+  memory_limits: "1500Mi"
+  cpu_requests: "50m"
+  ingress:
+    nginxRateLimit:
+      enabled: true
+      rpm: "500"
+      burstMultiplier: "1"
+      conections: "10"
+  rateLimit:
+    enabled: true
+    gatewayBurstCapacity: "30"
+    gatewayKeyResolver: "userKeyResolver"
+    gatewayReplenishRate: "30"
+egov-url-shortening:
+  image:
+    repository: docker.io/venkatramireddyb/egov-url-shortening
+    tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
+  heap: "-Xmx1024m -Xms256m"
+  memory_requests: "1200Mi"
+  memory_limits: "1500Mi"
+  cpu_requests: "50m"
+  ingress:
+    nginxRateLimit:
+      enabled: true
+      rpm: "500"
+      burstMultiplier: "1"
+      conections: "10"
+  rateLimit:
+    enabled: true
+    gatewayBurstCapacity: "30"
+    gatewayKeyResolver: "userKeyResolver"
+    gatewayReplenishRate: "30"
+egov-user:
+  image:
+    repository: docker.io/venkatramireddyb/egov-user
+    tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
+  heap: "-Xmx756m -Xms756m"
+  memory_requests: "1000Mi"
+  memory_limits: "1500Mi"
+  cpu_requests: "50m"
+  ingress:
+    nginxRateLimit:
+      enabled: true
+      rpm: "500"
+      burstMultiplier: "1"
+      conections: "10"
+  rateLimit:
+    enabled: true
+    gatewayBurstCapacity: "30"
+    gatewayKeyResolver: "userKeyResolver"
+    gatewayReplenishRate: "30"
+egov-user-event:
+  image:
+    repository: docker.io/venkatramireddyb/egov-user-event
+    tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
+  heap: "-Xmx1024m -Xms256m"
+  memory_requests: "1200Mi"
+  memory_limits: "1500Mi"
+  cpu_requests: "50m"
+  ingress:
+    nginxRateLimit:
+      enabled: true
+      rpm: "500"
+      burstMultiplier: "1"
+      conections: "10"
+  rateLimit:
+    enabled: true
+    gatewayBurstCapacity: "30"
+    gatewayKeyResolver: "userKeyResolver"
+    gatewayReplenishRate: "30"
+egov-workflow-v2:
+  image:
+    repository: docker.io/venkatramireddyb/egov-workflow-v2
+    tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
+  heap: "-Xmx1024m -Xms256m"
+  memory_requests: "1200Mi"
+  memory_limits: "1500Mi"
+  cpu_requests: "50m"
+  ingress:
+    nginxRateLimit:
+      enabled: true
+      rpm: "500"
+      burstMultiplier: "1"
+      conections: "10"
+  rateLimit:
+    enabled: true
+    gatewayBurstCapacity: "30"
+    gatewayKeyResolver: "userKeyResolver"
+    gatewayReplenishRate: "30"
+epost-tracker:
+  image:
+    repository: docker.io/venkatramireddyb/epost-tracker
+    tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
+  heap: "-Xmx1024m -Xms1024m"
+  memory_requests: 1280Mi
+  memory_limits: 1280Mi
+  cpu_requests: 50m
+  ingress:
+    nginxRateLimit:
+      enabled: true
+      rpm: "500"
+      burstMultiplier: "1"
+      conections: "10"
+  rateLimit:
+    enabled: true
+    gatewayBurstCapacity: "30"
+    gatewayKeyResolver: "userKeyResolver"
+    gatewayReplenishRate: "30"
+esign-interceptor:
+  image:
+    repository: docker.io/venkatramireddyb/esign-interceptor
+    tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
+  heap: "-Xmx1024m -Xms1024m"
+  memory_requests: 1280Mi
+  memory_limits: 1280Mi
+  cpu_requests: 50m
+  ingress:
+    nginxRateLimit:
+      enabled: true
+      rpm: "500"
+      burstMultiplier: "1"
+      conections: "10"
+  rateLimit:
+    enabled: true
+    gatewayBurstCapacity: "30"
+    gatewayKeyResolver: "userKeyResolver"
+    gatewayReplenishRate: "30"
+etreasury:
+  image:
+    repository: docker.io/venkatramireddyb/etreasury
+    tag: sdc-uat-fb7493994c08b593759448d6d3be1bd309d6ce02
+  heap: "-Xmx1024m -Xms1024m"
+  memory_requests: 1280Mi
+  memory_limits: 1280Mi
+  cpu_requests: 50m
+  ingress:
+    nginxRateLimit:
+      enabled: true
+      rpm: "500"
+      burstMultiplier: "1"
+      conections: "10"
+  rateLimit:
+    enabled: true
+    gatewayBurstCapacity: "30"
+    gatewayKeyResolver: "userKeyResolver"
+    gatewayReplenishRate: "30"
+evidence:
+  image:
+    repository: venkatramireddyb/evidence
+    tag: sdc-uat-fb7493994c08b593759448d6d3be1bd309d6ce02
+  heap: "-Xmx1024m -Xms1024m"
+  memory_requests: 1280Mi
+  memory_limits: 1280Mi
+  cpu_requests: 50m
+  ingress:
+    nginxRateLimit:
+      enabled: true
+      rpm: "500"
+      burstMultiplier: "1"
+      conections: "10"
+  rateLimit:
+    enabled: true
+    gatewayBurstCapacity: "30"
+    gatewayKeyResolver: "userKeyResolver"
+    gatewayReplenishRate: "30"
+epayments:
+  image:
+    repository: docker.io/venkatramireddyb/epayments
+    tag: sdc-uat-0657159be3406e649f60dacc4a73dedf1efa7c2e
+  memory_requests: 512Mi
+  cpu_requests: 50m
+  ingress:
+    nginxRateLimit:
+      enabled: true
+      rpm: "500"
+      burstMultiplier: "1"
+      conections: "10"
+  rateLimit:
+    enabled: true
+    gatewayBurstCapacity: "30"
+    gatewayKeyResolver: "userKeyResolver"
+    gatewayReplenishRate: "30"
+gateway:
+  namespace: pucar-stg
+  image:
+    repository: docker.io/venkatramireddyb/gateway
+    tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
+  heap: "-Xmx1024m -Xms1024m"
+  memory_requests: 1280Mi
+  memory_limits: 1280Mi
+  cpu_requests: 50m
+  ingress:
+    nginxRateLimit:
+      enabled: true
+      rpm: "500"
+      burstMultiplier: "1"
+      conections: "10"
+  rateLimit:
+    enabled: true
+    gatewayBurstCapacity: "30"
+    gatewayKeyResolver: "userKeyResolver"
+    gatewayReplenishRate: "30"
+hearing:
+  image:
+    repository: venkatramireddyb/hearing
+    tag: sdc-uat-fb7493994c08b593759448d6d3be1bd309d6ce02
+  heap: "-Xmx1024m -Xms1024m"
+  memory_requests: 1280Mi
+  memory_limits: 1280Mi
+  cpu_requests: 50m
+  ingress:
+    nginxRateLimit:
+      enabled: true
+      rpm: "500"
+      burstMultiplier: "1"
+      conections: "10"
+  rateLimit:
+    enabled: true
+    gatewayBurstCapacity: "40"
+    gatewayKeyResolver: "userKeyResolver"
+    gatewayReplenishRate: "40"
+hearing-management:
+  image:
+    repository: docker.io/venkatramireddyb/hearing-management
+    tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
+  heap: "-Xmx1024m -Xms1024m"
+  memory_requests: 1280Mi
+  memory_limits: 1280Mi
+  cpu_requests: 50m
+  ingress:
+    nginxRateLimit:
+      enabled: true
+      rpm: "500"
+      burstMultiplier: "1"
+      conections: "10"
+  rateLimit:
+    enabled: true
+    gatewayBurstCapacity: "30"
+    gatewayKeyResolver: "userKeyResolver"
+    gatewayReplenishRate: "30"
+icops-integration:
+  image:
+    repository: venkatramireddyb/icops-integration
+    tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
+  heap: "-Xmx512m -Xms512m"
+  memory_requests: 512Mi
+  memory_limits: 512Mi
+  cpu_requests: 50m
+  ingress:
+    nginxRateLimit:
+      enabled: true
+      rpm: "500"
+      burstMultiplier: "1"
+      conections: "10"
+  rateLimit:
+    enabled: true
+    gatewayBurstCapacity: "30"
+    gatewayKeyResolver: "userKeyResolver"
+    gatewayReplenishRate: "30"
+inbox:
+  image:
+    repository: docker.io/venkatramireddyb/inbox
+    tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
+  heap: "-Xmx1024m -Xms1024m"
+  memory_requests: 1280Mi
+  memory_limits: 1280Mi
+  cpu_requests: 50m
+  ingress:
+    nginxRateLimit:
+      enabled: true
+      rpm: "3000"
+      burstMultiplier: "1"
+      conections: "10"
+  rateLimit:
+    enabled: true
+    gatewayBurstCapacity: "100"
+    gatewayKeyResolver: "userKeyResolver"
+    gatewayReplenishRate: "100"
+individual:
+  image:
+    repository: docker.io/venkatramireddyb/individual
+    tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
+  heap: "-Xmx1024m -Xms1024m"
+  memory_requests: 1280Mi
+  memory_limits: 1280Mi
+  cpu_requests: 50m
+  ingress:
+    nginxRateLimit:
+      enabled: true
+      rpm: "500"
+      burstMultiplier: "1"
+      conections: "10"
+  rateLimit:
+    enabled: true
+    gatewayBurstCapacity: "30"
+    gatewayKeyResolver: "userKeyResolver"
+    gatewayReplenishRate: "30"
+inportal-survey:
+  image:
+    repository: docker.io/venkatramireddyb/inportal-survey
+    tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
+  heap: "-Xmx512m -Xms512m"
+  memory_requests: 512Mi
+  memory_limits: 512Mi
+  cpu_requests: 50m 
+  ingress:
+    nginxRateLimit:
+      enabled: true
+      rpm: "500"
+      burstMultiplier: "1"
+      conections: "10"
+  rateLimit:
+    enabled: true
+    gatewayBurstCapacity: "30"
+    gatewayKeyResolver: "userKeyResolver"
+    gatewayReplenishRate: "30"
+kerala-sms:
+  image:
+    repository: docker.io/venkatramireddyb/kerala-sms
+    tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
+  heap: "-Xmx512m -Xms512m"
+  memory_requests: 768Mi
+  memory_limits: 1000Mi
+  cpu_requests: 50m
+  ingress:
+    nginxRateLimit:
+      enabled: true
+      rpm: "500"
+      burstMultiplier: "1"
+      conections: "10"
+  rateLimit:
+    enabled: true
+    gatewayBurstCapacity: "30"
+    gatewayKeyResolver: "userKeyResolver"
+    gatewayReplenishRate: "30"
+lock-svc:
+  image:
+    repository: docker.io/venkatramireddyb/lock-svc
+    tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
+  heap: "-Xmx1024m -Xms1024m"
+  memory_requests: 1280Mi
+  memory_limits: 1536Mi
+  cpu_requests: 50m
+  ingress:
+    nginxRateLimit:
+      enabled: true
+      rpm: "500"
+      burstMultiplier: "1"
+      conections: "10"
+  rateLimit:
+    enabled: true
+    gatewayBurstCapacity: "30"
+    gatewayKeyResolver: "userKeyResolver"
+    gatewayReplenishRate: "30"
+minio-filestore:
+  image:
+    repository: docker.io/venkatramireddyb/egov-filestore
+    tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
+  heap: "-Xmx512m -Xms512m"
+  memory_requests: 768Mi
+  memory_limits: 1000Mi
+  cpu_requests: 50m
+  ingress:
+    nginxRateLimit:
+      enabled: true
+      rpm: "500"
+      burstMultiplier: "1"
+      conections: "10"
+  rateLimit:
+    enabled: true
+    gatewayBurstCapacity: "30"
+    gatewayKeyResolver: "userKeyResolver"
+    gatewayReplenishRate: "30"
+njdg-transformer:
+  image:
+    repository: docker.io/venkatramireddyb/njdg-transformer
+    tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
+  heap: "-Xmx768m -Xms768m"
+  memory_requests: 1000Mi
+  memory_limits: 1256Mi
+  cpu_requests: 50m
+  ingress:
+    nginxRateLimit:
+      enabled: true
+      rpm: "500"
+      burstMultiplier: "1"
+      conections: "10"
+  rateLimit:
+    enabled: true
+    gatewayBurstCapacity: "30"
+    gatewayKeyResolver: "userKeyResolver"
+    gatewayReplenishRate: "30"
+notification:
+  image:
+    repository: venkatramireddyb/notification
+    tag: sdc-uat-fb7493994c08b593759448d6d3be1bd309d6ce02
+  heap: "-Xmx512m -Xms512m"
+  memory_requests: 768Mi
+  memory_limits: 1000Mi
+  cpu_requests: 50m
+  ingress:
+    nginxRateLimit:
+      enabled: true
+      rpm: "500"
+      burstMultiplier: "1"
+      conections: "10"
+  rateLimit:
+    enabled: true
+    gatewayBurstCapacity: "30"
+    gatewayKeyResolver: "userKeyResolver"
+    gatewayReplenishRate: "30"
+ocr-service:
+  image:
+    repository: docker.io/venkatramireddyb/ocr-service
+    tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
+  heap: "-Xmx512m -Xms512m"
+  memory_requests: 768Mi
+  memory_limits: 1000Mi
+  cpu_requests: 50m
+  ingress:
+    nginxRateLimit:
+      enabled: true
+      rpm: "500"
+      burstMultiplier: "1"
+      conections: "10"
+  rateLimit:
+    enabled: true
+    gatewayBurstCapacity: "30"
+    gatewayKeyResolver: "userKeyResolver"
+    gatewayReplenishRate: "30"
+oncourts-website:
+  image:
+    repository: docker.io/venkatramireddyb/oncourts-website
+    tag: 'main-4f0da34d42062f07ba96821f18001886a6748fb1'
+  memory_requests: 512Mi
+  memory_limits: 768Mi
+  cpu_requests: 50m
+  ingress:
+    nginxRateLimit:
+      enabled: true
+      rpm: "500"
+      burstMultiplier: "1"
+      conections: "10"
+  rateLimit:
+    enabled: true
+    gatewayBurstCapacity: "30"
+    gatewayKeyResolver: "userKeyResolver"
+    gatewayReplenishRate: "30"
+openapi:
+  image:
+    repository: docker.io/venkatramireddyb/openapi
+    tag: sdc-uat-fb7493994c08b593759448d6d3be1bd309d6ce02
+  heap: "-Xmx768m -Xms768m"
+  memory_requests: 768Mi
+  memory_limits: 1000Mi
+  cpu_requests: 50m
+  ingress:
+    nginxRateLimit:
+      enabled: true
+      rpm: "500"
+      burstMultiplier: "1"
+      conections: "10"
+  rateLimit:
+    enabled: true
+    gatewayBurstCapacity: "30"
+    gatewayKeyResolver: "userKeyResolver"
+    gatewayReplenishRate: "30"
+order:
+  image:
+    repository: docker.io/venkatramireddyb/order
+    tag: sdc-uat-fb7493994c08b593759448d6d3be1bd309d6ce02
+  heap: "-Xmx512m -Xms512m"
+  memory_requests: 768Mi
+  memory_limits: 1000Mi
+  cpu_requests: 50m
+  ingress:
+    nginxRateLimit:
+      enabled: true
+      rpm: "500"
+      burstMultiplier: "1"
+      conections: "10"
+  rateLimit:
+    enabled: true
+    gatewayBurstCapacity: "30"
+    gatewayKeyResolver: "userKeyResolver"
+    gatewayReplenishRate: "30"
+order-management:
+  image:
+    repository: docker.io/venkatramireddyb/order-management
+    tag: sdc-uat-fb7493994c08b593759448d6d3be1bd309d6ce02
+  heap: "-Xmx512m -Xms512m"
+  memory_requests: 768Mi
+  memory_limits: 1000Mi
+  cpu_requests: 50m
+  ingress:
+    nginxRateLimit:
+      enabled: true
+      rpm: "500"
+      burstMultiplier: "1"
+      conections: "10"
+  rateLimit:
+    enabled: true
+    gatewayBurstCapacity: "30"
+    gatewayKeyResolver: "userKeyResolver"
+    gatewayReplenishRate: "30"
+payment-calculator:
+  image:
+    repository: docker.io/venkatramireddyb/payment-calculator
+    tag: sdc-uat-fb7493994c08b593759448d6d3be1bd309d6ce02
+  heap: "-Xmx512m -Xms512m"
+  memory_requests: 768Mi
+  memory_limits: 1000Mi
+  cpu_requests: 50m
+  ingress:
+    nginxRateLimit:
+      enabled: true
+      rpm: "500"
+      burstMultiplier: "1"
+      conections: "10"
+  rateLimit:
+    enabled: true
+    gatewayBurstCapacity: "30"
+    gatewayKeyResolver: "userKeyResolver"
+    gatewayReplenishRate: "30"
+pdf-service:
+  image:
+    repository: docker.io/venkatramireddyb/pdf-service
+    tag: sdc-uat-0657159be3406e649f60dacc4a73dedf1efa7c2e
+  heap: "-Xmx768m -Xms768m"
+  memory_requests: 768Mi
+  memory_limits: 1000Mi
+  cpu_requests: 50m
+  ingress:
+    nginxRateLimit:
+      enabled: true
+      rpm: "500"
+      burstMultiplier: "1"
+      conections: "10"
+  rateLimit:
+    enabled: true
+    gatewayBurstCapacity: "30"
+    gatewayKeyResolver: "userKeyResolver"
+    gatewayReplenishRate: "30"
+pgr-services:
+  image:
+    repository: docker.io/venkatramireddyb/pgr-services
+    tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
+  heap: "-Xmx856m -Xms856m"
+  memory_requests: 856Mi
+  memory_limits: 1024Mi
+  cpu_requests: 50m
+  ingress:
+    nginxRateLimit:
+      enabled: true
+      rpm: "500"
+      burstMultiplier: "1"
+      conections: "10"
+  rateLimit:
+    enabled: true
+    gatewayBurstCapacity: "30"
+    gatewayKeyResolver: "userKeyResolver"
+    gatewayReplenishRate: "30"
+scheduler:
+  image:
+    repository: docker.io/venkatramireddyb/scheduler
+    tag: sdc-uat-fb7493994c08b593759448d6d3be1bd309d6ce02
+  heap: "-Xmx512m -Xms512m"
+  memory_requests: 768Mi
+  memory_limits: 1000Mi
+  cpu_requests: 50m
+  ingress:
+    nginxRateLimit:
+      enabled: true
+      rpm: "500"
+      burstMultiplier: "1"
+      conections: "10"
+  rateLimit:
+    enabled: true
+    gatewayBurstCapacity: "30"
+    gatewayKeyResolver: "userKeyResolver"
+    gatewayReplenishRate: "30"
+service-request:
+  image:
+    repository: egovio/service-request
+    tag: core-2.9-lts-mvn-check-bbc06901f1-6
+  heap: "-Xmx512m -Xms512m"
+  memory_requests: 512Mi
+  memory_limits: 768Mi
+  cpu_requests: 50m
+  ingress:
+    nginxRateLimit:
+      enabled: true
+      rpm: "500"
+      burstMultiplier: "1"
+      conections: "10"
+  rateLimit:
+    enabled: true
+    gatewayBurstCapacity: "30"
+    gatewayKeyResolver: "userKeyResolver"
+    gatewayReplenishRate: "30"
+summons-svc:
+  image:
+    repository: venkatramireddyb/summons-svc
+    tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
+  heap: "-Xmx512m -Xms512m"
+  memory_requests: 768Mi
+  memory_limits: 1000Mi
+  cpu_requests: 50m
+  cpu_limits: 350m
+  ingress:
+    nginxRateLimit:
+      enabled: true
+      rpm: "500"
+      burstMultiplier: "1"
+      conections: "10"
+  rateLimit:
+    enabled: true
+    gatewayBurstCapacity: "30"
+    gatewayKeyResolver: "userKeyResolver"
+    gatewayReplenishRate: "30"
+
+task:
+  image:
+    repository: venkatramireddyb/task
+    tag: main-da2cfeab916936dd5da61db9248e5fddd3facd33
+  heap: "-Xmx856m -Xms256m"
+  memory_requests: "1024Mi"
+  memory_limits: "1024Mi"
+  cpu_requests: "50m"
+  ingress:
+    nginxRateLimit:
+      enabled: true
+      rpm: "500"
+      burstMultiplier: "1"
+      conections: "10"
+  rateLimit:
+    enabled: true
+    gatewayBurstCapacity: "30"
+    gatewayKeyResolver: "userKeyResolver"
+    gatewayReplenishRate: "30"
+task-management:
+  image:
+    repository: docker.io/venkatramireddyb/task-management
+    tag: sdc-uat-fb7493994c08b593759448d6d3be1bd309d6ce02
+  heap: "-Xmx384m -Xms256m"
+  memory_requests: 512Mi
+  memory_limits: 512Mi
+  cpu_requests: 50m
+  ingress:
+    nginxRateLimit:
+      enabled: true
+      rpm: "500"
+      burstMultiplier: "1"
+      conections: "10"
+  rateLimit:
+    enabled: true
+    gatewayBurstCapacity: "30"
+    gatewayKeyResolver: "userKeyResolver"
+    gatewayReplenishRate: "30"
+template-configuration:
+  image:
+    repository: docker.io/venkatramireddyb/template-configuration
+    tag: sdc-uat-fb7493994c08b593759448d6d3be1bd309d6ce02
+  heap: "-Xmx512m -Xms512m"
+  memory_requests: 768Mi
+  memory_limits: 768Mi
+  cpu_requests: 50m
+  ingress:
+    nginxRateLimit:
+      enabled: true
+      rpm: "500"
+      burstMultiplier: "1"
+      conections: "10"
+  rateLimit:
+    enabled: true
+    gatewayBurstCapacity: "30"
+    gatewayKeyResolver: "userKeyResolver"
+    gatewayReplenishRate: "30"
+transcription:
+  image:
+    repository: docker.io/venkatramireddyb/transcription
+    tag: v1.0.0-dristi-experiment-1
+  memory_requests: 856Mi
+  memory_limits: 1280Mi
+  cpu_requests: 50m
+  cpu_limits: 150m
+  ingress:
+    nginxRateLimit:
+      enabled: true
+      rpm: "500"
+      burstMultiplier: "1"
+      conections: "10"
+  rateLimit:
+    enabled: true
+    gatewayBurstCapacity: "30"
+    gatewayKeyResolver: "userKeyResolver"
+    gatewayReplenishRate: "30"
+transformer:
+  image:
+    repository: docker.io/venkatramireddyb/transformer
+    tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
+  heap: "-Xmx1000m -Xms1000m"
+  memory_requests: 1000Mi
+  memory_limits: 1500Mi
+  cpu_requests: 50m
+  cpu_limits: 250m
+  ingress:
+    nginxRateLimit:
+      enabled: true
+      rpm: "500"
+      burstMultiplier: "1"
+      conections: "10"
+  rateLimit:
+    enabled: true
+    gatewayBurstCapacity: "30"
+    gatewayKeyResolver: "userKeyResolver"
+    gatewayReplenishRate: "30"
+user-otp:
+  image:
+    repository: docker.io/venkatramireddyb/user-otp
+    tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
+  heap: "-Xmx856m -Xms856m"
+  memory_requests: 856Mi
+  memory_limits: 1280Mi
+  cpu_requests: 50m
+  cpu_limits: 150m
+  ingress:
+    nginxRateLimit:
+      enabled: true
+      rpm: "500"
+      burstMultiplier: "1"
+      conections: "10"
+  rateLimit:
+    enabled: true
+    gatewayBurstCapacity: "3"
+    gatewayKeyResolver: "otpKeyResolver"
+    gatewayReplenishRate: "3"
+workbench-ui:
+  image:
+    repository: registry-backbone-prod.apps.ocp2.ksdc.in/workbench-ui
+    tag: gogs-v1.12.0
+  memory_requests: 250Mi
+  memory_limits: 350Mi
+  cpu_requests: 50m
+  cpu_limits: 150m
+  ingress:
+    nginxRateLimit:
+      enabled: true
+      rpm: "500"
+      burstMultiplier: "1"
+      conections: "10"
+  rateLimit:
+    enabled: true
+    gatewayBurstCapacity: "30"
+    gatewayKeyResolver: "userKeyResolver"
+    gatewayReplenishRate: "30"
