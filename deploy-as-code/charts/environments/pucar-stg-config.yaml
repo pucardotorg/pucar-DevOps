@@ -526,7 +526,7 @@ egov-url-shortening:
 egov-user:
   image:
     repository: docker.io/venkatramireddyb/egov-user
-    tag: v1.0.0-core-2.9-lts-egov-user-deployement-1
+    tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
   ingress:
     nginxRateLimit:
       enabled: true
