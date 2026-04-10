@@ -209,6 +209,7 @@ egov-filestore:
   allowed-file-formats: "jpg,jpeg,png,doc,docx,pdf,odt,ods,text,dxf,xls,xlsx"
   filestore-url-validity: 3600
   fixed-bucketname: pucarfilestoreuat
+  fixed-container-name: pucarfilestoreuat
   spring-servlet-multipart-max-file-size: "50MB"
   spring-servlet-multipart-max-request-size: "100MB"
 
