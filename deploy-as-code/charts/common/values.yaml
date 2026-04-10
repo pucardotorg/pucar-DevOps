@@ -166,8 +166,6 @@ resources: |
     {{- end }}
     {{- if .Values.cpu_limits }}
     cpu: {{ .Values.cpu_limits | quote }}
-    {{- else if .Values.cpu_requests }}
-    cpu: {{ .Values.cpu_requests | quote }}
     {{- end }}
   {{- end -}}
 
