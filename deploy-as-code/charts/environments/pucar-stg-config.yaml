@@ -346,7 +346,7 @@ egov-apportion-service:
 egov-enc-service:
   image:
     repository: docker.io/venkatramireddyb/egov-enc-service
-    tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
+    tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
   ingress:
     nginxRateLimit:
       enabled: true
