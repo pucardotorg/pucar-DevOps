@@ -145,9 +145,9 @@ billing-service:
       conections: "10"
   rateLimit:
     enabled: true
-    gatewayBurstCapacity: "30"
+    gatewayBurstCapacity: "40"
     gatewayKeyResolver: "userKeyResolver"
-    gatewayReplenishRate: "30"
+    gatewayReplenishRate: "40"
 case:
   image:
     repository: docker.io/venkatramireddyb/case
@@ -160,9 +160,9 @@ case:
       conections: "10"
   rateLimit:
     enabled: true
-    gatewayBurstCapacity: "30"
+    gatewayBurstCapacity: "70"
     gatewayKeyResolver: "userKeyResolver"
-    gatewayReplenishRate: "30"
+    gatewayReplenishRate: "70"
 casemanagement:
   image:
     repository: docker.io/venkatramireddyb/casemanagement
@@ -370,9 +370,9 @@ egov-filestore:
       conections: "10"
   rateLimit:
     enabled: true
-    gatewayBurstCapacity: "30"
+    gatewayBurstCapacity: "40"
     gatewayKeyResolver: "userKeyResolver"
-    gatewayReplenishRate: "30"
+    gatewayReplenishRate: "40"
 egov-hrms:
   image:
     repository: docker.io/venkatramireddyb/egov-hrms
@@ -686,9 +686,9 @@ hearing:
       conections: "10"
   rateLimit:
     enabled: true
-    gatewayBurstCapacity: "30"
+    gatewayBurstCapacity: "40"
     gatewayKeyResolver: "userKeyResolver"
-    gatewayReplenishRate: "30"
+    gatewayReplenishRate: "40"
 hearing-management:
   image:
     repository: docker.io/venkatramireddyb/hearing-management
@@ -731,9 +731,9 @@ inbox:
       conections: "10"
   rateLimit:
     enabled: true
-    gatewayBurstCapacity: "30"
+    gatewayBurstCapacity: "100"
     gatewayKeyResolver: "userKeyResolver"
-    gatewayReplenishRate: "30"
+    gatewayReplenishRate: "100"
 individual:
   image:
     repository: docker.io/venkatramireddyb/individual
