@@ -256,7 +256,7 @@ digit-ui:
 digitalized-documents:
   image:
     repository: docker.io/venkatramireddyb/digitalized-documents
-    tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
+    tag: main-0447fff90ecf720ab53179d2523a564ddf34ef00
   ingress:
     nginxRateLimit:
       enabled: true
