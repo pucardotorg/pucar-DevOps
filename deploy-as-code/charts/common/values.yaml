@@ -327,7 +327,10 @@ extraEnv:
       - name: LOGGING_LOKI_ENABLED
         value: "true"
       - name: LOGGING_LOKI_URL
-        value: {{ if index .Values "loki-url" }}{{ index .Values "loki-url" }}{{ else }}{{ .Values.loki.url }}{{ end }}
+        valueFrom:
+          configMapKeyRef:
+            name: egov-config
+            key: loki-url
       - name: LOGGING_LOKI_APP
         valueFrom:
           fieldRef:
