@@ -63,6 +63,7 @@ configmaps:
       spring-jpa-show-sql: "true"
       timezone: Asia/Kolkata
       tracer-errors-provideexceptionindetails: "true"
+      loki-url: http://loki.monitoring-stg:3100/loki/api/v1/push
 egov-user:
   heap: "-Xmx256m -Xms256m"
   memory_limits: 512Mi
