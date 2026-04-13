@@ -20,7 +20,7 @@ initContainers:
   gitSync:
     enabled: true
     repo: "git@github.com:egovernments/configs"
-    branch: "bug-5635-main"
+    branch: "main"
 
 
 # Container Configs
