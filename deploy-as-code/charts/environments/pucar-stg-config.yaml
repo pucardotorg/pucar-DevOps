@@ -1157,7 +1157,7 @@ sunbirdrc-credential-service:
 task:
   image:
     repository: venkatramireddyb/task
-    tag: main-da2cfeab916936dd5da61db9248e5fddd3facd33
+    tag: main-0447fff90ecf720ab53179d2523a564ddf34ef00
   ingress:
     nginxRateLimit:
       enabled: true
