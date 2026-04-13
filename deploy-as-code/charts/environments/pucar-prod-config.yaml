@@ -1,7 +1,7 @@
 ab-diary:
   image:
-    repository: docker.io/venkatramireddyb/ab-diary
-    tag: sdc-uat-fb7493994c08b593759448d6d3be1bd309d6ce02
+    repository: registry-backbone-prod.apps.ocp2.ksdc.in/ab-diary
+    tag: gogs-v1.17.1
   heap: "-Xmx512m -Xms256m"
   memory_requests: "768Mi"
   memory_limits: "1Gi"
@@ -19,8 +19,8 @@ ab-diary:
     gatewayReplenishRate: "30"
 advocate:
   image:
-    repository: docker.io/venkatramireddyb/advocate
-    tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
+    repository: registry-backbone-prod.apps.ocp2.ksdc.in/advocate
+    tag: gogs-v1.17.0
   heap: "-Xmx1024m -Xms192m"
   memory_requests: "1200Mi"
   memory_limits: "1500Mi"
@@ -38,8 +38,8 @@ advocate:
     gatewayReplenishRate: "30"
 advocate-office-management:
   image:
-    repository: docker.io/venkatramireddyb/advocate-office-management
-    tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
+    repository: registry-backbone-prod.apps.ocp2.ksdc.in/advocate-office-management
+    tag: gogs-v1.17.0
   heap: "-Xmx512m -Xms256m"
   memory_requests: "768Mi"
   memory_limits: "768Mi"
@@ -57,8 +57,8 @@ advocate-office-management:
     gatewayReplenishRate: "30"
 analytics:
   image:
-    repository: docker.io/venkatramireddyb/analytics
-    tag: sdc-uat-fb7493994c08b593759448d6d3be1bd309d6ce02
+    repository: registry-backbone-prod.apps.ocp2.ksdc.in/analytics
+    tag: gogs-v1.17.1
   heap: "-Xmx1024m -Xms256m"
   memory_requests: "1200Mi"
   memory_limits: "1500Mi"
@@ -76,8 +76,8 @@ analytics:
     gatewayReplenishRate: "30"
 application:
   image:
-    repository: docker.io/venkatramireddyb/application
-    tag: sdc-uat-fb7493994c08b593759448d6d3be1bd309d6ce02
+    repository: registry-backbone-prod.apps.ocp2.ksdc.in/application
+    tag: gogs-v1.17.1
   heap: "-Xmx1024m -Xms192m"
   memory_requests: "1200Mi"
   memory_limits: "1500Mi"
@@ -95,8 +95,8 @@ application:
     gatewayReplenishRate: "30"
 audit-service:
   image:
-    repository: docker.io/venkatramireddyb/audit-service
-    tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
+    repository: registry-backbone-prod.apps.ocp2.ksdc.in/audit-service
+    tag: gogs-v1.17.0
   heap: "-Xmx128m -Xms128m"
   memory_requests: "256Mi"
   memory_limits: "384Mi"
@@ -115,8 +115,8 @@ audit-service:
     gatewayReplenishRate: "30"
 bail-bond:
   image:
-    repository: docker.io/venkatramireddyb/bail-bond
-    tag: sdc-uat-fb7493994c08b593759448d6d3be1bd309d6ce02
+    repository: registry-backbone-prod.apps.ocp2.ksdc.in/bail-bond
+    tag: gogs-v1.17.1
   heap: "-Xmx1024m -Xms256m"
   memory_requests: "1200Mi"
   memory_limits: "1500Mi"
@@ -134,8 +134,8 @@ bail-bond:
     gatewayReplenishRate: "30"
 bank-details:
   image:
-    repository: docker.io/venkatramireddyb/bank-details
-    tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
+    repository: registry-backbone-prod.apps.ocp2.ksdc.in/bank-details
+    tag: gogs-v1.17.0
   heap: "-Xmx512m -Xms256m"
   memory_requests: "768Mi"
   memory_limits: "768Mi"
@@ -153,8 +153,8 @@ bank-details:
     gatewayReplenishRate: "30"
 billing-service:
   image:
-    repository: docker.io/venkatramireddyb/billing-service
-    tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
+    repository: registry-backbone-prod.apps.ocp2.ksdc.in/billing-service
+    tag: gogs-v1.17.0
   heap: "-Xmx1024m -Xms256m"
   memory_requests: "1200Mi"
   memory_limits: "1500Mi"
@@ -172,8 +172,8 @@ billing-service:
     gatewayReplenishRate: "40"
 case:
   image:
-    repository: docker.io/venkatramireddyb/case
-    tag: sdc-uat-fb7493994c08b593759448d6d3be1bd309d6ce02
+    repository: registry-backbone-prod.apps.ocp2.ksdc.in/case
+    tag: gogs-v1.17.1
   heap: "-Xmx2g -Xms1g"
   memory_requests: "2.5Gi"
   memory_limits: "3Gi"
@@ -191,8 +191,8 @@ case:
     gatewayReplenishRate: "70"
 casemanagement:
   image:
-    repository: docker.io/venkatramireddyb/casemanagement
-    tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
+    repository: registry-backbone-prod.apps.ocp2.ksdc.in/casemanagement
+    tag: gogs-v1.17.0
   heap: "-Xmx1024m -Xms256m"
   memory_requests: "1200Mi"
   memory_limits: "1500Mi"
@@ -210,7 +210,7 @@ casemanagement:
     gatewayReplenishRate: "30"
 clamav:
   image:
-    repository: docker.io/venkatramireddyb/clamav
+    repository: registry-backbone-prod.apps.ocp2.ksdc.in/clamav
     tag: latest
   ingress:
     nginxRateLimit:
@@ -225,8 +225,8 @@ clamav:
     gatewayReplenishRate: "30"
 collection-services:
   image:
-    repository: docker.io/venkatramireddyb/collection-services
-    tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
+    repository: registry-backbone-prod.apps.ocp2.ksdc.in/collection-services
+    tag: gogs-v1.17.0
   heap: "-Xmx1024m -Xms256m"
   memory_requests: "1200Mi"
   memory_limits: "1500Mi"
@@ -244,8 +244,8 @@ collection-services:
     gatewayReplenishRate: "30"
 ctc:
   image:
-    repository: docker.io/venkatramireddyb/ctc
-    tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
+    repository: registry-backbone-prod.apps.ocp2.ksdc.in/ctc
+    tag: gogs-v1.17.0
   heap: "-Xmx384m -Xms256m"
   memory_requests: "512Mi"
   memory_limits: "768Mi"
@@ -263,8 +263,8 @@ ctc:
     gatewayReplenishRate: "30"
 digit-ui:
   image:
-    repository: docker.io/venkatramireddyb/digit-ui
-    tag: main-fda605c01e935db8152e001f7173df22f00a0ffc
+    repository: registry-backbone-prod.apps.ocp2.ksdc.in/digit-ui
+    tag: gogs-v1.17.1
   memory_requests: "1Gi"
   ingress:
     nginxRateLimit:
@@ -279,8 +279,8 @@ digit-ui:
     gatewayReplenishRate: "30"
 digitalized-documents:
   image:
-    repository: docker.io/venkatramireddyb/digitalized-documents
-    tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
+    repository: registry-backbone-prod.apps.ocp2.ksdc.in/digitalized-documents
+    tag: gogs-v1.17.1
   heap: "-Xmx768m -Xms768m"
   memory_requests: "1Gi"
   memory_limits: "1Gi"
@@ -298,8 +298,8 @@ digitalized-documents:
     gatewayReplenishRate: "30"
 dristi-case-pdf:
   image:
-    repository: docker.io/venkatramireddyb/dristi-case-pdf
-    tag: sdc-uat-fb7493994c08b593759448d6d3be1bd309d6ce02
+    repository: registry-backbone-prod.apps.ocp2.ksdc.in/dristi-case-pdf
+    tag: gogs-v1.17.1
   memory_requests: "1200Mi"
   memory_limits: "1500Mi"
   cpu_requests: "50m"
@@ -316,8 +316,8 @@ dristi-case-pdf:
     gatewayReplenishRate: "30"
 dristi-pdf:
   image:
-    repository: docker.io/venkatramireddyb/dristi-pdf
-    tag: sdc-uat-fb7493994c08b593759448d6d3be1bd309d6ce02
+    repository: registry-backbone-prod.apps.ocp2.ksdc.in/dristi-pdf
+    tag: gogs-v1.17.1
   memory_requests: "1200Mi"
   memory_limits: "2560Mi"
   cpu_requests: "50m"
@@ -335,8 +335,8 @@ dristi-pdf:
     gatewayReplenishRate: "30"
 e-sign-svc:
   image:
-    repository: docker.io/venkatramireddyb/e-sign-svc
-    tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
+    repository: registry-backbone-prod.apps.ocp2.ksdc.in/e-sign-svc
+    tag: gogs-v1.17.0
   heap: "-Xmx256m -Xms256m"
   memory_requests: "384Mi"
   memory_limits: "512Mi"
@@ -354,8 +354,8 @@ e-sign-svc:
     gatewayReplenishRate: "30"
 egov-accesscontrol:
   image:
-    repository: docker.io/venkatramireddyb/egov-accesscontrol
-    tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
+    repository: registry-backbone-prod.apps.ocp2.ksdc.in/egov-accesscontrol
+    tag: gogs-v1.17.0
   heap: "-Xmx768m -Xms256m"
   memory_requests: "1Gi"
   memory_limits: "1Gi"
@@ -373,8 +373,8 @@ egov-accesscontrol:
     gatewayReplenishRate: "30"
 egov-apportion-service:
   image:
-    repository: docker.io/venkatramireddyb/egov-apportion-service
-    tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
+    repository: registry-backbone-prod.apps.ocp2.ksdc.in/egov-apportion-service
+    tag: gogs-v1.17.0
   heap: "-Xmx256m -Xms256m"
   memory_requests: "384Mi"
   memory_limits: "512Mi"
@@ -392,8 +392,8 @@ egov-apportion-service:
     gatewayReplenishRate: "30"
 egov-enc-service:
   image:
-    repository: docker.io/venkatramireddyb/egov-enc-service
-    tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
+    repository: registry-backbone-prod.apps.ocp2.ksdc.in/egov-enc-service
+    tag: gogs-v1.17.0
   heap: "-Xmx512m -Xms256m"
   memory_requests: "768Mi"
   memory_limits: "1Gi"
@@ -412,8 +412,8 @@ egov-enc-service:
     gatewayReplenishRate: "30"
 egov-filestore:
   image:
-    repository: venkatramireddyb/egov-filestore
-    tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
+    repository: registry-backbone-prod.apps.ocp2.ksdc.in/egov-filestore
+    tag: gogs-v1.17.0
   heap: "-Xmx2816m -Xms1024m"
   memory_requests: "3Gi"
   memory_limits: "3.5Gi"
@@ -432,8 +432,8 @@ egov-filestore:
     gatewayReplenishRate: "40"
 egov-hrms:
   image:
-    repository: docker.io/venkatramireddyb/egov-hrms
-    tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
+    repository: registry-backbone-prod.apps.ocp2.ksdc.in/egov-hrms
+    tag: gogs-v1.17.0
   heap: "-Xmx856m -Xms256m"
   memory_requests: "1000Mi"
   memory_limits: "1500Mi"
@@ -451,8 +451,8 @@ egov-hrms:
     gatewayReplenishRate: "30"
 egov-idgen:
   image:
-    repository: docker.io/venkatramireddyb/egov-idgen
-    tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
+    repository: registry-backbone-prod.apps.ocp2.ksdc.in/egov-idgen
+    tag: gogs-v1.17.0
   heap: "-Xmx768m -Xms192m"
   memory_requests: "1000Mi"
   memory_limits: "1500Mi"
@@ -470,8 +470,8 @@ egov-idgen:
     gatewayReplenishRate: "30"
 egov-indexer:
   image:
-    repository: docker.io/venkatramireddyb/egov-indexer
-    tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
+    repository: registry-backbone-prod.apps.ocp2.ksdc.in/egov-indexer
+    tag: gogs-v1.17.0
   heap: "-Xmx918m -Xms512m"
   memory_requests: "1100Mi"
   memory_limits: "1500Mi"
@@ -489,8 +489,8 @@ egov-indexer:
     gatewayReplenishRate: "30"
 egov-localization:
   image:
-    repository: docker.io/venkatramireddyb/egov-localization
-    tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
+    repository: registry-backbone-prod.apps.ocp2.ksdc.in/egov-localization
+    tag: gogs-v1.17.0
   heap: "-Xmx768m -Xms256m"
   memory_requests: "1000Mi"
   memory_limits: "1500Mi"
@@ -508,8 +508,8 @@ egov-localization:
     gatewayReplenishRate: "30"
 egov-mdms-service:
   image:
-    repository: docker.io/venkatramireddyb/egov-mdms-service
-    tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
+    repository: registry-backbone-prod.apps.ocp2.ksdc.in/egov-mdms-service
+    tag: gogs-v1.17.0
   heap: "-Xmx512m -Xms512m"
   memory_requests: "768Mi"
   memory_limits: "1Gi"
@@ -527,8 +527,8 @@ egov-mdms-service:
     gatewayReplenishRate: "30"
 egov-notification-mail:
   image:
-    repository: docker.io/venkatramireddyb/egov-notification-mail
-    tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
+    repository: registry-backbone-prod.apps.ocp2.ksdc.in/egov-notification-mail
+    tag: gogs-v1.17.0
   heap: "-Xmx1024m -Xms256m"
   memory_requests: "1200Mi"
   memory_limits: "1500Mi"
@@ -546,8 +546,8 @@ egov-notification-mail:
     gatewayReplenishRate: "30"
 egov-otp:
   image:
-    repository: docker.io/venkatramireddyb/egov-otp
-    tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
+    repository: registry-backbone-prod.apps.ocp2.ksdc.in/egov-otp
+    tag: gogs-v1.17.0
   heap: "-Xmx1024m -Xms256m"
   memory_requests: "1200Mi"
   memory_limits: "1500Mi"
@@ -565,8 +565,8 @@ egov-otp:
     gatewayReplenishRate: "30"
 egov-persister:
   image:
-    repository: docker.io/venkatramireddyb/egov-persister
-    tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
+    repository: registry-backbone-prod.apps.ocp2.ksdc.in/egov-persister
+    tag: gogs-v1.17.0
   heap: "-Xmx768m -Xms256m"
   memory_requests: "1000Mi"
   memory_limits: "1500Mi"
@@ -584,8 +584,8 @@ egov-persister:
     gatewayReplenishRate: "30"
 egov-pg-service:
   image:
-    repository: docker.io/venkatramireddyb/egov-pg-service
-    tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
+    repository: registry-backbone-prod.apps.ocp2.ksdc.in/egov-pg-service
+    tag: gogs-v1.17.0
   heap: "-Xmx1024m -Xms256m"
   memory_requests: "1200Mi"
   memory_limits: "1500Mi"
@@ -603,8 +603,8 @@ egov-pg-service:
     gatewayReplenishRate: "30"
 egov-url-shortening:
   image:
-    repository: docker.io/venkatramireddyb/egov-url-shortening
-    tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
+    repository: registry-backbone-prod.apps.ocp2.ksdc.in/egov-url-shortening
+    tag: gogs-v1.17.0
   heap: "-Xmx1024m -Xms256m"
   memory_requests: "1200Mi"
   memory_limits: "1500Mi"
@@ -622,8 +622,8 @@ egov-url-shortening:
     gatewayReplenishRate: "30"
 egov-user:
   image:
-    repository: docker.io/venkatramireddyb/egov-user
-    tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
+    repository: registry-backbone-prod.apps.ocp2.ksdc.in/egov-user
+    tag: v1.4.0-62d3a2678cd6537e9b750dd95286b39bed70e172
   heap: "-Xmx756m -Xms756m"
   memory_requests: "1000Mi"
   memory_limits: "1500Mi"
@@ -641,8 +641,8 @@ egov-user:
     gatewayReplenishRate: "30"
 egov-user-event:
   image:
-    repository: docker.io/venkatramireddyb/egov-user-event
-    tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
+    repository: registry-backbone-prod.apps.ocp2.ksdc.in/egov-user-event
+    tag: gogs-v1.17.0
   heap: "-Xmx1024m -Xms256m"
   memory_requests: "1200Mi"
   memory_limits: "1500Mi"
@@ -660,8 +660,8 @@ egov-user-event:
     gatewayReplenishRate: "30"
 egov-workflow-v2:
   image:
-    repository: docker.io/venkatramireddyb/egov-workflow-v2
-    tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
+    repository: registry-backbone-prod.apps.ocp2.ksdc.in/egov-workflow-v2
+    tag: gogs-v1.17.0
   heap: "-Xmx1024m -Xms256m"
   memory_requests: "1200Mi"
   memory_limits: "1500Mi"
@@ -679,8 +679,8 @@ egov-workflow-v2:
     gatewayReplenishRate: "30"
 epost-tracker:
   image:
-    repository: docker.io/venkatramireddyb/epost-tracker
-    tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
+    repository: registry-backbone-prod.apps.ocp2.ksdc.in/epost-tracker
+    tag: gogs-v1.17.0
   heap: "-Xmx1024m -Xms1024m"
   memory_requests: 1280Mi
   memory_limits: 1280Mi
@@ -698,8 +698,8 @@ epost-tracker:
     gatewayReplenishRate: "30"
 esign-interceptor:
   image:
-    repository: docker.io/venkatramireddyb/esign-interceptor
-    tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
+    repository: registry-backbone-prod.apps.ocp2.ksdc.in/esign-interceptor
+    tag: gogs-v1.17.0
   heap: "-Xmx1024m -Xms1024m"
   memory_requests: 1280Mi
   memory_limits: 1280Mi
