@@ -323,7 +323,7 @@ extraEnv:
       {{- else }}
         value: "enc-user-audit-data"
       {{- end }}  
-      {{- if and .Values.lokiEnabled (or (index .Values "loki-url") (and .Values.loki .Values.loki.url)) }}
+      {{- if .Values.lokiEnabled }}
       - name: LOGGING_LOKI_ENABLED
         value: "true"
       - name: LOGGING_LOKI_URL
