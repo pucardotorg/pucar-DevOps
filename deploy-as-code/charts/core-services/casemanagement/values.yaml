@@ -168,6 +168,7 @@ env: |
       configMapKeyRef:
         key: sunbirdrc-credential-service
         name: egov-service-host
+        optional: true
   - name: DRISTI_CASE_HOST
     valueFrom:
       configMapKeyRef:
