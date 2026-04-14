@@ -8,7 +8,9 @@ ingress:
   zuul: true
   enabled: true
   context: "digitalized-documents"
-
+  additionalAnnotations: |
+    nginx.ingress.kubernetes.io/proxy-body-size: "10m"
+    
 lokiEnabled: true
 tracing-enabled: true
 
