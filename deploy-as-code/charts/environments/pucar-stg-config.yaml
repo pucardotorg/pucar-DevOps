@@ -535,9 +535,9 @@ egov-user:
       conections: "10"
   rateLimit:
     enabled: true
-    gatewayBurstCapacity: "30"
+    gatewayBurstCapacity: "40"
     gatewayKeyResolver: "userKeyResolver"
-    gatewayReplenishRate: "30"
+    gatewayReplenishRate: "40"
 egov-user-event:
   image:
     repository: docker.io/venkatramireddyb/egov-user-event
