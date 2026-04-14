@@ -68,6 +68,7 @@ env: |
       configMapKeyRef:
         name: egov-service-host
         key: dashboard-analytics
+        optional: true
   - name: EGOV_MDMS_HOST
     valueFrom:
       configMapKeyRef:
