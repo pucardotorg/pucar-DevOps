@@ -151,7 +151,7 @@ billing-service:
 case:
   image:
     repository: docker.io/venkatramireddyb/case
-    tag: main-f47220a1ec67ae806acbaf8c15ccfab017738b74
+    tag: main-f5fa24e7aa1fade71ffa994c66597d95393cb636
   ingress:
     nginxRateLimit:
       enabled: true
