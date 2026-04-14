@@ -241,7 +241,7 @@ ctc:
 digit-ui:
   image:
     repository: docker.io/venkatramireddyb/digit-ui
-    tag: main-5dcde6eac5ff57cc975960745c6d3fed6802374d
+    tag: main-a150b572ccba29c6b0ac55c63e7603fcb3ddab47
   ingress:
     nginxRateLimit:
       enabled: true
