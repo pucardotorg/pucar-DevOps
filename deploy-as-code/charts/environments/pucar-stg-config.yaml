@@ -151,7 +151,7 @@ billing-service:
 case:
   image:
     repository: docker.io/venkatramireddyb/case
-    tag: sdc-uat-fb7493994c08b593759448d6d3be1bd309d6ce02
+    tag: main-f47220a1ec67ae806acbaf8c15ccfab017738b74
   ingress:
     nginxRateLimit:
       enabled: true
