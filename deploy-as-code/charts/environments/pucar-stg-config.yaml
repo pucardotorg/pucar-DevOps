@@ -481,7 +481,7 @@ egov-otp:
 egov-persister:
   image:
     repository: docker.io/venkatramireddyb/egov-persister
-    tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
+    tag: main-cbc7f5cc29355825a7e6c54378e9263db5177bd4
   ingress:
     nginxRateLimit:
       enabled: true
