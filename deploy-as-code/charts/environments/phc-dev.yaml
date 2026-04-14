@@ -492,5 +492,4 @@ elasticsearch-master:
       memory: "2.5Gi" 
 
 # kibana:
-namespace: backbone-phc
 elasticsearchHosts: "https://elasticsearch-master.backbone-phc:9200"
