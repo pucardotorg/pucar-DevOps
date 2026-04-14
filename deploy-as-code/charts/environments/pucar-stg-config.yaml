@@ -677,7 +677,7 @@ gateway:
 hearing:
   image:
     repository: venkatramireddyb/hearing
-    tag: sdc-uat-fb7493994c08b593759448d6d3be1bd309d6ce02
+    tag: main-cbc7f5cc29355825a7e6c54378e9263db5177bd4
   ingress:
     nginxRateLimit:
       enabled: true
