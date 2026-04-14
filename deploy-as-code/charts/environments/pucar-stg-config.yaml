@@ -1217,7 +1217,7 @@ transcription:
 transformer:
   image:
     repository: docker.io/venkatramireddyb/transformer
-    tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
+    tag: main-ce229682f0cc2b126ccd7da876ce86698572d9db
   ingress:
     nginxRateLimit:
       enabled: true
