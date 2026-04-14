@@ -62,6 +62,7 @@ env: |
       configMapKeyRef:
         name: egov-service-host
         key: egov-searcher
+        optional: true
   - name: EGOV_DASHBOARD_ANALYTICS_HOST
     valueFrom:
       configMapKeyRef:
