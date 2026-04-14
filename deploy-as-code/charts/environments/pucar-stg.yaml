@@ -213,7 +213,9 @@ egov-filestore:
   fixed-container-name: pucarfilestoreuat
   spring-servlet-multipart-max-file-size: "50MB"
   spring-servlet-multipart-max-request-size: "100MB"
-
+  ingress:
+    additionalAnnotations: |
+      nginx.ingress.kubernetes.io/proxy-body-size: 500m
 egov-enc-service:
   heap: "-Xmx256m -Xms256m"
   memory_limits: 512Mi
