@@ -271,7 +271,7 @@ digitalized-documents:
 dristi-case-pdf:
   image:
     repository: docker.io/venkatramireddyb/dristi-case-pdf
-    tag: sdc-uat-fb7493994c08b593759448d6d3be1bd309d6ce02
+    tag: main-06f0eff9caaf00df56b51d8551335cf3d6258078
   ingress:
     nginxRateLimit:
       enabled: true
