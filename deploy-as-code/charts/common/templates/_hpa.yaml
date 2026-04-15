@@ -1,5 +1,5 @@
 {{- define "common.hpa" -}}
-  {{- if or .Values.hpa.cpu.enabled .Values.hpa.ram.enabled }}
+  {{- if or .Values.hpa.cpu.enabled .Values.hpa.memory.enabled }}
 ---
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
@@ -22,7 +22,7 @@ spec:
           type: Utilization
           averageUtilization: 80
     {{- end }}
-    {{- if .Values.hpa.ram.enabled }}
+    {{- if .Values.hpa.memory.enabled }}
     - type: Resource
       resource:
         name: memory
