@@ -360,8 +360,8 @@ dristi-case-pdf:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 dristi-pdf:
+  replicas: 2
   hpa:
-    replicas: 2
     maxReplicas: 5
     memory:
       enabled: true
