@@ -887,7 +887,7 @@ nginx-deployment:
 njdg-transformer:
   image:
     repository: docker.io/venkatramireddyb/njdg-transformer
-    tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
+    tag: main-89e457baafcba6893a2319038ddcfab35fc5c6a1
   ingress:
     nginxRateLimit:
       enabled: true
