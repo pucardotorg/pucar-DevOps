@@ -30,13 +30,13 @@ ingress:
     connections: "10"
     annotations:
 
-hpacpu:
-  enabled: false
-hparam:
-  enabled: true
 hpa:
   minReplicas: 1
   maxReplicas: 5
+  cpu:
+    enabled: false
+  memory:
+    enabled: false
 
 rateLimit:
   enabled: true
