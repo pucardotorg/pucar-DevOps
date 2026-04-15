@@ -707,7 +707,7 @@ hearing-management:
 icops-integration:
   image:
     repository: venkatramireddyb/icops-integration
-    tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
+    tag: main-89e457baafcba6893a2319038ddcfab35fc5c6a1
   ingress:
     nginxRateLimit:
       enabled: true
