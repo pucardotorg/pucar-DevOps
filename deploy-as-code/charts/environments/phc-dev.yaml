@@ -30,7 +30,7 @@ configmaps:
       egov-bnd-live-citizen-tenants: pg.testing
       egov-services: https://demo.pucar.org
       egov-services-fqdn-name: https://demo.pucar.org/
-      egov-state-level-tenant-id: ph
+      egov-state-level-tenant-id: pb
       es-host: elasticsearch-data.backbone-phc
       es-indexer-host: http://elasticsearch-data.backbone-phc:9200/
       esign-filestore-id: 2aefb901-edc6-4a45-95f8-3ea383a513f5
@@ -138,7 +138,7 @@ egov-user:
   citizen-registration-withlogin: "true"
   citizen-otp-fixed: "123456"
   citizen-otp-fixed-enabled: "true"
-  egov-state-level-tenant-id: "ph"
+  egov-state-level-tenant-id: "pb"
   decryption-abac-enabled: "true"
 digit-ui:
   custom-js-injection: |
@@ -146,7 +146,7 @@ digit-ui:
         sub_filter '<head>' '<head><script type="text/javascript">
         var globalConfigs = (function () {
             var contextPath = "ui";
-            var stateTenantId = "ph";
+            var stateTenantId = "pb";
             var configModuleName = "commonUiConfig";
             var centralInstanceEnabled = false;
             var localeRegion = "IN";
@@ -261,7 +261,7 @@ egov-filestore:
 egov-enc-service:
   heap: "-Xmx256m -Xms256m"
   memory_limits: 512Mi
-  state-level-tenant-id: "ph"
+  state-level-tenant-id: "pb"
 
 egov-idgen:
   idformat-from-mdms: "true"
@@ -338,7 +338,7 @@ oncourts-website:
     globalconfig.js: |
       var globalConfigs = (function () {
          var contextPath = "digit-ui";
-         var stateTenantId = "ph";
+         var stateTenantId = "pb";
          var configModuleName = "commonUiConfig";
          var centralInstanceEnabled = false;
          var localeRegion = "IN";
@@ -415,7 +415,7 @@ workbench-ui:
     sub_filter.conf: |
       sub_filter '<head>' '<head><script type="text/javascript">
       var globalConfigs = (function () {
-          var stateTenantId = "ph";
+          var stateTenantId = "pb";
           var contextPath = "workbench-ui";
           var configModuleName = "commonMuktaUiConfig";
           var centralInstanceEnabled = false;
