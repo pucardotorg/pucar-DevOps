@@ -932,7 +932,7 @@ ocr-service:
 oncourts-website:
   image:
     repository: docker.io/venkatramireddyb/oncourts-website
-    tag: 'main-4f0da34d42062f07ba96821f18001886a6748fb1'
+    tag: 'main-56972aa4e2e83af41225be3e1e018a2b20026a99'
   ingress:
     nginxRateLimit:
       enabled: true
