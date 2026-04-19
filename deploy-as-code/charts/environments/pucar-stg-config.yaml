@@ -766,7 +766,7 @@ etreasury:
       enabled: true
   image:
     repository: docker.io/venkatramireddyb/etreasury
-    tag: sdc-uat-fb7493994c08b593759448d6d3be1bd309d6ce02
+    tag: main-bd2d1424fc9a4b6cf1ce40c6ee4373c9e584b2e3
   ingress:
     nginxRateLimit:
       enabled: true
