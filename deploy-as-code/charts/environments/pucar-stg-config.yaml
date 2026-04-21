@@ -1128,7 +1128,7 @@ njdg-transformer:
       enabled: true
   image:
     repository: docker.io/venkatramireddyb/njdg-transformer
-    tag: main-89e457baafcba6893a2319038ddcfab35fc5c6a1
+    tag: main-de0605c9c6beb63a646c14baac6f0493a2403ffe
   ingress:
     nginxRateLimit:
       enabled: true
