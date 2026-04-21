@@ -138,7 +138,7 @@ bail-bond:
       enabled: true
   image:
     repository: docker.io/venkatramireddyb/bail-bond
-    tag: sdc-uat-fb7493994c08b593759448d6d3be1bd309d6ce02
+    tag: main-de0605c9c6beb63a646c14baac6f0493a2403ffe
   ingress:
     nginxRateLimit:
       enabled: true
