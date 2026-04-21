@@ -1546,7 +1546,7 @@ transformer:
       enabled: true
   image:
     repository: docker.io/venkatramireddyb/transformer
-    tag: main-ce229682f0cc2b126ccd7da876ce86698572d9db
+    tag: main-de0605c9c6beb63a646c14baac6f0493a2403ffe
   ingress:
     nginxRateLimit:
       enabled: true
