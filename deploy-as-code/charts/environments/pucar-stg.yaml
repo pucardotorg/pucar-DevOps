@@ -464,5 +464,5 @@ etreasury:
       hostnames:
       - "oncourts-staging.kerala.gov.in"
     - ip: "103.135.131.132"
-      hostname:
+      hostnames:
       - "stagingetreasury.kerala.gov.in"

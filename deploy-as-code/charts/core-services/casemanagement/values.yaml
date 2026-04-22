@@ -154,11 +154,6 @@ env: |
       configMapKeyRef:
         key: order
         name: egov-service-host
-  - name: EGOV_FILESTORE_HOST
-    valueFrom:
-      configMapKeyRef:
-        key: egov-filestore
-        name: egov-service-host
   - name: SPRING_DATA_REDIS_HOST
     value: {{ .Values.global.redis.host | quote }}
   - name: SPRING_DATA_REDIS_PORT
