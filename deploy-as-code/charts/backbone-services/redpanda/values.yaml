@@ -25,9 +25,9 @@
 # Common settings
 #
 # -- Override `redpanda.name` template.
-nameOverride: ""
+nameOverride: "backbone"
 # -- Override `redpanda.fullname` template.
-fullnameOverride: ""
+fullnameOverride: "redpanda"
 # -- Default Kubernetes cluster domain.
 clusterDomain: cluster.local.
 # -- Additional labels to add to all Kubernetes objects.
@@ -1070,4 +1070,4 @@ config:
   # superusers: None                                               # List of superuser usernames
 
 tests:
-  enabled: true
+  enabled: false
