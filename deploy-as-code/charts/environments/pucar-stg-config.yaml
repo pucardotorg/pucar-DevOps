@@ -614,7 +614,7 @@ egov-persister:
       enabled: true
   image:
     repository: docker.io/venkatramireddyb/egov-persister
-    tag: main-cbc7f5cc29355825a7e6c54378e9263db5177bd4
+    tag: main-206e0c53783db990ad4f9585083a866362d47e24
   ingress:
     nginxRateLimit:
       enabled: true
