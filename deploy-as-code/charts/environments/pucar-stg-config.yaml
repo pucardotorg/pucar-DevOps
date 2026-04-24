@@ -519,7 +519,7 @@ egov-indexer:
       enabled: true
   image:
     repository: docker.io/venkatramireddyb/egov-indexer
-    tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
+    tag: main-206e0c53783db990ad4f9585083a866362d47e24
   ingress:
     nginxRateLimit:
       enabled: true
