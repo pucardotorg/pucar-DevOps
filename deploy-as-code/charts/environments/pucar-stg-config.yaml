@@ -386,7 +386,7 @@ e-sign-svc:
       enabled: true
   image:
     repository: docker.io/venkatramireddyb/e-sign-svc
-    tag: main-da8e1d65607c265e039d3346f468cdfc256e55ef-1
+    tag: main-206e0c53783db990ad4f9585083a866362d47e24
   ingress:
     nginxRateLimit:
       enabled: true
