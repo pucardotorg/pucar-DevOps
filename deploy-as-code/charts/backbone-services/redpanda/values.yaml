@@ -196,7 +196,7 @@ tls:
   # To allow you to enable TLS for individual listeners,
   # Certificates in `auth.tls.certs` are always loaded, even if `tls.enabled` is `false`.
   # See `listeners.<listener-name>.tls.enabled`.
-  enabled: true
+  enabled: false
   # -- List all Certificates here,
   # then you can reference a specific Certificate's name
   # in each listener's `listeners.<listener name>.tls.cert` setting.
@@ -221,7 +221,7 @@ tls:
       # `false`, chart managed clients will use `tls.crt` for certificate
       # verification and listeners with `require_client_auth` and no explicit
       # `truststore` will use the container's CA certificates.
-      caEnabled: true
+      caEnabled: false
       # duration: 43800h
       # if you wish to have Kubernetes internal dns names (IE the headless service of the redpanda StatefulSet) included in `dnsNames` of the  certificate even, when supplying an issuer.
       # applyInternalDNSNames: false
@@ -245,7 +245,7 @@ tls:
       # `false`, chart managed clients will use `tls.crt` for certificate
       # verification and listeners with `require_client_auth` and no explicit
       # `truststore` will use the container's CA certificates.
-      caEnabled: true
+      caEnabled: false
       # duration: 43800h
       # if you wish to for apply internal dns names to the certificate even when supplying an issuer
       # applyInternalDNSNames: false
