@@ -83,10 +83,6 @@ env: |
     value: "8080"
   - name: MAX_NUMBER_PAGES
     value: "80"   
-  - name: DATA_CONFIG_URLS
-    value: {{ index .Values "data-config-urls" | quote }}
-  - name: FORMAT_CONFIG_URLS
-    value: {{ index .Values "format-config-urls" | quote }}
   - name: EGOV_LOCALISATION_HOST
     valueFrom:
       configMapKeyRef:
@@ -102,3 +98,8 @@ env: |
       configMapKeyRef:
         name: egov-config
         key: egov-services-fqdn-name
+  - name: EGOV_MDMS_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: egov-mdms-service
