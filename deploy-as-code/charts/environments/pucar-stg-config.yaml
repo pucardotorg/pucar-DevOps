@@ -93,6 +93,7 @@ application:
     gatewayBurstCapacity: "30"
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
+  memory_requests: 448Mi
 audit-service:
   hpa:
     maxReplicas: 5
