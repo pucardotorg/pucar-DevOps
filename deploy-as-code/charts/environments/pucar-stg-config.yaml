@@ -901,7 +901,7 @@ icops-integration:
       enabled: true
   image:
     repository: venkatramireddyb/icops-integration
-    tag: main-89e457baafcba6893a2319038ddcfab35fc5c6a1
+    tag: main-41a16228ce57875d0d699a26118f529585af534b
   ingress:
     nginxRateLimit:
       enabled: true
