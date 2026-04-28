@@ -150,3 +150,7 @@ env: |
     value: {{ .Values.global.redis.host | quote }}
   - name: SPRING_DATA_REDIS_PORT
     value: {{ .Values.global.redis.port | quote }}
+  - name: SPRING_CLOUD_GATEWAY_DISCOVERY_LOCATOR_ENABLED
+    value: "true"
+  - name: SPRING_CLOUD_GATEWAY_DISCOVERY_LOCATOR_LOWER_CASE_SERVICE_ID
+    value: "true"
