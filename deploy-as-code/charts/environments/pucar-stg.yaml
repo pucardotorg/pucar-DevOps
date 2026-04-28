@@ -451,6 +451,9 @@ icops-integration:
     - ip: "10.2.95.242"
       hostnames:
       - "staging-icops.keralapolice.gov.in"
+    - ip: "10.5.123.250"
+      hostnames:
+      - "oncourts-staging.kerala.gov.in"
 
 epayments:
   hostAliases: |
