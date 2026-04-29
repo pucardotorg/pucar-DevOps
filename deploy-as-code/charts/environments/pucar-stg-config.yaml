@@ -196,7 +196,7 @@ case:
       enabled: true
   image:
     repository: docker.io/venkatramireddyb/case
-    tag: feature-5218-addtional-pip-fix-47f148f372406e7764e4e08971e81381cdba9f5f
+    tag: main-d99be8f018924f96c99c8c47c6f9ab121a57d8e7
   ingress:
     nginxRateLimit:
       enabled: true
