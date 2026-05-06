@@ -340,7 +340,7 @@ digit-ui:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/digit-ui
     tag: gogs-v1.18.0.1
   memory_requests: "1Gi"
-  replicas: 0
+  replicas: 2
   ingress:
     nginxRateLimit:
       enabled: true
@@ -981,7 +981,7 @@ epayments:
 gateway:
   namespace: pucar-prod
   hpa:
-    maxReplicas: 5
+    maxReplicas: 10
     memory:
       enabled: true
   image:
@@ -991,7 +991,7 @@ gateway:
   memory_requests: 1280Mi
   memory_limits: 1280Mi
   cpu_requests: 50m
-  replicas: 2
+  replicas: 3
   ingress:
     nginxRateLimit:
       enabled: true
@@ -1412,7 +1412,7 @@ payment-calculator:
     gatewayReplenishRate: "30"
 pdf-service:
   hpa:
-    maxReplicas: 5
+    maxReplicas: 10
     memory:
       enabled: true
   image:
@@ -1422,7 +1422,7 @@ pdf-service:
   memory_requests: 768Mi
   memory_limits: 1000Mi
   cpu_requests: 50m
-  replicas: 2
+  replicas: 5
   ingress:
     nginxRateLimit:
       enabled: true
