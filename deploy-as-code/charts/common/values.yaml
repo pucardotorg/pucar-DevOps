@@ -332,7 +332,7 @@ extraEnv:
             name: egov-config
             key: loki-url
       - name: LOGGING_LOKI_APP
-        value: {{ template "common.name" . | quote }}
+        value: {{ template "common.name" . }}
       - name: LOGGING_LOKI_ENVIRONMENT
         valueFrom:
           configMapKeyRef:
