@@ -1,5 +1,8 @@
 ab-diary:
-  replicas: 2
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/ab-diary
     tag: gogs-v1.17.1
@@ -7,6 +10,7 @@ ab-diary:
   memory_requests: "768Mi"
   memory_limits: "1Gi"
   cpu_requests: "50m"
+  replicas: 2
   ingress:
     nginxRateLimit:
       enabled: true
@@ -19,7 +23,10 @@ ab-diary:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 advocate:
-  replicas: 2
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/advocate
     tag: gogs-v1.17.0
@@ -27,6 +34,7 @@ advocate:
   memory_requests: "1200Mi"
   memory_limits: "1500Mi"
   cpu_requests: "50m"
+  replicas: 2
   ingress:
     nginxRateLimit:
       enabled: true
@@ -39,7 +47,10 @@ advocate:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 advocate-office-management:
-  replicas: 2
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/advocate-office-management
     tag: gogs-v1.17.0
@@ -47,6 +58,7 @@ advocate-office-management:
   memory_requests: "768Mi"
   memory_limits: "768Mi"
   cpu_requests: "50m"
+  replicas: 2
   ingress:
     nginxRateLimit:
       enabled: true
@@ -59,7 +71,10 @@ advocate-office-management:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 analytics:
-  replicas: 2
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/analytics
     tag: gogs-v1.17.1
@@ -67,6 +82,7 @@ analytics:
   memory_requests: "1200Mi"
   memory_limits: "1500Mi"
   cpu_requests: "50m"
+  replicas: 2
   ingress:
     nginxRateLimit:
       enabled: true
@@ -79,7 +95,10 @@ analytics:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 application:
-  replicas: 2
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/application
     tag: gogs-v1.17.1
@@ -87,6 +106,7 @@ application:
   memory_requests: "1200Mi"
   memory_limits: "1500Mi"
   cpu_requests: "50m"
+  replicas: 2
   ingress:
     nginxRateLimit:
       enabled: true
@@ -99,7 +119,10 @@ application:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 audit-service:
-  replicas: 2
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/audit-service
     tag: gogs-v1.17.0
@@ -107,6 +130,7 @@ audit-service:
   memory_requests: "256Mi"
   memory_limits: "384Mi"
   cpu_requests: "50m"
+  replicas: 2
   cpu_limits: "150m"
   ingress:
     nginxRateLimit:
@@ -120,7 +144,10 @@ audit-service:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 bail-bond:
-  replicas: 2
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/bail-bond
     tag: gogs-v1.17.1
@@ -128,6 +155,7 @@ bail-bond:
   memory_requests: "1200Mi"
   memory_limits: "1500Mi"
   cpu_requests: "50m"
+  replicas: 2
   ingress:
     nginxRateLimit:
       enabled: true
@@ -140,7 +168,10 @@ bail-bond:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 bank-details:
-  replicas: 2
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/bank-details
     tag: gogs-v1.17.0
@@ -148,6 +179,7 @@ bank-details:
   memory_requests: "768Mi"
   memory_limits: "768Mi"
   cpu_requests: "50m"
+  replicas: 2
   ingress:
     nginxRateLimit:
       enabled: true
@@ -160,7 +192,10 @@ bank-details:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 billing-service:
-  replicas: 2
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/billing-service
     tag: gogs-v1.17.0
@@ -168,6 +203,7 @@ billing-service:
   memory_requests: "1200Mi"
   memory_limits: "1500Mi"
   cpu_requests: "50m"
+  replicas: 2
   ingress:
     nginxRateLimit:
       enabled: true
@@ -180,7 +216,10 @@ billing-service:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "40"
 case:
-  replicas: 2
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/case
     tag: gogs-v1.17.1
@@ -188,6 +227,7 @@ case:
   memory_requests: "2.5Gi"
   memory_limits: "3Gi"
   cpu_requests: "50m"
+  replicas: 2
   ingress:
     nginxRateLimit:
       enabled: true
@@ -200,7 +240,10 @@ case:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "70"
 casemanagement:
-  replicas: 2
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/casemanagement
     tag: gogs-v1.17.0
@@ -208,6 +251,7 @@ casemanagement:
   memory_requests: "1200Mi"
   memory_limits: "1500Mi"
   cpu_requests: "50m"
+  replicas: 2
   ingress:
     nginxRateLimit:
       enabled: true
@@ -220,7 +264,10 @@ casemanagement:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 clamav:
-  replicas: 2
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/clamav
     tag: latest
@@ -228,6 +275,7 @@ clamav:
     nginxRateLimit:
       enabled: true
       rpm: "500"
+  replicas: 2
       burstMultiplier: "1"
       conections: "10"
   rateLimit:
@@ -236,7 +284,10 @@ clamav:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 collection-services:
-  replicas: 2
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/collection-services
     tag: gogs-v1.17.0
@@ -244,6 +295,7 @@ collection-services:
   memory_requests: "1200Mi"
   memory_limits: "1500Mi"
   cpu_requests: "50m"
+  replicas: 2
   ingress:
     nginxRateLimit:
       enabled: true
@@ -256,7 +308,10 @@ collection-services:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 ctc:
-  replicas: 2
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/ctc
     tag: gogs-v1.17.0
@@ -264,6 +319,7 @@ ctc:
   memory_requests: "512Mi"
   memory_limits: "768Mi"
   cpu_requests: "50m"
+  replicas: 2
   ingress:
     nginxRateLimit:
       enabled: true
@@ -276,11 +332,15 @@ ctc:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 digit-ui:
-  replicas: 0
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: false
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/digit-ui
     tag: gogs-v1.17.1
   memory_requests: "1Gi"
+  replicas: 0
   ingress:
     nginxRateLimit:
       enabled: true
@@ -293,7 +353,10 @@ digit-ui:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 digitalized-documents:
-  replicas: 2
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/digitalized-documents
     tag: gogs-v1.17.1
@@ -301,6 +364,7 @@ digitalized-documents:
   memory_requests: "1Gi"
   memory_limits: "1Gi"
   cpu_requests: "50m"
+  replicas: 2
   ingress:
     nginxRateLimit:
       enabled: true
@@ -313,7 +377,10 @@ digitalized-documents:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 dristi-case-pdf:
-  replicas: 2
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/dristi-case-pdf
     tag: gogs-v1.17.1
@@ -321,6 +388,7 @@ dristi-case-pdf:
   memory_limits: "1500Mi"
   cpu_requests: "50m"
   ingress:
+  replicas: 2
     nginxRateLimit:
       enabled: true
       rpm: "500"
@@ -333,6 +401,10 @@ dristi-case-pdf:
     gatewayReplenishRate: "30"
 dristi-pdf:
   replicas: 2
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/dristi-pdf
     tag: gogs-v1.17.1
@@ -340,6 +412,7 @@ dristi-pdf:
   memory_limits: "2560Mi"
   cpu_requests: "50m"
   cpu_limits: "250m"
+  replicas: 2
   ingress:
     nginxRateLimit:
       enabled: true
@@ -352,7 +425,10 @@ dristi-pdf:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 e-sign-svc:
-  replicas: 2
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/e-sign-svc
     tag: gogs-v1.17.2
@@ -360,6 +436,7 @@ e-sign-svc:
   memory_requests: "384Mi"
   memory_limits: "512Mi"
   cpu_requests: "50m"
+  replicas: 2
   ingress:
     nginxRateLimit:
       enabled: true
@@ -372,7 +449,10 @@ e-sign-svc:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 egov-accesscontrol:
-  replicas: 2
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/egov-accesscontrol
     tag: gogs-v1.17.0
@@ -380,6 +460,7 @@ egov-accesscontrol:
   memory_requests: "1Gi"
   memory_limits: "1Gi"
   cpu_requests: "100m"
+  replicas: 2
   ingress:
     nginxRateLimit:
       enabled: true
@@ -392,7 +473,10 @@ egov-accesscontrol:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 egov-apportion-service:
-  replicas: 2
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/egov-apportion-service
     tag: gogs-v1.17.0
@@ -400,6 +484,7 @@ egov-apportion-service:
   memory_requests: "384Mi"
   memory_limits: "512Mi"
   cpu_requests: "50m"
+  replicas: 2
   ingress:
     nginxRateLimit:
       enabled: true
@@ -412,7 +497,10 @@ egov-apportion-service:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 egov-enc-service:
-  replicas: 2
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/egov-enc-service
     tag: gogs-v1.17.0
@@ -420,6 +508,7 @@ egov-enc-service:
   memory_requests: "768Mi"
   memory_limits: "1Gi"
   cpu_requests: "100m"
+  replicas: 2
   cpu_limits: "250m"
   ingress:
     nginxRateLimit:
@@ -433,7 +522,10 @@ egov-enc-service:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 egov-filestore:
-  replicas: 2
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/egov-filestore
     tag: gogs-v1.17.0
@@ -441,6 +533,7 @@ egov-filestore:
   memory_requests: "3Gi"
   memory_limits: "3.5Gi"
   cpu_requests: "100m"
+  replicas: 2
   cpu_limits: "2500m"
   ingress:
     nginxRateLimit:
@@ -454,7 +547,10 @@ egov-filestore:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "40"
 egov-hrms:
-  replicas: 2
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/egov-hrms
     tag: gogs-v1.17.0
@@ -462,6 +558,7 @@ egov-hrms:
   memory_requests: "1000Mi"
   memory_limits: "1500Mi"
   cpu_requests: "100m"
+  replicas: 2
   ingress:
     nginxRateLimit:
       enabled: true
@@ -474,7 +571,10 @@ egov-hrms:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 egov-idgen:
-  replicas: 2
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/egov-idgen
     tag: gogs-v1.17.0
@@ -482,6 +582,7 @@ egov-idgen:
   memory_requests: "1000Mi"
   memory_limits: "1500Mi"
   cpu_requests: "100m"
+  replicas: 2
   ingress:
     nginxRateLimit:
       enabled: true
@@ -494,7 +595,10 @@ egov-idgen:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 egov-indexer:
-  replicas: 2
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/egov-indexer
     tag: gogs-v1.17.0
@@ -502,6 +606,7 @@ egov-indexer:
   memory_requests: "1100Mi"
   memory_limits: "1500Mi"
   cpu_requests: "100m"
+  replicas: 2
   ingress:
     nginxRateLimit:
       enabled: true
@@ -514,7 +619,10 @@ egov-indexer:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 egov-localization:
-  replicas: 2
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/egov-localization
     tag: gogs-v1.17.0
@@ -522,6 +630,7 @@ egov-localization:
   memory_requests: "1000Mi"
   memory_limits: "1500Mi"
   cpu_requests: "50m"
+  replicas: 2
   ingress:
     nginxRateLimit:
       enabled: true
@@ -534,7 +643,10 @@ egov-localization:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 egov-mdms-service:
-  replicas: 2
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/egov-mdms-service
     tag: gogs-v1.17.0
@@ -542,6 +654,7 @@ egov-mdms-service:
   memory_requests: "768Mi"
   memory_limits: "1Gi"
   cpu_requests: "50m"
+  replicas: 2
   ingress:
     nginxRateLimit:
       enabled: true
@@ -554,7 +667,10 @@ egov-mdms-service:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 egov-notification-mail:
-  replicas: 2
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/egov-notification-mail
     tag: gogs-v1.17.0
@@ -562,6 +678,7 @@ egov-notification-mail:
   memory_requests: "1200Mi"
   memory_limits: "1500Mi"
   cpu_requests: "50m"
+  replicas: 2
   ingress:
     nginxRateLimit:
       enabled: true
@@ -574,7 +691,10 @@ egov-notification-mail:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 egov-otp:
-  replicas: 2
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/egov-otp
     tag: gogs-v1.17.0
@@ -582,6 +702,7 @@ egov-otp:
   memory_requests: "1200Mi"
   memory_limits: "1500Mi"
   cpu_requests: "50m"
+  replicas: 2
   ingress:
     nginxRateLimit:
       enabled: true
@@ -594,7 +715,10 @@ egov-otp:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 egov-persister:
-  replicas: 2
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/egov-persister
     tag: gogs-v1.17.0
@@ -602,6 +726,7 @@ egov-persister:
   memory_requests: "1000Mi"
   memory_limits: "1500Mi"
   cpu_requests: "50m"
+  replicas: 2
   ingress:
     nginxRateLimit:
       enabled: true
@@ -614,7 +739,10 @@ egov-persister:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 egov-pg-service:
-  replicas: 2
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/egov-pg-service
     tag: gogs-v1.17.0
@@ -622,6 +750,7 @@ egov-pg-service:
   memory_requests: "1200Mi"
   memory_limits: "1500Mi"
   cpu_requests: "50m"
+  replicas: 2
   ingress:
     nginxRateLimit:
       enabled: true
@@ -634,7 +763,10 @@ egov-pg-service:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 egov-url-shortening:
-  replicas: 2
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/egov-url-shortening
     tag: gogs-v1.17.0
@@ -642,6 +774,7 @@ egov-url-shortening:
   memory_requests: "1200Mi"
   memory_limits: "1500Mi"
   cpu_requests: "50m"
+  replicas: 2
   ingress:
     nginxRateLimit:
       enabled: true
@@ -654,7 +787,10 @@ egov-url-shortening:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 egov-user:
-  replicas: 2
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/egov-user
     tag: v1.4.0-62d3a2678cd6537e9b750dd95286b39bed70e172
@@ -662,6 +798,7 @@ egov-user:
   memory_requests: "1000Mi"
   memory_limits: "1500Mi"
   cpu_requests: "50m"
+  replicas: 2
   ingress:
     nginxRateLimit:
       enabled: true
@@ -670,11 +807,14 @@ egov-user:
       conections: "10"
   rateLimit:
     enabled: true
-    gatewayBurstCapacity: "30"
+    gatewayBurstCapacity: "40"
     gatewayKeyResolver: "userKeyResolver"
-    gatewayReplenishRate: "30"
+    gatewayReplenishRate: "40"
 egov-user-event:
-  replicas: 2
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/egov-user-event
     tag: gogs-v1.17.0
@@ -682,6 +822,7 @@ egov-user-event:
   memory_requests: "1200Mi"
   memory_limits: "1500Mi"
   cpu_requests: "50m"
+  replicas: 2
   ingress:
     nginxRateLimit:
       enabled: true
@@ -694,7 +835,10 @@ egov-user-event:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 egov-workflow-v2:
-  replicas: 2
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/egov-workflow-v2
     tag: gogs-v1.17.0
@@ -702,6 +846,7 @@ egov-workflow-v2:
   memory_requests: "1200Mi"
   memory_limits: "1500Mi"
   cpu_requests: "50m"
+  replicas: 2
   ingress:
     nginxRateLimit:
       enabled: true
@@ -714,7 +859,10 @@ egov-workflow-v2:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 epost-tracker:
-  replicas: 2
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/epost-tracker
     tag: gogs-v1.17.0
@@ -722,6 +870,7 @@ epost-tracker:
   memory_requests: 1280Mi
   memory_limits: 1280Mi
   cpu_requests: 50m
+  replicas: 2
   ingress:
     nginxRateLimit:
       enabled: true
@@ -734,7 +883,10 @@ epost-tracker:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 esign-interceptor:
-  replicas: 2
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/esign-interceptor
     tag: gogs-v1.17.0
@@ -742,6 +894,7 @@ esign-interceptor:
   memory_requests: 1280Mi
   memory_limits: 1280Mi
   cpu_requests: 50m
+  replicas: 2
   ingress:
     nginxRateLimit:
       enabled: true
@@ -754,7 +907,10 @@ esign-interceptor:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 etreasury:
-  replicas: 2
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/etreasury
     tag: gogs-v1.17.1
@@ -762,6 +918,7 @@ etreasury:
   memory_requests: 1280Mi
   memory_limits: 1280Mi
   cpu_requests: 50m
+  replicas: 2
   ingress:
     nginxRateLimit:
       enabled: true
@@ -774,7 +931,10 @@ etreasury:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 evidence:
-  replicas: 2
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/evidence
     tag: gogs-v1.17.1
@@ -782,6 +942,7 @@ evidence:
   memory_requests: 1280Mi
   memory_limits: 1280Mi
   cpu_requests: 50m
+  replicas: 2
   ingress:
     nginxRateLimit:
       enabled: true
@@ -794,12 +955,16 @@ evidence:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 epayments:
-  replicas: 2
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/epayments
     tag: v1.3.1-3cd967542ec02916a460cff31440bcc1344608f0
   memory_requests: 512Mi
   cpu_requests: 50m
+  replicas: 2
   ingress:
     nginxRateLimit:
       enabled: true
@@ -813,7 +978,10 @@ epayments:
     gatewayReplenishRate: "30"
 gateway:
   namespace: pucar-stg
-  replicas: 2
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/gateway
     tag: gogs-v1.17.0
@@ -821,6 +989,7 @@ gateway:
   memory_requests: 1280Mi
   memory_limits: 1280Mi
   cpu_requests: 50m
+  replicas: 2
   ingress:
     nginxRateLimit:
       enabled: true
@@ -833,7 +1002,10 @@ gateway:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 hearing:
-  replicas: 2
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/hearing
     tag: gogs-v1.17.0
@@ -841,6 +1013,7 @@ hearing:
   memory_requests: 1280Mi
   memory_limits: 1280Mi
   cpu_requests: 50m
+  replicas: 2
   ingress:
     nginxRateLimit:
       enabled: true
@@ -853,7 +1026,10 @@ hearing:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "40"
 hearing-management:
-  replicas: 2
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/hearing-management
     tag: gogs-v1.17.0
@@ -861,6 +1037,7 @@ hearing-management:
   memory_requests: 1280Mi
   memory_limits: 1280Mi
   cpu_requests: 50m
+  replicas: 2
   ingress:
     nginxRateLimit:
       enabled: true
@@ -873,7 +1050,10 @@ hearing-management:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 icops-integration:
-  replicas: 2
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/icops-integration
     tag: gogs-v1.17.0
@@ -881,6 +1061,7 @@ icops-integration:
   memory_requests: 512Mi
   memory_limits: 512Mi
   cpu_requests: 50m
+  replicas: 2
   ingress:
     nginxRateLimit:
       enabled: true
@@ -893,7 +1074,10 @@ icops-integration:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 inbox:
-  replicas: 2
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/inbox
     tag: gogs-v1.17.0
@@ -901,6 +1085,7 @@ inbox:
   memory_requests: 1280Mi
   memory_limits: 1280Mi
   cpu_requests: 50m
+  replicas: 2
   ingress:
     nginxRateLimit:
       enabled: true
@@ -913,7 +1098,10 @@ inbox:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "100"
 individual:
-  replicas: 2
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/individual
     tag: gogs-v1.17.0
@@ -921,6 +1109,7 @@ individual:
   memory_requests: 1280Mi
   memory_limits: 1280Mi
   cpu_requests: 50m
+  replicas: 2
   ingress:
     nginxRateLimit:
       enabled: true
@@ -933,7 +1122,10 @@ individual:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 inportal-survey:
-  replicas: 2
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/inportal-survey
     tag: gogs-v1.17.0
@@ -941,6 +1133,7 @@ inportal-survey:
   memory_requests: 512Mi
   memory_limits: 512Mi
   cpu_requests: 50m 
+  replicas: 2
   ingress:
     nginxRateLimit:
       enabled: true
@@ -953,7 +1146,10 @@ inportal-survey:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 kerala-sms:
-  replicas: 2
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/kerala-sms
     tag: gogs-v1.17.0
@@ -961,6 +1157,7 @@ kerala-sms:
   memory_requests: 768Mi
   memory_limits: 1000Mi
   cpu_requests: 50m
+  replicas: 2
   ingress:
     nginxRateLimit:
       enabled: true
@@ -973,7 +1170,10 @@ kerala-sms:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 lock-svc:
-  replicas: 2
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/lock-svc
     tag: gogs-v1.17.0
@@ -981,6 +1181,7 @@ lock-svc:
   memory_requests: 1280Mi
   memory_limits: 1536Mi
   cpu_requests: 50m
+  replicas: 2
   ingress:
     nginxRateLimit:
       enabled: true
@@ -993,7 +1194,10 @@ lock-svc:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 minio-filestore:
-  replicas: 2
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: docker.io/venkatramireddyb/egov-filestore
     tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
@@ -1001,6 +1205,7 @@ minio-filestore:
   memory_requests: 768Mi
   memory_limits: 1000Mi
   cpu_requests: 50m
+  replicas: 2
   ingress:
     nginxRateLimit:
       enabled: true
@@ -1013,7 +1218,10 @@ minio-filestore:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 njdg-transformer:
-  replicas: 2
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/njdg-transformer
     tag: gogs-v1.17.0
@@ -1021,6 +1229,7 @@ njdg-transformer:
   memory_requests: 1000Mi
   memory_limits: 1256Mi
   cpu_requests: 50m
+  replicas: 2
   ingress:
     nginxRateLimit:
       enabled: true
@@ -1033,7 +1242,10 @@ njdg-transformer:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 notification:
-  replicas: 2
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/notification
     tag: gogs-v1.17.1
@@ -1041,6 +1253,7 @@ notification:
   memory_requests: 768Mi
   memory_limits: 1000Mi
   cpu_requests: 50m
+  replicas: 2
   ingress:
     nginxRateLimit:
       enabled: true
@@ -1053,7 +1266,10 @@ notification:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 ocr-service:
-  replicas: 2
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/ocr-service
     tag: gogs-v1.17.0
@@ -1061,6 +1277,7 @@ ocr-service:
   memory_requests: 768Mi
   memory_limits: 1000Mi
   cpu_requests: 50m
+  replicas: 2
   ingress:
     nginxRateLimit:
       enabled: true
@@ -1073,7 +1290,10 @@ ocr-service:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 oncourts-website:
-  replicas: 2
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/oncourts-website
     tag: gogs-v1.17.2
@@ -1081,6 +1301,7 @@ oncourts-website:
   memory_limits: 768Mi
   cpu_requests: 50m
   ingress:
+  replicas: 2
     nginxRateLimit:
       enabled: true
       rpm: "500"
@@ -1092,7 +1313,10 @@ oncourts-website:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 openapi:
-  replicas: 2
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/openapi
     tag: gogs-v1.17.1
@@ -1100,6 +1324,7 @@ openapi:
   memory_requests: 768Mi
   memory_limits: 1000Mi
   cpu_requests: 50m
+  replicas: 2
   ingress:
     nginxRateLimit:
       enabled: true
@@ -1112,7 +1337,10 @@ openapi:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 order:
-  replicas: 2
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/order
     tag: gogs-v1.17.1
@@ -1120,6 +1348,7 @@ order:
   memory_requests: 768Mi
   memory_limits: 1000Mi
   cpu_requests: 50m
+  replicas: 2
   ingress:
     nginxRateLimit:
       enabled: true
@@ -1132,7 +1361,10 @@ order:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 order-management:
-  replicas: 2
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/order-management
     tag: gogs-v1.17.1
@@ -1140,6 +1372,7 @@ order-management:
   memory_requests: 768Mi
   memory_limits: 1000Mi
   cpu_requests: 50m
+  replicas: 2
   ingress:
     nginxRateLimit:
       enabled: true
@@ -1152,7 +1385,10 @@ order-management:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 payment-calculator:
-  replicas: 2
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/payment-calculator
     tag: gogs-v1.17.1
@@ -1160,6 +1396,7 @@ payment-calculator:
   memory_requests: 768Mi
   memory_limits: 1000Mi
   cpu_requests: 50m
+  replicas: 2
   ingress:
     nginxRateLimit:
       enabled: true
@@ -1172,7 +1409,10 @@ payment-calculator:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 pdf-service:
-  replicas: 2
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/pdf-service
     tag: gogs-v1.15.4
@@ -1180,6 +1420,7 @@ pdf-service:
   memory_requests: 768Mi
   memory_limits: 1000Mi
   cpu_requests: 50m
+  replicas: 2
   ingress:
     nginxRateLimit:
       enabled: true
@@ -1192,7 +1433,10 @@ pdf-service:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 pgr-services:
-  replicas: 2
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: govio/pgr-services
     tag: core-digit-2.9-lts-pgr-02df4964cb-3
@@ -1200,6 +1444,7 @@ pgr-services:
   memory_requests: 856Mi
   memory_limits: 1024Mi
   cpu_requests: 50m
+  replicas: 2
   ingress:
     nginxRateLimit:
       enabled: true
@@ -1212,7 +1457,10 @@ pgr-services:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 scheduler:
-  replicas: 2
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/scheduler
     tag: gogs-v1.17.0
@@ -1220,6 +1468,7 @@ scheduler:
   memory_requests: 768Mi
   memory_limits: 1000Mi
   cpu_requests: 50m
+  replicas: 2
   ingress:
     nginxRateLimit:
       enabled: true
@@ -1232,7 +1481,10 @@ scheduler:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 service-request:
-  replicas: 2
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: egovio/service-request
     tag: core-2.9-lts-mvn-check-bbc06901f1-6
@@ -1240,6 +1492,7 @@ service-request:
   memory_requests: 512Mi
   memory_limits: 768Mi
   cpu_requests: 50m
+  replicas: 2
   ingress:
     nginxRateLimit:
       enabled: true
@@ -1252,7 +1505,10 @@ service-request:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 summons-svc:
-  replicas: 2
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/summons-svc
     tag: gogs-v1.17.0
@@ -1260,6 +1516,7 @@ summons-svc:
   memory_requests: 768Mi
   memory_limits: 1000Mi
   cpu_requests: 50m
+  replicas: 2
   cpu_limits: 350m
   ingress:
     nginxRateLimit:
@@ -1274,7 +1531,10 @@ summons-svc:
     gatewayReplenishRate: "30"
 
 task:
-  replicas: 2
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/task
     tag: gogs-v1.17.0
@@ -1282,6 +1542,7 @@ task:
   memory_requests: "1024Mi"
   memory_limits: "1024Mi"
   cpu_requests: "50m"
+  replicas: 2
   ingress:
     nginxRateLimit:
       enabled: true
@@ -1294,7 +1555,10 @@ task:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 task-management:
-  replicas: 2
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/task-management
     tag: gogs-v1.17.0
@@ -1302,6 +1566,7 @@ task-management:
   memory_requests: 512Mi
   memory_limits: 512Mi
   cpu_requests: 50m
+  replicas: 2
   ingress:
     nginxRateLimit:
       enabled: true
@@ -1314,7 +1579,10 @@ task-management:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 template-configuration:
-  replicas: 2
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/template-configuration
     tag: gogs-v1.17.0
@@ -1322,6 +1590,7 @@ template-configuration:
   memory_requests: 768Mi
   memory_limits: 768Mi
   cpu_requests: 50m
+  replicas: 2
   ingress:
     nginxRateLimit:
       enabled: true
@@ -1334,7 +1603,10 @@ template-configuration:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 transcription:
-  replicas: 2
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/transcription
     tag: v1.0.0-dristi-experiment-1
@@ -1342,6 +1614,7 @@ transcription:
   memory_limits: 1280Mi
   cpu_requests: 50m
   cpu_limits: 150m
+  replicas: 2
   ingress:
     nginxRateLimit:
       enabled: true
@@ -1354,7 +1627,10 @@ transcription:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 transformer:
-  replicas: 2
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/transformer
     tag: gogs-v1.17.0
@@ -1362,6 +1638,7 @@ transformer:
   memory_requests: 1000Mi
   memory_limits: 1500Mi
   cpu_requests: 50m
+  replicas: 2
   cpu_limits: 250m
   ingress:
     nginxRateLimit:
@@ -1375,7 +1652,10 @@ transformer:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 user-otp:
-  replicas: 2
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/user-otp
     tag: gogs-v1.17.0
@@ -1383,6 +1663,7 @@ user-otp:
   memory_requests: 856Mi
   memory_limits: 1280Mi
   cpu_requests: 50m
+  replicas: 2
   cpu_limits: 150m
   ingress:
     nginxRateLimit:
@@ -1396,7 +1677,10 @@ user-otp:
     gatewayKeyResolver: "otpKeyResolver"
     gatewayReplenishRate: "3"
 workbench-ui:
-  replicas: 2
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/workbench-ui
     tag: gogs-v1.12.0
@@ -1404,6 +1688,7 @@ workbench-ui:
   memory_limits: 350Mi
   cpu_requests: 50m
   cpu_limits: 150m
+  replicas: 2
   ingress:
     nginxRateLimit:
       enabled: true
