@@ -30,13 +30,13 @@ ingress:
     connections: "10"
     annotations:
 
-hpacpu:
-  enabled: false
-hparam:
-  enabled: true
 hpa:
   minReplicas: 1
   maxReplicas: 5
+  cpu:
+    enabled: false
+  memory:
+    enabled: false
 
 rateLimit:
   enabled: true
@@ -323,7 +323,7 @@ extraEnv:
       {{- else }}
         value: "enc-user-audit-data"
       {{- end }}  
-      {{- if and .Values.lokiEnabled (or (index .Values "loki-url") (and .Values.loki .Values.loki.url)) }}
+      {{- if .Values.lokiEnabled }}
       - name: LOGGING_LOKI_ENABLED
         value: "true"
       - name: LOGGING_LOKI_URL
@@ -392,6 +392,7 @@ cron:
   namespace: egov
   concurrencyPolicy: Forbid
   restartPolicy: OnFailure
+  timezone: "Asia/Kolkata"
   httpPort: 8080
   ## Additional sidecar containers
   extraContainers: |

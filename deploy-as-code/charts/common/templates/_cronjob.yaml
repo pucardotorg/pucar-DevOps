@@ -19,7 +19,9 @@ spec:
       template:
         metadata:  
           annotations:
+          {{- if not .Values.disableAnnotationTimestamp}}
             deployment-timestamp: "{{ date "20060102150405" .Release.Time }}"    
+          {{- end }}
           labels:
           {{- include "common.labels" . | nindent 12 }}              
         spec:
