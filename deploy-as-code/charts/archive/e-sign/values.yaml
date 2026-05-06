@@ -1,0 +1,27 @@
+# Common Labels
+labels:
+  app: "e-sign"
+  group: "web"
+
+# Ingress Configs
+ingress:
+  enabled: true
+  context: "e-sign"
+
+
+# Container Configs
+image:
+  repository: "docker.io/venkatramireddyb/e-sign"
+  tag: v1.0.0-ee2012995905694a5cb0deeb46440e07d174d152
+replicas: "1"
+
+
+healthChecks:
+  enabled: false
+  livenessProbePath: "/e-sign/"
+  readinessProbePath: "/e-sign/"
+    
+env: |
+  - name: SERVER_PORT
+    value: "8080"
+

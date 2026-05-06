@@ -1,0 +1,171 @@
+# Common Labels
+labels:
+  app: "dristi-pdf"
+  group: "rainmaker"
+
+
+# Ingress Configs
+ingress:
+  enabled: true
+  zuul: true
+  context: "egov-pdf"
+  additionalAnnotations: |
+    nginx.ingress.kubernetes.io/proxy-body-size: "0"
+
+# Container Configs
+image:
+  repository: "docker.io/venkatramireddyb/dristi-pdf"
+  tag: develop-fb2913a52196e65e4ba5ac6bcf50aeb1ceee100d
+replicas: "1"
+#healthChecks:
+#  enabled: true
+#  livenessProbePath: "/egov-pdf/health"
+#  readinessProbePath: "/egov-pdf/health"
+# Additional Container Envs
+env: |
+  - name: DB_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-config
+        key: db-host
+  - name: DB_NAME
+    valueFrom:
+      configMapKeyRef:
+        name: egov-config
+        key: db-name
+  - name: DB_USER
+    valueFrom:
+      secretKeyRef:
+        name: db
+        key: username
+  - name: DB_PASSWORD
+    valueFrom:
+      secretKeyRef:
+        name: db
+        key: password
+  - name: KAFKA_BROKER_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-config
+        key: kafka-brokers
+  - name: DB_PORT
+    value: "5432"
+  - name: EGOV_MDMS_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: egov-mdms-service
+  - name: EGOV_PDF_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: pdf-service
+  - name: DRISTI_CASE_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: case
+  - name: DRISTI_ORDER_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: order
+  - name: EGOV_HRMS_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key:  egov-hrms
+  - name: EGOV_INDIVIDUAL_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key:  individual
+  - name:  DRISTI_HEARING_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: hearing
+  - name:  DRISTI_ADVOCATE_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: advocate
+  - name: CONTEXT_PATH
+    value: "/egov-pdf"    
+  - name: EGOV_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-config
+        key: egov-services-fqdn-name
+  - name: EGOV_SUNBIRDRC_CREDENTIAL_HOST
+    valueFrom:
+      configMapKeyRef:
+        key: sunbirdrc-credential-service
+        name: egov-service-host
+  - name:  DRISTI_APPLICATION_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: application
+  - name:  EGOV_LOCALIZATION_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: egov-localization
+  - name:  EGOV_FILESTORE_SERVICE_HOST
+    value: "http://egov-filestore.pucar-stg:8080"
+  - name: JUDGE_NAME
+    valueFrom:
+      configMapKeyRef:
+        key: judge-name
+        name: egov-config
+  - name: JUDGE_DESIGNATION
+    valueFrom:
+      configMapKeyRef:
+        key: judge-designation
+        name: egov-config
+  - name: ORDER_HEADING
+    valueFrom:
+      configMapKeyRef:
+        key: ORDER_HEADING
+        name: egov-config
+  - name: JUDGE_DESIGNATION_HEADER
+    valueFrom:
+      configMapKeyRef:
+        key: JUDGE_DESIGNATION_HEADER
+        name: egov-config
+  - name: DRISTI_TASK_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: task
+  - name: DRISTI_EVIDENCE_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: evidence
+  - name: DRISTI_BAIL_BOND_HOST
+    valueFrom:
+      configMapKeyRef:
+        key: bail-bond
+        name: egov-service-host
+  - name: DRISTI_TASK_MANAGEMENT_HOST
+    valueFrom:
+      configMapKeyRef:
+        key: task-management
+        name: egov-service-host
+  - name: DRISTI_DIGITALIZED_DOCUMENTS_HOST
+    valueFrom:
+      configMapKeyRef:
+        key: digitalized-documents
+        name: egov-service-host
+  - name: DRISTI_CTC_APPLICATIONS_HOST
+    valueFrom:
+      configMapKeyRef:
+        key: ctc
+        name: egov-service-host  
+  - name: DRISTI_OPENAPI_CASE_HOST
+    valueFrom:
+      configMapKeyRef:
+        key: openapi
+        name: egov-service-host

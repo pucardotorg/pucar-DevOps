@@ -1,0 +1,79 @@
+version: v.0.3
+modules:
+  - name: backbone
+    services:
+      - kafka-kraft
+      - elasticsearch-data
+      - elasticsearch-master
+      - kibana
+      - cert-manager
+      - ingress-nginx
+      - minio
+      - postgresql
+      - redis
+  - name: egov
+    dependencies:
+      - "backbone"
+    services:
+      payment-calculator: v0.5.1-uat-06ff554a88abb7153bc7b6046dcdb07b6b8a3230
+      advocate: v0.5.1-uat-06ff554a88abb7153bc7b6046dcdb07b6b8a3230
+      case: v0.5.1-uat-06ff554a88abb7153bc7b6046dcdb07b6b8a3230
+      casemanagement: v0.5.1-uat-06ff554a88abb7153bc7b6046dcdb07b6b8a3230
+      hearing: v0.5.1-uat-06ff554a88abb7153bc7b6046dcdb07b6b8a3230
+      dristi-case-pdf: v0.5.1-uat-06ff554a88abb7153bc7b6046dcdb07b6b8a3230
+      esign-interceptor: v0.5.1-uat-06ff554a88abb7153bc7b6046dcdb07b6b8a3230
+      e-sign-svc: v0.5.1-uat-06ff554a88abb7153bc7b6046dcdb07b6b8a3230
+      epost-tracker: v0.5.1-uat-06ff554a88abb7153bc7b6046dcdb07b6b8a3230
+      transformer: v0.5.1-uat-06ff554a88abb7153bc7b6046dcdb07b6b8a3230
+      order: v0.5.1-uat-06ff554a88abb7153bc7b6046dcdb07b6b8a3230
+      evidence: v0.5.1-uat-06ff554a88abb7153bc7b6046dcdb07b6b8a3230
+      application: v0.5.1-uat-06ff554a88abb7153bc7b6046dcdb07b6b8a3230
+      scheduler: v0.5.1-uat-06ff554a88abb7153bc7b6046dcdb07b6b8a3230
+      summons-svc: v0.5.1-uat-06ff554a88abb7153bc7b6046dcdb07b6b8a3230
+      collection-services: v0.5.1-uat-06ff554a88abb7153bc7b6046dcdb07b6b8a3230
+      task: v0.5.1-uat-06ff554a88abb7153bc7b6046dcdb07b6b8a3230
+      digit-ui: v0.5.1-uat-06ff554a88abb7153bc7b6046dcdb07b6b8a3230
+      analytics: v0.5.1-uat-06ff554a88abb7153bc7b6046dcdb07b6b8a3230
+      individual: v1.0.0-9f9fff70b3b2782499152458e041075a71e21660
+      inbox: v1.0.0-166a1ada6ae820e84f1e618fdaa8c207c5d7055d
+      etreasury: v0.5.1-uat-06ff554a88abb7153bc7b6046dcdb07b6b8a3230
+      epayments: v0.5.1-uat-06ff554a88abb7153bc7b6046dcdb07b6b8a3230
+      sbi-svc: v0.5.1-uat-06ff554a88abb7153bc7b6046dcdb07b6b8a3230
+      sbi-webpage: v0.5.1-uat-06ff554a88abb7153bc7b6046dcdb07b6b8a3230
+      icops-integration: v0.5.1-uat-06ff554a88abb7153bc7b6046dcdb07b6b8a3230
+      kerala-sms: v0.5.1-uat-06ff554a88abb7153bc7b6046dcdb07b6b8a3230
+      billing-service: v0.5.1-uat-06ff554a88abb7153bc7b6046dcdb07b6b8a3230
+      dristi-pdf: v0.5.1-uat-06ff554a88abb7153bc7b6046dcdb07b6b8a3230
+      verifyapp: v1.0.0-main-c4ee738-4
+      workbench-ui: court-room-hrms-0e500c0d6a-4
+      user-otp: v1.0.0-74196731f4b617ce06552e04a7a6eda9ffc40509
+      transcription: v1.0.0-dristi-experiment-1
+      sunbirdrc-credential-service: sunbirdrc-mithun-f0d17a4438-103
+      service-request: core-2.9-lts-mvn-check-bbc06901f1-6
+      citizen: v1.10.0-beta-0ad561e837-30
+      audit-service: core-2.9-lts-mvn-check-c33cfe45ab-9
+      egov-accesscontrol: core-2.9-lts-mvn-check-34362a8b87-9
+      egov-apportion-service: v1.0.0-911977062f07eda09758a1bb13daed6eee84b7d1
+      egov-enc-service: core-2.9-lts-mvn-check-c607f2d4de-20
+      egov-filestore: core-2.9-lts-mvn-check-17b905d01d-13
+      egov-hrms: court-room-hrm-changes-691901a842-14
+      egov-idgen: v1.0.0-cb22847c89d65c2a3eae05117108bb28c6eea290
+      egov-indexer: request-external-bug-fix-55924ec05b-63
+      egov-localization: core-2.9-lts-mvn-check-59c2e5ea5b-9
+      egov-location: core-2.9-lts-mvn-check-c33cfe45ab-9
+      egov-mdms-service: v1.0.0-MDMS-v2-2.9LTS-1
+      egov-notification-mail: core-2.9-lts-mvn-check-c33cfe45ab-4
+      egov-otp: core-2.9-lts-mvn-check-72333e5530-5
+      egov-persister: core-2.9-lts-mvn-check-c33cfe45ab-7
+      egov-pg-service: core-2.9-lts-mvn-check-421601fcdf-10
+      egov-url-shortening: core-2.9-lts-mvn-check-ecf5d0a880-11
+      egov-user: v1.0.0-core-2.9-lts-egov-user-deployement-1
+      egov-user-event: core-2.9-lts-mvn-check-57ef3ac8dd-4
+      egov-workflow-v2: core-2.9-lts-mvn-check-07ed8e9a49-12
+      employee: v1.10.0-beta-e7a69e05d3-33
+      gateway: core-2.9-lts-mvn-check-3b9d5c6ad1-20
+      kenlm: v1.0.0-dristi-experiment-1
+      ocr-service: v1.0.0-8d21efdbbb95a1bce3a0555c452a5568cbccf301
+      OCR: v1.0.0-dristi-experiment-OCR-6
+      pdf-service: v0.5.1-uat-06ff554a88abb7153bc7b6046dcdb07b6b8a3230
+      pgr-services: core-digit-2.9-lts-pgr-02df4964cb-3

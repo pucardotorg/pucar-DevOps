@@ -1,0 +1,223 @@
+# Common Labels
+labels:
+  app: "hearing"
+  group: "backend"
+
+# Ingress Configs
+ingress:
+  zuul: true
+  enabled: true
+  context: "hearing"
+
+lokiEnabled: true
+tracing-enabled: true
+redisEnabled: false
+
+# Init Containers Configs
+initContainers:
+  dbMigration:
+    enabled: true
+    schemaTable: "hearing_service_schema"
+    image:
+      repository: "docker.io/venkatramireddyb/hearing-db"
+      tag: develop-8220ea6b41b44305139c2facb61585d1ba5e35b8
+
+# Container Configs
+image:
+  repository: "docker.io/venkatramireddyb/hearing"
+  tag: develop-8220ea6b41b44305139c2facb61585d1ba5e35b8
+replicas: "1"
+httpPort: 8080
+appType: "java-spring"
+heap: "-Xmx256m -Xms256m"
+java-args: "-Dspring.profiles.active=monitoring"
+debugPort: 5005
+
+healthChecks:
+  enabled: true
+  livenessProbePath: "/hearing/health"
+  readinessProbePath: "/hearing/health"
+
+env: |
+  - name: JAVA_OPTS
+    value: {{ index .Values "heap" | quote }}
+  - name: SERVER_PORT
+    value: "8080"
+  - name: JAVA_ARGS
+    value: {{ index .Values "java-args" | quote }}
+  - name: SPRING_FLYWAY_URL
+    valueFrom:
+      configMapKeyRef:
+        key: db-url
+        name: egov-config
+  - name: SPRING_FLYWAY_USER
+    valueFrom:
+      secretKeyRef:
+        key: username
+        name: db
+  - name: SPRING_FLYWAY_PASSWORD
+    valueFrom:
+      secretKeyRef:
+        name: db
+        key: password
+  - name: "SCHEMA_TABLE"
+    value: "hearing_service_schema"
+  - name: EGOV_IDGEN_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: egov-idgen
+  - name: EGOV_USER_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: egov-user
+  - name: EGOV_HRMS_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: egov-hrms
+  - name: EGOV_MDMS_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: egov-mdms-service
+  - name: EGOV_LOCALIZATION_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: egov-localization
+  - name: EGOV_LOCALIZATION_SEARCH_ENDPOINT
+    value: /_search
+  - name: EGOV_MDMS_SEARCH_ENDPOINT
+    value: /egov-mdms-service/v1/_search
+  - name: SERVER_CONTEXT_PATH
+    value: /hearing
+  - name: EGOV_IDGEN_PATH
+    value: "egov-idgen/id/_generate"
+  - name: EGOV_BULK_INDEX_PATH
+    value: "_bulk?refresh=true"
+  - name: EGOV_INDIVIDUAL_HOST
+    valueFrom:
+      configMapKeyRef:
+        key: individual
+        name: egov-service-host
+  - name: EGOV_WORKFLOW_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: egov-workflow-v2
+  - name: EGOV_URL_SHORTNER
+    valueFrom:
+      configMapKeyRef:
+        key: egov-url-shortening
+        name: egov-service-host
+  - name: EGOV_CASE_HOST
+    valueFrom:
+      configMapKeyRef:
+        key: case
+        name: egov-service-host
+  - name: EGOV_APPLICATION_HOST
+    valueFrom:
+      configMapKeyRef:
+        key: application
+        name: egov-service-host
+  - name: EGOV_PDF_HOST
+    valueFrom:
+      configMapKeyRef:
+        key: pdf-service
+        name: egov-service-host
+  - name: EGOV_FILESTORE_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: egov-filestore
+  - name: DRISTI_SCHEDULER_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: scheduler
+  - name: SPRING_DATASOURCE_WRITER_URL
+    valueFrom:
+      configMapKeyRef:
+        key: db-url
+        name: egov-config
+  - name: SPRING_DATASOURCE_READER_URL
+    valueFrom:
+      configMapKeyRef:
+        key: db-url
+        name: egov-config
+  - name: SPRING_DATASOURCE_WRITER_USERNAME
+    valueFrom:
+      secretKeyRef:
+        key: writeusername
+        name: db
+  - name: SPRING_DATASOURCE_READER_USERNAME
+    valueFrom:
+      secretKeyRef:
+        key: readusername
+        name: db
+  - name: SPRING_DATASOURCE_WRITER_PASSWORD
+    valueFrom:
+      secretKeyRef:
+        key: writepassword
+        name: db
+  - name: SPRING_DATASOURCE_READER_PASSWORD
+    valueFrom:
+      secretKeyRef:
+        key: readpassword
+        name: db
+  - name: MANAGEMENT_HEALTH_JDBC_ENABLED
+    value: "false"
+  - name: MANAGEMENT_HEALTH_REDIS_ENABLED
+    value: "false"
+  - name: EGOV_INFRA_INDEXER_HOST
+    valueFrom:
+      configMapKeyRef:
+        key: es-indexer-host
+        name: egov-config
+  - name: EGOV_INBOX_HOST
+    valueFrom:
+      configMapKeyRef:
+        key: inbox
+        name: egov-service-host
+  - name: DRISTI_TASK_HOST
+    valueFrom:
+      configMapKeyRef:
+        key: task
+        name: egov-service-host
+  - name: EGOV_BILLINGSERVICE_HOST
+    valueFrom:
+      configMapKeyRef:
+        key: billing-service
+        name: egov-service-host
+  - name: DRISTI_ORDER_HOST
+    valueFrom:
+      configMapKeyRef:
+        key: order
+        name: egov-service-host
+  - name: DRISTI_ANALYTICS_HOST
+    valueFrom:
+      configMapKeyRef:
+        key: analytics
+        name: egov-service-host
+  - name: EGOV_ADVOCATE_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: advocate
+  - name: DRISTI_TASK-MANAGEMENT_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: task-management
+  - name: EGOV_INDEXER_ES_USERNAME
+    valueFrom:
+      secretKeyRef:
+        name: elasticsearch-credentials
+        key: username
+  - name: EGOV_INDEXER_ES_PASSWORD
+    valueFrom:
+      secretKeyRef:
+        name: elasticsearch-credentials
+        key: password

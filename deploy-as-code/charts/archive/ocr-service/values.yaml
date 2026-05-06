@@ -1,0 +1,142 @@
+# Common Labels
+labels:
+  app: "ocr-service"
+  group: "backend"
+
+# Ingress Configs
+ingress:
+  zuul: true
+  enabled: true
+  context: "ocr-service"
+
+lokiEnabled: true
+tracing-enabled: true
+
+# Init Containers Configs
+initContainers:
+  dbMigration:
+    enabled: true
+    schemaTable: "ocr-service_schema"
+    image:
+      repository: "docker.io/venkatramireddyb/ocr-service-db"
+      tag: v1.0.0-43fda1f5471717f3898bc96188ea068a4617ddd7
+
+# Container Configs
+image:
+  repository: "docker.io/venkatramireddyb/ocr-service"
+  tag: v1.0.0-43fda1f5471717f3898bc96188ea068a4617ddd7
+  imagePullPolicy: Always
+replicas: "1"
+httpPort: 8080
+
+
+#healthChecks:
+#  enabled: true
+#  livenessProbePath: "/advocate/"
+#  readinessProbePath: "/advocate/"
+
+env: |
+  - name: JAVA_OPTS
+    value: -Xmx256m -Xms256m
+  - name: SPRING_FLYWAY_URL
+    valueFrom:
+      configMapKeyRef:
+        key: db-url
+        name: egov-config
+  - name: SPRING_FLYWAY_USER
+    valueFrom:
+      secretKeyRef:
+        name: db
+        key: username
+  - name: SPRING_FLYWAY_PASSWORD
+    valueFrom:
+      secretKeyRef:
+        name: db
+        key: password
+  - name: SPRING_DATASOURCE_URL
+    valueFrom:
+      configMapKeyRef:
+        key: db-url
+        name: egov-config
+  - name: SPRING_DATASOURCE_USERNAME
+    valueFrom:
+      secretKeyRef:
+        name: db
+        key: username
+  - name: SPRING_DATASOURCE_PASSWORD
+    valueFrom:
+      secretKeyRef:
+        name: db
+        key: password
+  - name: "SCHEMA_TABLE"
+    value: "ocr-service_schema"
+  - name: EGOV_MDMS_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: egov-mdms-service
+  - name: EGOV_USER_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: egov-user
+  - name: EGOV_HRMS_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: egov-hrms
+  - name: KAFKA_CONFIG_BOOTSTRAP_SERVER_CONFIG
+    valueFrom:
+      configMapKeyRef:
+        key: kafka-brokers
+        name: egov-config
+  - name: EGOV_LOCALIZATION_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: egov-localization
+  - name: EGOV_LOCALIZATION_SEARCH_ENDPOINT
+    value: /localization/messages/v1/_search
+  - name: EGOV_MDMS_SEARCH_ENDPOINT
+    value: /egov-mdms-service/v1/_search
+  - name: SERVER_PORT
+    value: "8080"
+  - name: SERVER_CONTEXT_PATH
+    value: /ocr-service
+  - name: ADVCLERK_KAFKA_CREATE_TOPIC
+    value: save-advocate-clerk
+  - name: EGOV_IDGEN_PATH
+    value: "egov-idgen/id/_generate"
+  - name: EGOV_IDGEN_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: egov-idgen
+  - name: EGOV_INDIVIDUAL_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: individual
+  - name: EGOV_WORKFLOW_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: egov-workflow-v2
+  - name: EGOV_OCR_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: ocr-svc
+  - name: EGOV_FILE_STORE_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: egov-filestore
+  - name: SPRING_KAFKA_BOOTSTRAP_SERVERS
+    valueFrom:
+      configMapKeyRef:
+        key: kafka-brokers
+        name: egov-config
+
+
+

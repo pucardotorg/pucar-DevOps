@@ -1,0 +1,46 @@
+# Common Labels
+labels:
+  app: "dristi-case-pdf"
+  group: "web"
+
+# Ingress Configs
+ingress:
+  enabled: true
+  zuul: true
+  context: "dristi-case-pdf"
+
+
+# Container Configs
+image:
+  repository: "docker.io/venkatramireddyb/dristi-case-pdf"
+  tag: develop-4915d1cef06be7a2e622380fce50d863e473b23c
+replicas: "1"
+
+
+#healthChecks:
+#  enabled: true
+#  livenessProbePath: "/dristi-case-pdf/health"
+#  readinessProbePath: "/dristi-case-pdf/health"
+    
+env: |
+  - name: COURT_NAME
+    valueFrom:
+      configMapKeyRef:
+        key: ORDER_HEADING
+        name: egov-config
+  - name: NODE_OPTIONS
+    value: "--max-old-space-size=2048"
+  - name: SERVER_PORT
+    value: "8080"
+  - name: PDF_SERVICE_URL
+    value: "http://pdf-service:8080"
+  - name: FILE_STORE_HOST 
+    value: "http://egov-filestore:8080"
+  - name: PAYLOADSIZE 
+    value: "5mb"
+  - name: DRISTI_CASE_HOST
+    valueFrom:
+      configMapKeyRef:
+        key: case
+        name: egov-service-host
+

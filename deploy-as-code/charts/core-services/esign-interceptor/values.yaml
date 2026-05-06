@@ -1,0 +1,59 @@
+# Common Labels
+labels:
+  app: "esign-interceptor"
+  group: "backend"
+
+# Ingress Configs
+ingress:
+  enabled: true
+  context: "esign-interceptor"
+
+lokiEnabled: true
+tracing-enabled: true
+
+# Init Containers Configs
+
+debugPort: 5005
+
+# Container Configs
+image:
+  repository: "docker.io/venkatramireddyb/esign-interceptor"
+  tag: develop-026e2594c17944fc069afd6d762b36fd70cde5ed
+  imagePullPolicy: Always
+replicas: "1"
+httpPort: 8080
+appType: "java-spring"
+heap: "-Xmx64m -Xms64m"
+java-args: "-Dspring.profiles.active=monitoring"
+
+
+
+env: |
+  - name: JAVA_OPTS
+    value: -Xmx128m -Xms128m
+  - name: JAVA_ARGS
+    value: -Dspring.profiles.active=monitoring
+  - name: SERVER_PORT
+    value: "8080"
+  - name: EGOV_FILESTORE_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: egov-filestore
+  - name: DRISHTI_ESIGN_HOST
+    valueFrom:
+      configMapKeyRef:
+        key: e-sign-svc
+        name: egov-service-host
+  - name: DRISHTI_ESIGN_ENDPOINT
+    value: e-sign-svc/v1/_signed
+  - name: DRISHTI_ESIGN_REDIRECT_URL
+    valueFrom:
+      configMapKeyRef:
+        key: domain-url
+        name: egov-config
+  - name: DRISHTI_OATH_HOST
+    valueFrom:
+      configMapKeyRef:
+        key: egov-user
+        name: egov-service-host

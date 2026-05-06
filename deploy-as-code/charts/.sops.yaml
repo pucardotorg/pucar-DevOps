@@ -1,0 +1,7 @@
+creation_rules:
+  # upon creation of a file that matches the pattern *dev.yaml,
+  # KMS set A is used
+  # eGOV Internal ------------------------------------------------------------------------------------------------------------- #
+  - path_regex: '.*-secrets\.yaml$'
+    age: age1zhyajthu295tvkapjm6k5c7unr7mkdgu7v5zavcwkuw75r83eveqhyqk5n
+#    kms: 'arn:aws:kms:ap-south-1:680148267093:key/b7cf18c6-4396-4aff-b391-783c8605180a'

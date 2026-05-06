@@ -1,0 +1,105 @@
+# Common Labels
+labels:
+  app: "inbox"
+  group: "rainmaker"
+
+# Ingress Configs
+ingress:
+  enabled: true
+  zuul: true
+  context: "inbox"
+
+lokiEnabled: true
+tracing-enabled: true
+redisEnabled: true
+
+# Container Configs
+image:
+  repository: "docker.io/venkatramireddyb/inbox"
+  tag: develop-8220ea6b41b44305139c2facb61585d1ba5e35b8
+replicas: "1"
+healthChecks:
+  enabled: true
+  livenessProbePath: "/inbox/health"
+  readinessProbePath: "/inbox/health"
+appType: "java-spring"
+heap: "-Xmx256m -Xms256m"
+java-args: "-Dspring.profiles.active=monitoring"
+memory_limits: 768Mi
+
+debugPort: 5005
+
+# Additional Container Envs
+env: |
+  - name: JAVA_OPTS
+    value: {{ index .Values "heap" | quote }}
+  - name: SERVER_PORT
+    value: "8080"
+  - name: JAVA_ARGS
+    value: {{ index .Values "java-args" | quote }}
+  - name: WORKFLOW_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: egov-workflow-v2
+  - name: WORKFLOW_PROCESS_SEARCH_PATH
+    value: "egov-workflow-v2/egov-wf/process/_search"
+  - name: WORKFLOW_BUSINESSSERVICE_SEARCH_PATH
+    value: "egov-workflow-v2/egov-wf/businessservice/_search"
+  - name: WORKFLOW_PROCESS_COUNT_PATH
+    value: "egov-workflow-v2/egov-wf/process/_count"
+  - name: WORKFLOW_PROCESS_STATUSCOUNT_PATH
+    value: "egov-workflow-v2/egov-wf/process/_statuscount"
+  - name: EGOV_USER_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: egov-user
+  - name: EGOV_USER_SEARCH_PATH
+    value: "/user/v1/_search"
+  - name: EGOV_SEARCHER_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: egov-searcher
+  - name: EGOV_DASHBOARD_ANALYTICS_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: dashboard-analytics
+  - name: EGOV_MDMS_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: egov-mdms-service
+  - name: SERVICES_ESINDEXER_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-config
+        key: es-indexer-host
+  - name: EGOV_ES_PASSWORD
+    valueFrom:
+      secretKeyRef:
+        name: elasticsearch-credentials
+        key: password
+  - name: EGOV_ES_USERNAME
+    valueFrom:
+      secretKeyRef:
+        name: elasticsearch-credentials
+        key: username
+  - name: STATE_LEVEL_TENANT_ID
+    valueFrom:
+      configMapKeyRef:
+        name: egov-config
+        key: egov-state-level-tenant-id
+  - name: PARENT_LEVEL_TENANT_ID
+    valueFrom:
+      configMapKeyRef:
+        key: egov-state-level-tenant-id
+        name: egov-config
+  - name: EGOV_SEARCHER_PT_SEARCH_PATH
+    value: "egov-searcher/property-services/inboxpropertysearch/_get"
+  - name: SECURITY_BASIC_ENABLED
+    value: "false"  
+  - name: MANAGEMENT_SECURITY_ENABLED
+    value: "false"

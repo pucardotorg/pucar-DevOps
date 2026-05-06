@@ -1,0 +1,34 @@
+# Common Labels
+labels:
+  app: "transcription"
+  group: "backend"
+
+# Ingress Configs
+ingress:
+#  zuul: true
+  enabled: true
+  context: "transcription"
+
+
+# Init Containers Configs
+
+
+# Container Configs
+image:
+  repository: "docker.io/venkatramireddyb/transcription"
+  tag: v1.0.0-dristi-experiment-1
+
+replicas: "1"
+httpPort: 8765
+appType: "java-spring"
+heap: "-Xmx64m -Xms64m"
+java-args: "-Dspring.profiles.active=monitoring"
+memory_limits: 1Gi
+
+env: |
+  - name: MINIO_HOST
+    value: "minio.backbone:9001"
+  - name: KENLM_URL
+    value: "http://kenlm:8000/kenlm"
+
+

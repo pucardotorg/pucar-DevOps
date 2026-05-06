@@ -1,0 +1,23 @@
+# Common Labels
+labels:
+  app: "verifyapp"
+  group: "web"
+
+# Ingress Configs
+ingress:
+  enabled: true
+  context: "verifyapp"
+
+# Init Containers Configs
+initContainers: {}
+
+# Container Configs
+image:
+  repository: "docker.io/venkatramireddyb/verifierapp"
+  tag: v1.0.0-main-c4ee738-4
+replicas: "1"
+httpPort: 80
+healthChecks:
+  enabled: true
+  livenessProbePath: "/verifyapp/"
+  readinessProbePath: "/verifyapp/"

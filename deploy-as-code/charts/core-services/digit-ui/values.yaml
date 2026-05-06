@@ -1,0 +1,33 @@
+# Common Labels
+labels:
+  app: "digit-ui"
+  group: "web"
+
+# Ingress Configs
+ingress:
+  enabled: true
+  context: "ui"
+
+# Init Containers Configs
+initContainers: {}
+
+# Container Configs
+image:
+  repository: "docker.io/venkatramireddyb/digit-ui"
+  tag: develop-6ea29541a4eb381b189d32716dadac9c0991d41a
+replicas: "1"
+httpPort: 80
+healthChecks:
+  enabled: true
+  livenessProbePath: "/ui/"
+  readinessProbePath: "/ui/"
+
+extraVolumes: |
+  - name: js-injection
+    configMap:
+      name: digit-ui
+
+extraVolumeMounts: |
+  - mountPath: /etc/nginx/conf.d/sub_filter.conf
+    name: js-injection
+    subPath: sub_filter.conf

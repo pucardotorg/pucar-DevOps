@@ -1,0 +1,110 @@
+# Common Labels
+labels:
+  app: "billing-service"
+  group: "backend"
+
+# Ingress Configs
+ingress:
+  zuul: true
+  enabled: true
+  context: "billing-service"
+
+lokiEnabled: true
+tracing-enabled: true
+
+# Init Containers Configs
+initContainers:
+  dbMigration:
+    enabled: true
+    schemaTable: "billing_service_schema"
+    image:
+      repository: "docker.io/venkatramireddyb/billing-service-db"
+      tag: latest-021954a45478fc64addc9759b426d6f45034c98a
+
+# Container Configs
+image:
+  repository: "docker.io/venkatramireddyb/billing-service"
+  tag: latest-021954a45478fc64addc9759b426d6f45034c98a
+  imagePullPolicy: Always
+replicas: "1"
+httpPort: 8080
+appType: "java-spring"
+heap: "-Xmx64m -Xms64m"
+java-args: "-Dspring.profiles.active=monitoring"
+memory_requests: 256Mi
+
+env: |
+  - name: SPRING_FLYWAY_URL
+    valueFrom:
+      configMapKeyRef:
+        key: db-url
+        name: egov-config
+  - name: SPRING_FLYWAY_USER
+    valueFrom:
+      secretKeyRef:
+        key: username
+        name: db
+  - name: SPRING_FLYWAY_PASSWORD
+    valueFrom:
+      secretKeyRef:
+        name: db
+        key: password
+  - name: "SCHEMA_TABLE"
+    value: "billing_service_schema"
+  - name: EGOV_IDGEN_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: egov-idgen
+  - name: USER_SERVICE_HOSTNAME
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: egov-user
+  - name: EGOV_HRMS_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: egov-hrms
+  - name: EGOV_MDMS_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: egov-mdms-service
+  - name: EGOV_LOCALIZATION_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: egov-localization
+  - name: EGOV_LOCALIZATION_SEARCH_ENDPOINT
+    value: /localization/messages/v1/_search
+  - name: EGOV_MDMS_SEARCH_ENDPOINT
+    value: /egov-mdms-service/v1/_search
+  - name: SERVER_PORT
+    value: "8080"
+  - name: SERVER_CONTEXT_PATH
+    value: /billing-service
+  - name: EGOV_IDGEN_PATH
+    value: "egov-idgen/id/_generate"
+  - name: EGOV_INDIVIDUAL_HOST
+    valueFrom:
+      configMapKeyRef:
+        key: individual
+        name: egov-service-host
+  - name: EGOV_WORKFLOW_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: egov-workflow-v2
+  - name: EGOV_URL_SHORTNER
+    valueFrom:
+      configMapKeyRef:
+        key: egov-url-shortening
+        name: egov-service-host
+  - name: EGOV_APPORTION_HOST
+    valueFrom:
+      configMapKeyRef:
+        key: egov-apportion-service
+        name: egov-service-host
+  - name: STATELEVEL_ROLECODE_EXCLUDED_LIST
+    value: PAYMENT_COLLECTOR,BPAREG_DOC_VERIFIER,BPAREG_APPROVER

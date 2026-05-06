@@ -1,0 +1,79 @@
+version: v.0.3
+modules:
+  - name: backbone
+    services:
+      - kafka-kraft
+      - elasticsearch-data
+      - elasticsearch-master
+      - kibana
+      - cert-manager
+      - ingress-nginx
+      - minio
+      - postgresql
+      - redis
+  - name: egov
+    dependencies:
+      - "backbone"
+    services:
+      payment-calculator: v1.0.0-303529ae7bb3dc3dfadb291c0e85e89d4739fbcf
+      advocate: v1.0.0-c0669c8792bf4c6f241b6cc6a719c8029bb9b654
+      case: v1.0.0-8088039074b6c1364a7f1441aa3c8f2ab8dbb9b8
+      casemanagement: v1.0.0-80698b6dc6b2133e5edf1765bb1bcfb141db3fa7
+      hearing: v1.0.0-c0669c8792bf4c6f241b6cc6a719c8029bb9b654
+      dristi-case-pdf: v1.0.0-8a9d6df743aa8543bce4fb9d2ae9ead92ce6f1e3
+      esign-interceptor: v1.0.0-c0669c8792bf4c6f241b6cc6a719c8029bb9b654
+      e-sign-svc: v1.0.0-c0669c8792bf4c6f241b6cc6a719c8029bb9b654
+      epost-tracker: v1.0.0-c0669c8792bf4c6f241b6cc6a719c8029bb9b654
+      transformer: v1.0.0-166a1ada6ae820e84f1e618fdaa8c207c5d7055d
+      order: v1.0.0-c0669c8792bf4c6f241b6cc6a719c8029bb9b654
+      evidence: v1.0.0-617faac057106d6594cd4fd3d753285979630f68
+      application: v1.0.0-2b592df4832e221818f7d38fcee03561ee9c0e10
+      scheduler: v1.0.0-d16de2bec8fbd1934818a489628079956f575af8
+      summons-svc: v1.0.0-c09e277a92772c3aa401e2d9ca52b0276340165b
+      collection-services: v1.0.0-166a1ada6ae820e84f1e618fdaa8c207c5d7055d
+      task: v1.0.0-d16de2bec8fbd1934818a489628079956f575af8
+      digit-ui: v1.0.0-d16de2bec8fbd1934818a489628079956f575af8
+      analytics: v1.0.0-2cd55ac769b6d0cac96e93742f357bcaeb3c86a2
+      individual: v1.0.0-9f9fff70b3b2782499152458e041075a71e21660
+      inbox: v1.0.0-166a1ada6ae820e84f1e618fdaa8c207c5d7055d
+      etreasury: v1.0.0-166a1ada6ae820e84f1e618fdaa8c207c5d7055d
+      epayments: v1.0.0-166a1ada6ae820e84f1e618fdaa8c207c5d7055d
+      sbi-svc: v1.0.0-5bb8fcf5764b268693051c4ff1d5a7a2faf76278
+      sbi-webpage: v1.0.0-b34371b1ccc162470e5b8e751bbdc298e9f495ed
+      icops-integration: v1.0.0-b2394c1c227ce18f13ed7efab510b64fa525c51c
+      kerala-sms: v1.0.0-06a6d016599b5a9169b773330a88760819984459
+      billing-service: v1.0.0-3345f6bb9536054a0050db6a05e88de50a1f6647
+      dristi-pdf: v1.0.0-666424a35b43d8d3890ce351fbfc5735f6e32476
+      verifyapp: v1.0.0-main-c4ee738-4
+      workbench-ui: court-room-hrms-0e500c0d6a-4
+      user-otp: v1.0.0-74196731f4b617ce06552e04a7a6eda9ffc40509
+      transcription: v1.0.0-dristi-experiment-1
+      sunbirdrc-credential-service: sunbirdrc-mithun-f0d17a4438-103
+      service-request: core-2.9-lts-mvn-check-bbc06901f1-6
+      citizen: v1.10.0-beta-0ad561e837-30
+      audit-service: core-2.9-lts-mvn-check-c33cfe45ab-9
+      egov-accesscontrol: core-2.9-lts-mvn-check-34362a8b87-9
+      egov-apportion-service: v1.0.0-911977062f07eda09758a1bb13daed6eee84b7d1
+      egov-enc-service: core-2.9-lts-mvn-check-c607f2d4de-20
+      egov-filestore: core-2.9-lts-mvn-check-17b905d01d-13
+      egov-hrms: court-room-hrm-changes-691901a842-14
+      egov-idgen: v1.0.0-cb22847c89d65c2a3eae05117108bb28c6eea290
+      egov-indexer: request-external-bug-fix-55924ec05b-63
+      egov-localization: core-2.9-lts-mvn-check-59c2e5ea5b-9
+      egov-location: core-2.9-lts-mvn-check-c33cfe45ab-9
+      egov-mdms-service: v1.0.0-MDMS-v2-2.9LTS-1
+      egov-notification-mail: core-2.9-lts-mvn-check-c33cfe45ab-4
+      egov-otp: core-2.9-lts-mvn-check-72333e5530-5
+      egov-persister: core-2.9-lts-mvn-check-c33cfe45ab-7
+      egov-pg-service: core-2.9-lts-mvn-check-421601fcdf-10
+      egov-url-shortening: core-2.9-lts-mvn-check-ecf5d0a880-11
+      egov-user: v1.0.0-core-2.9-lts-egov-user-deployement-1
+      egov-user-event: core-2.9-lts-mvn-check-57ef3ac8dd-4
+      egov-workflow-v2: core-2.9-lts-mvn-check-07ed8e9a49-12
+      employee: v1.10.0-beta-e7a69e05d3-33
+      gateway: core-2.9-lts-mvn-check-3b9d5c6ad1-20
+      kenlm: v1.0.0-dristi-experiment-1
+      ocr-service: v1.0.0-8d21efdbbb95a1bce3a0555c452a5568cbccf301
+      OCR: v1.0.0-dristi-experiment-OCR-6
+      pdf-service: v1.0.0-90e4e870f2ce81ef35eeed5620ad957260f3d632
+      pgr-services: core-digit-2.9-lts-pgr-02df4964cb-3

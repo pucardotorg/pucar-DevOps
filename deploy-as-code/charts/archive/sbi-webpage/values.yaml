@@ -1,0 +1,38 @@
+# Common Labels
+labels:
+  app: "sbi-webpage"
+  group: "rainmaker"
+
+# Ingress Configs
+ingress:
+  enabled: true
+  zuul: true
+  context: "sbi-payments"
+
+
+# Container Configs
+image:
+   repository: "docker.io/venkatramireddyb/sbi-ui"
+   tag: develop-dd6d7922e48d4346e57f0f75e74e113949a6a5e5
+replicas: "1"
+
+env: |
+  - name: EXTERNAL_HOST
+    valueFrom:
+      configMapKeyRef:
+        key: sbi-url
+        name: egov-service-host
+  - name: DRISTI_URL
+    valueFrom:
+      configMapKeyRef:
+        key: dristi-url
+        name: egov-config
+  - name: REDIRECT_URL
+    valueFrom:
+      configMapKeyRef:
+        key: sbi-redirect-url
+        name: egov-config
+
+
+
+

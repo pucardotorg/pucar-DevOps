@@ -1,0 +1,118 @@
+# Common Labels
+labels:
+  app: "epost-tracker"
+  group: "backend"
+
+# Ingress Configs
+ingress:
+  zuul: true
+  enabled: true
+  context: "epost-tracker"
+
+lokiEnabled: true
+tracing-enabled: true
+
+# Init Containers Configs
+initContainers:
+  dbMigration:
+    enabled: true
+    schemaTable: "epost_tracker_service_schema"
+    image:
+      repository: "docker.io/venkatramireddyb/epost-tracker-db"
+      tag: develop-09d450d9508ea97902e45916dea69599542c89c5
+
+# Container Configs
+image:
+  repository: "docker.io/venkatramireddyb/epost-tracker"
+  tag: develop-09d450d9508ea97902e45916dea69599542c89c5
+  imagePullPolicy: Always
+replicas: "1"
+httpPort: 8080
+
+
+healthChecks:
+ enabled: true
+ livenessProbePath: "/epost-tracker/actuator/health"
+ readinessProbePath: "/epost-tracker/actuator/health"
+
+env: |
+  - name: EGOV_MDMS_HOST
+    valueFrom:
+      configMapKeyRef:
+        key: egov-mdms-service
+        name: egov-service-host
+  - name: SPRING_FLYWAY_URL
+    valueFrom:
+      configMapKeyRef:
+        key: db-url
+        name: egov-config
+  - name: SPRING_FLYWAY_USER
+    valueFrom:
+      secretKeyRef:
+        name: db
+        key: username
+  - name: SPRING_FLYWAY_PASSWORD
+    valueFrom:
+      secretKeyRef:
+        name: db
+        key: password
+  - name: SPRING_DATASOURCE_URL
+    valueFrom:
+      configMapKeyRef:
+        key: db-url
+        name: egov-config
+  - name: SPRING_DATASOURCE_USERNAME
+    valueFrom:
+      secretKeyRef:
+        name: db
+        key: username
+  - name: SPRING_DATASOURCE_PASSWORD
+    valueFrom:
+      secretKeyRef:
+        name: db
+        key: password
+  - name: "SCHEMA_TABLE"
+    value: "epost_tracker_schema"
+  - name: KAFKA_CONFIG_BOOTSTRAP_SERVER_CONFIG
+    valueFrom:
+      configMapKeyRef:
+        key: kafka-brokers
+        name: egov-config
+  - name: SPRING_KAFKA_BOOTSTRAP_SERVERS
+    valueFrom:
+      configMapKeyRef:
+        name: egov-config
+        key: kafka-brokers
+  - name: SERVER_PORT
+    value: "8080"
+  - name: SERVER_CONTEXT_PATH
+    value: /epost-tracker
+  - name: EGOV_IDGEN_PATH
+    value: "egov-idgen/id/_generate"
+  - name: EGOV_IDGEN_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: egov-idgen
+  - name: EGOV_SUMMONS_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: summons
+  - name: GET_DATA_BASED_USER_LOGGED_IN
+    value: "true"
+  - name: EGOV_USER_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: egov-user
+  - name: EGOV_PDF_SERVICE_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: pdf-service
+  - name: EGOV_FILESTORE_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: egov-filestore

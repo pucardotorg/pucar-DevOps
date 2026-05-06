@@ -1,0 +1,19 @@
+# Common Labels
+labels:
+  app: "qr-code-service"
+  group: "rainmaker"
+
+# Ingress Configs
+ingress:
+  enabled: true
+  context: "qr-code-service"
+
+# Init Containers Configs
+initContainers: {}
+
+# Container Configs
+image:
+  repository: "docker.io/venkatramireddyb/qr_code_service"
+  tag: v1.0.0-ff38bbcae147c92f0434724206de380f49cdccc4
+replicas: "1"
+

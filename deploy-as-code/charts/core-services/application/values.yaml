@@ -1,0 +1,150 @@
+# Common Labels
+labels:
+  app: "application"
+  group: "backend"
+
+# Ingress Configs
+ingress:
+  zuul: true
+  enabled: true
+  context: "application"
+
+lokiEnabled: true
+tracing-enabled: true
+
+# Init Containers Configs
+initContainers:
+  dbMigration:
+    enabled: true
+    schemaTable: "application_service_schema"
+    image:
+      repository: "docker.io/venkatramireddyb/application-db"
+      tag: develop-8220ea6b41b44305139c2facb61585d1ba5e35b8
+
+# Container Configs
+image:
+  repository: "docker.io/venkatramireddyb/application"
+  tag: develop-8220ea6b41b44305139c2facb61585d1ba5e35b8
+  imagePullPolicy: Always
+replicas: "1"
+httpPort: 8080
+appType: "java-spring"
+heap: "-Xmx192m -Xms192m"
+java-args: "-Dspring.profiles.active=monitoring"
+memory_requests: 384Mi
+debugPort: 5005
+
+healthChecks:
+  enabled: true
+  livenessProbePath: "/application/health"
+  readinessProbePath: "/application/health"
+
+env: |
+  - name: JAVA_OPTS
+    value: {{ index .Values "heap" | quote }}
+  - name: SERVER_PORT
+    value: "8080"
+  - name: JAVA_ARGS
+    value: {{ index .Values "java-args" | quote }}
+  - name: SPRING_FLYWAY_URL
+    valueFrom:
+      configMapKeyRef:
+        key: db-url
+        name: egov-config
+  - name: SPRING_FLYWAY_USER
+    valueFrom:
+      secretKeyRef:
+        key: username
+        name: db
+  - name: SPRING_FLYWAY_PASSWORD
+    valueFrom:
+      secretKeyRef:
+        name: db
+        key: password
+  - name: "SCHEMA_TABLE"
+    value: "application_service_schema"
+  - name: EGOV_IDGEN_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: egov-idgen
+  - name: EGOV_USER_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: egov-user
+  - name: EGOV_HRMS_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: egov-hrms
+  - name: EGOV_MDMS_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: egov-mdms-service
+  - name: EGOV_LOCALIZATION_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: egov-localization
+  - name: EGOV_LOCALIZATION_SEARCH_ENDPOINT
+    value: /localization/messages/v1/_search
+  - name: SERVER_CONTEXT_PATH
+    value: /application
+  - name: EGOV_INDIVIDUAL_HOST
+    valueFrom:
+      configMapKeyRef:
+        key: individual
+        name: egov-service-host
+  - name: EGOV_WORKFLOW_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: egov-workflow-v2
+  - name: EGOV_FILESTORE_HOST
+    valueFrom:
+      configMapKeyRef:
+        key: egov-filestore
+        name: egov-service-host
+  - name: EGOV_URL_SHORTNER
+    valueFrom:
+      configMapKeyRef:
+        key: egov-url-shortening
+        name: egov-service-host
+  - name: EGOV_CASE_HOST
+    valueFrom:
+      configMapKeyRef:
+        key: case
+        name: egov-service-host
+  - name: EGOV_ORDER_HOST
+    valueFrom:
+      configMapKeyRef:
+        key: order
+        name: egov-service-host
+  - name: KAFKA_TOPICS_RECEIPT_CREATE
+    value: egov.collection.payment-create
+  - name: SPRING_KAFKA_CONSUMER_GROUP_ID
+    value: application
+  - name: EGOV_IDGEN_CMP_TENANT_OVERRIDE_YEAR
+    value: "2025"
+  - name: EGOV_EVIDENCE_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: evidence
+  - name:  DRISTI_ADVOCATE_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: advocate
+  - name: EGOV_BILLING_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: billing-service
+  - name: EGOV_ETREASURY_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: etreasury
