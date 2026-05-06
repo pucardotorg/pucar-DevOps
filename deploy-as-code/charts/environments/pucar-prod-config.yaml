@@ -271,11 +271,11 @@ clamav:
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/clamav
     tag: latest
+  replicas: 2
   ingress:
     nginxRateLimit:
       enabled: true
       rpm: "500"
-  replicas: 2
       burstMultiplier: "1"
       conections: "10"
   rateLimit:
@@ -387,8 +387,8 @@ dristi-case-pdf:
   memory_requests: "1200Mi"
   memory_limits: "1500Mi"
   cpu_requests: "50m"
-  ingress:
   replicas: 2
+  ingress:
     nginxRateLimit:
       enabled: true
       rpm: "500"
@@ -1300,8 +1300,8 @@ oncourts-website:
   memory_requests: 512Mi
   memory_limits: 768Mi
   cpu_requests: 50m
-  ingress:
   replicas: 2
+  ingress:
     nginxRateLimit:
       enabled: true
       rpm: "500"
