@@ -431,7 +431,7 @@ e-sign-svc:
       enabled: true
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/e-sign-svc
-    tag: gogs-v1.18.0.1
+    tag: gogs-v1.18.0.2
   heap: "-Xmx256m -Xms256m"
   memory_requests: "384Mi"
   memory_limits: "512Mi"
