@@ -918,8 +918,8 @@ etreasury:
   memory_requests: 1280Mi
   memory_limits: 1280Mi
   cpu_requests: 50m
-  istestEnabled: "false"
-  ismockEnabled: "false"
+  istestEnabled: false
+  ismockEnabled: false
   replicas: 2
   ingress:
     nginxRateLimit:
