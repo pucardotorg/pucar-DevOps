@@ -920,6 +920,7 @@ etreasury:
   cpu_requests: 50m
   istestEnabled: false
   ismockEnabled: false
+  officecode: "030101B0076"
   replicas: 2
   ingress:
     nginxRateLimit:
