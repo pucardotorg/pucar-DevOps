@@ -27,6 +27,7 @@ image:
   tag: develop-8220ea6b41b44305139c2facb61585d1ba5e35b8
   imagePullPolicy: Always
 replicas: "1"
+debugPort: 5005
 httpPort: 8080
 appType: "java-spring"
 heap: "-Xmx256m -Xms256m"
