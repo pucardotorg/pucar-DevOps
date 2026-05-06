@@ -918,6 +918,8 @@ etreasury:
   memory_requests: 1280Mi
   memory_limits: 1280Mi
   cpu_requests: 50m
+  istestEnabled: "false"
+  ismockEnabled: "false"
   replicas: 2
   ingress:
     nginxRateLimit:
@@ -1059,7 +1061,7 @@ icops-integration:
     tag: gogs-v1.18.0.1
   heap: "-Xmx512m -Xms512m"
   memory_requests: 512Mi
-  memory_limits: 512Mi
+  memory_limits: 768Mi
   cpu_requests: 50m
   replicas: 2
   ingress:
