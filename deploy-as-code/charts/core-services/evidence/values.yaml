@@ -20,7 +20,7 @@ initContainers:
     image:
       repository: "docker.io/venkatramireddyb/evidence-db"
       tag: develop-8220ea6b41b44305139c2facb61585d1ba5e35b8
-
+debugPort: 5005
 # Container Configs
 image:
   repository: "docker.io/venkatramireddyb/evidence"
