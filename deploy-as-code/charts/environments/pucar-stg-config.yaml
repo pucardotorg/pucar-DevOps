@@ -1,4 +1,8 @@
 ab-diary:
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: docker.io/venkatramireddyb/ab-diary
     tag: sdc-uat-fb7493994c08b593759448d6d3be1bd309d6ce02
@@ -14,6 +18,10 @@ ab-diary:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 advocate:
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: docker.io/venkatramireddyb/advocate
     tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
@@ -29,9 +37,13 @@ advocate:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 advocate-office-management:
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: docker.io/venkatramireddyb/advocate-office-management
-    tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
+    tag: main-0447fff90ecf720ab53179d2523a564ddf34ef00
   ingress:
     nginxRateLimit:
       enabled: true
@@ -44,9 +56,13 @@ advocate-office-management:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 analytics:
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: docker.io/venkatramireddyb/analytics
-    tag: sdc-uat-fb7493994c08b593759448d6d3be1bd309d6ce02
+    tag: main-420f6436872f3e9c657a36a1fe65c1f4963c5958
   ingress:
     nginxRateLimit:
       enabled: true
@@ -59,9 +75,13 @@ analytics:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 application:
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: docker.io/venkatramireddyb/application
-    tag: sdc-uat-fb7493994c08b593759448d6d3be1bd309d6ce02
+    tag: main-de0605c9c6beb63a646c14baac6f0493a2403ffe
   ingress:
     nginxRateLimit:
       enabled: true
@@ -73,7 +93,12 @@ application:
     gatewayBurstCapacity: "30"
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
+  memory_requests: 512Mi
 audit-service:
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: docker.io/venkatramireddyb/audit-service
     tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
@@ -89,6 +114,10 @@ audit-service:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 auth-proxy:
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: egovio/auth-proxy
     tag: auth-proxy-urlencoded-fix-aad9a5959c-23
@@ -104,9 +133,13 @@ auth-proxy:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 bail-bond:
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: docker.io/venkatramireddyb/bail-bond
-    tag: sdc-uat-fb7493994c08b593759448d6d3be1bd309d6ce02
+    tag: main-de0605c9c6beb63a646c14baac6f0493a2403ffe
   ingress:
     nginxRateLimit:
       enabled: true
@@ -119,6 +152,10 @@ bail-bond:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 bank-details:
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: docker.io/venkatramireddyb/bank-details
     tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
@@ -134,6 +171,10 @@ bank-details:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 billing-service:
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: docker.io/venkatramireddyb/billing-service
     tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
@@ -149,9 +190,13 @@ billing-service:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "40"
 case:
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: docker.io/venkatramireddyb/case
-    tag: sdc-uat-fb7493994c08b593759448d6d3be1bd309d6ce02
+    tag: main-d99be8f018924f96c99c8c47c6f9ab121a57d8e7
   ingress:
     nginxRateLimit:
       enabled: true
@@ -164,9 +209,13 @@ case:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "70"
 casemanagement:
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: docker.io/venkatramireddyb/casemanagement
-    tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
+    tag: main-2e78f03c74248e925838be769d21855b5624a622
   ingress:
     nginxRateLimit:
       enabled: true
@@ -179,6 +228,10 @@ casemanagement:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 citizen:
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: egovio/citizen
     tag: v1.10.0-beta-0ad561e837-30
@@ -194,6 +247,10 @@ citizen:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 clamav:
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: docker.io/venkatramireddyb/clamav
     tag: latest
@@ -209,6 +266,10 @@ clamav:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 collection-services:
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: docker.io/venkatramireddyb/collection-services
     tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
@@ -224,6 +285,10 @@ collection-services:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 ctc:
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: docker.io/venkatramireddyb/ctc
     tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
@@ -239,9 +304,13 @@ ctc:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 digit-ui:
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: docker.io/venkatramireddyb/digit-ui
-    tag: main-fda605c01e935db8152e001f7173df22f00a0ffc
+    tag: main-c06a4df3753a5d5a68e96df4065513508c86011f
   ingress:
     nginxRateLimit:
       enabled: true
@@ -254,9 +323,13 @@ digit-ui:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 digitalized-documents:
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: docker.io/venkatramireddyb/digitalized-documents
-    tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
+    tag: main-0447fff90ecf720ab53179d2523a564ddf34ef00
   ingress:
     nginxRateLimit:
       enabled: true
@@ -269,9 +342,13 @@ digitalized-documents:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 dristi-case-pdf:
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: docker.io/venkatramireddyb/dristi-case-pdf
-    tag: sdc-uat-fb7493994c08b593759448d6d3be1bd309d6ce02
+    tag: main-06f0eff9caaf00df56b51d8551335cf3d6258078
   ingress:
     nginxRateLimit:
       enabled: true
@@ -284,9 +361,14 @@ dristi-case-pdf:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 dristi-pdf:
+  replicas: 2
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: docker.io/venkatramireddyb/dristi-pdf
-    tag: sdc-uat-fb7493994c08b593759448d6d3be1bd309d6ce02
+    tag: main-5af292b8d5273fe535a1f1b6a0f56bb9ea30b61d
   ingress:
     nginxRateLimit:
       enabled: true
@@ -299,9 +381,13 @@ dristi-pdf:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 e-sign-svc:
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: docker.io/venkatramireddyb/e-sign-svc
-    tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
+    tag: update-signature-container-size-main-2de70ae39fc589d10217cfa96c2b34ca75db5138
   ingress:
     nginxRateLimit:
       enabled: true
@@ -314,6 +400,10 @@ e-sign-svc:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 egov-accesscontrol:
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: docker.io/venkatramireddyb/egov-accesscontrol
     tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
@@ -329,6 +419,10 @@ egov-accesscontrol:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 egov-apportion-service:
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: docker.io/venkatramireddyb/egov-apportion-service
     tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
@@ -344,6 +438,10 @@ egov-apportion-service:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 egov-enc-service:
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: docker.io/venkatramireddyb/egov-enc-service
     tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
@@ -359,6 +457,10 @@ egov-enc-service:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 egov-filestore:
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: venkatramireddyb/egov-filestore
     tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
@@ -374,6 +476,10 @@ egov-filestore:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "40"
 egov-hrms:
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: docker.io/venkatramireddyb/egov-hrms
     tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
@@ -389,6 +495,10 @@ egov-hrms:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 egov-idgen:
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: docker.io/venkatramireddyb/egov-idgen
     tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
@@ -404,9 +514,13 @@ egov-idgen:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 egov-indexer:
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: docker.io/venkatramireddyb/egov-indexer
-    tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
+    tag: main-206e0c53783db990ad4f9585083a866362d47e24
   ingress:
     nginxRateLimit:
       enabled: true
@@ -419,6 +533,10 @@ egov-indexer:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 egov-localization:
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: docker.io/venkatramireddyb/egov-localization
     tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
@@ -434,6 +552,10 @@ egov-localization:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 egov-mdms-service:
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: docker.io/venkatramireddyb/egov-mdms-service
     tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
@@ -449,6 +571,10 @@ egov-mdms-service:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 egov-notification-mail:
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: docker.io/venkatramireddyb/egov-notification-mail
     tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
@@ -464,6 +590,10 @@ egov-notification-mail:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 egov-otp:
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: docker.io/venkatramireddyb/egov-otp
     tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
@@ -479,9 +609,13 @@ egov-otp:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 egov-persister:
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: docker.io/venkatramireddyb/egov-persister
-    tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
+    tag: main-206e0c53783db990ad4f9585083a866362d47e24
   ingress:
     nginxRateLimit:
       enabled: true
@@ -494,6 +628,10 @@ egov-persister:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 egov-pg-service:
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: docker.io/venkatramireddyb/egov-pg-service
     tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
@@ -509,6 +647,10 @@ egov-pg-service:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 egov-url-shortening:
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: docker.io/venkatramireddyb/egov-url-shortening
     tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
@@ -524,6 +666,10 @@ egov-url-shortening:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 egov-user:
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: docker.io/venkatramireddyb/egov-user
     tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
@@ -535,10 +681,14 @@ egov-user:
       conections: "10"
   rateLimit:
     enabled: true
-    gatewayBurstCapacity: "30"
+    gatewayBurstCapacity: "40"
     gatewayKeyResolver: "userKeyResolver"
-    gatewayReplenishRate: "30"
+    gatewayReplenishRate: "40"
 egov-user-event:
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: docker.io/venkatramireddyb/egov-user-event
     tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
@@ -554,6 +704,10 @@ egov-user-event:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 egov-workflow-v2:
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: docker.io/venkatramireddyb/egov-workflow-v2
     tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
@@ -569,6 +723,10 @@ egov-workflow-v2:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 epost-tracker:
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: docker.io/venkatramireddyb/epost-tracker
     tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
@@ -584,9 +742,13 @@ epost-tracker:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 esign-interceptor:
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: docker.io/venkatramireddyb/esign-interceptor
-    tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
+    tag: update-signature-container-size-main-2de70ae39fc589d10217cfa96c2b34ca75db5138
   ingress:
     nginxRateLimit:
       enabled: true
@@ -599,9 +761,13 @@ esign-interceptor:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 etreasury:
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: docker.io/venkatramireddyb/etreasury
-    tag: sdc-uat-fb7493994c08b593759448d6d3be1bd309d6ce02
+    tag: main-6667abfd14ac0e1f0b26db050c958a0021acebfa
   ingress:
     nginxRateLimit:
       enabled: true
@@ -614,6 +780,10 @@ etreasury:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 evidence:
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: venkatramireddyb/evidence
     tag: sdc-uat-fb7493994c08b593759448d6d3be1bd309d6ce02
@@ -629,6 +799,10 @@ evidence:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 employee:
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: egovio/employee
     tag: v1.10.0-beta-e7a69e05d3-33
@@ -644,6 +818,10 @@ employee:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 epayments:
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: docker.io/venkatramireddyb/epayments
     tag: sdc-uat-0657159be3406e649f60dacc4a73dedf1efa7c2e
@@ -660,6 +838,10 @@ epayments:
     gatewayReplenishRate: "30"
 gateway:
   namespace: pucar-stg
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: docker.io/venkatramireddyb/gateway
     tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
@@ -675,9 +857,13 @@ gateway:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 hearing:
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: venkatramireddyb/hearing
-    tag: sdc-uat-fb7493994c08b593759448d6d3be1bd309d6ce02
+    tag: main-a0505fbdc5f111343a17ebe611b797bc770a294d
   ingress:
     nginxRateLimit:
       enabled: true
@@ -690,6 +876,10 @@ hearing:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "40"
 hearing-management:
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: docker.io/venkatramireddyb/hearing-management
     tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
@@ -705,9 +895,13 @@ hearing-management:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 icops-integration:
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: venkatramireddyb/icops-integration
-    tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
+    tag: main-41a16228ce57875d0d699a26118f529585af534b
   ingress:
     nginxRateLimit:
       enabled: true
@@ -720,9 +914,13 @@ icops-integration:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 inbox:
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: docker.io/venkatramireddyb/inbox
-    tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
+    tag: main-cbc7f5cc29355825a7e6c54378e9263db5177bd4
   ingress:
     nginxRateLimit:
       enabled: true
@@ -735,6 +933,10 @@ inbox:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "100"
 individual:
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: docker.io/venkatramireddyb/individual
     tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
@@ -750,6 +952,10 @@ individual:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 inportal-survey:
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: docker.io/venkatramireddyb/inportal-survey
     tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
@@ -765,6 +971,10 @@ inportal-survey:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 jaeger-collector:
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: docker.io/venkatramireddyb/jaeger-collector
     tag: 1.55
@@ -780,6 +990,10 @@ jaeger-collector:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 jaeger-query:
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: docker.io/venkatramireddyb/jaeger-query
     tag: 1.55
@@ -795,6 +1009,10 @@ jaeger-query:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 kerala-sms:
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: docker.io/venkatramireddyb/kerala-sms
     tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
@@ -810,6 +1028,10 @@ kerala-sms:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 lock-svc:
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: docker.io/venkatramireddyb/lock-svc
     tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
@@ -825,6 +1047,10 @@ lock-svc:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 metabase:
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: docker.io/venkatramireddyb/metabase
     tag: latest
@@ -840,6 +1066,10 @@ metabase:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 minio-filestore:
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: docker.io/venkatramireddyb/egov-filestore
     tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
@@ -855,6 +1085,10 @@ minio-filestore:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 network-multitool:
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/network-multitool
     tag: latest
@@ -870,6 +1104,10 @@ network-multitool:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 nginx-deployment:
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/nginx
     tag: latest
@@ -885,9 +1123,13 @@ nginx-deployment:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 njdg-transformer:
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: docker.io/venkatramireddyb/njdg-transformer
-    tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
+    tag: main-de0605c9c6beb63a646c14baac6f0493a2403ffe
   ingress:
     nginxRateLimit:
       enabled: true
@@ -900,6 +1142,10 @@ njdg-transformer:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 notification:
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: venkatramireddyb/notification
     tag: sdc-uat-fb7493994c08b593759448d6d3be1bd309d6ce02
@@ -915,6 +1161,10 @@ notification:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 ocr-service:
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: docker.io/venkatramireddyb/ocr-service
     tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
@@ -930,9 +1180,13 @@ ocr-service:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 oncourts-website:
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: docker.io/venkatramireddyb/oncourts-website
-    tag: 'main-4f0da34d42062f07ba96821f18001886a6748fb1'
+    tag: 'main-56972aa4e2e83af41225be3e1e018a2b20026a99'
   ingress:
     nginxRateLimit:
       enabled: true
@@ -945,6 +1199,10 @@ oncourts-website:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 openapi:
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: docker.io/venkatramireddyb/openapi
     tag: sdc-uat-fb7493994c08b593759448d6d3be1bd309d6ce02
@@ -960,9 +1218,13 @@ openapi:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 order:
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: docker.io/venkatramireddyb/order
-    tag: sdc-uat-fb7493994c08b593759448d6d3be1bd309d6ce02
+    tag: main-a0505fbdc5f111343a17ebe611b797bc770a294d
   ingress:
     nginxRateLimit:
       enabled: true
@@ -975,9 +1237,13 @@ order:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 order-management:
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: docker.io/venkatramireddyb/order-management
-    tag: sdc-uat-fb7493994c08b593759448d6d3be1bd309d6ce02
+    tag: main-611759def9bb9d40b4a92a0278d8ec413d1f8aa1
   ingress:
     nginxRateLimit:
       enabled: true
@@ -990,6 +1256,10 @@ order-management:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 payment-calculator:
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: docker.io/venkatramireddyb/payment-calculator
     tag: sdc-uat-fb7493994c08b593759448d6d3be1bd309d6ce02
@@ -1005,6 +1275,10 @@ payment-calculator:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 pdf-service:
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: docker.io/venkatramireddyb/pdf-service
     tag: sdc-uat-0657159be3406e649f60dacc4a73dedf1efa7c2e
@@ -1020,6 +1294,10 @@ pdf-service:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 pgr-services:
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: docker.io/venkatramireddyb/pgr-services
     tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
@@ -1035,6 +1313,10 @@ pgr-services:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 qr-code-service:
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: docker.io/venkatramireddyb/qr_code_service
     tag: v1.0.0-ff38bbcae147c92f0434724206de380f49cdccc4
@@ -1050,9 +1332,13 @@ qr-code-service:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 scheduler:
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: docker.io/venkatramireddyb/scheduler
-    tag: sdc-uat-fb7493994c08b593759448d6d3be1bd309d6ce02
+    tag: main-cbc7f5cc29355825a7e6c54378e9263db5177bd4
   ingress:
     nginxRateLimit:
       enabled: true
@@ -1065,6 +1351,10 @@ scheduler:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 service-request:
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: egovio/service-request
     tag: core-2.9-lts-mvn-check-bbc06901f1-6
@@ -1080,6 +1370,10 @@ service-request:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 static-assets:
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: docker.io/venkatramireddyb/nginx
     tag: latest
@@ -1095,6 +1389,10 @@ static-assets:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 summons-svc:
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: venkatramireddyb/summons-svc
     tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
@@ -1110,6 +1408,10 @@ summons-svc:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 sunbird-rc-credentials-service:
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: ghcr.io/sunbird-rc/sunbird-rc-credentials-service
     tag: v2.0.0-rc3
@@ -1125,6 +1427,10 @@ sunbird-rc-credentials-service:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 sunbird-rc-identity-service:
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: docker.io/venkatramireddyb/sunbird-rc/sunbird-rc-identity-service
     tag: v2.0.0-rc3
@@ -1140,6 +1446,10 @@ sunbird-rc-identity-service:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 sunbirdrc-credential-service:
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: egovio/sunbirdrc-credential-service
     tag: sdc-uat-fb7493994c08b593759448d6d3be1bd309d6ce02
@@ -1155,9 +1465,13 @@ sunbirdrc-credential-service:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 task:
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: venkatramireddyb/task
-    tag: main-da2cfeab916936dd5da61db9248e5fddd3facd33
+    tag: main-a0505fbdc5f111343a17ebe611b797bc770a294d
   ingress:
     nginxRateLimit:
       enabled: true
@@ -1170,9 +1484,13 @@ task:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 task-management:
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: docker.io/venkatramireddyb/task-management
-    tag: sdc-uat-fb7493994c08b593759448d6d3be1bd309d6ce02
+    tag: main-de0605c9c6beb63a646c14baac6f0493a2403ffe
   ingress:
     nginxRateLimit:
       enabled: true
@@ -1185,6 +1503,10 @@ task-management:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 template-configuration:
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: docker.io/venkatramireddyb/template-configuration
     tag: sdc-uat-fb7493994c08b593759448d6d3be1bd309d6ce02
@@ -1200,6 +1522,10 @@ template-configuration:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 transcription:
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: docker.io/venkatramireddyb/transcription
     tag: v1.0.0-dristi-experiment-1
@@ -1215,9 +1541,13 @@ transcription:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 transformer:
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: docker.io/venkatramireddyb/transformer
-    tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
+    tag: main-a0505fbdc5f111343a17ebe611b797bc770a294d
   ingress:
     nginxRateLimit:
       enabled: true
@@ -1230,9 +1560,13 @@ transformer:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 user-otp:
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: docker.io/venkatramireddyb/user-otp
-    tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
+    tag: main-0447fff90ecf720ab53179d2523a564ddf34ef00
   ingress:
     nginxRateLimit:
       enabled: true
@@ -1245,6 +1579,10 @@ user-otp:
     gatewayKeyResolver: "otpKeyResolver"
     gatewayReplenishRate: "3"
 vault-agent-injector:
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: docker.io/venkatramireddyb/vault-k8s
     tag: 1.4.1
@@ -1260,6 +1598,10 @@ vault-agent-injector:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 verifyapp:
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: docker.io/venkatramireddyb/verifierapp
     tag: v1.0.0-main-c4ee738-5
@@ -1275,6 +1617,10 @@ verifyapp:
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
 workbench-ui:
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: true
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/workbench-ui
     tag: gogs-v1.12.0

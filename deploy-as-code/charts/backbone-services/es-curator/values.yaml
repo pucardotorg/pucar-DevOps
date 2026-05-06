@@ -1,0 +1,61 @@
+# Common Labels
+labels:
+  group: "cronjobs"
+
+cron:
+  schedule: "0 3 * * *"  
+# Container Configs
+namespace: egov
+image:
+  repository: "bobrik/curator"
+  tag: 5.6.0
+logs-cleanup-enabled: true
+jaeger-cleanup-enabled: true
+logs-to-retain-in-days: 7  
+jaeger-to-retain-in-days: 14
+memory_limits: 384Mi
+heap: "-Xmx256m -Xms256m"
+args:
+- --config
+- /etc/config/config.yml
+- /etc/config/action_file.yml
+
+# Additional Container Envs
+env: |
+  - name: SERVER_PORT
+    value: "8080"
+  - name: JAVA_OPTS
+    value: {{ index .Values "heap" | quote }}
+  - name: ES_CLIENT_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-config
+        key: es-infra-host    
+  - name: ES_CLIENT_PORT
+    value: "9200"
+  - name: LOG_LEVEL
+    value: "DEBUG" 
+  {{- if index .Values "logs-cleanup-enabled" }}                  
+  - name: LOGS_CLEANUP_DISABLED
+    value: "False"
+  - name: RETAIN_LOGS_IN_DAYS
+    value: {{ index .Values "logs-to-retain-in-days" | quote }}
+  {{- end }}               
+  {{- if index .Values "jaeger-cleanup-enabled" }}     
+  - name: JAEGER_CLEANUP_DISABLED
+    value: "False"
+  - name: RETAIN_JAEGER_DATA_IN_DAYS
+    value: {{ index .Values "jaeger-to-retain-in-days" | quote }}
+  {{- end }}       
+extraVolumes: |
+  - name: config-volume
+    configMap:
+      name: {{ template "name" . }}-config
+extraVolumeMounts: |
+  - mountPath: /etc/config
+    name: config-volume         
+resources: |
+  requests:
+    memory: {{ .Values.memory_limits | quote }}
+  limits:
+    memory: {{ .Values.memory_limits | quote }}

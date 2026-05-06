@@ -6,8 +6,8 @@ labels:
 # Init Containers Configs
 healthChecks:
   enabled: true
-  livenessProbePath: "/njdg-transformer/actuator/health"
-  readinessProbePath: "/njdg-transformer/actuator/health"
+  livenessProbePath: "/njdg-transformer/health"
+  readinessProbePath: "/njdg-transformer/health"
 
 lokiEnabled: true
 tracing-enabled: true
