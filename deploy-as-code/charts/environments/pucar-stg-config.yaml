@@ -62,7 +62,7 @@ analytics:
       enabled: true
   image:
     repository: docker.io/venkatramireddyb/analytics
-    tag: enhancement-5614-update-end-trigger-for-proclamation-8d4b48274560207f13e9eb5e7de2525c093f5fbd
+    tag: main-420f6436872f3e9c657a36a1fe65c1f4963c5958
   ingress:
     nginxRateLimit:
       enabled: true
