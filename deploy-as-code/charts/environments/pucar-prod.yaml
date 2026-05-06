@@ -446,5 +446,5 @@ prometheus-kafka-exporter:
 etreasury:
   hostAliases: |
     - ip: "10.5.37.90"
-      hostname:
+      hostnames:
       - "etreasury.kerala.gov.in"
