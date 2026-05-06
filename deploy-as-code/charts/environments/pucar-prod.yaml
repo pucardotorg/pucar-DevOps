@@ -373,7 +373,7 @@ oncourts-website:
          var judgeName = "Smt. Soorya S Sukumaran";
          var WEBSOCKET_ADDRESS = "wss://dristi-kerala-qa.pucar.org/transcription"
          var invalidEmployeeRoles = ["CBO_ADMIN", "ORG_ADMIN", "ORG_STAFF", "SYSTEM"];
-         var mockEnabled = "true";
+         var mockEnabled = "false";
          var mockESignEnabled = "false";
       
          var getConfig = function (key) {
