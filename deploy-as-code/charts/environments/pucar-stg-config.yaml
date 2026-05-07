@@ -368,7 +368,7 @@ dristi-pdf:
       enabled: true
   image:
     repository: docker.io/venkatramireddyb/dristi-pdf
-    tag: fix-logging-in-dristi-pdf-0b25f7d05f8bccd5d4246f7d28bc23a3bd18bcad
+    tag: main-c06a4df3753a5d5a68e96df4065513508c86011f
   ingress:
     nginxRateLimit:
       enabled: true
