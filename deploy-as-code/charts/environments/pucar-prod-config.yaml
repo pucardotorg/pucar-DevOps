@@ -13,7 +13,7 @@ ab-diary:
   replicas: 2
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -37,7 +37,7 @@ advocate:
   replicas: 2
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -61,7 +61,7 @@ advocate-office-management:
   replicas: 2
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -85,7 +85,7 @@ analytics:
   replicas: 2
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -109,7 +109,7 @@ application:
   replicas: 2
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -134,7 +134,7 @@ audit-service:
   cpu_limits: "150m"
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -158,7 +158,7 @@ bail-bond:
   replicas: 2
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -182,7 +182,7 @@ bank-details:
   replicas: 2
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -206,7 +206,7 @@ billing-service:
   replicas: 2
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -230,7 +230,7 @@ case:
   replicas: 2
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "1000"
       burstMultiplier: "1"
       conections: "10"
@@ -254,7 +254,7 @@ casemanagement:
   replicas: 2
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "1000"
       burstMultiplier: "1"
       conections: "10"
@@ -274,7 +274,7 @@ clamav:
   replicas: 2
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -298,7 +298,7 @@ collection-services:
   replicas: 2
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -322,7 +322,7 @@ ctc:
   replicas: 2
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -343,7 +343,7 @@ digit-ui:
   replicas: 2
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "10000"
       burstMultiplier: "1"
       conections: "10"
@@ -367,7 +367,7 @@ digitalized-documents:
   replicas: 2
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "1000"
       burstMultiplier: "1"
       conections: "10"
@@ -390,7 +390,7 @@ dristi-case-pdf:
   replicas: 2
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -415,7 +415,7 @@ dristi-pdf:
   replicas: 2
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -439,7 +439,7 @@ e-sign-svc:
   replicas: 2
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -463,7 +463,7 @@ egov-accesscontrol:
   replicas: 2
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -487,7 +487,7 @@ egov-apportion-service:
   replicas: 2
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -512,7 +512,7 @@ egov-enc-service:
   cpu_limits: "250m"
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -537,7 +537,7 @@ egov-filestore:
   cpu_limits: "2500m"
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "1000"
       burstMultiplier: "1"
       conections: "10"
@@ -561,7 +561,7 @@ egov-hrms:
   replicas: 2
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -585,7 +585,7 @@ egov-idgen:
   replicas: 2
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -609,7 +609,7 @@ egov-indexer:
   replicas: 2
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -633,7 +633,7 @@ egov-localization:
   replicas: 2
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -657,7 +657,7 @@ egov-mdms-service:
   replicas: 2
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -681,7 +681,7 @@ egov-notification-mail:
   replicas: 2
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -705,7 +705,7 @@ egov-otp:
   replicas: 2
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -729,7 +729,7 @@ egov-persister:
   replicas: 2
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -753,7 +753,7 @@ egov-pg-service:
   replicas: 2
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -777,7 +777,7 @@ egov-url-shortening:
   replicas: 2
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -801,7 +801,7 @@ egov-user:
   replicas: 2
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -825,7 +825,7 @@ egov-user-event:
   replicas: 2
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -849,7 +849,7 @@ egov-workflow-v2:
   replicas: 2
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -873,7 +873,7 @@ epost-tracker:
   replicas: 2
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -897,7 +897,7 @@ esign-interceptor:
   replicas: 2
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -924,7 +924,7 @@ etreasury:
   replicas: 2
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -948,7 +948,7 @@ evidence:
   replicas: 2
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -970,7 +970,7 @@ epayments:
   replicas: 2
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -995,7 +995,7 @@ gateway:
   replicas: 3
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -1019,7 +1019,7 @@ hearing:
   replicas: 2
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -1043,7 +1043,7 @@ hearing-management:
   replicas: 2
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -1067,7 +1067,7 @@ icops-integration:
   replicas: 2
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -1091,7 +1091,7 @@ inbox:
   replicas: 2
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "3000"
       burstMultiplier: "1"
       conections: "10"
@@ -1115,7 +1115,7 @@ individual:
   replicas: 2
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -1139,7 +1139,7 @@ inportal-survey:
   replicas: 2
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -1163,7 +1163,7 @@ kerala-sms:
   replicas: 2
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -1187,7 +1187,7 @@ lock-svc:
   replicas: 2
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -1211,7 +1211,7 @@ minio-filestore:
   replicas: 2
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -1235,7 +1235,7 @@ njdg-transformer:
   replicas: 2
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -1259,7 +1259,7 @@ notification:
   replicas: 2
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -1283,7 +1283,7 @@ ocr-service:
   replicas: 2
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -1306,7 +1306,7 @@ oncourts-website:
   replicas: 2
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -1330,7 +1330,7 @@ openapi:
   replicas: 2
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -1354,7 +1354,7 @@ order:
   replicas: 2
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -1378,7 +1378,7 @@ order-management:
   replicas: 2
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -1402,7 +1402,7 @@ payment-calculator:
   replicas: 2
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -1426,7 +1426,7 @@ pdf-service:
   replicas: 5
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -1450,7 +1450,7 @@ pgr-services:
   replicas: 2
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -1474,7 +1474,7 @@ scheduler:
   replicas: 2
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -1498,7 +1498,7 @@ service-request:
   replicas: 2
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -1523,7 +1523,7 @@ summons-svc:
   cpu_limits: 350m
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -1548,7 +1548,7 @@ task:
   replicas: 2
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -1572,7 +1572,7 @@ task-management:
   replicas: 2
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -1596,7 +1596,7 @@ template-configuration:
   replicas: 2
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -1620,7 +1620,7 @@ transcription:
   replicas: 2
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -1645,7 +1645,7 @@ transformer:
   cpu_limits: 250m
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -1670,7 +1670,7 @@ user-otp:
   cpu_limits: 150m
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -1694,7 +1694,7 @@ workbench-ui:
   replicas: 2
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
