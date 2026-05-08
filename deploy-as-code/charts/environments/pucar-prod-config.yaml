@@ -1323,9 +1323,9 @@ openapi:
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/openapi
     tag: gogs-v1.17.1
-  heap: "-Xmx768m -Xms768m"
-  memory_requests: 768Mi
-  memory_limits: 1000Mi
+  heap: "-Xmx768m -Xms256m"
+  memory_requests: 1024Mi
+  memory_limits: 1536Mi
   cpu_requests: 50m
   replicas: 2
   ingress:
