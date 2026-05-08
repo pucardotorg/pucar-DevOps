@@ -1371,9 +1371,9 @@ order-management:
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/order-management
     tag: gogs-v1.18.0.1
-  heap: "-Xmx512m -Xms512m"
-  memory_requests: 768Mi
-  memory_limits: 1000Mi
+  heap: "-Xmx512m -Xms256m"
+  memory_requests: 1024Mi
+  memory_limits: 1536Mi
   cpu_requests: 50m
   replicas: 2
   ingress:
