@@ -433,7 +433,7 @@ e-sign-svc:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/e-sign-svc
     tag: gogs-v1.18.0.2
   heap: "-Xmx256m -Xms256m"
-  memory_requests: "384Mi"
+  memory_requests: "512Mi"
   memory_limits: "512Mi"
   cpu_requests: "50m"
   replicas: 2
@@ -626,9 +626,9 @@ egov-localization:
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/egov-localization
     tag: gogs-v1.18.0.1
-  heap: "-Xmx768m -Xms256m"
-  memory_requests: "1000Mi"
-  memory_limits: "1500Mi"
+  heap: "-Xmx512m -Xms256m"
+  memory_requests: "1024Mi"
+  memory_limits: "1024Mi"
   cpu_requests: "50m"
   replicas: 2
   ingress:
@@ -1084,7 +1084,7 @@ inbox:
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/inbox
     tag: gogs-v1.18.0.1
-  heap: "-Xmx1024m -Xms1024m"
+  heap: "-Xmx1024m -Xms512m"
   memory_requests: 1280Mi
   memory_limits: 1280Mi
   cpu_requests: 50m
@@ -1132,9 +1132,9 @@ inportal-survey:
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/inportal-survey
     tag: gogs-v1.17.0
-  heap: "-Xmx512m -Xms512m"
-  memory_requests: 512Mi
-  memory_limits: 512Mi
+  heap: "-Xmx512m -Xms256m"
+  memory_requests: 768Mi
+  memory_limits: 768Mi
   cpu_requests: 50m 
   replicas: 2
   ingress:
@@ -1156,9 +1156,9 @@ kerala-sms:
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/kerala-sms
     tag: gogs-v1.17.0
-  heap: "-Xmx512m -Xms512m"
+  heap: "-Xmx512m -Xms256m"
   memory_requests: 768Mi
-  memory_limits: 1000Mi
+  memory_limits: 768Mi
   cpu_requests: 50m
   replicas: 2
   ingress:
@@ -1347,8 +1347,8 @@ order:
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/order
     tag: gogs-v1.18.0.1
-  heap: "-Xmx512m -Xms512m"
-  memory_requests: 768Mi
+  heap: "-Xmx512m -Xms256m"
+  memory_requests: 896Mi
   memory_limits: 1000Mi
   cpu_requests: 50m
   replicas: 2
@@ -1467,8 +1467,8 @@ scheduler:
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/scheduler
     tag: gogs-v1.18.0.1
-  heap: "-Xmx512m -Xms512m"
-  memory_requests: 768Mi
+  heap: "-Xmx512m -Xms256m"
+  memory_requests: 896Mi
   memory_limits: 1000Mi
   cpu_requests: 50m
   replicas: 2
