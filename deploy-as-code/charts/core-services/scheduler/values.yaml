@@ -11,7 +11,7 @@ ingress:
 
 lokiEnabled: true
 tracing-enabled: true
-redisEnabled: false
+redisEnabled: true
 
 healthChecks:
  enabled: true
@@ -162,3 +162,7 @@ env: |
       secretKeyRef:
         name: elasticsearch-credentials
         key: password
+  {{- if .Values.redisEnabled }}
+  - name: SPRING_REDIS_TIMEOUT
+    value: "300"
+  {{- end }}
