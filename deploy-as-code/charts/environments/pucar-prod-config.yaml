@@ -126,9 +126,9 @@ audit-service:
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/audit-service
     tag: gogs-v1.18.0.1
-  heap: "-Xmx128m -Xms128m"
-  memory_requests: "256Mi"
-  memory_limits: "384Mi"
+  heap: "-Xmx256m -Xms128m"
+  memory_requests: "512Mi"
+  memory_limits: "512Mi"
   cpu_requests: "50m"
   replicas: 2
   cpu_limits: "150m"
@@ -315,8 +315,8 @@ ctc:
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/ctc
     tag: gogs-v1.17.0
-  heap: "-Xmx384m -Xms256m"
-  memory_requests: "512Mi"
+  heap: "-Xmx512m -Xms256m"
+  memory_requests: "768Mi"
   memory_limits: "768Mi"
   cpu_requests: "50m"
   replicas: 2
