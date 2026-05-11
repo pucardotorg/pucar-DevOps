@@ -11,7 +11,7 @@ ingress:
 
 lokiEnabled: true
 tracing-enabled: true
-redisEnabled: true
+redisEnabled: false
 
 # Init Containers Configs
 initContainers:
@@ -225,3 +225,5 @@ env: |
   - name: SPRING_REDIS_TIMEOUT
     value: "300"
   {{- end }}
+  - name: SPRING_REDIS_ENABLED
+    value: "{{ .Values.redisEnabled | quote }}"
