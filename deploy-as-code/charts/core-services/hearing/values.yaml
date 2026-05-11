@@ -226,4 +226,4 @@ env: |
     value: "300"
   {{- end }}
   - name: SPRING_REDIS_ENABLED
-    value: "{{ .Values.redisEnabled | quote }}"
+    value: {{ .Values.redisEnabled | quote }}
