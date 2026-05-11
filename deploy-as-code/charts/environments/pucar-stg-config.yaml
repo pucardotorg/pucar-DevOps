@@ -863,7 +863,7 @@ hearing:
       enabled: true
   image:
     repository: venkatramireddyb/hearing
-    tag: main-a0505fbdc5f111343a17ebe611b797bc770a294d
+    tag: main-3c0b8a40f656956541da5851e6405fef9c4b9708
   ingress:
     nginxRateLimit:
       enabled: true
