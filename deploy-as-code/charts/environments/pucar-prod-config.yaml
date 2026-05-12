@@ -223,8 +223,8 @@ case:
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/case
     tag: gogs-v1.18.0.1
-  heap: "-Xmx2g -Xms1g"
-  memory_requests: "2.5Gi"
+  heap: "-Xmx2g -Xms512m"
+  memory_requests: "3Gi"
   memory_limits: "3Gi"
   cpu_requests: "50m"
   replicas: 2
