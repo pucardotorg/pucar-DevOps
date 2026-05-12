@@ -786,7 +786,7 @@ evidence:
       enabled: true
   image:
     repository: venkatramireddyb/evidence
-    tag: sdc-uat-fb7493994c08b593759448d6d3be1bd309d6ce02
+    tag: main-252c10776b042632d5ff573188ab1db28b975d5f
   ingress:
     nginxRateLimit:
       enabled: true
