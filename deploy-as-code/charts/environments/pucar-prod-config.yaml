@@ -1133,8 +1133,8 @@ inportal-survey:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/inportal-survey
     tag: gogs-v1.17.0
   heap: "-Xmx512m -Xms256m"
-  memory_requests: 1Gi
-  memory_limits: 1Gi
+  memory_requests: 768Mi
+  memory_limits: 768Mi
   cpu_requests: 50m 
   replicas: 2
   ingress:
@@ -1157,8 +1157,8 @@ kerala-sms:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/kerala-sms
     tag: gogs-v1.17.0
   heap: "-Xmx512m -Xms256m"
-  memory_requests: 768Mi
-  memory_limits: 768Mi
+  memory_requests: 1Gi
+  memory_limits: 1Gi
   cpu_requests: 50m
   replicas: 2
   ingress:
