@@ -35,6 +35,8 @@ appType: "java-spring"
 java-args: ""
 heap: "-Xmx192m -Xms192m"
 debugPort: 5005
+isMockPaymentEnabled: true
+
 # Additional Container Envs
 env: |
   - name: PUCAR_TSB_RECEIPT
@@ -122,7 +124,7 @@ env: |
         key: billing-service
         name: egov-service-host
   - name: isMock.enabled
-    value: "true"
+    value: {{ .Values.isMockPaymentEnabled | quote }}
   - name: EGOV_ADVOCATE_HOST
     valueFrom:
       configMapKeyRef:

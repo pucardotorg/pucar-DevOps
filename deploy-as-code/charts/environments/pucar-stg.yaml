@@ -465,6 +465,7 @@ epayments:
       - "oncourts-staging.kerala.gov.in"
 
 etreasury:
+  isMockPaymentEnabled: false
   hostAliases: |
     - ip: "10.5.123.250"
       hostnames:
