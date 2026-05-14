@@ -627,8 +627,8 @@ egov-localization:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/egov-localization
     tag: gogs-v1.18.0.1
   heap: "-Xmx512m -Xms256m"
-  memory_requests: "1024Mi"
-  memory_limits: "1024Mi"
+  memory_requests: "1536Mi"
+  memory_limits: "1536Mi"
   cpu_requests: "50m"
   replicas: 2
   ingress:
