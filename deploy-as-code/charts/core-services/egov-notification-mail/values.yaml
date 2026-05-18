@@ -67,3 +67,22 @@ env: |
       configMapKeyRef:
         name: egov-service-host
         key: egov-mdms-service
+  - name: EGOV_FROM_EMAIL
+    valueFrom:
+      secretKeyRef:
+        key: mailsenderusername
+        name: egov-notification-mail
+  - name: MAIL_SMTPS_DEBUG
+    value: "true"
+  - name: MAIL_SMTPS_AUTH
+    value: "true"
+  - name: MAIL_PROTOCOL
+    value: smtp
+  - name: MAIL_SMTPS_SSL_ENABLE
+    value: "false"
+  - name: MAIL_SMTPS_STARTTLS_ENABLE
+    value: "true"
+  - name: MAIL_SENDER_TEST
+    value: "false"
+  - name: TEST_EMAIL
+    value: manimaaran@beehyv.com

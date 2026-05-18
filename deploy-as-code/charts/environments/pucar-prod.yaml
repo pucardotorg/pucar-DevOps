@@ -448,3 +448,6 @@ etreasury:
     - ip: "10.5.37.90"
       hostnames:
       - "etreasury.kerala.gov.in"
+
+egov-notification-mail:
+  mail-port: 465
