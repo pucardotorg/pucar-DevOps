@@ -1250,6 +1250,8 @@ order-management:
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
+    additionalAnnotations: |
+      nginx.ingress.kubernetes.io/proxy-body-size: "2000m"
   rateLimit:
     enabled: true
     gatewayBurstCapacity: "30"
