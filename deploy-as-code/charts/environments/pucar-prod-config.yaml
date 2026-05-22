@@ -407,7 +407,7 @@ dristi-pdf:
       enabled: true
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/dristi-pdf
-    tag: gogs-v1.18.0.1
+    tag: gogs-v1.18.0.2
   memory_requests: "1200Mi"
   memory_limits: "2560Mi"
   cpu_requests: "50m"
