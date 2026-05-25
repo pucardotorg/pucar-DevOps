@@ -196,7 +196,7 @@ case:
       enabled: true
   image:
     repository: docker.io/venkatramireddyb/case
-    tag: main-2157192e15651e1bbc0299b5f616b768856cb0cb
+    tag: main-ee52286aab8c8870e7be02efa156840b4200cb04
   ingress:
     nginxRateLimit:
       enabled: true
