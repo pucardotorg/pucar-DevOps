@@ -116,7 +116,7 @@ env: |
     valueFrom:
       configMapKeyRef:
         name: egov-service-host
-        key: egov-filestore
+        key: dristi-pdf-filestore
   - name: JUDGE_NAME
     valueFrom:
       configMapKeyRef:
