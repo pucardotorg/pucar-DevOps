@@ -786,7 +786,7 @@ evidence:
       enabled: true
   image:
     repository: venkatramireddyb/evidence
-    tag: bug-5747-dev-907b349f13f6271a150635d583136d50cf9cefcc
+    tag: main-e3fd0bb075759cd86a595ccac3256c0f7231d404
   ingress:
     nginxRateLimit:
       enabled: true
