@@ -222,7 +222,7 @@ case:
       enabled: true
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/case
-    tag: gogs-v1.18.0.1
+    tag: gogs-v1.18.1
   heap: "-Xmx2g -Xms512m"
   memory_requests: "4Gi"
   memory_limits: "4Gi"
@@ -338,7 +338,7 @@ digit-ui:
       enabled: false
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/digit-ui
-    tag: gogs-v1.18.0.1
+    tag: gogs-v1.18.1
   memory_requests: "1Gi"
   replicas: 2
   ingress:
@@ -359,7 +359,7 @@ digitalized-documents:
       enabled: true
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/digitalized-documents
-    tag: gogs-v1.18.0.1
+    tag: gogs-v1.18.1
   heap: "-Xmx768m -Xms768m"
   memory_requests: "1Gi"
   memory_limits: "1Gi"
@@ -940,7 +940,7 @@ evidence:
       enabled: true
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/evidence
-    tag: gogs-v1.18.0.1
+    tag: gogs-v1.18.1
   heap: "-Xmx1024m -Xms1024m"
   memory_requests: 1280Mi
   memory_limits: 1280Mi
@@ -1011,7 +1011,7 @@ hearing:
       enabled: true
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/hearing
-    tag: gogs-v1.18.0.1
+    tag: gogs-v1.18.1
   heap: "-Xmx1024m -Xms1024m"
   memory_requests: 1536Mi
   memory_limits: 1536Mi
