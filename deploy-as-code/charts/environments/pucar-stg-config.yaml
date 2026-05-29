@@ -767,7 +767,7 @@ etreasury:
       enabled: true
   image:
     repository: docker.io/venkatramireddyb/etreasury
-    tag: etreasury-lower-env-fix-doubleverification-85f503e0603fc38e1b9b6ebb56cc1d689bb50cfa
+    tag: etreasury-lower-env-fix-doubleverification-v3-865291bc28a2fcef1c3890165f12ca016ad13e57
   ingress:
     nginxRateLimit:
       enabled: true
