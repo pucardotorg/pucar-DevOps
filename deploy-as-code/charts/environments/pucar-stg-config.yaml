@@ -1548,6 +1548,9 @@ transformer:
     memory:
       enabled: true
   heap: "-Xmx1000m -Xms1000m"
+  memory_requests: 2Gi
+  memory_limits: 2Gi
+  cpu_requests: 50m
   image:
     repository: docker.io/venkatramireddyb/transformer
     tag: main-a0505fbdc5f111343a17ebe611b797bc770a294d
