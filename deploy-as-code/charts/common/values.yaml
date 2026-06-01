@@ -332,13 +332,14 @@ extraEnv:
             name: egov-config
             key: loki-url
       - name: LOGGING_LOKI_APP
-        valueFrom:
-          fieldRef:
-            fieldPath: metadata.name
+        value: {{ template "common.name" . }}
       - name: LOGGING_LOKI_ENVIRONMENT
-        value: {{ .Values.global.domain }}
+        valueFrom:
+          configMapKeyRef:
+            key: domain-url
+            name: egov-config
       - name: LOGGING_LEVEL_ROOT
-        value: INFO
+        value: "INFO"
       {{- end }}
       {{- if .Values.redisEnabled }}
       - name: SPRING_REDIS_HOST
