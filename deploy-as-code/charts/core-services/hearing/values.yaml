@@ -221,3 +221,9 @@ env: |
       secretKeyRef:
         name: elasticsearch-credentials
         key: password
+  {{- if .Values.redisEnabled }}
+  - name: SPRING_REDIS_TIMEOUT
+    value: "300"
+  {{- end }}
+  - name: SPRING_REDIS_ENABLED
+    value: {{ .Values.redisEnabled | quote }}

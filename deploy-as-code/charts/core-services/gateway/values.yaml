@@ -150,3 +150,7 @@ env: |
     value: {{ .Values.global.redis.host | quote }}
   - name: SPRING_DATA_REDIS_PORT
     value: {{ .Values.global.redis.port | quote }}
+  - name: MANAGEMENT_HEALTH_REDIS_ENABLED
+    value: "false"
+  - name: SPRING_CODEC_MAX_IN_MEMORY_SIZE
+    value: 20MB

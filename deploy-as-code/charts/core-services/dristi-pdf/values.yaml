@@ -113,7 +113,10 @@ env: |
         name: egov-service-host
         key: egov-localization
   - name:  EGOV_FILESTORE_SERVICE_HOST
-    value: "http://egov-filestore.pucar-stg:8080"
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: dristi-pdf-filestore
   - name: JUDGE_NAME
     valueFrom:
       configMapKeyRef:
