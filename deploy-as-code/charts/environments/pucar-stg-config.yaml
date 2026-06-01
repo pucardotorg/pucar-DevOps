@@ -1547,6 +1547,7 @@ transformer:
     maxReplicas: 5
     memory:
       enabled: true
+  heap: "-Xmx1000m -Xms1000m"
   image:
     repository: docker.io/venkatramireddyb/transformer
     tag: main-a0505fbdc5f111343a17ebe611b797bc770a294d
