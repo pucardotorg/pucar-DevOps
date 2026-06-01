@@ -1,0 +1,334 @@
+_format_version: '3.0'
+_transform: true
+consumers:
+- username: digit-dev
+  keyauth_credentials:
+  - key: digit-dev-api-key-change-me
+  tags:
+  - development
+- username: digit-admin
+  keyauth_credentials:
+  - key: digit-admin-api-key-change-me
+  tags:
+  - admin
+plugins:
+- name: cors
+  config:
+    origins:
+    - '*'
+    methods:
+    - GET
+    - POST
+    - PUT
+    - PATCH
+    - DELETE
+    - OPTIONS
+    headers:
+    - Accept
+    - Accept-Version
+    - Content-Length
+    - Content-Type
+    - Authorization
+    - X-API-Key
+    - X-Requested-With
+    - auth-token
+    exposed_headers:
+    - X-Auth-Token
+    credentials: true
+    max_age: 3600
+- name: request-size-limiting
+  config:
+    allowed_payload_size: 10
+    size_unit: megabytes
+services:
+- name: mdms-service
+  url: http://egov-mdms-service:8094
+  tags:
+  - core
+  routes:
+  - name: mdms-route
+    paths:
+    - /mdms-v2
+    strip_path: false
+  # digit-studio globalConfigs uses MDMS_CONTEXT_PATH "egov-mdms-service" (K8s-style).
+  # Browser calls /egov-mdms-service/v1/_search; nginx/mdms-proxy.conf rewrites to mdms-v2.
+  - name: mdms-egov-mdms-service-path-route
+    paths:
+    - /egov-mdms-service
+    strip_path: false
+- name: user-service
+  url: http://egov-user:8107
+  tags:
+  - core
+  - auth
+  routes:
+  - name: user-route
+    paths:
+    - /user
+    strip_path: false
+- name: user-auth-public
+  url: http://egov-user:8107
+  tags:
+  - core
+  - auth
+  - public
+  routes:
+  - name: user-oauth-route
+    paths:
+    - /user/oauth/token
+    strip_path: false
+    methods:
+    - POST
+- name: enc-service
+  url: http://egov-enc-service:1234
+  tags:
+  - core
+  - security
+  routes:
+  - name: enc-route
+    paths:
+    - /egov-enc-service
+    strip_path: false
+- name: idgen-service
+  url: http://egov-idgen:8088
+  tags:
+  - core
+  routes:
+  - name: idgen-route
+    paths:
+    - /egov-idgen
+    strip_path: false
+- name: workflow-service
+  url: http://egov-workflow-v2:8109
+  tags:
+  - core
+  routes:
+  - name: workflow-route
+    paths:
+    - /egov-workflow-v2
+    strip_path: false
+- name: localization-service
+  url: http://egov-localization:8096
+  tags:
+  - core
+  routes:
+  - name: localization-route
+    paths:
+    - /localization
+    strip_path: false
+- name: boundary-service
+  url: http://boundary-service:8081
+  tags:
+  - core
+  routes:
+  - name: boundary-route
+    paths:
+    - /boundary-service
+    strip_path: false
+- name: accesscontrol-service
+  url: http://egov-accesscontrol:8090
+  tags:
+  - core
+  - security
+  routes:
+  - name: accesscontrol-route
+    paths:
+    - /access
+    strip_path: false
+- name: persister-service
+  url: http://egov-persister:8091
+  tags:
+  - core
+  - internal
+  routes:
+  - name: persister-route
+    paths:
+    - /common-persist
+    strip_path: false
+- name: health-mdms
+  url: http://egov-mdms-service:8094
+  routes:
+  - name: health-mdms-route
+    paths:
+    - /health/mdms
+    strip_path: true
+  plugins:
+  - name: request-transformer
+    config:
+      replace:
+        uri: /mdms-v2/health
+- name: health-user
+  url: http://egov-user:8107
+  routes:
+  - name: health-user-route
+    paths:
+    - /health/user
+    strip_path: true
+  plugins:
+  - name: request-transformer
+    config:
+      replace:
+        uri: /user/health
+- name: health-workflow
+  url: http://egov-workflow-v2:8109
+  routes:
+  - name: health-workflow-route
+    paths:
+    - /health/workflow
+    strip_path: true
+  plugins:
+  - name: request-transformer
+    config:
+      replace:
+        uri: /egov-workflow-v2/health
+- name: health-boundary
+  url: http://boundary-service:8081
+  routes:
+  - name: health-boundary-route
+    paths:
+    - /health/boundary
+    strip_path: true
+  plugins:
+  - name: request-transformer
+    config:
+      replace:
+        uri: /boundary-service/actuator/health
+- name: filestore-service
+  url: http://egov-filestore:8083
+  tags:
+  - core
+  routes:
+  - name: filestore-route
+    paths:
+    - /filestore
+    strip_path: false
+- name: hrms-service
+  url: http://egov-hrms:8092
+  tags:
+  - core
+  routes:
+  - name: hrms-route
+    paths:
+    - /egov-hrms
+    strip_path: false
+- name: bndry-mgmnt-service
+  url: http://egov-bndry-mgmnt:8080
+  tags:
+  - core
+  routes:
+  - name: bndry-mgmnt-route
+    paths:
+    - /egov-bndry-mgmnt
+    strip_path: true
+- name: digit-ui
+  url: http://digit-ui:80
+  tags:
+  - frontend
+  - ui
+  routes:
+  - name: digit-ui-route
+    paths:
+    - /digit-ui
+    strip_path: false
+- name: digit-studio
+  url: http://digit-studio:80
+  tags:
+  - studio
+  routes:
+  - name: digit-studio-route
+    paths:
+    - /digit-studio
+    strip_path: false
+    # Pass browser Host (e.g. localhost:18000) so nginx does not build redirects
+    # or absolute URLs using the upstream hostname "digit-studio".
+    preserve_host: true
+- name: public-service-init
+  url: http://public-service-init:8080
+  tags:
+  - studio
+  routes:
+  - name: public-service-init-route
+    paths:
+    - /public-service-init
+    strip_path: false
+- name: public-service
+  url: http://public-service:8080
+  tags:
+  - studio
+  routes:
+  - name: public-service-route
+    paths:
+    - /public-service
+    strip_path: false
+- name: health-individual
+  url: http://health-individual:8080
+  tags:
+  - studio
+  routes:
+  - name: health-individual-route
+    paths:
+    - /health-individual
+    strip_path: false
+- name: health-service-request
+  url: http://health-service-request:8080
+  tags:
+  - studio
+  routes:
+  - name: health-service-request-route
+    paths:
+    - /health-service-request
+    strip_path: false
+- name: otp-service
+  url: http://egov-otp:8080
+  tags:
+  - studio
+  routes:
+  - name: otp-route
+    paths:
+    - /otp
+    strip_path: false
+- name: user-otp-service
+  url: http://user-otp:8080
+  tags:
+  - studio
+  routes:
+  - name: user-otp-route
+    paths:
+    - /user-otp
+    strip_path: false
+- name: egov-notification-sms
+  url: http://egov-notification-sms:8080
+  tags:
+  - studio
+  routes:
+  - name: egov-notification-sms-route
+    paths:
+    - /egov-notification-sms
+    strip_path: false
+- name: studio-pdf
+  url: http://studio-pdf:8080
+  tags:
+  - studio
+  routes:
+  - name: studio-pdf-route
+    paths:
+    - /studio-pdf
+    strip_path: false
+- name: pdf-service
+  url: http://pdf-service:8080
+  tags:
+  - studio
+  routes:
+  - name: pdf-service-route
+    paths:
+    - /pdf-service
+    strip_path: false
+- name: inbox
+  url: http://inbox:8080
+  tags:
+  - studio
+  routes:
+  - name: inbox-route
+    paths:
+    - /inbox
+    strip_path: false
