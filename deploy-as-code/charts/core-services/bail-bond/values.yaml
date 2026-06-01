@@ -8,6 +8,8 @@ ingress:
   zuul: true
   enabled: true
   context: "bail-bond"
+  additionalAnnotations: |
+    nginx.ingress.kubernetes.io/proxy-body-size: 100m
 
 lokiEnabled: true
 tracing-enabled: true
