@@ -2,7 +2,7 @@ ab-diary:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/ab-diary
     tag: sdc-uat-fb7493994c08b593759448d6d3be1bd309d6ce02
@@ -21,7 +21,7 @@ advocate:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/advocate
     tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
@@ -40,7 +40,7 @@ advocate-office-management:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/advocate-office-management
     tag: main-0447fff90ecf720ab53179d2523a564ddf34ef00
@@ -59,7 +59,7 @@ analytics:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/analytics
     tag: main-420f6436872f3e9c657a36a1fe65c1f4963c5958
@@ -78,7 +78,7 @@ application:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/application
     tag: main-de0605c9c6beb63a646c14baac6f0493a2403ffe
@@ -98,7 +98,7 @@ audit-service:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/audit-service
     tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
@@ -117,7 +117,7 @@ auth-proxy:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: egovio/auth-proxy
     tag: auth-proxy-urlencoded-fix-aad9a5959c-23
@@ -136,7 +136,7 @@ bail-bond:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/bail-bond
     tag: main-de0605c9c6beb63a646c14baac6f0493a2403ffe
@@ -155,7 +155,7 @@ bank-details:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/bank-details
     tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
@@ -174,7 +174,7 @@ billing-service:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/billing-service
     tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
@@ -193,7 +193,7 @@ case:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/case
     tag: main-ee52286aab8c8870e7be02efa156840b4200cb04
@@ -212,7 +212,7 @@ casemanagement:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/casemanagement
     tag: main-2e78f03c74248e925838be769d21855b5624a622
@@ -231,7 +231,7 @@ citizen:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: egovio/citizen
     tag: v1.10.0-beta-0ad561e837-30
@@ -250,7 +250,7 @@ clamav:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/clamav
     tag: latest
@@ -269,7 +269,7 @@ collection-services:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/collection-services
     tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
@@ -288,7 +288,7 @@ ctc:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/ctc
     tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
@@ -307,7 +307,7 @@ digit-ui:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/digit-ui
     tag: main-4463e1b36b514dea69f464147412f72ae159d913
@@ -326,7 +326,7 @@ digitalized-documents:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/digitalized-documents
     tag: main-0447fff90ecf720ab53179d2523a564ddf34ef00
@@ -345,7 +345,7 @@ dristi-case-pdf:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/dristi-case-pdf
     tag: main-06f0eff9caaf00df56b51d8551335cf3d6258078
@@ -365,7 +365,7 @@ dristi-pdf:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/dristi-pdf
     tag: main-0d23335d34f7ae587ed901b470f9da88e2fb0283
@@ -384,7 +384,7 @@ e-sign-svc:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/e-sign-svc
     tag: update-signature-container-size-main-2de70ae39fc589d10217cfa96c2b34ca75db5138
@@ -403,7 +403,7 @@ egov-accesscontrol:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/egov-accesscontrol
     tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
@@ -422,7 +422,7 @@ egov-apportion-service:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/egov-apportion-service
     tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
@@ -441,7 +441,7 @@ egov-enc-service:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/egov-enc-service
     tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
@@ -460,7 +460,7 @@ egov-filestore:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: venkatramireddyb/egov-filestore
     tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
@@ -479,7 +479,7 @@ egov-hrms:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/egov-hrms
     tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
@@ -498,7 +498,7 @@ egov-idgen:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/egov-idgen
     tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
@@ -517,7 +517,7 @@ egov-indexer:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/egov-indexer
     tag: main-206e0c53783db990ad4f9585083a866362d47e24
@@ -536,7 +536,7 @@ egov-localization:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/egov-localization
     tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
@@ -555,7 +555,7 @@ egov-mdms-service:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/egov-mdms-service
     tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
@@ -574,7 +574,7 @@ egov-notification-mail:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/egov-notification-mail
     tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
@@ -593,7 +593,7 @@ egov-otp:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/egov-otp
     tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
@@ -612,7 +612,7 @@ egov-persister:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/egov-persister
     tag: main-206e0c53783db990ad4f9585083a866362d47e24
@@ -631,7 +631,7 @@ egov-pg-service:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/egov-pg-service
     tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
@@ -650,7 +650,7 @@ egov-url-shortening:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/egov-url-shortening
     tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
@@ -669,7 +669,7 @@ egov-user:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/egov-user
     tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
@@ -688,7 +688,7 @@ egov-user-event:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/egov-user-event
     tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
@@ -707,7 +707,7 @@ egov-workflow-v2:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/egov-workflow-v2
     tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
@@ -726,7 +726,7 @@ epost-tracker:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/epost-tracker
     tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
@@ -745,7 +745,7 @@ esign-interceptor:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/esign-interceptor
     tag: update-signature-container-size-main-2de70ae39fc589d10217cfa96c2b34ca75db5138
@@ -764,7 +764,7 @@ etreasury:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/etreasury
     tag: etreasury-lower-env-fix-doubleverification-v3-865291bc28a2fcef1c3890165f12ca016ad13e57
@@ -783,7 +783,7 @@ evidence:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: venkatramireddyb/evidence
     tag: main-e3fd0bb075759cd86a595ccac3256c0f7231d404
@@ -802,7 +802,7 @@ employee:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: egovio/employee
     tag: v1.10.0-beta-e7a69e05d3-33
@@ -821,7 +821,7 @@ epayments:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/epayments
     tag: sdc-uat-0657159be3406e649f60dacc4a73dedf1efa7c2e
@@ -841,7 +841,7 @@ gateway:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/gateway
     tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
@@ -860,7 +860,7 @@ hearing:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: venkatramireddyb/hearing
     tag: main-3c0b8a40f656956541da5851e6405fef9c4b9708
@@ -879,7 +879,7 @@ hearing-management:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/hearing-management
     tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
@@ -898,7 +898,7 @@ icops-integration:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: venkatramireddyb/icops-integration
     tag: main-41a16228ce57875d0d699a26118f529585af534b
@@ -917,7 +917,7 @@ inbox:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/inbox
     tag: main-cbc7f5cc29355825a7e6c54378e9263db5177bd4
@@ -936,7 +936,7 @@ individual:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/individual
     tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
@@ -955,7 +955,7 @@ inportal-survey:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/inportal-survey
     tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
@@ -974,7 +974,7 @@ jaeger-collector:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/jaeger-collector
     tag: 1.55
@@ -993,7 +993,7 @@ jaeger-query:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/jaeger-query
     tag: 1.55
@@ -1012,7 +1012,7 @@ kerala-sms:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/kerala-sms
     tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
@@ -1031,7 +1031,7 @@ lock-svc:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/lock-svc
     tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
@@ -1050,7 +1050,7 @@ metabase:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/metabase
     tag: latest
@@ -1069,7 +1069,7 @@ minio-filestore:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/egov-filestore
     tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
@@ -1088,7 +1088,7 @@ network-multitool:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/network-multitool
     tag: latest
@@ -1107,7 +1107,7 @@ nginx-deployment:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/nginx
     tag: latest
@@ -1126,7 +1126,7 @@ njdg-transformer:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/njdg-transformer
     tag: main-de0605c9c6beb63a646c14baac6f0493a2403ffe
@@ -1145,7 +1145,7 @@ notification:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: venkatramireddyb/notification
     tag: sdc-uat-fb7493994c08b593759448d6d3be1bd309d6ce02
@@ -1164,7 +1164,7 @@ ocr-service:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/ocr-service
     tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
@@ -1183,7 +1183,7 @@ oncourts-website:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/oncourts-website
     tag: 'main-56972aa4e2e83af41225be3e1e018a2b20026a99'
@@ -1202,7 +1202,7 @@ openapi:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/openapi
     tag: sdc-uat-fb7493994c08b593759448d6d3be1bd309d6ce02
@@ -1221,7 +1221,7 @@ order:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/order
     tag: main-a0505fbdc5f111343a17ebe611b797bc770a294d
@@ -1240,7 +1240,7 @@ order-management:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/order-management
     tag: main-611759def9bb9d40b4a92a0278d8ec413d1f8aa1
@@ -1261,7 +1261,7 @@ payment-calculator:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/payment-calculator
     tag: sdc-uat-fb7493994c08b593759448d6d3be1bd309d6ce02
@@ -1280,7 +1280,7 @@ pdf-service:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/pdf-service
     tag: sdc-uat-0657159be3406e649f60dacc4a73dedf1efa7c2e
@@ -1299,7 +1299,7 @@ pgr-services:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/pgr-services
     tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
@@ -1318,7 +1318,7 @@ qr-code-service:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/qr_code_service
     tag: v1.0.0-ff38bbcae147c92f0434724206de380f49cdccc4
@@ -1337,7 +1337,7 @@ scheduler:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/scheduler
     tag: main-cbc7f5cc29355825a7e6c54378e9263db5177bd4
@@ -1356,7 +1356,7 @@ service-request:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: egovio/service-request
     tag: core-2.9-lts-mvn-check-bbc06901f1-6
@@ -1375,7 +1375,7 @@ static-assets:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/nginx
     tag: latest
@@ -1394,7 +1394,7 @@ summons-svc:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: venkatramireddyb/summons-svc
     tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
@@ -1413,7 +1413,7 @@ sunbird-rc-credentials-service:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: ghcr.io/sunbird-rc/sunbird-rc-credentials-service
     tag: v2.0.0-rc3
@@ -1432,7 +1432,7 @@ sunbird-rc-identity-service:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/sunbird-rc/sunbird-rc-identity-service
     tag: v2.0.0-rc3
@@ -1451,7 +1451,7 @@ sunbirdrc-credential-service:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: egovio/sunbirdrc-credential-service
     tag: sdc-uat-fb7493994c08b593759448d6d3be1bd309d6ce02
@@ -1470,7 +1470,7 @@ task:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: venkatramireddyb/task
     tag: main-a0505fbdc5f111343a17ebe611b797bc770a294d
@@ -1489,7 +1489,7 @@ task-management:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/task-management
     tag: main-de0605c9c6beb63a646c14baac6f0493a2403ffe
@@ -1508,7 +1508,7 @@ template-configuration:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/template-configuration
     tag: sdc-uat-fb7493994c08b593759448d6d3be1bd309d6ce02
@@ -1527,7 +1527,7 @@ transcription:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/transcription
     tag: v1.0.0-dristi-experiment-1
@@ -1546,7 +1546,7 @@ transformer:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   heap: "-Xmx1000m -Xms1000m"
   memory_requests: 2Gi
   memory_limits: 2Gi
@@ -1569,7 +1569,7 @@ user-otp:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/user-otp
     tag: main-0447fff90ecf720ab53179d2523a564ddf34ef00
@@ -1588,7 +1588,7 @@ vault-agent-injector:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/vault-k8s
     tag: 1.4.1
@@ -1607,7 +1607,7 @@ verifyapp:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/verifierapp
     tag: v1.0.0-main-c4ee738-5
@@ -1626,7 +1626,7 @@ workbench-ui:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/workbench-ui
     tag: gogs-v1.12.0
