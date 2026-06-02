@@ -9,7 +9,7 @@ ingress:
   enabled: true
   context: "task-management"
 
-lokiEnabled: false
+lokiEnabled: true
 
 
 
