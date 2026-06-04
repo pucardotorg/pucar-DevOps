@@ -103,8 +103,8 @@ application:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/application
     tag: gogs-v1.18.0.1
   heap: "-Xmx1024m -Xms192m"
-  memory_requests: "1200Mi"
-  memory_limits: "1500Mi"
+  memory_requests: "1792Mi"
+  memory_limits: "1792Mi"
   cpu_requests: "50m"
   replicas: 2
   ingress:
@@ -433,8 +433,8 @@ e-sign-svc:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/e-sign-svc
     tag: gogs-v1.18.0.2
   heap: "-Xmx256m -Xms256m"
-  memory_requests: "768Mi"
-  memory_limits: "1Gi"
+  memory_requests: "1536Mi"
+  memory_limits: "1536Mi"
   cpu_requests: "50m"
   replicas: 2
   ingress:
@@ -481,8 +481,8 @@ egov-apportion-service:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/egov-apportion-service
     tag: gogs-v1.18.0.1
   heap: "-Xmx256m -Xms256m"
-  memory_requests: "384Mi"
-  memory_limits: "512Mi"
+  memory_requests: "1024Mi"
+  memory_limits: "1024Mi"
   cpu_requests: "50m"
   replicas: 2
   ingress:
@@ -627,8 +627,8 @@ egov-localization:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/egov-localization
     tag: gogs-v1.18.0.1
   heap: "-Xmx512m -Xms256m"
-  memory_requests: "2Gi"
-  memory_limits: "2Gi"
+  memory_requests: "2.5Gi"
+  memory_limits: "2.5Gi"
   cpu_requests: "50m"
   replicas: 2
   ingress:
@@ -723,7 +723,7 @@ egov-persister:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/egov-persister
     tag: gogs-v1.18.0.1
   heap: "-Xmx768m -Xms256m"
-  memory_requests: "1400Mi"
+  memory_requests: "1792Mi"
   memory_limits: "1792Mi"
   cpu_requests: "50m"
   replicas: 2
@@ -795,8 +795,8 @@ egov-user:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/egov-user
     tag: gogs-v1.18.0.1
   heap: "-Xmx756m -Xms756m"
-  memory_requests: "1000Mi"
-  memory_limits: "1500Mi"
+  memory_requests: "1.75Gi"
+  memory_limits: "1.75Gi"
   cpu_requests: "50m"
   replicas: 2
   ingress:
@@ -942,8 +942,8 @@ evidence:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/evidence
     tag: gogs-v1.18.1
   heap: "-Xmx1024m -Xms1024m"
-  memory_requests: 1280Mi
-  memory_limits: 1280Mi
+  memory_requests: 1792Mi
+  memory_limits: 1792Mi
   cpu_requests: 50m
   replicas: 2
   ingress:
@@ -989,8 +989,8 @@ gateway:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/gateway
     tag: gogs-v1.18.0.1
   heap: "-Xmx1024m -Xms512m"
-  memory_requests: 1536Mi
-  memory_limits: 1536Mi
+  memory_requests: "2.5Gi"
+  memory_limits: "2.5Gi"
   cpu_requests: 50m
   replicas: 3
   ingress:
@@ -1013,8 +1013,8 @@ hearing:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/hearing
     tag: gogs-v1.18.1
   heap: "-Xmx1024m -Xms1024m"
-  memory_requests: 1536Mi
-  memory_limits: 1536Mi
+  memory_requests: "2Gi"
+  memory_limits: "2Gi"
   cpu_requests: 50m
   replicas: 2
   ingress:
@@ -1037,8 +1037,8 @@ hearing-management:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/hearing-management
     tag: gogs-v1.17.0
   heap: "-Xmx1024m -Xms1024m"
-  memory_requests: 1280Mi
-  memory_limits: 1280Mi
+  memory_requests: "1.5Gi"
+  memory_limits: "1.5Gi"
   cpu_requests: 50m
   replicas: 2
   ingress:
@@ -1253,8 +1253,8 @@ notification:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/notification
     tag: gogs-v1.17.1
   heap: "-Xmx512m -Xms512m"
-  memory_requests: 768Mi
-  memory_limits: 1000Mi
+  memory_requests: 1Gi
+  memory_limits: 1Gi
   cpu_requests: 50m
   replicas: 2
   ingress:
@@ -1324,8 +1324,8 @@ openapi:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/openapi
     tag: gogs-v1.17.1
   heap: "-Xmx768m -Xms256m"
-  memory_requests: 1024Mi
-  memory_limits: 1536Mi
+  memory_requests: "1.5Gi"
+  memory_limits: "1.5Gi"
   cpu_requests: 50m
   replicas: 2
   ingress:
@@ -1542,8 +1542,8 @@ task:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/task
     tag: gogs-v1.18.0.1
   heap: "-Xmx856m -Xms256m"
-  memory_requests: "1024Mi"
-  memory_limits: "1024Mi"
+  memory_requests: "1.5Gi"
+  memory_limits: "1.5Gi"
   cpu_requests: "50m"
   replicas: 2
   ingress:
@@ -1638,8 +1638,8 @@ transformer:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/transformer
     tag: gogs-v1.18.0.1
   heap: "-Xmx1000m -Xms1000m"
-  memory_requests: 1000Mi
-  memory_limits: 1500Mi
+  memory_requests: 2Gi
+  memory_limits: 2Gi
   cpu_requests: 50m
   replicas: 2
   cpu_limits: 250m
