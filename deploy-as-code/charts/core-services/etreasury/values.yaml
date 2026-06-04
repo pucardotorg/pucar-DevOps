@@ -145,3 +145,13 @@ env: |
       secretKeyRef:
         name: etreasury
         key: treasury-reconciliation-v3-client-secret
+  - name: TREASURY-RECONCILIATION-V3-CLIENT-ID
+    valueFrom:
+      secretKeyRef:
+        name: etreasury
+        key: treasury-reconciliation-v3-client-id
+  - name: TREASURY-RECONCILIATION-V3-SOURCE
+    valueFrom:
+      secretKeyRef:
+        name: etreasury
+        key: treasury-reconciliation-v3-source
