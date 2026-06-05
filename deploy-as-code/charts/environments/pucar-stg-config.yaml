@@ -310,7 +310,7 @@ digit-ui:
       enabled: false
   image:
     repository: docker.io/venkatramireddyb/digit-ui
-    tag: bulk-sign-url-fix-7f63934a8ddb5221e6a1d3cabba53ed8edc62378
+    tag: main-7f51df6be44ae9bc816083324af3711617334811
   ingress:
     nginxRateLimit:
       enabled: true
