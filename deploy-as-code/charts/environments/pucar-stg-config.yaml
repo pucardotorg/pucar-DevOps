@@ -1243,7 +1243,7 @@ order-management:
       enabled: false
   image:
     repository: docker.io/venkatramireddyb/order-management
-    tag: main-611759def9bb9d40b4a92a0278d8ec413d1f8aa1
+    tag: main-bulk-sign-fix-4762947c4ab7b07ce2fc1727e1bfab01f841cb3b
   ingress:
     nginxRateLimit:
       enabled: true
