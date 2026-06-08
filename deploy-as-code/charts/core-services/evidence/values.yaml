@@ -184,3 +184,5 @@ env: |
       configMapKeyRef:
         key: advocate
         name: egov-service-host
+  - name: dristi.esign.signature.width
+    value: 218
