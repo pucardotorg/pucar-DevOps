@@ -387,7 +387,7 @@ e-sign-svc:
       enabled: false
   image:
     repository: docker.io/venkatramireddyb/e-sign-svc
-    tag: update-signature-container-size-main-2de70ae39fc589d10217cfa96c2b34ca75db5138
+    tag: main-bulk-sign-fix-535ae1be8812f4e93be87568d9637fee593d64d6
   ingress:
     nginxRateLimit:
       enabled: true
