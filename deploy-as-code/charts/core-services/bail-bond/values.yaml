@@ -158,4 +158,4 @@ env: |
         key: eus-host
         name: egov-service-host
   - name: dristi.esign.signature.width
-    value: 218
+    value: "218"

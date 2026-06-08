@@ -169,4 +169,4 @@ env: |
         key: e-sign-svc
         name: egov-service-host
   - name: dristi.esign.signature.width
-    value: 218
+    value: "218"

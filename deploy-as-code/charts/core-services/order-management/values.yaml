@@ -8,7 +8,6 @@ ingress:
   zuul: true
   enabled: true
   context: "order-management"
-
 healthChecks:
   enabled: true
   livenessProbePath: "/order-management/health"
@@ -189,4 +188,4 @@ env: |
         name: egov-service-host
         key: egov-mdms-service
   - name: dristi.esign.signature.width
-    value: 218
+    value: "218"
