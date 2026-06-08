@@ -8,35 +8,10 @@
 #   IMAGE_HEALTH_INDIVIDUAL, IMAGE_HEALTH_SERVICE_REQUEST, IMAGE_STUDIO_PDF,
 #   IMAGE_EGOV_OTP, IMAGE_PDF_SERVICE, IMAGE_USER_OTP, IMAGE_EGOV_NOTIFICATION_SMS
 services:
-  # PostgreSQL: init scripts in docker-entrypoint-initdb.d (e.g. full-dump.sql) run before DB accepts normal traffic.
-  postgres-db:
-    image: postgres:16
-    container_name: docker-postgres
-    environment:
-      POSTGRES_USER: egov
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-egov123}
-      POSTGRES_DB: egov
-    volumes:
-      - postgres_data:/var/lib/docker-postgresql/data
-      - ./db/full-dump.sql:/docker-entrypoint-initdb.d/01-full-dump.sql:ro
-    ports:
-      - 15432:5432
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U egov"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-    deploy:
-      resources:
-        limits:
-          memory: 768M
-          cpus: '0.5'
-    networks:
-      - egov-network
 
   redis:
     image: redis:7.2.4
-    container_name: digit-redis
+    container_name: redis
     ports:
       - 16379:6379
     healthcheck:
@@ -54,7 +29,7 @@ services:
 
   redpanda:
     image: redpandadata/redpanda:v24.1.1
-    container_name: digit-redpanda
+    container_name: redpanda
     command:
       - redpanda
       - start
@@ -92,482 +67,30 @@ services:
           - kafka
           - kafka-v2.kafka-cluster
 
-  # MDMS Backend
-  egov-mdms-service:
-    image: ${IMAGE_MDMS_V2:-egovio/egov-mdms-service:master-1e8d2bb}
-    container_name: egov-mdms-service
-    depends_on:
-      pgbouncer:
-        condition: service_healthy
-      redpanda:
-        condition: service_healthy
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:otel:postgresql://postgres:5432/egov?sslmode=disable
-      SPRING_DATASOURCE_USERNAME: egov
-      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD:-egov123}
-      SPRING_DATASOURCE_HIKARI_MAXIMUM_POOL_SIZE: "5"
-      SPRING_DATASOURCE_HIKARI_MINIMUM_IDLE: "2"
-      SPRING_FLYWAY_ENABLED: 'false'
-      KAFKA_BOOTSTRAP_SERVERS: redpanda:9092
-      SPRING_KAFKA_BOOTSTRAP_SERVERS: redpanda:9092
-      SERVER_PORT: 8094
-      OTEL_TRACES_EXPORTER: none
-      JAVA_TOOL_OPTIONS: -Xms64m -Xmx192m
-    healthcheck:
-      test: ["CMD-SHELL", "wget -qO- http://localhost:8094/egov-mdms-service/health >/dev/null 2>&1 || exit 1"]
-      interval: 10s
-      timeout: 10s
-      retries: 15
-      start_period: 45s
-    deploy:
-      resources:
-        limits:
-          memory: 512M
-          cpus: '1'
-    networks:
-      - egov-network
+  # git-sync:
+  #   image: ${GIT_SYNC_IMAGE:-registry.k8s.io/git-sync/git-sync:v3.6.9}
+  #   container_name: git-sync
+  #   user: "0:0"
+  #   environment:
+  #     GIT_SYNC_REPO: ${GIT_SYNC_REPO}
+  #     GIT_SYNC_BRANCH: ${GIT_SYNC_BRANCH}
+  #     GIT_SYNC_DEPTH: ${GIT_SYNC_DEPTH}
+  #     GIT_SYNC_ONE_TIME: ${GIT_SYNC_ONE_TIME}
+  #     GIT_SYNC_SSH: ${GIT_SYNC_SSH}
+  #     GIT_SYNC_ROOT: ${GIT_SYNC_ROOT}
+  #     GIT_SYNC_VERBOSE: "5"
+  #     GIT_SYNC_SSH_KNOWN_HOSTS: "false"
+  #   networks:
+  #     - egov-network
+  #   volumes:
+  #     - ./app-config:/tmp/git
+  #     - ./git-sync/ssh:/etc/git-secret/ssh
+  #     - ./git-sync/known_hosts:/etc/git-secret/known_hosts
+  #   restart: on-failure
 
-
-  egov-enc-service:
-    image: egovio/egov-enc-service:v2.9.2-4a60f20
-    container_name: egov-enc-service
-    depends_on:
-      pgbouncer:
-        condition: service_healthy
-      egov-mdms-service:
-        condition: service_healthy
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:otel:postgresql://postgres:5432/egov?sslmode=disable
-      SPRING_DATASOURCE_USERNAME: egov
-      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD:-egov123}
-      SPRING_DATASOURCE_HIKARI_MAXIMUM_POOL_SIZE: "5"
-      SPRING_DATASOURCE_HIKARI_MINIMUM_IDLE: "2"
-      SPRING_FLYWAY_ENABLED: 'false'
-      SERVER_PORT: 1234
-      OTEL_TRACES_EXPORTER: none
-      MASTER_PASSWORD: asd@#$@$!132123
-      MASTER_SALT: qweasdzx
-      MASTER_INITIALVECTOR: qweasdzxqwea
-      MASTER_PASSWORD_PROVIDER: software
-      EGOV_MDMS_HOST: http://egov-mdms-service:8094
-      EGOV_MDMS_SEARCH_ENDPOINT: /egov-mdms-service/v1/_search
-      EGOV_STATE_LEVEL_TENANT_ID: pg
-      STATE_LEVEL_TENANT_ID: pg.citya
-      JAVA_TOOL_OPTIONS: -Xms64m -Xmx192m
-    ports:
-      - 11234:1234
-    healthcheck:
-      test: ["CMD-SHELL", "wget -qO- http://localhost:1234/egov-enc-service/actuator/health >/dev/null 2>&1 || exit 1"]
-      interval: 30s
-      timeout: 10s
-      retries: 5
-      start_period: 120s
-    deploy:
-      resources:
-        limits:
-          memory: 300M
-          cpus: '0.25'
-    networks:
-      - egov-network
-
-  egov-idgen:
-    image: egovio/egov-idgen:v2.9.2-4a60f20
-    container_name: egov-idgen
-    depends_on:
-      pgbouncer:
-        condition: service_healthy
-      redpanda:
-        condition: service_healthy
-      egov-mdms-service:
-        condition: service_healthy
-    environment:
-      SPRING_DATASOURCE_DRIVER_CLASS_NAME: org.postgresql.Driver
-      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/egov?sslmode=disable
-      SPRING_DATASOURCE_USERNAME: egov
-      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD:-egov123}
-      SPRING_DATASOURCE_HIKARI_MAXIMUM_POOL_SIZE: "5"
-      SPRING_DATASOURCE_HIKARI_MINIMUM_IDLE: "2"
-      SPRING_FLYWAY_ENABLED: 'false'
-      EGOV_MDMS_HOST: http://egov-mdms-service:8094/
-      MDMS_HOST: http://egov-mdms-service:8094/
-      EGOV_MDMS_SEARCH_ENDPOINT: egov-mdms-service/v1/_search
-      MDMS_SERVICE_HOST: http://egov-mdms-service:8094/
-      MDMS_SERVICE_SEARCH_URI: egov-mdms-service/v1/_search
-      AUTOCREATE_NEW_SEQ: 'true'
-      KAFKA_BOOTSTRAP_SERVERS: redpanda:9092
-      SERVER_PORT: 8088
-      OTEL_TRACES_EXPORTER: none
-      MANAGEMENT_HEALTH_DB_ENABLED: 'false'
-      JAVA_TOOL_OPTIONS: -Xms64m -Xmx192m
-    ports:
-      - 18088:8088
-    healthcheck:
-      test: ["CMD-SHELL", "wget -qO- http://localhost:8088/egov-idgen/health >/dev/null 2>&1 || exit 1"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 120s
-    deploy:
-      resources:
-        limits:
-          memory: 256M
-          cpus: '0.25'
-    networks:
-      - egov-network
-
-  egov-user:
-    image: ${IMAGE_EGOV_USER:-egovio/egov-user:sandbox-log-f4a87d0}
-    container_name: egov-user
-    depends_on:
-      pgbouncer:
-        condition: service_healthy
-      redpanda:
-        condition: service_healthy
-      redis:
-        condition: service_healthy
-      egov-otp:
-        condition: service_healthy
-      egov-enc-service:
-        condition: service_healthy
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/egov?sslmode=disable
-      SPRING_DATASOURCE_USERNAME: egov
-      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD:-egov123}
-      SPRING_DATASOURCE_HIKARI_MAXIMUM_POOL_SIZE: "5"
-      SPRING_DATASOURCE_HIKARI_MINIMUM_IDLE: "2"
-      FLYWAY_ENABLED: 'false'
-      KAFKA_CONFIG_BOOTSTRAP_SERVER_CONFIG: redpanda:9092
-      SPRING_KAFKA_BOOTSTRAP_SERVERS: redpanda:9092
-      SPRING_REDIS_HOST: redis
-      SPRING_REDIS_PORT: 6379
-      SERVER_PORT: 8107
-      EGOV_MDMS_HOST: http://egov-mdms-service:8094
-      EGOV_MDMS_SEARCH_ENDPOINT: /egov-mdms-service/v1/_search
-      MDMS_HOST: http://egov-mdms-service:8094
-      MDMS_V2_HOST: http://egov-mdms-service:8094
-      EGOV_MDMS_V2_HOST: http://egov-mdms-service:8094
-      MDMS_SEARCH_ENDPOINT: /egov-mdms-service/v1/_search
-      EGOV_OTP_HOST: http://egov-otp:8080/otp
-      EGOV_ENC_HOST: http://egov-enc-service:1234
-      EGOV_IDGEN_HOST: http://egov-idgen:8088
-      EGOV_ACCESSCONTROL_HOST: http://egov-accesscontrol:8090
-      EGOV_STATE_LEVEL_TENANT_ID: pg
-      STATE_LEVEL_TENANT_ID: pg
-      OTEL_TRACES_EXPORTER: none
-      JAVA_TOOL_OPTIONS: -Xms128m -Xmx384m
-    ports:
-      - 18107:8107
-    healthcheck:
-      test: ["CMD-SHELL", "wget -qO- http://localhost:8107/user/health >/dev/null 2>&1 || exit 1"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 120s
-    deploy:
-      resources:
-        limits:
-          memory: 512M
-          cpus: '0.5'
-    networks:
-      - egov-network
-
-  egov-workflow-v2:
-    image: ${IMAGE_EGOV_WORKFLOW_V2:-egovio/egov-workflow-v2:v2.9.2-4a60f20}
-    container_name: egov-workflow-v2
-    depends_on:
-      pgbouncer:
-        condition: service_healthy
-      redpanda:
-        condition: service_healthy
-      egov-idgen:
-        condition: service_healthy
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:otel:postgresql://postgres:5432/egov?sslmode=disable
-      SPRING_DATASOURCE_USERNAME: egov
-      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD:-egov123}
-      SPRING_DATASOURCE_HIKARI_MAXIMUM_POOL_SIZE: "5"
-      SPRING_DATASOURCE_HIKARI_MINIMUM_IDLE: "2"
-      SPRING_FLYWAY_ENABLED: 'false'
-      KAFKA_BOOTSTRAP_SERVERS: redpanda:9092
-      SPRING_KAFKA_BOOTSTRAP_SERVERS: redpanda:9092
-      SERVER_PORT: 8109
-      EGOV_MDMS_HOST: http://egov-mdms-service:8094/
-      EGOV_MDMS_SEARCH_ENDPOINT: egov-mdms-service/v1/_search
-      EGOV_USER_HOST: http://egov-user:8107/
-      STATE_LEVEL_TENANT_ID: pg.citya
-      EGOV_STATE_LEVEL_TENANT_ID: pg
-      IS_ENVIRONMENT_CENTRAL_INSTANCE: 'false'
-      OTEL_TRACES_EXPORTER: none
-      JAVA_TOOL_OPTIONS: -Xms64m -Xmx256m
-    ports:
-      - 18109:8109
-    healthcheck:
-      test: ["CMD-SHELL", "wget -qO- http://localhost:8109/egov-workflow-v2/health >/dev/null 2>&1 || exit 1"]
-      interval: 30s
-      timeout: 10s
-      retries: 5
-      start_period: 240s
-    deploy:
-      resources:
-        limits:
-          memory: 320M
-          cpus: '0.25'
-    networks:
-      - egov-network
-
-  egov-localization:
-    image: egovio/egov-localization:v2.9.2-4a60f20
-    container_name: egov-localization
-    depends_on:
-      pgbouncer:
-        condition: service_healthy
-      redpanda:
-        condition: service_healthy
-      redis:
-        condition: service_healthy
-      egov-mdms-service:
-        condition: service_healthy
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:otel:postgresql://postgres:5432/egov?sslmode=disable
-      SPRING_DATASOURCE_USERNAME: egov
-      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD:-egov123}
-      SPRING_DATASOURCE_HIKARI_MAXIMUM_POOL_SIZE: "5"
-      SPRING_DATASOURCE_HIKARI_MINIMUM_IDLE: "2"
-      SPRING_FLYWAY_ENABLED: 'false'
-      KAFKA_BOOTSTRAP_SERVERS: redpanda:9092
-      SPRING_REDIS_HOST: redis
-      SPRING_REDIS_PORT: 6379
-      SERVER_PORT: 8096
-      OTEL_TRACES_EXPORTER: none
-      JAVA_TOOL_OPTIONS: -Xms64m -Xmx256m
-    ports:
-      - 18096:8096
-    healthcheck:
-      test: ["CMD-SHELL", "wget -qO- http://localhost:8096/localization/actuator/health >/dev/null 2>&1 || exit 1"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 120s
-    deploy:
-      resources:
-        limits:
-          memory: 320M
-          cpus: '1'
-    networks:
-      - egov-network
-
-  egov-accesscontrol:
-    image: egovio/egov-accesscontrol:v2.9.2-4a60f20
-    container_name: egov-accesscontrol
-    depends_on:
-      pgbouncer:
-        condition: service_healthy
-      redpanda:
-        condition: service_healthy
-      egov-mdms-service:
-        condition: service_healthy
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:otel:postgresql://postgres:5432/egov?sslmode=disable
-      SPRING_DATASOURCE_USERNAME: egov
-      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD:-egov123}
-      SPRING_DATASOURCE_HIKARI_MAXIMUM_POOL_SIZE: "5"
-      SPRING_DATASOURCE_HIKARI_MINIMUM_IDLE: "2"
-      SPRING_FLYWAY_ENABLED: 'false'
-      KAFKA_BOOTSTRAP_SERVERS: redpanda:9092
-      SERVER_PORT: 8090
-      EGOV_MDMS_HOST: http://egov-mdms-service:8094/
-      OTEL_TRACES_EXPORTER: none
-      JAVA_TOOL_OPTIONS: -Xms64m -Xmx192m
-    ports:
-      - 18090:8090
-    healthcheck:
-      test: ["CMD-SHELL", "wget -qO- http://localhost:8090/access/health >/dev/null 2>&1 || exit 1"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 120s
-    deploy:
-      resources:
-        limits:
-          memory: 256M
-          cpus: '0.25'
-    networks:
-      - egov-network
-
-  egov-persister:
-    image: egovio/egov-persister:v2.9.2-4a60f20
-    container_name: egov-persister
-    depends_on:
-      pgbouncer:
-        condition: service_healthy
-      redpanda:
-        condition: service_healthy
-      egov-mdms-service:
-        condition: service_healthy
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:otel:postgresql://postgres:5432/egov?sslmode=disable
-      SPRING_DATASOURCE_USERNAME: egov
-      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD:-egov123}
-      SPRING_DATASOURCE_HIKARI_MAXIMUM_POOL_SIZE: "5"
-      SPRING_DATASOURCE_HIKARI_MINIMUM_IDLE: "2"
-      KAFKA_BOOTSTRAP_SERVERS: redpanda:9092
-      SPRING_KAFKA_BOOTSTRAP_SERVERS: redpanda:9092
-      SERVER_PORT: 8091
-      EGOV_PERSIST_YML_REPO_PATH: /persister-config/
-      OTEL_TRACES_EXPORTER: none
-      JAVA_TOOL_OPTIONS: -Xms64m -Xmx192m
-    volumes:
-      - ./configs/persister:/persister-config:ro
-    ports:
-      - 18091:8091
-    healthcheck:
-      test: ["CMD-SHELL", "wget -qO- http://localhost:8091/common-persist/actuator/health >/dev/null 2>&1 || exit 1"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 120s
-    deploy:
-      resources:
-        limits:
-          memory: 256M
-          cpus: '0.25'
-    networks:
-      - egov-network
-
-  egov-filestore:
-    image: egovio/egov-filestore:v2.9.2-4a60f20
-    container_name: egov-filestore
-    depends_on:
-      pgbouncer:
-        condition: service_healthy
-      egov-mdms-service:
-        condition: service_healthy
-      minio:
-        condition: service_healthy
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:otel:postgresql://postgres:5432/egov?sslmode=disable
-      SPRING_DATASOURCE_USERNAME: egov
-      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD:-egov123}
-      SPRING_DATASOURCE_HIKARI_MAXIMUM_POOL_SIZE: "5"
-      SPRING_DATASOURCE_HIKARI_MINIMUM_IDLE: "2"
-      SPRING_FLYWAY_ENABLED: 'false'
-      SERVER_PORT: 8083
-      OTEL_TRACES_EXPORTER: none
-      JAVA_TOOL_OPTIONS: -Xms64m -Xmx192m
-      ISS3ENABLED: 'true'
-      MINIO_URL: http://minio:9000
-      AWS_KEY: minioadmin
-      AWS_SECRETKEY: minioadmin
-      IS_BUCKET_FIXED: 'true'
-      FIXED_BUCKETNAME: egov-rainmaker
-      ALLOWED_FORMATS_MAP: "{jpg:{'image/jpg','image/jpeg'},jpeg:{'image/jpeg','image/jpg'},png:{'image/png'},pdf:{'application/pdf'},odt:{'application/vnd.oasis.opendocument.text'},ods:{'application/vnd.oasis.opendocument.spreadsheet'},docx:{'application/x-tika-msoffice','application/x-tika-ooxml','application/vnd.oasis.opendocument.text','application/msword'},doc:{'application/x-tika-msoffice','application/x-tika-ooxml','application/vnd.oasis.opendocument.text','application/msword'},dxf:{'text/plain','application/dxf','application/octet-stream','image/vnd.dxf','image/vnd.dxf; format=ascii','image/vnd.dxf; format=binary','image/vnd.dxb'},csv:{'text/plain'},txt:{'text/plain'},xlsx:{'application/x-tika-ooxml','application/x-tika-msoffice','application/vnd.ms-excel','application/vnd.openxmlformats-officedocument.spreadsheetml.sheet','application/zip'},xls:{'application/x-tika-ooxml','application/x-tika-msoffice','application/vnd.ms-excel','multipart/form-data'},zip:{'application/zip','application/octet-stream'},geojson:{'application/json','text/plain','application/geo+json','multipart/form-data'},json:{'application/json','text/plain'}}"
-      EGOV_MDMS_HOST: http://egov-mdms-service:8094
-    ports:
-      - 18084:8083
-    healthcheck:
-      test: ["CMD-SHELL", "wget -qO- http://localhost:8083/filestore/health >/dev/null 2>&1 || exit 1"]
-      interval: 30s
-      timeout: 10s
-      retries: 5
-      start_period: 180s
-    deploy:
-      resources:
-        limits:
-          memory: 384M
-          cpus: '0.25'
-    networks:
-      - egov-network
-
-  egov-hrms:
-    image: ${IMAGE_EGOV_HRMS:-egovio/egov-hrms:hrms-boundary-individual-61e6097}
-    container_name: egov-hrms
-    depends_on:
-      pgbouncer:
-        condition: service_healthy
-      redpanda:
-        condition: service_healthy
-      egov-mdms-service:
-        condition: service_healthy
-      egov-idgen:
-        condition: service_healthy
-      egov-user:
-        condition: service_healthy
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/egov?sslmode=disable
-      SPRING_DATASOURCE_USERNAME: egov
-      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD:-egov123}
-      SPRING_DATASOURCE_HIKARI_MAXIMUM_POOL_SIZE: "5"
-      SPRING_DATASOURCE_HIKARI_MINIMUM_IDLE: "2"
-      SPRING_FLYWAY_ENABLED: 'false'
-      KAFKA_BOOTSTRAP_SERVERS: redpanda:9092
-      SPRING_KAFKA_BOOTSTRAP_SERVERS: redpanda:9092
-      SPRING_KAFKA_CONSUMER_GROUP_ID: employee-group1
-      SERVER_PORT: 8092
-      OTEL_TRACES_EXPORTER: none
-      JAVA_TOOL_OPTIONS: -Xms64m -Xmx192m
-      EGOV_MDMS_HOST: http://egov-mdms-service:8094
-      EGOV_IDGEN_HOST: http://egov-idgen:8088
-      EGOV_USER_HOST: http://egov-user:8107
-      EGOV_FILESTORE_HOST: http://egov-filestore:8083
-      EGOV_LOCALIZATION_HOST: http://egov-localization:8096
-      EGOV_BOUNDARY_HOST: http://boundary-service:8081
-      STATE_LEVEL_TENANT_ID: pg
-      EGOV_STATELEVEL_TENANT: pg
-      HRMS_SYSTEM_USERNAME: INTERNAL_USER
-    ports:
-      - 18092:8092
-    healthcheck:
-      test: ["CMD-SHELL", "wget -qO- http://localhost:8092/egov-hrms/actuator/health >/dev/null 2>&1 || exit 1"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 150s
-    deploy:
-      resources:
-        limits:
-          memory: 256M
-          cpus: '0.25'
-    networks:
-      - egov-network
-
-  egov-url-shortening:
-    image: egovio/egov-url-shortening:v2.9.2-4a60f20
-    container_name: egov-url-shortening
-    depends_on:
-      pgbouncer:
-        condition: service_healthy
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:otel:postgresql://postgres:5432/egov?sslmode=disable
-      SPRING_DATASOURCE_USERNAME: egov
-      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD:-egov123}
-      SPRING_DATASOURCE_HIKARI_MAXIMUM_POOL_SIZE: "5"
-      SPRING_DATASOURCE_HIKARI_MINIMUM_IDLE: "2"
-      SPRING_FLYWAY_ENABLED: 'false'
-      SERVER_PORT: 8080
-      OTEL_TRACES_EXPORTER: none
-      OTEL_INSTRUMENTATION_JDBC_ENABLED: 'false'
-      JAVA_TOOL_OPTIONS: -Xms64m -Xmx128m
-    ports:
-      - 18085:8080
-    healthcheck:
-      test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:8080/egov-url-shortening/actuator/health >/dev/null 2>&1 || exit 1"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 60s
-    deploy:
-      resources:
-        limits:
-          memory: 192M
-          cpus: '0.25'
-    networks:
-      - egov-network
-
-
-  # --- Studio stack (DIGIT-DevOps studio-services / core-services patterns) ---
   elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.17.23
-    container_name: digit-elasticsearch
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.11.3
+    container_name: elasticsearch
     environment:
       - discovery.type=single-node
       - xpack.security.enabled=false
@@ -594,172 +117,420 @@ services:
     networks:
       - egov-network
 
-  egov-otp:
-    image: ${IMAGE_EGOV_OTP:-egovio/egov-otp:master-1e8d2bb}
-    container_name: egov-otp
-    depends_on:
-      pgbouncer:
-        condition: service_healthy
-      redpanda:
-        condition: service_healthy
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/egov?sslmode=disable
-      SPRING_DATASOURCE_USERNAME: egov
-      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD:-egov123}
-      SPRING_DATASOURCE_HIKARI_MAXIMUM_POOL_SIZE: "5"
-      SPRING_DATASOURCE_HIKARI_MINIMUM_IDLE: "2"
-      SPRING_FLYWAY_ENABLED: "false"
-      SPRING_KAFKA_BOOTSTRAP_SERVERS: redpanda:9092
-      SERVER_PORT: "8080"
-      SERVER_SERVLET_CONTEXT_PATH: /otp
-      JAVA_TOOL_OPTIONS: -Xms128m -Xmx256m
-      OTEL_TRACES_EXPORTER: none
+  kibana:
+    image: kibana:8.11.3
+    container_name: kibana
+    volumes:
+      - ./kibana/kibana.yml:/usr/share/kibana/config/kibana.yml
     ports:
-      - "18115:8080"
-    healthcheck:
-      test: ["CMD-SHELL", "wget -qO- http://localhost:8080/otp/health >/dev/null 2>&1 || exit 1"]
-      interval: 30s
-      timeout: 10s
-      retries: 5
-      start_period: 90s
-    deploy:
-      resources:
-        limits:
-          memory: 512M
-          cpus: "0.25"
+      - 5601:5601
     networks:
       - egov-network
 
-  user-otp:
-    image: ${IMAGE_USER_OTP:-egovio/user-otp:sandbox-log-86902f9}
-    container_name: user-otp
-    depends_on:
-      egov-otp:
-        condition: service_healthy
-      egov-user:
-        condition: service_healthy
-      egov-localization:
-        condition: service_healthy
+  audit-service-db:
+    image: ${DOCKER_REPO_AUDIT_SERVICE}-db:${DOCKER_TAG_AUDIT_SERVICE:-latest}
+    container_name: audit-service-db
     environment:
-      SERVER_PORT: "8080"
-      SERVER_SERVLET_CONTEXT_PATH: /user-otp
-      OTP_HOST: http://egov-otp:8080/otp
-      USER_HOST: http://egov-user:8107
-      EGOV_LOCALISATION_HOST: http://egov-localization:8096
-      SMS_TOPIC: egov.core.notification.sms
-      JAVA_TOOL_OPTIONS: -Xms128m -Xmx256m
-      OTEL_TRACES_EXPORTER: none
-    ports:
-      - "18116:8080"
-    healthcheck:
-      test: ["CMD-SHELL", "wget -qO- http://localhost:8080/user-otp/actuator/health >/dev/null 2>&1 || exit 1"]
-      interval: 30s
-      timeout: 10s
-      retries: 5
-      start_period: 90s
-    deploy:
-      resources:
-        limits:
-          memory: 512M
-          cpus: "0.25"
+      DB_URL: ${SPRING_DATASOURCE_URL:-jdbc:postgresql://178.236.185.120:5432/phc_db}
+      SCHEMA_TABLE: audit_service_schema
+      FLYWAY_USER: ${SPRING_DATASOURCE_USERNAME:-postgres}
+      FLYWAY_PASSWORD: ${SPRING_DATASOURCE_PASSWORD:-postgres}
+      FLYWAY_LOCATIONS: ${FLYWAY_LOCATIONS}
     networks:
       - egov-network
+    restart: on-failure
 
-  egov-notification-sms:
-    image: ${IMAGE_EGOV_NOTIFICATION_SMS:-egovio/egov-notification-sms:sandbox-d760d6b}
-    container_name: egov-notification-sms
+  audit-service:
+    image: ${IMAGE_AUDIT_SERVICE:-docker.io/venkatramireddyb/audit-service:main-9eaace654285377eed8a7686eb71e16420152faa}
+    container_name: audit-service
     depends_on:
-      redpanda:
-        condition: service_healthy
+      audit-service-db:
+        condition: service_completed_successfully
     environment:
-      SPRING_KAFKA_BOOTSTRAP_SERVERS: redpanda:9092
-      SERVER_PORT: "8080"
-      SERVER_SERVLET_CONTEXT_PATH: /egov-notification-sms
-      KAFKA_TOPICS_NOTIFICATION_SMS_NAME: egov.core.notification.sms
-      KAFKA_TOPICS_NOTIFICATION_SMS_ID: egov.core.notification.sms
-      KAFKA_TOPICS_NOTIFICATION_SMS_GROUP: egov.core.notification.sms
-      SMS_ENABLED: "false"
-      SMS_PROVIDER_URL: "https://example.invalid/sms"
-      SMS_SENDER_USERNAME: "local-dev"
-      SMS_SENDER_PASSWORD: "local-dev"
-      SMS_SPICEDIGITAL_PROVIDER_URL: "https://example.invalid/sms"
-      SMS_SPICEDIGITAL_SENDER_USERNAME: "local-dev"
-      SMS_SPICEDIGITAL_SENDER_PASSWORD: "local-dev"
-      SMS_PROVIDER_USERNAME: "local-dev"
-      SMS_PROVIDER_PASSWORD: "local-dev"
-      SMS_SENDER: egov
-      SMS_GATEWAY_TO_USE: MSDG
-      SMS_PROVIDER_CLASS: MSDG
-      SMS_PROVIDER_REQUESTTYPE: POST
-      SMS_PROVIDER_CONTENTTYPE: application/json
-      STATE_LEVEL_TENANT_ID: pg
-      JAVA_TOOL_OPTIONS: -Xms128m -Xmx256m
-      OTEL_TRACES_EXPORTER: none
-    ports:
-      - "18117:8080"
-    healthcheck:
-      test: ["CMD-SHELL", "wget -qO- http://localhost:8080/egov-notification-sms/actuator/health >/dev/null 2>&1 || wget -qO- http://localhost:8080/actuator/health >/dev/null 2>&1 || exit 1"]
-      interval: 30s
-      timeout: 10s
-      retries: 5
-      start_period: 90s
-    deploy:
-      resources:
-        limits:
-          memory: 512M
-          cpus: "0.25"
+      SPRING_KAFKA_CONSUMER_GROUP_ID: audit-service
+      SPRING_KAFKA_PRODUCER_KEY_SERIALIZER: org.apache.kafka.common.serialization.StringSerializer
+      SPRING_KAFKA_PRODUCER_VALUE_SERIALIZER: org.springframework.kafka.support.serializer.JsonSerializer
+      PROCESS_AUDIT_LOGS_KAFKA_TOPIC: process-audit-records
+      PERSIST_AUDIT_LOGS_KAFKA_TOPIC: persist-audit-records
+      JAVA_OPTS: -Xmx64m -Xms64m
+      SERVER_PORT: 8080
+      JAVA_ARGS: ${JAVA_ARGS:--Dspring.profiles.active=monitoring}
+      SECURITY_BASIC_ENABLED: false
+      MANAGEMENT_SECURITY_ENABLED: false
+      EGOV_ENC_SIGN_HOST: ${EGOV_ENC_SERVICE_HOST:-http://egov-enc-service:8080/}
+      EGOV_PERSIST_YML_REPO_PATH: ${EGOV_PERSIST_YML_REPO_PATH}
+      FLYWAY_ENABLED: false
+      SPRING_FLYWAY_ENABLED: false
+      MANAGEMENT_ENDPOINTS_WEB_BASE_PATH: /
+      APP_TIMEZONE: ${APP_TIMEZONE}
+      FLYWAY_URL: ${SPRING_DATASOURCE_URL:-jdbc:postgresql://178.236.185.120:5432/phc_db}                                       
+      SPRING_DATASOURCE_URL: ${SPRING_DATASOURCE_URL:-jdbc:postgresql://178.236.185.120:5432/phc_db}                                       
+      SPRING_DATASOURCE_USERNAME: ${SPRING_DATASOURCE_USERNAME:-postgres}                                                 
+      SPRING_DATASOURCE_PASSWORD: ${SPRING_DATASOURCE_PASSWORD:-postgres}                                                  
+      SPRING_DATASOURCE_TOMCAT_INITIAL_SIZE: ${SPRING_DATASOURCE_TOMCAT_INITIAL_SIZE}        
+      SERVER_TOMCAT_MAX_CONNECTIONS: ${SERVER_TOMCAT_MAX_CONNECTIONS}                
+      SPRING_DATASOURCE_TOMCAT_MAX_ACTIVE: ${SPRING_DATASOURCE_TOMCAT_MAX_ACTIVE}          
+      SPRING_DATASOURCE_HIKARI_MAXIMUM- -SIZE:   ${SPRING_DATASOURCE_TOMCAT_MAX_ACTIVE}          
+      SPRING_DATASOURCE_HIKARI_MINIMUM_IDLE: ${SPRING_DATASOURCE_HIKARI_MINIMUM_IDLE}        
+      SPRING_DATASOURCE_HIKARI_IDLE_TIMEOUT: ${SPRING_DATASOURCE_HIKARI_IDLE_TIMEOUT}        
+      SPRING_DATASOURCE_HIKARI_MAX_LIFETIME: ${SPRING_DATASOURCE_HIKARI_MAX_LIFETIME}        
+      SPRING_DATASOURCE_HIKARI_CONNECTION_TIMEOUT: ${SPRING_DATASOURCE_HIKARI_CONNECTION_TIMEOUT}  
+      KAFKA_CONFIG_BOOTSTRAP_SERVER_CONFIG: ${KAFKA_BOOTSTRAP_SERVERS}                                
+      SPRING_KAFKA_BOOTSTRAP_SERVERS: ${KAFKA_BOOTSTRAP_SERVERS}                                
+      SPRING_JPA_SHOW_SQL: ${SPRING_JPA_SHOW_SQL}                          
+      STATE_LEVEL_TENANTID_LENGTH: 1
+      IS_ENVIRONMENT_CENTRAL_INSTANCE: false
+      STATE_SCHEMA_INDEX_POSITION_TENANTID: 0
+      KAFKA_TOPIC_AUDIT: enc-user-audit-data
+      LOGGING_LOKI_ENABLED: true
+      LOGGING_LOKI_URL: ${LOGGING_LOKI_URL}  
+      LOGGING_LOKI_APP: (v1:metadata.name)
+      LOGGING_LOKI_ENVIRONMENT: ${LOGGING_LOKI_ENVIRONMENT}
+      LOGGING_LEVEL_ROOT: INFO
+      OTEL_SERVICE_NAME: audit-service
+      OTEL_EXPORTER_OTLP_ENDPOINT: ${OTEL_EXPORTER_OTLP_ENDPOINT}
+    volumes:
+      - ./git-sync:/git-sync
     networks:
       - egov-network
+    restart: unless-stopped
 
-  pdf-service:
-    image: ${IMAGE_PDF_SERVICE:-egovio/pdf-service:multiarch-master-99a308d}
-    container_name: pdf-service
+  billing-service-db:
+    image: ${DOCKER_REPO_BILLING_SERVICE}-db:${DOCKER_TAG_BILLING_SERVICE:-latest}
+    container_name: billing-service-db
+    environment:
+      DB_URL: ${SPRING_DATASOURCE_URL:-jdbc:postgresql://178.236.185.120:5432/phc_db}
+      SCHEMA_TABLE: billing_service_schema
+      FLYWAY_USER: ${SPRING_DATASOURCE_USERNAME:-postgres}
+      FLYWAY_PASSWORD: ${SPRING_DATASOURCE_PASSWORD:-postgres}
+      FLYWAY_LOCATIONS: ${FLYWAY_LOCATIONS}
+    networks:
+      - egov-network
+    restart: on-failure
+  
+  billing-service:
+    image: ${DOCKER_REPO_BILLING_SERVICE}:${DOCKER_TAG_BILLING_SERVICE}
+    container_name: billing-service
+    environment:
+      SPRING_FLYWAY_URL:                            ${SPRING_DATASOURCE_URL}
+      SPRING_FLYWAY_USER:                           ${SPRING_DATASOURCE_USERNAME}
+      SPRING_FLYWAY_PASSWORD:                       ${SPRING_DATASOURCE_PASSWORD}
+      SCHEMA_TABLE:                                 billing_service_schema
+      EGOV_IDGEN_HOST:                              ${EGOV_IDGEN_HOST}
+      USER_SERVICE_HOSTNAME:                        ${USER_SERVICE_HOSTNAME}
+      EGOV_HRMS_HOST:                               ${EGOV_HRMS_HOST}
+      EGOV_MDMS_HOST:                               ${EGOV_MDMS_HOST}
+      EGOV_LOCALIZATION_HOST:                       ${EGOV_LOCALIZATION_HOST}
+      SERVER_PORT:                                  8080
+      SERVER_CONTEXT_PATH:                          /billing-service
+      EGOV_IDGEN_PATH:                              egov-idgen/id/_generate
+      EGOV_INDIVIDUAL_HOST:                         ${EGOV_INDIVIDUAL_HOST}
+      EGOV_WORKFLOW_HOST:                           ${EGOV_WORKFLOW_HOST}
+      EGOV_URL_SHORTNER:                            ${EGOV_URL_SHORTENING}
+      EGOV_APPORTION_HOST:                          ${EGOV_APPORTION_HOST}
+      STATELEVEL_ROLECODE_EXCLUDED_LIST:            PAYMENT_COLLECTOR,BPAREG_DOC_VERIFIER,BPAREG_APPROVER
+      FLYWAY_ENABLED:                               false
+      SPRING_FLYWAY_ENABLED:                        false
+      MANAGEMENT_ENDPOINTS_WEB_BASE_PATH:           /
+      APP_TIMEZONE:                                 ${APP_TIMEZONE}
+      FLYWAY_URL:                                   ${SPRING_DATASOURCE_URL}
+      SPRING_DATASOURCE_URL:                        ${SPRING_DATASOURCE_URL}
+      SPRING_DATASOURCE_USERNAME:                   ${SPRING_DATASOURCE_USERNAME}
+      SPRING_DATASOURCE_PASSWORD:                   ${SPRING_DATASOURCE_PASSWORD}
+      SPRING_DATASOURCE_TOMCAT_INITIAL_SIZE:        ${SPRING_DATASOURCE_TOMCAT_INITIAL_SIZE}         
+      SERVER_TOMCAT_MAX_THREADS:                    ${SERVER_TOMCAT_MAX_THREADS}                    
+      SERVER_TOMCAT_MAX_CONNECTIONS:                ${SERVER_TOMCAT_MAX_CONNECTIONS}                
+      SPRING_DATASOURCE_TOMCAT_MAX_ACTIVE:          ${SPRING_DATASOURCE_TOMCAT_MAX_ACTIVE}          
+      SPRING_DATASOURCE_HIKARI_MAXIMUM-POOL-SIZE:   ${SPRING_DATASOURCE_HIKARI_MAXIMUM_POOL_SIZE}          
+      SPRING_DATASOURCE_HIKARI_MINIMUM_IDLE:        ${SPRING_DATASOURCE_HIKARI_MINIMUM_IDLE}        
+      SPRING_DATASOURCE_HIKARI_IDLE_TIMEOUT:        ${SPRING_DATASOURCE_HIKARI_IDLE_TIMEOUT}
+      SPRING_DATASOURCE_HIKARI_MAX_LIFETIME:        ${SPRING_DATASOURCE_HIKARI_MAX_LIFETIME}        
+      SPRING_DATASOURCE_HIKARI_CONNECTION_TIMEOUT:  ${SPRING_DATASOURCE_HIKARI_CONNECTION_TIMEOUT}  
+      KAFKA_CONFIG_BOOTSTRAP_SERVER_CONFIG:         ${KAFKA_BOOTSTRAP_SERVERS}
+      SPRING_KAFKA_BOOTSTRAP_SERVERS:               ${KAFKA_BOOTSTRAP_SERVERS}
+      SPRING_JPA_SHOW_SQL:                          ${SPRING_JPA_SHOW_SQL}                          
+      STATE_LEVEL_TENANTID_LENGTH:                  1
+      IS_ENVIRONMENT_CENTRAL_INSTANCE:              false
+      STATE_SCHEMA_INDEX_POSITION_TENANTID:         0
+      KAFKA_TOPIC_AUDIT:                            enc-user-audit-data
+      LOGGING_LOKI_ENABLED:                         true
+      LOGGING_LOKI_URL:                             ${LOGGING_LOKI_URL}
+      LOGGING_LOKI_APP:                              (v1:metadata.name)
+      LOGGING_LOKI_ENVIRONMENT:                     ${LOGGING_LOKI_ENVIRONMENT}
+      LOGGING_LEVEL_ROOT:                           INFO
+      OTEL_SERVICE_NAME:                            billing-service
+      OTEL_EXPORTER_OTLP_ENDPOINT:                  ${OTEL_EXPORTER_OTLP_ENDPOINT}  
+    networks:
+      - egov-network
     depends_on:
-      pgbouncer:
-        condition: service_healthy
+      - billing-service-db
+    restart: unless-stopped
+
+  collection-services-db:
+    image: ${DOCKER_REPO_COLLECTION_SERVICES}-db:${DOCKER_TAG_COLLECTION_SERVICES:-latest}
+    container_name: collection-services-db
+    environment:
+      DB_URL: ${SPRING_DATASOURCE_URL:-jdbc:postgresql://178.236.185.120:5432/phc_db}
+      SCHEMA_TABLE: collection_services_schema
+      FLYWAY_USER: ${SPRING_DATASOURCE_USERNAME:-postgres}
+      FLYWAY_PASSWORD: ${SPRING_DATASOURCE_PASSWORD:-postgres}
+      FLYWAY_LOCATIONS: ${FLYWAY_LOCATIONS}
+    networks:
+      - egov-network
+    restart: on-failure
+
+  collection-services:
+    image: ${DOCKER_REPO_COLLECTION_SERVICES}:${DOCKER_TAG_COLLECTION_SERVICES}
+    container_name: collection-services
+    environment:
+      JAVA_OPTS:                                    -Xmx64m -Xms64m
+      SERVER_PORT:                                  8080
+      JAVA_ARGS:                                    -Dspring.profiles.active=monitoring
+      SPRING_DATASOURCE_URL:                        ${SPRING_DATASOURCE_URL}
+      SPRING_DATASOURCE_USERNAME:                   ${SPRING_DATASOURCE_USERNAME}
+      SPRING_DATASOURCE_PASSWORD:                   ${SPRING_DATASOURCE_PASSWORD}
+      SCHEMA_TABLE:                                 collection_services_schema
+      EGOV_IDGEN_HOSTNAME:                          ${EGOV_IDGEN_HOST}
+      USER_SERVICE_HOST:                            ${USER_SERVICE_HOSTNAME}
+      EGOV_HRMS_HOST:                               ${EGOV_HRMS_HOST}
+      EGOV_MDMS_HOST:                               ${EGOV_MDMS_HOST}
+      EGOV_LOCALIZATION_HOST:                       ${EGOV_LOCALIZATION_HOST}
+      EGOV_INDIVIDUAL_HOST:                         ${EGOV_INDIVIDUAL_HOST}
+      EGOV_WORKFLOW_HOST:                           ${EGOV_WORKFLOW_V2}
+      EGOV_SERVICES_BILLING_SERVICE_HOSTNAME:       ${EGOV_BILLING_HOST}
+      EGOV_URL_SHORTNER:                            ${EGOV_URL_SHORTENING}
+      EGOV_APPORTION_SERVICE_HOST:                  ${EGOV_APPORTION_HOST}
+      FLYWAY_ENABLED:                               false
+      SPRING_FLYWAY_ENABLED:                        false
+      MANAGEMENT_ENDPOINTS_WEB_BASE_PATH:           /
+      APP_TIMEZONE:                                 ${APP_TIMEZONE}
+      FLYWAY_URL:                                   ${SPRING_DATASOURCE_URL}
+      SPRING_DATASOURCE_TOMCAT_INITIAL_SIZE:        ${SPRING_DATASOURCE_TOMCAT_INITIAL_SIZE}
+      SERVER_TOMCAT_MAX_THREADS:                    ${SERVER_TOMCAT_MAX_THREADS}
+      SERVER_TOMCAT_MAX_CONNECTIONS:                ${SERVER_TOMCAT_MAX_CONNECTIONS}
+      SPRING_DATASOURCE_TOMCAT_MAX_ACTIVE:          ${SPRING_DATASOURCE_TOMCAT_MAX_ACTIVE}
+      SPRING_DATASOURCE_HIKARI_MAXIMUM-POOL-SIZE:   ${SPRING_DATASOURCE_HIKARI_MAXIMUM_POOL_SIZE}
+      SPRING_DATASOURCE_HIKARI_MINIMUM_IDLE:        ${SPRING_DATASOURCE_HIKARI_MINIMUM_IDLE}
+      SPRING_DATASOURCE_HIKARI_IDLE_TIMEOUT:        ${SPRING_DATASOURCE_HIKARI_IDLE_TIMEOUT}
+      SPRING_DATASOURCE_HIKARI_MAX_LIFETIME:        ${SPRING_DATASOURCE_HIKARI_MAX_LIFETIME}
+      SPRING_DATASOURCE_HIKARI_CONNECTION_TIMEOUT:  ${SPRING_DATASOURCE_HIKARI_CONNECTION_TIMEOUT}
+      KAFKA_CONFIG_BOOTSTRAP_SERVER_CONFIG:         ${KAFKA_BOOTSTRAP_SERVERS}
+      SPRING_KAFKA_BOOTSTRAP_SERVERS:               ${KAFKA_BOOTSTRAP_SERVERS}
+      SPRING_JPA_SHOW_SQL:                          ${SPRING_JPA_SHOW_SQL}
+      STATE_LEVEL_TENANTID_LENGTH:                  1
+      IS_ENVIRONMENT_CENTRAL_INSTANCE:              false
+      STATE_SCHEMA_INDEX_POSITION_TENANTID:         0
+      KAFKA_TOPIC_AUDIT:                            enc-user-audit-data
+      LOGGING_LOKI_ENABLED:                         true
+      LOGGING_LOKI_URL:                             ${LOGGING_LOKI_URL}
+      LOGGING_LOKI_APP:                              (v1:metadata.name)
+      LOGGING_LOKI_ENVIRONMENT:                     ${LOGGING_LOKI_ENVIRONMENT}
+      LOGGING_LEVEL_ROOT:                           ${LOGGING_LEVEL_ROOT}
+      OTEL_SERVICE_NAME:                            collection-services
+      OTEL_EXPORTER_OTLP_ENDPOINT:                  ${OTEL_EXPORTER_OTLP_ENDPOINT}
+    networks:
+      - egov-network
+    depends_on:
+      - collection-services-db
+    restart: unless-stopped
+
+  egov-accesscontrol:
+    image: ${DOCKER_REPO_EGOV_ACCESSCONTROL}:${DOCKER_TAG_EGOV_ACCESSCONTROL}
+    container_name: egov-accesscontrol
+    depends_on:
       redpanda:
         condition: service_healthy
       egov-mdms-service:
         condition: service_healthy
-      egov-localization:
-        condition: service_healthy
-      egov-filestore:
+    environment:
+      SERVER_PORT:                                  8080
+      JAVA_OPTS:                                    -Xmx192m -Xms192m
+      EGOV_MDMS_HOST:                               ${EGOV_MDMS_HOST}  
+      JAVA_ARGS:                                    ${JAVA_ARGS} 
+      SECURITY_BASIC_ENABLED:                       false
+      MANAGEMENT_SECURITY_ENABLED:                  false
+      FLYWAY_ENABLED:                               false
+      SPRING_FLYWAY_ENABLED:                        false
+      MANAGEMENT_ENDPOINTS_WEB_BASE_PATH:           /
+      APP_TIMEZONE:                                 ${APP_TIMEZONE}
+      FLYWAY_URL:                                   ${SPRING_DATASOURCE_URL:-jdbc:postgresql://178.236.185.120:5432/phc_db}                                       
+      SPRING_DATASOURCE_URL:                        ${SPRING_DATASOURCE_URL:-jdbc:postgresql://178.236.185.120:5432/phc_db}                                       
+      SPRING_DATASOURCE_USERNAME:                   ${SPRING_DATASOURCE_USERNAME:-postgres}                                                 
+      SPRING_DATASOURCE_PASSWORD:                   ${SPRING_DATASOURCE_PASSWORD:-postgres}                                                  
+      SPRING_DATASOURCE_TOMCAT_INITIAL_SIZE:        ${SPRING_DATASOURCE_TOMCAT_INITIAL_SIZE}          
+      SERVER_TOMCAT_MAX_THREADS:                    ${SERVER_TOMCAT_MAX_THREADS}                    
+      SERVER_TOMCAT_MAX_CONNECTIONS:                ${SERVER_TOMCAT_MAX_CONNECTIONS}                
+      SPRING_DATASOURCE_TOMCAT_MAX_ACTIVE:          ${SPRING_DATASOURCE_TOMCAT_MAX_ACTIVE}          
+      SPRING_DATASOURCE_HIKARI_MAXIMUM-POOL-SIZE:   ${SPRING_DATASOURCE_HIKARI_MAXIMUM_POOL_SIZE}          
+      SPRING_DATASOURCE_HIKARI_MINIMUM_IDLE:        ${SPRING_DATASOURCE_HIKARI_MINIMUM_IDLE}        
+      SPRING_DATASOURCE_HIKARI_IDLE_TIMEOUT:        ${SPRING_DATASOURCE_HIKARI_IDLE_TIMEOUT}        
+      SPRING_DATASOURCE_HIKARI_MAX_LIFETIME:        ${SPRING_DATASOURCE_HIKARI_MAX_LIFETIME}        
+      SPRING_DATASOURCE_HIKARI_CONNECTION_TIMEOUT:  ${SPRING_DATASOURCE_HIKARI_CONNECTION_TIMEOUT}  
+      KAFKA_CONFIG_BOOTSTRAP_SERVER_CONFIG:         ${KAFKA_BOOTSTRAP_SERVERS}                                
+      SPRING_KAFKA_BOOTSTRAP_SERVERS:               ${KAFKA_BOOTSTRAP_SERVERS}                                
+      SPRING_JPA_SHOW_SQL:                          ${SPRING_JPA_SHOW_SQL}                          
+      STATE_LEVEL_TENANTID_LENGTH:                  1
+      IS_ENVIRONMENT_CENTRAL_INSTANCE:              false
+      STATE_SCHEMA_INDEX_POSITION_TENANTID:         0
+      KAFKA_TOPIC_AUDIT:                            enc-user-audit-data
+      LOGGING_LOKI_ENABLED:                         ${LOGGING_LOKI_ENABLED}
+      LOGGING_LOKI_URL:                             ${LOGGING_LOKI_URL}
+      LOGGING_LOKI_APP:                             (v1:metadata.name)
+      LOGGING_LOKI_ENVIRONMENT:                     ${LOGGING_LOKI_ENVIRONMENT}
+      LOGGING_LEVEL_ROOT:                           ${LOGGING_LEVEL_ROOT}
+      OTEL_SERVICE_NAME:                            egov-accesscontrol
+      OTEL_EXPORTER_OTLP_ENDPOINT:                  ${OTEL_EXPORTER_OTLP_ENDPOINT}
+    # ports:
+    #   - 18090:8080
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsS http://localhost:8080/access/health >/dev/null 2>&1 || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 120s
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+          cpus: '0.25'
+    networks:
+      - egov-network
+  # MDMS Backend
+  egov-mdms-service:
+    image: ${IMAGE_EGOV_MDMS_SERVICE:-docker.io/venkatramireddyb/egov-mdms-service:main-d545e4ba420f6de7d63a8f064af94ba3746f9fdb}
+    container_name: egov-mdms-service
+    depends_on:
+      redpanda:
         condition: service_healthy
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/egov?sslmode=disable
-      SPRING_DATASOURCE_USERNAME: egov
-      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD:-egov123}
-      SPRING_DATASOURCE_HIKARI_MAXIMUM_POOL_SIZE: "5"
-      SPRING_DATASOURCE_HIKARI_MINIMUM_IDLE: "2"
-      SPRING_FLYWAY_ENABLED: "false"
-      SPRING_KAFKA_BOOTSTRAP_SERVERS: redpanda:9092
-      KAFKA_BROKER_HOST: redpanda:9092
-      SERVER_PORT: "8080"
-      SERVER_SERVLET_CONTEXT_PATH: /pdf-service
-      DB_HOST: postgres
-      DB_PORT: "5432"
-      DB_NAME: egov
-      DB_USER: egov
-      DB_PASSWORD: ${POSTGRES_PASSWORD:-egov123}
-      EGOV_EXTERNAL_HOST: http://localhost:18000
-      EGOV_HOST: http://localhost:18000
-      DEFAULT_LOCALISATION_TENANT: pg
-      STATE_LEVEL_TENANT_ID: pg
-      EGOV_LOCALISATION_HOST: http://egov-localization:8096
-      EGOV_FILESTORE_SERVICE_HOST: http://egov-filestore:8083
-      MAX_NUMBER_PAGES: "80"
-      # Local copies from configs/staging: https://github.com/egovernments/configs/tree/staging/pdf-service
-      DATA_CONFIG_URLS: file:///pdf-config/data-config/pt-receipt.json
-      FORMAT_CONFIG_URLS: file:///pdf-config/format-config/pt-receipt.json
-      JAVA_TOOL_OPTIONS: -Xms128m -Xmx256m
-      OTEL_TRACES_EXPORTER: none
-    ports:
-      - "18119:8080"
-    volumes:
-      - ./configs/pdf-service/data-config:/pdf-config/data-config:ro
-      - ./configs/pdf-service/format-config:/pdf-config/format-config:ro
+      SERVER_SERVLET_CONTEXT_PATH:                  /egov-mdms-service
+      SERVER_CONTEXT_PATH:                          /egov-mdms-service
+      SPRING_KAFKA_CONSUMER_GROUP_ID:               egov-mdms-service-consumer-group
+      SPRING_KAFKA_PRODUCER_KEY_SERIALIZER:         org.apache.kafka.common.serialization.StringSerializer
+      JAVA_OPTS:                                    -Xmx512m -Xms512m
+      JAVA_ARGS:                                    -Dspring.profiles.active=monitoring
+      SERVER_PORT:                                  8080
+      SECURITY_BASIC_ENABLED:                       false
+      MANAGEMENT_SECURITY_ENABLED:                  false
+      JAVA_ENABLE_DEBUG:                            true
+      EGOV_MDMS_SCHEMA_DEFINITION_SAVE_TOPIC:       save-mdms-schema-definition
+      EGOV_MDMS_DATA_SAVE_TOPIC:                    save-mdms-data
+      MDMS_DEFAULT_OFFSET:                          0
+      MDMS_DEFAULT_LIMIT:                           100
+      FLYWAY_ENABLED:                               false
+      SPRING_FLYWAY_ENABLED:                        false
+      MANAGEMENT_ENDPOINTS_WEB_BASE_PATH:           /
+      APP_TIMEZONE:                                 ${APP_TIMEZONE}
+      FLYWAY_URL:                                   ${SPRING_DATASOURCE_URL}
+      SPRING_DATASOURCE_URL:                        ${SPRING_DATASOURCE_URL}
+      SPRING_DATASOURCE_USERNAME:                   ${SPRING_DATASOURCE_USERNAME}
+      SPRING_DATASOURCE_PASSWORD:                   ${SPRING_DATASOURCE_PASSWORD}
+      SPRING_DATASOURCE_TOMCAT_INITIAL_SIZE:        ${SPRING_DATASOURCE_TOMCAT_INITIAL_SIZE}
+      SERVER_TOMCAT_MAX_THREADS:                    ${SERVER_TOMCAT_MAX_THREADS}
+      SERVER_TOMCAT_MAX_CONNECTIONS:                ${SERVER_TOMCAT_MAX_CONNECTIONS}
+      SPRING_DATASOURCE_TOMCAT_MAX_ACTIVE:          ${SPRING_DATASOURCE_TOMCAT_MAX_ACTIVE}
+      SPRING_DATASOURCE_HIKARI_MAXIMUM-POOL-SIZE:   ${SPRING_DATASOURCE_HIKARI_MAXIMUM_POOL_SIZE}
+      SPRING_DATASOURCE_HIKARI_MINIMUM_IDLE:        ${SPRING_DATASOURCE_HIKARI_MINIMUM_IDLE}
+      SPRING_DATASOURCE_HIKARI_IDLE_TIMEOUT:        ${SPRING_DATASOURCE_HIKARI_IDLE_TIMEOUT}
+      SPRING_DATASOURCE_HIKARI_MAX_LIFETIME:        ${SPRING_DATASOURCE_HIKARI_MAX_LIFETIME}
+      SPRING_DATASOURCE_HIKARI_CONNECTION_TIMEOUT:  ${SPRING_DATASOURCE_HIKARI_CONNECTION_TIMEOUT}
+      KAFKA_CONFIG_BOOTSTRAP_SERVER_CONFIG:         ${KAFKA_BOOTSTRAP_SERVERS}
+      SPRING_KAFKA_BOOTSTRAP_SERVERS:               ${KAFKA_BOOTSTRAP_SERVERS}
+      SPRING_JPA_SHOW_SQL:                          ${SPRING_JPA_SHOW_SQL}
+      STATE_LEVEL_TENANTID_LENGTH:                  1
+      IS_ENVIRONMENT_CENTRAL_INSTANCE:              false
+      STATE_SCHEMA_INDEX_POSITION_TENANTID:         0
+      KAFKA_TOPIC_AUDIT:                            enc-user-audit-data
+      LOGGING_LOKI_ENABLED:                         true
+      LOGGING_LOKI_URL:                             ${LOGGING_LOKI_URL}
+      LOGGING_LOKI_APP:                             (v1:metadata.name)
+      LOGGING_LOKI_ENVIRONMENT:                     ${LOGGING_LOKI_ENVIRONMENT}
+      LOGGING_LEVEL_ROOT:                           INFO
+      OTEL_SERVICE_NAME:                            egov-mdms-service
+      OTEL_EXPORTER_OTLP_ENDPOINT:                  ${OTEL_EXPORTER_OTLP_ENDPOINT}
     healthcheck:
-      test: ["CMD-SHELL", "wget -qO- http://localhost:8080/ >/dev/null 2>&1 || exit 1"]
+      test: ["CMD-SHELL", "curl -fsS http://localhost:${SERVER_PORT:-8080}/egov-mdms-service/health >/dev/null || exit 1"]
+      interval: 10s
+      timeout: 10s
+      retries: 15
+      start_period: 45s
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+          cpus: '1'
+    networks:
+      - egov-network
+
+  egov-enc-service-db:
+    image: ${DOCKER_REPO_EGOV_ENC_SERVICE}-db:${DOCKER_TAG_EGOV_ENC_SERVICE:-latest}
+    container_name: egov-enc-service-db
+    environment:
+      DB_URL: ${SPRING_DATASOURCE_URL:-jdbc:postgresql://178.236.185.120:5432/phc_db}
+      SCHEMA_TABLE: enc_service_schema
+      FLYWAY_USER: ${SPRING_DATASOURCE_USERNAME:-postgres}
+      FLYWAY_PASSWORD: ${SPRING_DATASOURCE_PASSWORD:-postgres}
+      FLYWAY_LOCATIONS: ${FLYWAY_LOCATIONS}
+    networks:
+      - egov-network
+    restart: on-failure
+
+  egov-enc-service:
+    image: ${DOCKER_REPO_EGOV_ENC_SERVICE}:${DOCKER_TAG_EGOV_ENC_SERVICE}
+    container_name: egov-enc-service
+    depends_on:
+      - egov-enc-service-db
+      - egov-mdms-service
+    environment:
+      SERVER_PORT:                                  8080
+      JAVA_OPTS:                                    -Xmx256m -Xms256m
+      JAVA_ARGS:                                    -Dspring.profiles.active=monitoring
+      JAVA_ENABLE_DEBUG:                            true
+      JAVA_DEBUG_PORT:                              5005
+      EGOV_MDMS_HOST:                               ${EGOV_MDMS_HOST}
+      EGOV_STATE_LEVEL_TENANT_ID:                   ${EGOV_STATE_LEVEL_TENANT_ID}
+      SECURITY_BASIC_ENABLED:                       false
+      MANAGEMENT_SECURITY_ENABLED:                  false
+      SERVER_CONTEXT_PATH:                          /egov-enc-service
+      MASTER_PASSWORD_PROVIDER:                     software
+      MASTER_PASSWORD:                              demo
+      MASTER_SALT:                                  q7.fr.cr
+      MASTER_INITIALVECTOR:                         9J&asfgrU-H2
+      FLYWAY_ENABLED:                               false
+      SPRING_FLYWAY_ENABLED:                        false
+      MANAGEMENT_ENDPOINTS_WEB_BASE_PATH:           /
+      APP_TIMEZONE:                                 ${APP_TIMEZONE}
+      FLYWAY_URL:                                   ${SPRING_DATASOURCE_URL}
+      SPRING_DATASOURCE_URL:                        ${SPRING_DATASOURCE_URL}
+      SPRING_DATASOURCE_USERNAME:                   ${SPRING_DATASOURCE_USERNAME}
+      SPRING_DATASOURCE_PASSWORD:                   ${SPRING_DATASOURCE_PASSWORD}
+      SPRING_DATASOURCE_TOMCAT_INITIAL_SIZE:        ${SPRING_DATASOURCE_TOMCAT_INITIAL_SIZE}
+      SERVER_TOMCAT_MAX_THREADS:                    ${SERVER_TOMCAT_MAX_THREADS}
+      SERVER_TOMCAT_MAX_CONNECTIONS:                ${SERVER_TOMCAT_MAX_CONNECTIONS}
+      SPRING_DATASOURCE_TOMCAT_MAX_ACTIVE:          ${SPRING_DATASOURCE_TOMCAT_MAX_ACTIVE}
+      SPRING_DATASOURCE_HIKARI_MAXIMUM-POOL-SIZE:   ${SPRING_DATASOURCE_HIKARI_MAXIMUM_POOL_SIZE}
+      SPRING_DATASOURCE_HIKARI_MINIMUM_IDLE:        ${SPRING_DATASOURCE_HIKARI_MINIMUM_IDLE}
+      SPRING_DATASOURCE_HIKARI_IDLE_TIMEOUT:        ${SPRING_DATASOURCE_HIKARI_IDLE_TIMEOUT}
+      SPRING_DATASOURCE_HIKARI_MAX_LIFETIME:        ${SPRING_DATASOURCE_HIKARI_MAX_LIFETIME}
+      SPRING_DATASOURCE_HIKARI_CONNECTION_TIMEOUT:  ${SPRING_DATASOURCE_HIKARI_CONNECTION_TIMEOUT}
+      KAFKA_CONFIG_BOOTSTRAP_SERVER_CONFIG:         ${KAFKA_BOOTSTRAP_SERVERS}
+      SPRING_KAFKA_BOOTSTRAP_SERVERS:               ${KAFKA_BOOTSTRAP_SERVERS}
+      SPRING_JPA_SHOW_SQL:                          ${SPRING_JPA_SHOW_SQL}
+      STATE_LEVEL_TENANTID_LENGTH:                  1
+      IS_ENVIRONMENT_CENTRAL_INSTANCE:              false
+      STATE_SCHEMA_INDEX_POSITION_TENANTID:         0
+      KAFKA_TOPIC_AUDIT:                            enc-user-audit-data
+      LOGGING_LOKI_ENABLED:                         true
+      LOGGING_LOKI_URL:                             ${LOGGING_LOKI_URL}
+      LOGGING_LOKI_APP:                             egov-enc-service
+      LOGGING_LOKI_ENVIRONMENT:                     ${LOGGING_LOKI_ENVIRONMENT}
+      LOGGING_LEVEL_ROOT:                           ${LOGGING_LEVEL_ROOT}
+      OTEL_SERVICE_NAME:                            egov-enc-service
+      OTEL_EXPORTER_OTLP_ENDPOINT:                  ${OTEL_EXPORTER_OTLP_ENDPOINT}
+    # ports:
+    #   - 11234:1234
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsS http://localhost:8080/egov-enc-service/health >/dev/null 2>&1 || exit 1"]
       interval: 30s
       timeout: 10s
       retries: 5
@@ -768,82 +539,1374 @@ services:
       resources:
         limits:
           memory: 512M
-          cpus: "0.5"
+          cpus: '0.25'
     networks:
       - egov-network
 
-  inbox:
-    image: ${IMAGE_INBOX:-egovio/inbox:inbox-parallel-workflow-b5cd4a6}
-    container_name: inbox
-    env_file:
-      - ./configs/studio/inbox.env
+  egov-idgen-db:
+    image: ${DOCKER_REPO_EGOV_IDGEN}-db:${DOCKER_TAG_EGOV_IDGEN}
+    container_name: egov-idgen-db
+    environment:
+      DB_URL: ${SPRING_DATASOURCE_URL:-jdbc:postgresql://178.236.185.120:5432/phc_db}
+      SCHEMA_TABLE: egov_idgen_schema
+      FLYWAY_USER: ${SPRING_DATASOURCE_USERNAME:-postgres}
+      FLYWAY_PASSWORD: ${SPRING_DATASOURCE_PASSWORD:-postgres}
+      FLYWAY_LOCATIONS: ${FLYWAY_LOCATIONS}
+    networks:
+      - egov-network
+    restart: on-failure
+
+  egov-idgen:
+    image: ${DOCKER_REPO_EGOV_IDGEN}:${DOCKER_TAG_EGOV_IDGEN}
+    container_name: egov-idgen
     depends_on:
-      elasticsearch:
-        condition: service_healthy
       redpanda:
         condition: service_healthy
       egov-mdms-service:
         condition: service_healthy
-      egov-user:
-        condition: service_healthy
-      egov-workflow-v2:
-        condition: service_healthy
+      egov-idgen-db:
+        condition: service_completed_successfully
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/egov?sslmode=disable
-      SPRING_DATASOURCE_USERNAME: egov
-      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD:-egov123}
-      SPRING_DATASOURCE_HIKARI_MAXIMUM_POOL_SIZE: "5"
-      SPRING_DATASOURCE_HIKARI_MINIMUM_IDLE: "2"
-      SPRING_FLYWAY_ENABLED: "false"
-      SPRING_KAFKA_BOOTSTRAP_SERVERS: redpanda:9092
-      SERVER_PORT: "8080"
-      SERVER_SERVLET_CONTEXT_PATH: /inbox
-      WORKFLOW_HOST: http://egov-workflow-v2:8109
-      EGOV_MDMS_HOST: http://egov-mdms-service:8094
-      EGOV_USER_HOST: http://egov-user:8107
-      EGOV_SEARCHER_HOST: http://egov-mdms-service:8094
-      SERVICES_ESINDEXER_HOST: http://elasticsearch:9200
-      WORKFLOW_PROCESS_SEARCH_PATH: egov-workflow-v2/egov-wf/process/_search
-      WORKFLOW_BUSINESSSERVICE_SEARCH_PATH: egov-workflow-v2/egov-wf/businessservice/_search
-      WORKFLOW_PROCESS_COUNT_PATH: egov-workflow-v2/egov-wf/process/_count
-      WORKFLOW_PROCESS_STATUSCOUNT_PATH: egov-workflow-v2/egov-wf/process/_statuscount
-      EGOV_VEHICLE_HOST: http://egov-mdms-service:8094
-      EGOV_ES_USERNAME: ""
-      EGOV_ES_PASSWORD: ""
-      SERVICES_ESINDEXER_USERNAME: ""
-      SERVICES_ESINDEXER_PASSWORD: ""
-      WATER_ES_INDEX: pg-water-services
-      SEWERAGE_ES_INDEX: pg-sewerage-services
-      JAVA_OPTS: -Xms256m -Xmx512m
-      JAVA_ARGS: -Dspring.profiles.active=monitoring
-      JAVA_ENABLE_DEBUG: "true"
-      JAVA_TOOL_OPTIONS: -Xms256m -Xmx512m
-      OTEL_TRACES_EXPORTER: none
-    ports:
-      - "18120:8080"
+      SERVER_PORT:                                  8080
+      JAVA_OPTS:                                    -Xmx192m -Xms192m
+      JAVA_ARGS:                                    -Dspring.profiles.active=monitoring
+      IDFORMAT_FROM_MDMS:                           true
+      AUTOCREATE_NEW_SEQ:                           true
+      MDMS_SERVICE_HOST:                            ${EGOV_MDMS_HOST}
+      SECURITY_BASIC_ENABLED:                       false
+      MANAGEMENT_SECURITY_ENABLED:                  false
+      SEQUENCE_LIST_REQUIRE_COURT_ID:               SEQ_CNR_,SEQ_CMP_
+      FLYWAY_ENABLED:                               false
+      SPRING_FLYWAY_ENABLED:                        false
+      MANAGEMENT_ENDPOINTS_WEB_BASE_PATH:           /
+      APP_TIMEZONE:                                 ${APP_TIMEZONE}
+      FLYWAY_URL:                                   ${SPRING_DATASOURCE_URL}
+      SPRING_DATASOURCE_URL:                        ${SPRING_DATASOURCE_URL}
+      SPRING_DATASOURCE_USERNAME:                   ${SPRING_DATASOURCE_USERNAME}
+      SPRING_DATASOURCE_PASSWORD:                   ${SPRING_DATASOURCE_PASSWORD}
+      SPRING_DATASOURCE_TOMCAT_INITIAL_SIZE:        ${SPRING_DATASOURCE_TOMCAT_INITIAL_SIZE}
+      SERVER_TOMCAT_MAX_THREADS:                    ${SERVER_TOMCAT_MAX_THREADS}
+      SERVER_TOMCAT_MAX_CONNECTIONS:                ${SERVER_TOMCAT_MAX_CONNECTIONS}
+      SPRING_DATASOURCE_TOMCAT_MAX_ACTIVE:          ${SPRING_DATASOURCE_TOMCAT_MAX_ACTIVE}
+      SPRING_DATASOURCE_HIKARI_MAXIMUM-POOL-SIZE:   ${SPRING_DATASOURCE_HIKARI_MAXIMUM_POOL_SIZE}
+      SPRING_DATASOURCE_HIKARI_MINIMUM_IDLE:        ${SPRING_DATASOURCE_HIKARI_MINIMUM_IDLE}
+      SPRING_DATASOURCE_HIKARI_IDLE_TIMEOUT:        ${SPRING_DATASOURCE_HIKARI_IDLE_TIMEOUT}
+      SPRING_DATASOURCE_HIKARI_MAX_LIFETIME:        ${SPRING_DATASOURCE_HIKARI_MAX_LIFETIME}
+      SPRING_DATASOURCE_HIKARI_CONNECTION_TIMEOUT:  ${SPRING_DATASOURCE_HIKARI_CONNECTION_TIMEOUT}
+      KAFKA_CONFIG_BOOTSTRAP_SERVER_CONFIG:         ${KAFKA_BOOTSTRAP_SERVERS}
+      SPRING_KAFKA_BOOTSTRAP_SERVERS:               ${KAFKA_BOOTSTRAP_SERVERS}
+      SPRING_JPA_SHOW_SQL:                          ${SPRING_JPA_SHOW_SQL}
+      STATE_LEVEL_TENANTID_LENGTH:                  1
+      IS_ENVIRONMENT_CENTRAL_INSTANCE:              false
+      STATE_SCHEMA_INDEX_POSITION_TENANTID:         0
+      KAFKA_TOPIC_AUDIT:                            enc-user-audit-data
+      LOGGING_LOKI_ENABLED:                         true
+      LOGGING_LOKI_URL:                             ${LOGGING_LOKI_URL}
+      LOGGING_LOKI_APP:                             egov-idgen
+      LOGGING_LOKI_ENVIRONMENT:                     ${LOGGING_LOKI_ENVIRONMENT}
+      LOGGING_LEVEL_ROOT:                           ${LOGGING_LEVEL_ROOT}
+      OTEL_SERVICE_NAME:                            egov-idgen
+      OTEL_EXPORTER_OTLP_ENDPOINT:                  ${OTEL_EXPORTER_OTLP_ENDPOINT}
+    # ports:
+    #   - 18088:8088
     healthcheck:
-      test: ["CMD-SHELL", "wget -qO- http://localhost:8080/inbox/actuator/health >/dev/null 2>&1 || exit 1"]
+      test: ["CMD-SHELL", "curl -fsS http://localhost:8080/egov-idgen/health >/dev/null 2>&1 || exit 1"]
       interval: 30s
-      timeout: 15s
-      retries: 10
-      start_period: 300s
+      timeout: 10s
+      retries: 3
+      start_period: 120s
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+          cpus: '0.25'
+    networks:
+      - egov-network
+
+  egov-user-db:
+    image: ${DOCKER_REPO_EGOV_USER}-db:${DOCKER_TAG_EGOV_USER}
+    container_name: egov-user-db
+    environment:
+      DB_URL: ${SPRING_DATASOURCE_URL:-jdbc:postgresql://178.236.185.120:5432/phc_db}
+      SCHEMA_TABLE: egov_user_schema
+      FLYWAY_USER: ${SPRING_DATASOURCE_USERNAME:-postgres}
+      FLYWAY_PASSWORD: ${SPRING_DATASOURCE_PASSWORD:-postgres}
+      FLYWAY_LOCATIONS: ${FLYWAY_LOCATIONS}
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+          cpus: '0.25'
+    networks:
+      - egov-network
+
+  egov-user:
+    image: ${DOCKER_REPO_EGOV_USER}:${DOCKER_TAG_EGOV_USER}
+    container_name: egov-user
+    depends_on:
+      redpanda:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      egov-otp:
+        condition: service_healthy
+      egov-enc-service:
+        condition: service_healthy
+      egov-user-db:
+        condition: service_completed_successfully
+    environment:
+      SERVER_PORT:                                  8080
+      EGOV_OTP_HOST:                                ${EGOV_OTP_HOST}
+      EGOV_USER_HOST:                               http://localhost:8080
+      EGOV_SERVICES_ACCESSCONTROL_HOST:             ${EGOV_ACCESSCONTROL_HOST}
+      EGOV_FILESTORE_HOST:                          ${EGOV_FILESTORE_HOST}
+      MDMS_HOST:                                    ${EGOV_MDMS_HOST}
+      EGOV_MDMS_HOST:                               ${EGOV_MDMS_HOST}
+      EGOV_ENC_HOST:                                ${EGOV_ENC_SERVICE_HOST}
+      EGOV_STATE_LEVEL_TENANT_ID:                   ${EGOV_STATE_LEVEL_TENANT_ID:-pb}
+      STATE_LEVEL_TENANT_ID:                        ${EGOV_STATE_LEVEL_TENANT_ID:-pb}
+      DECRYPTION_ABAC_ENABLED:                      true
+      SPRING_KAFKA_CONSUMER_GROUP_ID:               egov-user
+      ACCOUNT_UNLOCK_COOL_DOWN_PERIOD_MINUTES:      30
+      SPRING_KAFKA_PRODUCER_KEY_SERIALIZER:         org.apache.kafka.common.serialization.StringSerializer
+      SPRING_KAFKA_PRODUCER_VALUE_SERIALIZER:       org.springframework.kafka.support.serializer.JsonSerializer
+      OTP_VALIDATION_REGISTER_MANDATORY:            false
+      CITIZEN_LOGIN_PASSWORD_OTP_ENABLED:           true
+      EMPLOYEE_LOGIN_PASSWORD_OTP_ENABLED:          false
+      ACCESS_TOKEN_VALIDITY_IN_MINUTES:             10080
+      REFRESH_TOKEN_VALIDITY_IN_MINUTES:            20160
+      DEFAULT_PASSWORD_EXPIRY_IN_DAYS:              90
+      MOBILE_NUMBER_VALIDATION_WORKAROUND_ENABLED:  false
+      ROLES_STATE_LEVEL_ENABLED:                    true
+      CITIZEN_REGISTRATION_WITHLOGIN_ENABLED:       true
+      CITIZEN_LOGIN_PASSWORD_OTP_FIXED_VALUE:       123456
+      CITIZEN_LOGIN_PASSWORD_OTP_FIXED_ENABLED:     true
+      JAVA_OPTS:                                    -Xmx256m -Xms256m
+      SECURITY_BASIC_ENABLED:                       false
+      MANAGEMENT_SECURITY_ENABLED:                  false
+      FLYWAY_ENABLED:                               false
+      SPRING_FLYWAY_ENABLED:                        false
+      MANAGEMENT_ENDPOINTS_WEB_BASE_PATH:           /
+      APP_TIMEZONE:                                 ${APP_TIMEZONE:-Asia/Kolkata}
+      FLYWAY_URL:                                   ${SPRING_DATASOURCE_URL}
+      SPRING_DATASOURCE_URL:                        ${SPRING_DATASOURCE_URL}
+      SPRING_DATASOURCE_USERNAME:                   ${SPRING_DATASOURCE_USERNAME}
+      SPRING_DATASOURCE_PASSWORD:                   ${SPRING_DATASOURCE_PASSWORD}
+      SPRING_DATASOURCE_TOMCAT_INITIAL_SIZE:        ${SPRING_DATASOURCE_TOMCAT_INITIAL_SIZE:-10}
+      SERVER_TOMCAT_MAX_THREADS:                    ${SERVER_TOMCAT_MAX_THREADS:-100}
+      SERVER_TOMCAT_MAX_CONNECTIONS:                ${SERVER_TOMCAT_MAX_CONNECTIONS:-200}
+      SPRING_DATASOURCE_TOMCAT_MAX_ACTIVE:          ${SPRING_DATASOURCE_TOMCAT_MAX_ACTIVE:-100}
+      SPRING_DATASOURCE_HIKARI_MAXIMUM-POOL-SIZE:   ${SPRING_DATASOURCE_HIKARI_MAXIMUM_POOL_SIZE:-100}
+      SPRING_DATASOURCE_HIKARI_MINIMUM_IDLE:        ${SPRING_DATASOURCE_HIKARI_MINIMUM_IDLE:-10}
+      SPRING_DATASOURCE_HIKARI_IDLE_TIMEOUT:        ${SPRING_DATASOURCE_HIKARI_IDLE_TIMEOUT:-10000}
+      SPRING_DATASOURCE_HIKARI_MAX_LIFETIME:        ${SPRING_DATASOURCE_HIKARI_MAX_LIFETIME:-1800000}
+      SPRING_DATASOURCE_HIKARI_CONNECTION_TIMEOUT:  ${SPRING_DATASOURCE_HIKARI_CONNECTION_TIMEOUT:-20000}
+      KAFKA_CONFIG_BOOTSTRAP_SERVER_CONFIG:         ${KAFKA_BOOTSTRAP_SERVERS}
+      SPRING_KAFKA_BOOTSTRAP_SERVERS:               ${KAFKA_BOOTSTRAP_SERVERS}
+      SPRING_JPA_SHOW_SQL:                          ${SPRING_JPA_SHOW_SQL}
+      STATE_LEVEL_TENANTID_LENGTH:                  1
+      IS_ENVIRONMENT_CENTRAL_INSTANCE:              false
+      STATE_SCHEMA_INDEX_POSITION_TENANTID:         0
+      KAFKA_TOPIC_AUDIT:                            enc-user-audit-data
+      LOGGING_LOKI_ENABLED:                         ${LOGGING_LOKI_ENABLED}
+      LOGGING_LOKI_URL:                             ${LOGGING_LOKI_URL}
+      LOGGING_LOKI_APP:                             egov-user
+      LOGGING_LOKI_ENVIRONMENT:                     ${LOGGING_LOKI_ENVIRONMENT}
+      LOGGING_LEVEL_ROOT:                           ${LOGGING_LEVEL_ROOT}
+      SPRING_REDIS_HOST:                            ${SPRING_REDIS_HOST}
+      SPRING_REDIS_PORT:                            ${SPRING_REDIS_PORT}
+      OTEL_SERVICE_NAME:                            egov-user
+      OTEL_EXPORTER_OTLP_ENDPOINT:                  ${OTEL_EXPORTER_OTLP_ENDPOINT}
+    ports:
+      - 18107:8107
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsS http://localhost:8080/user/health >/dev/null 2>&1 || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 120s
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+          cpus: '0.5'
+    networks:
+      - egov-network
+
+  egov-workflow-v2-db:
+    image: ${DOCKER_REPO_EGOV_WORKFLOW_V2}-db:${DOCKER_TAG_EGOV_WORKFLOW_V2}
+    container_name: egov-workflow-v2-db
+    environment:
+      DB_URL: ${SPRING_DATASOURCE_URL:-jdbc:postgresql://178.236.185.120:5432/phc_db}
+      SCHEMA_TABLE: egov_workflow_v2_schema
+      FLYWAY_USER: ${SPRING_DATASOURCE_USERNAME:-postgres}
+      FLYWAY_PASSWORD: ${SPRING_DATASOURCE_PASSWORD:-postgres}
+      FLYWAY_LOCATIONS: ${FLYWAY_LOCATIONS}
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+          cpus: '0.25'
+    networks:
+      - egov-network
+
+  egov-workflow-v2:
+    image: ${DOCKER_REPO_EGOV_WORKFLOW_V2}:${DOCKER_TAG_EGOV_WORKFLOW_V2}
+    container_name: egov-workflow-v2
+    depends_on:
+      redpanda:
+        condition: service_healthy
+      egov-idgen:
+        condition: service_healthy
+      egov-workflow-v2-db:
+        condition: service_completed_successfully
+    environment:
+      EGOV_WF_FUZZYSEARCH_ISFUZZYENABLED:           false
+      SPRING_KAFKA_CONSUMER_GROUP_ID:               egov-tl-services
+      SPRING_KAFKA_PRODUCER_KEY_SERIALIZER:         org.apache.kafka.common.serialization.StringSerializer
+      SPRING_KAFKA_PRODUCER_VALUE_SERIALIZER:       org.springframework.kafka.support.serializer.JsonSerializer
+      PERSISTER_SAVE_WF_TOPIC:                      save-wf-transitions
+      EGOV_MDMS_HOST:                               ${EGOV_MDMS_HOST}
+      STATE_LEVEL_TENANT_ID:                        ${EGOV_STATE_LEVEL_TENANT_ID}
+      EGOV_USER_HOST:                               ${EGOV_USER_HOST}
+      JAVA_OPTS:                                    -Xmx64m -Xms64m
+      JAVA_ENABLE_DEBUG:                            true
+      JAVA_DEBUG_PORT:                              5005
+      SERVER_PORT:                                  8080
+      JAVA_ARGS:                                    -Dspring.profiles.active=monitoring
+      SECURITY_BASIC_ENABLED:                       false
+      MANAGEMENT_SECURITY_ENABLED:                  false
+      EGOV_WF_DEFAULT_LIMIT:                        100
+      EGOV_WF_STATELEVEL:                           true
+      FLYWAY_ENABLED:                               false
+      SPRING_FLYWAY_ENABLED:                        false
+      MANAGEMENT_ENDPOINTS_WEB_BASE_PATH:           /
+      APP_TIMEZONE:                                 ${APP_TIMEZONE}
+      FLYWAY_URL:                                   ${SPRING_DATASOURCE_URL}
+      SPRING_DATASOURCE_URL:                        ${SPRING_DATASOURCE_URL}
+      SPRING_DATASOURCE_USERNAME:                   ${SPRING_DATASOURCE_USERNAME}
+      SPRING_DATASOURCE_PASSWORD:                   ${SPRING_DATASOURCE_PASSWORD}
+      SPRING_DATASOURCE_TOMCAT_INITIAL_SIZE:        ${SPRING_DATASOURCE_TOMCAT_INITIAL_SIZE}
+      SERVER_TOMCAT_MAX_THREADS:                    ${SERVER_TOMCAT_MAX_THREADS}
+      SERVER_TOMCAT_MAX_CONNECTIONS:                ${SERVER_TOMCAT_MAX_CONNECTIONS}
+      SPRING_DATASOURCE_TOMCAT_MAX_ACTIVE:          ${SPRING_DATASOURCE_TOMCAT_MAX_ACTIVE}
+      SPRING_DATASOURCE_HIKARI_MAXIMUM-POOL-SIZE:   ${SPRING_DATASOURCE_HIKARI_MAXIMUM_POOL_SIZE}
+      SPRING_DATASOURCE_HIKARI_MINIMUM_IDLE:        ${SPRING_DATASOURCE_HIKARI_MINIMUM_IDLE}
+      SPRING_DATASOURCE_HIKARI_IDLE_TIMEOUT:        ${SPRING_DATASOURCE_HIKARI_IDLE_TIMEOUT}
+      SPRING_DATASOURCE_HIKARI_MAX_LIFETIME:        ${SPRING_DATASOURCE_HIKARI_MAX_LIFETIME}
+      SPRING_DATASOURCE_HIKARI_CONNECTION_TIMEOUT:  ${SPRING_DATASOURCE_HIKARI_CONNECTION_TIMEOUT}
+      KAFKA_CONFIG_BOOTSTRAP_SERVER_CONFIG:         ${KAFKA_BOOTSTRAP_SERVERS}
+      SPRING_KAFKA_BOOTSTRAP_SERVERS:               ${KAFKA_BOOTSTRAP_SERVERS}
+      SPRING_JPA_SHOW_SQL:                          ${SPRING_JPA_SHOW_SQL}
+      STATE_LEVEL_TENANTID_LENGTH:                  1
+      IS_ENVIRONMENT_CENTRAL_INSTANCE:              false
+      STATE_SCHEMA_INDEX_POSITION_TENANTID:         0
+      KAFKA_TOPIC_AUDIT:                            enc-user-audit-data
+      LOGGING_LOKI_ENABLED:                         true
+      LOGGING_LOKI_URL:                             ${LOGGING_LOKI_URL}
+      LOGGING_LOKI_APP:                             egov-workflow-v2
+      LOGGING_LOKI_ENVIRONMENT:                     ${LOGGING_LOKI_ENVIRONMENT}
+      LOGGING_LEVEL_ROOT:                           ${LOGGING_LEVEL_ROOT}
+      OTEL_SERVICE_NAME:                            egov-workflow-v2
+      OTEL_EXPORTER_OTLP_ENDPOINT:                  ${OTEL_EXPORTER_OTLP_ENDPOINT}
+    # ports:
+    #   - 18109:8109
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsS http://localhost:8080/egov-workflow-v2/health >/dev/null 2>&1 || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 120s
+    deploy:
+      resources:
+        limits:
+          memory: 320M
+          cpus: '0.25'
+    networks:
+      - egov-network
+
+  egov-apportion-service-db:
+    image: ${DOCKER_REPO_EGOV_APPORTION_SERVICE}-db:${DOCKER_TAG_EGOV_APPORTION_SERVICE}
+    container_name: egov-apportion-service-db
+    environment:
+      DB_URL: ${SPRING_DATASOURCE_URL:-jdbc:postgresql://178.236.185.120:5432/phc_db}
+      SCHEMA_TABLE: apportion_service_schema
+      FLYWAY_USER: ${SPRING_DATASOURCE_USERNAME:-postgres}
+      FLYWAY_PASSWORD: ${SPRING_DATASOURCE_PASSWORD:-postgres}
+      FLYWAY_LOCATIONS: ${FLYWAY_LOCATIONS}
+    networks:
+      - egov-network
+    restart: on-failure
+
+  egov-apportion-service:
+    image: ${DOCKER_REPO_EGOV_APPORTION_SERVICE}:${DOCKER_TAG_EGOV_APPORTION_SERVICE}
+    container_name: egov-apportion-service
+    depends_on:
+      redpanda:
+        condition: service_healthy
+      egov-mdms-service:
+        condition: service_healthy
+      egov-apportion-service-db:
+        condition: service_completed_successfully
+    environment:
+      EGOV_IDGEN_HOST:                              ${EGOV_IDGEN_HOST}
+      EGOV_USER_HOST:                               ${EGOV_USER_HOST}
+      EGOV_HRMS_HOST:                               ${EGOV_HRMS_HOST}
+      EGOV_MDMS_HOST:                               ${EGOV_MDMS_HOST}
+      EGOV_LOCALIZATION_HOST:                       ${EGOV_LOCALIZATION_HOST}
+      SERVER_PORT:                                  8080
+      SERVER_CONTEXT_PATH:                          /apportion-service
+      EGOV_IDGEN_PATH:                              egov-idgen/id/_generate
+      EGOV_INDIVIDUAL_HOST:                         ${EGOV_INDIVIDUAL_HOST}
+      EGOV_WORKFLOW_HOST:                           ${EGOV_WORKFLOW_HOST}
+      EGOV_URL_SHORTNER:                            ${EGOV_URL_SHORTENING}
+      SPRING_DATASOURCE_URL:                        ${SPRING_DATASOURCE_URL}
+      SPRING_DATASOURCE_USERNAME:                   ${SPRING_DATASOURCE_USERNAME}
+      SPRING_DATASOURCE_PASSWORD:                   ${SPRING_DATASOURCE_PASSWORD}
+      FLYWAY_ENABLED:                               false
+      SPRING_FLYWAY_ENABLED:                        false
+      MANAGEMENT_ENDPOINTS_WEB_BASE_PATH:           /
+      APP_TIMEZONE:                                 ${APP_TIMEZONE}
+      FLYWAY_URL:                                   ${SPRING_DATASOURCE_URL}
+      SPRING_DATASOURCE_TOMCAT_INITIAL_SIZE:        ${SPRING_DATASOURCE_TOMCAT_INITIAL_SIZE}
+      SERVER_TOMCAT_MAX_THREADS:                    ${SERVER_TOMCAT_MAX_THREADS}
+      SERVER_TOMCAT_MAX_CONNECTIONS:                ${SERVER_TOMCAT_MAX_CONNECTIONS}
+      SPRING_DATASOURCE_TOMCAT_MAX_ACTIVE:          ${SPRING_DATASOURCE_TOMCAT_MAX_ACTIVE}
+      SPRING_DATASOURCE_HIKARI_MAXIMUM-POOL-SIZE:   ${SPRING_DATASOURCE_HIKARI_MAXIMUM_POOL_SIZE}
+      SPRING_DATASOURCE_HIKARI_MINIMUM_IDLE:        ${SPRING_DATASOURCE_HIKARI_MINIMUM_IDLE}
+      SPRING_DATASOURCE_HIKARI_IDLE_TIMEOUT:        ${SPRING_DATASOURCE_HIKARI_IDLE_TIMEOUT}
+      SPRING_DATASOURCE_HIKARI_MAX_LIFETIME:        ${SPRING_DATASOURCE_HIKARI_MAX_LIFETIME}
+      SPRING_DATASOURCE_HIKARI_CONNECTION_TIMEOUT:  ${SPRING_DATASOURCE_HIKARI_CONNECTION_TIMEOUT}
+      KAFKA_CONFIG_BOOTSTRAP_SERVER_CONFIG:         ${KAFKA_BOOTSTRAP_SERVERS}
+      SPRING_KAFKA_BOOTSTRAP_SERVERS:               ${KAFKA_BOOTSTRAP_SERVERS}
+      SPRING_JPA_SHOW_SQL:                          ${SPRING_JPA_SHOW_SQL}
+      STATE_LEVEL_TENANTID_LENGTH:                  1
+      IS_ENVIRONMENT_CENTRAL_INSTANCE:              false
+      STATE_SCHEMA_INDEX_POSITION_TENANTID:         0
+      KAFKA_TOPIC_AUDIT:                            enc-user-audit-data
+      LOGGING_LOKI_ENABLED:                         true
+      LOGGING_LOKI_URL:                             ${LOGGING_LOKI_URL}
+      LOGGING_LOKI_APP:                             egov-apportion-service
+      LOGGING_LOKI_ENVIRONMENT:                     ${LOGGING_LOKI_ENVIRONMENT}
+      LOGGING_LEVEL_ROOT:                           ${LOGGING_LEVEL_ROOT}
+      OTEL_SERVICE_NAME:                            egov-apportion-service
+      OTEL_EXPORTER_OTLP_ENDPOINT:                  ${OTEL_EXPORTER_OTLP_ENDPOINT}
+
+    # ports:
+    #   - 18088:8088
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsS http://localhost:8080/apportion-service/health >/dev/null 2>&1 || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 120s
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+          cpus: '0.25'
+    networks:
+      - egov-network
+
+  egov-filestore-db:
+    image: ${DOCKER_REPO_EGOV_FILESTORE}-db:${DOCKER_TAG_EGOV_FILESTORE}
+    container_name: egov-filestore-db
+    environment:
+      DB_URL: ${SPRING_DATASOURCE_URL:-jdbc:postgresql://178.236.185.120:5432/phc_db}
+      SCHEMA_TABLE: egov_filestore_schema
+      FLYWAY_USER: ${SPRING_DATASOURCE_USERNAME:-postgres}
+      FLYWAY_PASSWORD: ${SPRING_DATASOURCE_PASSWORD:-postgres}
+      FLYWAY_LOCATIONS: ${FLYWAY_LOCATIONS}
+    networks:
+      - egov-network
+    restart: on-failure
+
+  egov-filestore:
+    image: ${DOCKER_REPO_EGOV_FILESTORE}:${DOCKER_TAG_EGOV_FILESTORE}
+    container_name: egov-filestore
+    depends_on:
+      redpanda:
+        condition: service_healthy
+      egov-mdms-service:
+        condition: service_healthy
+      egov-filestore-db:
+        condition: service_completed_successfully
+    environment:
+      JAVA_ENABLE_DEBUG:                            true
+      JAVA_DEBUG_PORT:                              5005
+      JAVA_OPTS:                                    -Xmx1g -Xms1g
+      JAVA_ARGS:                                    
+      SERVER_PORT:                                  8080
+      SECURITY_BASIC_ENABLED:                       false
+      MANAGEMENT_SECURITY_ENABLED:                  false
+      FILE_STORAGE_MOUNT_PATH:                      /filestore
+      TEMP_FOLDER_PATH:                             /tmp
+      SPRING_SERVLET_MULTIPART_MAX_FILE_SIZE:       200MB
+      SPRING_SERVLET_MULTIPART_MAX_REQUEST_SIZE:    1000MB
+      MAX_FILE_SIZE:                                500000000
+      ISNFSSTORAGEENABLED:                          false
+      ISS3ENABLED:                                  true
+      AWS_KEY:                                      ${MINIO_ACCESS_KEY}
+      AWS_SECRETKEY:                                ${MINIO_SECRET_ACCESS_KEY}
+      IS_BUCKET_FIXED:                              true
+      IS_CONTAINER_FIXED:                           true
+      FIXED_BUCKETNAME:                             ${MINIO_BUCKET_NAME}
+      FIXED_CONTAINER_NAME:                         ${MINIO_BUCKET_NAME}
+      ALLOWED_FORMATS_MAP:                          ${ALLOWED_FORMATS_MAP}
+      MINIO_URL:                                    ${MINIO_URL}
+      PRESIGNED_URL_EXPIRY_TIME_IN_SECS:            3600
+      PDF_DISALLOW_EMBEDDED_FILES:                  false
+      FLYWAY_ENABLED:                               false
+      SPRING_FLYWAY_ENABLED:                        false
+      MANAGEMENT_ENDPOINTS_WEB_BASE_PATH:           /
+      APP_TIMEZONE:                                 ${APP_TIMEZONE}
+      FLYWAY_URL:                                   ${SPRING_DATASOURCE_URL}
+      SPRING_DATASOURCE_URL:                        ${SPRING_DATASOURCE_URL}
+      SPRING_DATASOURCE_USERNAME:                   ${SPRING_DATASOURCE_USERNAME}
+      SPRING_DATASOURCE_PASSWORD:                   ${SPRING_DATASOURCE_PASSWORD}
+      SPRING_DATASOURCE_TOMCAT_INITIAL_SIZE:        ${SPRING_DATASOURCE_TOMCAT_INITIAL_SIZE}
+      SERVER_TOMCAT_MAX_THREADS:                    ${SERVER_TOMCAT_MAX_THREADS}
+      SERVER_TOMCAT_MAX_CONNECTIONS:                ${SERVER_TOMCAT_MAX_CONNECTIONS}
+      SPRING_DATASOURCE_TOMCAT_MAX_ACTIVE:          ${SPRING_DATASOURCE_TOMCAT_MAX_ACTIVE}
+      SPRING_DATASOURCE_HIKARI_MAXIMUM-POOL-SIZE:   ${SPRING_DATASOURCE_TOMCAT_MAX_ACTIVE}
+      SPRING_DATASOURCE_HIKARI_MINIMUM_IDLE:        ${SPRING_DATASOURCE_HIKARI_MINIMUM_IDLE}
+      SPRING_DATASOURCE_HIKARI_IDLE_TIMEOUT:        ${SPRING_DATASOURCE_HIKARI_IDLE_TIMEOUT}
+      SPRING_DATASOURCE_HIKARI_MAX_LIFETIME:        ${SPRING_DATASOURCE_HIKARI_MAX_LIFETIME}
+      SPRING_DATASOURCE_HIKARI_CONNECTION_TIMEOUT:  ${SPRING_DATASOURCE_HIKARI_CONNECTION_TIMEOUT}
+      KAFKA_CONFIG_BOOTSTRAP_SERVER_CONFIG:         ${KAFKA_BOOTSTRAP_SERVERS}
+      SPRING_KAFKA_BOOTSTRAP_SERVERS:               ${KAFKA_BOOTSTRAP_SERVERS}
+      SPRING_JPA_SHOW_SQL:                          ${SPRING_JPA_SHOW_SQL}
+      STATE_LEVEL_TENANTID_LENGTH:                  1
+      IS_ENVIRONMENT_CENTRAL_INSTANCE:              false
+      STATE_SCHEMA_INDEX_POSITION_TENANTID:         0
+      KAFKA_TOPIC_AUDIT:                            enc-user-audit-data
+      LOGGING_LOKI_ENABLED:                         true
+      LOGGING_LOKI_URL:                             ${LOGGING_LOKI_URL}
+      LOGGING_LOKI_APP:                             egov-filestore
+      LOGGING_LOKI_ENVIRONMENT:                     ${LOGGING_LOKI_ENVIRONMENT}
+      LOGGING_LEVEL_ROOT:                           ${LOGGING_LEVEL_ROOT}
+      OTEL_SERVICE_NAME:                            egov-filestore
+      OTEL_EXPORTER_OTLP_ENDPOINT:                  ${OTEL_EXPORTER_OTLP_ENDPOINT}
+    # ports:
+    #   - 18088:8088
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsS http://localhost:8080/filestore/health >/dev/null 2>&1 || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 120s
+    deploy:
+      resources:
+        limits:
+          memory: 1.5G
+          cpus: '0.5'
+    networks:
+      - egov-network
+
+  egov-hrms-db:
+    image: ${DOCKER_REPO_EGOV_HRMS}-db:${DOCKER_TAG_EGOV_HRMS}
+    container_name: egov-hrms-db
+    environment:
+      DB_URL: ${SPRING_DATASOURCE_URL:-jdbc:postgresql://178.236.185.120:5432/phc_db}
+      SCHEMA_TABLE: egov_hrms_schema
+      FLYWAY_USER: ${SPRING_DATASOURCE_USERNAME:-postgres}
+      FLYWAY_PASSWORD: ${SPRING_DATASOURCE_PASSWORD:-postgres}
+      FLYWAY_LOCATIONS: ${FLYWAY_LOCATIONS}
+    networks:
+      - egov-network
+    restart: on-failure
+
+  egov-hrms:
+    image: ${DOCKER_REPO_EGOV_HRMS}:${DOCKER_TAG_EGOV_HRMS}
+    container_name: egov-hrms
+    depends_on:
+      redpanda:
+        condition: service_healthy
+      egov-mdms-service:
+        condition: service_healthy
+      egov-hrms-db:
+        condition: service_completed_successfully
+    environment:
+      JAVA_ENABLE_DEBUG:                            true
+      JAVA_DEBUG_PORT:                              5005
+      EGOV_SERVICES_DATA_SYNC_EMPLOYEE_REQUIRED:    false
+      EGOV_MDMS_HOST:                               ${EGOV_MDMS_HOST}
+      EGOV_MDMSLEGACY_HOST:                         ${EGOV_MDMS_HOST}
+      EGOV_FILESTORE_HOST:                          ${EGOV_FILESTORE_HOST}
+      STATE_LEVEL_TENANT_ID:                        ${EGOV_STATE_LEVEL_TENANT_ID}
+      EGOV_LOCALIZATION_HOST:                       ${EGOV_LOCALIZATION_HOST}
+      EGOV_IDGEN_HOST:                              ${EGOV_IDGEN_HOST}
+      EGOV_SERVICES_EGOV_IDGEN_EMP_CODE_NAME:       employee.code
+      EGOV_SERVICES_EGOV_IDGEN_EMP_CODE_FORMAT:     EMP_[SEQ_EMPLOYEE_CODE]
+      EGOV_USER_HOST:                               ${EGOV_USER_HOST}
+      EGOV_OTP_HOST:                                ${EGOV_OTP_HOST}
+      EGOV_ENVIRONMENT_DOMAIN:                      ${DOMAIN_HTTPS_URL}
+      EGOV_HRMS_EMPLOYEE_APP_LINK:                  https://egov-micro-dev.egovernments.org/employee/user/login
+      SPRING_KAFKA_CONSUMER_GROUP_ID:               employee-group1
+      SPRING_KAFKA_PRODUCER_KEY_SERIALIZER:         org.apache.kafka.common.serialization.StringSerializer
+      SPRING_KAFKA_PRODUCER_VALUE_SERIALIZER:       org.springframework.kafka.support.serializer.JsonSerializer
+      KAFKA_TOPICS_SAVE_SERVICE:                    save-hrms-employee
+      KAFKA_TOPICS_UPDATE_SERVICE:                  update-hrms-employee
+      KAFKA_TOPICS_NOTIFICATION_SMS:                egov.core.notification.sms
+      JAVA_OPTS:                                    -Xmx192m -Xms192m
+      SERVER_PORT:                                  8080
+      JAVA_ARGS:                                    -Dspring.profiles.active=monitoring
+      SECURITY_BASIC_ENABLED:                       false
+      MANAGEMENT_SECURITY_ENABLED:                  false
+      FLYWAY_ENABLED:                               false
+      SPRING_FLYWAY_ENABLED:                        false
+      MANAGEMENT_ENDPOINTS_WEB_BASE_PATH:           /
+      APP_TIMEZONE:                                 ${APP_TIMEZONE}
+      FLYWAY_URL:                                   ${SPRING_DATASOURCE_URL}
+      SPRING_DATASOURCE_URL:                        ${SPRING_DATASOURCE_URL}
+      SPRING_DATASOURCE_USERNAME:                   ${SPRING_DATASOURCE_USERNAME}
+      SPRING_DATASOURCE_PASSWORD:                   ${SPRING_DATASOURCE_PASSWORD}
+      SPRING_DATASOURCE_TOMCAT_INITIAL_SIZE:        ${SPRING_DATASOURCE_TOMCAT_INITIAL_SIZE}
+      SERVER_TOMCAT_MAX_THREADS:                    ${SERVER_TOMCAT_MAX_THREADS}
+      SERVER_TOMCAT_MAX_CONNECTIONS:                ${SERVER_TOMCAT_MAX_CONNECTIONS}
+      SPRING_DATASOURCE_TOMCAT_MAX_ACTIVE:          ${SPRING_DATASOURCE_TOMCAT_MAX_ACTIVE}
+      SPRING_DATASOURCE_HIKARI_MAXIMUM-POOL-SIZE:   ${SPRING_DATASOURCE_HIKARI_MAXIMUM_POOL_SIZE}
+      SPRING_DATASOURCE_HIKARI_MINIMUM_IDLE:        ${SPRING_DATASOURCE_HIKARI_MINIMUM_IDLE}
+      SPRING_DATASOURCE_HIKARI_IDLE_TIMEOUT:        ${SPRING_DATASOURCE_HIKARI_IDLE_TIMEOUT}
+      SPRING_DATASOURCE_HIKARI_MAX_LIFETIME:        ${SPRING_DATASOURCE_HIKARI_MAX_LIFETIME}
+      SPRING_DATASOURCE_HIKARI_CONNECTION_TIMEOUT:  ${SPRING_DATASOURCE_HIKARI_CONNECTION_TIMEOUT}
+      KAFKA_CONFIG_BOOTSTRAP_SERVER_CONFIG:         ${KAFKA_BOOTSTRAP_SERVERS}
+      SPRING_KAFKA_BOOTSTRAP_SERVERS:               ${KAFKA_BOOTSTRAP_SERVERS}
+      SPRING_JPA_SHOW_SQL:                          ${SPRING_JPA_SHOW_SQL}
+      STATE_LEVEL_TENANTID_LENGTH:                  1
+      IS_ENVIRONMENT_CENTRAL_INSTANCE:              false
+      STATE_SCHEMA_INDEX_POSITION_TENANTID:         0
+      KAFKA_TOPIC_AUDIT:                            enc-user-audit-data
+      LOGGING_LOKI_ENABLED:                         true
+      LOGGING_LOKI_URL:                             ${LOGGING_LOKI_URL}
+      LOGGING_LOKI_APP:                             egov-hrms
+      LOGGING_LOKI_ENVIRONMENT:                     ${LOGGING_LOKI_ENVIRONMENT}
+      LOGGING_LEVEL_ROOT:                           ${LOGGING_LEVEL_ROOT}
+      OTEL_SERVICE_NAME:                            egov-hrms
+      OTEL_EXPORTER_OTLP_ENDPOINT:                  ${OTEL_EXPORTER_OTLP_ENDPOINT}
+    # ports:
+    #   - 18088:8088
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsS http://localhost:8080/egov-hrms/health >/dev/null 2>&1 || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 120s
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+          cpus: '0.25'
+    networks:
+      - egov-network
+
+  egov-indexer-db:
+    image: ${DOCKER_REPO_EGOV_INDEXER}-db:${DOCKER_TAG_EGOV_INDEXER}
+    container_name: egov-indexer-db
+    environment:
+      DB_URL: ${SPRING_DATASOURCE_URL:-jdbc:postgresql://178.236.185.120:5432/phc_db}
+      SCHEMA_TABLE: egov_indexer_schema
+      FLYWAY_USER: ${SPRING_DATASOURCE_USERNAME:-postgres}
+      FLYWAY_PASSWORD: ${SPRING_DATASOURCE_PASSWORD:-postgres}
+      FLYWAY_LOCATIONS: ${FLYWAY_LOCATIONS}
+    networks:
+      - egov-network
+    restart: on-failure
+
+  egov-indexer:
+    image: ${DOCKER_REPO_EGOV_INDEXER}:${DOCKER_TAG_EGOV_INDEXER}
+    container_name: egov-indexer
+    depends_on:
+      redpanda:
+        condition: service_healthy
+      egov-mdms-service:
+        condition: service_healthy
+      egov-indexer-db:
+        condition: service_completed_successfully
+    environment:
+      EGOV_SERVICES_INFRA_INDEXER_HOST:             ${ELASTICSEARCH_HOST}
+      EGOV_INFRA_INDEXER_HOST:                      ${ELASTICSEARCH_HOST}
+      EGOV_INDEXER_YML_REPO_PATH:                   ${EGOV_INDEXER_YML_REPO_PATH}
+      JAVA_OPTS:                                    -Xmx512m -Xms512m
+      SERVER_PORT:                                  8080
+      SECURITY_BASIC_ENABLED:                       false
+      MANAGEMENT_SECURITY_ENABLED:                  false
+      EGOV_STATELEVEL_TENANTID:                     ${EGOV_STATE_LEVEL_TENANT_ID}
+      EGOV_INDEXER_ES_USERNAME:                     ${ELASTICSEARCH_USERNAME}
+      EGOV_INDEXER_ES_PASSWORD:                     ${ELASTICSEARCH_PASSWORD}
+      FLYWAY_ENABLED:                               false
+      SPRING_FLYWAY_ENABLED:                        false
+      MANAGEMENT_ENDPOINTS_WEB_BASE_PATH:           /
+      APP_TIMEZONE:                                 ${APP_TIMEZONE}
+      FLYWAY_URL:                                   ${SPRING_DATASOURCE_URL}
+      SPRING_DATASOURCE_URL:                        ${SPRING_DATASOURCE_URL}
+      SPRING_DATASOURCE_USERNAME:                   ${SPRING_DATASOURCE_USERNAME}
+      SPRING_DATASOURCE_PASSWORD:                   ${SPRING_DATASOURCE_PASSWORD}
+      SPRING_DATASOURCE_TOMCAT_INITIAL_SIZE:        ${SPRING_DATASOURCE_TOMCAT_INITIAL_SIZE}
+      SERVER_TOMCAT_MAX_THREADS:                    ${SERVER_TOMCAT_MAX_THREADS}
+      SERVER_TOMCAT_MAX_CONNECTIONS:                ${SERVER_TOMCAT_MAX_CONNECTIONS}
+      SPRING_DATASOURCE_TOMCAT_MAX_ACTIVE:          ${SPRING_DATASOURCE_TOMCAT_MAX_ACTIVE}
+      SPRING_DATASOURCE_HIKARI_MAXIMUM-POOL-SIZE:   ${SPRING_DATASOURCE_HIKARI_MAXIMUM_POOL_SIZE}
+      SPRING_DATASOURCE_HIKARI_MINIMUM_IDLE:        ${SPRING_DATASOURCE_HIKARI_MINIMUM_IDLE}
+      SPRING_DATASOURCE_HIKARI_IDLE_TIMEOUT:        ${SPRING_DATASOURCE_HIKARI_IDLE_TIMEOUT}
+      SPRING_DATASOURCE_HIKARI_MAX_LIFETIME:        ${SPRING_DATASOURCE_HIKARI_MAX_LIFETIME}
+      SPRING_DATASOURCE_HIKARI_CONNECTION_TIMEOUT:  ${SPRING_DATASOURCE_HIKARI_CONNECTION_TIMEOUT}
+      KAFKA_CONFIG_BOOTSTRAP_SERVER_CONFIG:         ${KAFKA_BOOTSTRAP_SERVERS}
+      SPRING_KAFKA_BOOTSTRAP_SERVERS:               ${KAFKA_BOOTSTRAP_SERVERS}
+      SPRING_JPA_SHOW_SQL:                          ${SPRING_JPA_SHOW_SQL}
+      STATE_LEVEL_TENANTID_LENGTH:                  1
+      IS_ENVIRONMENT_CENTRAL_INSTANCE:              false
+      STATE_SCHEMA_INDEX_POSITION_TENANTID:         0
+      KAFKA_TOPIC_AUDIT:                            enc-user-audit-data
+      LOGGING_LOKI_ENABLED:                         true
+      LOGGING_LOKI_URL:                             ${LOGGING_LOKI_URL}
+      LOGGING_LOKI_APP:                             egov-indexer
+      LOGGING_LOKI_ENVIRONMENT:                     ${LOGGING_LOKI_ENVIRONMENT}
+      LOGGING_LEVEL_ROOT:                           ${LOGGING_LEVEL_ROOT}
+      OTEL_SERVICE_NAME:                            egov-indexer
+      OTEL_EXPORTER_OTLP_ENDPOINT:                  ${OTEL_EXPORTER_OTLP_ENDPOINT}
+    volumes:
+      - ./git-sync:/git-sync
+    # ports:
+    #   - 18088:8088
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsS http://localhost:8080/egov-indexer/health >/dev/null 2>&1 || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 120s
+    deploy:
+      resources:
+        limits:
+          memory: 1G
+          cpus: '0.25'
+    networks:
+      - egov-network
+
+  egov-localization-db:
+    image: ${DOCKER_REPO_EGOV_LOCALIZATION}-db:${DOCKER_TAG_EGOV_LOCALIZATION}
+    container_name: egov-localization-db
+    environment:
+      DB_URL: ${SPRING_DATASOURCE_URL:-jdbc:postgresql://178.236.185.120:5432/phc_db}
+      SCHEMA_TABLE: egov_localization_schema
+      FLYWAY_USER: ${SPRING_DATASOURCE_USERNAME:-postgres}
+      FLYWAY_PASSWORD: ${SPRING_DATASOURCE_PASSWORD:-postgres}
+      FLYWAY_LOCATIONS: ${FLYWAY_LOCATIONS}
+    networks:
+      - egov-network
+    restart: on-failure
+
+  egov-localization:
+    image: ${DOCKER_REPO_EGOV_LOCALIZATION}:${DOCKER_TAG_EGOV_LOCALIZATION}
+    container_name: egov-localization
+    depends_on:
+      redpanda:
+        condition: service_healthy
+      egov-mdms-service:
+        condition: service_healthy
+      egov-localization-db:
+        condition: service_completed_successfully
+    environment:
+      SERVER_PORT:                                  8080
+      JAVA_OPTS:                                    -Xmx256m -Xms256m
+      JAEGER_SAMPLER_PARAM:                         1
+      FLYWAY_ENABLED:                               false
+      SPRING_FLYWAY_ENABLED:                        false
+      MANAGEMENT_ENDPOINTS_WEB_BASE_PATH:           /
+      APP_TIMEZONE:                                 ${APP_TIMEZONE}
+      FLYWAY_URL:                                   ${SPRING_DATASOURCE_URL}
+      SPRING_DATASOURCE_URL:                        ${SPRING_DATASOURCE_URL}
+      SPRING_DATASOURCE_USERNAME:                   ${SPRING_DATASOURCE_USERNAME}
+      SPRING_DATASOURCE_PASSWORD:                   ${SPRING_DATASOURCE_PASSWORD}
+      SPRING_DATASOURCE_TOMCAT_INITIAL_SIZE:        ${SPRING_DATASOURCE_TOMCAT_INITIAL_SIZE}
+      SERVER_TOMCAT_MAX_THREADS:                    ${SERVER_TOMCAT_MAX_THREADS}
+      SERVER_TOMCAT_MAX_CONNECTIONS:                ${SERVER_TOMCAT_MAX_CONNECTIONS}
+      SPRING_DATASOURCE_TOMCAT_MAX_ACTIVE:          ${SPRING_DATASOURCE_TOMCAT_MAX_ACTIVE}
+      SPRING_DATASOURCE_HIKARI_MAXIMUM-POOL-SIZE:   ${SPRING_DATASOURCE_HIKARI_MAXIMUM_POOL_SIZE}
+      SPRING_DATASOURCE_HIKARI_MINIMUM_IDLE:        ${SPRING_DATASOURCE_HIKARI_MINIMUM_IDLE}
+      SPRING_DATASOURCE_HIKARI_IDLE_TIMEOUT:        ${SPRING_DATASOURCE_HIKARI_IDLE_TIMEOUT}
+      SPRING_DATASOURCE_HIKARI_MAX_LIFETIME:        ${SPRING_DATASOURCE_HIKARI_MAX_LIFETIME}
+      SPRING_DATASOURCE_HIKARI_CONNECTION_TIMEOUT:  ${SPRING_DATASOURCE_HIKARI_CONNECTION_TIMEOUT}
+      KAFKA_CONFIG_BOOTSTRAP_SERVER_CONFIG:         ${KAFKA_BOOTSTRAP_SERVERS}
+      SPRING_KAFKA_BOOTSTRAP_SERVERS:               ${KAFKA_BOOTSTRAP_SERVERS}
+      SPRING_JPA_SHOW_SQL:                          ${SPRING_JPA_SHOW_SQL}
+      STATE_LEVEL_TENANTID_LENGTH:                  1
+      IS_ENVIRONMENT_CENTRAL_INSTANCE:              false
+      STATE_SCHEMA_INDEX_POSITION_TENANTID:         0
+      KAFKA_TOPIC_AUDIT:                            enc-user-audit-data
+      LOGGING_LOKI_ENABLED:                         true
+      LOGGING_LOKI_URL:                             ${LOGGING_LOKI_URL}
+      LOGGING_LOKI_APP:                             egov-localization
+      LOGGING_LOKI_ENVIRONMENT:                     ${LOGGING_LOKI_ENVIRONMENT}
+      LOGGING_LEVEL_ROOT:                           ${LOGGING_LEVEL_ROOT}
+      SPRING_REDIS_HOST:                            ${SPRING_REDIS_HOST}
+      SPRING_REDIS_PORT:                            ${SPRING_REDIS_PORT}
+      OTEL_SERVICE_NAME:                            egov-localization
+      OTEL_EXPORTER_OTLP_ENDPOINT:                  ${OTEL_EXPORTER_OTLP_ENDPOINT}
+
+    # ports:
+    #   - 18088:8088
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsS http://localhost:8080/localization/health >/dev/null 2>&1 || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 120s
     deploy:
       resources:
         limits:
           memory: 768M
-          cpus: "0.5"
-    restart: "on-failure"
+          cpus: '0.25'
     networks:
       - egov-network
 
+  egov-url-shortening-db:
+    image: ${DOCKER_REPO_EGOV_URL_SHORTENING}-db:${DOCKER_TAG_EGOV_URL_SHORTENING}
+    container_name: egov-url-shortening-db
+    environment:
+      DB_URL: ${SPRING_DATASOURCE_URL:-jdbc:postgresql://178.236.185.120:5432/phc_db}
+      SCHEMA_TABLE: egov-url-shortening_schema
+      FLYWAY_USER: ${SPRING_DATASOURCE_USERNAME:-postgres}
+      FLYWAY_PASSWORD: ${SPRING_DATASOURCE_PASSWORD:-postgres}
+      FLYWAY_LOCATIONS: ${FLYWAY_LOCATIONS}
+    networks:
+      - egov-network
+    restart: on-failure
+
+  egov-url-shortening:
+    image: ${DOCKER_REPO_EGOV_URL_SHORTENING}:${DOCKER_TAG_EGOV_URL_SHORTENING}
+    container_name: egov-url-shortening
+    depends_on:
+      redpanda:
+        condition: service_healthy
+      egov-mdms-service:
+        condition: service_healthy
+      egov-url-shortening-db:
+        condition: service_completed_successfully
+    environment:
+      JAVA_ENABLE_DEBUG:                            true
+      SPRING_REDIS_HOST:                            ${SPRING_REDIS_HOST}
+      SPRING_REDIS_PORT:                            ${SPRING_REDIS_PORT}
+      SERVER_CONTEXT_PATH:                          /eus
+      SERVER_SERVLET_CONTEXT_PATH:                  /eus
+      SERVER_CONTEXTPATH:                           /eus
+      JAVA_OPTS:                                    -Xmx256m -Xms256m
+      JAVA_ARGS:                                    -Dspring.profiles.active=monitoring
+      SERVER_PORT:                                  8080
+      SECURITY_BASIC_ENABLED:                       false
+      MANAGEMENT_SECURITY_ENABLED:                  false
+      HOST_NAME:                                    ${DOMAIN_HTTPS_URL}
+      FLYWAY_ENABLED:                               false
+      SPRING_FLYWAY_ENABLED:                        false
+      MANAGEMENT_ENDPOINTS_WEB_BASE_PATH:           /
+      APP_TIMEZONE:                                 ${APP_TIMEZONE}
+      FLYWAY_URL:                                   ${SPRING_DATASOURCE_URL}
+      SPRING_DATASOURCE_URL:                        ${SPRING_DATASOURCE_URL}
+      SPRING_DATASOURCE_USERNAME:                   ${SPRING_DATASOURCE_USERNAME}
+      SPRING_DATASOURCE_PASSWORD:                   ${SPRING_DATASOURCE_PASSWORD}
+      SPRING_DATASOURCE_TOMCAT_INITIAL_SIZE:        ${SPRING_DATASOURCE_TOMCAT_INITIAL_SIZE}
+      SERVER_TOMCAT_MAX_THREADS:                    ${SERVER_TOMCAT_MAX_THREADS}
+      SERVER_TOMCAT_MAX_CONNECTIONS:                ${SERVER_TOMCAT_MAX_CONNECTIONS}
+      SPRING_DATASOURCE_TOMCAT_MAX_ACTIVE:          ${SPRING_DATASOURCE_TOMCAT_MAX_ACTIVE}
+      SPRING_DATASOURCE_HIKARI_MAXIMUM-POOL-SIZE:   ${SPRING_DATASOURCE_HIKARI_MAXIMUM_POOL_SIZE}
+      SPRING_DATASOURCE_HIKARI_MINIMUM_IDLE:        ${SPRING_DATASOURCE_HIKARI_MINIMUM_IDLE}
+      SPRING_DATASOURCE_HIKARI_IDLE_TIMEOUT:        ${SPRING_DATASOURCE_HIKARI_IDLE_TIMEOUT}
+      SPRING_DATASOURCE_HIKARI_MAX_LIFETIME:        ${SPRING_DATASOURCE_HIKARI_MAX_LIFETIME}
+      SPRING_DATASOURCE_HIKARI_CONNECTION_TIMEOUT:  ${SPRING_DATASOURCE_HIKARI_CONNECTION_TIMEOUT}
+      KAFKA_CONFIG_BOOTSTRAP_SERVER_CONFIG:         ${KAFKA_BOOTSTRAP_SERVERS}
+      SPRING_KAFKA_BOOTSTRAP_SERVERS:               ${KAFKA_BOOTSTRAP_SERVERS}
+      SPRING_JPA_SHOW_SQL:                          ${SPRING_JPA_SHOW_SQL}
+      STATE_LEVEL_TENANTID_LENGTH:                  1
+      IS_ENVIRONMENT_CENTRAL_INSTANCE:              false
+      STATE_SCHEMA_INDEX_POSITION_TENANTID:         0
+      KAFKA_TOPIC_AUDIT:                            enc-user-audit-data
+      LOGGING_LOKI_ENABLED:                         true
+      LOGGING_LOKI_URL:                             ${LOGGING_LOKI_URL}
+      LOGGING_LOKI_APP:                             egov-url-shortening
+      LOGGING_LOKI_ENVIRONMENT:                     ${LOGGING_LOKI_ENVIRONMENT}
+      LOGGING_LEVEL_ROOT:                           ${LOGGING_LEVEL_ROOT}
+      OTEL_SERVICE_NAME:                            egov-url-shortening
+      OTEL_EXPORTER_OTLP_ENDPOINT:                  ${OTEL_EXPORTER_OTLP_ENDPOINT}
+
+    # ports:
+    #   - 18088:8088
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsS http://localhost:8080/eus/health >/dev/null 2>&1 || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 120s
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+          cpus: '0.25'
+    networks:
+      - egov-network
+
+  egov-persister:
+    image: ${DOCKER_REPO_EGOV_PERSISTER}:${DOCKER_TAG_EGOV_PERSISTER}
+    container_name: egov-persister
+    depends_on:
+      redpanda:
+        condition: service_healthy
+      egov-mdms-service:
+        condition: service_healthy
+    environment:
+      JAVA_ENABLE_DEBUG:                            true
+      JAVA_DEBUG_PORT:                              5005
+      EGOV_PERSIST_YML_REPO_PATH:                   ${EGOV_PERSIST_YML_REPO_PATH}
+      JAVA_OPTS:                                    -Xmx768m -Xms256m
+      JAVA_ARGS:                                    
+      SERVER_PORT:                                  8080
+      JAEGER_SAMPLER_PARAM:                         1
+      FLYWAY_ENABLED:                               false
+      SPRING_FLYWAY_ENABLED:                        false
+      MANAGEMENT_ENDPOINTS_WEB_BASE_PATH:           /
+      APP_TIMEZONE:                                 ${APP_TIMEZONE}
+      FLYWAY_URL:                                   ${SPRING_DATASOURCE_URL}
+      SPRING_DATASOURCE_URL:                        ${SPRING_DATASOURCE_URL}
+      SPRING_DATASOURCE_USERNAME:                   ${SPRING_DATASOURCE_USERNAME}
+      SPRING_DATASOURCE_PASSWORD:                   ${SPRING_DATASOURCE_PASSWORD}
+      SPRING_DATASOURCE_TOMCAT_INITIAL_SIZE:        ${SPRING_DATASOURCE_TOMCAT_INITIAL_SIZE}
+      SERVER_TOMCAT_MAX_THREADS:                    ${SERVER_TOMCAT_MAX_THREADS}
+      SERVER_TOMCAT_MAX_CONNECTIONS:                ${SERVER_TOMCAT_MAX_CONNECTIONS}
+      SPRING_DATASOURCE_TOMCAT_MAX_ACTIVE:          ${SPRING_DATASOURCE_TOMCAT_MAX_ACTIVE}
+      SPRING_DATASOURCE_HIKARI_MAXIMUM-POOL-SIZE:   ${SPRING_DATASOURCE_HIKARI_MAXIMUM_POOL_SIZE}
+      SPRING_DATASOURCE_HIKARI_MINIMUM_IDLE:        ${SPRING_DATASOURCE_HIKARI_MINIMUM_IDLE}
+      SPRING_DATASOURCE_HIKARI_IDLE_TIMEOUT:        ${SPRING_DATASOURCE_HIKARI_IDLE_TIMEOUT}
+      SPRING_DATASOURCE_HIKARI_MAX_LIFETIME:        ${SPRING_DATASOURCE_HIKARI_MAX_LIFETIME}
+      SPRING_DATASOURCE_HIKARI_CONNECTION_TIMEOUT:  ${SPRING_DATASOURCE_HIKARI_CONNECTION_TIMEOUT}
+      KAFKA_CONFIG_BOOTSTRAP_SERVER_CONFIG:         ${KAFKA_BOOTSTRAP_SERVERS}
+      SPRING_KAFKA_BOOTSTRAP_SERVERS:               ${KAFKA_BOOTSTRAP_SERVERS}
+      SPRING_JPA_SHOW_SQL:                          ${SPRING_JPA_SHOW_SQL}
+      STATE_LEVEL_TENANTID_LENGTH:                  1
+      IS_ENVIRONMENT_CENTRAL_INSTANCE:              false
+      STATE_SCHEMA_INDEX_POSITION_TENANTID:         0
+      KAFKA_TOPIC_AUDIT:                            enc-user-audit-data
+      LOGGING_LOKI_ENABLED:                         true
+      LOGGING_LOKI_URL:                             ${LOGGING_LOKI_URL}
+      LOGGING_LOKI_APP:                             (v1:metadata.name)
+      LOGGING_LOKI_ENVIRONMENT:                     ${LOGGING_LOKI_ENVIRONMENT}
+      LOGGING_LEVEL_ROOT:                           ${LOGGING_LEVEL_ROOT}
+      OTEL_SERVICE_NAME:                            egov-persister
+      OTEL_EXPORTER_OTLP_ENDPOINT:                  ${OTEL_EXPORTER_OTLP_ENDPOINT}
+    volumes:
+      - ./git-sync:/git-sync
+    # ports:
+    #   - 18091:8091
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsS http://localhost:8080/common-persist/actuator/health >/dev/null 2>&1 || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 120s
+    deploy:
+      resources:
+        limits:
+          memory: 1G
+          cpus: '0.25'
+    networks:
+      - egov-network
+
+  egov-otp-db:
+    image: ${DOCKER_REPO_EGOV_OTP}-db:${DOCKER_TAG_EGOV_OTP}
+    container_name: egov-otp-db
+    environment:
+      DB_URL: ${SPRING_DATASOURCE_URL:-jdbc:postgresql://178.236.185.120:5432/phc_db}
+      SCHEMA_TABLE: egov_otp_schema
+      FLYWAY_USER: ${SPRING_DATASOURCE_USERNAME:-postgres}
+      FLYWAY_PASSWORD: ${SPRING_DATASOURCE_PASSWORD:-postgres}
+      FLYWAY_LOCATIONS: ${FLYWAY_LOCATIONS}
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+          cpus: '0.25'
+    networks:
+      - egov-network
+
+  egov-otp:
+    image: ${DOCKER_REPO_EGOV_OTP}:${DOCKER_TAG_EGOV_OTP}
+    container_name: egov-otp
+    depends_on:
+      redpanda:
+        condition: service_healthy
+      egov-otp-db:
+        condition: service_completed_successfully
+    environment:
+      SERVER_PORT:                                  8080
+      JAVA_OPTS:                                    -Xmx192m -Xms192m
+      SECURITY_BASIC_ENABLED:                       false
+      MANAGEMENT_SECURITY_ENABLED:                  false
+      FLYWAY_ENABLED:                               false
+      SPRING_FLYWAY_ENABLED:                        false
+      MANAGEMENT_ENDPOINTS_WEB_BASE_PATH:           /
+      APP_TIMEZONE:                                 ${APP_TIMEZONE}
+      FLYWAY_URL:                                   ${SPRING_DATASOURCE_URL}
+      SPRING_DATASOURCE_URL:                        ${SPRING_DATASOURCE_URL}
+      SPRING_DATASOURCE_USERNAME:                   ${SPRING_DATASOURCE_USERNAME}
+      SPRING_DATASOURCE_PASSWORD:                   ${SPRING_DATASOURCE_PASSWORD}
+      SPRING_DATASOURCE_TOMCAT_INITIAL_SIZE:        ${SPRING_DATASOURCE_TOMCAT_INITIAL_SIZE}
+      SERVER_TOMCAT_MAX_THREADS:                    ${SERVER_TOMCAT_MAX_THREADS}
+      SERVER_TOMCAT_MAX_CONNECTIONS:                ${SERVER_TOMCAT_MAX_CONNECTIONS}
+      SPRING_DATASOURCE_TOMCAT_MAX_ACTIVE:          ${SPRING_DATASOURCE_TOMCAT_MAX_ACTIVE}
+      SPRING_DATASOURCE_HIKARI_MAXIMUM-POOL-SIZE:   ${SPRING_DATASOURCE_HIKARI_MAXIMUM_POOL_SIZE}
+      SPRING_DATASOURCE_HIKARI_MINIMUM_IDLE:        ${SPRING_DATASOURCE_HIKARI_MINIMUM_IDLE}
+      SPRING_DATASOURCE_HIKARI_IDLE_TIMEOUT:        ${SPRING_DATASOURCE_HIKARI_IDLE_TIMEOUT}
+      SPRING_DATASOURCE_HIKARI_MAX_LIFETIME:        ${SPRING_DATASOURCE_HIKARI_MAX_LIFETIME}
+      SPRING_DATASOURCE_HIKARI_CONNECTION_TIMEOUT:  ${SPRING_DATASOURCE_HIKARI_CONNECTION_TIMEOUT}
+      KAFKA_CONFIG_BOOTSTRAP_SERVER_CONFIG:         ${KAFKA_BOOTSTRAP_SERVERS}
+      SPRING_KAFKA_BOOTSTRAP_SERVERS:               ${KAFKA_BOOTSTRAP_SERVERS}
+      SPRING_JPA_SHOW_SQL:                          ${SPRING_JPA_SHOW_SQL}
+      STATE_LEVEL_TENANTID_LENGTH:                  1
+      IS_ENVIRONMENT_CENTRAL_INSTANCE:              false
+      STATE_SCHEMA_INDEX_POSITION_TENANTID:         0
+      KAFKA_TOPIC_AUDIT:                            enc-user-audit-data
+      LOGGING_LOKI_ENABLED:                         true
+      LOGGING_LOKI_URL:                             ${LOGGING_LOKI_URL}
+      LOGGING_LOKI_APP:                             egov-otp
+      LOGGING_LOKI_ENVIRONMENT:                     ${LOGGING_LOKI_ENVIRONMENT}
+      LOGGING_LEVEL_ROOT:                           INFO
+      OTEL_SERVICE_NAME:                            egov-otp
+      OTEL_EXPORTER_OTLP_ENDPOINT:                  ${OTEL_EXPORTER_OTLP_ENDPOINT}
+
+    ports:
+      - "18115:8080"
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsS http://localhost:8080/otp/health >/dev/null 2>&1 || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 90s
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+          cpus: "0.25"
+    networks:
+      - egov-network
+
+  gateway:
+    image: ${DOCKER_REPO_GATEWAY}:${DOCKER_TAG_GATEWAY}
+    container_name: gateway
+    depends_on:
+      redpanda:
+        condition: service_healthy
+    environment:
+      URL_LISTS:                                    ${URL_LISTS}
+      CUSTOM_FILTER_PROPERTY:                       false
+      CUSTOM_FILTER_POSTHOOKS:                      true
+      CUSTOM_FILTER_PREHOOKS:                       true
+      SPRING_CODEC_MAX_IN_MEMORY_SIZE:              ${SPRING_CODEC_MAX_IN_MEMORY_SIZE}  
+      GATEWAY_ROUTES_TL_CALCULATOR_URL:             ${GATEWAY_ROUTES_TL_CALCULATOR_URL}
+      SERVER_PORT:                                  8080
+      JAVA_ENABLE_DEBUG:                            false
+      JAVA_OPTS:                                    -Xmx512m -Xms512m
+      JAVA_DEBUG_PORT:                              5005
+      SPRING_KAFKA_CONSUMER_GROUP_ID:               egov-api-gateway
+      SPRING_KAFKA_PRODUCER_KEY_SERIALIZER:         org.apache.kafka.common.serialization.StringSerializer
+      SPRING_KAFKA_PRODUCER_VALUE_SERIALIZER:       org.springframework.kafka.support.serializer.JsonSerializer
+      EGOV_CUSTOM_ASYNC_FILTER_TOPIC:               res-custom-filter
+      EGOV_OPEN_ENDPOINTS_WHITELIST:                ${EGOV_OPEN_ENDPOINTS_WHITELIST}
+      EGOV_MIXED_MODE_ENDPOINTS_WHITELIST:          ${EGOV_MIXED_MODE_ENDPOINTS_WHITELIST}
+      EVENTLOG_ENABLED:                             false
+      EVENTLOG_TOPIC:                               springGateway-event-log
+      EGOV_AUTHORIZE_ACCESS_CONTROL_HOST:           ${EGOV_ACCESSCONTROL_HOST}
+      EGOV_AUTH_SERVICE_HOST:                       ${EGOV_USER_HOST}
+      GATEWAY_HOST_CONNECT_TIMEOUT_MILLIS:          20000
+      GATEWAY_HOST_SOCKET_TIMEOUT_MILLIS:           60000
+      SECURITY_BASIC_ENABLED:                       false
+      MANAGEMENT_SECURITY_ENABLED:                  false
+      JAVA_ARGS:                                    
+      STATE_LEVEL_TENANT_ID:                        ${EGOV_STATE_LEVEL_TENANT_ID}
+      SPRING_DATA_REDIS_DEFAULT_REPLENISHRATE:      10
+      SPRING_DATA_REDIS_DEFAULT_BURSTCAPACITY:      10
+      SPRING_ROUTES_FILEPATH:                       ${SPRING_ROUTES_FILEPATH}
+      SPRING_DATA_REDIS_HOST:                       ${SPRING_REDIS_HOST}
+      SPRING_DATA_REDIS_PORT:                       ${SPRING_REDIS_PORT}
+      FLYWAY_ENABLED:                               false
+      SPRING_FLYWAY_ENABLED:                        false
+      MANAGEMENT_ENDPOINTS_WEB_BASE_PATH:           /
+      APP_TIMEZONE:                                 ${APP_TIMEZONE}
+      FLYWAY_URL:                                   ${SPRING_DATASOURCE_URL}
+      SPRING_DATASOURCE_URL:                        ${SPRING_DATASOURCE_URL}
+      SPRING_DATASOURCE_USERNAME:                   ${SPRING_DATASOURCE_USERNAME}
+      SPRING_DATASOURCE_PASSWORD:                   ${SPRING_DATASOURCE_PASSWORD}
+      SPRING_DATASOURCE_TOMCAT_INITIAL_SIZE:        ${SPRING_DATASOURCE_TOMCAT_INITIAL_SIZE}
+      SERVER_TOMCAT_MAX_THREADS:                    ${SERVER_TOMCAT_MAX_THREADS}
+      SERVER_TOMCAT_MAX_CONNECTIONS:                ${SERVER_TOMCAT_MAX_CONNECTIONS}
+      SPRING_DATASOURCE_TOMCAT_MAX_ACTIVE:          ${SPRING_DATASOURCE_TOMCAT_MAX_ACTIVE}
+      SPRING_DATASOURCE_HIKARI_MAXIMUM-POOL-SIZE:   ${SPRING_DATASOURCE_HIKARI_MAXIMUM-POOL-SIZE}
+      SPRING_DATASOURCE_HIKARI_MINIMUM_IDLE:        ${SPRING_DATASOURCE_HIKARI_MINIMUM_IDLE}
+      SPRING_DATASOURCE_HIKARI_IDLE_TIMEOUT:        ${SPRING_DATASOURCE_HIKARI_IDLE_TIMEOUT}
+      SPRING_DATASOURCE_HIKARI_MAX_LIFETIME:        ${SPRING_DATASOURCE_HIKARI_MAX_LIFETIME}
+      SPRING_DATASOURCE_HIKARI_CONNECTION_TIMEOUT:  ${SPRING_DATASOURCE_HIKARI_CONNECTION_TIMEOUT}
+      KAFKA_CONFIG_BOOTSTRAP_SERVER_CONFIG:         ${KAFKA_BOOTSTRAP_SERVERS}
+      SPRING_KAFKA_BOOTSTRAP_SERVERS:               ${KAFKA_BOOTSTRAP_SERVERS}
+      SPRING_JPA_SHOW_SQL:                          ${SPRING_JPA_SHOW_SQL}
+      STATE_LEVEL_TENANTID_LENGTH:                  1
+      IS_ENVIRONMENT_CENTRAL_INSTANCE:              false
+      STATE_SCHEMA_INDEX_POSITION_TENANTID:         0
+      KAFKA_TOPIC_AUDIT:                            enc-user-audit-data
+      LOGGING_LOKI_ENABLED:                         ${LOGGING_LOKI_ENABLED}
+      LOGGING_LOKI_URL:                             ${LOGGING_LOKI_URL}
+      LOGGING_LOKI_APP:                             gateway
+      LOGGING_LOKI_ENVIRONMENT:                     ${LOGGING_LOKI_ENVIRONMENT}
+      LOGGING_LEVEL_ROOT:                           ${LOGGING_LEVEL_ROOT}
+      OTEL_SERVICE_NAME:                            gatewayF
+      OTEL_EXPORTER_OTLP_ENDPOINT:                  ${OTEL_EXPORTER_OTLP_ENDPOINT}
+    volumes:
+      - ./gateway/route.properties:/etc/zuul/routes.properties:ro
+    # ports:
+    #   - 18088:8088
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsS http://localhost:8080/health >/dev/null 2>&1 || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 120s
+    deploy:
+      resources:
+        limits:
+          memory: 1G
+          cpus: '0.5'
+    networks:
+      - egov-network
+
+  inbox:
+    image: ${DOCKER_REPO_INBOX}:${DOCKER_TAG_INBOX}
+    container_name: inbox
+    depends_on:
+      redpanda:
+        condition: service_healthy
+      egov-mdms-service:
+        condition: service_healthy
+    environment:
+      SPRING_JACKSON_DESRIALIZATION_FAIL-ON-UNKNOWN-PROPERTIES:  false
+      JAVA_ENABLE_DEBUG:                                         true
+      JAVA_DEBUG_PORT:                                           5005
+      JAVA_OPTS:                                                 -Xmx256m -Xms256m
+      SERVER_PORT:                                               8080
+      JAVA_ARGS:                                                 -Dspring.profiles.active=monitoring
+      WORKFLOW_HOST:                                             ${EGOV_WORKFLOW_HOST}
+      EGOV_USER_HOST:                                            ${EGOV_USER_HOST}
+      EGOV_MDMS_HOST:                                            ${EGOV_MDMS_HOST}
+      SERVICES_ESINDEXER_HOST:                                   ${ELASTICSEARCH_HOST}
+      EGOV_ES_PASSWORD:                                          ${ELASTICSEARCH_PASSWORD}
+      EGOV_ES_USERNAME:                                          ${ELASTICSEARCH_USERNAME}
+      STATE_LEVEL_TENANT_ID:                                     ${EGOV_STATE_LEVEL_TENANT_ID}
+      PARENT_LEVEL_TENANT_ID:                                    ${EGOV_STATE_LEVEL_TENANT_ID}
+      SECURITY_BASIC_ENABLED:                                    false
+      MANAGEMENT_SECURITY_ENABLED:                               false
+      FLYWAY_ENABLED:                                            false
+      SPRING_FLYWAY_ENABLED:                                     false
+      MANAGEMENT_ENDPOINTS_WEB_BASE_PATH:                        /
+      APP_TIMEZONE:                                              ${APP_TIMEZONE}
+      FLYWAY_URL:                                                ${SPRING_DATASOURCE_URL}
+      SPRING_DATASOURCE_URL:                                     ${SPRING_DATASOURCE_URL}
+      SPRING_DATASOURCE_USERNAME:                                ${SPRING_DATASOURCE_USERNAME}
+      SPRING_DATASOURCE_PASSWORD:                                ${SPRING_DATASOURCE_PASSWORD}
+      SPRING_DATASOURCE_TOMCAT_INITIAL_SIZE:                     ${SPRING_DATASOURCE_TOMCAT_INITIAL_SIZE}
+      SERVER_TOMCAT_MAX_THREADS:                                 ${SERVER_TOMCAT_MAX_THREADS}
+      SERVER_TOMCAT_MAX_CONNECTIONS:                             ${SERVER_TOMCAT_MAX_CONNECTIONS}
+      SPRING_DATASOURCE_TOMCAT_MAX_ACTIVE:                       ${SPRING_DATASOURCE_TOMCAT_MAX_ACTIVE}
+      SPRING_DATASOURCE_HIKARI_MAXIMUM-POOL-SIZE:                ${SPRING_DATASOURCE_TOMCAT_MAX_ACTIVE}
+      SPRING_DATASOURCE_HIKARI_MINIMUM_IDLE:                     ${SPRING_DATASOURCE_HIKARI_MINIMUM_IDLE}
+      SPRING_DATASOURCE_HIKARI_IDLE_TIMEOUT:                     ${SPRING_DATASOURCE_HIKARI_IDLE_TIMEOUT}
+      SPRING_DATASOURCE_HIKARI_MAX_LIFETIME:                     ${SPRING_DATASOURCE_HIKARI_MAX_LIFETIME}
+      SPRING_DATASOURCE_HIKARI_CONNECTION_TIMEOUT:               ${SPRING_DATASOURCE_HIKARI_CONNECTION_TIMEOUT}
+      KAFKA_CONFIG_BOOTSTRAP_SERVER_CONFIG:                      ${KAFKA_BOOTSTRAP_SERVERS}
+      SPRING_KAFKA_BOOTSTRAP_SERVERS:                            ${KAFKA_BOOTSTRAP_SERVERS}
+      SPRING_JPA_SHOW_SQL:                                       ${SPRING_JPA_SHOW_SQL}
+      STATE_LEVEL_TENANTID_LENGTH:                               1
+      IS_ENVIRONMENT_CENTRAL_INSTANCE:                           false
+      STATE_SCHEMA_INDEX_POSITION_TENANTID:                      0
+      KAFKA_TOPIC_AUDIT:                                         enc-user-audit-data
+      LOGGING_LOKI_ENABLED:                                      true
+      LOGGING_LOKI_URL:                                          ${LOGGING_LOKI_URL}
+      LOGGING_LOKI_APP:                                          inbox
+      LOGGING_LOKI_ENVIRONMENT:                                  ${LOGGING_LOKI_ENVIRONMENT}
+      LOGGING_LEVEL_ROOT:                                        ${LOGGING_LEVEL_ROOT}
+      SPRING_REDIS_HOST:                                         ${SPRING_REDIS_HOST}
+      SPRING_REDIS_PORT:                                         ${SPRING_REDIS_PORT}
+      OTEL_SERVICE_NAME:                                         inbox
+      OTEL_EXPORTER_OTLP_ENDPOINT:                               ${OTEL_EXPORTER_OTLP_ENDPOINT}
+    # ports:
+    #   - 18088:8088
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsS http://localhost:8080/inbox/health >/dev/null 2>&1 || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 120s
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+          cpus: '0.25'
+    networks:
+      - egov-network
+
+  individual-db:
+    image: ${DOCKER_REPO_INDIVIDUAL}-db:${DOCKER_TAG_INDIVIDUAL}
+    container_name: individual-db
+    environment:
+      DB_URL: ${SPRING_DATASOURCE_URL:-jdbc:postgresql://178.236.185.120:5432/phc_db}
+      SCHEMA_TABLE: individual_schema
+      FLYWAY_USER: ${SPRING_DATASOURCE_USERNAME:-postgres}
+      FLYWAY_PASSWORD: ${SPRING_DATASOURCE_PASSWORD:-postgres}
+      FLYWAY_LOCATIONS: ${FLYWAY_LOCATIONS}
+    networks:
+      - egov-network
+    restart: on-failure
+
+  individual:
+    image: ${DOCKER_REPO_INDIVIDUAL}:${DOCKER_TAG_INDIVIDUAL}
+    container_name: individual
+    depends_on:
+      redpanda:
+        condition: service_healthy
+      egov-mdms-service:
+        condition: service_healthy
+      individual-db:
+        condition: service_completed_successfully
+    environment:
+      SPRING_KAFKA_CONSUMER_GROUP_ID:               health-individual
+      SPRING_KAFKA_PRODUCER_KEY_SERIALIZER:         org.apache.kafka.common.serialization.StringSerializer
+      EGOV_IDGEN_HOST:                              ${EGOV_IDGEN_HOST}
+      EGOV_IDGEN_INTEGRATION_ENABLED:               true
+      IDGEN.INDIVIDUAL.ID.FORMAT:                   individual.id
+      SPRING_CACHE_TYPE:                            redis
+      SPRING_CACHE_REDIS_TIME-TO-LIVE:              60
+      SPRING_CACHE_AUTOEXPIRY:                      true
+      INDIVIDUAL.CONSUMER.BULK.CREATE.TOPIC:        individual-consumer-bulk-create-topic
+      INDIVIDUAL.CONSUMER.BULK.UPDATE.TOPIC:        individual-consumer-bulk-update-topic
+      INDIVIDUAL.CONSUMER.BULK.DELETE.TOPIC:        individual-consumer-bulk-delete-topic
+      INDIVIDUAL.PRODUCER.SAVE.TOPIC:               save-individual-topic
+      INDIVIDUAL.PRODUCER.UPDATE.TOPIC:             update-individual-topic
+      INDIVIDUAL.PRODUCER.DELETE.TOPIC:             delete-individual-topic
+      JAVA_OPTS:                                    -Xmx256m -Xms256m
+      JAVA_ARGS:                                    -Dspring.profiles.active=monitoring
+      SERVER_PORT:                                  8080
+      SECURITY_BASIC_ENABLED:                       false
+      MANAGEMENT_SECURITY_ENABLED:                  false
+      STATE_LEVEL_TENANT_ID:                        ${EGOV_STATE_LEVEL_TENANT_ID}
+      EGOV_MDMS_HOST:                               ${EGOV_MDMS_HOST}
+      EGOV_LOCALIZATION_HOST:                       ${EGOV_LOCALIZATION_HOST}
+      AADHAAR_PATTERN:                              X{8}\d{4}
+      MOBILE_PATTERN:                               \d+
+      EGOV_USER_HOST:                               ${EGOV_USER_HOST}
+      EGOV_USER_INTEGRATION_ENABLED:                true
+      USER_SYNC_ENABLED:                            true
+      USER_SERVICE_USER_TYPE:                       CITIZEN
+      USER_SERVICE_ACCOUNT_LOCKED:                  false
+      INDIVIDUAL_PRODUCER_UPDATE_USER_ID_TOPIC:     update-user-id-topic
+      NOTIFICATION_SMS_ENABLED:                     false
+      FLYWAY_ENABLED:                               false
+      SPRING_FLYWAY_ENABLED:                        false
+      MANAGEMENT_ENDPOINTS_WEB_BASE_PATH:           /
+      APP_TIMEZONE:                                 ${APP_TIMEZONE}
+      FLYWAY_URL:                                   ${SPRING_DATASOURCE_URL}
+      SPRING_DATASOURCE_URL:                        ${SPRING_DATASOURCE_URL}
+      SPRING_DATASOURCE_USERNAME:                   ${SPRING_DATASOURCE_USERNAME}
+      SPRING_DATASOURCE_PASSWORD:                   ${SPRING_DATASOURCE_PASSWORD}
+      SPRING_DATASOURCE_TOMCAT_INITIAL_SIZE:        ${SPRING_DATASOURCE_TOMCAT_INITIAL_SIZE}
+      SERVER_TOMCAT_MAX_THREADS:                    ${SERVER_TOMCAT_MAX_THREADS}
+      SERVER_TOMCAT_MAX_CONNECTIONS:                ${SERVER_TOMCAT_MAX_CONNECTIONS}
+      SPRING_DATASOURCE_TOMCAT_MAX_ACTIVE:          ${SPRING_DATASOURCE_TOMCAT_MAX_ACTIVE}
+      SPRING_DATASOURCE_HIKARI_MAXIMUM-POOL-SIZE:   ${SPRING_DATASOURCE_HIKARI_MAXIMUM_POOL_SIZE}
+      SPRING_DATASOURCE_HIKARI_MINIMUM_IDLE:        ${SPRING_DATASOURCE_HIKARI_MINIMUM_IDLE}
+      SPRING_DATASOURCE_HIKARI_IDLE_TIMEOUT:        ${SPRING_DATASOURCE_HIKARI_IDLE_TIMEOUT}
+      SPRING_DATASOURCE_HIKARI_MAX_LIFETIME:        ${SPRING_DATASOURCE_HIKARI_MAX_LIFETIME}
+      SPRING_DATASOURCE_HIKARI_CONNECTION_TIMEOUT:  ${SPRING_DATASOURCE_HIKARI_CONNECTION_TIMEOUT}
+      KAFKA_CONFIG_BOOTSTRAP_SERVER_CONFIG:         ${KAFKA_BOOTSTRAP_SERVERS}
+      SPRING_KAFKA_BOOTSTRAP_SERVERS:               ${KAFKA_BOOTSTRAP_SERVERS}
+      SPRING_JPA_SHOW_SQL:                          ${SPRING_JPA_SHOW_SQL}                       
+      STATE_LEVEL_TENANTID_LENGTH:                  1
+      IS_ENVIRONMENT_CENTRAL_INSTANCE:              false
+      STATE_SCHEMA_INDEX_POSITION_TENANTID:         0
+      KAFKA_TOPIC_AUDIT:                            enc-user-audit-data
+      LOGGING_LOKI_ENABLED:                         ${LOGGING_LOKI_ENABLED}
+      LOGGING_LOKI_URL:                             ${LOGGING_LOKI_URL}
+      LOGGING_LOKI_APP:                             individual
+      LOGGING_LOKI_ENVIRONMENT:                     ${LOGGING_LOKI_ENVIRONMENT}
+      LOGGING_LEVEL_ROOT:                           ${LOGGING_LEVEL_ROOT}
+      SPRING_REDIS_HOST:                            ${SPRING_REDIS_HOST}
+      SPRING_REDIS_PORT:                            ${SPRING_REDIS_PORT}
+      OTEL_SERVICE_NAME:                            individual
+      OTEL_EXPORTER_OTLP_ENDPOINT:                  ${OTEL_EXPORTER_OTLP_ENDPOINT}
+    # ports:
+    #   - 18088:8088
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsS http://localhost:8080/individual/health >/dev/null 2>&1 || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 120s
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+          cpus: '0.25'
+    networks:
+      - egov-network
+
+  pdf-service-db:
+    image: ${DOCKER_REPO_PDF_SERVICE}-db:${DOCKER_TAG_PDF_SERVICE}
+    container_name: pdf-service-db
+    environment:
+      DB_URL: ${SPRING_DATASOURCE_URL:-jdbc:postgresql://178.236.185.120:5432/phc_db}
+      SCHEMA_TABLE: pdf_service_schema
+      FLYWAY_USER: ${SPRING_DATASOURCE_USERNAME:-postgres}
+      FLYWAY_PASSWORD: ${SPRING_DATASOURCE_PASSWORD:-postgres}
+      FLYWAY_LOCATIONS: ${FLYWAY_LOCATIONS}
+    networks:
+      - egov-network
+    restart: on-failure
+
+  pdf-service:
+    image: ${DOCKER_REPO_PDF_SERVICE}:${DOCKER_TAG_PDF_SERVICE}
+    container_name: pdf-service
+    depends_on:
+      redpanda:
+        condition: service_healthy
+      egov-mdms-service:
+        condition: service_healthy
+      pdf-service-db:
+        condition: service_completed_successfully
+    environment:
+      DEFAULT_LOCALISATION_TENANT:                  ${EGOV_STATE_LEVEL_TENANT_ID}
+      DB_HOST:                                      ${DB_HOST}
+      DB_NAME:                                      ${DB_NAME}
+      DB_USER:                                      ${SPRING_DATASOURCE_USERNAME}
+      DB_PASSWORD:                                  ${SPRING_DATASOURCE_PASSWORD}
+      KAFKA_BROKER_HOST:                            ${EGOV_LOCALIZATION_HOST}
+      EGOV_EXTERNAL_HOST:                           ${DOMAIN_HTTPS_URL}
+      DB_PORT:                                      5432
+      SERVER_PORT:                                  8080
+      MAX_NUMBER_PAGES:                             80
+      EGOV_LOCALISATION_HOST:                       ${EGOV_LOCALIZATION_HOST}
+      EGOV_FILESTORE_SERVICE_HOST:                  ${EGOV_FILESTORE_HOST}
+      EGOV_HOST:                                    ${DOMAIN_HTTPS_URL}
+      EGOV_MDMS_HOST:                               ${EGOV_MDMS_HOST}
+      FLYWAY_ENABLED:                               false
+      SPRING_FLYWAY_ENABLED:                        false
+      MANAGEMENT_ENDPOINTS_WEB_BASE_PATH:           /
+      APP_TIMEZONE:                                 ${APP_TIMEZONE}
+      FLYWAY_URL:                                   ${SPRING_DATASOURCE_URL}
+      SPRING_DATASOURCE_URL:                        ${SPRING_DATASOURCE_URL}
+      SPRING_DATASOURCE_USERNAME:                   ${SPRING_DATASOURCE_USERNAME}
+      SPRING_DATASOURCE_PASSWORD:                   ${SPRING_DATASOURCE_PASSWORD}
+      SPRING_DATASOURCE_TOMCAT_INITIAL_SIZE:        ${SPRING_DATASOURCE_TOMCAT_INITIAL_SIZE}
+      SERVER_TOMCAT_MAX_THREADS:                    ${SERVER_TOMCAT_MAX_THREADS}
+      SERVER_TOMCAT_MAX_CONNECTIONS:                ${SERVER_TOMCAT_MAX_CONNECTIONS}
+      SPRING_DATASOURCE_TOMCAT_MAX_ACTIVE:          ${SPRING_DATASOURCE_TOMCAT_MAX_ACTIVE}
+      SPRING_DATASOURCE_HIKARI_MAXIMUM-POOL-SIZE:   ${SPRING_DATASOURCE_HIKARI_MAXIMUM_POOL_SIZE}
+      SPRING_DATASOURCE_HIKARI_MINIMUM_IDLE:        ${SPRING_DATASOURCE_HIKARI_MINIMUM_IDLE}
+      SPRING_DATASOURCE_HIKARI_IDLE_TIMEOUT:        ${SPRING_DATASOURCE_HIKARI_IDLE_TIMEOUT}
+      SPRING_DATASOURCE_HIKARI_MAX_LIFETIME:        ${SPRING_DATASOURCE_HIKARI_MAX_LIFETIME}
+      SPRING_DATASOURCE_HIKARI_CONNECTION_TIMEOUT:  ${SPRING_DATASOURCE_HIKARI_CONNECTION_TIMEOUT}
+      KAFKA_CONFIG_BOOTSTRAP_SERVER_CONFIG:         ${KAFKA_BOOTSTRAP_SERVERS}
+      SPRING_KAFKA_BOOTSTRAP_SERVERS:               ${KAFKA_BOOTSTRAP_SERVERS}
+      SPRING_JPA_SHOW_SQL:                          ${SPRING_JPA_SHOW_SQL}
+      STATE_LEVEL_TENANTID_LENGTH:                  1
+      IS_ENVIRONMENT_CENTRAL_INSTANCE:              false
+      STATE_SCHEMA_INDEX_POSITION_TENANTID:         0
+      KAFKA_TOPIC_AUDIT:                            enc-user-audit-data
+      OTEL_SERVICE_NAME:                            pdf-service
+      OTEL_EXPORTER_OTLP_ENDPOINT:                  ${OTEL_EXPORTER_OTLP_ENDPOINT}
+    # ports:
+    #   - 18088:8088
+    # healthcheck:
+    #   test: ["CMD-SHELL", "curl -fsS http://localhost:8080/egov-idgen/health >/dev/null 2>&1 || exit 1"]
+    #   interval: 30s
+    #   timeout: 10s
+    #   retries: 3
+    #   start_period: 120s
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+          cpus: '0.25'
+    networks:
+      - egov-network
+
+  user-otp:
+    image: ${DOCKER_REPO_USER_OTP}:${DOCKER_TAG_USER_OTP}
+    container_name: user-otp
+    depends_on:
+      redpanda:
+        condition: service_healthy
+      egov-mdms-service:
+        condition: service_healthy
+    environment:
+      EGOV_SMS_TEMPLATE_ID:                         1107173141022956265
+      CONFIG_ISTEST:                                false
+      SERVER_PORT:                                  8080
+      OTP_HOST:                                     ${EGOV_OTP_HOST}/otp
+      SECURITY_BASIC_ENABLED:                       false
+      MANAGEMENT_SECURITY_ENABLED:                  false
+      USER_HOST:                                    ${EGOV_USER_HOST}
+      EGOV_LOCALISATION_HOST:                       ${EGOV_LOCALIZATION_HOST}
+      SMS_TOPIC:                                    egov.core.notification.sms
+      JAVA_OPTS:                                    -Xmx192m -Xms192m
+      FLYWAY_ENABLED:                               false
+      SPRING_FLYWAY_ENABLED:                        false
+      MANAGEMENT_ENDPOINTS_WEB_BASE_PATH:           /
+      APP_TIMEZONE:                                 ${APP_TIMEZONE}
+      FLYWAY_URL:                                   ${SPRING_DATASOURCE_URL}
+      SPRING_DATASOURCE_URL:                        ${SPRING_DATASOURCE_URL}
+      SPRING_DATASOURCE_USERNAME:                   ${SPRING_DATASOURCE_USERNAME}
+      SPRING_DATASOURCE_PASSWORD:                   ${SPRING_DATASOURCE_PASSWORD}
+      SPRING_DATASOURCE_TOMCAT_INITIAL_SIZE:        ${SPRING_DATASOURCE_TOMCAT_INITIAL_SIZE}
+      SERVER_TOMCAT_MAX_THREADS:                    ${SERVER_TOMCAT_MAX_THREADS}
+      SERVER_TOMCAT_MAX_CONNECTIONS:                ${SERVER_TOMCAT_MAX_CONNECTIONS}
+      SPRING_DATASOURCE_TOMCAT_MAX_ACTIVE:          ${SPRING_DATASOURCE_TOMCAT_MAX_ACTIVE}
+      SPRING_DATASOURCE_HIKARI_MAXIMUM-POOL-SIZE:   ${SPRING_DATASOURCE_HIKARI_MAXIMUM_POOL_SIZE}
+      SPRING_DATASOURCE_HIKARI_MINIMUM_IDLE:        ${SPRING_DATASOURCE_HIKARI_MINIMUM_IDLE}
+      SPRING_DATASOURCE_HIKARI_IDLE_TIMEOUT:        ${SPRING_DATASOURCE_HIKARI_IDLE_TIMEOUT}
+      SPRING_DATASOURCE_HIKARI_MAX_LIFETIME:        ${SPRING_DATASOURCE_HIKARI_MAX_LIFETIME}
+      SPRING_DATASOURCE_HIKARI_CONNECTION_TIMEOUT:  ${SPRING_DATASOURCE_HIKARI_CONNECTION_TIMEOUT}
+      KAFKA_CONFIG_BOOTSTRAP_SERVER_CONFIG:         ${KAFKA_BOOTSTRAP_SERVERS}
+      SPRING_KAFKA_BOOTSTRAP_SERVERS:               ${KAFKA_BOOTSTRAP_SERVERS}
+      SPRING_JPA_SHOW_SQL:                          ${SPRING_JPA_SHOW_SQL}  
+      STATE_LEVEL_TENANTID_LENGTH:                  1
+      IS_ENVIRONMENT_CENTRAL_INSTANCE:              false
+      STATE_SCHEMA_INDEX_POSITION_TENANTID:         0
+      KAFKA_TOPIC_AUDIT:                            enc-user-audit-data
+      LOGGING_LOKI_ENABLED:                         ${LOGGING_LOKI_ENABLED}
+      LOGGING_LOKI_URL:                             ${LOGGING_LOKI_URL}
+      LOGGING_LOKI_APP:                             user-otp
+      LOGGING_LOKI_ENVIRONMENT:                     ${LOGGING_LOKI_ENVIRONMENT}
+      LOGGING_LEVEL_ROOT:                           ${LOGGING_LEVEL_ROOT}
+      OTEL_SERVICE_NAME:                            user-otp
+      OTEL_EXPORTER_OTLP_ENDPOINT:                  ${OTEL_EXPORTER_OTLP_ENDPOINT}
+    # ports:
+    #   - 18088:8088
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsS http://localhost:8080/user-otp/health >/dev/null 2>&1 || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 120s
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+          cpus: '0.25'
+    networks:
+      - egov-network
 
   digit-ui:
-    image: egovio/digit-ui:multiarch-d448cb7
+    image: ${DOCKER_REPO_DIGIT_UI}:${DOCKER_TAG_DIGIT_UI}
     container_name: digit-ui
     ports:
       - "18080:80"
+    volumes:
+     - ./digit-ui/subfilter.conf:/etc/nginx/conf.d/sub_filter.conf:ro
     healthcheck:
-      test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:80/ui/ >/dev/null 2>&1 || exit 1"]
+      test: ["CMD-SHELL", "curl -fsS http://127.0.0.1:80/ui/ >/dev/null 2>&1 || exit 1"]
       interval: 30s
       timeout: 10s
       retries: 5
@@ -856,48 +1919,409 @@ services:
     networks:
       - egov-network
 
-  kong:
-    image: kong:3.6
-    container_name: kong-gateway
+  dristi-case-pdf:
+    image: ${DOCKER_REPO_DRISTI_CASE_PDF}:${DOCKER_TAG_DRISTI_CASE_PDF}
+    container_name: dristi-case-pdf
+    depends_on:
+      redpanda:
+        condition: service_healthy
     environment:
-      KONG_DATABASE: "off"
-      KONG_DECLARATIVE_CONFIG: /kong/kong.yml
-      KONG_PROXY_ACCESS_LOG: /dev/stdout
-      KONG_ADMIN_ACCESS_LOG: /dev/stdout
-      KONG_PROXY_ERROR_LOG: /dev/stderr
-      KONG_ADMIN_ERROR_LOG: /dev/stderr
-      KONG_ADMIN_LISTEN: 0.0.0.0:8001
-      KONG_ADMIN_GUI_URL: http://localhost:8002
-      KONG_STATUS_LISTEN: 0.0.0.0:8100
-      KONG_MEM_CACHE_SIZE: 64m
-      KONG_NGINX_WORKER_PROCESSES: 1
+      COURT_NAME:        ${COURT_NAME}
+
+      NODE_OPTIONS:      --max-old-space-size=2048
+      SERVER_PORT:       8080
+      PDF_SERVICE_URL:   http://pdf-service:8080
+      FILE_STORE_HOST:   http://egov-filestore:8080
+      PAYLOADSIZE:       5mb
+      DRISTI_CASE_HOST:  ${DRISTI_BACKEND_HOST}
+    # ports:
+    #   - 18088:8088
     deploy:
       resources:
         limits:
-          memory: 256M
+          memory: 512M
           cpus: '0.25'
-    volumes:
-      - ./kong/kong.yml:/kong/kong.yml:ro
-    ports:
-      - "18000:8000"
-      - "18443:8443"
-      - "18001:8001"
-      - "18002:8002"
-      - "18100:8100"
-    healthcheck:
-      test: ["CMD", "kong", "health"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 30s
-    depends_on:
-      egov-mdms-service:
-        condition: service_healthy
-      egov-user:
-        condition: service_healthy
     networks:
       - egov-network
 
+  dristi-pdf:
+    image: ${DOCKER_REPO_DRISTI_PDF}:${DOCKER_TAG_DRISTI_PDF}
+    container_name: dristi-pdf
+    depends_on:
+      redpanda:
+        condition: service_healthy
+    environment:
+      DB_HOST:                            ${DB_HOST}
+      DB_NAME:                            ${DB_NAME}
+      DB_USER:                            ${SPRING_DATASOURCE_USERNAME}
+      DB_PASSWORD:                        ${SPRING_DATASOURCE_PASSWORD}
+      KAFKA_BROKER_HOST:                  ${KAFKA_BOOTSTRAP_SERVERS}
+      DB_PORT:                            5432
+      EGOV_MDMS_HOST:                     ${EGOV_MDMS_HOST}
+      EGOV_PDF_HOST:                      ${EGOV_PDF_SERVICE_HOST}
+      DRISTI_CASE_HOST:                   ${DRISTI_BACKEND_HOST}
+      DRISTI_ORDER_HOST:                  ${DRISTI_BACKEND_HOST}
+      EGOV_HRMS_HOST:                     ${EGOV_HRMS_HOST}
+      EGOV_INDIVIDUAL_HOST:               ${EGOV_INDIVIDUAL_HOST}
+      DRISTI_HEARING_HOST:                ${DRISTI_BACKEND_HOST}
+      DRISTI_ADVOCATE_HOST:               ${DRISTI_BACKEND_HOST}
+      CONTEXT_PATH:                       /egov-pdf
+      EGOV_HOST:                          ${DOMAIN_HTTPS_URL}
+      DRISTI_APPLICATION_HOST:            ${DRISTI_BACKEND_HOST}
+      EGOV_LOCALIZATION_HOST:             ${EGOV_LOCALIZATION_HOST}
+      EGOV_FILESTORE_SERVICE_HOST:        ${EGOV_FILESTORE_HOST}
+      JUDGE_NAME:                         ${JUDGE_NAME}
+      JUDGE_DESIGNATION:                  ${JUDGE_DESIGNATION}
+      ORDER_HEADING:                      ${ORDER_HEADING}
+      JUDGE_DESIGNATION_HEADER:           ${JUDGE_DESIGNATION_HEADER}
+      DRISTI_TASK_HOST:                   ${DRISTI_BACKEND_HOST}
+      DRISTI_EVIDENCE_HOST:               ${DRISTI_BACKEND_HOST}
+      DRISTI_BAIL_BOND_HOST:              ${DRISTI_BACKEND_HOST}
+      DRISTI_TASK_MANAGEMENT_HOST:        ${DRISTI_BACKEND_HOST}
+      DRISTI_DIGITALIZED_DOCUMENTS_HOST:  ${DRISTI_BACKEND_HOST}
+      DRISTI_CTC_APPLICATIONS_HOST:       ${DRISTI_BACKEND_HOST}
+      DRISTI_OPENAPI_CASE_HOST:           ${DRISTI_BACKEND_HOST}
+
+    # ports:
+    #   - 18088:8088
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+          cpus: '0.25'
+    networks:
+      - egov-network
+
+  epayments:
+    image: ${DOCKER_REPO_EPAYMENTS}:${DOCKER_TAG_EPAYMENTS}
+    container_name: epayments
+    depends_on:
+      redpanda:
+        condition: service_healthy
+    environment:
+      EXTERNAL_HOST:  https://${DOMAIN}
+      SERVER_URL:     ${DRISTI_BACKEND_HOST}
+      DRISTI_URL:     ${DRISTI_URL}
+    # ports:
+    #   - 18088:8088
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+          cpus: '0.25'
+    networks:
+      - egov-network
+
+  kerala-sms:
+    image: ${DOCKER_REPO_KERALA_SMS}:${DOCKER_TAG_KERALA_SMS}
+    container_name: kerala-sms
+    depends_on:
+      redpanda:
+        condition: service_healthy
+      egov-mdms-service:
+        condition: service_healthy
+    environment:
+      KAFKA_TOPICS_NOTIFICATION_SMS_NAME:           egov.core.notification.sms
+      KAFKA_TOPICS_NOTIFICATION_SMS_ID:             egov.core.notification.sms
+      KAFKA_TOPICS_NOTIFICATION_SMS_GROUP:          egov.core.notification.sms
+      SMS_CONFIG_MAP:                               ${SMS_CONFIG_MAP}
+      SMS_PROVIDER_URL:                             https://msdgweb.mgov.gov.in/esms/sendsmsrequestDLT
+      SMS_SENDER_USERNAME:                          ${SMS_SENDER_USERNAME}
+      SMS_SENDER_PASSWORD:                          ${SMS_SENDER_PASSWORD}
+      SMS_SENDER_SECURE_KEY:                        ${SMS_SENDER_SECURE_KEY}
+      SMS_ENABLED:                                  ${SMS_ENABLED}
+      SMS_SENDER:                                   sms sender
+      SMS_SENDER_REQUESTTYPE:                       GET
+      SMS_SENDER_REQ_PARAM_NAME:                    sid
+      SMS_SENDER_USERNAME_REQ_PARAM_NAME:           User
+      SMS_SENDER_PASSWORD_REQ_PARAM_NAME:           passwd
+      SMS_DESTINATION_MOBILE_REQ_PARAM_NAME:        mobilenumber
+      SMS_TYPE_REQ_PARAM_NAME:                      smsservicetype
+      SMS_MESSAGE_REQ_PARAM_NAME:                   message
+      SMS_EXTRA_REQ_PARAMS:                         mtype=N&DR=Y
+      SMS_VERIFY_SSL:                               false
+      SMS_URL_DONT_ENCODE_URL:                      true
+      SMS_SPICEDIGITAL_PROVIDER_URL:                https://msdgweb.mgov.gov.in/esms/sendsmsrequestDLT
+      SMS_SPICEDIGITAL_SENDER_USERNAME:             ${SMS_SENDER_USERNAME}
+      SMS_SPICEDIGITAL_SENDER_PASSWORD:             ${SMS_SENDER_PASSWORD}
+      LOGGING_LEVEL_org.egov.tracer.kafka:          DEBUG
+      SMS_SPICEDIGITAL_SENDER:                      sms sender
+      SMS_GATEWAY_TO_USE:                           sms provider name
+      JAVA_OPTS:                                    -Xmx192m -Xms192m
+      SMS_PROVIDER_USERNAME:                        ${SMS_SENDER_USERNAME}
+      SMS_PROVIDER_PASSWORD:                        ${SMS_SENDER_PASSWORD}
+      SMS_PROVIDER_CLASS:                           CDAC
+      SMS_PROVIDER_REQUESTTYPE:                     POST
+      SMS_SENDERID:                                 CRTKER
+      SMS_PROVIDER_CONTENTTYPE:                     application/x-www-form-urlencoded
+      SMS_VERIFY_RESPONSE:                          true
+      SMS_VERIFY_RESPONSECONTAINS:                  SMS message(s) sent
+      SMS_SUCCESS_CODES:                            200,201,202
+      SMS_ERROR_CODES:                              401,402,403,404,405,406,407,408,409,410,411,412,413,414,415,416,417,418
+      SMS_IS_DEFAULT_NUMBER:                        false
+      FLYWAY_ENABLED:                               false
+      SPRING_FLYWAY_ENABLED:                        false
+      MANAGEMENT_ENDPOINTS_WEB_BASE_PATH:           /
+      APP_TIMEZONE:                                 ${APP_TIMEZONE}
+      FLYWAY_URL:                                   ${SPRING_DATASOURCE_URL}
+      SPRING_DATASOURCE_URL:                        ${SPRING_DATASOURCE_URL}
+      SPRING_DATASOURCE_USERNAME:                   ${SPRING_DATASOURCE_USERNAME}
+      SPRING_DATASOURCE_PASSWORD:                   ${SPRING_DATASOURCE_PASSWORD}
+      SPRING_DATASOURCE_TOMCAT_INITIAL_SIZE:        ${SPRING_DATASOURCE_TOMCAT_INITIAL_SIZE}
+      SERVER_TOMCAT_MAX_THREADS:                    ${SERVER_TOMCAT_MAX_THREADS}
+      SERVER_TOMCAT_MAX_CONNECTIONS:                ${SERVER_TOMCAT_MAX_CONNECTIONS}
+      SPRING_DATASOURCE_TOMCAT_MAX_ACTIVE:          ${SPRING_DATASOURCE_TOMCAT_MAX_ACTIVE}
+      SPRING_DATASOURCE_HIKARI_MAXIMUM-POOL-SIZE:   ${SPRING_DATASOURCE_HIKARI_MAXIMUM_POOL_SIZE}
+      SPRING_DATASOURCE_HIKARI_MINIMUM_IDLE:        ${SPRING_DATASOURCE_HIKARI_MINIMUM_IDLE}
+      SPRING_DATASOURCE_HIKARI_IDLE_TIMEOUT:        ${SPRING_DATASOURCE_HIKARI_IDLE_TIMEOUT}
+      SPRING_DATASOURCE_HIKARI_MAX_LIFETIME:        ${SPRING_DATASOURCE_HIKARI_MAX_LIFETIME}
+      SPRING_DATASOURCE_HIKARI_CONNECTION_TIMEOUT:  ${SPRING_DATASOURCE_HIKARI_CONNECTION_TIMEOUT}
+      KAFKA_CONFIG_BOOTSTRAP_SERVER_CONFIG:         ${KAFKA_BOOTSTRAP_SERVERS}
+      SPRING_KAFKA_BOOTSTRAP_SERVERS:               ${KAFKA_BOOTSTRAP_SERVERS}
+      SPRING_JPA_SHOW_SQL:                          ${SPRING_JPA_SHOW_SQL}  
+      STATE_LEVEL_TENANTID_LENGTH:                  1
+      IS_ENVIRONMENT_CENTRAL_INSTANCE:              false
+      STATE_SCHEMA_INDEX_POSITION_TENANTID:         0
+      KAFKA_TOPIC_AUDIT:                            enc-user-audit-data
+      LOGGING_LOKI_ENABLED:                         ${LOGGING_LOKI_ENABLED}
+      LOGGING_LOKI_URL:                             ${LOGGING_LOKI_URL}
+      LOGGING_LOKI_APP:                             kerala-sms
+      LOGGING_LOKI_ENVIRONMENT:                     ${LOGGING_LOKI_ENVIRONMENT}
+      LOGGING_LEVEL_ROOT:                           ${LOGGING_LEVEL_ROOT}
+      OTEL_SERVICE_NAME:                            kerala-sms
+      OTEL_EXPORTER_OTLP_ENDPOINT:                  ${OTEL_EXPORTER_OTLP_ENDPOINT}
+
+    # ports:
+    #   - 18088:8088
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsS http://localhost:8080/kerala-sms/health >/dev/null 2>&1 || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 120s
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+          cpus: '0.25'
+    networks:
+      - egov-network
+
+  oncourts-website:
+    image: ${DOCKER_REPO_ONCOURTS_WEBSITE}:${DOCKER_TAG_ONCOURTS_WEBSITE}
+    container_name: oncourts-website
+    ports:
+      - "18081:80"
+    volumes:
+     - ./oncourts-website/globalconfig.js:/app/public/globalconfig/globalconfig.js:ro
+    # healthcheck:
+    #   test: ["CMD-SHELL", "curl -fsS http://127.0.0.1:80/ui/ >/dev/null 2>&1 || exit 1"]
+    #   interval: 30s
+    #   timeout: 10s
+    #   retries: 5
+    #   start_period: 60s
+    deploy:
+      resources:
+        limits:
+          memory: 128M
+          cpus: '0.1'
+    networks:
+      - egov-network
+
+  workbench-ui:
+    image: ${DOCKER_REPO_WORKBENCH_UI}:${DOCKER_TAG_WORKBENCH_UI}
+    container_name: workbench-ui
+    ports:
+      - "18083:80"
+    volumes:
+     - ./workbench-ui/subfilter.conf:/etc/nginx/conf.d/sub_filter.conf:ro
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsS http://127.0.0.1:80/workbench-ui/ >/dev/null 2>&1 || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
+    deploy:
+      resources:
+        limits:
+          memory: 128M
+          cpus: '0.1'
+    networks:
+      - egov-network
+
+  dristi-app-db:
+    image: ${DOCKER_REPO_EGOV_DRISTI}-db:${DOCKER_TAG_EGOV_DRISTI}
+    container_name: dristi-app-db
+    restart: "no"
+    environment:
+      DB_URL:          ${SPRING_DATASOURCE_URL}
+      FLYWAY_USER:     ${SPRING_DATASOURCE_USERNAME}
+      FLYWAY_PASSWORD: ${SPRING_DATASOURCE_PASSWORD}
+
+  # ── dristi-monolith application ────────────────────────────────────────────
+  dristi-app:
+    image: ${DOCKER_REPO_EGOV_DRISTI}:${DOCKER_TAG_EGOV_DRISTI}
+    container_name: dristi-app
+    restart: unless-stopped
+    depends_on:
+      redis:
+        condition: service_healthy
+      redpanda:
+        condition: service_healthy
+      # dristi-app-db:
+      #   condition: service_completed_successfully
+    ports:
+      - "${APP_PORT:-8080}:8080"
+
+    environment:
+      # ── JVM ───────────────────────────────────────────────────────────────
+      JAVA_OPTS: ${JAVA_OPTS:--Xms512m -Xmx1g}
+
+      # ── Spring active profiles ────────────────────────────────────────────
+      # "local" profile is excluded here; the compose file sets individual vars
+      # instead. Override SPRING_PROFILES_ACTIVE to add extra profiles.
+      SPRING_PROFILES_ACTIVE: >-
+        shared,transformer,cases,locksvc,order,bank,notification,
+        templateconfiguration,advocate,abdiary,epost,calculator,
+        inportalsurvey,bailbond,digitalizeddocuments,advocateoffice,
+        esign,ctc,treasury,application,hearing,task,taskmanagement,
+        evidence,casemanagement,analytics,ordermanagement,summons,njdg,
+        scheduler,hearingmanagement,icops
+
+      # ── Database ──────────────────────────────────────────────────────────
+      SPRING_DATASOURCE_WRITER_URL:              ${SPRING_DATASOURCE_URL}
+      SPRING_DATASOURCE_WRITER_USERNAME:         ${SPRING_DATASOURCE_USERNAME}
+      SPRING_DATASOURCE_WRITER_PASSWORD:         ${SPRING_DATASOURCE_PASSWORD}
+      SPRING_DATASOURCE_WRITER_DRIVER_CLASS_NAME: org.postgresql.Driver
+      SPRING_DATASOURCE_READER_URL:              ${SPRING_DATASOURCE_URL}
+      SPRING_DATASOURCE_READER_USERNAME:         ${SPRING_DATASOURCE_USERNAME}
+      SPRING_DATASOURCE_READER_PASSWORD:         ${SPRING_DATASOURCE_PASSWORD}
+      SPRING_DATASOURCE_READER_DRIVER_CLASS_NAME: org.postgresql.Driver
+
+      # ── Flyway ────────────────────────────────────────────────────────────
+      SPRING_FLYWAY_ENABLED:  "true"
+      SPRING_FLYWAY_URL:      ${SPRING_DATASOURCE_URL}
+      SPRING_FLYWAY_USER:     ${SPRING_DATASOURCE_USERNAME}
+      SPRING_FLYWAY_PASSWORD: ${SPRING_DATASOURCE_PASSWORD}
+
+      # ── Kafka / Redpanda ──────────────────────────────────────────────────
+      SPRING_KAFKA_BOOTSTRAP_SERVERS: ${KAFKA_BOOTSTRAP_SERVERS}
+
+      # ── Redis ─────────────────────────────────────────────────────────────
+      SPRING_REDIS_HOST:    ${SPRING_REDIS_HOST}
+      SPRING_REDIS_PORT:    ${SPRING_REDIS_PORT}
+      SPRING_REDIS_TIMEOUT: 10
+
+      # ── eGov / DIGIT platform hosts ───────────────────────────────────────
+      EGOV_USER_HOST:             ${EGOV_USER_HOST}
+      # EGOV_USER_CONTEXT_PATH:     ${EGOV_USER_CONTEXT_PATH:-/user/users}
+      # EGOV_USER_CREATE_PATH:      ${EGOV_USER_CREATE_PATH:=/_createnovalidate}
+      # EGOV_USER_SEARCH_PATH:      ${EGOV_USER_SEARCH_PATH:-/user/v1/_search}
+      # EGOV_USER_UPDATE_PATH:      ${EGOV_USER_UPDATE_PATH:-/_updatenovalidate}
+
+      EGOV_MDMS_HOST:             ${EGOV_MDMS_HOST}
+      # EGOV_MDMS_SEARCH_ENDPOINT:  ${EGOV_MDMS_SEARCH_ENDPOINT:-/egov-mdms-service/v1/_search}
+      # EGOV_MDMS_V2_SEARCH_ENDPOINT: ${EGOV_MDMS_V2_SEARCH_ENDPOINT:-/egov-mdms-service/v2/_search}
+
+      EGOV_IDGEN_HOST:            ${EGOV_IDGEN_HOST}
+      # EGOV_IDGEN_PATH:            ${EGOV_IDGEN_PATH:-/egov-idgen/id/_generate}
+
+      EGOV_INDIVIDUAL_HOST:       ${EGOV_INDIVIDUAL_HOST}
+      # EGOV_INDIVIDUAL_SEARCH_PATH: ${EGOV_INDIVIDUAL_SEARCH_PATH:-individual/v1/_search}
+
+      EGOV_FILESTORE_HOST:        ${EGOV_FILESTORE_HOST}
+      # EGOV_FILESTORE_PATH:        ${EGOV_FILESTORE_PATH:-/filestore/v1/files}
+
+      EGOV_WORKFLOW_HOST:         ${EGOV_WORKFLOW_HOST}
+      # EGOV_WORKFLOW_TRANSITION_PATH: ${EGOV_WORKFLOW_TRANSITION_PATH:-/egov-workflow-v2/egov-wf/process/_transition}
+      # EGOV_WORKFLOW_BUSINESSSERVICE_SEARCH_PATH: ${EGOV_WORKFLOW_BUSINESSSERVICE_SEARCH_PATH:-/egov-workflow-v2/egov-wf/businessservice/_search}
+
+      EGOV_HRMS_HOST:             ${EGOV_HRMS_HOST}
+      # EGOV_HRMS_SEARCH_ENDPOINT:  ${EGOV_HRMS_SEARCH_ENDPOINT:-/egov-hrms/employees/_search}
+
+      EGOV_URL_SHORTNER_HOST:     ${EGOV_URL_SHORTENING}
+      # EGOV_URL_SHORTNER_ENDPOINT: ${EGOV_URL_SHORTNER_ENDPOINT:-/egov-url-shortening/shortener}
+
+      # ── Encryption service ────────────────────────────────────────────────
+      EGOV_ENC_HOST:              ${EGOV_ENC_SERVICE_HOST}
+      # EGOV_ENC_ENCRYPT_ENDPOINT:  ${EGOV_ENC_ENCRYPT_ENDPOINT:-/egov-enc-service/crypto/v1/_encrypt}
+      # EGOV_ENC_DECRYPT_ENDPOINT:  ${EGOV_ENC_DECRYPT_ENDPOINT:-/egov-enc-service/crypto/v1/_decrypt}
+
+      # ── State / tenant ────────────────────────────────────────────────────
+      STATE_LEVEL_TENANT_ID:      ${STATE_LEVEL_TENANT_ID:-pb}
+      EGOV_COURT_ID:              ${EGOV_COURT_ID:-KLKM52}
+
+      # ── Billing / payment ─────────────────────────────────────────────────
+      EGOV_BILLING_HOST:          ${EGOV_BILLING_HOST}
+      # EGOV_DEMAND_CREATE_ENDPOINT: ${EGOV_DEMAND_CREATE_ENDPOINT:-/billing-service/demand/_create}
+
+      # ── Lock service ──────────────────────────────────────────────────────
+      PUCAR_LOCK_DURATION:        ${PUCAR_LOCK_DURATION:-1200000}
+      PUCAR_LOCK_HOST:            http://dristi-app:8080/
+      PUCAR_LOCK_SEARCH_ENDPOINT: /lock-svc/v1/_get
+
+      # ── OpenTelemetry (disable for local) ─────────────────────────────────
+      OTEL_TRACES_EXPORTER:   none
+      OTEL_METRICS_EXPORTER:  none
+      OTEL_LOGS_EXPORTER:     none
+
+      # ── Logging ───────────────────────────────────────────────────────────
+      LOGGING_LEVEL_ROOT:          ${LOGGING_LEVEL_ROOT:-INFO}
+      LOGGING_LEVEL_ORG_PUCAR:     ${LOGGING_LEVEL_ORG_PUCAR:-DEBUG}
+
+  caddy:
+    image: caddy:2
+    container_name: caddy-gateway
+    volumes:
+      - ./caddy/Caddyfile:/etc/caddy/Caddyfile:ro
+    ports:
+      - "18000:8000"
+      - "10080:80"
+      - "10443:443"
+    # healthcheck:
+    #   test: ["CMD", "wget", "-qO-", "http://localhost:8000/"]
+    #   interval: 30s
+    #   timeout: 10s
+    #   retries: 3
+    #   start_period: 15s
+    deploy:
+      resources:
+        limits:
+          memory: 64M
+          cpus: '0.1'
+    networks:
+      - egov-network
+
+  jaeger:
+    image: jaegertracing/all-in-one:latest
+    container_name: jaeger
+    environment:
+      - COLLECTOR_OTLP_ENABLED=true
+    ports:
+      # Jaeger UI (HTTP) - Open this in your browser
+      - "16686:16686"
+      # OpenTelemetry Protocol (OTLP) gRPC receiver
+      - "4317:4317"
+      # OpenTelemetry Protocol (OTLP) HTTP receiver
+      - "4318:4318"
+      # Thrift HTTP receiver (Legacy)
+      - "14268:14268"
+      # Zipkin compact HTTP receiver (Legacy)
+      - "9411:9411"
+    restart: unless-stopped
+
+  portainer:
+    image: portainer/portainer-ce:latest
+    container_name: portainer
+    command: --base-url /portainer
+    restart: unless-stopped
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      # - portainer_data:/
+    ports:
+      - "9099:9000"
+    networks:
+      - egov-network
 
 networks:
   egov-network:
@@ -906,3 +2330,4 @@ networks:
 volumes:
   postgres_data: null
   minio_data: null
+  portainer_data: null

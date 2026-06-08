@@ -1,0 +1,369 @@
+# Caddy reverse-proxy gateway (replaces Kong 3.6 declarative config)
+# Listens on :8000 inside the container → exposed as host port 18000
+# Routing is organized deterministic using a route block.
+
+{
+    # Enable automatic HTTPS certificates but disable redirection from HTTP to HTTPS
+    # (to prevent conflicts with host Nginx port 80 redirects).
+    auto_https disable_redirects
+}
+
+demo.pucar.org, :80, :8000 {
+
+    # ----------------------------------------------------------------
+    # Global: CORS headers (mirrors kong cors plugin)
+    # ----------------------------------------------------------------
+    @cors_preflight method OPTIONS
+    handle @cors_preflight {
+        header Access-Control-Allow-Origin  "*"
+        header Access-Control-Allow-Methods "GET, POST, PUT, PATCH, DELETE, OPTIONS"
+        header Access-Control-Allow-Headers "Accept, Accept-Version, Content-Length, Content-Type, Authorization, X-API-Key, X-Requested-With, auth-token"
+        header Access-Control-Expose-Headers "X-Auth-Token"
+        header Access-Control-Allow-Credentials "true"
+        header Access-Control-Max-Age "3600"
+        respond "" 204
+    }
+
+    header Access-Control-Allow-Origin  "*"
+    header Access-Control-Allow-Methods "GET, POST, PUT, PATCH, DELETE, OPTIONS"
+    header Access-Control-Allow-Headers "Accept, Accept-Version, Content-Length, Content-Type, Authorization, X-API-Key, X-Requested-With, auth-token"
+    header Access-Control-Expose-Headers "X-Auth-Token"
+    header Access-Control-Allow-Credentials "true"
+
+    # ----------------------------------------------------------------
+    # Global: 10 MB request body limit (mirrors kong request-size-limiting)
+    # ----------------------------------------------------------------
+    request_body {
+        max_size 10MB
+    }
+
+    # ----------------------------------------------------------------
+    # Routing Logic (Wrapped in route for deterministic execution)
+    # ----------------------------------------------------------------
+    route {
+        # Health alias routes (strip_path: true + uri rewrite)
+        handle /health/mdms* {
+            rewrite * /mdms-v2/health
+            reverse_proxy egov-mdms-service:8080
+        }
+
+        handle /health/user* {
+            rewrite * /user/health
+            reverse_proxy egov-user:8080
+        }
+
+        handle /health/workflow* {
+            rewrite * /egov-workflow-v2/health
+            reverse_proxy egov-workflow-v2:8080
+        }
+
+        handle /health/boundary* {
+            rewrite * /boundary-service/actuator/health
+            reverse_proxy boundary-service:8080
+        }
+
+        # ----------------------------------------------------------------
+        # Microservices
+        # ----------------------------------------------------------------
+        handle /audit-service* {
+            reverse_proxy audit-service:8080
+        }
+
+        handle /billing-service* {
+            reverse_proxy billing-service:8080
+        }
+
+        handle /collection-services* {
+            reverse_proxy collection-services:8080
+        }
+
+        handle /dristi-case-pdf* {
+            reverse_proxy dristi-case-pdf:8080
+        }
+
+        handle /egov-pdf* {
+            reverse_proxy dristi-pdf:8080
+        }
+
+        handle /access* {
+            reverse_proxy egov-accesscontrol:8080
+        }
+
+        handle /egov-apportion-service* {
+            reverse_proxy egov-apportion-service:8080
+        }
+
+        handle /egov-enc-service* {
+            reverse_proxy egov-enc-service:8080
+        }
+
+        handle /filestore* {
+            reverse_proxy egov-filestore:8080
+        }
+
+        handle /egov-hrms* {
+            reverse_proxy egov-hrms:8080
+        }
+
+        handle /egov-idgen* {
+            reverse_proxy egov-idgen:8080
+        }
+
+        handle /egov-indexer* {
+            reverse_proxy egov-indexer:8080
+        }
+
+        handle /localization* {
+            reverse_proxy egov-localization:8080
+        }
+
+        handle /mdms-v2* {
+            reverse_proxy egov-mdms-service:8080
+        }
+
+        handle /egov-mdms-service* {
+            reverse_proxy egov-mdms-service:8080
+        }
+
+        handle /egov-notification-mail* {
+            reverse_proxy egov-notification-mail:8080
+        }
+
+        handle /otp* {
+            reverse_proxy egov-otp:8080
+        }
+
+        handle /user-otp* {
+            reverse_proxy user-otp:8080
+        }
+
+        handle /common-persist* {
+            reverse_proxy egov-persister:8080
+        }
+
+        handle /egov-url-shortening* {
+            reverse_proxy egov-url-shortening:8080
+        }
+
+        handle /user* {
+            reverse_proxy egov-user:8080
+        }
+
+        handle /egov-workflow-v2* {
+            reverse_proxy egov-workflow-v2:8080
+        }
+
+        handle /epayments* {
+            reverse_proxy epayments:8080
+        }
+
+        handle /gateway* {
+            reverse_proxy gateway:8080
+        }
+
+        handle /inbox* {
+            reverse_proxy inbox:8080
+        }
+
+        handle /individual* {
+            reverse_proxy individual:8080
+        }
+
+        handle /kerala-sms* {
+            reverse_proxy kerala-sms:8080
+        }
+
+        handle /egov-notification-sms* {
+            reverse_proxy kerala-sms:8080
+        }
+
+        handle /pdf-service* {
+            reverse_proxy pdf-service:8080
+        }
+
+        # Additional microservices placeholders from previous config
+        handle /public-service-init* {
+            reverse_proxy public-service-init:8080
+        }
+
+        handle /public-service* {
+            reverse_proxy public-service:8080
+        }
+
+        handle /health-individual* {
+            reverse_proxy individual:8080
+        }
+
+        handle /health-service-request* {
+            reverse_proxy health-service-request:8080
+        }
+
+        handle /studio-pdf* {
+            reverse_proxy studio-pdf:8080
+        }
+
+        # ----------------------------------------------------------------
+        # Monoliths (Route to dristi-app:8080)
+        # ----------------------------------------------------------------
+        handle /ab-diary* {
+            reverse_proxy dristi-app:8080
+        }
+
+        handle /advocate* {
+            reverse_proxy dristi-app:8080
+        }
+
+        handle /advocate-office-management* {
+            reverse_proxy dristi-app:8080
+        }
+
+        handle /analytics* {
+            reverse_proxy dristi-app:8080
+        }
+
+        handle /application* {
+            reverse_proxy dristi-app:8080
+        }
+
+        handle /bail-bond* {
+            reverse_proxy dristi-app:8080
+        }
+
+        handle /bank-details* {
+            reverse_proxy dristi-app:8080
+        }
+
+        handle /case* {
+            reverse_proxy dristi-app:8080
+        }
+
+        handle /casemanagement* {
+            reverse_proxy dristi-app:8080
+        }
+
+        handle /ctc* {
+            reverse_proxy dristi-app:8080
+        }
+
+        handle /digitalized-documents* {
+            reverse_proxy dristi-app:8080
+        }
+
+        handle /e-sign-svc* {
+            reverse_proxy dristi-app:8080
+        }
+
+        handle /epost-tracker* {
+            reverse_proxy dristi-app:8080
+        }
+
+        handle /esign-interceptor* {
+            reverse_proxy dristi-app:8080
+        }
+
+        handle /etreasury* {
+            reverse_proxy dristi-app:8080
+        }
+
+        handle /evidence* {
+            reverse_proxy dristi-app:8080
+        }
+
+        handle /hearing* {
+            reverse_proxy dristi-app:8080
+        }
+
+        handle /hearing-management* {
+            reverse_proxy dristi-app:8080
+        }
+
+        handle /icops-integration* {
+            reverse_proxy dristi-app:8080
+        }
+
+        handle /inportal-survey* {
+            reverse_proxy dristi-app:8080
+        }
+
+        handle /lock-svc* {
+            reverse_proxy dristi-app:8080
+        }
+
+        handle /njdg-transformer* {
+            reverse_proxy dristi-app:8080
+        }
+
+        handle /notification* {
+            reverse_proxy dristi-app:8080
+        }
+
+        handle /openapi* {
+            reverse_proxy dristi-app:8080
+        }
+
+        handle /order* {
+            reverse_proxy dristi-app:8080
+        }
+
+        handle /order-management* {
+            reverse_proxy dristi-app:8080
+        }
+
+        handle /payment-calculator* {
+            reverse_proxy dristi-app:8080
+        }
+
+        handle /scheduler* {
+            reverse_proxy dristi-app:8080
+        }
+
+        handle /summons* {
+            reverse_proxy dristi-app:8080
+        }
+
+        handle /summons-svc* {
+            reverse_proxy dristi-app:8080
+        }
+
+        handle /task* {
+            reverse_proxy dristi-app:8080
+        }
+
+        handle /task-management* {
+            reverse_proxy dristi-app:8080
+        }
+
+        handle /template-configuration* {
+            reverse_proxy dristi-app:8080
+        }
+
+        handle /transformer* {
+            reverse_proxy dristi-app:8080
+        }
+
+        # ----------------------------------------------------------------
+        # Frontends & UI
+        # ----------------------------------------------------------------
+        handle_path /portainer* {
+            reverse_proxy portainer:9000 {
+                header_up Host {upstream_hostport}
+                header_up X-Forwarded-Prefix /portainer
+            }
+        }
+
+        handle /ui* {
+            reverse_proxy digit-ui:80
+        }
+
+        handle /workbench-ui* {
+            reverse_proxy workbench-ui:80
+        }
+
+        # ----------------------------------------------------------------
+        # Fallback / Landing Homepage
+        # ----------------------------------------------------------------
+        handle /* {
+            reverse_proxy oncourts-website:3000
+        }
+    }
+}

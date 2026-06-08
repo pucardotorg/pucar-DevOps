@@ -37,3 +37,9 @@ Session.vim
 
 # Ignore all zip files
 *.tgz*
+
+docker-setup/git-sync
+docker-setup/.env
+docker-setup/elasticsearch-data
+docker-setup/certs
+docker-setup/kibana
