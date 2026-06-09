@@ -1473,7 +1473,7 @@ task:
       enabled: false
   image:
     repository: venkatramireddyb/task
-    tag: main-bulk-sign-fix-9c1656c663ab77c5c3e33027c91a54e69d50e8d1
+    tag: main-bulk-sign-fix-5a0f3b707bcc1a96d0845beb963bd88d77f01a1e
   ingress:
     nginxRateLimit:
       enabled: false
