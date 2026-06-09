@@ -168,3 +168,5 @@ env: |
       configMapKeyRef:
         key: e-sign-svc
         name: egov-service-host
+  - name: dristi.esign.signature.width
+    value: "218"
