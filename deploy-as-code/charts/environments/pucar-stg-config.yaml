@@ -8,7 +8,7 @@ ab-diary:
     tag: sdc-uat-fb7493994c08b593759448d6d3be1bd309d6ce02
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -27,7 +27,7 @@ advocate:
     tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -46,7 +46,7 @@ advocate-office-management:
     tag: main-0447fff90ecf720ab53179d2523a564ddf34ef00
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -65,7 +65,7 @@ analytics:
     tag: main-420f6436872f3e9c657a36a1fe65c1f4963c5958
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -84,7 +84,7 @@ application:
     tag: main-de0605c9c6beb63a646c14baac6f0493a2403ffe
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -104,7 +104,7 @@ audit-service:
     tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -123,7 +123,7 @@ auth-proxy:
     tag: auth-proxy-urlencoded-fix-aad9a5959c-23
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -142,7 +142,7 @@ bail-bond:
     tag: main-bulk-sign-fix-9c1656c663ab77c5c3e33027c91a54e69d50e8d1
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -161,7 +161,7 @@ bank-details:
     tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -180,7 +180,7 @@ billing-service:
     tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -199,7 +199,7 @@ case:
     tag: main-ee52286aab8c8870e7be02efa156840b4200cb04
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "1000"
       burstMultiplier: "1"
       conections: "10"
@@ -218,7 +218,7 @@ casemanagement:
     tag: main-2e78f03c74248e925838be769d21855b5624a622
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "1000"
       burstMultiplier: "1"
       conections: "10"
@@ -237,7 +237,7 @@ citizen:
     tag: v1.10.0-beta-0ad561e837-30
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -256,7 +256,7 @@ clamav:
     tag: latest
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -275,7 +275,7 @@ collection-services:
     tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -294,7 +294,7 @@ ctc:
     tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -313,7 +313,7 @@ digit-ui:
     tag: main-7f51df6be44ae9bc816083324af3711617334811
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "10000"
       burstMultiplier: "1"
       conections: "10"
@@ -332,7 +332,7 @@ digitalized-documents:
     tag: main-bulk-sign-fix-9c1656c663ab77c5c3e33027c91a54e69d50e8d1
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "1000"
       burstMultiplier: "1"
       conections: "10"
@@ -351,7 +351,7 @@ dristi-case-pdf:
     tag: main-06f0eff9caaf00df56b51d8551335cf3d6258078
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -371,7 +371,7 @@ dristi-pdf:
     tag: main-0d23335d34f7ae587ed901b470f9da88e2fb0283
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -390,7 +390,7 @@ e-sign-svc:
     tag: main-bulk-sign-fix-f0bc53ae082c5c01161e0323b27f0d9f1eedd20c
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -409,7 +409,7 @@ egov-accesscontrol:
     tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -428,7 +428,7 @@ egov-apportion-service:
     tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -447,7 +447,7 @@ egov-enc-service:
     tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -466,7 +466,7 @@ egov-filestore:
     tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "1000"
       burstMultiplier: "1"
       conections: "10"
@@ -485,7 +485,7 @@ egov-hrms:
     tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -504,7 +504,7 @@ egov-idgen:
     tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -523,7 +523,7 @@ egov-indexer:
     tag: main-206e0c53783db990ad4f9585083a866362d47e24
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -542,7 +542,7 @@ egov-localization:
     tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -561,7 +561,7 @@ egov-mdms-service:
     tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -580,7 +580,7 @@ egov-notification-mail:
     tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -599,7 +599,7 @@ egov-otp:
     tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -618,7 +618,7 @@ egov-persister:
     tag: main-206e0c53783db990ad4f9585083a866362d47e24
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -637,7 +637,7 @@ egov-pg-service:
     tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -656,7 +656,7 @@ egov-url-shortening:
     tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -675,7 +675,7 @@ egov-user:
     tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -694,7 +694,7 @@ egov-user-event:
     tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -713,7 +713,7 @@ egov-workflow-v2:
     tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -732,7 +732,7 @@ epost-tracker:
     tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -751,7 +751,7 @@ esign-interceptor:
     tag: update-signature-container-size-main-2de70ae39fc589d10217cfa96c2b34ca75db5138
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -770,7 +770,7 @@ etreasury:
     tag: etreasury-lower-env-fix-doubleverification-v3-52145ce92fb231d0845fe930050cb758548f727a
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -789,7 +789,7 @@ evidence:
     tag: main-bulk-sign-fix-f0bc53ae082c5c01161e0323b27f0d9f1eedd20c
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -808,7 +808,7 @@ employee:
     tag: v1.10.0-beta-e7a69e05d3-33
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -827,7 +827,7 @@ epayments:
     tag: sdc-uat-0657159be3406e649f60dacc4a73dedf1efa7c2e
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -847,7 +847,7 @@ gateway:
     tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -866,7 +866,7 @@ hearing:
     tag: main-3c0b8a40f656956541da5851e6405fef9c4b9708
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -885,7 +885,7 @@ hearing-management:
     tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -904,7 +904,7 @@ icops-integration:
     tag: main-41a16228ce57875d0d699a26118f529585af534b
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -923,7 +923,7 @@ inbox:
     tag: main-cbc7f5cc29355825a7e6c54378e9263db5177bd4
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "3000"
       burstMultiplier: "1"
       conections: "10"
@@ -942,7 +942,7 @@ individual:
     tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -961,7 +961,7 @@ inportal-survey:
     tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -980,7 +980,7 @@ jaeger-collector:
     tag: 1.55
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -999,7 +999,7 @@ jaeger-query:
     tag: 1.55
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -1018,7 +1018,7 @@ kerala-sms:
     tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -1037,7 +1037,7 @@ lock-svc:
     tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -1056,7 +1056,7 @@ metabase:
     tag: latest
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -1075,7 +1075,7 @@ minio-filestore:
     tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -1094,7 +1094,7 @@ network-multitool:
     tag: latest
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -1113,7 +1113,7 @@ nginx-deployment:
     tag: latest
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -1132,7 +1132,7 @@ njdg-transformer:
     tag: main-de0605c9c6beb63a646c14baac6f0493a2403ffe
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -1151,7 +1151,7 @@ notification:
     tag: sdc-uat-fb7493994c08b593759448d6d3be1bd309d6ce02
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -1170,7 +1170,7 @@ ocr-service:
     tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -1189,7 +1189,7 @@ oncourts-website:
     tag: 'main-56972aa4e2e83af41225be3e1e018a2b20026a99'
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -1208,7 +1208,7 @@ openapi:
     tag: sdc-uat-fb7493994c08b593759448d6d3be1bd309d6ce02
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -1227,7 +1227,7 @@ order:
     tag: main-a0505fbdc5f111343a17ebe611b797bc770a294d
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -1246,7 +1246,7 @@ order-management:
     tag: main-bulk-sign-fix-4762947c4ab7b07ce2fc1727e1bfab01f841cb3b
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -1267,7 +1267,7 @@ payment-calculator:
     tag: sdc-uat-fb7493994c08b593759448d6d3be1bd309d6ce02
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -1286,7 +1286,7 @@ pdf-service:
     tag: sdc-uat-0657159be3406e649f60dacc4a73dedf1efa7c2e
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -1305,7 +1305,7 @@ pgr-services:
     tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -1324,7 +1324,7 @@ qr-code-service:
     tag: v1.0.0-ff38bbcae147c92f0434724206de380f49cdccc4
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -1343,7 +1343,7 @@ scheduler:
     tag: main-cbc7f5cc29355825a7e6c54378e9263db5177bd4
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -1362,7 +1362,7 @@ service-request:
     tag: core-2.9-lts-mvn-check-bbc06901f1-6
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -1381,7 +1381,7 @@ static-assets:
     tag: latest
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -1400,7 +1400,7 @@ summons-svc:
     tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -1419,7 +1419,7 @@ sunbird-rc-credentials-service:
     tag: v2.0.0-rc3
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -1438,7 +1438,7 @@ sunbird-rc-identity-service:
     tag: v2.0.0-rc3
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -1457,7 +1457,7 @@ sunbirdrc-credential-service:
     tag: sdc-uat-fb7493994c08b593759448d6d3be1bd309d6ce02
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -1476,7 +1476,7 @@ task:
     tag: main-bulk-sign-fix-9c1656c663ab77c5c3e33027c91a54e69d50e8d1
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -1495,7 +1495,7 @@ task-management:
     tag: main-de0605c9c6beb63a646c14baac6f0493a2403ffe
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -1514,7 +1514,7 @@ template-configuration:
     tag: sdc-uat-fb7493994c08b593759448d6d3be1bd309d6ce02
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -1533,7 +1533,7 @@ transcription:
     tag: v1.0.0-dristi-experiment-1
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -1556,7 +1556,7 @@ transformer:
     tag: main-a0505fbdc5f111343a17ebe611b797bc770a294d
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -1575,7 +1575,7 @@ user-otp:
     tag: main-0447fff90ecf720ab53179d2523a564ddf34ef00
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -1594,7 +1594,7 @@ vault-agent-injector:
     tag: 1.4.1
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -1613,7 +1613,7 @@ verifyapp:
     tag: v1.0.0-main-c4ee738-5
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -1632,7 +1632,7 @@ workbench-ui:
     tag: gogs-v1.12.0
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
