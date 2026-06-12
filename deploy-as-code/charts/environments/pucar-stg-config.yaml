@@ -939,7 +939,7 @@ individual:
       enabled: false
   image:
     repository: docker.io/venkatramireddyb/individual
-    tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
+    tag: enhancement-5806-unique-active-individual-with-user-fafca55775f5984c0efa467b4997a54a1001d9ff
   ingress:
     nginxRateLimit:
       enabled: false
