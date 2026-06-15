@@ -310,7 +310,7 @@ digit-ui:
       enabled: false
   image:
     repository: docker.io/venkatramireddyb/digit-ui
-    tag: main-5385edd4c4a924ac52a4d0362f20334055167765
+    tag: 5783-payment-popup-auto-close-1e372af21d68ce860708c63e5d2b789759c10664
   ingress:
     nginxRateLimit:
       enabled: false
