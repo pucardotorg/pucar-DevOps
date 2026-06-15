@@ -603,8 +603,8 @@ egov-indexer:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/egov-indexer
     tag: gogs-v1.18.0.1
   heap: "-Xmx918m -Xms512m"
-  memory_requests: "1100Mi"
-  memory_limits: "1500Mi"
+  memory_requests: "1800Mi"
+  memory_limits: "2.5Gi"
   cpu_requests: "100m"
   replicas: 2
   ingress:
@@ -1013,8 +1013,8 @@ hearing:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/hearing
     tag: gogs-v1.18.1
   heap: "-Xmx1024m -Xms1024m"
-  memory_requests: "2Gi"
-  memory_limits: "2Gi"
+  memory_requests: "3Gi"
+  memory_limits: "3.5Gi"
   cpu_requests: 50m
   replicas: 2
   ingress:
