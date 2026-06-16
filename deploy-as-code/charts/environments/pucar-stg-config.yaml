@@ -215,7 +215,7 @@ casemanagement:
       enabled: false
   image:
     repository: docker.io/venkatramireddyb/casemanagement
-    tag: main-2e78f03c74248e925838be769d21855b5624a622
+    tag: main-ffad1fd84c1a6d1a344b733de0aa9b829d2835da
   ingress:
     nginxRateLimit:
       enabled: false
