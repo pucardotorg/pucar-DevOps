@@ -24,7 +24,7 @@ advocate:
       enabled: false
   image:
     repository: docker.io/venkatramireddyb/advocate
-    tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
+    tag: main-ffad1fd84c1a6d1a344b733de0aa9b829d2835da
   ingress:
     nginxRateLimit:
       enabled: false
