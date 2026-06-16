@@ -348,7 +348,7 @@ dristi-case-pdf:
       enabled: false
   image:
     repository: docker.io/venkatramireddyb/dristi-case-pdf
-    tag: main-06f0eff9caaf00df56b51d8551335cf3d6258078
+    tag: main-ffad1fd84c1a6d1a344b733de0aa9b829d2835da
   ingress:
     nginxRateLimit:
       enabled: false
