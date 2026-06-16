@@ -81,7 +81,7 @@ application:
       enabled: false
   image:
     repository: docker.io/venkatramireddyb/application
-    tag: main-de0605c9c6beb63a646c14baac6f0493a2403ffe
+    tag: main-ffad1fd84c1a6d1a344b733de0aa9b829d2835da
   ingress:
     nginxRateLimit:
       enabled: false
