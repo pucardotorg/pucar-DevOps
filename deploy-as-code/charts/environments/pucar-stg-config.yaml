@@ -824,7 +824,7 @@ epayments:
       enabled: false
   image:
     repository: docker.io/venkatramireddyb/epayments
-    tag: 5783-payment-popup-auto-close-1e372af21d68ce860708c63e5d2b789759c10664
+    tag: 5783-payment-popup-auto-close-21b2bd3ee80f8c0e2891f4677d41f20def510a61
   ingress:
     nginxRateLimit:
       enabled: false
