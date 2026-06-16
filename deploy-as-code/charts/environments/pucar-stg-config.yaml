@@ -1205,7 +1205,7 @@ openapi:
       enabled: false
   image:
     repository: docker.io/venkatramireddyb/openapi
-    tag: sdc-uat-fb7493994c08b593759448d6d3be1bd309d6ce02
+    tag: main-ffad1fd84c1a6d1a344b733de0aa9b829d2835da
   ingress:
     nginxRateLimit:
       enabled: false
