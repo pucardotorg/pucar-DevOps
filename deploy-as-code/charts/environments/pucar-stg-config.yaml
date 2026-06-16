@@ -368,7 +368,7 @@ dristi-pdf:
       enabled: false
   image:
     repository: docker.io/venkatramireddyb/dristi-pdf
-    tag: main-0d23335d34f7ae587ed901b470f9da88e2fb0283
+    tag: main-ffad1fd84c1a6d1a344b733de0aa9b829d2835da
   ingress:
     nginxRateLimit:
       enabled: false
