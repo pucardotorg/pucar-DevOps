@@ -14,7 +14,7 @@ ingress:
   zuul: false
   annotations:
     nginx.ingress.kubernetes.io/use-regex: "true" 
-    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
   waf: 
     enabled: true
     annotations:

@@ -21,7 +21,10 @@ metadata:
     nginx.ingress.kubernetes.io/limit-rpm: "{{ .Values.ingress.nginxRateLimit.rpm }}"
     nginx.ingress.kubernetes.io/limit-burst-multiplier: "{{ .Values.ingress.nginxRateLimit.burstMultiplier }}"
     nginx.ingress.kubernetes.io/limit-connections: "{{ .Values.ingress.nginxRateLimit.connections }}"
+{{- end }}
     nginx.ingress.kubernetes.io/configuration-snippet: |
+      proxy_cookie_flags * secure httponly samesite=strict;
+{{- if .Values.ingress.nginxRateLimit.enabled }}
       more_set_headers "X-Content-Type-Options: nosniff";
       more_set_headers "X-Frame-Options: DENY";
       more_set_headers "X-Xss-Protection: 1; mode=block";
