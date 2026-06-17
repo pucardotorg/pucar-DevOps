@@ -62,7 +62,7 @@ analytics:
       enabled: false
   image:
     repository: docker.io/venkatramireddyb/analytics
-    tag: main-420f6436872f3e9c657a36a1fe65c1f4963c5958
+    tag: main-fbaa582f523aa816fe71906f060353d83dd78a7a
   ingress:
     nginxRateLimit:
       enabled: false
