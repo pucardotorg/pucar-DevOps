@@ -1300,7 +1300,7 @@ oncourts-website:
       enabled: true
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/oncourts-website
-    tag: gogs-v1.19.0
+    tag: gogs-v1.18.0.1
   memory_requests: 512Mi
   memory_limits: 768Mi
   cpu_requests: 50m
