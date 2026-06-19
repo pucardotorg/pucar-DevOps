@@ -5,7 +5,7 @@ ab-diary:
       enabled: true
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/ab-diary
-    tag: gogs-v1.17.1
+    tag: gogs-v1.19.0
   heap: "-Xmx512m -Xms256m"
   memory_requests: "768Mi"
   memory_limits: "1Gi"
@@ -29,7 +29,7 @@ advocate:
       enabled: true
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/advocate
-    tag: gogs-v1.17.0
+    tag: gogs-v1.19.0
   heap: "-Xmx1024m -Xms192m"
   memory_requests: "1200Mi"
   memory_limits: "1500Mi"
@@ -53,7 +53,7 @@ advocate-office-management:
       enabled: true
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/advocate-office-management
-    tag: gogs-v1.18.0.1
+    tag: gogs-v1.19.0
   heap: "-Xmx512m -Xms256m"
   memory_requests: "768Mi"
   memory_limits: "768Mi"
@@ -77,7 +77,7 @@ analytics:
       enabled: true
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/analytics
-    tag: gogs-v1.18.0.1
+    tag: gogs-v1.19.0
   heap: "-Xmx1024m -Xms256m"
   memory_requests: "1400Mi"
   memory_limits: "1792Mi"
@@ -101,7 +101,7 @@ application:
       enabled: true
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/application
-    tag: gogs-v1.18.0.1
+    tag: gogs-v1.19.0
   heap: "-Xmx1024m -Xms192m"
   memory_requests: "1792Mi"
   memory_limits: "1792Mi"
@@ -150,7 +150,7 @@ bail-bond:
       enabled: true
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/bail-bond
-    tag: gogs-v1.18.3
+    tag: gogs-v1.19.0
   heap: "-Xmx1024m -Xms256m"
   memory_requests: "1200Mi"
   memory_limits: "1500Mi"
@@ -222,7 +222,7 @@ case:
       enabled: true
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/case
-    tag: gogs-v1.18.1
+    tag: gogs-v1.19.0
   heap: "-Xmx2g -Xms512m"
   memory_requests: "4Gi"
   memory_limits: "4Gi"
@@ -246,7 +246,7 @@ casemanagement:
       enabled: true
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/casemanagement
-    tag: gogs-v1.18.0.1
+    tag: gogs-v1.19.0
   heap: "-Xmx1024m -Xms256m"
   memory_requests: "1200Mi"
   memory_limits: "1500Mi"
@@ -314,7 +314,7 @@ ctc:
       enabled: true
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/ctc
-    tag: gogs-v1.17.0
+    tag: gogs-v1.19.0
   heap: "-Xmx512m -Xms256m"
   memory_requests: "768Mi"
   memory_limits: "768Mi"
@@ -338,7 +338,7 @@ digit-ui:
       enabled: false
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/digit-ui
-    tag: gogs-v1.18.3
+    tag: gogs-v1.19.0
   memory_requests: "1Gi"
   replicas: 2
   ingress:
@@ -359,7 +359,7 @@ digitalized-documents:
       enabled: true
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/digitalized-documents
-    tag: gogs-v1.18.3
+    tag: gogs-v1.19.0
   heap: "-Xmx768m -Xms768m"
   memory_requests: "1Gi"
   memory_limits: "1Gi"
@@ -383,7 +383,7 @@ dristi-case-pdf:
       enabled: true
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/dristi-case-pdf
-    tag: gogs-v1.18.0.1
+    tag: gogs-v1.19.0
   memory_requests: "1200Mi"
   memory_limits: "1500Mi"
   cpu_requests: "50m"
@@ -407,7 +407,7 @@ dristi-pdf:
       enabled: true
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/dristi-pdf
-    tag: gogs-v1.18.1
+    tag: gogs-v1.19.0
   memory_requests: "1200Mi"
   memory_limits: "2560Mi"
   cpu_requests: "50m"
@@ -721,7 +721,7 @@ egov-persister:
       enabled: true
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/egov-persister
-    tag: gogs-v1.18.0.1
+    tag: gogs-v1.19.0
   heap: "-Xmx768m -Xms256m"
   memory_requests: "1792Mi"
   memory_limits: "1792Mi"
@@ -913,7 +913,7 @@ etreasury:
       enabled: true
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/etreasury
-    tag: gogs-v1.18.0.1
+    tag: gogs-v1.19.0
   heap: "-Xmx1024m -Xms1024m"
   memory_requests: 1280Mi
   memory_limits: 1280Mi
@@ -940,7 +940,7 @@ evidence:
       enabled: true
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/evidence
-    tag: gogs-v1.18.3
+    tag: gogs-v1.19.0
   heap: "-Xmx1024m -Xms1024m"
   memory_requests: 1792Mi
   memory_limits: 1792Mi
@@ -964,7 +964,7 @@ epayments:
       enabled: true
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/epayments
-    tag: v1.3.1-3cd967542ec02916a460cff31440bcc1344608f0
+    tag: gogs-v1.19.0
   memory_requests: 512Mi
   cpu_requests: 50m
   replicas: 2
@@ -1011,7 +1011,7 @@ hearing:
       enabled: true
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/hearing
-    tag: gogs-v1.18.1
+    tag: gogs-v1.19.0
   heap: "-Xmx1024m -Xms1024m"
   memory_requests: "3Gi"
   memory_limits: "3.5Gi"
@@ -1107,7 +1107,7 @@ individual:
       enabled: true
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/individual
-    tag: gogs-v1.18.0.1
+    tag: gogs-v1.19.0
   heap: "-Xmx1024m -Xms1024m"
   memory_requests: 1280Mi
   memory_limits: 1280Mi
@@ -1227,7 +1227,7 @@ njdg-transformer:
       enabled: true
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/njdg-transformer
-    tag: gogs-v1.18.0.1
+    tag: gogs-v1.19.0
   heap: "-Xmx768m -Xms768m"
   memory_requests: 2Gi
   memory_limits: 2Gi
@@ -1299,7 +1299,7 @@ oncourts-website:
       enabled: true
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/oncourts-website
-    tag: gogs-v1.18.0.1
+    tag: gogs-v1.19.0
   memory_requests: 512Mi
   memory_limits: 768Mi
   cpu_requests: 50m
@@ -1322,7 +1322,7 @@ openapi:
       enabled: true
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/openapi
-    tag: gogs-v1.17.1
+    tag: gogs-v1.19.0
   heap: "-Xmx768m -Xms256m"
   memory_requests: "1.5Gi"
   memory_limits: "1.5Gi"
@@ -1346,7 +1346,7 @@ order:
       enabled: true
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/order
-    tag: gogs-v1.18.0.1
+    tag: gogs-v1.19.0
   heap: "-Xmx512m -Xms256m"
   memory_requests: 896Mi
   memory_limits: 1000Mi
@@ -1370,7 +1370,7 @@ order-management:
       enabled: true
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/order-management
-    tag: gogs-v1.18.3
+    tag: gogs-v1.19.0
   heap: "-Xmx512m -Xms256m"
   memory_requests: 1536Mi
   memory_limits: 1536Mi
@@ -1466,7 +1466,7 @@ scheduler:
       enabled: true
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/scheduler
-    tag: gogs-v1.18.0.1
+    tag: gogs-v1.19.0
   heap: "-Xmx512m -Xms256m"
   memory_requests: 896Mi
   memory_limits: 1000Mi
@@ -1514,7 +1514,7 @@ summons-svc:
       enabled: true
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/summons-svc
-    tag: gogs-v1.17.0
+    tag: gogs-v1.19.0
   heap: "-Xmx512m -Xms512m"
   memory_requests: 768Mi
   memory_limits: 1000Mi
@@ -1540,7 +1540,7 @@ task:
       enabled: true
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/task
-    tag: gogs-v1.18.3
+    tag: gogs-v1.19.0
   heap: "-Xmx856m -Xms256m"
   memory_requests: "1.5Gi"
   memory_limits: "1.5Gi"
@@ -1564,7 +1564,7 @@ task-management:
       enabled: true
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/task-management
-    tag: gogs-v1.18.0.1
+    tag: gogs-v1.19.0
   heap: "-Xmx384m -Xms256m"
   memory_requests: 768Mi
   memory_limits: 1Gi
@@ -1636,7 +1636,7 @@ transformer:
       enabled: true
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/transformer
-    tag: gogs-v1.18.0.1
+    tag: gogs-v1.19.0
   heap: "-Xmx1000m -Xms1000m"
   memory_requests: 2Gi
   memory_limits: 2Gi
@@ -1661,7 +1661,7 @@ user-otp:
       enabled: true
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/user-otp
-    tag: gogs-v1.18.0.1
+    tag: gogs-v1.19.0
   heap: "-Xmx856m -Xms856m"
   memory_requests: 856Mi
   memory_limits: 1280Mi
