@@ -1108,6 +1108,7 @@ individual:
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/individual
     tag: gogs-v1.19.0
+    pullPolicy: Always
   heap: "-Xmx1024m -Xms1024m"
   memory_requests: 1280Mi
   memory_limits: 1280Mi
