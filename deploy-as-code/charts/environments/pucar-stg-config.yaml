@@ -310,7 +310,7 @@ digit-ui:
       enabled: false
   image:
     repository: docker.io/venkatramireddyb/digit-ui
-    tag: 5831-pdfjs-upgrade-90673a8c6b9a176a384b4af43c0a55199e90fee5
+    tag: main-a9c2b855098fe0cd4b28b0f1f64478e0af96b05c
   ingress:
     nginxRateLimit:
       enabled: false
