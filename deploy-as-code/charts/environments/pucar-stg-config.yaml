@@ -1186,7 +1186,7 @@ oncourts-website:
       enabled: false
   image:
     repository: docker.io/venkatramireddyb/oncourts-website
-    tag: '5831-update-pdf-lib-da68cbc089fab82111ec7e1910809f08b3feab00'
+    tag: 'main-494eae88f3fcd9efbadcef5d1808b93ae2f32e3e'
   ingress:
     nginxRateLimit:
       enabled: false
