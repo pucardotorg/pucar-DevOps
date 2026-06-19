@@ -9,7 +9,7 @@ ingress:
   zuul: true
   context: "individual"
 
-lokiEnabled: true
+lokiEnabled: false
 tracing-enabled: true
 
 # Init Containers Configs
