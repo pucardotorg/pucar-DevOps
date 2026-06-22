@@ -310,7 +310,7 @@ digit-ui:
       enabled: false
   image:
     repository: docker.io/venkatramireddyb/digit-ui
-    tag: 5831-pdfjs-upgrade-af824e1e752e205d9daac64a21e9c2dd1856e9d9
+    tag: main-82a50206028acd80ea7e0f16005ba53191bfe54f
   ingress:
     nginxRateLimit:
       enabled: false
@@ -1186,7 +1186,7 @@ oncourts-website:
       enabled: false
   image:
     repository: docker.io/venkatramireddyb/oncourts-website
-    tag: '5831-update-pdf-lib-56972aa4e2e83af41225be3e1e018a2b20026a99'
+    tag: 'main-494eae88f3fcd9efbadcef5d1808b93ae2f32e3e'
   ingress:
     nginxRateLimit:
       enabled: false
@@ -1572,7 +1572,7 @@ user-otp:
       enabled: false
   image:
     repository: docker.io/venkatramireddyb/user-otp
-    tag: main-0447fff90ecf720ab53179d2523a564ddf34ef00
+    tag: main-d56622fe93d39101401d70d6c511c12de5064f85
   ingress:
     nginxRateLimit:
       enabled: false
