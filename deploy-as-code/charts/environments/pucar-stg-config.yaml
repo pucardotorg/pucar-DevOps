@@ -1593,7 +1593,7 @@ user-otp:
       conections: "10"
   rateLimit:
     enabled: true
-    gatewayBurstCapacity: "20"
+    gatewayBurstCapacity: "60"
     gatewayKeyResolver: "otpKeyResolver"
     gatewayReplenishRate: "1"
     gatewayRequestedTokens: "20"
