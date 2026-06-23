@@ -845,6 +845,18 @@ gateway:
   image:
     repository: docker.io/venkatramireddyb/gateway
     tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
+  initContainers:
+    extraInitContainers: |
+      - name: "gateway-kubernetes-discovery"
+        image: {{ .Values.global.containerRegistry }}/gateway-kubernetes-discovery:fix-user-otp-rate-limit-per-minute-334a481adcd4b36c7108c86fc9dec59d33846bd6
+        env:
+        - name: "OUTPUT_FILE_PATH"
+          value: "/etc/zuul/routes.properties"
+        - name: "NAMESPACE"
+          value: {{ .Values.namespace | quote }}
+        volumeMounts:
+        - name: zuul-routes
+          mountPath: /etc/zuul
   ingress:
     nginxRateLimit:
       enabled: false
@@ -1581,9 +1593,10 @@ user-otp:
       conections: "10"
   rateLimit:
     enabled: true
-    gatewayBurstCapacity: "3"
+    gatewayBurstCapacity: "20"
     gatewayKeyResolver: "otpKeyResolver"
-    gatewayReplenishRate: "3"
+    gatewayReplenishRate: "1"
+    gatewayRequestedTokens: "20"
 vault-agent-injector:
   hpa:
     maxReplicas: 5
