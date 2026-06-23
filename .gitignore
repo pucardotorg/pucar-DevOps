@@ -43,3 +43,8 @@ docker-setup/.env
 docker-setup/elasticsearch-data
 docker-setup/certs
 docker-setup/kibana
+
+# email-smtp — runtime data (mail, keys, state) generated during setup
+email-smtp/data/
+email-smtp/.env
+email-smtp/roundcube-ssl.php

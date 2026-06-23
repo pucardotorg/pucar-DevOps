@@ -2272,8 +2272,10 @@ services:
   caddy:
     image: caddy:2
     container_name: caddy-gateway
+    restart: always
     volumes:
       - ./caddy/Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
     ports:
       - "18000:8000"
       - "10080:80"
@@ -2330,4 +2332,6 @@ networks:
 volumes:
   postgres_data: null
   minio_data: null
+  caddy_data:
+    name: caddy_data
   portainer_data: null

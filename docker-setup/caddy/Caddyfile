@@ -8,6 +8,30 @@
     auto_https disable_redirects
 }
 
+# ----------------------------------------------------------------
+# SMTP web UI — Roundcube running in the email-smtp compose stack.
+# Caddy gets TLS cert automatically for this domain.
+# The mailserver container must be running for this to serve content.
+# ----------------------------------------------------------------
+emailsmtp.pucar.org {
+    # Roundcube webmail at /roundcube — strip prefix so Apache sees /.
+    # ROUNDCUBEMAIL_REQUEST_PATH=/roundcube makes Roundcube generate asset URLs with the prefix.
+    handle /roundcube* {
+        uri strip_prefix /roundcube
+        reverse_proxy roundcube:80 {
+            header_up Host {host}
+            header_up X-Real-IP {remote_host}
+            header_up X-Forwarded-For {remote_host}
+            header_up X-Forwarded-Proto {scheme}
+        }
+    }
+
+    # Redirect root to /roundcube
+    handle / {
+        redir /roundcube permanent
+    }
+}
+
 demo.pucar.org, :80, :8000 {
 
     # ----------------------------------------------------------------
