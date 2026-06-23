@@ -15,7 +15,9 @@ metadata:
     gateway-burstCapacity: {{ .Values.rateLimit.gatewayBurstCapacity | quote }}
     gateway-keyResolver: {{ .Values.rateLimit.gatewayKeyResolver | quote }}
     gateway-replenishRate: {{ .Values.rateLimit.gatewayReplenishRate | quote }}
+    {{- if .Values.rateLimit.gatewayRequestedTokens }}
     gateway-requestedTokens: {{ .Values.rateLimit.gatewayRequestedTokens | quote }}
+    {{- end }}
 {{- end }}
 {{- if .Values.ingress.zuul }} 
     zuul/route-path: {{ .Values.ingress.context }}
