@@ -170,3 +170,8 @@ env: |
       configMapKeyRef:
         key: e-sign-svc
         name: egov-service-host
+  - name: EGOV_BAILBOND_HOST
+    valueFrom:
+      configMapKeyRef:
+        key: bail-bond
+        name: egov-service-host
