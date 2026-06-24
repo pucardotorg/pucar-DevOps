@@ -148,3 +148,8 @@ env: |
       configMapKeyRef:
         name: egov-service-host
         key: etreasury
+  - name: EGOV_ANALYTICS_HOST
+    valueFrom:
+      configMapKeyRef:
+        key: analytics
+        name: egov-service-host
