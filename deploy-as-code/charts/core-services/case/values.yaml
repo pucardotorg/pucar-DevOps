@@ -210,3 +210,8 @@ env: |
     value: "redis.backbone"
   - name: SPRING_DATA_REDIS_PORT
     value: "6379"
+  - name: EGOV_ANALYTICS_HOST
+    valueFrom:
+      configMapKeyRef:
+        key: analytics
+        name: egov-service-host
