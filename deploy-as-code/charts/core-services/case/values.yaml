@@ -32,8 +32,8 @@ appType: "java-spring"
 heap: "-Xmx1836m -Xms512m"
 debugPort: 5005
 java-args: "-Dspring.profiles.active=monitoring"
-memory_requests: 3Gi
-memory_limits: 2Gi
+memory_requests: 2Gi
+memory_limits: 3Gi
 redisEnabled: true
 healthChecks:
   enabled: true
