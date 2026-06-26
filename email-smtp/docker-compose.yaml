@@ -1,10 +1,10 @@
-# SMTP server stack for pucar.org — outbound mail relay for applications.
-# Domain: emailsmtp.pucar.org
+# SMTP server stack — outbound mail relay for applications.
+# Domain: emailsmtp.pucar.org (mail addresses: user@emailsmtp.pucar.org)
 # SMTP ports are bound directly to the host (no nginx/Caddy proxy for TCP mail traffic).
 # TLS cert is managed by Caddy (caddy_data volume, shared from the main docker-setup stack).
 # Run setup helper after first start:
-#   docker exec -it mailserver setup email add noreply@pucar.org <password>
-#   docker exec -it mailserver setup email add app-notify@pucar.org <password>
+#   docker exec -it mailserver setup email add noreply@emailsmtp.pucar.org <password>
+#   docker exec -it mailserver setup email add app-notify@emailsmtp.pucar.org <password>
 
 name: pucar-smtp
 
@@ -13,19 +13,19 @@ services:
   mailserver:
     image: ghcr.io/docker-mailserver/docker-mailserver:latest
     container_name: mailserver
-    hostname: emailsmtp
-    domainname: pucar.org
+    hostname: mail
+    domainname: emailsmtp.pucar.org
     ports:
       - "127.0.0.1:10025:25"   # SMTP  — nginx stream :25 → 127.0.0.1:10025
       - "127.0.0.1:10465:465"  # SMTPS — nginx stream :465 → 127.0.0.1:10465
       - "127.0.0.1:10587:587"  # Submission — nginx stream :587 → 127.0.0.1:10587
     volumes:
-      - ./data/mail-data:/var/mail
-      - ./data/mail-state:/var/mail-state
-      - ./data/mail-logs:/var/log/mail
-      - ./data/config:/tmp/docker-mailserver
+      # - ./data/mail-data:/var/mail
+      # - ./data/mail-state:/var/mail-state
+      # - ./data/mail-logs:/var/log/mail
+      # - ./data/config:/tmp/docker-mailserver
       # Persist OpenDKIM config (KeyTable, SigningTable, keys) across container restarts.
-      - ./data/opendkim:/etc/opendkim
+      # - ./data/opendkim:/etc/opendkim
       # Caddy cert volume — shared from the main docker-setup stack (name: caddy_data).
       # Caddy stores certs at /data/certificates/acme-v02.api.letsencrypt.org-directory/<domain>/
       - caddy_data:/caddy-certs:ro
@@ -46,7 +46,7 @@ services:
       # --- Network ---
       POSTFIX_INET_PROTOCOLS: ipv4
       # --- Identity ---
-      POSTMASTER_ADDRESS: postmaster@pucar.org
+      POSTMASTER_ADDRESS: postmaster@emailsmtp.pucar.org
       # --- Misc ---
       ONE_DIR: "1"
       LOG_LEVEL: info
@@ -69,7 +69,7 @@ services:
           - emailsmtp.pucar.org   # makes this FQDN resolvable within Docker network
 
   # Roundcube — browser-based mail client (optional but useful for admin/testing).
-  # Accessible at https://emailsmtp.pucar.org/ via Caddy.
+  # Accessible at https://emailsmtp.pucar.org/roundcube via Caddy.
   roundcube:
     image: roundcube/roundcubemail:latest
     container_name: roundcube
@@ -81,7 +81,7 @@ services:
       - ./data/roundcube:/var/roundcube/db
     environment:
       # emailsmtp.pucar.org resolves to the mailserver container within Docker
-      # (hostname: emailsmtp + domainname: pucar.org). TLS cert matches the domain
+      # (hostname: emailsmtp + domainname: emailsmtp.pucar.org). TLS cert matches the domain
       # so hostname verification passes — no SSL workarounds needed.
       ROUNDCUBEMAIL_DEFAULT_HOST: ssl://emailsmtp.pucar.org
       ROUNDCUBEMAIL_DEFAULT_PORT: "993"

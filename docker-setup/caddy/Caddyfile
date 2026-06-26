@@ -14,8 +14,7 @@
 # The mailserver container must be running for this to serve content.
 # ----------------------------------------------------------------
 emailsmtp.pucar.org {
-    # Roundcube webmail at /roundcube — strip prefix so Apache sees /.
-    # ROUNDCUBEMAIL_REQUEST_PATH=/roundcube makes Roundcube generate asset URLs with the prefix.
+    # /roundcube — strip prefix so Apache receives / and finds Roundcube files.
     handle /roundcube* {
         uri strip_prefix /roundcube
         reverse_proxy roundcube:80 {
@@ -26,9 +25,20 @@ emailsmtp.pucar.org {
         }
     }
 
-    # Redirect root to /roundcube
+    # Redirect bare root to /roundcube
     handle / {
         redir /roundcube permanent
+    }
+
+    # Catch-all: Roundcube generates asset URLs without /roundcube prefix
+    # (e.g. /static.php/..., /program/js/...). Forward them directly without stripping.
+    handle {
+        reverse_proxy roundcube:80 {
+            header_up Host {host}
+            header_up X-Real-IP {remote_host}
+            header_up X-Forwarded-For {remote_host}
+            header_up X-Forwarded-Proto {scheme}
+        }
     }
 }
 

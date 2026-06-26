@@ -1,6 +1,6 @@
 # SMTP Server — emailsmtp.pucar.org
 
-Self-hosted mail stack for pucar.org applications.
+Self-hosted mail stack for emailsmtp.pucar.org applications.
 
 | Service | Image | Purpose |
 |---|---|---|
@@ -52,8 +52,8 @@ Add these records in your DNS provider before doing anything else. Cert issuance
 | Type | Name | Value |
 |---|---|---|
 | A | `emailsmtp.pucar.org` | `<VM public IP>` |
-| MX | `pucar.org` | `emailsmtp.pucar.org` (priority 10) |
-| TXT | `pucar.org` (SPF) | `v=spf1 ip4:<VM public IP> ~all` |
+| MX | `emailsmtp.pucar.org` | `emailsmtp.pucar.org` (priority 10) |
+| TXT | `emailsmtp.pucar.org` (SPF) | `v=spf1 ip4:<VM public IP> ~all` |
 
 DKIM and DMARC records are added in Step 7 after the mailserver starts.
 
@@ -64,14 +64,14 @@ DKIM and DMARC records are added in Step 7 after the mailserver starts.
 | Field | Value |
 |---|---|
 | Type | `TXT` |
-| Name | `pucar.org` (or `@`) |
+| Name | `emailsmtp.pucar.org` |
 | Content | `v=spf1 ip4:178.236.185.120 ~all` |
 | TTL | Auto |
 
 > **Do not use Cloudflare's SPF wizard.** It generates `include:emailsmtp.pucar.org` as the include — that subdomain has no SPF record of its own, so the include always fails. It also defaults to `+all` (allows anyone to send as your domain). Enter the raw TXT value manually instead.
 
 **SPF values explained:**
-- `ip4:178.236.185.120` — authorises the VM IP to send mail for `pucar.org`
+- `ip4:178.236.185.120` — authorises the VM IP to send mail for `emailsmtp.pucar.org`
 - `~all` — softfail: mail from other IPs is flagged but not rejected (safe starting point)
 - `-all` — hardfail: mail from other IPs is rejected; switch to this after confirming delivery works
 
@@ -82,7 +82,7 @@ v=spf1 ip4:178.236.185.120 include:_spf.google.com ~all
 
 Verify after DNS propagates:
 ```bash
-dig TXT pucar.org +short
+dig TXT emailsmtp.pucar.org +short
 # should include: "v=spf1 ip4:178.236.185.120 ~all"
 ```
 
@@ -208,10 +208,10 @@ docker logs mailserver --tail 50
 The mailserver gives a **120-second window** after first startup to create at least one account. If the window closes with no accounts, Dovecot aborts and the container restarts. Add the account immediately:
 
 ```bash
-docker exec -it mailserver setup email add emailsmtp-noreply@pucar.org <strong-password>
+docker exec -it mailserver setup email add emailsmtp-noreply@emailsmtp.pucar.org <strong-password>
 
 # Additional addresses as needed
-docker exec -it mailserver setup email add postmaster@pucar.org <strong-password>
+docker exec -it mailserver setup email add postmaster@emailsmtp.pucar.org <strong-password>
 ```
 
 List all accounts:
@@ -229,19 +229,24 @@ docker exec -it mailserver setup email list
 ```bash
 docker exec -it mailserver sh
 
-# Generate both private key and public key TXT file
-opendkim-genkey -D /etc/opendkim/keys/pucar.org/ -d pucar.org -s mail
+# Create key directory and generate keypair
+mkdir -p /etc/opendkim/keys/emailsmtp.pucar.org
+opendkim-genkey -D /etc/opendkim/keys/emailsmtp.pucar.org/ -d emailsmtp.pucar.org -s mail
+
+# Fix permissions — opendkim-genkey creates the key owned by root (mode 600).
+# OpenDKIM runs as the opendkim user and cannot read it without this fix.
+chown opendkim:opendkim /etc/opendkim/keys/emailsmtp.pucar.org/mail.private
 
 # The KeyTable and SigningTable in /etc/opendkim/ are created empty on first
 # startup (before keys exist). Populate them manually:
-echo "mail._domainkey.pucar.org pucar.org:mail:/etc/opendkim/keys/pucar.org/mail.private" > /etc/opendkim/KeyTable
-echo "*@pucar.org mail._domainkey.pucar.org" > /etc/opendkim/SigningTable
+echo "mail._domainkey.emailsmtp.pucar.org emailsmtp.pucar.org:mail:/etc/opendkim/keys/emailsmtp.pucar.org/mail.private" > /etc/opendkim/KeyTable
+echo "*@emailsmtp.pucar.org mail._domainkey.emailsmtp.pucar.org" > /etc/opendkim/SigningTable
 
 # Reload OpenDKIM to pick up the new config
 supervisorctl restart opendkim
 
 # Print the public key for DNS
-cat /etc/opendkim/keys/pucar.org/mail.txt
+cat /etc/opendkim/keys/emailsmtp.pucar.org/mail.txt
 exit
 ```
 
@@ -255,11 +260,11 @@ Join the quoted strings (strip line breaks and quote marks) and add as a DNS TXT
 
 | Type | Name | Value |
 |---|---|---|
-| TXT | `mail._domainkey` | `v=DKIM1; h=sha256; k=rsa; p=<full key>` |
+| TXT | `mail._domainkey.emailsmtp.pucar.org` | `v=DKIM1; h=sha256; k=rsa; p=<full key>` |
 
 Verify after DNS propagation:
 ```bash
-dig TXT mail._domainkey.pucar.org +short
+dig TXT mail._domainkey.emailsmtp.pucar.org +short
 ```
 
 > **Persistence:** `/etc/opendkim/` is bind-mounted to `./data/opendkim/` so changes written there (keys, KeyTable, SigningTable) survive restarts. After the first run the startup script seeds this directory; once you populate KeyTable and SigningTable with the `echo` commands above, those files persist on disk and OpenDKIM signing continues working across restarts.
@@ -268,17 +273,34 @@ dig TXT mail._domainkey.pucar.org +short
 
 ## Step 8 — Add DMARC record
 
-In Cloudflare, a DMARC record was auto-created by Cloudflare's DMARC Management feature:
+**Cloudflare → DNS → Records → Add record**
 
-```
-_dmarc.pucar.org  TXT  "v=DMARC1; p=none; rua=mailto:...@dmarc-reports.cloudflare.net"
+| Field | Value |
+|---|---|
+| Type | `TXT` |
+| Name | `_dmarc.emailsmtp.pucar.org` |
+| Content | `v=DMARC1; p=none; rua=mailto:postmaster@emailsmtp.pucar.org` |
+| TTL | Auto |
+
+Click **Save**.
+
+Verify after DNS propagates:
+```bash
+dig TXT _dmarc.emailsmtp.pucar.org +short
+# should return: "v=DMARC1; p=none; rua=mailto:postmaster@emailsmtp.pucar.org"
 ```
 
-`p=none` is monitoring mode — no mail is rejected. Once SPF and DKIM are confirmed passing, tighten to `p=quarantine`:
+**DMARC policy explained:**
+- `p=none` — monitoring only, no mail is rejected. Start here.
+- `p=quarantine` — failed mail goes to spam. Switch to this after confirming SPF and DKIM both pass.
+- `p=reject` — failed mail is rejected outright. Use only when fully confident in your setup.
+- `rua=` — email address to receive aggregate DMARC reports (daily digest of pass/fail stats)
 
-**Cloudflare → DNS → Records** — edit `_dmarc` TXT record:
+Once SPF and DKIM are confirmed passing, tighten the policy:
+
+**Cloudflare → DNS → Records** — edit the `_dmarc.emailsmtp.pucar.org` TXT record, change content to:
 ```
-v=DMARC1; p=quarantine; rua=mailto:postmaster@pucar.org
+v=DMARC1; p=quarantine; rua=mailto:postmaster@emailsmtp.pucar.org
 ```
 
 ---
@@ -305,10 +327,10 @@ docker exec -it mailserver sh
 
 # Port 587 + STARTTLS (correct for submission)
 swaks --to test@gmail.com \
-      --from emailsmtp-noreply@pucar.org \
+      --from emailsmtp-noreply@emailsmtp.pucar.org \
       --server localhost --port 587 \
       --auth LOGIN \
-      --auth-user emailsmtp-noreply@pucar.org \
+      --auth-user emailsmtp-noreply@emailsmtp.pucar.org \
       --auth-password <password> \
       --tls
 ```
@@ -318,7 +340,7 @@ swaks --to test@gmail.com \
 In the mailserver logs, a successful send looks like:
 
 ```
-opendkim: DKIM-Signature field added (s=mail, d=pucar.org)   ← DKIM signing
+opendkim: DKIM-Signature field added (s=mail, d=emailsmtp.pucar.org)   ← DKIM signing
 postfix/smtp: status=sent (250 2.0.0 OK ...)                 ← Gmail accepted
 ```
 
@@ -331,9 +353,9 @@ postfix/smtp: status=sent (250 2.0.0 OK ...)                 ← Gmail accepted
 | SMTP host | `emailsmtp.pucar.org` (external) or `mailserver` (from inside Docker) |
 | SMTP port | `587` |
 | Encryption | STARTTLS |
-| Username | full email address, e.g. `emailsmtp-noreply@pucar.org` |
+| Username | full email address, e.g. `emailsmtp-noreply@emailsmtp.pucar.org` |
 | Password | set in Step 6 |
-| From address | `emailsmtp-noreply@pucar.org` |
+| From address | `emailsmtp-noreply@emailsmtp.pucar.org` |
 
 For containers on `docker-setup_egov-network`, use `mailserver` as the hostname and port `587`.
 
@@ -351,11 +373,30 @@ If DKIM stops signing after a restart, re-populate and reload:
 
 ```bash
 docker exec -it mailserver sh
-echo "mail._domainkey.pucar.org pucar.org:mail:/etc/opendkim/keys/pucar.org/mail.private" > /etc/opendkim/KeyTable
-echo "*@pucar.org mail._domainkey.pucar.org" > /etc/opendkim/SigningTable
+echo "mail._domainkey.emailsmtp.pucar.org emailsmtp.pucar.org:mail:/etc/opendkim/keys/emailsmtp.pucar.org/mail.private" > /etc/opendkim/KeyTable
+echo "*@emailsmtp.pucar.org mail._domainkey.emailsmtp.pucar.org" > /etc/opendkim/SigningTable
 supervisorctl restart opendkim
 exit
 ```
+
+### DKIM key permission denied — `can't load key: Permission denied`
+
+`opendkim-genkey` creates `mail.private` owned by `root` with mode `600`. OpenDKIM runs as the `opendkim` user and cannot read it, causing every outbound mail to be rejected with:
+
+```
+opendkim: can't load key from /etc/opendkim/keys/emailsmtp.pucar.org/mail.private: Permission denied
+opendkim: milter-reject: 4.7.1 Service unavailable - try again later
+```
+
+Fix:
+```bash
+docker exec -it mailserver sh
+chown opendkim:opendkim /etc/opendkim/keys/emailsmtp.pucar.org/mail.private
+supervisorctl restart opendkim
+exit
+```
+
+This is already included in Step 7 but must be re-applied if keys are regenerated manually.
 
 ### Rspamd + OpenDKIM conflict warnings
 
@@ -413,13 +454,13 @@ docker run --rm -v caddy_data:/data alpine \
   ls /data/certificates/acme-v02.api.letsencrypt.org-directory/emailsmtp.pucar.org/
 
 # Verify SPF record
-dig TXT pucar.org +short
+dig TXT emailsmtp.pucar.org +short
 
 # Verify DKIM public key in DNS
-dig TXT mail._domainkey.pucar.org +short
+dig TXT mail._domainkey.emailsmtp.pucar.org +short
 
 # Verify DMARC record
-dig TXT _dmarc.pucar.org +short
+dig TXT _dmarc.emailsmtp.pucar.org +short
 ```
 
 ---
