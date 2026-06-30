@@ -112,3 +112,5 @@ env: |
       configMapKeyRef:
         name: egov-service-host
         key: individual
+  - name: dristi.esign.signature.width
+    value: "218"

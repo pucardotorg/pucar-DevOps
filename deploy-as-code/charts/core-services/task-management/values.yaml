@@ -9,8 +9,8 @@ ingress:
   enabled: true
   context: "task-management"
 
-lokiEnabled: false
-
+lokiEnabled: true
+tracing-enabled: true
 
 
 # Init Containers Configs

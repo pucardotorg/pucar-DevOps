@@ -32,7 +32,6 @@ appType: "java-spring"
 heap: "-Xmx256m -Xms256m"
 java-args: "-Dspring.profiles.active=monitoring"
 debugPort: 5005
-redisEnabled: true
 
 healthChecks:
   enabled: true
