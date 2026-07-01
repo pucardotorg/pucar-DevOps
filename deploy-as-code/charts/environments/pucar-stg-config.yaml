@@ -932,7 +932,7 @@ inbox:
       enabled: false
   image:
     repository: docker.io/venkatramireddyb/inbox
-    tag: main-cbc7f5cc29355825a7e6c54378e9263db5177bd4
+    tag: main-29274e5b114572f8c9cb9cabb594b07a8bf62b82
   ingress:
     nginxRateLimit:
       enabled: false
