@@ -729,7 +729,7 @@ epost-tracker:
       enabled: false
   image:
     repository: docker.io/venkatramireddyb/epost-tracker
-    tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
+    tag: main-29274e5b114572f8c9cb9cabb594b07a8bf62b82
   ingress:
     nginxRateLimit:
       enabled: false
