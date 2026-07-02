@@ -12,7 +12,7 @@ initContainers:
     enabled: true
     repo: "git@github.com:egovernments/configs"
     branch: "UAT"
-
+debugPort: 5005
 # Container Configs
 image:
   repository: "docker.io/egovio/egov-persister"
