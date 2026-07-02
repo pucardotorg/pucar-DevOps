@@ -18,7 +18,7 @@ image:
 user_id: 483
 user_uuid: "ee6d94ef-f029-4b8a-8560-5b001d809b20"
 user_name: "payment-collector"
-name: "payment-collector"
+name_of_user: "payment-collector"
 
 # Environment variables sourced from ConfigMap
 env: |
@@ -34,7 +34,7 @@ env: |
   - name: USER_NAME
     value: {{ index .Values "user_name" | quote }}
   - name: NAME
-    value: {{ index .Values "name" | quote }}
+    value: {{ index .Values "name_of_user" | quote }}
 
 command: 
   - "bin/sh" 
