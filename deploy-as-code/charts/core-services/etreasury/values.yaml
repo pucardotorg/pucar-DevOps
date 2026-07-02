@@ -221,5 +221,3 @@ env: |
       secretKeyRef:
         name: etreasury
         key: treasury-reconciliation-v3-source
-  - name: payment.reconciliation.v3.threshold.minutes
-    value: "5"
