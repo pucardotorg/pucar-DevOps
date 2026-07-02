@@ -103,3 +103,13 @@ env: |
     value: "false"  
   - name: MANAGEMENT_SECURITY_ENABLED
     value: "false"
+  - name: AB_DIARY_HOST
+    valueFrom:
+      configMapKeyRef:
+        key: ab-diary
+        name: egov-service-host
+  - name: TASK_SERVICE_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: task
