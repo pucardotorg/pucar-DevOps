@@ -30,11 +30,12 @@ image:
 replicas: "1"
 httpPort: 8080
 appType: "java-spring"
-heap: "-Xmx1536m -Xms1536m"
+heap: "-Xmx1836m -Xms512m"
 debugPort: 5005
 java-args: "-Dspring.profiles.active=monitoring"
 memory_requests: 2Gi
-memory_limits: 2Gi
+memory_limits: 3Gi
+redisEnabled: true
 healthChecks:
   enabled: true
   livenessProbePath: "/case/health"
@@ -205,3 +206,12 @@ env: |
         key: advocate-office-management
   - name: EGOV_USER_SEARCH_PATH
     value: /user/v1/_search
+  - name: SPRING_DATA_REDIS_HOST
+    value: "redis.backbone"
+  - name: SPRING_DATA_REDIS_PORT
+    value: "6379"
+  - name: EGOV_ANALYTICS_HOST
+    valueFrom:
+      configMapKeyRef:
+        key: analytics
+        name: egov-service-host
