@@ -32,3 +32,13 @@ env: |
       configMapKeyRef:
         key: dristi-url
         name: egov-config
+  - name: USERNAME
+    valueFrom:
+      secretKeyRef:
+        key: epayments-username
+        name: epayments
+  - name: PASSWORD
+    valueFrom:
+      secretKeyRef:
+        key: epayments-password
+        name: epayments

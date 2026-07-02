@@ -8,6 +8,8 @@ ingress:
   zuul: true
   enabled: true
   context: "bail-bond"
+  additionalAnnotations: |
+    nginx.ingress.kubernetes.io/proxy-body-size: 100m
 
 lokiEnabled: true
 tracing-enabled: true
@@ -116,7 +118,7 @@ env: |
   - name: DOMAIN_URL
     valueFrom:
       configMapKeyRef:
-        key: egov-services
+        key: domain-url
         name: egov-config
   - name: EGOV_FILESTORE_HOST
     valueFrom:
@@ -155,3 +157,5 @@ env: |
       configMapKeyRef:
         key: eus-host
         name: egov-service-host
+  - name: dristi.esign.signature.width
+    value: "218"
