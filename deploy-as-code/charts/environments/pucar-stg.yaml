@@ -468,3 +468,9 @@ etreasury:
     - ip: "103.135.131.132"
       hostnames:
       - "stagingetreasury.kerala.gov.in"
+
+etreasury-process-reconciliation:
+  user_id: 321
+  user_uuid: "cc0bea82-0525-4a48-9192-5721931af654"
+  user_name: "payment-collector"
+  name: "payment-collector"

@@ -14,6 +14,12 @@ image:
   repository: "docker.io/venkatramireddyb/cronjob"
   tag: "v1"
 
+# User info used by the reconciliation request
+user_id: 483
+user_uuid: "ee6d94ef-f029-4b8a-8560-5b001d809b20"
+user_name: "payment-collector"
+name: "payment-collector"
+
 # Environment variables sourced from ConfigMap
 env: |
   - name: ETREASURY_HOST
@@ -21,6 +27,14 @@ env: |
       configMapKeyRef:
         name: egov-service-host
         key: etreasury
+  - name: USER_ID
+    value: {{ index .Values "user_id" | quote }}
+  - name: USER_UUID
+    value: {{ index .Values "user_uuid" | quote }}
+  - name: USER_NAME
+    value: {{ index .Values "user_name" | quote }}
+  - name: NAME
+    value: {{ index .Values "name" | quote }}
 
 command: 
   - "bin/sh" 
@@ -31,10 +45,10 @@ command:
     --data '{
         "authToken": "e231def1-fa70-4fff-93be-4a0490f66ccb",
         "userInfo": {
-            "id": 483,
-            "uuid": "ee6d94ef-f029-4b8a-8560-5b001d809b20",
-            "userName": "payment-collector",
-            "name": "payment-collector",
+            "id": ${USER_ID},
+            "uuid": "${USER_UUID}",
+            "userName": "${USER_NAME}",
+            "name": "${NAME}",
             "mobileNumber": "1002335566",
             "emailId": null,
             "locale": null,
