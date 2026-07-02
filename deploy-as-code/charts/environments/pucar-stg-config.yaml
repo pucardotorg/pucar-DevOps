@@ -771,6 +771,7 @@ etreasury:
   istestEnabled: false
   ismockEnabled: false
   challan-test-amount: "4"
+  challan-test-amount-enabled: true
   ingress:
     nginxRateLimit:
       enabled: false
