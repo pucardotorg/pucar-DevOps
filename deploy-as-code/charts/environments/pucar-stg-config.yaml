@@ -768,6 +768,8 @@ etreasury:
   image:
     repository: docker.io/venkatramireddyb/etreasury
     tag: main-84fae7ee3bb623cc355a3006f409e5a396eaf539
+  istestEnabled: false
+  ismockEnabled: false
   ingress:
     nginxRateLimit:
       enabled: false

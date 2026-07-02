@@ -30,7 +30,7 @@ env: |
   - name: DRISTI_URL
     valueFrom:
       configMapKeyRef:
-        key: dristi-url
+        key: dristi-internal-url
         name: egov-config
   - name: USERNAME
     valueFrom:
