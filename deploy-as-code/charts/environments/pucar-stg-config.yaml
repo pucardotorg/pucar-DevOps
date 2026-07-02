@@ -310,7 +310,7 @@ digit-ui:
       enabled: false
   image:
     repository: docker.io/venkatramireddyb/digit-ui
-    tag: main-8335fe6b3559f3ae6370250d1bcb8597a1a9db23
+    tag: main-ea1a560910f5ecf5b359499469ba4867740f9e72
   ingress:
     nginxRateLimit:
       enabled: false
