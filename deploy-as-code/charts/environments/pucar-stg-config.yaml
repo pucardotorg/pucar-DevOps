@@ -770,6 +770,7 @@ etreasury:
     tag: main-84fae7ee3bb623cc355a3006f409e5a396eaf539
   istestEnabled: false
   ismockEnabled: false
+  challan-test-amount: "4"
   ingress:
     nginxRateLimit:
       enabled: false

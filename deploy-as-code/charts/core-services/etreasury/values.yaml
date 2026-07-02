@@ -58,7 +58,7 @@ env: |
   {{- end }}
   - name: TREASURY_ACCOUNT_TYPE
     value: 01,14
-  {{- if .Values.istestEnabled }}
+  {{- if .Values."challan-test-amount" }}
   - name: CHALLAN_TEST_AMOUNT
     value: {{ index .Values "challan-test-amount" | quote }}
   {{- end }}
