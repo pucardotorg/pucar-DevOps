@@ -26,7 +26,7 @@ command:
   - "bin/sh" 
   - "-c"
   - |
-    curl -X POST --location "${ETREASURY_HOST}etreasury/payment/v1/_processReconciliationV3" \
+    curl -X POST --location "${ETREASURY_HOST}/etreasury/payment/v1/_processReconciliationV3" \
     --header 'Content-Type: application/json' \
     --data '{
         "authToken": "e231def1-fa70-4fff-93be-4a0490f66ccb",
