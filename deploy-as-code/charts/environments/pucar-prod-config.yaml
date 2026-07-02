@@ -988,6 +988,18 @@ gateway:
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/gateway
     tag: gogs-v1.18.0.1
+  initContainers:
+    extraInitContainers: |
+      - name: "gateway-kubernetes-discovery"
+        image: {{ .Values.global.containerRegistry }}/gateway-kubernetes-discovery:fix-user-otp-rate-limit-per-minute-334a481adcd4b36c7108c86fc9dec59d33846bd6
+        env:
+        - name: "OUTPUT_FILE_PATH"
+          value: "/etc/zuul/routes.properties"
+        - name: "NAMESPACE"
+          value: {{ .Values.namespace | quote }}
+        volumeMounts:
+        - name: zuul-routes
+          mountPath: /etc/zuul
   heap: "-Xmx1024m -Xms512m"
   memory_requests: "2.5Gi"
   memory_limits: "2.5Gi"
