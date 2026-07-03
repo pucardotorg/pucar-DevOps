@@ -12,6 +12,8 @@ ingress:
 lokiEnabled: true
 tracing-enabled: true
 
+debugPort: 5005
+
 # Init Containers Configs
 initContainers:
   dbMigration:

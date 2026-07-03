@@ -35,6 +35,11 @@ appType: "java-spring"
 java-args: ""
 heap: "-Xmx192m -Xms192m"
 debugPort: 5005
+istestEnabled: "true"
+ismockEnabled: "true"
+officecode: "030101B0019"
+challan-test-amount-enabled: false
+challan-test-amount: "4"
 # Additional Container Envs
 env: |
   - name: PUCAR_TSB_RECEIPT
@@ -44,13 +49,22 @@ env: |
   - name: TREASURY_ACCOUNT_NUMBERS
     value: 8031-00-102-94-07-00-00-N-V,8031-00-102-94-03-00-00-N-V
   - name: OFFICE_CODE
-    value: 030101B0019
+  {{- if .Values.officecode }}
+    value: {{ index .Values "officecode" | quote }}
+  {{- else }}
+    valueFrom:
+      configMapKeyRef:
+        name: egov-config
+        key: treasury-office-code
+  {{- end }}
   - name: TREASURY_ACCOUNT_TYPE
     value: 01,14
+  {{- if index .Values "challan-test-amount-enabled" }}
   - name: CHALLAN_TEST_AMOUNT
-    value: "4"
+    value: {{ index .Values "challan-test-amount" | quote }}
+  {{- end }}
   - name: ISTEST_ENABLED
-    value: "true"
+    value: {{ index .Values "istestEnabled" | quote }}
   - name: SERVER_PORT
     value: "8080"
   - name: JAVA_OPTS
@@ -122,7 +136,7 @@ env: |
         key: billing-service
         name: egov-service-host
   - name: isMock.enabled
-    value: "true"
+    value: {{ index .Values "ismockEnabled" | quote }}
   - name: EGOV_ADVOCATE_HOST
     valueFrom:
       configMapKeyRef:
@@ -153,3 +167,62 @@ env: |
       secretKeyRef:
         name: etreasury
         key: treasury-reconciliation-v3-source
+  - name: spring.kafka.producer.properties.connections.max.idle.ms
+    value: "1800000"
+  {{- if not .Values.ismockEnabled  }}
+  - name: TREASURY_PUBLIC_KEY
+    valueFrom:
+      configMapKeyRef:
+        name: egov-config
+        key: treasury-public-key
+  - name: TREASURY_CLIENT_ID
+    valueFrom:
+      configMapKeyRef:
+        name: egov-config
+        key: treasury-client-id
+  - name: TREASURY_CLIENT_SECRET
+    valueFrom:
+      configMapKeyRef:
+        name: egov-config
+        key: treasury-client-secret
+  - name: TREASURY_AUTH_URL
+    valueFrom:
+      configMapKeyRef:
+        name: egov-config
+        key: treasury-auth-url
+  - name: TREASURY_CHALLAN_GENERATE_URL
+    valueFrom:
+      configMapKeyRef:
+        name: egov-config
+        key: treasury-challan-generate-url
+  - name: TREASURY_DOUBLE_VERIFICATION_URL
+    valueFrom:
+      configMapKeyRef:
+        name: egov-config
+        key: treasury-double-verification-url
+  - name: TREASURY_TRANSACTION_DETAILS_URL
+    valueFrom:
+      configMapKeyRef:
+        name: egov-config
+        key: treasury-transaction-details-url
+  - name: TREASURY_SERVER_STATUS_URL
+    valueFrom:
+      configMapKeyRef:
+        name: egov-config
+        key: treasury-server-status-url
+  - name: TREASURY_PRINT_SLIP_URL
+    valueFrom:
+      configMapKeyRef:
+        name: egov-config
+        key: treasury-print-slip-url
+  - name: TREASURY_REFUND_REQUEST_URL
+    valueFrom:
+      configMapKeyRef:
+        name: egov-config
+        key: treasury-refund-request-url
+  - name: TREASURY_REFUND_STATUS_URL
+    valueFrom:
+      configMapKeyRef:
+        name: egov-config
+        key: treasury-refund-status-url
+  {{- end }}  

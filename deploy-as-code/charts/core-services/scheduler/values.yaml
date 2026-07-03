@@ -11,7 +11,7 @@ ingress:
 
 lokiEnabled: true
 tracing-enabled: true
-redisEnabled: true
+redisEnabled: false
 
 healthChecks:
  enabled: true
@@ -44,8 +44,11 @@ healthChecks:
 debugPort: 5005
 # Additional Container Envs
 env: |
-  - name: email.cause.list.recipients
-    value: yoyogogeta@gmail.com
+  - name: EMAIL_CAUSE_LIST_RECIPIENTS
+    valueFrom:
+      secretKeyRef:
+        key: causelistmailid
+        name: egov-notification-mail
   - name: MANAGEMENT_HEALTH_REDIS_ENABLED
     value: "false"
   - name: JUDGE_NAME
@@ -159,3 +162,9 @@ env: |
       secretKeyRef:
         name: elasticsearch-credentials
         key: password
+  {{- if .Values.redisEnabled }}
+  - name: SPRING_REDIS_TIMEOUT
+    value: "300"
+  {{- end }}
+  - name: SPRING_REDIS_ENABLED
+    value: {{ .Values.redisEnabled | quote }}
