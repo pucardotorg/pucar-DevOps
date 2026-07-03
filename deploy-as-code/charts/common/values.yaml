@@ -3,7 +3,8 @@
 # Declare name/value pairs to be passed into your templates.
 global:
     containerRegistry: docker.io/venkatramireddyb
-
+serviceAccount: pucar-sa
+namespace: pucar-stg
 replicas: 1
 httpPort: 8080
 appType: ""

@@ -40,6 +40,11 @@ ismockEnabled: "true"
 officecode: "030101B0019"
 challan-test-amount-enabled: false
 challan-test-amount: "4"
+istestEnabled: "true"
+ismockEnabled: "true"
+officecode: "030101B0019"
+challan-test-amount-enabled: false
+challan-test-amount: "4"
 # Additional Container Envs
 env: |
   - name: PUCAR_TSB_RECEIPT
@@ -49,6 +54,14 @@ env: |
   - name: TREASURY_ACCOUNT_NUMBERS
     value: 8031-00-102-94-07-00-00-N-V,8031-00-102-94-03-00-00-N-V
   - name: OFFICE_CODE
+  {{- if .Values.officecode }}
+    value: {{ index .Values "officecode" | quote }}
+  {{- else }}
+    valueFrom:
+      configMapKeyRef:
+        name: egov-config
+        key: treasury-office-code
+  {{- end }}
   {{- if .Values.officecode }}
     value: {{ index .Values "officecode" | quote }}
   {{- else }}
