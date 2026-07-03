@@ -4,7 +4,7 @@
 global:
     containerRegistry: docker.io/venkatramireddyb
 serviceAccount: pucar-sa
-namespace: pucar-stg
+namespace: pucar-prod
 replicas: 1
 httpPort: 8080
 appType: ""
