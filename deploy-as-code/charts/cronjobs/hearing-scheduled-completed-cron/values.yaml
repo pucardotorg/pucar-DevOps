@@ -9,7 +9,6 @@ cron:
   timezone: "Asia/Kolkata"
 
 # Container Configs
-namespace: pucar-stg
 image:
   repository: "docker.io/venkatramireddyb/cronjob"
   tag: "v1"
