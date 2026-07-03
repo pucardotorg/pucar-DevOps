@@ -310,7 +310,7 @@ digit-ui:
       enabled: false
   image:
     repository: docker.io/venkatramireddyb/digit-ui
-    tag: payment-status-not-setting-issue-6131ce5d3991942072d06c1a93095a022a16895e
+    tag: payment-status-not-setting-issue-650bb071e5e65c795ac83f21d583e3564fbed22b
   ingress:
     nginxRateLimit:
       enabled: false
