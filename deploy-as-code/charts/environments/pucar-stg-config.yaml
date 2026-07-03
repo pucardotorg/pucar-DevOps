@@ -2,13 +2,13 @@ ab-diary:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/ab-diary
     tag: sdc-uat-fb7493994c08b593759448d6d3be1bd309d6ce02
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -21,13 +21,13 @@ advocate:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/advocate
-    tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
+    tag: main-29274e5b114572f8c9cb9cabb594b07a8bf62b82
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -40,13 +40,13 @@ advocate-office-management:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/advocate-office-management
     tag: main-0447fff90ecf720ab53179d2523a564ddf34ef00
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -59,13 +59,13 @@ analytics:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/analytics
-    tag: main-420f6436872f3e9c657a36a1fe65c1f4963c5958
+    tag: main-29274e5b114572f8c9cb9cabb594b07a8bf62b82
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -78,13 +78,13 @@ application:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/application
-    tag: main-de0605c9c6beb63a646c14baac6f0493a2403ffe
+    tag: main-29274e5b114572f8c9cb9cabb594b07a8bf62b82
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -98,13 +98,13 @@ audit-service:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/audit-service
     tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -117,13 +117,13 @@ auth-proxy:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: egovio/auth-proxy
     tag: auth-proxy-urlencoded-fix-aad9a5959c-23
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -136,13 +136,13 @@ bail-bond:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/bail-bond
-    tag: main-de0605c9c6beb63a646c14baac6f0493a2403ffe
+    tag: main-ffad1fd84c1a6d1a344b733de0aa9b829d2835da
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -155,13 +155,13 @@ bank-details:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/bank-details
     tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -174,13 +174,13 @@ billing-service:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/billing-service
     tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -193,13 +193,13 @@ case:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/case
-    tag: main-ee52286aab8c8870e7be02efa156840b4200cb04
+    tag: main-29274e5b114572f8c9cb9cabb594b07a8bf62b82
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "1000"
       burstMultiplier: "1"
       conections: "10"
@@ -212,13 +212,13 @@ casemanagement:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/casemanagement
-    tag: main-2e78f03c74248e925838be769d21855b5624a622
+    tag: main-29274e5b114572f8c9cb9cabb594b07a8bf62b82
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "1000"
       burstMultiplier: "1"
       conections: "10"
@@ -231,13 +231,13 @@ citizen:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: egovio/citizen
     tag: v1.10.0-beta-0ad561e837-30
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -250,13 +250,13 @@ clamav:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/clamav
     tag: latest
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -269,13 +269,13 @@ collection-services:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/collection-services
     tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -288,13 +288,13 @@ ctc:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/ctc
-    tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
+    tag: main-29274e5b114572f8c9cb9cabb594b07a8bf62b82
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -307,13 +307,13 @@ digit-ui:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/digit-ui
-    tag: main-4463e1b36b514dea69f464147412f72ae159d913
+    tag: payment-status-not-setting-issue-42ae9cd10d98286b4d59a36bff8b04d7225f34e0
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "10000"
       burstMultiplier: "1"
       conections: "10"
@@ -326,13 +326,13 @@ digitalized-documents:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/digitalized-documents
-    tag: main-0447fff90ecf720ab53179d2523a564ddf34ef00
+    tag: main-ffad1fd84c1a6d1a344b733de0aa9b829d2835da
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "1000"
       burstMultiplier: "1"
       conections: "10"
@@ -345,13 +345,13 @@ dristi-case-pdf:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/dristi-case-pdf
-    tag: main-06f0eff9caaf00df56b51d8551335cf3d6258078
+    tag: main-ffad1fd84c1a6d1a344b733de0aa9b829d2835da
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -365,13 +365,13 @@ dristi-pdf:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/dristi-pdf
-    tag: main-0d23335d34f7ae587ed901b470f9da88e2fb0283
+    tag: main-29274e5b114572f8c9cb9cabb594b07a8bf62b82
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -384,13 +384,13 @@ e-sign-svc:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/e-sign-svc
-    tag: update-signature-container-size-main-2de70ae39fc589d10217cfa96c2b34ca75db5138
+    tag: main-6331beed32f18124e5dbae288fde917edfbe9cf2
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -403,13 +403,13 @@ egov-accesscontrol:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/egov-accesscontrol
     tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -422,13 +422,13 @@ egov-apportion-service:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/egov-apportion-service
     tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -441,13 +441,13 @@ egov-enc-service:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/egov-enc-service
     tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -460,13 +460,13 @@ egov-filestore:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: venkatramireddyb/egov-filestore
     tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "1000"
       burstMultiplier: "1"
       conections: "10"
@@ -479,13 +479,13 @@ egov-hrms:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/egov-hrms
     tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -498,13 +498,13 @@ egov-idgen:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/egov-idgen
     tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -517,13 +517,13 @@ egov-indexer:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/egov-indexer
     tag: main-206e0c53783db990ad4f9585083a866362d47e24
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -536,13 +536,13 @@ egov-localization:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/egov-localization
     tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -555,13 +555,13 @@ egov-mdms-service:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/egov-mdms-service
     tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -574,13 +574,13 @@ egov-notification-mail:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/egov-notification-mail
     tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -593,13 +593,13 @@ egov-otp:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/egov-otp
     tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -612,13 +612,13 @@ egov-persister:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/egov-persister
-    tag: main-206e0c53783db990ad4f9585083a866362d47e24
+    tag: main-ffad1fd84c1a6d1a344b733de0aa9b829d2835da
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -631,13 +631,13 @@ egov-pg-service:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/egov-pg-service
     tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -650,13 +650,13 @@ egov-url-shortening:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/egov-url-shortening
     tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -669,13 +669,13 @@ egov-user:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/egov-user
-    tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
+    tag: main-29274e5b114572f8c9cb9cabb594b07a8bf62b82
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -688,13 +688,13 @@ egov-user-event:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/egov-user-event
     tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -707,13 +707,13 @@ egov-workflow-v2:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/egov-workflow-v2
     tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -726,13 +726,13 @@ epost-tracker:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/epost-tracker
-    tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
+    tag: main-29274e5b114572f8c9cb9cabb594b07a8bf62b82
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -745,13 +745,13 @@ esign-interceptor:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/esign-interceptor
     tag: update-signature-container-size-main-2de70ae39fc589d10217cfa96c2b34ca75db5138
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -764,13 +764,17 @@ etreasury:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/etreasury
-    tag: etreasury-lower-env-fix-doubleverification-v3-865291bc28a2fcef1c3890165f12ca016ad13e57
+    tag: main-84fae7ee3bb623cc355a3006f409e5a396eaf539
+  istestEnabled: true
+  ismockEnabled: false
+  challan-test-amount: "4"
+  challan-test-amount-enabled: true
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -783,13 +787,13 @@ evidence:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: venkatramireddyb/evidence
-    tag: main-e3fd0bb075759cd86a595ccac3256c0f7231d404
+    tag: main-ffad1fd84c1a6d1a344b733de0aa9b829d2835da
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -802,13 +806,13 @@ employee:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: egovio/employee
     tag: v1.10.0-beta-e7a69e05d3-33
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -821,13 +825,13 @@ epayments:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/epayments
-    tag: sdc-uat-0657159be3406e649f60dacc4a73dedf1efa7c2e
+    tag: main-9f559b0c91271fcfd661d0d8909d233981cd0253
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -841,13 +845,25 @@ gateway:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/gateway
     tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
+  initContainers:
+    extraInitContainers: |
+      - name: "gateway-kubernetes-discovery"
+        image: {{ .Values.global.containerRegistry }}/gateway-kubernetes-discovery:fix-user-otp-rate-limit-per-minute-334a481adcd4b36c7108c86fc9dec59d33846bd6
+        env:
+        - name: "OUTPUT_FILE_PATH"
+          value: "/etc/zuul/routes.properties"
+        - name: "NAMESPACE"
+          value: {{ .Values.namespace | quote }}
+        volumeMounts:
+        - name: zuul-routes
+          mountPath: /etc/zuul
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -860,13 +876,13 @@ hearing:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: venkatramireddyb/hearing
-    tag: main-3c0b8a40f656956541da5851e6405fef9c4b9708
+    tag: main-29274e5b114572f8c9cb9cabb594b07a8bf62b82
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -879,13 +895,13 @@ hearing-management:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/hearing-management
     tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -898,13 +914,13 @@ icops-integration:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: venkatramireddyb/icops-integration
-    tag: main-41a16228ce57875d0d699a26118f529585af534b
+    tag: main-29274e5b114572f8c9cb9cabb594b07a8bf62b82
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -917,13 +933,13 @@ inbox:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/inbox
-    tag: main-cbc7f5cc29355825a7e6c54378e9263db5177bd4
+    tag: main-29274e5b114572f8c9cb9cabb594b07a8bf62b82
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "3000"
       burstMultiplier: "1"
       conections: "10"
@@ -936,13 +952,13 @@ individual:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/individual
-    tag: main-0a506a31d2903e35f06af086bcc51217e7dda8aa
+    tag: enhancement-5806-unique-active-individual-with-user-fafca55775f5984c0efa467b4997a54a1001d9ff
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -955,13 +971,13 @@ inportal-survey:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/inportal-survey
     tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -974,13 +990,13 @@ jaeger-collector:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/jaeger-collector
     tag: 1.55
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -993,13 +1009,13 @@ jaeger-query:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/jaeger-query
     tag: 1.55
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -1012,13 +1028,13 @@ kerala-sms:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/kerala-sms
     tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -1031,13 +1047,13 @@ lock-svc:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/lock-svc
     tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -1050,13 +1066,13 @@ metabase:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/metabase
     tag: latest
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -1069,13 +1085,13 @@ minio-filestore:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/egov-filestore
     tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -1088,13 +1104,13 @@ network-multitool:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/network-multitool
     tag: latest
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -1107,13 +1123,13 @@ nginx-deployment:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/nginx
     tag: latest
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -1126,13 +1142,13 @@ njdg-transformer:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/njdg-transformer
-    tag: main-de0605c9c6beb63a646c14baac6f0493a2403ffe
+    tag: main-ffad1fd84c1a6d1a344b733de0aa9b829d2835da
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -1145,13 +1161,13 @@ notification:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: venkatramireddyb/notification
     tag: sdc-uat-fb7493994c08b593759448d6d3be1bd309d6ce02
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -1164,13 +1180,13 @@ ocr-service:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/ocr-service
     tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -1183,13 +1199,13 @@ oncourts-website:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/oncourts-website
-    tag: 'main-56972aa4e2e83af41225be3e1e018a2b20026a99'
+    tag: 'main-494eae88f3fcd9efbadcef5d1808b93ae2f32e3e'
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -1202,13 +1218,13 @@ openapi:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/openapi
-    tag: sdc-uat-fb7493994c08b593759448d6d3be1bd309d6ce02
+    tag: main-29274e5b114572f8c9cb9cabb594b07a8bf62b82
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -1221,13 +1237,13 @@ order:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/order
-    tag: main-a0505fbdc5f111343a17ebe611b797bc770a294d
+    tag: main-29274e5b114572f8c9cb9cabb594b07a8bf62b82
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -1240,13 +1256,13 @@ order-management:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/order-management
-    tag: main-611759def9bb9d40b4a92a0278d8ec413d1f8aa1
+    tag: main-29274e5b114572f8c9cb9cabb594b07a8bf62b82
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -1261,13 +1277,13 @@ payment-calculator:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/payment-calculator
     tag: sdc-uat-fb7493994c08b593759448d6d3be1bd309d6ce02
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -1280,13 +1296,13 @@ pdf-service:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/pdf-service
     tag: sdc-uat-0657159be3406e649f60dacc4a73dedf1efa7c2e
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -1299,13 +1315,13 @@ pgr-services:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/pgr-services
     tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -1318,13 +1334,13 @@ qr-code-service:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/qr_code_service
     tag: v1.0.0-ff38bbcae147c92f0434724206de380f49cdccc4
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -1337,13 +1353,13 @@ scheduler:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/scheduler
-    tag: main-cbc7f5cc29355825a7e6c54378e9263db5177bd4
+    tag: main-29274e5b114572f8c9cb9cabb594b07a8bf62b82
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -1356,13 +1372,13 @@ service-request:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: egovio/service-request
     tag: core-2.9-lts-mvn-check-bbc06901f1-6
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -1375,13 +1391,13 @@ static-assets:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/nginx
     tag: latest
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -1394,13 +1410,13 @@ summons-svc:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: venkatramireddyb/summons-svc
-    tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
+    tag: main-29274e5b114572f8c9cb9cabb594b07a8bf62b82
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -1413,13 +1429,13 @@ sunbird-rc-credentials-service:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: ghcr.io/sunbird-rc/sunbird-rc-credentials-service
     tag: v2.0.0-rc3
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -1432,13 +1448,13 @@ sunbird-rc-identity-service:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/sunbird-rc/sunbird-rc-identity-service
     tag: v2.0.0-rc3
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -1451,13 +1467,13 @@ sunbirdrc-credential-service:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: egovio/sunbirdrc-credential-service
     tag: sdc-uat-fb7493994c08b593759448d6d3be1bd309d6ce02
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -1470,13 +1486,13 @@ task:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: venkatramireddyb/task
-    tag: main-a0505fbdc5f111343a17ebe611b797bc770a294d
+    tag: main-29274e5b114572f8c9cb9cabb594b07a8bf62b82
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -1489,13 +1505,13 @@ task-management:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/task-management
-    tag: main-de0605c9c6beb63a646c14baac6f0493a2403ffe
+    tag: main-29274e5b114572f8c9cb9cabb594b07a8bf62b82
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -1508,13 +1524,13 @@ template-configuration:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/template-configuration
     tag: sdc-uat-fb7493994c08b593759448d6d3be1bd309d6ce02
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -1527,13 +1543,13 @@ transcription:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/transcription
     tag: v1.0.0-dristi-experiment-1
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -1546,14 +1562,17 @@ transformer:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   heap: "-Xmx1000m -Xms1000m"
+  memory_requests: 2Gi
+  memory_limits: 2Gi
+  cpu_requests: 50m
   image:
     repository: docker.io/venkatramireddyb/transformer
-    tag: main-a0505fbdc5f111343a17ebe611b797bc770a294d
+    tag: main-ffad1fd84c1a6d1a344b733de0aa9b829d2835da
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -1566,32 +1585,33 @@ user-otp:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/user-otp
-    tag: main-0447fff90ecf720ab53179d2523a564ddf34ef00
+    tag: main-d56622fe93d39101401d70d6c511c12de5064f85
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
   rateLimit:
     enabled: true
-    gatewayBurstCapacity: "3"
+    gatewayBurstCapacity: "60"
     gatewayKeyResolver: "otpKeyResolver"
-    gatewayReplenishRate: "3"
+    gatewayReplenishRate: "1"
+    gatewayRequestedTokens: "20"
 vault-agent-injector:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/vault-k8s
     tag: 1.4.1
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -1604,13 +1624,13 @@ verifyapp:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: docker.io/venkatramireddyb/verifierapp
     tag: v1.0.0-main-c4ee738-5
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"
@@ -1623,13 +1643,13 @@ workbench-ui:
   hpa:
     maxReplicas: 5
     memory:
-      enabled: true
+      enabled: false
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/workbench-ui
     tag: gogs-v1.12.0
   ingress:
     nginxRateLimit:
-      enabled: true
+      enabled: false
       rpm: "500"
       burstMultiplier: "1"
       conections: "10"

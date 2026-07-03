@@ -107,14 +107,9 @@ digit-ui:
             var localeRegion = "IN";
             var localeDefault = "en";
             var mdmsContext = "mdms-v2";
-            var footerBWLogoURL = "http://10.5.94.229:9000/assests/pucar-assets/digit-footer-bw.png";
-            var footerLogoURL = "http://10.5.94.229:9000/assests/pucar-assets/digit-footer.png";
+            var footerBWLogoURL = "https://oncourts.kerala.gov.in/minio-filestore/v1/files/id?tenantId=kl&fileStoreId=2cb2fd08-61f4-4132-9607-64f2c94e8fa9";
+            var footerLogoURL = "https://oncourts.kerala.gov.in/minio-filestore/v1/files/id?tenantId=kl&fileStoreId=7b5c9588-6bc3-456c-9477-7a4930df3c78";
             var digitHomeURL = "https://www.digit.org/";
-            var assetS3Bucket = "pucarfilestore";
-            var benchId = "BENCH_ID";
-            var judgeId = "JUDGE_ID";
-            var courtId = "KLKM52";
-            var judgeName = "Michael George";
             var mockEnabled = "false";
             var mockESignEnabled = "false";
             var pucarFileStoreBlob = "https://pucarfilestoreuat.blob.core.windows.net"
@@ -379,7 +374,7 @@ oncourts-website:
          var judgeName = "Smt. Soorya S Sukumaran";
          var WEBSOCKET_ADDRESS = "wss://dristi-kerala-qa.pucar.org/transcription"
          var invalidEmployeeRoles = ["CBO_ADMIN", "ORG_ADMIN", "ORG_STAFF", "SYSTEM"];
-         var mockEnabled = "true";
+         var mockEnabled = "false";
          var mockESignEnabled = "false";
       
          var getConfig = function (key) {
@@ -473,3 +468,9 @@ etreasury:
     - ip: "103.135.131.132"
       hostnames:
       - "stagingetreasury.kerala.gov.in"
+
+etreasury-process-reconciliation:
+  user_id: 321
+  user_uuid: "cc0bea82-0525-4a48-9192-5721931af654"
+  user_name: "payment-collector"
+  name_of_user: "payment-collector"

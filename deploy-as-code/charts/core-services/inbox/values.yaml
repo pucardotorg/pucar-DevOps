@@ -107,3 +107,13 @@ env: |
   - name: SPRING_REDIS_TIMEOUT
     value: "300"
   {{- end }}
+  - name: AB_DIARY_HOST
+    valueFrom:
+      configMapKeyRef:
+        key: ab-diary
+        name: egov-service-host
+  - name: TASK_SERVICE_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: task
