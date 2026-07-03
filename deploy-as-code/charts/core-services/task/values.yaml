@@ -170,3 +170,8 @@ env: |
         name: egov-service-host
   - name: dristi.esign.signature.width
     value: "218"
+  - name: EGOV_BAILBOND_HOST
+    valueFrom:
+      configMapKeyRef:
+        key: bail-bond
+        name: egov-service-host

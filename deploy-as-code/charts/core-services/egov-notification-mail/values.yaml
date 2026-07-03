@@ -17,6 +17,12 @@ appType: "java-spring"
 mail-port: 587
 username: "egov-testing@egovernments.org"
 heap: "-Xmx192m -Xms192m"
+mail-smtps-debug: "true"
+mail-smtps-auth: "true"
+mail-smtps-ssl-enable: "false"
+mail-smtps-starttls-enable: "true"
+mail-sender-test: "false"
+mail-protocol: "smtp"
 
 # Additional Container Envs
 env: |
@@ -73,16 +79,16 @@ env: |
         key: mailsenderusername
         name: egov-notification-mail
   - name: MAIL_SMTPS_DEBUG
-    value: "true"
+    value: {{ index .Values "mail-smtps-debug" | quote }}
   - name: MAIL_SMTPS_AUTH
-    value: "true"
+    value: {{ index .Values "mail-smtps-auth" | quote }}
   - name: MAIL_PROTOCOL
-    value: smtp
+    value: {{ index .Values "mail-protocol" | quote }}
   - name: MAIL_SMTPS_SSL_ENABLE
-    value: "false"
+    value: {{ index .Values "mail-smtps-ssl-enable" | quote }}
   - name: MAIL_SMTPS_STARTTLS_ENABLE
-    value: "true"
+    value: {{ index .Values "mail-smtps-starttls-enable" | quote }}
   - name: MAIL_SENDER_TEST
-    value: "false"
+    value: {{ index .Values "mail-sender-test" | quote }}
   - name: TEST_EMAIL
     value: manimaaran@beehyv.com

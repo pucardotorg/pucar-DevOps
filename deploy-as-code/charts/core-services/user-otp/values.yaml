@@ -27,6 +27,7 @@ replicas: "1"
 appType: "java-spring"
 heap: "-Xmx192m -Xms192m"
 java-args: ""
+debugPort: 5005
 
 # Additional Container Envs
 env: |

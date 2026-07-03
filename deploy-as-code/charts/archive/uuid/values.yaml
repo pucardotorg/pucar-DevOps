@@ -1,0 +1,81 @@
+# Common Labels
+labels:
+  app: "uuid"
+  group: "core-services"
+
+# Ingress Configs
+ingress:
+  enabled: true
+  zuul: true
+  context: "uuid"
+
+lokiEnabled: true
+tracing-enabled: true
+
+# Init Containers Configs
+initContainers:
+  dbMigration:
+    enabled: true
+    schemaTable: "uuid_schema"
+    image:
+      repository: "docker.io/venkatramireddyb/uuid-db"
+      tag: feature-5421-develop-978f90a1e36cef52ddcd186ed182987103526329
+
+# Container Configs
+image:
+  repository: "docker.io/venkatramireddyb/uuid"
+  tag: feature-5421-develop-978f90a1e36cef52ddcd186ed182987103526329
+healthChecks:
+  enabled: true
+  livenessProbePath: "/uuid/health"
+  readinessProbePath: "/uuid/health"
+replicas: "1"
+appType: "java-spring"
+heap: "-Xmx192m -Xms192m"
+java-args: ""
+
+# Additional Container Envs
+env: |
+  - name: JAVA_OPTS
+    value: {{ index .Values "heap" | quote }}
+  - name: SERVER_PORT
+    value: "8080"
+  - name: JAVA_ARGS
+    value: {{ index .Values "java-args" | quote }}
+  - name: SPRING_FLYWAY_ENABLED
+    value: "false"
+  - name: EGOV_LOCALIZATION_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: egov-localization
+  - name: EGOV_MDMS_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: egov-mdms-service
+  - name: EGOV_HRMS_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: egov-hrms
+  - name: EGOV_USER_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: egov-user
+  - name: EGOV_IDGEN_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: egov-idgen
+  - name: EGOV_WORKFLOW_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: egov-workflow-v2
+  - name: EGOV_URL_SHORTNER_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: egov-url-shortening
