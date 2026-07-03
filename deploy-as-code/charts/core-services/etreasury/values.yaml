@@ -172,6 +172,11 @@ env: |
       secretKeyRef:
         name: etreasury
         key: treasury-reconciliation-v3-source
+  - name: TREASURY-TRANSACTION-DETAILS-V3-URL
+    valueFrom:
+      configMapKeyRef:
+        name: egov-config
+        key: treasury-transaction-details-v3-url
   - name: spring.kafka.producer.properties.connections.max.idle.ms
     value: "1800000"
   {{- if not .Values.ismockEnabled  }}
