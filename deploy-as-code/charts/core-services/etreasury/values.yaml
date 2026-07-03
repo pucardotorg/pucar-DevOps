@@ -62,14 +62,6 @@ env: |
         name: egov-config
         key: treasury-office-code
   {{- end }}
-  {{- if .Values.officecode }}
-    value: {{ index .Values "officecode" | quote }}
-  {{- else }}
-    valueFrom:
-      configMapKeyRef:
-        name: egov-config
-        key: treasury-office-code
-  {{- end }}
   - name: TREASURY_ACCOUNT_TYPE
     value: 01,14
   {{- if index .Values "challan-test-amount-enabled" }}
