@@ -38,6 +38,13 @@ debugPort: 5005
 istestEnabled: "true"
 ismockEnabled: "true"
 officecode: "030101B0019"
+challan-test-amount-enabled: false
+challan-test-amount: "4"
+istestEnabled: "true"
+ismockEnabled: "true"
+officecode: "030101B0019"
+challan-test-amount-enabled: false
+challan-test-amount: "4"
 # Additional Container Envs
 env: |
   - name: PUCAR_TSB_RECEIPT
@@ -57,6 +64,10 @@ env: |
   {{- end }}
   - name: TREASURY_ACCOUNT_TYPE
     value: 01,14
+  {{- if index .Values "challan-test-amount-enabled" }}
+  - name: CHALLAN_TEST_AMOUNT
+    value: {{ index .Values "challan-test-amount" | quote }}
+  {{- end }}
   - name: ISTEST_ENABLED
     value: {{ index .Values "istestEnabled" | quote }}
   - name: SERVER_PORT
@@ -146,6 +157,26 @@ env: |
       configMapKeyRef:
         name: egov-service-host
         key: egov-localization
+  - name: TREASURY-RECONCILIATION-V3-CLIENT-SECRET
+    valueFrom:
+      secretKeyRef:
+        name: etreasury
+        key: treasury-reconciliation-v3-client-secret
+  - name: TREASURY-RECONCILIATION-V3-CLIENT-ID
+    valueFrom:
+      secretKeyRef:
+        name: etreasury
+        key: treasury-reconciliation-v3-client-id
+  - name: TREASURY-RECONCILIATION-V3-SOURCE
+    valueFrom:
+      secretKeyRef:
+        name: etreasury
+        key: treasury-reconciliation-v3-source
+  - name: TREASURY-TRANSACTION-DETAILS-V3-URL
+    valueFrom:
+      configMapKeyRef:
+        name: egov-config
+        key: treasury-transaction-details-v3-url
   - name: spring.kafka.producer.properties.connections.max.idle.ms
     value: "1800000"
   {{- if not .Values.ismockEnabled  }}
@@ -204,4 +235,4 @@ env: |
       configMapKeyRef:
         name: egov-config
         key: treasury-refund-status-url
-  {{- end }}
+  {{- end }}  

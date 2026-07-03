@@ -451,3 +451,9 @@ etreasury:
 
 egov-notification-mail:
   mail-port: 465
+
+etreasury-process-reconciliation:
+  user_id: 2402
+  user_uuid: "9caf4180-aaa2-442f-93c1-0e403b72c736"
+  user_name: "oncourts-payment-collector"
+  name_of_user: "payment-collector"
