@@ -40,6 +40,11 @@ ismockEnabled: "true"
 officecode: "030101B0019"
 challan-test-amount-enabled: false
 challan-test-amount: "4"
+istestEnabled: "true"
+ismockEnabled: "true"
+officecode: "030101B0019"
+challan-test-amount-enabled: false
+challan-test-amount: "4"
 # Additional Container Envs
 env: |
   - name: PUCAR_TSB_RECEIPT
@@ -49,14 +54,6 @@ env: |
   - name: TREASURY_ACCOUNT_NUMBERS
     value: 8031-00-102-94-07-00-00-N-V,8031-00-102-94-03-00-00-N-V
   - name: OFFICE_CODE
-  {{- if .Values.officecode }}
-    value: {{ index .Values "officecode" | quote }}
-  {{- else }}
-    valueFrom:
-      configMapKeyRef:
-        name: egov-config
-        key: treasury-office-code
-  {{- end }}
   {{- if .Values.officecode }}
     value: {{ index .Values "officecode" | quote }}
   {{- else }}
@@ -160,6 +157,21 @@ env: |
       configMapKeyRef:
         name: egov-service-host
         key: egov-localization
+  - name: TREASURY-RECONCILIATION-V3-CLIENT-SECRET
+    valueFrom:
+      secretKeyRef:
+        name: etreasury
+        key: treasury-reconciliation-v3-client-secret
+  - name: TREASURY-RECONCILIATION-V3-CLIENT-ID
+    valueFrom:
+      secretKeyRef:
+        name: etreasury
+        key: treasury-reconciliation-v3-client-id
+  - name: TREASURY-RECONCILIATION-V3-SOURCE
+    valueFrom:
+      secretKeyRef:
+        name: etreasury
+        key: treasury-reconciliation-v3-source
   - name: spring.kafka.producer.properties.connections.max.idle.ms
     value: "1800000"
   {{- if not .Values.ismockEnabled  }}
@@ -219,13 +231,3 @@ env: |
         name: egov-config
         key: treasury-refund-status-url
   {{- end }}  
-  - name: TREASURY-RECONCILIATION-V3-CLIENT-ID
-    valueFrom:
-      secretKeyRef:
-        name: etreasury
-        key: treasury-reconciliation-v3-client-id
-  - name: TREASURY-RECONCILIATION-V3-SOURCE
-    valueFrom:
-      secretKeyRef:
-        name: etreasury
-        key: treasury-reconciliation-v3-source
