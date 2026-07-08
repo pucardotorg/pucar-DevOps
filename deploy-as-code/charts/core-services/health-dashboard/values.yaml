@@ -23,6 +23,16 @@ heap: "-Xmx512m -Xms512m"
 java-args: ""
 memory_limits: 768Mi
 
+# Init Containers Configs
+initContainers:
+  dbMigration:
+    enabled: true
+    schemaTable: "health_dashboard_schema"
+    image:
+      repository: "docker.io/venkatramireddyb/health-dashboard-db"
+      tag: "latest"
+
+
 healthChecks:
   enabled: true
   livenessProbePath: "/health-dashboard/health"
