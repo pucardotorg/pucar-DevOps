@@ -1,0 +1,38 @@
+# Common Labels
+labels:
+  app: "health-dashboard"
+  group: "backend"
+
+# Ingress Configs
+ingress:
+  enabled: true
+  zuul: true
+  context: "health-dashboard"
+
+lokiEnabled: true
+tracing-enabled: true
+
+# Container Configs
+image:
+  repository: "health-dashboard"
+  tag: "latest"
+replicas: "1"
+httpPort: 8080
+appType: "java-spring"
+heap: "-Xmx512m -Xms512m"
+java-args: ""
+memory_limits: 768Mi
+
+healthChecks:
+  enabled: true
+  livenessProbePath: "/health-dashboard/health"
+  readinessProbePath: "/health-dashboard/health"
+
+# Additional Container Envs
+env: |
+  - name: JAVA_OPTS
+    value: {{ index .Values "heap" | quote }}
+  - name: SERVER_PORT
+    value: "8080"
+  - name: JAVA_ARGS
+    value: {{ index .Values "java-args" | quote }}
