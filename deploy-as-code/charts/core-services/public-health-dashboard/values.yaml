@@ -16,5 +16,5 @@ replicas: "1"
 httpPort: 80
 healthChecks:
   enabled: true
-  livenessProbePath: "/"
-  readinessProbePath: "/"
+  livenessProbePath: "/public-health-dashboard/"
+  readinessProbePath: "/public-health-dashboard/"
