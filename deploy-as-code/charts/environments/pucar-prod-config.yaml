@@ -338,7 +338,7 @@ digit-ui:
       enabled: false
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/digit-ui
-    tag: gogs-v1.20.0
+    tag: gogs-v1.20.1
   memory_requests: "1Gi"
   replicas: 2
   ingress:
