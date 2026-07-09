@@ -32,11 +32,11 @@ image:
 replicas: "1"
 httpPort: 8080
 appType: "java-spring"
-heap: "-Xmx1536m -Xms1536m"
+heap: "-Xmx256m -Xms256m"
 debugPort: 5005
 java-args: "-Dspring.profiles.active=monitoring"
-memory_requests: 2Gi
-memory_limits: 2Gi
+memory_requests: "512Mi"
+memory_limits: "512Mi"
 
 healthChecks:
   enabled: true

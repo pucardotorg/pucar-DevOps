@@ -1,0 +1,42 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: pucar-prod-core-services
+  namespace: openshift-gitops
+spec:
+  generators:
+    - git:
+        repoURL: http://172.50.102.86:3000/pucar_repo/Oncourts-Openshift.git
+        revision: master
+        directories:
+          - path: deploy-as-code/charts/core-services/*
+  template:
+    metadata:
+      name: 'prod-{{path.basename}}'
+    spec:
+      project: oncourts-prod
+      source:
+        repoURL: http://172.50.102.86:3000/pucar_repo/Oncourts-Openshift.git
+        targetRevision: master
+        path: '{{path}}'
+        helm:
+          valueFiles:
+            - values.yaml
+            - ../../environments/pucar-prod.yaml
+            - ../../environments/pucar-prod-config.yaml
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: pucar-prod
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - ApplyOutOfSyncOnly=true
+          - ServerSideApply=true
+        retry:
+          limit: 100
+          backoff:
+            duration: 5s
+            factor: 2
+            maxDuration: 3m0s

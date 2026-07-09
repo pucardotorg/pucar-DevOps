@@ -113,7 +113,10 @@ env: |
         name: egov-service-host
         key: egov-localization
   - name:  EGOV_FILESTORE_SERVICE_HOST
-    value: "http://egov-filestore.egov:8080"
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: dristi-pdf-filestore
   - name: JUDGE_NAME
     valueFrom:
       configMapKeyRef:
@@ -168,4 +171,9 @@ env: |
     valueFrom:
       configMapKeyRef:
         key: openapi
+        name: egov-service-host
+  - name: DRISTI_ORDER_MANAGEMENT_HOST
+    valueFrom:
+      configMapKeyRef:
+        key: order-management
         name: egov-service-host

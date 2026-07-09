@@ -12,9 +12,8 @@ ingress:
   enabled: false
   zuul: false
   annotations:
-    kubernetes.io/ingress.class: "nginx"
     nginx.ingress.kubernetes.io/use-regex: "true" 
-   # nginx.ingress.kubernetes.io/limit-rpm: "300"
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
   waf: 
     enabled: true
     annotations:
@@ -30,13 +29,13 @@ ingress:
     connections: "10"
     annotations:
 
-hpacpu:
-  enabled: false
-hparam:
-  enabled: true
 hpa:
   minReplicas: 1
   maxReplicas: 5
+  cpu:
+    enabled: false
+  memory:
+    enabled: false
 
 rateLimit:
   enabled: true
@@ -146,23 +145,29 @@ lifecycle:
 
 memory_limits: "512Mi"
 resources: |
-  {{- if .Values.memory_limits -}}
+  {{- if or (eq .Values.appType "java-spring") .Values.applyResourceLimits -}}
   requests:
     {{- if .Values.memory_requests }}
     memory: {{ .Values.memory_requests | quote }}
     {{- else if .Values.memory_limits }}
     memory: {{ .Values.memory_limits | quote }}
     {{- end }}
-  limits:
-    {{- if .Values.cpu_limits }}
+    {{- if .Values.cpu_requests }}
+    cpu: {{ .Values.cpu_requests | quote }}
+    {{- else if .Values.cpu_limits }}
     cpu: {{ .Values.cpu_limits | quote }}
-    {{- end }}  
+    {{- end }}
+  limits:
     {{- if .Values.memory_limits }}
     memory: {{ .Values.memory_limits | quote }}
     {{- else if .Values.memory_requests }}
     memory: {{ .Values.memory_requests | quote }}
     {{- end }}
+    {{- if .Values.cpu_limits }}
+    cpu: {{ .Values.cpu_limits | quote }}
+    {{- end }}
   {{- end -}}
+
 ## Allows specification of additional environment variables
 extraEnv:
   java: |
@@ -317,7 +322,7 @@ extraEnv:
       {{- else }}
         value: "enc-user-audit-data"
       {{- end }}  
-      {{- if and .Values.lokiEnabled (or (index .Values "loki-url") (and .Values.loki .Values.loki.url)) }}
+      {{- if .Values.lokiEnabled }}
       - name: LOGGING_LOKI_ENABLED
         value: "true"
       - name: LOGGING_LOKI_URL
@@ -326,13 +331,14 @@ extraEnv:
             name: egov-config
             key: loki-url
       - name: LOGGING_LOKI_APP
-        valueFrom:
-          fieldRef:
-            fieldPath: metadata.name
+        value: {{ template "common.name" . }}
       - name: LOGGING_LOKI_ENVIRONMENT
-        value: {{ .Values.global.domain }}
+        valueFrom:
+          configMapKeyRef:
+            key: domain-url
+            name: egov-config
       - name: LOGGING_LEVEL_ROOT
-        value: INFO
+        value: "INFO"
       {{- end }}
       {{- if .Values.redisEnabled }}
       - name: SPRING_REDIS_HOST

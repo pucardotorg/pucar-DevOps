@@ -11,6 +11,7 @@ ingress:
 
 tracing-enabled: true
 lokiEnabled: true
+redisEnabled: true
 
 # Init Containers Configs
 initContainers:
@@ -98,7 +99,3 @@ env: |
       configMapKeyRef:
         key: case
         name: egov-service-host
-  - name: SPRING_REDIS_HOST
-    value: "redis.backbone"
-  - name: SPRING_REDIS_PORT
-    value: "6379"
