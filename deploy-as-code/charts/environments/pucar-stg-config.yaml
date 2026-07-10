@@ -1413,7 +1413,7 @@ summons-svc:
       enabled: false
   image:
     repository: venkatramireddyb/summons-svc
-    tag: main-29274e5b114572f8c9cb9cabb594b07a8bf62b82
+    tag: main-918214e8016ebbc5f7080fe7a8c040db6a82735d
   ingress:
     nginxRateLimit:
       enabled: false
