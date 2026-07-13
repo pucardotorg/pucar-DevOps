@@ -879,7 +879,7 @@ health-dashboard:
       enabled: false
   image:
     repository: venkatramireddyb/health-dashboard
-    tag: feature-5807-public-health-dashboard-8d248e597aad75f0747d682796a318896c17b6a1
+    tag: feature-5807-public-health-dashboard-to-main-82afa8d97d1c83b75c28ab56689666cf7c679410
   ingress:
     nginxRateLimit:
       enabled: false
