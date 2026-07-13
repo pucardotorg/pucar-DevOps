@@ -872,6 +872,25 @@ gateway:
     gatewayBurstCapacity: "30"
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
+health-dashboard:
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: false
+  image:
+    repository: venkatramireddyb/health-dashboard
+    tag: feature-5807-public-health-dashboard-8d248e597aad75f0747d682796a318896c17b6a1
+  ingress:
+    nginxRateLimit:
+      enabled: false
+      rpm: "500"
+      burstMultiplier: "1"
+      conections: "10"
+  rateLimit:
+    enabled: true
+    gatewayBurstCapacity: "40"
+    gatewayKeyResolver: "userKeyResolver"
+    gatewayReplenishRate: "40"
 hearing:
   hpa:
     maxReplicas: 5
@@ -1319,6 +1338,25 @@ pgr-services:
   image:
     repository: docker.io/venkatramireddyb/pgr-services
     tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
+  ingress:
+    nginxRateLimit:
+      enabled: false
+      rpm: "500"
+      burstMultiplier: "1"
+      conections: "10"
+  rateLimit:
+    enabled: true
+    gatewayBurstCapacity: "30"
+    gatewayKeyResolver: "userKeyResolver"
+    gatewayReplenishRate: "30"
+public-health-dashboard:
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: false
+  image:
+    repository: docker.io/venkatramireddyb/public-health-dashboard
+    tag: main-ae856e17d963f8f4316e0283cd10d30152926346
   ingress:
     nginxRateLimit:
       enabled: false
