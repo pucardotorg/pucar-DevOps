@@ -1,0 +1,20 @@
+# Common Labels
+labels:
+  app: "public-health-dashboard"
+  group: "web"
+
+# Ingress Configs
+ingress:
+  enabled: true
+  context: "public-health-dashboard"
+
+# Container Configs
+image:
+  repository: "docker.io/venkatramireddyb/public-health-dashboard"
+  tag: latest
+replicas: "1"
+httpPort: 80
+healthChecks:
+  enabled: true
+  livenessProbePath: "/public-health-dashboard/"
+  readinessProbePath: "/public-health-dashboard/"
