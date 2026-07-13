@@ -24,7 +24,7 @@ advocate:
       enabled: false
   image:
     repository: docker.io/venkatramireddyb/advocate
-    tag: main-29274e5b114572f8c9cb9cabb594b07a8bf62b82
+    tag: main-9dd3d2f9a11991cff73b82f703284b9ad5bc0406
   ingress:
     nginxRateLimit:
       enabled: false
@@ -196,7 +196,7 @@ case:
       enabled: false
   image:
     repository: docker.io/venkatramireddyb/case
-    tag: main-29274e5b114572f8c9cb9cabb594b07a8bf62b82
+    tag: main-918214e8016ebbc5f7080fe7a8c040db6a82735d
   ingress:
     nginxRateLimit:
       enabled: false
@@ -310,7 +310,7 @@ digit-ui:
       enabled: false
   image:
     repository: docker.io/venkatramireddyb/digit-ui
-    tag: payment-status-not-setting-issue-67a72064e553d7f4ab1dcd606c1e48b3c44f1c75
+    tag: main-c37ca40fb2cc9a734659a26dd06fade0bc2e3d16
   ingress:
     nginxRateLimit:
       enabled: false
@@ -368,7 +368,7 @@ dristi-pdf:
       enabled: false
   image:
     repository: docker.io/venkatramireddyb/dristi-pdf
-    tag: main-29274e5b114572f8c9cb9cabb594b07a8bf62b82
+    tag: main-918214e8016ebbc5f7080fe7a8c040db6a82735d
   ingress:
     nginxRateLimit:
       enabled: false
@@ -879,7 +879,7 @@ hearing:
       enabled: false
   image:
     repository: venkatramireddyb/hearing
-    tag: main-29274e5b114572f8c9cb9cabb594b07a8bf62b82
+    tag: main-918214e8016ebbc5f7080fe7a8c040db6a82735d
   ingress:
     nginxRateLimit:
       enabled: false
@@ -936,7 +936,7 @@ inbox:
       enabled: false
   image:
     repository: docker.io/venkatramireddyb/inbox
-    tag: main-29274e5b114572f8c9cb9cabb594b07a8bf62b82
+    tag: main-918214e8016ebbc5f7080fe7a8c040db6a82735d
   ingress:
     nginxRateLimit:
       enabled: false
@@ -1240,7 +1240,7 @@ order:
       enabled: false
   image:
     repository: docker.io/venkatramireddyb/order
-    tag: main-29274e5b114572f8c9cb9cabb594b07a8bf62b82
+    tag: main-918214e8016ebbc5f7080fe7a8c040db6a82735d
   ingress:
     nginxRateLimit:
       enabled: false
@@ -1259,7 +1259,7 @@ order-management:
       enabled: false
   image:
     repository: docker.io/venkatramireddyb/order-management
-    tag: main-29274e5b114572f8c9cb9cabb594b07a8bf62b82
+    tag: main-918214e8016ebbc5f7080fe7a8c040db6a82735d
   ingress:
     nginxRateLimit:
       enabled: false
@@ -1356,7 +1356,7 @@ scheduler:
       enabled: false
   image:
     repository: docker.io/venkatramireddyb/scheduler
-    tag: main-29274e5b114572f8c9cb9cabb594b07a8bf62b82
+    tag: main-918214e8016ebbc5f7080fe7a8c040db6a82735d
   ingress:
     nginxRateLimit:
       enabled: false
@@ -1413,7 +1413,7 @@ summons-svc:
       enabled: false
   image:
     repository: venkatramireddyb/summons-svc
-    tag: main-29274e5b114572f8c9cb9cabb594b07a8bf62b82
+    tag: main-918214e8016ebbc5f7080fe7a8c040db6a82735d
   ingress:
     nginxRateLimit:
       enabled: false
@@ -1569,7 +1569,7 @@ transformer:
   cpu_requests: 50m
   image:
     repository: docker.io/venkatramireddyb/transformer
-    tag: main-ffad1fd84c1a6d1a344b733de0aa9b829d2835da
+    tag: main-918214e8016ebbc5f7080fe7a8c040db6a82735d
   ingress:
     nginxRateLimit:
       enabled: false
