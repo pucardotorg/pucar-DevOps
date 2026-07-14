@@ -13,8 +13,16 @@ image:
   repository: "docker.io/venkatramireddyb/cronjob"
   tag: "v1"
 
-command: 
-  - "bin/sh" 
+# Environment variables sourced from ConfigMap
+env: |
+  - name: HEARING_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: hearing
+
+command:
+  - "bin/sh"
   - "-c"
   - |
-    curl -X POST --location "http://hearing.egov:8080/hearing/v1/_runCronJob"
+    curl -X POST --location "${HEARING_HOST}hearing/v1/_runCronJob"
