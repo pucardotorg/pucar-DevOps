@@ -310,7 +310,7 @@ digit-ui:
       enabled: false
   image:
     repository: docker.io/venkatramireddyb/digit-ui
-    tag: main-1706887ecbfc114da0d6bbcb68f1a1aed601962d
+    tag: main-a9d3c7109aa2b47c635f75e51cd17b9c222c8502
   ingress:
     nginxRateLimit:
       enabled: false
@@ -1696,7 +1696,6 @@ workbench-ui:
     gatewayBurstCapacity: "30"
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
-
 acme-challenge:
   namespace: backbone-stg
   serviceAccount: default
