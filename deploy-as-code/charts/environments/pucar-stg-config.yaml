@@ -1696,3 +1696,7 @@ workbench-ui:
     gatewayBurstCapacity: "30"
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
+
+acme-challenge:
+  namespace: backbone-stg
+  serviceAccount: default

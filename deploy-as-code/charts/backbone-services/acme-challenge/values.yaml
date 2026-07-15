@@ -1,0 +1,41 @@
+replicaCount: 1
+
+# Scaffold so plain .Values.global.* access is always safe; real values
+# come from global.domain / global.ingress.className in environments/*.yaml.
+global:
+  domain: ""
+  ingress:
+    className: ""
+
+namespace: backbone-prod
+# Falls back to the namespace's default ServiceAccount when unset.
+# Override per environment via the "acme-challenge:" block in
+# environments/*.yaml or environments/*-config.yaml.
+serviceAccount: ""
+
+nginx:
+  image:
+    repository: nginx
+    tag: alpine
+    pullPolicy: IfNotPresent
+  containerPort: 8080
+
+certbot:
+  image:
+    repository: certbot/certbot
+    tag: latest
+    pullPolicy: Always
+
+service:
+  type: ClusterIP
+  port: 80
+
+ingress:
+  # ingressClassName/host default to global.ingress.className / global.domain
+  # (set in environments/*.yaml per environment). Set here to override.
+  ingressClassName: ""
+  host: ""
+  path: /.well-known/acme-challenge
+  pathType: Prefix
+
+resources: {}

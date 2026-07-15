@@ -1716,3 +1716,8 @@ workbench-ui:
     gatewayBurstCapacity: "30"
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
+
+acme-challenge:
+  namespace: backbone-prod
+  serviceAccount: default
+  # Uses the backbone-prod namespace's default ServiceAccount.
