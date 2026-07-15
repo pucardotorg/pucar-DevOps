@@ -5,28 +5,31 @@ metadata:
   namespace: openshift-gitops
 spec:
   generators:
-    - git:
-        repoURL: https://github.com/pucardotorg/pucar-DevOps.git
-        revision: pucar-stg
-        directories:
-          - path: deploy-as-code/charts/backbone-services/acme-challenge
+    - list:
+        elements:
+          - service: acme-challenge
   template:
     metadata:
-      name: 'staging-{{path.basename}}'
+      name: "staging-{{service}}"
     spec:
       project: oncourts-project
-      source:
-        repoURL: https://github.com/pucardotorg/pucar-DevOps.git
-        targetRevision: pucar-stg
-        path: '{{path}}'
-        helm:
-          valueFiles:
-            - values.yaml
-            - ../../environments/pucar-stg.yaml
-            - ../../environments/pucar-stg-config.yaml
+      sources:
+        - repoURL: https://github.com/pucardotorg/pucar-DevOps.git
+          targetRevision: pucar-stg
+          path: "deploy-as-code/charts/backbone-services/{{service}}"
+          helm:
+            valueFiles:
+              - values.yaml
+              - ../../environments/pucar-stg.yaml
+              - ../../environments/pucar-stg-config.yaml
       destination:
         server: https://kubernetes.default.svc
         namespace: backbone-stg
+      ignoreDifferences:
+        - group: apps
+          kind: Deployment
+          jsonPointers:
+            - /spec/replicas
       syncPolicy:
         automated:
           prune: true
