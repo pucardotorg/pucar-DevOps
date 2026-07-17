@@ -1356,7 +1356,7 @@ public-health-dashboard:
       enabled: false
   image:
     repository: docker.io/venkatramireddyb/public-health-dashboard
-    tag: main-ae856e17d963f8f4316e0283cd10d30152926346
+    tag: main-4f0d3c93a92043215ff9b244c7e8f4a27c2d4567
   ingress:
     nginxRateLimit:
       enabled: false
