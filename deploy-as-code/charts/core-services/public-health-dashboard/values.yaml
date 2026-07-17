@@ -6,7 +6,7 @@ labels:
 # Ingress Configs
 ingress:
   enabled: true
-  context: "public-health-dashboard"
+  context: "health"
 
 # Container Configs
 image:
@@ -16,5 +16,5 @@ replicas: "1"
 httpPort: 80
 healthChecks:
   enabled: true
-  livenessProbePath: "/public-health-dashboard/"
-  readinessProbePath: "/public-health-dashboard/"
+  livenessProbePath: "/health/"
+  readinessProbePath: "/health/"
