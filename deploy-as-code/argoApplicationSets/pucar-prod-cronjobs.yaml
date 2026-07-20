@@ -1,0 +1,46 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: pucar-prod-cronjobs
+  namespace: openshift-gitops
+spec:
+  generators:
+    - git:
+        repoURL: http://10.70.161.86:3000/pucar_repo/kerala-DevOps.git
+        revision: main
+        directories:
+          - path: deploy-as-code/charts/cronjobs/case-status-cron
+          - path: deploy-as-code/charts/cronjobs/etreasury-process-reconciliation
+          - path: deploy-as-code/charts/cronjobs/hearing-scheduled-completed-cron
+          - path: deploy-as-code/charts/cronjobs/ordermanagement-mandatory-submission
+          - path: deploy-as-code/charts/cronjobs/payment-pending-cron
+  template:
+    metadata:
+      name: 'prod-{{path.basename}}'
+    spec:
+      project: oncourts-prod
+      source:
+        repoURL: http://10.70.161.86:3000/pucar_repo/kerala-DevOps.git
+        targetRevision: main
+        path: '{{path}}'
+        helm:
+          valueFiles:
+            - values.yaml
+            - ../../environments/pucar-prod.yaml
+            - ../../environments/pucar-prod-config.yaml
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: pucar-prod
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - ApplyOutOfSyncOnly=true
+          - ServerSideApply=true
+        retry:
+          limit: 100
+          backoff:
+            duration: 5s
+            factor: 2
+            maxDuration: 3m0s

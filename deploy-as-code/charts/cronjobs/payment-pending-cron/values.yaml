@@ -9,13 +9,21 @@ cron:
   timezone: "Asia/Kolkata"
 
 # Container Configs
-namespace: pucar-stg
+
 image:
   repository: "docker.io/venkatramireddyb/cronjob"
   tag: "v1"
 
-command: 
-  - "bin/sh" 
+# Environment variables sourced from ConfigMap
+env: |
+  - name: ORDER_MANAGEMENT_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: order-management
+
+command:
+  - "bin/sh"
   - "-c"
   - |
-    curl -X POST --location "http://order-management.egov:8080/order-management/v1/_runCronJob/third-day
+    curl -X POST --location "${ORDER_MANAGEMENT_HOST}order-management/v1/_runCronJob/third-day"

@@ -9,13 +9,20 @@ cron:
   timezone: "Asia/Kolkata"
 
 # Container Configs
-namespace: pucar-stg
 image:
   repository: "docker.io/venkatramireddyb/cronjob"
   tag: "v1"
 
-command: 
-  - "bin/sh" 
+# Environment variables sourced from ConfigMap
+env: |
+  - name: CASE_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: case
+
+command:
+  - "bin/sh"
   - "-c"
   - |
-    curl -X POST --location "http://case.egov:8080/case/v1/_runCronJob"
+    curl -X POST --location "${CASE_HOST}case/v1/_runCronJob"
