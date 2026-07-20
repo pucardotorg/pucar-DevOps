@@ -37,3 +37,11 @@ Session.vim
 
 # Ignore all zip files
 *.tgz*
+
+# Generated/backed-up TLS certs and private keys (see scripts/generate-acme-cert.*
+# and scripts/update-route-cert.*) - never commit these
+scripts/certs/
+certs-backup/
+*.pem
+*.crt
+*.key
