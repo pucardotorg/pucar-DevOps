@@ -222,7 +222,7 @@ case:
       enabled: true
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/case
-    tag: gogs-v1.20.0
+    tag: gogs-v1.20.2
   heap: "-Xmx2g -Xms512m"
   memory_requests: "4Gi"
   memory_limits: "4Gi"
@@ -338,7 +338,7 @@ digit-ui:
       enabled: false
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/digit-ui
-    tag: gogs-v1.20.1
+    tag: gogs-v1.20.2
   memory_requests: "1Gi"
   replicas: 2
   ingress:
@@ -407,7 +407,7 @@ dristi-pdf:
       enabled: true
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/dristi-pdf
-    tag: gogs-v1.20.0
+    tag: gogs-v1.20.2
   memory_requests: "1200Mi"
   memory_limits: "2560Mi"
   cpu_requests: "50m"
@@ -431,7 +431,7 @@ e-sign-svc:
       enabled: true
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/e-sign-svc
-    tag: gogs-v1.20.1
+    tag: gogs-v1.20.2
   heap: "-Xmx256m -Xms256m"
   memory_requests: "1536Mi"
   memory_limits: "1536Mi"
@@ -913,7 +913,7 @@ etreasury:
       enabled: true
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/etreasury
-    tag: gogs-v1.20.0
+    tag: gogs-v1.20.2
   heap: "-Xmx1024m -Xms1024m"
   memory_requests: 1280Mi
   memory_limits: 1280Mi
@@ -1016,6 +1016,25 @@ gateway:
     gatewayBurstCapacity: "30"
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
+health-dashboard:
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: false
+  image:
+    repository: registry-backbone-prod.apps.ocp2.ksdc.in/health-dashboard
+    tag: gogs-v1.20.2
+  ingress:
+    nginxRateLimit:
+      enabled: false
+      rpm: "500"
+      burstMultiplier: "1"
+      conections: "10"
+  rateLimit:
+    enabled: true
+    gatewayBurstCapacity: "40"
+    gatewayKeyResolver: "userKeyResolver"
+    gatewayReplenishRate: "40"
 hearing:
   hpa:
     maxReplicas: 5
@@ -1023,7 +1042,7 @@ hearing:
       enabled: true
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/hearing
-    tag: gogs-v1.20.0
+    tag: gogs-v1.20.2
   heap: "-Xmx1024m -Xms1024m"
   memory_requests: "3Gi"
   memory_limits: "3.5Gi"
@@ -1071,7 +1090,7 @@ icops-integration:
       enabled: true
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/icops-integration
-    tag: gogs-v1.20.0
+    tag: gogs-v1.20.2
   heap: "-Xmx512m -Xms512m"
   memory_requests: 512Mi
   memory_limits: 768Mi
@@ -1095,7 +1114,7 @@ inbox:
       enabled: true
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/inbox
-    tag: gogs-v1.20.0
+    tag: gogs-v1.20.2
   heap: "-Xmx1024m -Xms512m"
   memory_requests: 1280Mi
   memory_limits: 1280Mi
@@ -1168,7 +1187,7 @@ kerala-sms:
       enabled: true
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/kerala-sms
-    tag: gogs-v1.17.0
+    tag: gogs-v1.20.2
   heap: "-Xmx512m -Xms256m"
   memory_requests: 1536Mi
   memory_limits: 2Gi
@@ -1359,7 +1378,7 @@ order:
       enabled: true
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/order
-    tag: gogs-v1.20.0
+    tag: gogs-v1.20.2
   heap: "-Xmx512m -Xms256m"
   memory_requests: 896Mi
   memory_limits: 1000Mi
@@ -1383,7 +1402,7 @@ order-management:
       enabled: true
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/order-management
-    tag: gogs-v1.20.0
+    tag: gogs-v1.20.2
   heap: "-Xmx512m -Xms256m"
   memory_requests: 1536Mi
   memory_limits: 1536Mi
@@ -1472,6 +1491,25 @@ pgr-services:
     gatewayBurstCapacity: "30"
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
+public-health-dashboard:
+  hpa:
+    maxReplicas: 5
+    memory:
+      enabled: false
+  image:
+    repository: registry-backbone-prod.apps.ocp2.ksdc.in/public-health-dashboard
+    tag: gogs-v1.20.2
+  ingress:
+    nginxRateLimit:
+      enabled: false
+      rpm: "500"
+      burstMultiplier: "1"
+      conections: "10"
+  rateLimit:
+    enabled: true
+    gatewayBurstCapacity: "30"
+    gatewayKeyResolver: "userKeyResolver"
+    gatewayReplenishRate: "30"
 scheduler:
   hpa:
     maxReplicas: 5
@@ -1479,7 +1517,7 @@ scheduler:
       enabled: true
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/scheduler
-    tag: gogs-v1.20.0
+    tag: gogs-v1.20.2
   heap: "-Xmx512m -Xms256m"
   memory_requests: 896Mi
   memory_limits: 1000Mi
@@ -1527,7 +1565,7 @@ summons-svc:
       enabled: true
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/summons-svc
-    tag: gogs-v1.20.0
+    tag: gogs-v1.20.2
   heap: "-Xmx512m -Xms512m"
   memory_requests: 768Mi
   memory_limits: 1000Mi
@@ -1649,7 +1687,7 @@ transformer:
       enabled: true
   image:
     repository: registry-backbone-prod.apps.ocp2.ksdc.in/transformer
-    tag: gogs-v1.19.0
+    tag: gogs-v1.20.2
   heap: "-Xmx1000m -Xms1000m"
   memory_requests: 2Gi
   memory_limits: 2Gi
