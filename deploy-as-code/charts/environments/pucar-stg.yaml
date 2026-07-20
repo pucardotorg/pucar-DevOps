@@ -110,7 +110,7 @@ digit-ui:
             var footerBWLogoURL = "https://oncourts.kerala.gov.in/minio-filestore/v1/files/id?tenantId=kl&fileStoreId=2cb2fd08-61f4-4132-9607-64f2c94e8fa9";
             var footerLogoURL = "https://oncourts.kerala.gov.in/minio-filestore/v1/files/id?tenantId=kl&fileStoreId=7b5c9588-6bc3-456c-9477-7a4930df3c78";
             var digitHomeURL = "https://www.digit.org/";
-            var mockEnabled = "true";
+            var mockEnabled = "false";
             var mockESignEnabled = "false";
             var pucarFileStoreBlob = "https://pucarfilestoreuat.blob.core.windows.net"
             var esignUrl = "https://es-staging.cdac.in/esignlevel2/2.1/form/signdoc"

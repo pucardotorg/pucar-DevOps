@@ -24,7 +24,7 @@ advocate:
       enabled: false
   image:
     repository: docker.io/venkatramireddyb/advocate
-    tag: main-9dd3d2f9a11991cff73b82f703284b9ad5bc0406
+    tag: main-29274e5b114572f8c9cb9cabb594b07a8bf62b82
   ingress:
     nginxRateLimit:
       enabled: false
@@ -196,7 +196,7 @@ case:
       enabled: false
   image:
     repository: docker.io/venkatramireddyb/case
-    tag: main-918214e8016ebbc5f7080fe7a8c040db6a82735d
+    tag: main-29274e5b114572f8c9cb9cabb594b07a8bf62b82
   ingress:
     nginxRateLimit:
       enabled: false
@@ -310,7 +310,7 @@ digit-ui:
       enabled: false
   image:
     repository: docker.io/venkatramireddyb/digit-ui
-    tag: main-4ebf73bb547a19cf0e75f9e93f39bb7d52e4dee7
+    tag: payment-status-not-setting-issue-42ae9cd10d98286b4d59a36bff8b04d7225f34e0
   ingress:
     nginxRateLimit:
       enabled: false
@@ -368,7 +368,7 @@ dristi-pdf:
       enabled: false
   image:
     repository: docker.io/venkatramireddyb/dristi-pdf
-    tag: main-918214e8016ebbc5f7080fe7a8c040db6a82735d
+    tag: main-29274e5b114572f8c9cb9cabb594b07a8bf62b82
   ingress:
     nginxRateLimit:
       enabled: false
@@ -769,7 +769,7 @@ etreasury:
     repository: docker.io/venkatramireddyb/etreasury
     tag: main-84fae7ee3bb623cc355a3006f409e5a396eaf539
   istestEnabled: true
-  ismockEnabled: true
+  ismockEnabled: false
   challan-test-amount: "4"
   challan-test-amount-enabled: true
   ingress:
@@ -898,7 +898,7 @@ hearing:
       enabled: false
   image:
     repository: venkatramireddyb/hearing
-    tag: main-918214e8016ebbc5f7080fe7a8c040db6a82735d
+    tag: main-29274e5b114572f8c9cb9cabb594b07a8bf62b82
   ingress:
     nginxRateLimit:
       enabled: false
@@ -955,7 +955,7 @@ inbox:
       enabled: false
   image:
     repository: docker.io/venkatramireddyb/inbox
-    tag: main-918214e8016ebbc5f7080fe7a8c040db6a82735d
+    tag: main-29274e5b114572f8c9cb9cabb594b07a8bf62b82
   ingress:
     nginxRateLimit:
       enabled: false
@@ -1259,7 +1259,7 @@ order:
       enabled: false
   image:
     repository: docker.io/venkatramireddyb/order
-    tag: main-918214e8016ebbc5f7080fe7a8c040db6a82735d
+    tag: main-29274e5b114572f8c9cb9cabb594b07a8bf62b82
   ingress:
     nginxRateLimit:
       enabled: false
@@ -1278,7 +1278,7 @@ order-management:
       enabled: false
   image:
     repository: docker.io/venkatramireddyb/order-management
-    tag: main-702d2028f112859f10d3fdab3cce62447af5b9d5
+    tag: main-29274e5b114572f8c9cb9cabb594b07a8bf62b82
   ingress:
     nginxRateLimit:
       enabled: false
@@ -1349,25 +1349,6 @@ pgr-services:
     gatewayBurstCapacity: "30"
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
-public-health-dashboard:
-  hpa:
-    maxReplicas: 5
-    memory:
-      enabled: false
-  image:
-    repository: docker.io/venkatramireddyb/public-health-dashboard
-    tag: main-4f0d3c93a92043215ff9b244c7e8f4a27c2d4567
-  ingress:
-    nginxRateLimit:
-      enabled: false
-      rpm: "500"
-      burstMultiplier: "1"
-      conections: "10"
-  rateLimit:
-    enabled: true
-    gatewayBurstCapacity: "30"
-    gatewayKeyResolver: "userKeyResolver"
-    gatewayReplenishRate: "30"
 qr-code-service:
   hpa:
     maxReplicas: 5
@@ -1394,7 +1375,7 @@ scheduler:
       enabled: false
   image:
     repository: docker.io/venkatramireddyb/scheduler
-    tag: main-918214e8016ebbc5f7080fe7a8c040db6a82735d
+    tag: main-29274e5b114572f8c9cb9cabb594b07a8bf62b82
   ingress:
     nginxRateLimit:
       enabled: false
@@ -1451,7 +1432,7 @@ summons-svc:
       enabled: false
   image:
     repository: venkatramireddyb/summons-svc
-    tag: main-a9d3c7109aa2b47c635f75e51cd17b9c222c8502
+    tag: main-29274e5b114572f8c9cb9cabb594b07a8bf62b82
   ingress:
     nginxRateLimit:
       enabled: false
@@ -1607,7 +1588,7 @@ transformer:
   cpu_requests: 50m
   image:
     repository: docker.io/venkatramireddyb/transformer
-    tag: main-918214e8016ebbc5f7080fe7a8c040db6a82735d
+    tag: main-ffad1fd84c1a6d1a344b733de0aa9b829d2835da
   ingress:
     nginxRateLimit:
       enabled: false
@@ -1696,6 +1677,3 @@ workbench-ui:
     gatewayBurstCapacity: "30"
     gatewayKeyResolver: "userKeyResolver"
     gatewayReplenishRate: "30"
-acme-challenge:
-  namespace: backbone-stg
-  serviceAccount: default

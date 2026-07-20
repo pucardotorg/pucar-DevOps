@@ -30,8 +30,8 @@ set -euo pipefail
 #
 ###############################################################################
 
-NAMESPACE="egov"
-RESTART_WINDOW_SECONDS=900  # 15 minutes
+NAMESPACE="pucar-prod"
+RESTART_WINDOW_SECONDS=1800  # 30 minutes
 
 #######################################
 # Phase 1: Core dependency services
