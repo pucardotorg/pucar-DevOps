@@ -1,0 +1,67 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "acme-challenge.name" . }}
+  namespace: {{ .Values.namespace }}
+  labels:
+    {{- include "acme-challenge.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "acme-challenge.labels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "acme-challenge.labels" . | nindent 8 }}
+    spec:
+      {{- if .Values.serviceAccount }}
+      serviceAccountName: {{ .Values.serviceAccount }}
+      serviceAccount: {{ .Values.serviceAccount }}
+      {{- end }}
+      containers:
+        - name: nginx
+          image: "{{ .Values.nginx.image.repository }}:{{ .Values.nginx.image.tag }}"
+          imagePullPolicy: {{ .Values.nginx.image.pullPolicy }}
+          ports:
+            - containerPort: {{ .Values.nginx.containerPort }}
+              protocol: TCP
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          volumeMounts:
+            - name: challenge-volume
+              mountPath: /usr/share/nginx/html
+            - name: nginx-config
+              mountPath: /etc/nginx/conf.d
+            - name: nginx-cache
+              mountPath: /var/cache/nginx
+            - name: nginx-run
+              mountPath: /var/run
+            - name: nginx-tmp
+              mountPath: /tmp
+        - name: certbot
+          image: "{{ .Values.certbot.image.repository }}:{{ .Values.certbot.image.tag }}"
+          imagePullPolicy: {{ .Values.certbot.image.pullPolicy }}
+          command:
+            - /bin/sh
+            - -c
+          args:
+            - sleep infinity
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          volumeMounts:
+            - name: challenge-volume
+              mountPath: /acme
+      volumes:
+        - name: challenge-volume
+          emptyDir: {}
+        - name: nginx-config
+          configMap:
+            name: acme-nginx-config
+            defaultMode: 420
+        - name: nginx-cache
+          emptyDir: {}
+        - name: nginx-run
+          emptyDir: {}
+        - name: nginx-tmp
+          emptyDir: {}

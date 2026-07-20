@@ -40,11 +40,6 @@ ismockEnabled: "true"
 officecode: "030101B0019"
 challan-test-amount-enabled: false
 challan-test-amount: "4"
-istestEnabled: "true"
-ismockEnabled: "true"
-officecode: "030101B0019"
-challan-test-amount-enabled: false
-challan-test-amount: "4"
 # Additional Container Envs
 env: |
   - name: PUCAR_TSB_RECEIPT

@@ -10,6 +10,7 @@ templates:
 values:
   - ../environments/{{ requiredEnv "HELMFILE_ENV" }}-secrets.yaml
   - ../environments/{{ requiredEnv "HELMFILE_ENV" }}.yaml
+  - ../environments/{{ requiredEnv "HELMFILE_ENV" }}-config.yaml
 commonLabels:
   deployment: "pucar"
 
@@ -22,6 +23,14 @@ releases:
   disableValidation: true
   values:
     - ./cert-manager/values.yaml
+
+- name: acme-challenge
+  chart: ./acme-challenge
+  namespace: backbone-prod
+  installed: true
+  version: 0.1.0
+  values:
+    - ./acme-challenge/values.yaml
 ##
 #- name: minio
 #  installed: true

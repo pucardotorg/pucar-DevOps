@@ -15,6 +15,7 @@ healthChecks:
 
 lokiEnabled: true
 tracing-enabled: true
+appType: "java-spring"
 
 initContainers:
   dbMigration:
@@ -50,21 +51,6 @@ env: |
       secretKeyRef:
         name: db
         key: password
-  - name: SPRING_DATASOURCE_URL
-    valueFrom:
-      configMapKeyRef:
-        key: db-url
-        name: egov-config
-  - name: SPRING_DATASOURCE_USERNAME
-    valueFrom:
-      secretKeyRef:
-        name: db
-        key: username
-  - name: SPRING_DATASOURCE_PASSWORD
-    valueFrom:
-      secretKeyRef:
-        name: db
-        key: password
   - name: EGOV_IDGEN_HOST
     valueFrom:
       configMapKeyRef:
@@ -85,16 +71,6 @@ env: |
       configMapKeyRef:
         key: summons
         name: egov-service-host
-  - name: SPRING_KAFKA_BOOTSTRAP_SERVERS
-    valueFrom:
-      configMapKeyRef:
-        key: kafka-brokers
-        name: egov-config
-  - name: KAFKA_CONFIG_BOOTSTRAP_SERVER_CONFIG
-    valueFrom:
-      configMapKeyRef:
-        key: kafka-brokers
-        name: egov-config
   - name: SERVICE_NAME
     valueFrom:
       configMapKeyRef:
