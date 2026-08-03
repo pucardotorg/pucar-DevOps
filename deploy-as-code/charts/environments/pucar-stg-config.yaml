@@ -329,7 +329,7 @@ digitalized-documents:
       enabled: false
   image:
     repository: docker.io/venkatramireddyb/digitalized-documents
-    tag: main-ffad1fd84c1a6d1a344b733de0aa9b829d2835da
+    tag: main-808e9870c3e4075765074c8584633ebdc2c63fd0
   ingress:
     nginxRateLimit:
       enabled: false
