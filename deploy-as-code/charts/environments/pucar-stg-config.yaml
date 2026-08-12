@@ -879,7 +879,7 @@ health-dashboard:
       enabled: false
   image:
     repository: venkatramireddyb/health-dashboard
-    tag: main-5a6f01a6770b99a29664cc6744dfc0f19395c7c0
+    tag: main-67e5d93ce4f93f16fec7ee036f6f6f1fdf98037d
   ingress:
     nginxRateLimit:
       enabled: false
