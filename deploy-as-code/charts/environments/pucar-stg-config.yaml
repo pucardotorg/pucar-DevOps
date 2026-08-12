@@ -1626,7 +1626,7 @@ user-otp:
       enabled: false
   image:
     repository: docker.io/venkatramireddyb/user-otp
-    tag: main-d56622fe93d39101401d70d6c511c12de5064f85
+    tag: main-67e5d93ce4f93f16fec7ee036f6f6f1fdf98037d
   ingress:
     nginxRateLimit:
       enabled: false
