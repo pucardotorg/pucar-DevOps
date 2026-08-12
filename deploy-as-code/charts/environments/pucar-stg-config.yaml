@@ -917,7 +917,7 @@ hearing-management:
       enabled: false
   image:
     repository: docker.io/venkatramireddyb/hearing-management
-    tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
+    tag: main-67e5d93ce4f93f16fec7ee036f6f6f1fdf98037d
   ingress:
     nginxRateLimit:
       enabled: false
