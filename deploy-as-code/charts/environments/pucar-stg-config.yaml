@@ -790,7 +790,7 @@ evidence:
       enabled: false
   image:
     repository: venkatramireddyb/evidence
-    tag: main-ffad1fd84c1a6d1a344b733de0aa9b829d2835da
+    tag: main-67e5d93ce4f93f16fec7ee036f6f6f1fdf98037d
   ingress:
     nginxRateLimit:
       enabled: false
