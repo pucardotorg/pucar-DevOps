@@ -1607,7 +1607,7 @@ transformer:
   cpu_requests: 50m
   image:
     repository: docker.io/venkatramireddyb/transformer
-    tag: main-918214e8016ebbc5f7080fe7a8c040db6a82735d
+    tag: main-67e5d93ce4f93f16fec7ee036f6f6f1fdf98037d
   ingress:
     nginxRateLimit:
       enabled: false
