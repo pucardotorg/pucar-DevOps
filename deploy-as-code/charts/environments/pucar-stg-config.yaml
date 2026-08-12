@@ -1565,7 +1565,7 @@ template-configuration:
       enabled: false
   image:
     repository: docker.io/venkatramireddyb/template-configuration
-    tag: sdc-uat-fb7493994c08b593759448d6d3be1bd309d6ce02
+    tag: main-67e5d93ce4f93f16fec7ee036f6f6f1fdf98037d
   ingress:
     nginxRateLimit:
       enabled: false
