@@ -305,16 +305,16 @@ releases:
     labels:
       deployment: "dristi-pdf"
     <<: *default
-  #    - name: sbi-webpage # Replace with your desired namespace
-  #      installed: true
-  #      labels:
-  #        deployment: "sbi-webpage"
-  #      <<: *default
-  #    - name: sbi-svc # Replace with your desired namespace
-  #      installed: true
-  #      labels:
-  #        deployment: "sbi-svc"
-  #      <<: *default
+  - name: sbi-webpage # Replace with your desired namespace
+    installed: true
+    labels:
+      deployment: "sbi-webpage"
+    <<: *default
+  - name: sbi-svc # Replace with your desired namespace
+    installed: true
+    labels:
+      deployment: "sbi-svc"
+    <<: *default
   #    - name: transcription # Replace with your desired namespace
   #      installed: true
   #      labels:
