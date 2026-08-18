@@ -1527,7 +1527,7 @@ task:
       enabled: false
   image:
     repository: venkatramireddyb/task
-    tag: bug-5925-main-2a042270afc6f82b3f1a689791f720a2c6061062
+    tag: 5965-npe-fix-main-263372edcb6f0ce9056970391a6d861842211af6
   ingress:
     nginxRateLimit:
       enabled: false
