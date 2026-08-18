@@ -196,7 +196,7 @@ case:
       enabled: false
   image:
     repository: docker.io/venkatramireddyb/case
-    tag: main-67e5d93ce4f93f16fec7ee036f6f6f1fdf98037d
+    tag: 5965-npe-fix-main-b3f46bde3725a75662a351bd92bdd0987421615c
   ingress:
     nginxRateLimit:
       enabled: false
