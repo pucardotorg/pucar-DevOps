@@ -519,3 +519,6 @@ pdf-service:
 
 gateway:
   namespace: egov
+
+individual:
+  debugPort: 5005
