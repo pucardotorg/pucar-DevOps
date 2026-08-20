@@ -108,7 +108,12 @@ env: |
       configMapKeyRef:
         key: sbi-tranction-fail-url
         name: egov-config
-  
+  - name: SBI_DOUBLE_VERIFICATION_URL
+    valueFrom:
+      configMapKeyRef:
+        key: sbi-double-verification-url
+        name: egov-config
+
 
 
 

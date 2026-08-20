@@ -58,10 +58,11 @@ configmaps:
       mobile-validation-workaround: "true"
       pucar-domain: dristi-kerala-dev.pucar.org
       s3-assets-bucket: (pg-egov-assets|egov-playground-assets)
+      sbi-double-verification-url: https://test.epay.sbiuat.bank.in/payagg/statusQuery/getStatusQuery
       sbi-redirect-url: https://dristi-kerala-dev.pucar.org/digit-ui/citizen/home/sbi-payment-screen
       sbi-tranction-fail-url: https://dristi-kerala-dev.pucar.org/sbi-payments/fail.jsp
       sbi-tranction-success-url: https://dristi-kerala-dev.pucar.org/sbi-payments/success.jsp
-      sbi-tranction-url: https://test.sbiepay.sbi/secure/AggregatorHostedListener
+      sbi-tranction-url: https://test.epay.sbiuat.bank.in/secure/AggregatorHostedListener
       serializers-timezone-in-ist: "true"
       server-tomcat-max-connections: "500"
       server-tomcat-max-threads: "10"
