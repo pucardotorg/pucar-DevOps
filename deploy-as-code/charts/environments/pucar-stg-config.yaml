@@ -196,7 +196,7 @@ case:
       enabled: false
   image:
     repository: docker.io/venkatramireddyb/case
-    tag: 5988-revert-change-e25245a384caf53af52c4d64910bd4bec87494e1
+    tag: main-d0040a883c92ac9581530c812fc3bd6178e22ff9
   ingress:
     nginxRateLimit:
       enabled: false
