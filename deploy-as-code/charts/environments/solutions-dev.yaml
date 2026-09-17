@@ -293,7 +293,8 @@ egov-enc-service:
 egov-idgen:
   idformat-from-mdms: "true"
   java-args: -Dspring.profiles.active=monitoring
-  heap: "-Xmx192m -Xms192m"
+  heap: "-Xmx256m -Xms256m"
+  memory_limits: 768Mi
   autocreate-new-seq: "true"
 
 egov-localization:
@@ -302,6 +303,8 @@ egov-localization:
   memory_limits: 512Mi
 
 kerala-sms:
+  heap: "-Xmx256m -Xms256m"
+  memory_limits: 768Mi
   sms-provider-url: "https://msdgweb.mgov.gov.in/esms/sendsmsrequestDLT" ## Add sms provider url
   sms.provider.class: "CDAC"
   sms.provider.contentType:  "application/x-www-form-urlencoded"
@@ -354,6 +357,8 @@ egov-persister:
       branch: "develop"
 
 audit-service:
+  heap: "-Xmx256m -Xms256m"
+  memory_limits: 768Mi
   persist-yml-path: "file:///work-dir/kerala-configs/egov-persister/template-configuration-persister.yml,file:///work-dir/kerala-configs/egov-persister/advocate-office-management-persister.yml,file:///work-dir/kerala-configs/egov-persister/sbi-payment-persister.yml,file:///work-dir/kerala-configs/egov-persister/icops-tracker-persister.yml,file:///work-dir/kerala-configs/egov-persister/epost-tracker-persister.yml,file:///work-dir/kerala-configs//egov-persister/auth-sek-session-persister.yml,file:///work-dir/kerala-configs/egov-persister/order-persister.yml,file:///work-dir/kerala-configs/egov-persister/hearing-persister.yml,file:///work-dir/kerala-configs/egov-persister/evidence-persister.yml,file:///work-dir/kerala-configs/egov-persister/application-persister.yml,file:///work-dir/kerala-configs/egov-persister/postalhub-persister.yml,file:///work-dir/kerala-configs/egov-persister/advocate-clerk-persister.yml,file:///work-dir/kerala-configs/egov-persister/advocate-persister.yml,file:///work-dir/kerala-configs/egov-persister/case-persister.yml,file:///work-dir/kerala-configs/egov-persister/summons.yml,file:///work-dir/kerala-configs/egov-persister/billing-services-persist.yml,file:///work-dir/kerala-configs/egov-persister/egov-user-event-persister.yml,file:///work-dir/kerala-configs/egov-persister/egov-workflow-v2-persister.yml,file:///work-dir/kerala-configs/egov-persister/hrms-employee-persister.yml,file:///work-dir/kerala-configs/egov-persister/pdf-generator.yml,file:///work-dir/kerala-configs/egov-persister/mdms-persister.yml,file:///work-dir/kerala-configs/egov-persister/individual-persister.yml,file:///work-dir/kerala-configs/egov-persister/rescheduling-request-persister.yml,file:///work-dir/kerala-configs/egov-persister/judge-calendar-persister.yml,file:///work-dir/kerala-configs/egov-persister/hearing-booking-persister.yml,file:///work-dir/kerala-configs/egov-persister/reschedule-request-opt-out-persister.yml,file:///work-dir/kerala-configs/egov-persister/causelist-persister.yml,file:///work-dir/kerala-configs/egov-persister/task-persister.yml,file:///work-dir/kerala-configs/egov-persister/evidencewithoutworkflow-persister.yml,file:///work-dir/kerala-configs/egov-persister/icops-tracker-persister.yml,file:///work-dir/kerala-configs/egov-persister/causelist-document-persister.yml,file:///work-dir/kerala-configs/egov-persister/bail-bond.persister.yml,file:///work-dir/kerala-configs/egov-persister/esign-persister.yml,file:///work-dir/kerala-configs/egov-persister/case-diary-persister.yml,file:///work-dir/kerala-configs/egov-persister/notification-persister.yml,file:///work-dir/kerala-configs/egov-persister/inportal-survey-persister.yml,file:///work-dir/kerala-configs/egov-persister/task-management-persister.yml,file:///work-dir/kerala-configs/egov-persister/ctc-persister.yml,file:///work-dir/kerala-configs/egov-persister/digitalized-documents-persister.yml"
   initContainers:
     gitSync:
@@ -448,3 +453,42 @@ pdf-service:
 
 es-curator:
   jaeger-to-retain-in-days: 30
+
+# Heap/memory tuning (Sep 2026): chart defaults of -Xmx64m/-Xmx128m/-Xmx192m caused constant GC
+# and OOMKills (exit 137). Limits set to ~3x heap to leave room for metaspace/threads.
+transformer:
+  heap: "-Xmx384m -Xms384m"
+  memory_requests: 512Mi
+  memory_limits: 1Gi
+
+egov-workflow-v2:
+  heap: "-Xmx256m -Xms256m"
+  memory_limits: 768Mi
+
+casemanagement:
+  heap: "-Xmx256m -Xms256m"
+  memory_limits: 768Mi
+
+collection-services:
+  heap: "-Xmx256m -Xms256m"
+  memory_limits: 768Mi
+
+esign-interceptor:
+  heap: "-Xmx256m -Xms256m"
+  memory_limits: 768Mi
+
+icops-integration:
+  heap: "-Xmx256m -Xms256m"
+  memory_limits: 768Mi
+
+egov-hrms:
+  heap: "-Xmx256m -Xms256m"
+  memory_limits: 768Mi
+
+application:
+  heap: "-Xmx256m -Xms256m"
+  memory_limits: 768Mi
+
+user-otp:
+  heap: "-Xmx256m -Xms256m"
+  memory_limits: 768Mi
