@@ -672,7 +672,7 @@ egov-user:
       enabled: false
   image:
     repository: docker.io/venkatramireddyb/egov-user
-    tag: release-38-0ae8c1846dee7329543bb5f6f6a412eb9474f3c0
+    tag: release-38-513733daae8578e5f46471b93fe583782c937630
   ingress:
     nginxRateLimit:
       enabled: false
