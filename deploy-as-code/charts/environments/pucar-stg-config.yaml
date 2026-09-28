@@ -310,7 +310,7 @@ digit-ui:
       enabled: false
   image:
     repository: docker.io/venkatramireddyb/digit-ui
-    tag: ehnace-5930-reschedule-date-ffd9696689fb0427967217cf81a4bd5f40d511d1
+    tag: main-7f73b0f5be2191fcf441b77041c958ac9f4b1b15
   ingress:
     nginxRateLimit:
       enabled: false
