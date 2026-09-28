@@ -1508,7 +1508,7 @@ sunbirdrc-credential-service:
       enabled: false
   image:
     repository: egovio/sunbirdrc-credential-service
-    tag: main-67e5d93ce4f93f16fec7ee036f6f6f1fdf98037d
+    tag: main-7f73b0f5be2191fcf441b77041c958ac9f4b1b15
   ingress:
     nginxRateLimit:
       enabled: false
