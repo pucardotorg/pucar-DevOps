@@ -1202,7 +1202,7 @@ ocr-service:
       enabled: false
   image:
     repository: docker.io/venkatramireddyb/ocr-service
-    tag: sdc-uat-65b8778b484c65017c061dfcf55d978a1ef06186
+    tag: main-7f73b0f5be2191fcf441b77041c958ac9f4b1b15
   ingress:
     nginxRateLimit:
       enabled: false
