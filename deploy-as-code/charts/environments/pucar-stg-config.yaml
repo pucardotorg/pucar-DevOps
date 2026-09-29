@@ -1546,7 +1546,7 @@ task-management:
       enabled: false
   image:
     repository: docker.io/venkatramireddyb/task-management
-    tag: release-38-1229112d6578ad977f630b51f12717811896effc
+    tag: main-71628a4f039776755410655680629e26f77ee1e0
   ingress:
     nginxRateLimit:
       enabled: false
