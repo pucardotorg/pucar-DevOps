@@ -24,7 +24,7 @@ advocate:
       enabled: false
   image:
     repository: docker.io/venkatramireddyb/advocate
-    tag: release-38-1229112d6578ad977f630b51f12717811896effc
+    tag: main-1447503127dd4ec71f024c8d46eb4658e5c78bfe
   ingress:
     nginxRateLimit:
       enabled: false
