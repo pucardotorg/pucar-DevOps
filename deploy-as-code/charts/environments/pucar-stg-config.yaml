@@ -1221,7 +1221,7 @@ oncourts-website:
       enabled: false
   image:
     repository: docker.io/venkatramireddyb/oncourts-website
-    tag: 'main-494eae88f3fcd9efbadcef5d1808b93ae2f32e3e'
+    tag: 'main-323b6e97b69f0a6bd110d7443c7bc6c3abc72230'
   ingress:
     nginxRateLimit:
       enabled: false
