@@ -406,7 +406,7 @@ egov-accesscontrol:
       enabled: false
   image:
     repository: docker.io/venkatramireddyb/egov-accesscontrol
-    tag: release-38-1229112d6578ad977f630b51f12717811896effc
+    tag: main-d5ffc39a40a66da9299dd56c458700eb21ce2efa
   ingress:
     nginxRateLimit:
       enabled: false
